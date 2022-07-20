@@ -32,6 +32,11 @@
 		AA93405028888B9B00309E83 /* WorkoutsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93404F28888B9B00309E83 /* WorkoutsViewTests.swift */; };
 		AA93405228888C1600309E83 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93405128888C1600309E83 /* ProfileViewTests.swift */; };
 		AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACF8880287366DC003A50E8 /* MainViewModel.swift */; };
+		AADCABDC2888944100FF09B9 /* SettingsNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABDB2888944100FF09B9 /* SettingsNavigationRouterTests.swift */; };
+		AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */ = {isa = PBXBuildFile; productRef = AADCABDE288895AC00FF09B9 /* Mocking */; };
+		AADCABE1288898A100FF09B9 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */; };
+		AADCABE328889A0C00FF09B9 /* SettingsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */; };
+		AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */; };
 		AAFC58F428871CE2001B69B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AAFC58F328871CE2001B69B3 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +78,11 @@
 		AA93404F28888B9B00309E83 /* WorkoutsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewTests.swift; sourceTree = "<group>"; };
 		AA93405128888C1600309E83 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		AACF8880287366DC003A50E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		AADCABDB2888944100FF09B9 /* SettingsNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationRouterTests.swift; sourceTree = "<group>"; };
+		AADCABDD2888946F00FF09B9 /* Mocking */ = {isa = PBXFileReference; lastKnownFileType = text; name = Mocking; path = SPLYTTests/Settings/Mocking; sourceTree = SOURCE_ROOT; };
+		AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewTests.swift; sourceTree = "<group>"; };
+		AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +92,7 @@
 			files = (
 				AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */,
 				AA934041288883A200309E83 /* SnapshotTesting in Frameworks */,
+				AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */,
 				AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */,
 				AA1A34082882E24D00BCB792 /* Core in Frameworks */,
 			);
@@ -114,6 +125,7 @@
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AADCABDD2888946F00FF09B9 /* Mocking */,
 				AA1A34042882E18400BCB792 /* Core */,
 				AA4A314D2882DAF7003E7C64 /* DesignShowcase */,
 				AA4A31492882D0CC003E7C64 /* DesignSystem */,
@@ -255,8 +267,20 @@
 		AA93404E28888B5800309E83 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AADCABE428889A4700FF09B9 /* Mocks */,
+				AADCABDB2888944100FF09B9 /* SettingsNavigationRouterTests.swift */,
+				AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */,
+				AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		AADCABE428889A4700FF09B9 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +304,7 @@
 				AA1A34052882E24900BCB792 /* DesignShowcase */,
 				AA1A34072882E24D00BCB792 /* Core */,
 				AA934040288883A200309E83 /* SnapshotTesting */,
+				AADCABDE288895AC00FF09B9 /* Mocking */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -394,10 +419,14 @@
 			files = (
 				AA93405028888B9B00309E83 /* WorkoutsViewTests.swift in Sources */,
 				AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */,
+				AADCABE328889A0C00FF09B9 /* SettingsViewTests.swift in Sources */,
 				AA934048288888EF00309E83 /* MainViewTests.swift in Sources */,
 				AA934043288883ED00309E83 /* TabTypeTests.swift in Sources */,
+				AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */,
+				AADCABDC2888944100FF09B9 /* SettingsNavigationRouterTests.swift in Sources */,
 				AA93405228888C1600309E83 /* ProfileViewTests.swift in Sources */,
 				AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */,
+				AADCABE1288898A100FF09B9 /* SettingsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +721,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AAFC58F228871CE2001B69B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		AADCABDE288895AC00FF09B9 /* Mocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Mocking;
 		};
 		AAFC58F328871CE2001B69B3 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
