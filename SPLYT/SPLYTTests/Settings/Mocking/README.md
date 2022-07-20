@@ -1,3 +1,3 @@
 # Mocking
 
-A description of this package.
+Contains a collection of reusable mocks from different packages.

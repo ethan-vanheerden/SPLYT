@@ -16,13 +16,16 @@ let package = Package(
     targets: [
         .target(
             name: "DesignSystem",
-            dependencies: []),
+            dependencies: [
+            ]),
         .testTarget(
             name: "DesignSystemTests",
             dependencies: [
                 "DesignSystem",
                 .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
             ],
-            exclude: ["Atomic/Atoms/__Snapshots__/"]), // Add more folders here once we have snapshots for those
+            exclude: [
+                "Atomic/Atoms/__Snapshots__/" // Add more folders here once we have snapshots for those
+            ]),
     ]
 )
