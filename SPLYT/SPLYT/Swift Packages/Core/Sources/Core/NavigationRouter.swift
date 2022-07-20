@@ -1,6 +1,8 @@
-
+/// Triggers custom actions based on navigation events which we send.
 public protocol NavigationRouter {
     associatedtype Event
     
+    /// Performs a custom action when a navigation event is received.
+    /// - Parameter event: The navigation event which should trigger some navigation
     func navigate(_ event: Event)
 }

@@ -9,13 +9,21 @@ import SwiftUI
 
 struct MainView<V: MainViewModelType>: View {
     @ObservedObject private var viewModel: V
+    @State private var selectedTab: TabType = .workouts
     
     init(viewModel: V) {
         self.viewModel = viewModel
     }
     
+    /// Convenience init for testing different tab selections
+    init(viewModel: V,
+         selectedTab: TabType) {
+        self.init(viewModel: viewModel)
+        self.selectedTab = selectedTab
+    }
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             ForEach(TabType.allCases, id: \.self) { tab in
                 tab.baseView
                     .tabItem {
