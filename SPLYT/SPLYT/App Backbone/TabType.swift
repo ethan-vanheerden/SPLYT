@@ -21,7 +21,6 @@ enum TabType: CaseIterable {
     case profile
     case settings
     
-    
     @ViewBuilder
     /// The view to show for each tab
     var baseView: some View {

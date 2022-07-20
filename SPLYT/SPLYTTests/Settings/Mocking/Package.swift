@@ -4,28 +4,26 @@
 import PackageDescription
 
 let package = Package(
-    name: "DesignShowcase",
+    name: "Mocking",
     platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "DesignShowcase",
-            targets: ["DesignShowcase"]),
+            name: "Mocking",
+            targets: ["Mocking"]),
     ],
     dependencies: [
-        .package(path: "../DesignSystem"),
         .package(path: "../Core")
     ],
     targets: [
         .target(
-            name: "DesignShowcase",
+            name: "Mocking",
             dependencies: [
-                "DesignSystem",
                 "Core"
             ]),
         .testTarget(
-            name: "DesignShowcaseTests",
+            name: "MockingTests",
             dependencies: [
-                "DesignShowcase"
+                "Mocking"
             ]),
     ]
 )

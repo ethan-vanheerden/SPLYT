@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: migrate this to `ViewModel` protocol once this isn't empty
 protocol MainViewModelType: ObservableObject {
     
 }

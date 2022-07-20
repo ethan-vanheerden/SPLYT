@@ -8,7 +8,6 @@
 import SwiftUI
 import Core
 
-
 /// The base view controller for Settings
 final class SettingsNavigationController: UINavigationController {
     init() {
@@ -43,6 +42,6 @@ struct SettingsViewController_SwiftUI: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-
+        
     }
 }
