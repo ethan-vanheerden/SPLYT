@@ -36,7 +36,7 @@ public struct MenuItem: View {
         if let subtitle = viewState.subtitle {
             Text(subtitle)
                 .bodyText()
-                .foregroundColor(.blue.opacity(0.6))
+                .foregroundColor(SplytColor.lightBlue)
         } else {
             EmptyView()
         }

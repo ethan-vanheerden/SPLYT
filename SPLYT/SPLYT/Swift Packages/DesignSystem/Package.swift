@@ -25,7 +25,9 @@ let package = Package(
                 .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
             ],
             exclude: [
-                "Atomic/Atoms/__Snapshots__/" // Add more folders here once we have snapshots for those
+                "Atomic/Particles/__Snapshots__/",
+                "Atomic/Atoms/__Snapshots__/",
+                "Atomic/Molecules/__Snapshots__/"
             ]),
     ]
 )
