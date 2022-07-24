@@ -25,7 +25,6 @@
 		AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA825D41287238C90041D94A /* Preview Assets.xcassets */; };
 		AA825D66287241840041D94A /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA825D65287241840041D94A /* TabType.swift */; };
 		AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93403D288882AB00309E83 /* MainViewModelTests.swift */; };
-		AA934041288883A200309E83 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AA934040288883A200309E83 /* SnapshotTesting */; };
 		AA934043288883ED00309E83 /* TabTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA934042288883ED00309E83 /* TabTypeTests.swift */; };
 		AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */; };
 		AA934048288888EF00309E83 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA934047288888EF00309E83 /* MainViewTests.swift */; };
@@ -91,7 +90,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */,
-				AA934041288883A200309E83 /* SnapshotTesting in Frameworks */,
 				AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */,
 				AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */,
 				AA1A34082882E24D00BCB792 /* Core in Frameworks */,
@@ -303,7 +301,6 @@
 				AA4A314B2882D0E8003E7C64 /* DesignSystem */,
 				AA1A34052882E24900BCB792 /* DesignShowcase */,
 				AA1A34072882E24D00BCB792 /* Core */,
-				AA934040288883A200309E83 /* SnapshotTesting */,
 				AADCABDE288895AC00FF09B9 /* Mocking */,
 			);
 			productName = SPLYT;
@@ -321,6 +318,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AAD8D4B3288DCB3F00221EBA /* PBXTargetDependency */,
 				AA825D49287238CB0041D94A /* PBXTargetDependency */,
 			);
 			name = SPLYTTests;
@@ -437,6 +435,10 @@
 			isa = PBXTargetDependency;
 			target = AA825D36287238BF0041D94A /* SPLYT */;
 			targetProxy = AA825D48287238CB0041D94A /* PBXContainerItemProxy */;
+		};
+		AAD8D4B3288DCB3F00221EBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = AAD8D4B2288DCB3F00221EBA /* SnapshotTesting */;
 		};
 /* End PBXTargetDependency section */
 
@@ -717,7 +719,7 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
 		};
-		AA934040288883A200309E83 /* SnapshotTesting */ = {
+		AAD8D4B2288DCB3F00221EBA /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AAFC58F228871CE2001B69B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;

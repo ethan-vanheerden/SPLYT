@@ -3,7 +3,7 @@ import DesignSystem
 import SwiftUI
 @testable import SnapshotTesting
 
-class SectionHeaderTests: XCTestCase {
+final class SectionHeaderTests: XCTestCase {
     func testSectionHeader() throws {
         let view = VStack {
             SectionHeader(viewState: SectionHeaderViewState(text: "TITLE"))
@@ -13,6 +13,6 @@ class SectionHeaderTests: XCTestCase {
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(size: CGSize(width: 250, height: 200)))
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

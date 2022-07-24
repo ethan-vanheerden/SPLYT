@@ -6,6 +6,8 @@ struct MoleculeFactory {
         switch molecule {
         case .menuItem:
             MenuItemGallery()
+        case .repCounter:
+            RepCounterGallery()
         }
     }
 }

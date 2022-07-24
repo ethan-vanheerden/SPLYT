@@ -5,6 +5,7 @@ struct MoleculeGallery: GalleryType {
 
 enum Molecule: String, CaseIterable, GalleryItem {
     case menuItem = "Menu Item"
+    case repCounter = "Rep Counter"
     
     var title: String {
         return self.rawValue
