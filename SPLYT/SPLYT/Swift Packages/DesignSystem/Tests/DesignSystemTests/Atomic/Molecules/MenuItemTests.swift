@@ -9,12 +9,8 @@ final class MenuItemTests: XCTestCase {
         let subtitleViewState = MenuItemViewState(title: "TITLE",
                                                           subtitle: "THIS IS A SUBTITLE")
         let view = VStack {
-            MenuItem(viewState: viewState) { viewState in
-                print(viewState)
-            }
-            MenuItem(viewState: subtitleViewState) { viewState in
-                print(viewState)
-            }
+            MenuItem(viewState: viewState) { _ in }
+            MenuItem(viewState: subtitleViewState) { _ in }
             Spacer()
         }
         let vc = UIHostingController(rootView: view)
