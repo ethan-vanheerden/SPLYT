@@ -14,6 +14,7 @@
 		AA1A34082882E24D00BCB792 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34072882E24D00BCB792 /* Core */; };
 		AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewHostingController.swift */; };
 		AA2A22D428A069C4002357E4 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = AA2A22D328A069C4002357E4 /* Networking */; };
+		AA2A22D628A06AC6002357E4 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A22D528A06AC6002357E4 /* SettingsInteractor.swift */; };
 		AA4A31452882CD1C003E7C64 /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31442882CD1C003E7C64 /* WorkoutsView.swift */; };
 		AA4A31472882CE63003E7C64 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* ProfileView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
@@ -58,6 +59,7 @@
 		AA1A34092884841B00BCB792 /* MainViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewHostingController.swift; sourceTree = "<group>"; };
 		AA1A340D2884893800BCB792 /* Architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Architecture.md; sourceTree = "<group>"; };
 		AA2A22D228A05C61002357E4 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
+		AA2A22D528A06AC6002357E4 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
 		AA4A31442882CD1C003E7C64 /* WorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsView.swift; sourceTree = "<group>"; };
 		AA4A31462882CE63003E7C64 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */,
 				AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */,
 				AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */,
+				AA2A22D528A06AC6002357E4 /* SettingsInteractor.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */,
 				AA825D3D287238BF0041D94A /* MainView.swift in Sources */,
 				AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */,
+				AA2A22D628A06AC6002357E4 /* SettingsInteractor.swift in Sources */,
 				AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */,
 				AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,

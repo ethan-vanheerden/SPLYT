@@ -4,6 +4,6 @@ import Foundation
 public protocol NetworkRequest {
     associatedtype Response: Decodable
     
-    /// The encapsulated URL request to make
-    var urlRequest: URLRequest { get }
+    /// Creates a `URLRequest` used for the networking call.
+    func createRequest() -> URLRequest
 }
