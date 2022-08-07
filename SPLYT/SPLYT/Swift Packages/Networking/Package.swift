@@ -3,26 +3,24 @@
 import PackageDescription
 
 let package = Package(
-    name: "Mocking",
+    name: "Networking",
     platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "Mocking",
-            targets: ["Mocking"]),
+            name: "Networking",
+            targets: ["Networking"]),
     ],
     dependencies: [
-        .package(path: "../Core")
     ],
     targets: [
         .target(
-            name: "Mocking",
+            name: "Networking",
             dependencies: [
-                "Core"
             ]),
         .testTarget(
-            name: "MockingTests",
+            name: "NetworkingTests",
             dependencies: [
-                "Mocking"
+                "Networking"
             ]),
     ]
 )
