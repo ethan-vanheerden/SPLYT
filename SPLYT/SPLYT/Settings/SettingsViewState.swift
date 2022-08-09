@@ -11,4 +11,6 @@ import DesignSystem
 enum SettingsViewState: Equatable {
     case loading
     case main(items: [MenuItemViewState])
+    case networkResponse(TestNetworkObject)
+    case error
 }

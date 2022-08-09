@@ -11,13 +11,24 @@ import DesignSystem
 
 final class SettingsViewModel: ViewModel {
     @Published private(set) var viewState: SettingsViewState = .loading
+    private let interactor: SettingsInteractorType
+    
+    init(interactor: SettingsInteractorType) {
+        self.interactor = interactor
+    }
 
     func send(_ event: SettingsViewEvent) async {
         switch event {
         case .load:
-            await MainActor.run {
-                viewState = .main(items: getMenuItems())
+            let domainState = await interactor.interact(with: .load)
+            switch domainState {
+            case .loaded(let testNetworkObject):
+                await updateViewState(.networkResponse(testNetworkObject))
+            case .error:
+                await updateViewState(.error)
             }
+        case .menuItems:
+            await updateViewState(.main(items: getMenuItems()))
         }
     }
 }
@@ -31,10 +42,17 @@ private extension SettingsViewModel {
             MenuItemViewState(id: $0, title: $0.title, subtitle: $0.subtitle)
         }
     }
+    
+    func updateViewState(_ viewState: SettingsViewState) async {
+        await MainActor.run {
+            self.viewState = viewState
+        }
+    }
 }
 
 // MARK: - Events
 
 enum SettingsViewEvent {
     case load
+    case menuItems
 }

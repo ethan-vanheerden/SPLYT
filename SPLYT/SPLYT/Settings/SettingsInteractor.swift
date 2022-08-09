@@ -17,7 +17,7 @@ enum SettingsDomainEvent {
 // MARK: - Domain State
 
 enum SettingsDomainState {
-    case loaded
+    case loaded(TestNetworkObject)
     case error
 }
 
@@ -32,7 +32,7 @@ final class SettingsInteractor: SettingsInteractorType {
     func interact(with event: SettingsDomainEvent) async -> SettingsDomainState {
         switch event {
         case .load:
-            return handleLoad()
+            return await handleLoad()
         }
     }
 }
@@ -42,8 +42,15 @@ final class SettingsInteractor: SettingsInteractorType {
 // (This is just for testing purposes, we will normally want another class/struct to delegate the actual networking layer to)
 
 private extension SettingsInteractor {
-    func handleLoad() -> SettingsDomainState {
-        return .error
+    func handleLoad() async -> SettingsDomainState {
+        do {
+            let response = try await APIInteractor.performRequest(with: TestNetworkRequest())
+            return .loaded(response.responseObject)
+        } catch {
+            print(error)
+            return .error
+        }
+        
     }
 }
 
@@ -52,15 +59,16 @@ struct TestNetworkRequest: NetworkRequest {
     typealias Response = TestNetworkObject
     
     func createRequest() -> URLRequest {
-        <#code#>
+        var request = URLRequest(url: URL(string: "http://splyt-dev.us-east-1.elasticbeanstalk.com/object")!)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.get.rawValue
+        return request
     }
-    
-    
 }
 
 
 
-struct TestNetworkObject: Codable {
+struct TestNetworkObject: Codable, Equatable {
     let title: String
     let subtitle: String
 }

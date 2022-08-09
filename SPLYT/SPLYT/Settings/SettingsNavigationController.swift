@@ -11,7 +11,7 @@ import Core
 /// The base view controller for Settings
 final class SettingsNavigationController: UINavigationController {
     init() {
-        let viewModel = SettingsViewModel()
+        let viewModel = SettingsViewModel(interactor: SettingsInteractor())
         let navigationRouter = SettingsNavigationRouter()
         let view = SettingsView(viewModel: viewModel,
                                 navigationRouter: navigationRouter)

@@ -28,6 +28,13 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent, VM
             ProgressView()
         case .main(let items):
             mainView(items: items)
+        case .error:
+            Text("ERROR")
+        case .networkResponse(let testNetworkObject):
+            VStack {
+                Text(testNetworkObject.title)
+                Text(testNetworkObject.subtitle)
+            }
         }
     }
     
@@ -55,7 +62,7 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent, VM
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(viewModel: SettingsViewModel(),
+        SettingsView(viewModel: SettingsViewModel(interactor: SettingsInteractor()),
                      navigationRouter: SettingsNavigationRouter())
     }
 }
