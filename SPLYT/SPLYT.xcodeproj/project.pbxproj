@@ -13,6 +13,7 @@
 		AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34052882E24900BCB792 /* DesignShowcase */; };
 		AA1A34082882E24D00BCB792 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34072882E24D00BCB792 /* Core */; };
 		AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewHostingController.swift */; };
+		AA2A22D428A069C4002357E4 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = AA2A22D328A069C4002357E4 /* Networking */; };
 		AA4A31452882CD1C003E7C64 /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31442882CD1C003E7C64 /* WorkoutsView.swift */; };
 		AA4A31472882CE63003E7C64 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* ProfileView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
@@ -56,6 +57,8 @@
 		AA1A34042882E18400BCB792 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
 		AA1A34092884841B00BCB792 /* MainViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewHostingController.swift; sourceTree = "<group>"; };
 		AA1A340D2884893800BCB792 /* Architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Architecture.md; sourceTree = "<group>"; };
+		AA2A22D228A05C61002357E4 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
+		AA2A22D728A2E7FD002357E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA4A31442882CD1C003E7C64 /* WorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsView.swift; sourceTree = "<group>"; };
 		AA4A31462882CE63003E7C64 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 				AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */,
 				AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */,
 				AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */,
+				AA2A22D428A069C4002357E4 /* Networking in Frameworks */,
 				AA1A34082882E24D00BCB792 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,6 +127,7 @@
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AA2A22D228A05C61002357E4 /* Networking */,
 				AADCABDD2888946F00FF09B9 /* Mocking */,
 				AA1A34042882E18400BCB792 /* Core */,
 				AA4A314D2882DAF7003E7C64 /* DesignShowcase */,
@@ -169,6 +174,7 @@
 		AA825D39287238BF0041D94A /* SPLYT */ = {
 			isa = PBXGroup;
 			children = (
+				AA2A22D728A2E7FD002357E4 /* Info.plist */,
 				AA1A340D2884893800BCB792 /* Architecture.md */,
 				AA4A31482882D089003E7C64 /* Swift Packages */,
 				AA825D6428723CDD0041D94A /* App Backbone */,
@@ -302,6 +308,7 @@
 				AA1A34052882E24900BCB792 /* DesignShowcase */,
 				AA1A34072882E24D00BCB792 /* Core */,
 				AADCABDE288895AC00FF09B9 /* Mocking */,
+				AA2A22D328A069C4002357E4 /* Networking */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -568,10 +575,12 @@
 				DEVELOPMENT_TEAM = TM29ZMC7X2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SPLYT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -597,10 +606,12 @@
 				DEVELOPMENT_TEAM = TM29ZMC7X2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SPLYT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -714,6 +725,10 @@
 		AA1A34072882E24D00BCB792 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
+		};
+		AA2A22D328A069C4002357E4 /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
 		};
 		AA4A314B2882D0E8003E7C64 /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
