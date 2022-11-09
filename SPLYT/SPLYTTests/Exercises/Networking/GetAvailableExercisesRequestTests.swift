@@ -1,5 +1,5 @@
 //
-//  GetExercisesRequestTests.swift
+//  GetAvailableExercisesRequestTests.swift
 //  SPLYTTests
 //
 //  Created by Ethan Van Heerden on 8/13/22.
@@ -9,8 +9,8 @@ import XCTest
 @testable import SPLYT
 import Networking
 
-final class GetExercisesRequestsTests: XCTestCase {
-    private let sut = GetExercisesRequest()
+final class GetAvailableExercisesRequestsTests: XCTestCase {
+    private let sut = GetAvailableExercisesRequest()
     
     func testCreateRequest() {
         let expectedHeaders: [String: String] = [

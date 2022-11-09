@@ -74,8 +74,3 @@ public struct MenuItemViewState: Equatable, ItemViewState {
         self.subtitle = subtitle
     }
 }
-
-/* TODO:
- - Add unit tests
- - Add snapshot tests
- */
