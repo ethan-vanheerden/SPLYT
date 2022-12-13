@@ -91,6 +91,7 @@
 		AA934047288888EF00309E83 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
 		AA93404F28888B9B00309E83 /* WorkoutsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewTests.swift; sourceTree = "<group>"; };
 		AA93405128888C1600309E83 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
+		AACC432F29493F3E00F3EEC4 /* Caching */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Caching; sourceTree = "<group>"; };
 		AABFB5A028BE769100B63DF6 /* AvailableExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercise.swift; sourceTree = "<group>"; };
 		AABFB5A228BE76FD00B63DF6 /* MusclesWorked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusclesWorked.swift; sourceTree = "<group>"; };
 		AACF8880287366DC003A50E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -157,6 +158,7 @@
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AACC432F29493F3E00F3EEC4 /* Caching */,
 				AA2A22D228A05C61002357E4 /* Networking */,
 				AADCABDD2888946F00FF09B9 /* Mocking */,
 				AA1A34042882E18400BCB792 /* Core */,
@@ -588,7 +590,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -642,7 +644,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -725,7 +727,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TM29ZMC7X2;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = evh.SPLYTTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -745,7 +747,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TM29ZMC7X2;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = evh.SPLYTTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
