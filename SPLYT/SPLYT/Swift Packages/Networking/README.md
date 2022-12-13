@@ -1,3 +1,3 @@
 # Networking
 
-A description of this package.
+Package to make networking calls possible.
