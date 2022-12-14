@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Different modifiers that affect a set's behavior.
 enum SetModifier: String, Codable, Equatable {
     case dropSet = "DROP_SET"
     case restPause = "REST_PAUSE"

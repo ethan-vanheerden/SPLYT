@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A created workout. This same struct is used for workouts that are planned, in-progress, or completed.
 struct Workout: Equatable {
     let name: String
     let exerciseGroups: [ExerciseGroup]

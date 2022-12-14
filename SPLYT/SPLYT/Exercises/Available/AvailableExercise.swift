@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Represents exercises that users can add when creating a workout.
 struct AvailableExercise: Codable, Equatable {
     let id: String
     let name: String

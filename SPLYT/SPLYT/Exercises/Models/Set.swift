@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// An exercise's set.
 struct Set: Codable, Equatable {
     let inputType: SetInputType
     let modifier: SetModifier
