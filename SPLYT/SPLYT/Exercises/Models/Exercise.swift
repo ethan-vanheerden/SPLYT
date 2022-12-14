@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Represents an exercise and the series of sets performed in it.
 struct Exercise: Codable, Equatable {
     let id: String
     let name: String
