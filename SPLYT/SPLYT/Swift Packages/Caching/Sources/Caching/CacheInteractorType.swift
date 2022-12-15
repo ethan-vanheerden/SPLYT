@@ -8,11 +8,16 @@ public protocol CacheInteractorType {
     /// - Returns: The request's Codable object, or throws error
     static func load<R: CacheRequest>(with: R) throws -> R.CacheData
     
+    /// Saves the given data using the given cache request.
+    /// - Parameters:
+    ///   - with: The cache request to perform
+    ///   - data: The data to save
     static func save<R: CacheRequest>(with: R, data: R.CacheData) throws
 }
 
 // MARK: - Implementation
 
+@available(iOS 16.0, *)
 @available(iOS 16.0, *)
 public struct CacheInterator: CacheInteractorType {
     public static func load<R: CacheRequest>(with request: R) throws -> R.CacheData where R : CacheRequest {
