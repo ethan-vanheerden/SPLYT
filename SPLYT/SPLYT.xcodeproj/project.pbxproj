@@ -27,6 +27,7 @@
 		AA825D3F287238C90041D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA825D3E287238C90041D94A /* Assets.xcassets */; };
 		AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA825D41287238C90041D94A /* Preview Assets.xcassets */; };
 		AA825D66287241840041D94A /* TabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA825D65287241840041D94A /* TabType.swift */; };
+		AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */; };
 		AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93403D288882AB00309E83 /* MainViewModelTests.swift */; };
 		AA934043288883ED00309E83 /* TabTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA934042288883ED00309E83 /* TabTypeTests.swift */; };
 		AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */; };
@@ -85,13 +86,14 @@
 		AA825D41287238C90041D94A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA825D47287238CB0041D94A /* SPLYTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPLYTTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA825D65287241840041D94A /* TabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabType.swift; sourceTree = "<group>"; };
+		AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercisesCacheRequest.swift; sourceTree = "<group>"; };
+		AA893139294A4FA600D7B4B1 /* Caching */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Caching; sourceTree = "<group>"; };
 		AA93403D288882AB00309E83 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		AA934042288883ED00309E83 /* TabTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTypeTests.swift; sourceTree = "<group>"; };
 		AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SnapshotTesting+Extensions.swift"; sourceTree = "<group>"; };
 		AA934047288888EF00309E83 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
 		AA93404F28888B9B00309E83 /* WorkoutsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewTests.swift; sourceTree = "<group>"; };
 		AA93405128888C1600309E83 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
-		AACC432F29493F3E00F3EEC4 /* Caching */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Caching; sourceTree = "<group>"; };
 		AABFB5A028BE769100B63DF6 /* AvailableExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercise.swift; sourceTree = "<group>"; };
 		AABFB5A228BE76FD00B63DF6 /* MusclesWorked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusclesWorked.swift; sourceTree = "<group>"; };
 		AACF8880287366DC003A50E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		AA2A22D828A5BE88002357E4 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
+				AA893136294A4A2900D7B4B1 /* Caching */,
 				AABFB59F28BE766200B63DF6 /* Available */,
 				AADEC4B128A8398F00A5463B /* Networking */,
 				AADEC4B028A8395300A5463B /* Models */,
@@ -158,7 +161,7 @@
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
 			isa = PBXGroup;
 			children = (
-				AACC432F29493F3E00F3EEC4 /* Caching */,
+				AA893139294A4FA600D7B4B1 /* Caching */,
 				AA2A22D228A05C61002357E4 /* Networking */,
 				AADCABDD2888946F00FF09B9 /* Mocking */,
 				AA1A34042882E18400BCB792 /* Core */,
@@ -250,6 +253,14 @@
 				AACF8880287366DC003A50E8 /* MainViewModel.swift */,
 			);
 			path = "App Backbone";
+			sourceTree = "<group>";
+		};
+		AA893136294A4A2900D7B4B1 /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */,
+			);
+			path = Caching;
 			sourceTree = "<group>";
 		};
 		AA93403C2888826400309E83 /* App Backbone */ = {
@@ -487,6 +498,7 @@
 				AABFB5A328BE76FD00B63DF6 /* MusclesWorked.swift in Sources */,
 				AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */,
 				AADEC4B528A839F600A5463B /* Workout.swift in Sources */,
+				AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */,
 				AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */,
 				AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */,
 				AA2A22DC28A5C01E002357E4 /* Set.swift in Sources */,

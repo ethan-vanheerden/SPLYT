@@ -1,7 +1,6 @@
 import XCTest
 @testable import Caching
 
-@available(iOS 16.0, *)
 final class CacheURLCreatorTests: XCTestCase {
     private let request = MockCacheRequest()
     
