@@ -18,5 +18,7 @@ enum MusclesWorked: String, Codable {
     case biceps = "BICEPS"
     case core = "CORE"
     case hamstrings = "HAMSTRINGS"
+    case glutes = "GLUTES"
+    case power = "POWER"
     case other = "OTHER"
 }
