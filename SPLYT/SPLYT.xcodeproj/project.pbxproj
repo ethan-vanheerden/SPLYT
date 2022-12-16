@@ -20,6 +20,7 @@
 		AA4A31472882CE63003E7C64 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* ProfileView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
 		AA60DA01294B7FA0008C7615 /* Caching in Frameworks */ = {isa = PBXBuildFile; productRef = AA60DA00294B7FA0008C7615 /* Caching */; };
+		AA60DA03294D01EB008C7615 /* fallback_exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = AA60DA02294D01EB008C7615 /* fallback_exercises.json */; };
 		AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */; };
 		AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */; };
 		AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */; };
@@ -77,6 +78,7 @@
 		AA4A31462882CE63003E7C64 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		AA4A314D2882DAF7003E7C64 /* DesignShowcase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignShowcase; sourceTree = "<group>"; };
+		AA60DA02294D01EB008C7615 /* fallback_exercises.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fallback_exercises.json; path = SPLYT/Exercises/fallback_exercises.json; sourceTree = SOURCE_ROOT; };
 		AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewState.swift; sourceTree = "<group>"; };
 		AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */,
+				AA60DA02294D01EB008C7615 /* fallback_exercises.json */,
 			);
 			path = Caching;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA60DA03294D01EB008C7615 /* fallback_exercises.json in Resources */,
 				AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */,
 				AA825D3F287238C90041D94A /* Assets.xcassets in Resources */,
 			);
