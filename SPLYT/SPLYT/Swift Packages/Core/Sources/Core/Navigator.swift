@@ -27,3 +27,14 @@ public extension Navigator {
     func present(_ vc: UIViewController, animated: Bool) { }
     func dismiss(animated: Bool) { }
 }
+
+/// Default methods for base UINavigationControllers
+public extension Navigator where Self: UINavigationController {
+    func push(_ vc: UIViewController, animated: Bool) {
+        self.pushViewController(vc, animated: animated)
+    }
+    
+    func present(_ vc: UIViewController, animated: Bool) {
+        self.present(vc, animated: animated)
+    }
+}

@@ -21,19 +21,6 @@ enum TabType: CaseIterable {
     case profile
     case settings
     
-    @ViewBuilder
-    /// The view to show for each tab
-    var baseView: some View {
-        switch self {
-        case .workouts:
-            WorkoutsView()
-        case .profile:
-            ProfileView()
-        case .settings:
-            SettingsViewController_SwiftUI()
-        }
-    }
-    
     /// The image name for the icon displayed
     var imageName: String {
         switch self {
