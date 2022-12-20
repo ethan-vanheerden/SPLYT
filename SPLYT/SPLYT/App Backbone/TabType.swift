@@ -25,7 +25,7 @@ enum TabType: CaseIterable {
     var imageName: String {
         switch self {
         case .workouts:
-            return "figure.walk"
+            return "dumbbell.fill"
         case .profile:
             return "person.crop.circle"
         case .settings:

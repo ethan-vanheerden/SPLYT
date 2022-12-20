@@ -4,6 +4,7 @@ struct AtomGallery: GalleryType {
 }
 
 enum Atom: String, CaseIterable, GalleryItem {
+    case FABIcon = "FAB Icon"
     case sectionHeader = "Section Header"
     
     var title: String {
