@@ -6,8 +6,20 @@
 //
 
 import SwiftUI
+import Core
+import DesignSystem
 
-struct WorkoutsView: View {
+struct WorkoutsView<VM: ViewModel>: View where VM.Event == WorkoutsViewEvent, VM.ViewState == WorkoutsViewState {
+    @ObservedObject private var viewModel: VM
+    private let navigationRouter: WorkoutsNavigationRouter
+    
+    init(viewModel: VM,
+         navigationRouter: WorkoutsNavigationRouter) {
+        self.viewModel = viewModel
+        self.navigationRouter = navigationRouter
+        viewModel.send(.load)
+    }
+    
     var body: some View {
         Text("Workouts")
     }
@@ -15,6 +27,7 @@ struct WorkoutsView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutsView()
+        WorkoutsView(viewModel: WorkoutsViewModel(),
+                     navigationRouter: WorkoutsNavigationRouter())
     }
 }

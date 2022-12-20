@@ -9,7 +9,7 @@ import SwiftUI
 import Core
 
 /// The base view controller for Settings
-final class SettingsNavigationController: UINavigationController {
+final class SettingsNavigationController: UINavigationController, Navigator {
     init() {
         let viewModel = SettingsViewModel()
         let navigationRouter = SettingsNavigationRouter()
@@ -22,14 +22,6 @@ final class SettingsNavigationController: UINavigationController {
     
     required init?(coder aDecoder: NSCoder) {
         return nil
-    }
-}
-
-// MARK: - Navigator
-
-extension SettingsNavigationController: Navigator {
-    func push(_ vc: UIViewController, animated: Bool) {
-        self.pushViewController(vc, animated: animated)
     }
 }
 

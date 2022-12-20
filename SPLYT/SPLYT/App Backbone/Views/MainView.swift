@@ -25,12 +25,25 @@ struct MainView<V: MainViewModelType>: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             ForEach(TabType.allCases, id: \.self) { tab in
-                tab.baseView
+                tabView(tab: tab)
                     .tabItem {
                         Label(tab.title, systemImage: tab.imageName)
                             .tag(tab)
                     }
             }
+        }
+    }
+    
+    @ViewBuilder
+    // The view to show for each tab
+    private func tabView(tab: TabType) -> some View {
+        switch tab {
+        case .workouts:
+            WorkoutsViewController_SwiftUI()
+        case .profile:
+            ProfileView()
+        case .settings:
+            SettingsViewController_SwiftUI()
         }
     }
 }
