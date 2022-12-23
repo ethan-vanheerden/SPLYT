@@ -6,6 +6,8 @@ struct AtomFactory {
         switch atom {
         case .FABIcon:
             FABIconGallery()
+        case .scrim:
+            ScrimGallery()
         case .sectionHeader:
             SectionHeaderGallery()
         }

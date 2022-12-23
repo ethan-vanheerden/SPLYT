@@ -11,13 +11,11 @@ public struct FABRow: View {
     }
     
     public var body: some View {
-        HStack(spacing: Layout.size(1)) {
+        HStack {
             Text(viewState.title)
                 .bodyText()
-            FABIcon(type: fabIconType)
-                .onTapGesture {
-                    viewState.tapAction()
-                }
+            FABIcon(type: fabIconType,
+                    tapAction: viewState.tapAction)
         }
     }
     

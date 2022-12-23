@@ -13,5 +13,6 @@ protocol GalleryItem {
 let galleryTypes: [GalleryType] = [
     ParticleGallery(),
     AtomGallery(),
-    MoleculeGallery()
+    MoleculeGallery(),
+    OrganismGallery()
 ]
