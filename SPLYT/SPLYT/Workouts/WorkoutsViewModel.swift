@@ -10,11 +10,16 @@ import Core
 
 final class WorkoutsViewModel: ViewModel {
     @Published private(set) var viewState: WorkoutsViewState = .loading
+    private let interactor: WorkoutsInteractorType
+    
+    init(interactor: WorkoutsInteractorType = WorkoutsInteractor()) {
+        self.interactor = interactor
+    }
     
     func send(_ event: WorkoutsViewEvent) async {
         switch event {
         case .load:
-            await updateViewState(.main)
+            await handleLoad()
         }
     }
     
@@ -27,6 +32,10 @@ private extension WorkoutsViewModel {
         await MainActor.run {
             self.viewState = viewState
         }
+    }
+    
+    func handleLoad() async {
+        let exercises = await interactor
     }
 }
 

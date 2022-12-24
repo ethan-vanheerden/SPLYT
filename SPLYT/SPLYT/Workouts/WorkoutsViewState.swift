@@ -9,5 +9,5 @@ import Foundation
 
 enum WorkoutsViewState: Equatable {
     case loading
-    case main
+    case main(WorkoutsDisplayInfo)
 }

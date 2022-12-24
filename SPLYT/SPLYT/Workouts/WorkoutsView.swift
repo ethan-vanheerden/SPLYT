@@ -21,7 +21,12 @@ struct WorkoutsView<VM: ViewModel>: View where VM.Event == WorkoutsViewEvent, VM
     }
     
     var body: some View {
-        Text("Workouts")
+        switch viewModel.viewState {
+        case .loading:
+            ProgressView()
+        case .main:
+            Text("Workouts")
+        }
     }
 }
 

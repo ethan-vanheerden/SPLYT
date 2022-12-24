@@ -27,6 +27,10 @@ public struct FABRow: View {
 // MARK: - ViewState
 
 public struct FABRowViewState: ItemViewState {
+    public static func == (lhs: FABRowViewState, rhs: FABRowViewState) -> Bool {
+        return true
+    }
+    
     public let id: AnyHashable
     let title: String
     let imageName: String
