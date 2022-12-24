@@ -26,11 +26,7 @@ public struct FABRow: View {
 
 // MARK: - ViewState
 
-public struct FABRowViewState: ItemViewState {
-    public static func == (lhs: FABRowViewState, rhs: FABRowViewState) -> Bool {
-        return true
-    }
-    
+public struct FABRowViewState: ItemViewState, Equatable {
     public let id: AnyHashable
     let title: String
     let imageName: String
@@ -46,6 +42,11 @@ public struct FABRowViewState: ItemViewState {
         self.tapAction = tapAction
     }
     
+    public static func == (lhs: FABRowViewState, rhs: FABRowViewState) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.title == rhs.title
+            && lhs.imageName == rhs.imageName
+    }
 }
 
 struct FABRow_Previews: PreviewProvider {

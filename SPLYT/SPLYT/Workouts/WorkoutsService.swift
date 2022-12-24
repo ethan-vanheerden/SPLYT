@@ -9,7 +9,7 @@ import Foundation
 import Caching
 
 protocol WorkoutsServiceType {
-    func loadAvailableExercises() async throws -> [AvailableExercise]
+    func loadAvailableExercises() throws -> [AvailableExercise]
 }
 
 // MARK: - Implementation
@@ -21,8 +21,9 @@ struct WorkoutsService: WorkoutsServiceType {
         self.cacheInteractor = cacheInteractor
     }
     
-    func loadAvailableExercises() async throws -> [AvailableExercise] {
+    func loadAvailableExercises() throws -> [AvailableExercise] {
         let request = AvailableExercisesCacheRequest()
-        let exercises = try await cacheInteractor.load(with: request)
+        let exercises = try cacheInteractor.load(with: request)
+        return exercises
     }
 }

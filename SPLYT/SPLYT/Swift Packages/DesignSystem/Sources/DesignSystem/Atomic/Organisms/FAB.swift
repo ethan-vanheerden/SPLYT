@@ -9,32 +9,42 @@ public struct FAB: View {
         self.items = items
     }
     
-    // TODO: Scrim, custom alignment
     public var body: some View {
-        // TODO: custom alignment
-        HStack {
-            Spacer()
-            VStack(alignment: .trailing) {
-                Spacer()
-                ForEach(items) { item in
-                    FABRow(viewState: item)
-                }
+        ZStack {
+            Scrim()
+                .ignoresSafeArea(edges: .all)
                 .isVisible(isPresenting)
-                .padding(.trailing)// TODO: remove me
-                FABIcon(type: plusIcon) {
+                .onTapGesture {
                     withAnimation(Animation.easeOut) {
                         isPresenting.toggle()
                     }
                 }
+            HStack {
+                Spacer()
+                VStack(alignment: .trailing) {
+                    Spacer()
+                    ForEach(items, id: \.id) { item in
+                        FABRow(viewState: item)
+                    }
+                    .isVisible(isPresenting)
+                    .padding(.trailing, Layout.size(2))
+                    FABIcon(type: plusIcon) {
+                        withAnimation(Animation.easeOut) {
+                            isPresenting.toggle()
+                        }
+                    }
+                }
             }
+            .padding()
         }
-        .padding()
     }
     
     private var plusIcon: FABIconType {
         return FABIconType(size: .primary, imageName: "plus")
     }
 }
+
+
 
 struct FAB_Previews: PreviewProvider {
     static var previews: some View {

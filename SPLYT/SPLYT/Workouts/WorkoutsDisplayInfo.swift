@@ -10,11 +10,6 @@ import Core
 import DesignSystem
 
 struct WorkoutsDisplayInfo: Equatable {
-    static func == (lhs: WorkoutsDisplayInfo, rhs: WorkoutsDisplayInfo) -> Bool {
-        return false // TODO
-    }
-    
-    
-    let mainItems: [ItemViewState]
+    let mainItems: [ItemViewStateWrapper]
     let fabItems: [FABRowViewState]
 }

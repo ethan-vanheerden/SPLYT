@@ -5,15 +5,9 @@ public struct Scrim: View {
     public init() {}
     
     public var body: some View {
-        ZStack {
-            Text("HELLO")
-            Rectangle()
-                .fill(Color.white)
-//                .blur(radius: 1, opaque: false)
-//                .blur(radius: 4)
-                .opacity(0.5)
-        }
-        
+        Rectangle()
+            .fill(.ultraThinMaterial)
+            .opacity(0.95)
     }
 }
 

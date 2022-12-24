@@ -9,9 +9,13 @@ struct ScrimGallery: View {
                 Text("Hello, World!")
                 Rectangle()
                     .fill(Color.red)
+                Text("MORE TEXT")
+                    .megaText()
+                Rectangle()
+                    .fill(Color.blue)
             }
             Scrim()
+                .edgesIgnoringSafeArea(.all)
         }
-        
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DesignSystem
 
 enum WorkoutsViewState: Equatable {
     case loading
