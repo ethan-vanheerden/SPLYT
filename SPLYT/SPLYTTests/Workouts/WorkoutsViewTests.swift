@@ -12,8 +12,8 @@ import SwiftUI
 
 final class WorkoutsViewTests: XCTestCase {
     
-    func testWorkoutsView() {
-        let vc = UIHostingController(rootView: WorkoutsView())
-        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
-    }
+//    func testWorkoutsView() {
+//        let vc = UIHostingController(rootView: WorkoutsView())
+//        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
+//    }
 }

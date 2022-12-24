@@ -24,6 +24,8 @@ struct DesignShowcaseView: View {
                     AtomFactory().makeView(atom)
                 case let molecule as Molecule:
                     MoleculeFactory().makeView(molecule)
+                case let organism as Organism:
+                    OrganismFactory().makeView(organism)
                 default:
                     EmptyView()
                 }

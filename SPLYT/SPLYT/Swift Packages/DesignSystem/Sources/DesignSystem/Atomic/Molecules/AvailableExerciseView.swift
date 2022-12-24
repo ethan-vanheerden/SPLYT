@@ -16,7 +16,7 @@ struct AvailableExerciseView: View {
 
 // MARK: - ViewState
 
-public struct AvailableExerciseViewState: ItemViewState {
+public struct AvailableExerciseViewState: ItemViewState, Equatable {
     public let id: AnyHashable
     let name: String
     

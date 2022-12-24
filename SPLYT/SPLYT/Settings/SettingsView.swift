@@ -42,7 +42,7 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent, VM
             .padding(.leading)
             
             VStack {
-                ForEach(items) {
+                ForEach(items, id: \.id) {
                     MenuItem(viewState: $0) { viewState in
                         navigationRouter.navigate(.menuItem(viewState))
                     }

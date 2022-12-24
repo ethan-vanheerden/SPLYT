@@ -19,7 +19,7 @@ public protocol CacheInteractorType {
 
 @available(iOS 16.0, *)
 @available(iOS 16.0, *)
-public struct CacheInterator: CacheInteractorType {
+public struct CacheInteractor: CacheInteractorType {
     public static func load<R: CacheRequest>(with request: R) throws -> R.CacheData where R : CacheRequest {
         let url = try CacheURLCreator.getURL(for: request)
         let file = try FileHandle(forReadingFrom: url)

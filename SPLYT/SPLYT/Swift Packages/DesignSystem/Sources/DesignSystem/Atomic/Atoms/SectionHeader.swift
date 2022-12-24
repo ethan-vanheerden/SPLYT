@@ -28,7 +28,7 @@ public struct SectionHeader: View {
 
 // MARK: - ViewState
 
-public struct SectionHeaderViewState: ItemViewState {
+public struct SectionHeaderViewState: ItemViewState, Equatable {
     public let id: AnyHashable
     let text: String
     

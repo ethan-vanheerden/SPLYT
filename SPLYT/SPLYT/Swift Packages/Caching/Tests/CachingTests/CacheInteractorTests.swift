@@ -14,11 +14,11 @@ final class CacheInteractorTests: XCTestCase {
     
     func testLoadAndSave() throws {
         // Try to load data which is not there
-        XCTAssertThrowsError(try CacheInterator.load(with: request))
+        XCTAssertThrowsError(try CacheInteractor.load(with: request))
         
         // Now save some data
         let mockData = "Hello World!"
-        try CacheInterator.save(with: request, data: mockData)
+        try CacheInteractor.save(with: request, data: mockData)
         
         // Try loading the data again
         let loadedData = try CacheInterator.load(with: request)
