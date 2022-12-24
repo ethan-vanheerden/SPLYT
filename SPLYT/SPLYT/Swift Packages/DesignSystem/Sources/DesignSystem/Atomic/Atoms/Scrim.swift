@@ -9,6 +9,7 @@ public struct Scrim: View {
             Text("HELLO")
             Rectangle()
                 .fill(Color.white)
+//                .blur(radius: 1, opaque: false)
 //                .blur(radius: 4)
                 .opacity(0.5)
         }

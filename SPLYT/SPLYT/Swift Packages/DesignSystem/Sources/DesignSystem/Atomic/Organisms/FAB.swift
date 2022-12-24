@@ -9,7 +9,7 @@ public struct FAB: View {
         self.items = items
     }
     
-    // TODO: hiding/showing views keeping their frame, Scrim, custom alignment
+    // TODO: Scrim, custom alignment
     public var body: some View {
         // TODO: custom alignment
         HStack {
@@ -17,12 +17,10 @@ public struct FAB: View {
             VStack(alignment: .trailing) {
                 Spacer()
                 ForEach(items) { item in
-                    if isPresenting {
-                        withAnimation(Animation.easeIn) {
-                            FABRow(viewState: item)
-                        }
-                    }
-                }.padding(.trailing) // TODO: remove me
+                    FABRow(viewState: item)
+                }
+                .isVisible(isPresenting)
+                .padding(.trailing)// TODO: remove me
                 FABIcon(type: plusIcon) {
                     withAnimation(Animation.easeOut) {
                         isPresenting.toggle()
