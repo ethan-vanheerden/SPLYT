@@ -7,8 +7,8 @@ final class FABIconTests: XCTestCase {
     // TODO: Bug with Xcode and iOS, add snapshot once we can
     func testFABIcon() throws {
         let view = VStack(spacing: Layout.size(6)) {
-            FABIcon(type: FABIconType(size: .primary, imageName: "plus"))
-            FABIcon(type: FABIconType(size: .secondary, imageName: "calendar"))
+            FABIcon(type: FABIconType(size: .primary, imageName: "plus"), tapAction: { })
+            FABIcon(type: FABIconType(size: .secondary, imageName: "calendar"), tapAction: { })
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)

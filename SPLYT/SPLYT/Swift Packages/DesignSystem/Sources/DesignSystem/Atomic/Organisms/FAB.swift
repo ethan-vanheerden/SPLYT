@@ -9,10 +9,17 @@ public struct FAB: View {
         self.items = items
     }
     
+    /// Initializer for testing purposes
+    init(items: [FABRowViewState],
+         isPresentingOverride: Bool) {
+        self.items = items
+        self._isPresenting = State(initialValue: isPresentingOverride)
+    }
+    
     public var body: some View {
         ZStack {
             Scrim()
-                .ignoresSafeArea(edges: .all)
+                .edgesIgnoringSafeArea(.all)
                 .isVisible(isPresenting)
                 .onTapGesture {
                     withAnimation(Animation.easeOut) {
