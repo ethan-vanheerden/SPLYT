@@ -10,10 +10,25 @@ import XCTest
 import SnapshotTesting
 import SwiftUI
 
+// TODO: run when Xcode is fixed
 final class WorkoutsViewTests: XCTestCase {
+    private var viewModel: MockWorkoutsViewModel!
+    private var sut: WorkoutsView<MockWorkoutsViewModel>!
+    private var vc: UIHostingController<WorkoutsView<MockWorkoutsViewModel>>!
+    private let fixtures = WorkoutsFixtures.self
     
-//    func testWorkoutsView() {
-//        let vc = UIHostingController(rootView: WorkoutsView())
-//        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
-//    }
+    override func setUp() {
+        viewModel = MockWorkoutsViewModel()
+        sut = WorkoutsView(viewModel: viewModel, navigationRouter: WorkoutsNavigationRouter())
+        vc = UIHostingController(rootView: sut)
+    }
+    
+    func testLoading() {
+        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
+    }
+    
+    func testWorkoutsView() {
+        viewModel.viewState = .main(fixtures.mainDisplay)
+        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
+    }
 }

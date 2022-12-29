@@ -11,14 +11,14 @@ import Core
 // MARK: - Domain Action
 
 enum WorkoutsDomainAction {
-    case loadAvailableExercises
+    case loadWorkouts
 }
 
 // MARK: - Domain Results
 
-enum WorkoutsDomainResult {
+enum WorkoutsDomainResult: Equatable {
     case error
-    case loaded([AvailableExercise])
+    case loaded([String]) // TODO: this should actually be CreatedWorkouts and CreatedPlans
 }
 
 // MARK: - Protocol
@@ -32,7 +32,7 @@ protocol WorkoutsInteractorType {
 struct WorkoutsInteractor: WorkoutsInteractorType {
     func interact(with action: WorkoutsDomainAction) async -> WorkoutsDomainResult {
         switch action {
-        case .loadAvailableExercises:
+        case .loadWorkouts:
             return await handleLoadAvailableExercises()
         }
     }

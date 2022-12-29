@@ -8,9 +8,12 @@
 import Foundation
 import Core
 
+// MARK: - Protocol
+
 final class WorkoutsViewModel: ViewModel {
     @Published private(set) var viewState: WorkoutsViewState = .loading
     private let interactor: WorkoutsInteractorType
+    private let reducer = WorkoutsViewStateReducer()
     
     init(interactor: WorkoutsInteractorType = WorkoutsInteractor()) {
         self.interactor = interactor
@@ -35,7 +38,9 @@ private extension WorkoutsViewModel {
     }
     
     func handleLoad() async {
-        let exercises = await interactor
+        let domain = await interactor.interact(with: .loadWorkouts)
+        let viewState = reducer.reduce(domain)
+        await updateViewState(viewState)
     }
 }
 

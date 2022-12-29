@@ -5,20 +5,18 @@ import SwiftUI
 
 final class FABTests: XCTestCase {
     // TODO: Bug with Xcode and iOS, add snapshot once we can
-    let fabItems: [FABRowViewState] = [
-        FABRowViewState(title: "CREATE NEW PLAN",
-                        imageName: "calendar",
-                        tapAction: { }),
-        FABRowViewState(title: "CREATE NEW WORKOUT",
-                        imageName: "figure.strengthtraining.traditional",
-                        tapAction: { })
-    ]
+    private let viewState = FABViewState(createPlanState: FABRowViewState(title: "CREATE NEW PLAN",
+                                                                         imageName: "calendar"),
+                                         createWorkoutState: FABRowViewState(title: "CREATE NEW WORKOUT",
+                                                                            imageName: "figure.strengthtraining.traditional"))
     
     func testFABNotExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
                 .bodyText()
-            FAB(items: fabItems)
+            FAB(viewState: viewState,
+                createPlanAction: { },
+                createWorkoutAction: { })
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
@@ -29,7 +27,9 @@ final class FABTests: XCTestCase {
         let view = ZStack {
             Text("Hello, World!")
                 .bodyText()
-            FAB(items: fabItems,
+            FAB(viewState: viewState,
+                createPlanAction: { },
+                createWorkoutAction: { },
                 isPresentingOverride: true)
         }
         .padding(.horizontal)

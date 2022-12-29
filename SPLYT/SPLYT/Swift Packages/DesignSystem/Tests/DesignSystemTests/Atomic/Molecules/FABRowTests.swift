@@ -6,16 +6,16 @@ import SwiftUI
 final class FABRowTests: XCTestCase {
     // TODO: Bug with Xcode and iOS, add snapshot once we can
     let viewStateOne = FABRowViewState(title: "CREATE NEW PLAN",
-                                       imageName: "calendar",
-                                       tapAction: { print("Create new plan") })
+                                       imageName: "calendar")
     let viewStateTwo = FABRowViewState(title: "CREATE NEW WORKOUT",
-                                       imageName: "figure.strengthtraining.traditional",
-                                       tapAction: { print("Create new workout") })
+                                       imageName: "figure.strengthtraining.traditional")
     
     func testFABRow() throws {
         let view = VStack(alignment: .trailing) {
-            FABRow(viewState: viewStateOne)
-            FABRow(viewState: viewStateTwo)
+            FABRow(viewState: viewStateOne,
+                   tapAction: { print("Create new plan") })
+            FABRow(viewState: viewStateTwo,
+                   tapAction: { print("Create new workout") })
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)

@@ -22,11 +22,28 @@ struct WorkoutsView<VM: ViewModel>: View where VM.Event == WorkoutsViewEvent, VM
     
     var body: some View {
         switch viewModel.viewState {
+        case .error:
+            Text("Error!")
         case .loading:
             ProgressView()
-        case .main:
-            Text("Workouts")
+        case .main(let display):
+            mainView(display: display)
         }
+    }
+    
+    @ViewBuilder
+    private func mainView(display: WorkoutsDisplayInfo) -> some View {
+        ZStack {
+            Text("Workouts")
+            fabView(state: display.fab)
+        }
+    }
+    
+    @ViewBuilder
+    private func fabView(state: FABViewState) -> some View {
+        FAB(viewState: state,
+            createPlanAction: { navigationRouter.navigate(.createPlan) },
+            createWorkoutAction: { navigationRouter.navigate(.createWorkout) })
     }
 }
 
