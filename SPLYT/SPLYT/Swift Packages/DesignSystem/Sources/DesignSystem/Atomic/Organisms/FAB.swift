@@ -3,16 +3,26 @@ import SwiftUI
 
 public struct FAB: View {
     @State private var isPresenting = false
-    private let items: [FABRowViewState]
+    private let viewState: FABViewState
+    private let createPlanAction: () -> Void
+    private let createWorkoutAction: () -> Void
     
-    public init(items: [FABRowViewState]) {
-        self.items = items
+    public init(viewState: FABViewState,
+                createPlanAction: @escaping () -> Void,
+                createWorkoutAction: @escaping () -> Void) {
+        self.viewState = viewState
+        self.createPlanAction = createPlanAction
+        self.createWorkoutAction = createWorkoutAction
     }
     
     /// Initializer for testing purposes
-    init(items: [FABRowViewState],
+    init(viewState: FABViewState,
+         createPlanAction: @escaping () -> Void,
+         createWorkoutAction: @escaping () -> Void,
          isPresentingOverride: Bool) {
-        self.items = items
+        self.viewState = viewState
+        self.createPlanAction = createPlanAction
+        self.createWorkoutAction = createWorkoutAction
         self._isPresenting = State(initialValue: isPresentingOverride)
     }
     
@@ -30,12 +40,11 @@ public struct FAB: View {
                 Spacer()
                 VStack(alignment: .trailing) {
                     Spacer()
-                    ForEach(items, id: \.id) { item in
-                        FABRow(viewState: item)
-                    }
-                    .isVisible(isPresenting)
-                    .padding(.trailing, Layout.size(2))
+                    fabItems
                     FABIcon(type: plusIcon) {
+                        // Adds a small vibration effect
+                        let haptic = UIImpactFeedbackGenerator(style: .rigid)
+                        haptic.impactOccurred()
                         withAnimation(Animation.easeOut) {
                             isPresenting.toggle()
                         }
@@ -46,22 +55,46 @@ public struct FAB: View {
         }
     }
     
+    private var fabItems: some View {
+        VStack(alignment: .trailing) {
+            FABRow(viewState: viewState.createPlanState,
+                   tapAction: createPlanAction)
+            FABRow(viewState: viewState.createWorkoutState,
+                   tapAction: createWorkoutAction)
+        }
+        .isVisible(isPresenting)
+        .padding(.trailing, Layout.size(2))
+    }
+    
     private var plusIcon: FABIconType {
         return FABIconType(size: .primary, imageName: "plus")
     }
 }
 
+// MARK: - ViewState
+
+public struct FABViewState: ItemViewState, Equatable {
+    public let id: AnyHashable
+    let createPlanState: FABRowViewState
+    let createWorkoutState: FABRowViewState
+    
+    public init(id: AnyHashable = UUID(),
+                createPlanState: FABRowViewState,
+                createWorkoutState: FABRowViewState) {
+        self.id = id
+        self.createPlanState = createPlanState
+        self.createWorkoutState = createWorkoutState
+    }
+}
 
 
 struct FAB_Previews: PreviewProvider {
     static var previews: some View {
-        FAB(items: [
-            FABRowViewState(title: "CREATE NEW PLAN",
-                            imageName: "calendar",
-                            tapAction: { }),
-            FABRowViewState(title: "CREATE NEW WORKOUT",
-                            imageName: "figure.strengthtraining.traditional",
-                            tapAction: { })
-        ])
+        FAB(viewState: FABViewState(createPlanState: FABRowViewState(title: "CREATE NEW PLAN",
+                                                                     imageName: "calendar"),
+                                    createWorkoutState: FABRowViewState(title: "CREATE NEW WORKOUT",
+                                                                        imageName: "figure.strengthtraining.traditional")),
+            createPlanAction: { },
+            createWorkoutAction: { })
     }
 }

@@ -7,12 +7,13 @@
 
 import Foundation
 import Core
-import UIKit
+import SwiftUI
 
 // MARK: - Navigation Events
 
 enum WorkoutsNavigationEvent {
-    case create
+    case createPlan
+    case createWorkout
 }
 
 // MARK: - Router
@@ -22,8 +23,10 @@ final class WorkoutsNavigationRouter: NavigationRouter {
     
     func navigate(_ event: WorkoutsNavigationEvent) {
         switch event {
-        case .create:
-            handleCreate()
+        case .createPlan:
+            handleCreatePlan()
+        case .createWorkout:
+            handleCreateWorkout()
         }
     }
 }
@@ -31,7 +34,13 @@ final class WorkoutsNavigationRouter: NavigationRouter {
 // MARK: - Private
 
 private extension WorkoutsNavigationRouter {
-    func handleCreate() {
-        navigator?.present(UIViewController(), animated: true)
+    func handleCreatePlan() {
+        let view = Text("CREATE PLAN")
+        navigator?.present(UIHostingController(rootView: view), animated: true)
+    }
+    
+    func handleCreateWorkout() {
+        let view = Text("CREATE WORKOUT")
+        navigator?.present(UIHostingController(rootView: view), animated: true)
     }
 }

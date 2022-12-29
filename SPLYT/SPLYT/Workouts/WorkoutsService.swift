@@ -8,6 +8,7 @@
 import Foundation
 import Caching
 
+// TODO: fix since this is not used on the landing workouts screen
 protocol WorkoutsServiceType {
     func loadAvailableExercises() throws -> [AvailableExercise]
 }

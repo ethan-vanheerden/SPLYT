@@ -11,5 +11,5 @@ import DesignSystem
 
 struct WorkoutsDisplayInfo: Equatable {
     let mainItems: [ItemViewStateWrapper]
-    let fabItems: [FABRowViewState]
+    let fab: FABViewState
 }

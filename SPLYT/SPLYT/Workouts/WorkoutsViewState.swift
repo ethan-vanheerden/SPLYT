@@ -9,6 +9,7 @@ import Foundation
 import DesignSystem
 
 enum WorkoutsViewState: Equatable {
+    case error
     case loading
     case main(WorkoutsDisplayInfo)
 }
