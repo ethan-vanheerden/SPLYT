@@ -10,6 +10,8 @@ struct MoleculeFactory {
             MenuItemGallery()
         case .repCounter:
             RepCounterGallery()
+        case .segmentedControl:
+            SegmentedControlGallery()
         }
     }
 }

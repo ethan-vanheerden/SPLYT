@@ -24,7 +24,7 @@ public struct Tile<Content: View>: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct Tile_Previews: PreviewProvider {
     static var previews: some View {
         Tile {
             Text("Hello World!")
