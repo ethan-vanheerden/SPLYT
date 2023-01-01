@@ -5,6 +5,7 @@ struct MoleculeGallery: GalleryType {
 }
 
 enum Molecule: String, CaseIterable, GalleryItem {
+    case bottomSheet = "Bottom Sheet"
     case FABRow = "FAB Row"
     case menuItem = "Menu Item"
     case repCounter = "Rep Counter"
