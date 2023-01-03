@@ -11,4 +11,5 @@ import Foundation
 enum SetModifier: String, Codable, Equatable {
     case dropSet = "DROP_SET"
     case restPause = "REST_PAUSE"
+    case eccentric = "ECCENTRIC"
 }

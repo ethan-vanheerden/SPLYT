@@ -11,4 +11,5 @@ import Foundation
 struct Workout: Equatable {
     let name: String
     let exerciseGroups: [ExerciseGroup]
+    let lastCompleted: Date?
 }

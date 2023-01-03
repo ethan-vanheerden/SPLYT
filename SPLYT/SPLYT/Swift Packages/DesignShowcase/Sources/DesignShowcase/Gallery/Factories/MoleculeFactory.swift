@@ -4,12 +4,16 @@ struct MoleculeFactory {
     @ViewBuilder
     func makeView(_ molecule: Molecule) -> some View {
         switch molecule {
+        case .bottomSheet:
+            BottomSheetGallery()
         case .FABRow:
             FABRowGallery()
         case .menuItem:
             MenuItemGallery()
         case .repCounter:
             RepCounterGallery()
+        case .segmentedControl:
+            SegmentedControlGallery()
         }
     }
 }

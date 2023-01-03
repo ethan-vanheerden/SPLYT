@@ -47,7 +47,7 @@ struct WorkoutsView<VM: ViewModel>: View where VM.Event == WorkoutsViewEvent, VM
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct WorkoutsView_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutsView(viewModel: WorkoutsViewModel(),
                      navigationRouter: WorkoutsNavigationRouter())
