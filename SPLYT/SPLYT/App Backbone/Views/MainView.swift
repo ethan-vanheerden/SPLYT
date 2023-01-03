@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct MainView<V: MainViewModelType>: View {
     @ObservedObject private var viewModel: V

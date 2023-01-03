@@ -11,7 +11,7 @@
     - There should be very few of these
     
 2. Isolated Views - Starting point for isolated screens which will have limited navigation events
-    - UIViewControllerRepresentable withs its view controller being a UIViewController
+    - UIViewControllerRepresentable with its view controller being a UIViewController
     - These should have some Root View being its entry point
     - Show SwiftUI Views
 
