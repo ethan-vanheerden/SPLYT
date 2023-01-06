@@ -212,6 +212,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AA58D7F0296869E5009B9ECC /* Workout Creation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Workout Creation";
+			sourceTree = "<group>";
+		};
 		AA7AA65B28848F6200CB0A6B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +326,7 @@
 		AA93404A28888B0400309E83 /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
+				AA58D7F0296869E5009B9ECC /* Workout Creation */,
 				AA4A31442882CD1C003E7C64 /* WorkoutsView.swift */,
 				AA60DA04295215DF008C7615 /* WorkoutsNavigationController.swift */,
 				AA60DA06295217CF008C7615 /* WorkoutsViewModel.swift */,
