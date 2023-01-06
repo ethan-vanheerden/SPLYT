@@ -10,6 +10,8 @@ struct MoleculeFactory {
             FABRowGallery()
         case .menuItem:
             MenuItemGallery()
+        case .navigationBar:
+            NavigationBarGallery()
         case .repCounter:
             RepCounterGallery()
         case .segmentedControl:

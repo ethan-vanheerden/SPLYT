@@ -19,6 +19,8 @@
 		AA4A31452882CD1C003E7C64 /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31442882CD1C003E7C64 /* WorkoutsView.swift */; };
 		AA4A31472882CE63003E7C64 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* ProfileView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
+		AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58D7F4296876FE009B9ECC /* NameWorkoutViewModel.swift */; };
+		AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58D7F629687AF9009B9ECC /* NameWorkoutView.swift */; };
 		AA60DA01294B7FA0008C7615 /* Caching in Frameworks */ = {isa = PBXBuildFile; productRef = AA60DA00294B7FA0008C7615 /* Caching */; };
 		AA60DA03294D01EB008C7615 /* fallback_exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = AA60DA02294D01EB008C7615 /* fallback_exercises.json */; };
 		AA60DA05295215DF008C7615 /* WorkoutsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA60DA04295215DF008C7615 /* WorkoutsNavigationController.swift */; };
@@ -93,6 +95,8 @@
 		AA4A31462882CE63003E7C64 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		AA4A314D2882DAF7003E7C64 /* DesignShowcase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignShowcase; sourceTree = "<group>"; };
+		AA58D7F4296876FE009B9ECC /* NameWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameWorkoutViewModel.swift; sourceTree = "<group>"; };
+		AA58D7F629687AF9009B9ECC /* NameWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameWorkoutView.swift; sourceTree = "<group>"; };
 		AA60DA02294D01EB008C7615 /* fallback_exercises.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fallback_exercises.json; path = SPLYT/Exercises/fallback_exercises.json; sourceTree = SOURCE_ROOT; };
 		AA60DA04295215DF008C7615 /* WorkoutsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsNavigationController.swift; sourceTree = "<group>"; };
 		AA60DA06295217CF008C7615 /* WorkoutsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewModel.swift; sourceTree = "<group>"; };
@@ -215,8 +219,18 @@
 		AA58D7F0296869E5009B9ECC /* Workout Creation */ = {
 			isa = PBXGroup;
 			children = (
+				AA58D7F32968768A009B9ECC /* NameWorkoutViewModel */,
 			);
 			path = "Workout Creation";
+			sourceTree = "<group>";
+		};
+		AA58D7F32968768A009B9ECC /* NameWorkoutViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AA58D7F4296876FE009B9ECC /* NameWorkoutViewModel.swift */,
+				AA58D7F629687AF9009B9ECC /* NameWorkoutView.swift */,
+			);
+			path = NameWorkoutViewModel;
 			sourceTree = "<group>";
 		};
 		AA7AA65B28848F6200CB0A6B /* Views */ = {
@@ -576,6 +590,7 @@
 				AA60DA07295217CF008C7615 /* WorkoutsViewModel.swift in Sources */,
 				AA2A22DC28A5C01E002357E4 /* Set.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
+				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
 				AADEC4AA28A7193A00A5463B /* SetInputType.swift in Sources */,
 				AADEC4AF28A8375500A5463B /* ExerciseGroup.swift in Sources */,
 				AA60DA0F2956B453008C7615 /* WorkoutsInteractor.swift in Sources */,
@@ -590,6 +605,7 @@
 				AA60DA05295215DF008C7615 /* WorkoutsNavigationController.swift in Sources */,
 				AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */,
 				AA4A31452882CD1C003E7C64 /* WorkoutsView.swift in Sources */,
+				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
 				AADEC4AC28A71BC100A5463B /* SetModifier.swift in Sources */,
 				AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */,
 			);

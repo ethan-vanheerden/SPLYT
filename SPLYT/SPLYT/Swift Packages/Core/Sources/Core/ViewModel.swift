@@ -28,3 +28,12 @@ public extension ViewModel {
         }
     }
 }
+
+/// Empty struct to simulate a View Model which should not receive view events
+public struct NoViewEvent { }
+
+public extension ViewModel where Self.Event == NoViewEvent {
+    
+    /// Do nothing
+    func send(_ event: NoViewEvent) async { }
+}

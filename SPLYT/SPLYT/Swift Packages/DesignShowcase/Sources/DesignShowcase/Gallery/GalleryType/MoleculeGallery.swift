@@ -8,6 +8,7 @@ enum Molecule: String, CaseIterable, GalleryItem {
     case bottomSheet = "Bottom Sheet"
     case FABRow = "FAB Row"
     case menuItem = "Menu Item"
+    case navigationBar = "Navigation Bar"
     case repCounter = "Rep Counter"
     case segmentedControl = "Segmented Control"
     

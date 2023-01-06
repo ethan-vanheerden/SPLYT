@@ -35,12 +35,12 @@ final class WorkoutsNavigationRouter: NavigationRouter {
 
 private extension WorkoutsNavigationRouter {
     func handleCreatePlan() {
-        let view = Text("CREATE PLAN")
+        let view = NavigationView{ Text("CREATE PLAN").navigationTitle("hello").navigationBarBackButtonHidden(false) }
         navigator?.present(UIHostingController(rootView: view), animated: true)
     }
     
     func handleCreateWorkout() {
-        let view = Text("CREATE WORKOUT")
+        let view = NameWorkoutView()
         navigator?.present(UIHostingController(rootView: view), animated: true)
     }
 }

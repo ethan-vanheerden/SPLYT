@@ -8,8 +8,6 @@
 import Foundation
 import Core
 
-// MARK: - Protocol
-
 final class WorkoutsViewModel: ViewModel {
     @Published private(set) var viewState: WorkoutsViewState = .loading
     private let interactor: WorkoutsInteractorType
