@@ -24,11 +24,11 @@ public extension View {
                                     .tint(Color.black)
                             }
                         }
+                    }
                         ToolbarItem(placement: getToolbarPlacement(position: state.position)) {
                             Text(state.title)
                                 .subtitleText()
                         }
-                    }
                 }
         }
     }

@@ -40,8 +40,7 @@ final class NameWorkoutNavigationRouter: NavigationRouter {
 private extension NameWorkoutNavigationRouter {
     func handleNext(state: NameWorkoutNavigationState) {
         // TODO: entry point for next screen
-        let vc = UIHostingController(rootView: Text(state.workoutName))
-        
+        let vc = UIHostingController(rootView: AddExerciseView())
         navigator?.push(vc, animated: true)
     }
 }

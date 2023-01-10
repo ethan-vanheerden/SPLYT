@@ -9,7 +9,7 @@ import SwiftUI
 import Core
 
 /// The base view controller for Settings
-final class SettingsNavigationController: UINavigationController, Navigator {
+final class SettingsNavigationController: UINavigationController {
     init() {
         let viewModel = SettingsViewModel()
         let navigationRouter = SettingsNavigationRouter()

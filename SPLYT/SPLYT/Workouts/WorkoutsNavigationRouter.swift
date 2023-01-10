@@ -35,16 +35,22 @@ final class WorkoutsNavigationRouter: NavigationRouter {
 
 private extension WorkoutsNavigationRouter {
     func handleCreatePlan() {
-        let view = NavigationView{ Text("CREATE PLAN").navigationTitle("hello").navigationBarBackButtonHidden(false) }
+        let view = Text("CREATE PLAN")
         navigator?.present(UIHostingController(rootView: view), animated: true)
+
     }
     
     func handleCreateWorkout() {
         let viewModel = NameWorkoutViewModel()
         let navigationRouter = NameWorkoutNavigationRouter()
-        navigationRouter.navigator = navigator
-        let view = NameWorkoutView(viewModel: viewModel, navigationRouter: navigationRouter)
+        let view = NameWorkoutView(viewModel: viewModel, navigationRouter: navigationRouter) { [weak self] in
+            self?.navigator?.dismiss(animated: true)
+        }
+        // Use a navigation controller since we will be pushing views on top of a view
+        let navController = UINavigationController(rootViewController: UIHostingController(rootView: view))
         
-        navigator?.present(UIHostingController(rootView: view), animated: true)
+        navController.isNavigationBarHidden = true
+        navigationRouter.navigator = navController
+        navigator?.present(navController, animated: true)
     }
 }
