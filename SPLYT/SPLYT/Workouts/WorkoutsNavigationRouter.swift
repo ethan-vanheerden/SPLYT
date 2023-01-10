@@ -40,7 +40,11 @@ private extension WorkoutsNavigationRouter {
     }
     
     func handleCreateWorkout() {
-        let view = NameWorkoutView()
+        let viewModel = NameWorkoutViewModel()
+        let navigationRouter = NameWorkoutNavigationRouter()
+        navigationRouter.navigator = navigator
+        let view = NameWorkoutView(viewModel: viewModel, navigationRouter: navigationRouter)
+        
         navigator?.present(UIHostingController(rootView: view), animated: true)
     }
 }

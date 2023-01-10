@@ -3,13 +3,13 @@ import SwiftUI
 import DesignSystem
 
 struct NavigationBarGallery: View {
+    @Environment(\.dismiss) private var dismiss
     let viewStateOne = NavigationBarViewState(title: "Title")
-    let viewStateTwo = NavigationBarViewState(title: "Another Title")
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Layout.size(5)) {
-            NavigationBar(viewState: viewStateOne)
-            NavigationBar(viewState: viewStateTwo, dismissAction: { print("Hello, world!")})
-        }
+        Text("You can't have more than one navigation bar on the same screen without Xcode having a heart attack 💅")
+            .padding(.horizontal)
+            .multilineTextAlignment(.center)
+            .navigationBar(state: viewStateOne) { dismiss() }
     }
 }
