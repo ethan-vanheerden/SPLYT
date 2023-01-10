@@ -28,7 +28,11 @@ final class WorkoutsNavigationRouterTests: XCTestCase {
     
     func testNavigate_CreateWorkout() {
         sut.navigate(.createWorkout)
-        let expectedVC = UIHostingController<Text>.self
-        XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedVC) ?? false)
+        let expectedNavController = UINavigationController.self
+        let expectedVC = UIHostingController<NameWorkoutView<NameWorkoutViewModel>>.self
+        
+        XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedNavController) ?? false)
+        let navController = mockNavigator.stubPresentedVC as? UINavigationController
+        XCTAssertTrue(navController?.topViewController?.isKind(of: expectedVC) ?? false)
     }
 }

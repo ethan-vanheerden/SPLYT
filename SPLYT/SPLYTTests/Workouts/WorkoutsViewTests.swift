@@ -19,7 +19,8 @@ final class WorkoutsViewTests: XCTestCase {
     
     override func setUp() {
         viewModel = MockWorkoutsViewModel()
-        sut = WorkoutsView(viewModel: viewModel, navigationRouter: WorkoutsNavigationRouter())
+        sut = WorkoutsView(viewModel: viewModel,
+                           navigationRouter: WorkoutsNavigationRouter())
         vc = UIHostingController(rootView: sut)
     }
     

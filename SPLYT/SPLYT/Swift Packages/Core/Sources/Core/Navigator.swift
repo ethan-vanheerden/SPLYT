@@ -35,6 +35,13 @@ public extension Navigator where Self: UINavigationController {
     }
     
     func present(_ vc: UIViewController, animated: Bool) {
+        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: animated)
     }
+    
+    func dismiss(animated: Bool) {
+        self.dismiss(animated: animated)
+    }
 }
+
+extension UINavigationController: Navigator { }

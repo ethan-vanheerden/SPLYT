@@ -9,7 +9,7 @@ import SwiftUI
 import Core
 
 /// The base view controller for Workouts
-final class WorkoutsNavigationController: UINavigationController, Navigator {
+final class WorkoutsNavigationController: UINavigationController {
     init() {
         let viewModel = WorkoutsViewModel()
         let navigationRouter = WorkoutsNavigationRouter()

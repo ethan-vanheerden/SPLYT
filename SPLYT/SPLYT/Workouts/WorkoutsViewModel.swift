@@ -8,7 +8,13 @@
 import Foundation
 import Core
 
-// MARK: - Protocol
+// MARK: - Events
+
+enum WorkoutsViewEvent {
+    case load
+}
+
+// MARK: - View Model
 
 final class WorkoutsViewModel: ViewModel {
     @Published private(set) var viewState: WorkoutsViewState = .loading
@@ -42,11 +48,4 @@ private extension WorkoutsViewModel {
         let viewState = reducer.reduce(domain)
         await updateViewState(viewState)
     }
-}
-
-
-// MARK: - Events
-
-enum WorkoutsViewEvent {
-    case load
 }
