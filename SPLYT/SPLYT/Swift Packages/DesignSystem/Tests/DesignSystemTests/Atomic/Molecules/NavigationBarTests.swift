@@ -1,4 +1,3 @@
-
 import XCTest
 import SnapshotTesting
 import DesignSystem

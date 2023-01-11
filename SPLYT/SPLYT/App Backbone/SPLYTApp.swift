@@ -13,6 +13,7 @@ struct SPLYTApp: App {
     var body: some Scene {
         WindowGroup {
             MainViewHostingController_SwiftUI()
+                .ignoresSafeArea(.keyboard)
 //                .environmentObject(UserSettings()) -> This would allow us to access the all of the user info we need throughout the app
         }
     }

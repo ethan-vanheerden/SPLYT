@@ -1,4 +1,3 @@
-
 import SwiftUI
 import DesignSystem
 
@@ -12,7 +11,7 @@ struct TileGallery: View {
             
             Tile {
                 Circle()
-                    .fill(Color.red)
+                    .fill(Color.splytColor(.red))
                     .frame(width: Layout.size(1))
             }
         }.padding()

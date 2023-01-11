@@ -1,4 +1,3 @@
-
 import SwiftUI
 import DesignSystem
 
@@ -8,11 +7,11 @@ struct ScrimGallery: View {
             VStack {
                 Text("Hello, World!")
                 Rectangle()
-                    .fill(Color.red)
+                    .fill(Color.splytColor(.red))
                 Text("MORE TEXT")
                     .megaText()
                 Rectangle()
-                    .fill(Color.blue)
+                    .fill(Color.splytColor(.lightBlue))
             }
             Scrim()
                 .edgesIgnoringSafeArea(.all)

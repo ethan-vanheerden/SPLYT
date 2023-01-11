@@ -41,6 +41,3 @@ private extension WorkoutsViewStateReducer {
                             createWorkoutState: createWorkoutState)
     }
 }
-
-
-// View Domain Reducer Interactor ViewModel

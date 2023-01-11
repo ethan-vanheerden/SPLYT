@@ -20,10 +20,10 @@ struct BottomSheetGallery: View {
             }
             Spacer()
         }
-        .bottomSheet(isPresented: $sheetOnePresented, showIndicator: false) {
+        .bottomSheet(isPresented: $sheetOnePresented, currentSize: .constant(.small), showIndicator: false) {
             Text("Sheet One")
         }
-        .bottomSheet(isPresented: $sheetTwoPresented, detents: sheetTwoDetents) {
+        .bottomSheet(isPresented: $sheetTwoPresented, currentSize: .constant(.small), detents: sheetTwoDetents) {
             Text("Sheet Two")
         }
     }

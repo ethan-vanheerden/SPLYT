@@ -24,7 +24,7 @@ final class NameWorkoutNavigationRouterTests: XCTestCase {
         let navState = NameWorkoutNavigationState(workoutName: "Test")
         sut.navigate(.next(navState))
         
-        let expectedVC = UIHostingController<AddExerciseView>.self
+        let expectedVC = UIHostingController<BuildWorkoutView<BuildWorkoutViewModel>>.self
         XCTAssertTrue(mockNavigator.stubPushedVC?.isKind(of: expectedVC) ?? false)
     }
 }

@@ -3,14 +3,13 @@ import XCTest
 @testable import DesignSystem
 import SnapshotTesting
 import SwiftUI
-
 // TODO: run when Xcode fixes UIScene bug
 final class BottomSheetTests: XCTestCase {
     func testBottomSheetNotResizable() {
         let view = VStack {
             Text("Hello World")
         }
-            .bottomSheet(isPresented: .constant(true)) {
+            .bottomSheet(isPresented: .constant(true), currentSize: .constant(.medium)) {
                 Text("Sheet")
             }
         let vc = UIHostingController(rootView: view)
@@ -21,7 +20,7 @@ final class BottomSheetTests: XCTestCase {
         let view = VStack {
             Text("Hello World")
         }
-            .bottomSheet(isPresented: .constant(true), detents: [.percent(0.1)]) {
+            .bottomSheet(isPresented: .constant(true), currentSize: .constant(.percent(0.1)), detents: [.percent(0.1)]) {
                 Text("Sheet")
             }
         let vc = UIHostingController(rootView: view)

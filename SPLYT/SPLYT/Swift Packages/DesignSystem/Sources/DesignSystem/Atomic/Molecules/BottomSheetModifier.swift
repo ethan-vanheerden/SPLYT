@@ -27,6 +27,8 @@ public enum BottomSheetSize: Hashable {
 
 struct BottomSheetModifier<SheetContent: View>: ViewModifier {
     @Binding private var isPresented: Bool
+    @Binding private var currentSize: BottomSheetSize
+    
     private let showIndicator: Bool
     private let detents: [BottomSheetSize]
     private let sheetContent: () -> SheetContent
@@ -38,16 +40,18 @@ struct BottomSheetModifier<SheetContent: View>: ViewModifier {
     private let screenHeight: CGFloat = UIScreen.main.bounds.height - Layout.size(20)
     
     init(isPresented: Binding<Bool>,
+         currentSize: Binding<BottomSheetSize>,
          showIndicator: Bool,
          detents: [BottomSheetSize],
          @ViewBuilder sheetContent: @escaping () -> SheetContent) {
         self._isPresented = isPresented
+        self._currentSize = currentSize
         self.showIndicator = showIndicator
         self.detents = detents
         self.sheetContent = sheetContent
         /// We know that the sheet will have at least one value
         assert(detents.count > 0)
-        self._offset = State(initialValue: detents.first!.offset(containerHeight: screenHeight))
+        self._offset = State(initialValue: self.currentSize.offset(containerHeight: screenHeight))
         self._lastOffset = self._offset
 //        moveToClosestDetent(height: screenHeight)
     }
@@ -59,14 +63,14 @@ struct BottomSheetModifier<SheetContent: View>: ViewModifier {
                 GeometryReader { _ in
                     ZStack {
                         Rectangle()
-                            .fill(Color.white)
+                            .fill(Color.splytColor(.white))
                             .frame(height: proxy.size.height * 1.5) // ensures rectangle is always big enough
                             .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: Layout.size(3.5)))
                             .shadow(radius: Layout.size(0.5))
                         
                         VStack {
                             Capsule()
-                                .fill(Color.gray.opacity(0.5))
+                                .fill(Color.splytColor(.gray).opacity(0.5))
                                 .frame(width: Layout.size(9), height: Layout.size(0.5))
                                 .padding(.top, Layout.size(0.5))
                                 .isVisible(showIndicator)
@@ -114,6 +118,7 @@ struct BottomSheetModifier<SheetContent: View>: ViewModifier {
         }
         
         offset = closestDetent.offset(containerHeight: height)
+        currentSize = closestDetent
     }
 }
 
@@ -137,7 +142,7 @@ fileprivate struct CustomCorner: Shape {
 struct BottomSheet_Previews: PreviewProvider {
     static var previews: some View {
         Text("Hello World")
-            .bottomSheet(isPresented: .constant(true), detents: [.small, .medium, .percent(0.75), .large]) {
+            .bottomSheet(isPresented: .constant(true), currentSize: .constant(.small), detents: [.small, .medium, .percent(0.75), .large]) {
                 Text("Text")
             }
     }

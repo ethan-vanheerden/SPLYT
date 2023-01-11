@@ -2,32 +2,47 @@ import Foundation
 
 /// Protocol which defines behaviors needed to perfrom cache requests.
 public protocol CacheInteractorType {
+    associatedtype Request: CacheRequest
     
-    /// Loads data using the given cache request.
-    /// - Parameter with: The cache request to perfrom
+    var request: Request { get }
+    
+    /// Determines if the file associated with the cache request exists.
+    /// - Returns: `true` if the file exists, `false` otherwise
+    func fileExists() throws -> Bool
+    
+    /// Loads data using the cache request.
     /// - Returns: The request's Codable object, or throws error
-    static func load<R: CacheRequest>(with: R) throws -> R.CacheData
+    func load() throws -> Request.CacheData
     
-    /// Saves the given data using the given cache request.
+    /// Saves the given data using the cache request.
     /// - Parameters:
-    ///   - with: The cache request to perform
     ///   - data: The data to save
-    static func save<R: CacheRequest>(with: R, data: R.CacheData) throws
+    func save(data: Request.CacheData) throws
 }
 
 // MARK: - Implementation
 
 @available(iOS 16.0, *)
-@available(iOS 16.0, *)
-public struct CacheInteractor: CacheInteractorType {
-    public static func load<R: CacheRequest>(with request: R) throws -> R.CacheData where R : CacheRequest {
+public struct CacheInteractor<R: CacheRequest>: CacheInteractorType {
+    public let request: R
+    
+    public init(request: R) {
+        self.request = request
+    }
+    
+    public func fileExists() throws -> Bool {
+        let url = try CacheURLCreator.getURL(for: request)
+        return FileManager.default.fileExists(atPath: url.relativePath)
+    }
+    
+    public func load() throws -> R.CacheData {
         let url = try CacheURLCreator.getURL(for: request)
         let file = try FileHandle(forReadingFrom: url)
         let object = try JSONDecoder().decode(R.CacheData.self, from: file.availableData)
         return object
     }
     
-    public static func save<R>(with request: R, data: R.CacheData) throws where R : CacheRequest {
+    public func save(data: R.CacheData) throws {
         let url = try CacheURLCreator.getURL(for: request)
         let data = try JSONEncoder().encode(data)
         try data.write(to: url)
