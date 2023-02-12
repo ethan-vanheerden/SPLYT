@@ -16,15 +16,16 @@ protocol WorkoutsServiceType {
 // MARK: - Implementation
 
 struct WorkoutsService: WorkoutsServiceType {
-    private let cacheInteractor: CacheInteractorType.Type
+//    private let cacheInteractor: CacheInteractorType.Type
     
-    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
-        self.cacheInteractor = cacheInteractor
-    }
+//    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
+//        self.cacheInteractor = cacheInteractor
+//    }
     
     func loadAvailableExercises() throws -> [AvailableExercise] {
-        let request = AvailableExercisesCacheRequest()
-        let exercises = try cacheInteractor.load(with: request)
-        return exercises
+//        let request = AvailableExercisesCacheRequest()
+//        let exercises = try cacheInteractor.load(with: request)
+//        return exercises
+        return []
     }
 }

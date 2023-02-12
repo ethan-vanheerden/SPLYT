@@ -5,6 +5,7 @@ struct OrganismGallery: GalleryType {
 }
 
 enum Organism: String, CaseIterable, GalleryItem {
+    case buildExercise = "Build Exercise View"
     case FAB = "FAB"
     
     var title: String {

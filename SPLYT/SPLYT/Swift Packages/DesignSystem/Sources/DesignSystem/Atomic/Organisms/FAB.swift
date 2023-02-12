@@ -71,7 +71,7 @@ public struct FAB: View {
     }
 }
 
-// MARK: - ViewState
+// MARK: - View State
 
 public struct FABViewState: ItemViewState, Equatable {
     public let id: AnyHashable

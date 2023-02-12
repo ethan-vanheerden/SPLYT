@@ -8,6 +8,8 @@ enum Atom: String, CaseIterable, GalleryItem {
     case FABIcon = "FAB Icon"
     case scrim = "Scrim"
     case sectionHeader = "Section Header"
+    case setEntry = "Set Entry"
+    case tag = "Tag"
     case tile = "Tile"
     
     var title: String {

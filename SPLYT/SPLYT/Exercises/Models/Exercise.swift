@@ -8,19 +8,11 @@
 import Foundation
 
 /// Represents an exercise and the series of sets performed in it.
+/// Note: This is different from `AvailableExercise` in the sense that an `AvailableExercise`
+///      is just a barebones representation of an exercise with no utility. An `Exercise` is the user-completed
+///      version of an `AvailableExercise`.
 struct Exercise: Codable, Equatable {
     let id: String
     let name: String
     let sets: [Set]
 }
-
-
-
-/*
- Workout -> List of Groups
- Groups -> has a list of exercises
-    - Number of exercises determines of it is a superset or not
- Exercises -> Has a list of sets, list of notes
- Sets -> Has a type (reps/weight, reps only, time, etc.) and a set modifier (dropset, restpause)
- TODO: Add Exercise/Set Notes
- */

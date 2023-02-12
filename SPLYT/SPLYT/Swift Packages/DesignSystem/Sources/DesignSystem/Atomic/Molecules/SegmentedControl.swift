@@ -151,13 +151,13 @@ private struct UnderlineModifier: ViewModifier {
         content
             .background(
                 Rectangle()
-                    .fill(SplytColor.lightBlue)
+                    .fill(Color.splytColor(.lightBlue))
                     .frame(width: frames[selectedIndex].width, height: Layout.size(0.4))
                     .offset(x: frames[selectedIndex].minX - frames[0].minX), alignment: .bottomLeading
             )
             .background(
                 Rectangle()
-                    .fill(Color.gray.opacity(0.5))
+                    .fill(Color.splytColor(.gray).opacity(0.5))
                     .frame(height: 1), alignment: .bottomLeading
             )
     }

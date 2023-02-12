@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 public struct FABIcon: View {
@@ -56,9 +55,9 @@ public struct FABIcon: View {
     private var circleColor: Color {
         switch type.size {
         case .primary:
-            return SplytColor.lightBlue
+            return Color.splytColor(.lightBlue)
         case .secondary:
-            return Color.white
+            return Color.splytColor(.white)
         }
     }
     
@@ -74,9 +73,9 @@ public struct FABIcon: View {
     private var iconColor: Color {
         switch type.size {
         case .primary:
-            return Color.white
+            return Color.splytColor(.white)
         case .secondary:
-            return SplytColor.lightBlue
+            return Color.splytColor(.lightBlue)
         }
     }
     

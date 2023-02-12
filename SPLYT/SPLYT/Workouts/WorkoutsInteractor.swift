@@ -8,7 +8,7 @@
 import Foundation
 import Core
 
-// MARK: - Domain Action
+// MARK: - Domain Actions
 
 enum WorkoutsDomainAction {
     case loadWorkouts

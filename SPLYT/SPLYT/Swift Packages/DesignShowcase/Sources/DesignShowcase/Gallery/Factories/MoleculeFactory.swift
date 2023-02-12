@@ -4,6 +4,8 @@ struct MoleculeFactory {
     @ViewBuilder
     func makeView(_ molecule: Molecule) -> some View {
         switch molecule {
+        case .addExerciseTile:
+            AddExerciseTileGallery()
         case .bottomSheet:
             BottomSheetGallery()
         case .FABRow:
@@ -16,6 +18,8 @@ struct MoleculeFactory {
             RepCounterGallery()
         case .segmentedControl:
             SegmentedControlGallery()
+        case .setView:
+            SetViewGallery()
         }
     }
 }

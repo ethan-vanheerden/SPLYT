@@ -9,18 +9,14 @@ public struct Tile<Content: View>: View {
     }
     
     public var body: some View {
-        GeometryReader { proxy in
-            VStack {
-                Spacer()
-                content()
-                    .padding(.vertical)
-                    .frame(width: proxy.size.width)
-                    .roundedBackground(cornerRadius: Layout.size(1.25), fill: Color.white)
-                    .shadow(radius: 0)
-                Spacer()
-            }
-            .shadow(radius: Layout.size(0.25))
+        HStack {
+            Spacer()
+            content()
+                .padding(.vertical, Layout.size(2))
+            Spacer()
         }
+        .roundedBackground(cornerRadius: Layout.size(1.25),
+                           fill: Color.splytColor(.white).shadow(.drop(radius: Layout.size(0.25))))
     }
 }
 

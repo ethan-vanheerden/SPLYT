@@ -21,7 +21,7 @@ public extension View {
                         ToolbarItem(placement: .navigation) {
                             Button(action: { backAction() }) {
                                 Image(systemName: "chevron.backward")
-                                    .tint(Color.black)
+                                    .tint(Color.splytColor(.black))
                             }
                         }
                     }

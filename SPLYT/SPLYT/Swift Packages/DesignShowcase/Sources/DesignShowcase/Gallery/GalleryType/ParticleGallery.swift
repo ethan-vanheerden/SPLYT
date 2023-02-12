@@ -5,7 +5,7 @@ struct ParticleGallery: GalleryType {
 }
 
 enum Particle: String, CaseIterable, GalleryItem {
-    case icons = "Icons"
+    case colors = "Colors"
     case text = "Text"
     
     var title: String {

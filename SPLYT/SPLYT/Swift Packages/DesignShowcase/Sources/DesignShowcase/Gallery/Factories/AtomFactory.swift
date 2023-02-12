@@ -10,6 +10,10 @@ struct AtomFactory {
             ScrimGallery()
         case .sectionHeader:
             SectionHeaderGallery()
+        case .setEntry:
+            SetEntryGallery()
+        case .tag:
+            TagGallery()
         case .tile:
             TileGallery()
         }

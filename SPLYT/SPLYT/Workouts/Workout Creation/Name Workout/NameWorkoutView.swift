@@ -52,9 +52,10 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NoViewEvent, VM.Vi
             }) {
                 Text(Strings.next)
                     .descriptionText()
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.splytColor(.white))
                     .padding(Layout.size(1.5))
-                    .roundedBackground(cornerRadius: Layout.size(1), fill: SplytColor.lightBlue)
+                    .roundedBackground(cornerRadius: Layout.size(1),
+                                       fill: Color.splytColor(.lightBlue))
                     .padding(.trailing, Layout.size(2))
             }
         }

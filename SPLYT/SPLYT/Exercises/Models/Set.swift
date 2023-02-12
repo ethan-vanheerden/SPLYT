@@ -9,10 +9,12 @@ import Foundation
 
 /// An exercise's set.
 struct Set: Codable, Equatable {
+    let id: String
     let inputType: SetInputType
-    let modifier: SetModifier
+    let modifier: SetModifier?
     
     private enum CodingKeys: String, CodingKey {
+        case id
         case inputType = "input_type"
         case modifier
     }
