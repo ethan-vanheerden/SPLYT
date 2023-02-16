@@ -18,7 +18,7 @@ public struct AddExerciseTile: View {
             HStack {
                 favorite
                 Text(viewState.exerciseName)
-                    .descriptionText()
+                    .body()
                 Spacer()
                 selection
             }

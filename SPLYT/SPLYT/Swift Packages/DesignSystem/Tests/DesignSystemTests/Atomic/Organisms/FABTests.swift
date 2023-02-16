@@ -13,7 +13,7 @@ final class FABTests: XCTestCase {
     func testFABNotExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
-                .bodyText()
+                .body()
             FAB(viewState: viewState,
                 createPlanAction: { },
                 createWorkoutAction: { })
@@ -26,7 +26,7 @@ final class FABTests: XCTestCase {
     func testFABExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
-                .bodyText()
+                .body()
             FAB(viewState: viewState,
                 createPlanAction: { },
                 createWorkoutAction: { },

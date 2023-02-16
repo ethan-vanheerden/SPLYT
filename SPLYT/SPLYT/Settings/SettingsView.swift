@@ -20,8 +20,6 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent, VM
         viewModel.send(.load)
     }
     
-    let items = ["Design Showcase"]
-    
     var body: some View {
         switch viewModel.viewState {
         case .loading:
@@ -36,7 +34,7 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent, VM
         VStack {
             HStack {
                 Text("Settings 🔨")
-                    .megaText()
+                    .largeTitle()
                 Spacer()
             }
             .padding(.leading)

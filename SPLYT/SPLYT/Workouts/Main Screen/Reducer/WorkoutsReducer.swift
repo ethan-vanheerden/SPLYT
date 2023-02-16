@@ -1,5 +1,5 @@
 //
-//  WorkoutsViewStateReducer.swift
+//  WorkoutsReducer.swift
 //  SPLYT
 //
 //  Created by Ethan Van Heerden on 12/24/22.
@@ -8,7 +8,7 @@
 import Foundation
 import DesignSystem
 
-final class WorkoutsViewStateReducer {
+final class WorkoutsReducer {
     func reduce(_ domain: WorkoutsDomainResult) -> WorkoutsViewState {
         switch domain {
         case .error:
@@ -21,7 +21,7 @@ final class WorkoutsViewStateReducer {
 
 // MARK: - Private
 
-private extension WorkoutsViewStateReducer {
+private extension WorkoutsReducer {
     func reduceLoaded(exercises: [String]) -> WorkoutsViewState {
         let fabState = getFABState()
         let display = WorkoutsDisplayInfo(mainItems: [], fab: fabState)

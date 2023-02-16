@@ -28,7 +28,7 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NoViewEvent, VM.Vi
         VStack {
             HStack {
                 Text(Strings.workoutName)
-                    .descriptionText()
+                    .body()
                 Spacer()
             }
             .padding(.leading, Layout.size(2))
@@ -51,7 +51,7 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NoViewEvent, VM.Vi
                 navigationRouter.navigate(.next(navigationState))
             }) {
                 Text(Strings.next)
-                    .descriptionText()
+                    .footnote()
                     .foregroundColor(Color.splytColor(.white))
                     .padding(Layout.size(1.5))
                     .roundedBackground(cornerRadius: Layout.size(1),

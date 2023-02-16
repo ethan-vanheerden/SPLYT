@@ -13,7 +13,7 @@ enum SettingsItem: Equatable, CaseIterable {
     var title: String {
         switch self {
         case .designShowcase:
-            return "DESIGN SHOWCASE"
+            return "Design Showcase"
         }
     }
     

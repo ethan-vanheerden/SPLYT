@@ -29,7 +29,7 @@ final class SettingsViewTests: XCTestCase {
     
     func testView_Main() {
         let items: [MenuItemViewState] = [
-            MenuItemViewState(id: SettingsItem.designShowcase, title: "DESIGN SHOWCASE")
+            MenuItemViewState(id: SettingsItem.designShowcase, title: "Design Showcase")
         ]
         mockViewModel.viewState = .main(items: items)
         

@@ -9,7 +9,7 @@ struct ScrimGallery: View {
                 Rectangle()
                     .fill(Color.splytColor(.red))
                 Text("MORE TEXT")
-                    .megaText()
+                    .largeTitle()
                 Rectangle()
                     .fill(Color.splytColor(.lightBlue))
             }

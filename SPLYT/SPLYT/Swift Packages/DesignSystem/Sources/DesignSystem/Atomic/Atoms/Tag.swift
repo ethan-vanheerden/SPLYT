@@ -12,7 +12,7 @@ public struct Tag<S: ShapeStyle>: View {
     
     public var body: some View {
         Text(text)
-            .bodyText()
+            .footnote()
             .padding(Layout.size(0.5))
             .foregroundColor(.white)
             .roundedBackground(cornerRadius: Layout.size(0.5),

@@ -1,5 +1,5 @@
 //
-//  WorkoutsViewStateReducerTests.swift
+//  WorkoutsReducerTests.swift
 //  SPLYTTests
 //
 //  Created by Ethan Van Heerden on 12/29/22.
@@ -8,8 +8,8 @@
 import XCTest
 @testable import SPLYT
 
-final class WorkoutsViewStateReducerTests: XCTestCase {
-    private let sut = WorkoutsViewStateReducer()
+final class WorkoutsReducerTests: XCTestCase {
+    private let sut = WorkoutsReducer()
     private let fixtures = WorkoutsFixtures.self
     
     func testReduce_Error() {

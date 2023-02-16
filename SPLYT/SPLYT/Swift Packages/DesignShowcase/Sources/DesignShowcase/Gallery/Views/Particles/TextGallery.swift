@@ -3,17 +3,21 @@ import DesignSystem
 
 struct TextGallery: View {
     var body: some View {
-        VStack(spacing: Layout.size(1)) {
-            Text("MEGA Text")
-                .megaText()
-            Text("TITLE Text")
-                .titleText()
-            Text("SUBTITLE Text")
-                .subtitleText()
-            Text("DESCRIPTION Text")
-                .descriptionText()
-            Text("BODY Text")
-                .bodyText()
+        ScrollView {
+            VStack {
+                ForEach(SplytFont.allCases, id: \.self) { style in
+                    SectionHeader(viewState: SectionHeaderViewState(text: style.rawValue))
+                    Text("Large Title")
+                        .largeTitle(style: style)
+                    Text("Title 1")
+                        .title1(style: style)
+                    Text("Body")
+                        .body(style: style)
+                    Text("Footnote")
+                        .footnote(style: style)
+                }
+            }
+            .padding(.horizontal)
         }
     }
 }
