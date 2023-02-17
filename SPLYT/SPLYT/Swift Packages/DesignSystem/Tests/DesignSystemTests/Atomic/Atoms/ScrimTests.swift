@@ -12,7 +12,7 @@ final class ScrimTests: XCTestCase {
                 Rectangle()
                     .fill(Color.splytColor(.red))
                 Text("MORE TEXT")
-                    .megaText()
+                    .largeTitle()
                 Rectangle()
                     .fill(Color.splytColor(.lightBlue))
             }

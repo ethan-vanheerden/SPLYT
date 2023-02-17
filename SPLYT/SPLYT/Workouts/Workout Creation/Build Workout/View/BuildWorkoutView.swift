@@ -64,13 +64,13 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             VStack {
                 HStack {
                     Text(display.currentGroupTitle)
-                        .descriptionText()
+                        .subhead()
                     Spacer()
                     Button(action: {
                         viewModel.send(.addGroup, taskPriority: .userInitiated)
                     }) {
                         Text(Strings.addGroup)
-                            .descriptionText()
+                            .footnote()
                             .foregroundColor(Color.splytColor(.white))
                             .padding(Layout.size(1))
                             .roundedBackground(cornerRadius: Layout.size(1), fill: Color.splytColor(.lightBlue))

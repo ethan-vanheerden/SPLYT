@@ -11,7 +11,7 @@ public struct SectionHeader: View {
     public var body: some View {
         HStack {
             Text(viewState.text)
-                .descriptionText()
+                .body()
                 .multilineTextAlignment(.center)
             GeometryReader { proxy in
                 Path { path in

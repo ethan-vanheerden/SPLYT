@@ -35,17 +35,17 @@ public struct BuildExerciseView: View {
         HStack(spacing: Layout.size(5)) {
             Button(action: addSetAction) {
                 Text("Add Set")
-                    .bodyText()
+                    .footnote()
                     .foregroundColor(Color.splytColor(.lightBlue))
             }
             Button(action: removeSetAction) {
                 Text("Remove Set")
-                    .bodyText()
+                    .footnote()
                     .foregroundColor(Color.splytColor(.lightBlue))
             }
-            Button(action: { }) {
+            Button(action: addModiferAction) {
                 Text("Add Modifer")
-                    .bodyText()
+                    .footnote()
                     .foregroundColor(Color.splytColor(.lightBlue))
             }
             Spacer()

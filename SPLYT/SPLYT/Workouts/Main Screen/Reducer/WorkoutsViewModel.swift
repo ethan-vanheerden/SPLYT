@@ -19,7 +19,7 @@ enum WorkoutsViewEvent {
 final class WorkoutsViewModel: ViewModel {
     @Published private(set) var viewState: WorkoutsViewState = .loading
     private let interactor: WorkoutsInteractorType
-    private let reducer = WorkoutsViewStateReducer()
+    private let reducer = WorkoutsReducer()
     
     init(interactor: WorkoutsInteractorType = WorkoutsInteractor()) {
         self.interactor = interactor

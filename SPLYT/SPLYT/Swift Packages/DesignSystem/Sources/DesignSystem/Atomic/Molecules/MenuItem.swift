@@ -17,7 +17,7 @@ public struct MenuItem: View {
             VStack(alignment: .leading) {
                 Spacer()
                 Text(viewState.title)
-                    .descriptionText()
+                    .body()
                     .foregroundColor(isPressed ? .blue : .black)
                 subtitleView
                 Spacer()
@@ -35,7 +35,7 @@ public struct MenuItem: View {
     private var subtitleView: some View {
         if let subtitle = viewState.subtitle {
             Text(subtitle)
-                .bodyText()
+                .footnote()
                 .foregroundColor(Color.splytColor(.lightBlue))
         } else {
             EmptyView()

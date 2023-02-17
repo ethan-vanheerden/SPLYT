@@ -103,7 +103,7 @@ private struct SegmentedControlButtonView: View {
                 Button(action: { selectedIndex = index }) {
                     HStack {
                         Text(titles[index])
-                            .descriptionText()
+                            .footnote()
                             .foregroundColor(selectedIndex == index ? .black : .gray)
                     }
                 }

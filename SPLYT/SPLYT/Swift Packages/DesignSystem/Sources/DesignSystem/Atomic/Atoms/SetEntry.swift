@@ -37,7 +37,7 @@ public struct SetEntry: View {
                         .frame(width: Layout.size(7))
                 }
                 Text(title)
-                    .bodyText()
+                    .footnote()
                     .foregroundColor(Color.splytColor(.gray))
                     .padding(.top, Layout.size(-0.75)) // Because of automatic padding on TextField
                 Spacer()

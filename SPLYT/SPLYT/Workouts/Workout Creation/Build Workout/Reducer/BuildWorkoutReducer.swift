@@ -91,6 +91,6 @@ private extension BuildWorkoutReducer {
     
     func getCurrentGroupTitle(_ numExercises: Int) -> String {
         let exercisePlural = numExercises == 1 ? "exercise" : "exercises"
-        return "Current group: \(numExercises) \(exercisePlural)"
+        return "Current group:\n\(numExercises) \(exercisePlural)"
     }
 }

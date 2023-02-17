@@ -22,7 +22,7 @@ public struct SetView: View {
             }
             HStack {
                 Text(viewState.title)
-                    .bodyText()
+                    .subhead(style: .semiBold)
                     .padding(.bottom, Layout.size(2))
                     .padding(.leading, horizontalPadding)
                 Spacer()

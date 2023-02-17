@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-        <key>NSAppTransportSecurity</key>
-        <dict>
-            <key>NSExceptionDomains</key>
-            <dict>
-                <key>splyt-dev.us-east-1.elasticbeanstalk.com</key>
-                <dict>
-                    <!--Include to allow subdomains-->
-                    <key>NSIncludesSubdomains</key>
-                    <true/>
-                    <!--Include to allow HTTP requests-->
-                    <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-                    <true/>
-                    <!--Include to specify minimum TLS version-->
-                    <key>NSTemporaryExceptionMinimumTLSVersion</key>
-                    <string>TLSv1.1</string>
-                </dict>
-            </dict>
-        </dict>
-    </dict>
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Font/static/Montserrat-Light.ttf</string>
+		<string>Font/static/Montserrat-Regular.ttf</string>
+		<string>Font/static/Montserrat-Medium.ttf</string>
+		<string>Font/static/Montserrat-SemiBold.ttf</string>
+		<string>Font/static/Montserrat-Bold.ttf</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>splyt-dev.us-east-1.elasticbeanstalk.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+		</dict>
+	</dict>
+</dict>
 </plist>

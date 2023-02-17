@@ -12,7 +12,7 @@ struct SetEntryGallery: View {
                 print("ID: \(id), Weight: \(value)")
             }
             SetEntry(id: "set-2",
-                     title: "REPS",
+                     title: "reps",
                      placeholder: "0",
                      inputType: .reps) { id, value in
                 print("ID: \(id), Reps: \(value)")

@@ -27,7 +27,7 @@ public extension View {
                     }
                         ToolbarItem(placement: getToolbarPlacement(position: state.position)) {
                             Text(state.title)
-                                .subtitleText()
+                                .title3()
                         }
                 }
         }

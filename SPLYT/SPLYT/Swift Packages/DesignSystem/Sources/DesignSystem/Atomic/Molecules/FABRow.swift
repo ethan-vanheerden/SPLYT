@@ -14,7 +14,7 @@ public struct FABRow: View {
     public var body: some View {
         HStack {
             Text(viewState.title)
-                .bodyText()
+                .footnote()
             FABIcon(type: fabIconType,
                     tapAction: tapAction)
         }

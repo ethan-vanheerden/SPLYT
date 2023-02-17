@@ -10,7 +10,7 @@ struct ColorGallery: View {
                 LazyVGrid(columns: columns) {
                     ForEach(SplytColor.allCases, id: \.self) { color in
                         Text(color.rawValue)
-                            .descriptionText()
+                            .footnote()
                             .frame(width: proxy.size.width / 2.2, height: Layout.size(6))
                             .roundedBackground(cornerRadius: Layout.size(0.5),
                                                fill: Color.splytColor(color))

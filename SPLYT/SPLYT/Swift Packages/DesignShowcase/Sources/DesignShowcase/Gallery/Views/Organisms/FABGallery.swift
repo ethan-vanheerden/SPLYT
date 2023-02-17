@@ -10,7 +10,7 @@ struct FABGallery: View {
     var body: some View {
         ZStack {
             Text("Hello, World!")
-                .megaText()
+                .largeTitle()
             FAB(viewState: viewState,
                 createPlanAction: { },
                 createWorkoutAction: { })
