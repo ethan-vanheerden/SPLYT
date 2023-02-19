@@ -4,18 +4,34 @@ import DesignSystem
 struct ButtonGallery: View {
     var body: some View {
         VStack {
+            SectionHeader(viewState: SectionHeaderViewState(text: "Enabled"))
+            buttons(isEnabled: true)
+            SectionHeader(viewState: SectionHeaderViewState(text: "Disabled"))
+            buttons(isEnabled: false)
             Spacer()
-            SplytButton(text: "BUTTON TEXT") { print("Button tapped!") }
-            HStack {
+        }
+        .padding(.horizontal, Layout.size(2))
+    }
+    
+    @ViewBuilder
+    private func buttons(isEnabled: Bool) -> some View {
+        VStack {
+            SplytButton(text: "BUTTON TEXT",
+                        isEnabled: isEnabled) { print("Button tapped!") }
+            HStack(spacing: Layout.size(2)) {
                 Spacer()
                 SplytButton(text: "cancel",
                             color: .red,
-                            textColor: .black) { print("Button tapped!") }
+                            textColor: .black,
+                            isEnabled: isEnabled) { print("Button tapped!") }
                 SplytButton(text: "Confirm",
-                            color: .green) { print("Button tapped!") }
+                            color: .green,
+                            isEnabled: isEnabled) { print("Button tapped!") }
                 Spacer()
             }
-            Spacer()
+            SplytButton(text: "Secondary Button",
+                        size: .secondary,
+                        isEnabled: isEnabled) { print("Button tapped!") }
         }
     }
 }

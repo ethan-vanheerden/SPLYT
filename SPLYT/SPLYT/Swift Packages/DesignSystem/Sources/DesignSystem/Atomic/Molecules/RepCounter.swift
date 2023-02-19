@@ -10,7 +10,7 @@ public struct RepCounter: View {
     
     public var body: some View {
         HStack {
-            Button {
+            Button { // TODO: 36: icon buttons
                 if selectedNumber > 0 {
                     selectedNumber -= 1
                 }

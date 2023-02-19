@@ -10,12 +10,12 @@ struct BottomSheetGallery: View {
     var body: some View {
         VStack {
             Spacer()
-            Button("Present Sheet One") {
+            SplytButton(text: "Present Sheet One") {
                 sheetOnePresented.toggle()
             }
             .padding(.bottom)
             
-            Button("Present Sheet Two") {
+            SplytButton(text: "Present Sheet Two") {
                 sheetTwoPresented.toggle()
             }
             Spacer()

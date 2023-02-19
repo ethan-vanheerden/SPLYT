@@ -32,25 +32,16 @@ public struct BuildExerciseView: View {
     
     @ViewBuilder
     private var setButtons: some View {
-        HStack(spacing: Layout.size(5)) {
-            Button(action: addSetAction) {
-                Text("Add Set")
-                    .footnote()
-                    .foregroundColor(Color.splytColor(.lightBlue))
-            }
-            Button(action: removeSetAction) {
-                Text("Remove Set")
-                    .footnote()
-                    .foregroundColor(Color.splytColor(.lightBlue))
-            }
-            Button(action: addModiferAction) {
-                Text("Add Modifer")
-                    .footnote()
-                    .foregroundColor(Color.splytColor(.lightBlue))
-            }
+        HStack(spacing: Layout.size(2)) {
+            Spacer()
+            SplytButton(text: "Add Set",
+                        size: .secondary) { addSetAction() }
+            SplytButton(text: "Remove Set",
+                        size: .secondary) { removeSetAction() }
+            SplytButton(text: "Add Modifier",
+                        size: .secondary) { addModiferAction() }
             Spacer()
         }
-        .padding(.leading, Layout.size(4))
     }
 }
 

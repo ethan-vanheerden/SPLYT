@@ -14,7 +14,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
     private var interactor: BuildWorkoutInteractor!
     private var sut: BuildWorkoutViewModel!
-
+    
     override func setUpWithError() throws {
         let navState = NameWorkoutNavigationState(workoutName: "Test Workout")
         self.interactor = BuildWorkoutInteractor(service: MockBuildWorkoutService(),
@@ -32,7 +32,11 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let currentGroupTitle = "Current group: 0 exercises"
         let groupTitles = ["Group 1"]
         let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
-                                                  groups: [[]], currentGroup: 0, currentGroupTitle: currentGroupTitle, groupTitles: groupTitles)
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -47,7 +51,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: [[], []],
                                                   currentGroup: 1,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -64,7 +69,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle:
                                                     currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -87,7 +93,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: groups,
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -103,7 +110,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: [[]],
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -127,7 +135,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: groups,
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -152,7 +161,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: groups,
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -174,7 +184,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: [[]],
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -190,8 +201,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: [[]],
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
-        
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
     
@@ -206,7 +217,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   groups: [[], []],
                                                   currentGroup: 1,
                                                   currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
