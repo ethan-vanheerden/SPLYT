@@ -14,4 +14,5 @@ struct BuildWorkoutDisplay: Equatable {
     let currentGroup: Int // Zero-indexed
     let currentGroupTitle: String
     let groupTitles: [String] // Ex: "Group 1", "Group 2", etc.
+    let lastGroupEmpty: Bool
 }

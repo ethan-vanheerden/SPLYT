@@ -40,12 +40,14 @@ private extension BuildWorkoutReducer {
         
         let currentGroup = domain.currentGroup
         let numExercisesInCurrentGroup = groups[currentGroup].count
+        let lastGroupEmpty = groups.last?.isEmpty ?? true
         
         let display = BuildWorkoutDisplay(allExercises: availableExercises,
                                           groups: groups,
                                           currentGroup: currentGroup,
                                           currentGroupTitle: getCurrentGroupTitle(numExercisesInCurrentGroup),
-                                          groupTitles: getGroupTitles(workout: domain.builtWorkout))
+                                          groupTitles: getGroupTitles(workout: domain.builtWorkout),
+                                          lastGroupEmpty: lastGroupEmpty)
         return .main(display)
     }
     
@@ -65,8 +67,8 @@ private extension BuildWorkoutReducer {
             let headerState = SectionHeaderViewState(id: exercise.name,
                                                      text: exercise.name)
             return BuildExerciseViewState(id: exercise.id,
-                                   header: headerState,
-                                   sets: getSetStates(exercise: exercise))
+                                          header: headerState,
+                                          sets: getSetStates(exercise: exercise))
         }
     }
     
@@ -91,6 +93,6 @@ private extension BuildWorkoutReducer {
     
     func getCurrentGroupTitle(_ numExercises: Int) -> String {
         let exercisePlural = numExercises == 1 ? "exercise" : "exercises"
-        return "Current group:\n\(numExercises) \(exercisePlural)"
+        return "Current group: \(numExercises) \(exercisePlural)"
     }
 }

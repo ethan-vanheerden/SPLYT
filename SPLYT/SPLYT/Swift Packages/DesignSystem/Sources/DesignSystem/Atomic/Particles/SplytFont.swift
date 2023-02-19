@@ -6,4 +6,5 @@ public enum SplytFont: String, CaseIterable {
     case medium = "Montserrat-Medium"
     case semiBold = "Montserrat-SemiBold"
     case bold = "Montserrat-Bold"
+    case black = "Montserrat-Black"
 }

@@ -26,7 +26,7 @@ public struct FABIcon: View {
         .frame(width: circleFrame, height: circleFrame)
     }
     
-    /// Animates button and changes color on tap
+    /// Animates FAB and changes color on tap
     // TODO: add vibration effect
     private var press: some Gesture {
         DragGesture(minimumDistance: .zero)

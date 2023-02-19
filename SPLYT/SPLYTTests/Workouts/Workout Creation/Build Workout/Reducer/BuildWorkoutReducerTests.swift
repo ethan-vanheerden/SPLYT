@@ -17,7 +17,7 @@ final class BuildWorkoutReducerTests: XCTestCase {
     override func setUpWithError() throws {
         let navState = NameWorkoutNavigationState(workoutName: "Test Workout")
         self.interactor = BuildWorkoutInteractor(service: MockBuildWorkoutService(),
-                                          nameState: navState)
+                                                 nameState: navState)
     }
     
     func testReduce_Error() {
@@ -32,7 +32,11 @@ final class BuildWorkoutReducerTests: XCTestCase {
         let currentGroupTitle = "Current group: 0 exercises"
         let groupTitles = ["Group 1"]
         let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
-                                                  groups: [[]], currentGroup: 0, currentGroupTitle: currentGroupTitle, groupTitles: groupTitles)
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }
@@ -66,7 +70,8 @@ final class BuildWorkoutReducerTests: XCTestCase {
         let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
                                                   groups: groups,
                                                   currentGroup: 1, currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles)
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }

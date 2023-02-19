@@ -10,11 +10,11 @@ import DesignSystem
 import Core
 
 struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NoViewEvent, VM.ViewState == NameWorkoutViewState {
-    
     @State private var workoutName = ""
     private let viewModel: VM
     private let navigationRouter: NameWorkoutNavigationRouter
     private let dismissAction: () -> Void
+    private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
          navigationRouter: NameWorkoutNavigationRouter,
@@ -31,33 +31,22 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NoViewEvent, VM.Vi
                     .body()
                 Spacer()
             }
-            .padding(.leading, Layout.size(2))
             .padding(.top, Layout.size(3))
-            
             TextField(Strings.enterAWorkoutName, text: $workoutName)
                 .textFieldStyle(.roundedBorder)
-                .padding(.horizontal, Layout.size(2))
-            
             nextButton
             Spacer()
         }
+        .padding(.horizontal, horizontalPadding)
         .navigationBar(state: viewModel.viewState.navBar) { dismissAction() }
     }
     
     private var nextButton: some View {
         HStack {
             Spacer()
-            Button(action: {
-                navigationRouter.navigate(.next(navigationState))
-            }) {
-                Text(Strings.next)
-                    .footnote()
-                    .foregroundColor(Color.splytColor(.white))
-                    .padding(Layout.size(1.5))
-                    .roundedBackground(cornerRadius: Layout.size(1),
-                                       fill: Color.splytColor(.lightBlue))
-                    .padding(.trailing, Layout.size(2))
-            }
+            SplytButton(text: Strings.next,
+                        isEnabled: !workoutName.isEmpty) { navigationRouter.navigate(.next(navigationState)) }
+                .frame(width: Layout.size(10))
         }
     }
     

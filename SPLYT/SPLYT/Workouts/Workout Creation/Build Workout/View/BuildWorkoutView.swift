@@ -62,24 +62,9 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     private func sheetView(display: BuildWorkoutDisplay) -> some View {
         Tile {
             VStack {
-                HStack {
-                    Text(display.currentGroupTitle)
-                        .subhead()
-                    Spacer()
-                    Button(action: {
-                        viewModel.send(.addGroup, taskPriority: .userInitiated)
-                    }) {
-                        Text(Strings.addGroup)
-                            .footnote()
-                            .foregroundColor(Color.splytColor(.white))
-                            .padding(Layout.size(1))
-                            .roundedBackground(cornerRadius: Layout.size(1), fill: Color.splytColor(.lightBlue))
-                            .padding(ViewConstants.horizontalPadding)
-                    }
-                }
-                Button(Strings.editSetsReps) {
-                    sheetPresented.toggle()
-                }
+                Text(display.currentGroupTitle)
+                    .body()
+                sheetButtons(lastGroupEmpty: display.lastGroupEmpty)
             }
             .padding(.horizontal, ViewConstants.horizontalPadding)
         }
@@ -87,6 +72,17 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .sheet(isPresented: $sheetPresented) {
             expandedSheetView(display: display)
                 .presentationDetents([.fraction(0.75)])
+        }
+    }
+    
+    @ViewBuilder
+    private func sheetButtons(lastGroupEmpty: Bool) -> some View {
+        HStack(spacing: Layout.size(2)) {
+            Spacer()
+            SplytButton(text: Strings.editSetsReps) { sheetPresented.toggle() }
+            SplytButton(text: Strings.addGroup,
+                        isEnabled: !lastGroupEmpty) { viewModel.send(.addGroup, taskPriority: .userInitiated) }
+            Spacer()
         }
     }
     
