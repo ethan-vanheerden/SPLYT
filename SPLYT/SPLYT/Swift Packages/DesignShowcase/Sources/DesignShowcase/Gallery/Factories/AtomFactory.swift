@@ -4,6 +4,8 @@ struct AtomFactory {
     @ViewBuilder
     func makeView(_ atom: Atom) -> some View {
         switch atom {
+        case .buttons:
+            ButtonGallery()
         case .FABIcon:
             FABIconGallery()
         case .scrim:

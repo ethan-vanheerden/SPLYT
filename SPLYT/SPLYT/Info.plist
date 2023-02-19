@@ -9,6 +9,7 @@
 		<string>Font/static/Montserrat-Medium.ttf</string>
 		<string>Font/static/Montserrat-SemiBold.ttf</string>
 		<string>Font/static/Montserrat-Bold.ttf</string>
+		<string>Font/static/Montserrat-Black.ttf</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
