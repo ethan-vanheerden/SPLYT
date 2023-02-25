@@ -11,7 +11,7 @@ struct TileGallery: View {
             
             Tile {
                 Circle()
-                    .fill(Color.splytColor(.red))
+                    .fill(Color(splytColor: .red))
                     .frame(width: Layout.size(1))
             }
         }.padding()

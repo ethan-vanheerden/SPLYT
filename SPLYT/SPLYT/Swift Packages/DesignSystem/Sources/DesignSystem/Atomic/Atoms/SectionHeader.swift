@@ -19,7 +19,7 @@ public struct SectionHeader: View {
                     path.addLine(to: CGPoint(x: proxy.size.width, y: proxy.size.height))
                 }
                 .frame(height: lineHeight)
-                .background(Color.splytColor(.gray))
+                .background(Color(splytColor: .gray))
                 .opacity(0.5)
             }
             .frame(height: lineHeight)

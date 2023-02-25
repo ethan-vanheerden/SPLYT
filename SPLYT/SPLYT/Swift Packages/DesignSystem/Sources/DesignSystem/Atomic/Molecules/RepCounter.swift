@@ -21,7 +21,7 @@ public struct RepCounter: View {
             Text("\(selectedNumber)")
                 .body()
                 .frame(width: sideLength, height: sideLength)
-                .roundedBackground(cornerRadius: Layout.size(1), fill: Color.splytColor(.lightBlue))
+                .roundedBackground(cornerRadius: Layout.size(1), fill: Color(splytColor: .lightBlue))
             Button {
                 selectedNumber += 1
             } label: {

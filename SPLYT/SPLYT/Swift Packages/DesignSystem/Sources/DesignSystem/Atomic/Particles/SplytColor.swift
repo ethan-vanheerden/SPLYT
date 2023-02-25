@@ -28,10 +28,3 @@ public enum SplytColor: String, CaseIterable {
         }
     }
 }
-
-
-public extension Color {
-    static func splytColor(_ color: SplytColor) -> Color {
-        return color.color
-    }
-}

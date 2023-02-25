@@ -31,11 +31,11 @@ public enum SetTag {
     var tag: some View {
         switch self {
         case .dropSet:
-            Tag(text: "dropset", fill: Color.splytColor(.red))
+            Tag(text: "dropset", fill: Color(splytColor: .red))
         case .restPause:
-            Tag(text: "rest/pause", fill: Color.splytColor(.green))
+            Tag(text: "rest/pause", fill: Color(splytColor: .green))
         case .eccentric:
-            Tag(text: "eccentric", fill: Color.splytColor(.gray))
+            Tag(text: "eccentric", fill: Color(splytColor: .gray))
         }
     }
 }

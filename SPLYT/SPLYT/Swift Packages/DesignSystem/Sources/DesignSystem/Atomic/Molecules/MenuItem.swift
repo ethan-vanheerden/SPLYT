@@ -26,7 +26,7 @@ public struct MenuItem: View {
             Spacer()
         }
         .frame(height: cellHeight)
-        .roundedBackground(cornerRadius: Layout.size(1.5), fill: Color.splytColor(.gray).opacity(0.1))
+        .roundedBackground(cornerRadius: Layout.size(1.5), fill: Color(splytColor: .gray).opacity(0.1))
         .gesture(press)
         .padding(.horizontal, Layout.size(2))
     }
@@ -36,7 +36,7 @@ public struct MenuItem: View {
         if let subtitle = viewState.subtitle {
             Text(subtitle)
                 .footnote()
-                .foregroundColor(Color.splytColor(.lightBlue))
+                .foregroundColor(Color(splytColor: .lightBlue))
         } else {
             EmptyView()
         }

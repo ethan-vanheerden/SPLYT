@@ -13,7 +13,7 @@ struct ColorGallery: View {
                             .footnote()
                             .frame(width: proxy.size.width / 2.2, height: Layout.size(6))
                             .roundedBackground(cornerRadius: Layout.size(0.5),
-                                               fill: Color.splytColor(color))
+                                               fill: Color(splytColor: color))
                     }
                 }
                 .padding(.horizontal)

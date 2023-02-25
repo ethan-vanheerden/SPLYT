@@ -8,6 +8,8 @@ struct MoleculeFactory {
             AddExerciseTileGallery()
         case .bottomSheet:
             BottomSheetGallery()
+        case .dialog:
+            DialogGallery()
         case .FABRow:
             FABRowGallery()
         case .menuItem:

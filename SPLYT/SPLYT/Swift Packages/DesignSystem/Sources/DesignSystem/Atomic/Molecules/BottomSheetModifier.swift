@@ -63,14 +63,14 @@ struct BottomSheetModifier<SheetContent: View>: ViewModifier {
                 GeometryReader { _ in
                     ZStack {
                         Rectangle()
-                            .fill(Color.splytColor(.white))
+                            .fill(Color(splytColor: .white))
                             .frame(height: proxy.size.height * 1.5) // ensures rectangle is always big enough
                             .clipShape(CustomCorner(corners: [.topLeft, .topRight], radius: Layout.size(3.5)))
                             .shadow(radius: Layout.size(0.5))
                         
                         VStack {
                             Capsule()
-                                .fill(Color.splytColor(.gray).opacity(0.5))
+                                .fill(Color(splytColor: .gray).opacity(0.5))
                                 .frame(width: Layout.size(9), height: Layout.size(0.5))
                                 .padding(.top, Layout.size(0.5))
                                 .isVisible(showIndicator)
