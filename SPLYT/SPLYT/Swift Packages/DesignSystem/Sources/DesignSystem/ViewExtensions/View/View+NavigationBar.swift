@@ -21,7 +21,7 @@ public extension View {
                         ToolbarItem(placement: .navigation) {
                             Button(action: { backAction() }) { // TODO: 36: icon buttons
                                 Image(systemName: "chevron.backward")
-                                    .tint(Color.splytColor(.black))
+                                    .tint(Color(splytColor: .black))
                             }
                         }
                     }

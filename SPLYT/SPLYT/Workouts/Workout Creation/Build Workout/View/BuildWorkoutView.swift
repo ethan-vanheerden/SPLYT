@@ -20,22 +20,20 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     }
     
     var body: some View {
-        baseView
-            .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
-                dismiss()
-            }
-    }
-    
-    @ViewBuilder
-    private var baseView: some View {
         switch viewModel.viewState {
         case .loading:
             ProgressView()
+                .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
+                    viewModel.send(.toggleLeaveDialog(isOpen: true), taskPriority: .userInitiated)
+                }
         case .main(let display):
             mainView(display: display)
         case .error:
             Text("Error!")
                 .foregroundColor(.red)
+                .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
+                    viewModel.send(.toggleLeaveDialog(isOpen: true), taskPriority: .userInitiated)
+                }
         }
     }
     
@@ -56,6 +54,13 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             sheetView(display: display)
         }
+        .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
+            viewModel.send(.toggleLeaveDialog(isOpen: true), taskPriority: .userInitiated)
+        }
+        .dialog(isOpen: display.dialogOpen,
+                viewState: display.dialog,
+                primaryAction: { dismiss() }, // Leave build workout flow
+                secondaryAction: { viewModel.send(.toggleLeaveDialog(isOpen: false), taskPriority: .userInitiated) })
     }
     
     @ViewBuilder

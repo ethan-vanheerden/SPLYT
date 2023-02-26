@@ -32,7 +32,7 @@ public struct AddExerciseTile: View {
         let imageName = viewState.isFavorite ? "star.fill" : "star"
         let opacity = viewState.isFavorite ? 1 : 0.5
         return Image(systemName: imageName)
-            .foregroundColor(Color.splytColor(.yellow).opacity(opacity))
+            .foregroundColor(Color(splytColor: .yellow).opacity(opacity))
             .onTapGesture {
                 favoriteAction()
             }
@@ -41,7 +41,7 @@ public struct AddExerciseTile: View {
     @ViewBuilder
     private var selection: some View {
         Image(systemName: "checkmark.circle.fill")
-            .foregroundColor(Color.splytColor(.lightBlue))
+            .foregroundColor(Color(splytColor: .lightBlue))
             .padding(.trailing, Layout.size(2))
             .isVisible(viewState.isSelected)
     }

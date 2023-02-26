@@ -55,9 +55,9 @@ public struct FABIcon: View {
     private var circleColor: Color {
         switch type.size {
         case .primary:
-            return Color.splytColor(.lightBlue)
+            return Color(splytColor: .lightBlue)
         case .secondary:
-            return Color.splytColor(.white)
+            return Color(splytColor: .white)
         }
     }
     
@@ -73,9 +73,9 @@ public struct FABIcon: View {
     private var iconColor: Color {
         switch type.size {
         case .primary:
-            return Color.splytColor(.white)
+            return Color(splytColor: .white)
         case .secondary:
-            return Color.splytColor(.lightBlue)
+            return Color(splytColor: .lightBlue)
         }
     }
     

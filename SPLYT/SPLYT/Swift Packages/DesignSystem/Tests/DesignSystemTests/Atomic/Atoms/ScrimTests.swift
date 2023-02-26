@@ -10,11 +10,11 @@ final class ScrimTests: XCTestCase {
             VStack {
                 Text("Hello, World!")
                 Rectangle()
-                    .fill(Color.splytColor(.red))
+                    .fill(Color(splytColor: .red))
                 Text("MORE TEXT")
                     .largeTitle()
                 Rectangle()
-                    .fill(Color.splytColor(.lightBlue))
+                    .fill(Color(splytColor: .lightBlue))
             }
             Scrim()
                 .edgesIgnoringSafeArea(.all)

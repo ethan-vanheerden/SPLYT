@@ -36,7 +36,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -52,7 +54,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 1,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -70,7 +74,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroupTitle:
                                                     currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -94,7 +100,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: false)
+                                                  lastGroupEmpty: false,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -111,7 +119,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -136,7 +146,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: false)
+                                                  lastGroupEmpty: false,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -162,7 +174,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: false)
+                                                  lastGroupEmpty: false,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -185,7 +199,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -202,7 +218,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
     
@@ -218,12 +236,51 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   currentGroup: 1,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
     
     // TODO: SPYLT-26: test save
+    
+    func testSend_ToggleDialog_OpenDialog() async {
+        await sut.send(.load)
+        await sut.send(.toggleLeaveDialog(isOpen: true))
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: true,
+                                                  dialog: Fixtures.dialogViewState)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testSend_ToggleDialog_CloseDialog() async {
+        await sut.send(.load)
+        await sut.send(.toggleLeaveDialog(isOpen: true)) // Open dialog so we can close it
+        await sut.send(.toggleLeaveDialog(isOpen: false))
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
 }
 
 // MARK: - Private

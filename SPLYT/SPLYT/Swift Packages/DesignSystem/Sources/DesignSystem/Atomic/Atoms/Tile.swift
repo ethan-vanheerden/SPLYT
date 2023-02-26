@@ -16,7 +16,7 @@ public struct Tile<Content: View>: View {
             Spacer()
         }
         .roundedBackground(cornerRadius: Layout.size(1.25),
-                           fill: Color.splytColor(.white).shadow(.drop(radius: Layout.size(0.25))))
+                           fill: Color(splytColor: .white).shadow(.drop(radius: Layout.size(0.25))))
     }
 }
 

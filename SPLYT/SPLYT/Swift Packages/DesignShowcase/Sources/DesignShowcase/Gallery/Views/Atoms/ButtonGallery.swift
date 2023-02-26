@@ -32,6 +32,13 @@ struct ButtonGallery: View {
             SplytButton(text: "Secondary Button",
                         size: .secondary,
                         isEnabled: isEnabled) { print("Button tapped!") }
+            SplytButton(text: "Button no animations",
+                        size: .primary,
+                        color: .white,
+                        textColor: .black,
+                        outlineColor: .black,
+                        isEnabled: isEnabled,
+                        animationEnabled: false) { print("Button tapped!") }
         }
     }
 }
