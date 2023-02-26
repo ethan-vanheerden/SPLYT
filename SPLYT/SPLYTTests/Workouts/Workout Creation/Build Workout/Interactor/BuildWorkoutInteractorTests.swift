@@ -42,7 +42,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_AddGroup_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .addGroup)
-        
         XCTAssertEqual(result, .error)
     }
     
@@ -63,7 +62,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_RemoveGroup_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .removeGroup(group: 0))
-        
         XCTAssertEqual(result, .error)
     }
     
@@ -127,7 +125,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_ToggleExercise_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .toggleExercise(id: "back-squat", group: 0))
-        
         XCTAssertEqual(result, .error)
     }
     
@@ -213,7 +210,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_AddSet_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .addSet(group: 0))
-        
         XCTAssertEqual(result, .error)
     }
     
@@ -265,7 +261,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_RemoveSet_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .removeSet(group: 0))
-        
         XCTAssertEqual(result, .error)
     }
     
@@ -359,7 +354,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_ToggleFavorite_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .toggleFavorite(id: "back-squat"))
-        
         XCTAssertEqual(result, .error)
     }
     
@@ -424,7 +418,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_SwitchGroup_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .switchGroup(to: 0))
-        
         XCTAssertEqual(result, .error)
     }
     
@@ -454,6 +447,38 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     }
     
     // TODO: SPLYT-26: save tests
+    
+    func testInteract_ToggleDialog_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .toggleLeaveDialog(isOpen: true))
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testInteract_ToggleDialog_OpenDialog_Success() async {
+        await loadExercises()
+        let result = await sut.interact(with: .toggleLeaveDialog(isOpen: true))
+        var groupMap = [Int: [Exercise]]()
+        groupMap[0] = []
+        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+                                                   builtWorkout: workout,
+                                                   currentGroup: 0)
+        
+        XCTAssertEqual(result, .dialog(expectedDomain))
+    }
+    
+    func testInteract_ToggleDialog_CloseDialog_Success() async {
+        await loadExercises()
+        _ = await sut.interact(with: .toggleLeaveDialog(isOpen: true)) // Open dialog so we can close it
+        let result = await sut.interact(with: .toggleLeaveDialog(isOpen: false))
+        var groupMap = [Int: [Exercise]]()
+        groupMap[0] = []
+        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+                                                   builtWorkout: workout,
+                                                   currentGroup: 0)
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+    }
 }
 
 // MARK: - Private

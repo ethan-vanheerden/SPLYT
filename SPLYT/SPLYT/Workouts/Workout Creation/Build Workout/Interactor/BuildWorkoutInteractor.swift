@@ -20,12 +20,15 @@ enum BuildWorkoutDomainAction {
     case toggleFavorite(id: AnyHashable)
     case switchGroup(to: Int)
     case save
+    case toggleLeaveDialog(isOpen: Bool)
 }
 
 // MARK: - Domain Results
 
 enum BuildWorkoutDomainResult: Equatable {
     case loaded(BuildWorkoutDomainObject)
+    // Note: if we want more than one dialog for this screen, we can put an additional field in the dialog case here
+    case dialog(BuildWorkoutDomainObject)
     case error
 }
 
@@ -64,6 +67,8 @@ final class BuildWorkoutInteractor {
             return handleSwitchGroup(to: group)
         case .save:
             return .error // TODO: SPLYT-26
+        case .toggleLeaveDialog(let isOpen):
+            return handleToggleLeaveDialog(isOpen: isOpen)
         }
     }
 }
@@ -331,6 +336,13 @@ private extension BuildWorkoutInteractor {
                                                  currentGroup: group)
         
         return updateSavedDomain(newDomain)
+    }
+    
+    func handleToggleLeaveDialog(isOpen: Bool) -> BuildWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        // Show the confirmation dialog if needed
+        return isOpen ? .dialog(domain) : .loaded(domain)
     }
 }
 

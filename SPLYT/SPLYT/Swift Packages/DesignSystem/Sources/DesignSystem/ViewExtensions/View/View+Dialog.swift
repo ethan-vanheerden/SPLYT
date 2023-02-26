@@ -6,25 +6,25 @@ public extension View {
     @ViewBuilder
     /// Conditionally displays a dialog in front of this view.
     /// - Parameters:
-    ///   - isOpen: Condition to display the dialog or not
-    ///   - title: Dialog title
-    ///   - subtitle: Dialog subtitle
-    ///   - type: The button type of the dialog
-    ///   - content: Addiontal view content to display in the dialog
-    /// - Returns: This view with the dialog conditionally displayed
+    ///   - isOpen: Wether to show the dialog or not
+    ///   - viewState: The rendering instructions for the dialog
+    ///   - primaryAction: The primary button action in the dialog
+    ///   - secondaryAction: The secondary button action in the dialog
+    ///   - content: Additional view to be in the dialog
+    /// - Returns: This view with the dialog conditionally displayed in front of it
     func dialog<Content: View>(isOpen: Bool,
-                               title: String,
-                               subtitle: String? = nil,
-                               type: DialogType,
+                               viewState: DialogViewState,
+                               primaryAction: @escaping () -> Void,
+                               secondaryAction: (() -> Void)? = nil,
                                content: @escaping () -> Content = { EmptyView() }) -> some View {
         ZStack {
             self
             ZStack {
                 Scrim()
                     .edgesIgnoringSafeArea(.all)
-                Dialog(title: title,
-                       subtitle: subtitle,
-                       type: type,
+                Dialog(viewState: viewState,
+                       primaryAction: primaryAction,
+                       secondaryAction: secondaryAction,
                        content: content)
                 .scaleEffect(isOpen ? 1 : 0.1)
             }

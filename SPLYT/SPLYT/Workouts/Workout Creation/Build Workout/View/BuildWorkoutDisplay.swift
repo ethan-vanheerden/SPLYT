@@ -15,4 +15,6 @@ struct BuildWorkoutDisplay: Equatable {
     let currentGroupTitle: String
     let groupTitles: [String] // Ex: "Group 1", "Group 2", etc.
     let lastGroupEmpty: Bool
+    let dialogOpen: Bool
+    let dialog: DialogViewState
 }

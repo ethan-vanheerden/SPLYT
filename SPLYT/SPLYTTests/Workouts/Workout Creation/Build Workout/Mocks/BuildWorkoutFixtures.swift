@@ -160,4 +160,9 @@ struct BuildWorkoutFixtures {
                                       header: header,
                                       sets: createSetViewStates(id: "incline-db-row", numSets: numSets))
     }
+    
+    static var dialogViewState: DialogViewState = DialogViewState(title: "Confirm Exit",
+                                                                  subtitle: "If you exit now, all progress will be lost.",
+                                                                  primaryButtonTitle: "Confirm",
+                                                                  secondaryButtonTitle: "Cancel")
 }

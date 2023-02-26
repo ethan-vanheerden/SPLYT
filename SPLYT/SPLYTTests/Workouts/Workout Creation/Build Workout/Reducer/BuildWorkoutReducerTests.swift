@@ -36,7 +36,9 @@ final class BuildWorkoutReducerTests: XCTestCase {
                                                   currentGroup: 0,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: true)
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }
@@ -71,10 +73,32 @@ final class BuildWorkoutReducerTests: XCTestCase {
                                                   groups: groups,
                                                   currentGroup: 1, currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
-                                                  lastGroupEmpty: false)
+                                                  lastGroupEmpty: false,
+                                                  dialogOpen: false,
+                                                  dialog: Fixtures.dialogViewState)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }
+    
+    func testReduce_Dialog() async {
+        await loadExercises()
+        let domain = await interactor.interact(with: .toggleLeaveDialog(isOpen: true))
+        let result = sut.reduce(domain)
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  dialogOpen: true,
+                                                  dialog: Fixtures.dialogViewState)
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+    }
+    
 }
 
 // MARK: - Private
