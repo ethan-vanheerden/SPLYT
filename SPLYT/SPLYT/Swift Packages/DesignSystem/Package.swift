@@ -11,7 +11,7 @@ let package = Package(
             targets: ["DesignSystem"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", exact: "1.9.0")
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", exact: "1.11.0")
     ],
     targets: [
         .target(

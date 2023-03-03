@@ -15,6 +15,8 @@ struct TextGallery: View {
                         .title2(style: style)
                     Text("Title 3")
                         .title3(style: style)
+                    Text("Title 4")
+                        .title4(style: style)
                     Text("Body")
                         .body(style: style)
                     Text("Subheading")

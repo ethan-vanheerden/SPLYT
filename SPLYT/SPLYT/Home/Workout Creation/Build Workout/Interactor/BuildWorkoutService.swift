@@ -13,6 +13,7 @@ import Caching
 protocol BuildWorkoutServiceType {
     func loadAvailableExercises() throws -> [AvailableExercise]
     func saveAvailableExercises(_: [AvailableExercise]) throws
+    func saveWorkout(_: Workout) throws
 }
 
 // MARK: - Errors
@@ -23,16 +24,19 @@ enum BuildWorkoutError: Error {
 
 // MARK: - Implementation
 
-struct BuildWorkoutService<T: CacheInteractorType>: BuildWorkoutServiceType where T.Request == AvailableExercisesCacheRequest  {
-    private let cacheInteractor: T
+struct BuildWorkoutService<T: CacheInteractorType, U: CacheInteractorType>: BuildWorkoutServiceType where T.Request == AvailableExercisesCacheRequest, U.Request == CreatedWorkoutsCacheRequest  {
+    private let exerciseCacheInteractor: T
+    private let workoutCacheInteractor: U
     
-    init(cacheInteractor: T = CacheInteractor(request: AvailableExercisesCacheRequest())) {
-        self.cacheInteractor = cacheInteractor
+    init(exerciseCacheInteractor: T = CacheInteractor(request: AvailableExercisesCacheRequest()),
+         workoutCacheInteractor: U = CacheInteractor(request: CreatedWorkoutsCacheRequest())) {
+        self.exerciseCacheInteractor = exerciseCacheInteractor
+        self.workoutCacheInteractor = workoutCacheInteractor
     }
     
     func loadAvailableExercises() throws -> [AvailableExercise] {
         // First check if the user has the cached AvailableExercise file yet
-        if !(try cacheInteractor.fileExists()) {
+        if !(try exerciseCacheInteractor.fileExists()) {
             
             // Save the fallback file
             guard let url = Bundle.main.url(forResource: "fallback_exercises", withExtension: "json") else {
@@ -47,11 +51,20 @@ struct BuildWorkoutService<T: CacheInteractorType>: BuildWorkoutServiceType wher
             return exercises
         }
         
-        let exercises = try cacheInteractor.load()
+        let exercises = try exerciseCacheInteractor.load()
         return exercises
     }
     
     func saveAvailableExercises(_ exercises: [AvailableExercise]) throws {
-        try cacheInteractor.save(data: exercises)
+        try exerciseCacheInteractor.save(data: exercises)
+    }
+    
+    func saveWorkout(_ workout: Workout) throws {
+        // First load the user's current workouts so we can append the new one
+        var workouts = try workoutCacheInteractor.load()
+        workouts.append(workout)
+        
+        // Now save the new workout list
+        try workoutCacheInteractor.save(data: workouts)
     }
 }

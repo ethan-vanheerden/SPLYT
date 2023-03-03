@@ -13,8 +13,8 @@ struct BuildWorkoutReducer {
         switch domain {
         case .loaded(let domainObject):
             return reduceLoaded(domain: domainObject)
-        case .dialog(let domainObject):
-            return reduceLoaded(domain: domainObject, dialogOpen: true)
+        case let .dialog(type, domain):
+            return reduceLoaded(domain: domain, dialog: type)
         case .error:
             return .error
         }
@@ -24,7 +24,7 @@ struct BuildWorkoutReducer {
 // MARK: - Private
 
 private extension BuildWorkoutReducer {
-    func reduceLoaded(domain: BuildWorkoutDomainObject, dialogOpen: Bool = false) -> BuildWorkoutViewState {
+    func reduceLoaded(domain: BuildWorkoutDomainObject, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutViewState {
         let availableExercises: [AddExerciseTileViewState] = domain.exercises.map {
             AddExerciseTileViewState(id: $0.id,
                                      exerciseName: $0.name,
@@ -44,14 +44,18 @@ private extension BuildWorkoutReducer {
         let numExercisesInCurrentGroup = groups[currentGroup].count
         let lastGroupEmpty = groups.last?.isEmpty ?? true
         
+        let canSave = groups[0].count > 0 // We can save if there is at least one exercise
+        
         let display = BuildWorkoutDisplay(allExercises: availableExercises,
                                           groups: groups,
                                           currentGroup: currentGroup,
                                           currentGroupTitle: getCurrentGroupTitle(numExercisesInCurrentGroup),
                                           groupTitles: getGroupTitles(workout: domain.builtWorkout),
                                           lastGroupEmpty: lastGroupEmpty,
-                                          dialogOpen: dialogOpen,
-                                          dialog: getDialog())
+                                          showDialog: dialog,
+                                          backDialog: backDialog,
+                                          saveDialog: saveDialog,
+                                          canSave: canSave)
         return .main(display)
     }
     
@@ -100,13 +104,21 @@ private extension BuildWorkoutReducer {
         return Strings.currentGroup + ": \(numExercises) \(exercisePlural)"
     }
     
-    func getDialog() -> DialogViewState {
-        return DialogViewState(title: Strings.dialogTitle,
-                               subtitle: Strings.dialogSubtitle,
-                               primaryButtonTitle: Strings.dialogPrimaryTitle,
-                               secondaryButtonTitle: Strings.dialogSecondaryTitle)
+    var backDialog: DialogViewState {
+        return DialogViewState(title: Strings.confirmExit,
+                               subtitle: Strings.exitNow,
+                               primaryButtonTitle: Strings.confirm,
+                               secondaryButtonTitle: Strings.cancel)
+    }
+    
+    var saveDialog: DialogViewState {
+        return DialogViewState(title: Strings.errorSaving,
+                               subtitle: Strings.tryAgain,
+                               primaryButtonTitle: Strings.ok)
     }
 }
+
+// MARK: - Strings
 
 fileprivate struct Strings {
     static let group = "Group"
@@ -117,8 +129,11 @@ fileprivate struct Strings {
     static let exercise = "exercise"
     static let exercises = "exercises"
     static let currentGroup = "Current group"
-    static let dialogTitle = "Confirm Exit"
-    static let dialogSubtitle = "If you exit now, all progress will be lost."
-    static let dialogPrimaryTitle = "Confirm"
-    static let dialogSecondaryTitle = "Cancel"
+    static let confirmExit = "Confirm Exit"
+    static let exitNow = "If you exit now, all progress will be lost."
+    static let confirm = "Confirm"
+    static let cancel = "Cancel"
+    static let errorSaving = "Error saving"
+    static let tryAgain = "Please try again later."
+    static let ok = "Ok"
 }

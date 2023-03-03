@@ -11,8 +11,11 @@ public extension View {
     /// - Parameters:
     ///   - state: The navigation bar state with rendering instructions
     ///   - backAction: Action for the back button (if not given, there is no back button)
+    ///   - content: An additional view to display to the right of the navigation bar if needed
     /// - Returns: This view with the navigation bar applied
-    func navigationBar(state: NavigationBarViewState, backAction: (() -> Void)? = nil) -> some View {
+    func navigationBar<Content: View>(state: NavigationBarViewState,
+                                      backAction: (() -> Void)? = nil,
+                                      content: @escaping () -> Content = { EmptyView() }) -> some View {
         NavigationStack { // Need to wrap in a NavigationStack to show toolbar
             self
                 .navigationBarTitleDisplayMode(.inline) // Gets rid of extra space below toolbar
@@ -25,10 +28,20 @@ public extension View {
                             }
                         }
                     }
-                        ToolbarItem(placement: getToolbarPlacement(position: state.position)) {
+                    ToolbarItem(placement: getToolbarPlacement(position: state.position)) {
+                        VStack {
                             Text(state.title)
-                                .title3()
+                                .title1()
+                            if let subtitle = state.subtitle {
+                                Text(subtitle)
+                                    .footnote(style: .medium)
+                            }
                         }
+                    }
+                    
+                    ToolbarItem(placement: .confirmationAction) {
+                        content()
+                    }
                 }
         }
     }

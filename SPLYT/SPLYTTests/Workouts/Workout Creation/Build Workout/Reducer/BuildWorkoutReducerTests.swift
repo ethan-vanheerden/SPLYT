@@ -38,7 +38,8 @@ final class BuildWorkoutReducerTests: XCTestCase {
                                                   groupTitles: groupTitles,
                                                   lastGroupEmpty: true,
                                                   dialogOpen: false,
-                                                  dialog: Fixtures.dialogViewState)
+                                                  dialog: Fixtures.dialogViewState,
+                                                  canSave: false)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }
@@ -75,7 +76,8 @@ final class BuildWorkoutReducerTests: XCTestCase {
                                                   groupTitles: groupTitles,
                                                   lastGroupEmpty: false,
                                                   dialogOpen: false,
-                                                  dialog: Fixtures.dialogViewState)
+                                                  dialog: Fixtures.dialogViewState,
+                                                  canSave: true)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }
@@ -94,7 +96,8 @@ final class BuildWorkoutReducerTests: XCTestCase {
                                                   groupTitles: groupTitles,
                                                   lastGroupEmpty: true,
                                                   dialogOpen: true,
-                                                  dialog: Fixtures.dialogViewState)
+                                                  dialog: Fixtures.dialogViewState,
+                                                  canSave: false)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }

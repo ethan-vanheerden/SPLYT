@@ -11,11 +11,11 @@ import Mocking
 import SwiftUI
 
 final class WorkoutsNavigationRouterTests: XCTestCase {
-    private var sut: WorkoutsNavigationRouter!
+    private var sut: HomeNavigationRouter!
     private var mockNavigator: MockNavigator!
     
     override func setUp() async throws {
-        sut = WorkoutsNavigationRouter()
+        sut = HomeNavigationRouter()
         mockNavigator = MockNavigator()
         sut.navigator = mockNavigator
     }

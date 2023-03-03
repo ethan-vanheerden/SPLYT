@@ -1,5 +1,5 @@
 //
-//  WorkoutsNavigationController.swift
+//  HomeNavigationController.swift
 //  SPLYT
 //
 //  Created by Ethan Van Heerden on 12/20/22.
@@ -9,14 +9,15 @@ import SwiftUI
 import Core
 
 /// The base view controller for Workouts
-final class WorkoutsNavigationController: UINavigationController {
+final class HomeNavigationController: UINavigationController {
     init() {
-        let viewModel = WorkoutsViewModel()
-        let navigationRouter = WorkoutsNavigationRouter()
-        let view = WorkoutsView(viewModel: viewModel, navigationRouter: navigationRouter)
+        let viewModel = HomeViewModel()
+        let navigationRouter = HomeNavigationRouter()
+        let view = HomeView(viewModel: viewModel, navigationRouter: navigationRouter)
         
         let rootVC = UIHostingController(rootView: view)
         super.init(rootViewController: rootVC)
+        self.setNavigationBarHidden(true, animated: false)
         navigationRouter.navigator = self
     }
     
@@ -29,7 +30,7 @@ final class WorkoutsNavigationController: UINavigationController {
 
 struct WorkoutsViewController_SwiftUI: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> some UIViewController {
-        return WorkoutsNavigationController()
+        return HomeNavigationController()
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {

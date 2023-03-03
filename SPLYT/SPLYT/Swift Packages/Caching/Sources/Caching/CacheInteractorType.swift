@@ -46,5 +46,6 @@ public struct CacheInteractor<R: CacheRequest>: CacheInteractorType {
         let url = try CacheURLCreator.getURL(for: request)
         let data = try JSONEncoder().encode(data)
         try data.write(to: url)
+        try data.write(to: url)
     }
 }

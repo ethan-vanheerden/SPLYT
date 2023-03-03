@@ -10,7 +10,7 @@ import Core
 @testable import SPLYT
 
 final class MockWorkoutsViewModel: ViewModel {
-    @Published var viewState: WorkoutsViewState = .loading
+    @Published var viewState: HomeViewState = .loading
     
-    func send(_ event: WorkoutsViewEvent) async { }
+    func send(_ event: HomeViewEvent) async { }
 }

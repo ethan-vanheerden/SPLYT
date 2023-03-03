@@ -8,9 +8,9 @@
 import Foundation
 @testable import SPLYT
 
-struct MockWorkoutsInteractor: WorkoutsInteractorType {
+struct MockWorkoutsInteractor: HomeInteractorType {
     
-    func interact(with domainAction: WorkoutsDomainAction) async -> WorkoutsDomainResult {
+    func interact(with domainAction: HomeDomainAction) async -> HomeDomainResult {
         switch domainAction {
         case .loadWorkouts:
             return .loaded([])

@@ -5,13 +5,16 @@ import SwiftUI
 public struct NavigationBarViewState: Equatable, ItemViewState {
     public let id: AnyHashable
     let title: String
+    let subtitle: String?
     let position: NavigationBarPosition
     
     public init(id: AnyHashable = UUID(),
                 title: String,
+                subtitle: String? = nil,
                 position: NavigationBarPosition = .center) {
         self.id = id
         self.title = title
+        self.subtitle = subtitle
         self.position = position
     }
 }

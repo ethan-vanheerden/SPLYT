@@ -1,5 +1,5 @@
 //
-//  WorkoutsNavigationRouter.swift
+//  HomeNavigationRouter.swift
 //  SPLYT
 //
 //  Created by Ethan Van Heerden on 12/20/22.
@@ -11,17 +11,17 @@ import SwiftUI
 
 // MARK: - Navigation Events
 
-enum WorkoutsNavigationEvent {
+enum HomeNavigationEvent {
     case createPlan
     case createWorkout
 }
 
 // MARK: - Router
 
-final class WorkoutsNavigationRouter: NavigationRouter {
+final class HomeNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
     
-    func navigate(_ event: WorkoutsNavigationEvent) {
+    func navigate(_ event: HomeNavigationEvent) {
         switch event {
         case .createPlan:
             handleCreatePlan()
@@ -33,7 +33,7 @@ final class WorkoutsNavigationRouter: NavigationRouter {
 
 // MARK: - Private
 
-private extension WorkoutsNavigationRouter {
+private extension HomeNavigationRouter {
     func handleCreatePlan() {
         let view = Text("CREATE PLAN")
         navigator?.present(UIHostingController(rootView: view), animated: true)
@@ -48,8 +48,7 @@ private extension WorkoutsNavigationRouter {
         }
         // Use a navigation controller since we will be pushing views on top of a view
         let navController = UINavigationController(rootViewController: UIHostingController(rootView: view))
-        
-        navController.isNavigationBarHidden = true
+        navController.setNavigationBarHidden(true, animated: false)
         navigationRouter.navigator = navController
         navigator?.present(navController, animated: true)
     }

@@ -21,7 +21,7 @@ enum BuildWorkoutViewEvent {
     case toggleFavorite(id: AnyHashable)
     case switchGroup(to: Int)
     case save
-    case toggleLeaveDialog(isOpen: Bool)
+    case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
 }
 
 // MARK: - View Model
@@ -57,8 +57,8 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .switchGroup(to: group))
         case .save:
             await react(domainAction: .save)
-        case .toggleLeaveDialog(let isOpen):
-            await react(domainAction: .toggleLeaveDialog(isOpen: isOpen))
+        case let .toggleDialog(type, isOpen):
+            await react(domainAction: .toggleDialog(type: type, isOpen: isOpen))
         }
     }
 }

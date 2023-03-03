@@ -13,14 +13,14 @@ import SwiftUI
 // TODO: run when Xcode is fixed
 final class WorkoutsViewTests: XCTestCase {
     private var viewModel: MockWorkoutsViewModel!
-    private var sut: WorkoutsView<MockWorkoutsViewModel>!
-    private var vc: UIHostingController<WorkoutsView<MockWorkoutsViewModel>>!
+    private var sut: HomeView<MockWorkoutsViewModel>!
+    private var vc: UIHostingController<HomeView<MockWorkoutsViewModel>>!
     private let fixtures = WorkoutsFixtures.self
     
     override func setUp() {
         viewModel = MockWorkoutsViewModel()
-        sut = WorkoutsView(viewModel: viewModel,
-                           navigationRouter: WorkoutsNavigationRouter())
+        sut = HomeView(viewModel: viewModel,
+                           navigationRouter: HomeNavigationRouter())
         vc = UIHostingController(rootView: sut)
     }
     

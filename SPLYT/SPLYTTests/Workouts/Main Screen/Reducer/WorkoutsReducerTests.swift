@@ -9,7 +9,7 @@ import XCTest
 @testable import SPLYT
 
 final class WorkoutsReducerTests: XCTestCase {
-    private let sut = WorkoutsReducer()
+    private let sut = HomeReducer()
     private let fixtures = WorkoutsFixtures.self
     
     func testReduce_Error() {

@@ -20,15 +20,14 @@ enum BuildWorkoutDomainAction {
     case toggleFavorite(id: AnyHashable)
     case switchGroup(to: Int)
     case save
-    case toggleLeaveDialog(isOpen: Bool)
+    case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
 }
 
 // MARK: - Domain Results
 
 enum BuildWorkoutDomainResult: Equatable {
     case loaded(BuildWorkoutDomainObject)
-    // Note: if we want more than one dialog for this screen, we can put an additional field in the dialog case here
-    case dialog(BuildWorkoutDomainObject)
+    case dialog(type: BuildWorkoutDialog, domain: BuildWorkoutDomainObject)
     case error
 }
 
@@ -48,7 +47,7 @@ final class BuildWorkoutInteractor {
     func interact(with action: BuildWorkoutDomainAction) async -> BuildWorkoutDomainResult {
         switch action {
         case .loadExercises:
-            return await handleLoadExercises()
+            return handleLoadExercises()
         case .addGroup:
             return handleAddGroup()
         case .removeGroup(let index):
@@ -66,9 +65,9 @@ final class BuildWorkoutInteractor {
         case .switchGroup(let group):
             return handleSwitchGroup(to: group)
         case .save:
-            return .error // TODO: SPLYT-26
-        case .toggleLeaveDialog(let isOpen):
-            return handleToggleLeaveDialog(isOpen: isOpen)
+            return handleSave()
+        case let .toggleDialog(type, isOpen):
+            return handleToggleDialog(type: type, isOpen: isOpen)
         }
     }
 }
@@ -77,7 +76,7 @@ final class BuildWorkoutInteractor {
 
 private extension BuildWorkoutInteractor {
     
-    func handleLoadExercises() async -> BuildWorkoutDomainResult {
+    func handleLoadExercises() -> BuildWorkoutDomainResult {
         do {
             let exercises = try service.loadAvailableExercises()
             let startingGroup = [ExerciseGroup(exercises: [])]
@@ -338,11 +337,21 @@ private extension BuildWorkoutInteractor {
         return updateSavedDomain(newDomain)
     }
     
-    func handleToggleLeaveDialog(isOpen: Bool) -> BuildWorkoutDomainResult {
+    func handleSave() -> BuildWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        do {
+            try service.saveWorkout(domain.builtWorkout)
+            return .loaded(domain)
+        } catch {
+            return .dialog(type: .save, domain: domain) // Show the error dialog
+        }
+    }
+    
+    func handleToggleDialog(type: BuildWorkoutDialog, isOpen: Bool) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain else { return .error }
         
-        // Show the confirmation dialog if needed
-        return isOpen ? .dialog(domain) : .loaded(domain)
+        // Show dialog if needed
+        return isOpen ? .dialog(type: type, domain: domain) : .loaded(domain)
     }
 }
 

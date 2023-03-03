@@ -24,7 +24,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .loading:
             ProgressView()
                 .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
-                    viewModel.send(.toggleLeaveDialog(isOpen: true), taskPriority: .userInitiated)
+                    viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated)
                 }
         case .main(let display):
             mainView(display: display)
@@ -32,7 +32,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             Text("Error!")
                 .foregroundColor(.red)
                 .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
-                    viewModel.send(.toggleLeaveDialog(isOpen: true), taskPriority: .userInitiated)
+                    viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated)
                 }
         }
     }
@@ -54,13 +54,26 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             sheetView(display: display)
         }
-        .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
-            viewModel.send(.toggleLeaveDialog(isOpen: true), taskPriority: .userInitiated)
+        .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises),
+                       backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated) }) {
+            saveButton(canSave: display.canSave)
         }
-        .dialog(isOpen: display.dialogOpen,
-                viewState: display.dialog,
-                primaryAction: { dismiss() }, // Leave build workout flow
-                secondaryAction: { viewModel.send(.toggleLeaveDialog(isOpen: false), taskPriority: .userInitiated) })
+                       .dialog(isOpen: display.showDialog == .leave,
+                               viewState: display.backDialog,
+                               primaryAction: { dismiss() },
+                               secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false), taskPriority: .userInitiated) })
+                       .dialog(isOpen: display.showDialog == .save,
+                               viewState: display.saveDialog,
+                               primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false), taskPriority: .userInitiated) })
+    }
+    
+    @ViewBuilder
+    private func saveButton(canSave: Bool) -> some View {
+        SplytButton(text: Strings.save,
+                    size: .secondary,
+                    isEnabled: canSave) {
+            viewModel.send(.save, taskPriority: .userInitiated)
+        }
     }
     
     @ViewBuilder
@@ -127,6 +140,7 @@ fileprivate struct Strings {
     static let addYourExercises = "ADD YOUR EXERCISES"
     static let addGroup = "Add group"
     static let editSetsReps = "Edit sets/reps"
+    static let save = "SAVE"
 }
 
 // MARK: - View Constants

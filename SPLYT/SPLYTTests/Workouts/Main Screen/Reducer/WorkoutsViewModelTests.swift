@@ -9,13 +9,13 @@ import XCTest
 @testable import SPLYT
 
 final class WorkoutsViewModelTests: XCTestCase {
-    private var sut: WorkoutsViewModel!
+    private var sut: HomeViewModel!
     private var mockInteractor: MockWorkoutsInteractor!
     private let fixtures = WorkoutsFixtures.self
     
     override func setUp() async throws {
         mockInteractor = MockWorkoutsInteractor()
-        sut = WorkoutsViewModel(interactor: mockInteractor)
+        sut = HomeViewModel(interactor: mockInteractor)
     }
     
     func testLoadingOnStart() {

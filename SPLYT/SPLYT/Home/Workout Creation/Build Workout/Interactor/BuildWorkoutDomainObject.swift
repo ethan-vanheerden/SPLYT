@@ -7,8 +7,17 @@
 
 import Foundation
 
+// MARK: - Domain Object
+
 struct BuildWorkoutDomainObject: Equatable {
     let exercises: [AvailableExercise]
     let builtWorkout: Workout
     let currentGroup: Int // Zero-indexed
+}
+
+// MARK: - Dialog Type
+
+enum BuildWorkoutDialog {
+    case leave
+    case save
 }
