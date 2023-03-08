@@ -18,6 +18,5 @@ final class NameWorkoutViewModel: ViewModel {
 // MARK: - View State
 
 struct NameWorkoutViewState: Equatable {
-    let navBar: NavigationBarViewState = NavigationBarViewState(id: "nav bar",
-                                                                title: "CREATE WORKOUT")
+    let navBar: NavigationBarViewState = NavigationBarViewState(title: "CREATE WORKOUT")
 }

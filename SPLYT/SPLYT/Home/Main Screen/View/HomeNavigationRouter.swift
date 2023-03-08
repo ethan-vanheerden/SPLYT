@@ -14,6 +14,8 @@ import SwiftUI
 enum HomeNavigationEvent {
     case createPlan
     case createWorkout
+    case seletectWorkout(id: String)
+    case editWorkout(id: String)
 }
 
 // MARK: - Router
@@ -27,6 +29,10 @@ final class HomeNavigationRouter: NavigationRouter {
             handleCreatePlan()
         case .createWorkout:
             handleCreateWorkout()
+        case .seletectWorkout(let id):
+            handleSelectWorkout(id: id)
+        case .editWorkout(let id):
+            handleEditWorkout(id: id)
         }
     }
 }
@@ -42,14 +48,30 @@ private extension HomeNavigationRouter {
     
     func handleCreateWorkout() {
         let viewModel = NameWorkoutViewModel()
-        let navigationRouter = NameWorkoutNavigationRouter()
-        let view = NameWorkoutView(viewModel: viewModel, navigationRouter: navigationRouter) { [weak self] in
-            self?.navigator?.dismiss(animated: true)
+        var navRouter = NameWorkoutNavigationRouter() // var because used as inout parameter
+        let view = NameWorkoutView(viewModel: viewModel, navigationRouter: navRouter) {
+            navRouter.navigator?.dismissSelf(animated: true)
         }
-        // Use a navigation controller since we will be pushing views on top of a view
+        presentNavController(view: view, navRouter: &navRouter)
+    }
+    
+    func handleSelectWorkout(id: String) {
+        var navRouter = SelectWorkoutNavigationRouter()
+        let view = SelectWorkoutView() {
+            navRouter.navigator?.dismissSelf(animated: true)
+        }
+        presentNavController(view: view, navRouter: &navRouter)
+    }
+    
+    func handleEditWorkout(id: String) {
+        return // TODO
+    }
+    
+    func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {
+        // Use a navigation controller since we will be pushing views on top of a presented view
         let navController = UINavigationController(rootViewController: UIHostingController(rootView: view))
         navController.setNavigationBarHidden(true, animated: false)
-        navigationRouter.navigator = navController
+        navRouter.navigator = navController
         navigator?.present(navController, animated: true)
     }
 }

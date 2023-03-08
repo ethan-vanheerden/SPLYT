@@ -10,7 +10,7 @@ struct NavigationBarGallery: View {
         Text("You can't have more than one navigation bar on the same screen without Xcode having a heart attack 💅")
             .padding(.horizontal)
             .multilineTextAlignment(.center)
-            .navigationBar(state: state, backAction: { dismiss() }) {
+            .navigationBar(viewState: state, backAction: { dismiss() }) {
                 SplytButton(text: "save", action: { })
             }
     }

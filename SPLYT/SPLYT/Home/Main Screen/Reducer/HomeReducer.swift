@@ -25,16 +25,15 @@ private extension HomeReducer {
     func reduceLoaded(domain: HomeDomain) -> HomeViewState {
         
         let display = HomeDisplay(navBar: navBar,
-                                      segmentedControlTitles: segmentedControlTitles,
-                                      workouts: getCreatedWorkouts(workouts: domain.workouts),
-                                      fab: getFABState())
+                                  segmentedControlTitles: segmentedControlTitles,
+                                  workouts: getCreatedWorkouts(workouts: domain.workouts),
+                                  fab: getFABState())
         return .main(display)
     }
     
-    
     var navBar: NavigationBarViewState {
-        NavigationBarViewState(id: "workouts-navbar", // TODO: this doesn't need an id at all
-                               title: Strings.home,
+        NavigationBarViewState(title: Strings.home,
+                               size: .large,
                                position: .left)
     }
     
@@ -44,10 +43,10 @@ private extension HomeReducer {
     
     func getCreatedWorkouts(workouts: [Workout]) -> [CreatedWorkoutViewState] {
         return workouts.map {
-            CreatedWorkoutViewState(id: "0", // FIXME
+            CreatedWorkoutViewState(id: $0.id,
                                     title: $0.name,
-                                    subtitle: "TODO num exercises",
-                                    lastCompleted: "TODO parse date")
+                                    subtitle: getWorkoutSubtitle(workout: $0),
+                                    lastCompleted: getLastCompletedTitle(date: $0.lastCompleted))
         }
     }
     
@@ -63,6 +62,26 @@ private extension HomeReducer {
                             createPlanState: createPlanState,
                             createWorkoutState: createWorkoutState)
     }
+    
+    func getWorkoutSubtitle(workout: Workout) -> String {
+        var numExercises = 0
+        for group in workout.exerciseGroups {
+            numExercises += group.exercises.count
+        }
+        let exercisePlural = numExercises == 1 ? Strings.exercise : Strings.exercises
+        return "\(numExercises) \(exercisePlural)"
+    }
+    
+    func getLastCompletedTitle(date: Date?) -> String? {
+        guard let date = date else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMMdY"
+        formatter.dateStyle = .medium // Feb 3, 2023
+
+        
+        let dateString = formatter.string(from: date)
+        return Strings.lastCompleted + " \(dateString)"
+    }
 }
 
 // MARK: - Strings
@@ -73,5 +92,7 @@ fileprivate struct Strings {
     static let home = "Home"
     static let workouts = "WORKOUTS"
     static let plans = "PLANS"
-    
+    static let exercise = "exercise"
+    static let exercises = "exercises"
+    static let lastCompleted = "Last completed:"
 }

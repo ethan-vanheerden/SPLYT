@@ -13,9 +13,14 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
     @State private var sheetPresented: Bool = false
+    @Environment(\.isPresented) private var isPresented
+    private let navigationRouter: BuildWorkoutNavigationRouter
+
     
-    init(viewModel: VM) {
+    init(viewModel: VM,
+         navigationRouter: BuildWorkoutNavigationRouter) {
         self.viewModel = viewModel
+        self.navigationRouter = navigationRouter
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
@@ -23,7 +28,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         switch viewModel.viewState {
         case .loading:
             ProgressView()
-                .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
+                .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
                     viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated)
                 }
         case .main(let display):
@@ -31,8 +36,13 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .error:
             Text("Error!")
                 .foregroundColor(.red)
-                .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises)) {
+                .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
                     viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated)
+                }
+        case .exit(let display):
+            mainView(display: display)
+                .onAppear {
+                    navigationRouter.navigate(.exit)
                 }
         }
     }
@@ -54,7 +64,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             sheetView(display: display)
         }
-        .navigationBar(state: NavigationBarViewState(title: Strings.addYourExercises),
+        .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated) }) {
             saveButton(canSave: display.canSave)
         }

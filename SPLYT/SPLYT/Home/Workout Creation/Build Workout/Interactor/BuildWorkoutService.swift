@@ -60,11 +60,16 @@ struct BuildWorkoutService<T: CacheInteractorType, U: CacheInteractorType>: Buil
     }
     
     func saveWorkout(_ workout: Workout) throws {
-        // First load the user's current workouts so we can append the new one
-        var workouts = try workoutCacheInteractor.load()
-        workouts.append(workout)
-        
-        // Now save the new workout list
-        try workoutCacheInteractor.save(data: workouts)
+        // First load the user's current workouts so we can prepend the new one
+        if !(try workoutCacheInteractor.fileExists()) {
+            // No workouts created yet, so just ssave the given one
+            try workoutCacheInteractor.save(data: [workout])
+        } else {
+            var workouts = try workoutCacheInteractor.load()
+            workouts.insert(workout, at: 0)
+            
+            // Now save the new workout list
+            try workoutCacheInteractor.save(data: workouts)
+        }
     }
 }

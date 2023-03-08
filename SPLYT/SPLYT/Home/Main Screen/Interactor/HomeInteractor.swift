@@ -12,6 +12,7 @@ import Core
 
 enum HomeDomainAction {
     case load
+    case deleteWorkout(id: String) // TODO: add dialog action here, edit workout skeleton, tests
 }
 
 // MARK: - Domain Results
@@ -40,15 +41,17 @@ final class HomeInteractor: HomeInteractorType {
     func interact(with action: HomeDomainAction) async -> HomeDomainResult {
         switch action {
         case .load:
-            return await handleLoad()
+            return handleLoad()
+        case .deleteWorkout(let id):
+            return handleDeleteWorkout(id: id)
         }
     }
 }
 
-// MARK: - Private
+// MARK: - Private Handlers
 
 private extension HomeInteractor {
-    func handleLoad() async -> HomeDomainResult {
+    func handleLoad() -> HomeDomainResult {
         do {
             let workouts = try service.loadWorkouts()
             let domain = HomeDomain(workouts: workouts)
@@ -59,5 +62,29 @@ private extension HomeInteractor {
         } catch {
             return .error
         }
+    }
+    
+    func handleDeleteWorkout(id: String) -> HomeDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        do {
+            // Remove the workout
+            domain.workouts = domain.workouts.filter { $0.id != id }
+            
+            // Save the results
+            try service.saveWorkouts(domain.workouts)
+            return updateDomain(domain)
+        } catch {
+            return .error
+        }
+    }
+}
+
+// MARK: - Other Private Helpers
+
+private extension HomeInteractor {
+    func updateDomain(_ newDomain: HomeDomain) -> HomeDomainResult {
+        self.savedDomain = newDomain
+        return .loaded(newDomain)
     }
 }

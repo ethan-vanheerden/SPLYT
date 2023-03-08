@@ -2,28 +2,19 @@
 import SwiftUI
 
 public struct FAB: View {
-    @State private var isPresenting = false
+    @Binding private var isPresenting: Bool
     private let viewState: FABViewState
     private let createPlanAction: () -> Void
     private let createWorkoutAction: () -> Void
     
-    public init(viewState: FABViewState,
+    public init(isPresenting: Binding<Bool>,
+                viewState: FABViewState,
                 createPlanAction: @escaping () -> Void,
                 createWorkoutAction: @escaping () -> Void) {
+        self._isPresenting = isPresenting
         self.viewState = viewState
         self.createPlanAction = createPlanAction
         self.createWorkoutAction = createWorkoutAction
-    }
-    
-    /// Initializer for testing purposes
-    init(viewState: FABViewState,
-         createPlanAction: @escaping () -> Void,
-         createWorkoutAction: @escaping () -> Void,
-         isPresentingOverride: Bool) {
-        self.viewState = viewState
-        self.createPlanAction = createPlanAction
-        self.createWorkoutAction = createWorkoutAction
-        self._isPresenting = State(initialValue: isPresentingOverride)
     }
     
     public var body: some View {
@@ -84,17 +75,5 @@ public struct FABViewState: ItemViewState, Equatable {
         self.id = id
         self.createPlanState = createPlanState
         self.createWorkoutState = createWorkoutState
-    }
-}
-
-
-struct FAB_Previews: PreviewProvider {
-    static var previews: some View {
-        FAB(viewState: FABViewState(createPlanState: FABRowViewState(title: "CREATE NEW PLAN",
-                                                                     imageName: "calendar"),
-                                    createWorkoutState: FABRowViewState(title: "CREATE NEW WORKOUT",
-                                                                        imageName: "figure.strengthtraining.traditional")),
-            createPlanAction: { },
-            createWorkoutAction: { })
     }
 }

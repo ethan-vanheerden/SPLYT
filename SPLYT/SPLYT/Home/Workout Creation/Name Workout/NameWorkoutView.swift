@@ -38,7 +38,7 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NoViewEvent, VM.Vi
             Spacer()
         }
         .padding(.horizontal, horizontalPadding)
-        .navigationBar(state: viewModel.viewState.navBar) { dismissAction() }
+        .navigationBar(viewState: viewModel.viewState.navBar) { dismissAction() }
     }
     
     private var nextButton: some View {

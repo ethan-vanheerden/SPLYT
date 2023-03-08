@@ -28,7 +28,7 @@ final class HomeNavigationController: UINavigationController {
 
 // MARK: - SwiftUI Usable
 
-struct WorkoutsViewController_SwiftUI: UIViewControllerRepresentable {
+struct HomeViewController_SwiftUI: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> some UIViewController {
         return HomeNavigationController()
     }

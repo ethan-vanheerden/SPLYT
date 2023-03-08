@@ -12,6 +12,7 @@ import Caching
 
 protocol HomeServiceType {
     func loadWorkouts() throws -> [Workout]
+    func saveWorkouts(_: [Workout]) throws
 }
 
 // MARK: - Implementation
@@ -30,5 +31,9 @@ struct HomeService<T: CacheInteractorType>: HomeServiceType where T.Request == C
             try cacheInteractor.save(data: [])
         }
         return try cacheInteractor.load()
+    }
+    
+    func saveWorkouts(_ workouts: [Workout]) throws {
+        try cacheInteractor.save(data: workouts)
     }
 }

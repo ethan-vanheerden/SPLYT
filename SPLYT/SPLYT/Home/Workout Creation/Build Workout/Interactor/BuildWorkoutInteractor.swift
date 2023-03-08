@@ -29,6 +29,7 @@ enum BuildWorkoutDomainResult: Equatable {
     case loaded(BuildWorkoutDomainObject)
     case dialog(type: BuildWorkoutDialog, domain: BuildWorkoutDomainObject)
     case error
+    case exit(BuildWorkoutDomainObject)
 }
 
 // MARK: - Interactor
@@ -37,11 +38,14 @@ final class BuildWorkoutInteractor {
     private let service: BuildWorkoutServiceType
     private let nameState: NameWorkoutNavigationState
     private var savedDomain: BuildWorkoutDomainObject?
+    private let creationDate: Date // Used for the workout's id
     
     init(service: BuildWorkoutServiceType = BuildWorkoutService(),
-         nameState: NameWorkoutNavigationState) {
+         nameState: NameWorkoutNavigationState,
+         creationDate: Date = Date.now) {
         self.service = service
         self.nameState = nameState
+        self.creationDate = creationDate
     }
     
     func interact(with action: BuildWorkoutDomainAction) async -> BuildWorkoutDomainResult {
@@ -80,7 +84,9 @@ private extension BuildWorkoutInteractor {
         do {
             let exercises = try service.loadAvailableExercises()
             let startingGroup = [ExerciseGroup(exercises: [])]
-            let newWorkout = Workout(name: nameState.workoutName,
+            let workoutId = getWorkoutId() // ex: Legs-2023-02-15T16:39:57
+            let newWorkout = Workout(id: workoutId,
+                                     name: nameState.workoutName,
                                      exerciseGroups: startingGroup,
                                      lastCompleted: nil)
             let domainObject = BuildWorkoutDomainObject(exercises: exercises,
@@ -265,25 +271,25 @@ private extension BuildWorkoutInteractor {
         let exercises = groups[group].exercises
         
     outerLoop: for (exerciseIndex, exercise) in exercises.enumerated() {
-                    for (setIndex, set) in exercise.sets.enumerated() {
-                        if set.id == id {
-                            let newSet = Set(id: set.id,
-                                     inputType: newInput, // Update input
-                                     modifier: nil) // Reset modifier as well
-                            var newSets = exercise.sets
-                            newSets[setIndex] = newSet
-                            
-                            var newExercises = exercises
-                            let newExercise = Exercise(id: exercise.id,
-                                                       name: exercise.name,
-                                                       sets: newSets)
-                            newExercises[exerciseIndex] = newExercise
-                            groups[group] = ExerciseGroup(exercises: newExercises)
-                            
-                            break outerLoop
-                        }
-                    }
+        for (setIndex, set) in exercise.sets.enumerated() {
+            if set.id == id {
+                let newSet = Set(id: set.id,
+                                 inputType: newInput, // Update input
+                                 modifier: nil) // Reset modifier as well
+                var newSets = exercise.sets
+                newSets[setIndex] = newSet
+                
+                var newExercises = exercises
+                let newExercise = Exercise(id: exercise.id,
+                                           name: exercise.name,
+                                           sets: newSets)
+                newExercises[exerciseIndex] = newExercise
+                groups[group] = ExerciseGroup(exercises: newExercises)
+                
+                break outerLoop
             }
+        }
+    }
         
         return updateDomain(domain: domain,
                             exercises: domain.exercises,
@@ -341,7 +347,7 @@ private extension BuildWorkoutInteractor {
         guard let domain = savedDomain else { return .error }
         do {
             try service.saveWorkout(domain.builtWorkout)
-            return .loaded(domain)
+            return .exit(domain)
         } catch {
             return .dialog(type: .save, domain: domain) // Show the error dialog
         }
@@ -359,6 +365,17 @@ private extension BuildWorkoutInteractor {
 
 private extension BuildWorkoutInteractor {
     
+    /// Returns a string representation of the workout creation date in the form of: 2023-02-15T16:39:57Z. This is used to make workout identifiers unique.
+    /// - Returns: The creation date of the current workout as a string with that format
+    func getWorkoutId() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        return nameState.workoutName + "-" + formatter.string(from: creationDate)
+    }
+    
     func updateSavedDomain(_ newDomain: BuildWorkoutDomainObject) -> BuildWorkoutDomainResult {
         savedDomain = newDomain
         return .loaded(newDomain)
@@ -374,9 +391,10 @@ private extension BuildWorkoutInteractor {
                       exercises: [AvailableExercise],
                       groups: [ExerciseGroup],
                       currentGroup: Int) -> BuildWorkoutDomainResult {
-        let updatedWorkout = Workout(name: domain.builtWorkout.name,
-                                   exerciseGroups: groups,
-                                   lastCompleted: domain.builtWorkout.lastCompleted)
+        let updatedWorkout = Workout(id: domain.builtWorkout.id,
+                                     name: domain.builtWorkout.name,
+                                     exerciseGroups: groups,
+                                     lastCompleted: domain.builtWorkout.lastCompleted)
         let updatedDomain = BuildWorkoutDomainObject(exercises: exercises,
                                                      builtWorkout: updatedWorkout,
                                                      currentGroup: currentGroup)

@@ -8,16 +8,16 @@
 import SwiftUI
 import DesignSystem
 
-struct MainView<V: MainViewModelType>: View {
-    @ObservedObject private var viewModel: V
-    @State private var selectedTab: TabType = .workouts
+struct MainView<VM: MainViewModelType>: View {
+    @ObservedObject private var viewModel: VM
+    @State private var selectedTab: TabType = .home
     
-    init(viewModel: V) {
+    init(viewModel: VM) {
         self.viewModel = viewModel
     }
     
     /// Convenience init for testing different tab selections
-    init(viewModel: V,
+    init(viewModel: VM,
          selectedTab: TabType) {
         self.init(viewModel: viewModel)
         self.selectedTab = selectedTab
@@ -39,8 +39,8 @@ struct MainView<V: MainViewModelType>: View {
     // The view to show for each tab
     private func tabView(tab: TabType) -> some View {
         switch tab {
-        case .workouts:
-            WorkoutsViewController_SwiftUI()
+        case .home:
+            HomeViewController_SwiftUI()
         case .profile:
             ProfileView()
         case .settings:

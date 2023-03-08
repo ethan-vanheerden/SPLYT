@@ -3,6 +3,7 @@ import SwiftUI
 import DesignSystem
 
 struct FABGallery: View {
+    @State private var isPresenting = false
     private let viewState = FABViewState(createPlanState: FABRowViewState(title: "CREATE NEW PLAN",
                                                                          imageName: "calendar"),
                                          createWorkoutState: FABRowViewState(title: "CREATE NEW WORKOUT",
@@ -11,7 +12,8 @@ struct FABGallery: View {
         ZStack {
             Text("Hello, World!")
                 .largeTitle()
-            FAB(viewState: viewState,
+            FAB(isPresenting: $isPresenting,
+                viewState: viewState,
                 createPlanAction: { },
                 createWorkoutAction: { })
         }

@@ -19,4 +19,9 @@ public final class MockNavigator: Navigator {
     public func dismiss(animated: Bool) {
         calledDismiss = true
     }
+    
+    public private(set) var calledDismissSelf = false
+    public func dismissSelf(animated: Bool) {
+        calledDismissSelf = true
+    }
 }

@@ -1,0 +1,166 @@
+//
+//  BuildWorkoutReducerTests.swift
+//  SPLYTTests
+//
+//  Created by Ethan Van Heerden on 2/11/23.
+//
+
+import XCTest
+@testable import SPLYT
+import DesignSystem
+
+final class BuildWorkoutReducerTests: XCTestCase {
+    typealias Fixtures = BuildWorkoutFixtures
+    private let sut = BuildWorkoutReducer()
+    private var interactor: BuildWorkoutInteractor! // Used to construct the domain object
+    
+    override func setUpWithError() throws {
+        let navState = NameWorkoutNavigationState(workoutName: "Test Workout")
+        self.interactor = BuildWorkoutInteractor(service: MockBuildWorkoutService(),
+                                                 nameState: navState)
+    }
+    
+    func testReduce_Error() {
+        let result = sut.reduce(.error)
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testReduce_Loaded_StartingScreen() async {
+        let domain = await loadExercises()
+        let result = sut.reduce(domain)
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: false)
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+    }
+    
+    // After modifying the workout a bit
+    func testReduce_Loaded_BuiltWorkout() async {
+        await loadExercises()
+        _ = await interactor.interact(with: .toggleExercise(id: "back-squat", group: 0))
+        _ = await interactor.interact(with: .toggleExercise(id: "bench-press", group: 0))
+        _ = await interactor.interact(with: .addSet(group: 0))
+        _ = await interactor.interact(with: .addSet(group: 0))
+        _ = await interactor.interact(with: .addGroup)
+        _ = await interactor.interact(with: .toggleExercise(id: "incline-db-row", group: 1))
+        let domain = await interactor.interact(with: .toggleFavorite(id: "incline-db-row"))
+        let result = sut.reduce(domain)
+        
+        let exerciseTileViewStates = [
+            Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
+            Fixtures.benchPressTileViewState(isSelected: true, isFavorite: false),
+            Fixtures.inclineDBRowTileViewState(isSelected: true, isFavorite: true)
+        ]
+        let groups: [[BuildExerciseViewState]] = [
+            [Fixtures.backSquatViewState(numSets: 3), Fixtures.benchPressViewState(numSets: 3)],
+            [Fixtures.inclineDBRowViewState(numSets: 1)]
+        ]
+        let currentGroupTitle = "Current group: 1 exercise"
+        let groupTitles = ["Group 1", "Group 2"]
+        
+        // TODO: SPLYT-31: test for set inputs
+        
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
+                                                  groups: groups,
+                                                  currentGroup: 1, currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: true)
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+    }
+    
+    func testReduce_BackDialog() async {
+        await loadExercises()
+        let domain = await interactor.interact(with: .toggleDialog(type: .leave, isOpen: true))
+        let result = sut.reduce(domain)
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  showDialog: .leave,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: false)
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+    }
+    
+    func testReduce_SaveDialog() async {
+        await loadExercises()
+        let domain = await interactor.interact(with: .toggleDialog(type: .save, isOpen: true))
+        let result = sut.reduce(domain)
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  showDialog: .save,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: false)
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+    }
+    
+    func testReduce_Exit() async {
+        await loadExercises()
+        _ = await interactor.interact(with: .toggleExercise(id: "back-squat", group: 0))
+        let domain = await interactor.interact(with: .save)
+        let result = sut.reduce(domain)
+        
+        let exerciseTileViewStates = [
+            Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
+            Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
+            Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
+        ]
+        let groups: [[BuildExerciseViewState]] = [[Fixtures.backSquatViewState(numSets: 1)]]
+        let currentGroupTitle = "Current group: 1 exercise"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
+                                                  groups: groups,
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: true)
+        
+        XCTAssertEqual(result, .exit(expectedDisplay))
+    }
+    
+}
+
+// MARK: - Private
+
+private extension BuildWorkoutReducerTests {
+    @discardableResult
+    func loadExercises() async -> BuildWorkoutDomainResult {
+        return await interactor.interact(with: .loadExercises)
+    }
+}

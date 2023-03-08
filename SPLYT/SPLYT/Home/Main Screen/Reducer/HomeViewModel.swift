@@ -12,6 +12,7 @@ import Core
 
 enum HomeViewEvent {
     case load
+    case deleteWorkout(id: String)
 }
 
 // MARK: - View Model
@@ -29,6 +30,8 @@ final class HomeViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .load)
+        case .deleteWorkout(let id):
+            await react(domainAction: .deleteWorkout(id: id))
         }
     }
 }

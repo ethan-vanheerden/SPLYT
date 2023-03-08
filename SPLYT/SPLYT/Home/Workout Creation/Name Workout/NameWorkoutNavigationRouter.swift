@@ -41,7 +41,9 @@ private extension NameWorkoutNavigationRouter {
     func handleNext(state: NameWorkoutNavigationState) {
         let interactor = BuildWorkoutInteractor(nameState: state)
         let viewModel = BuildWorkoutViewModel(interactor: interactor)
-        let view = BuildWorkoutView(viewModel: viewModel)
+        let navRouter = BuildWorkoutNavigationRouter()
+        navRouter.navigator = navigator
+        let view = BuildWorkoutView(viewModel: viewModel, navigationRouter: navRouter)
         let vc = UIHostingController(rootView: view)
         
         navigator?.push(vc, animated: true)

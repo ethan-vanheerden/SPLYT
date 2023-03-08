@@ -8,5 +8,5 @@
 import Foundation
 
 struct HomeDomain: Equatable {
-    let workouts: [Workout]
+    var workouts: [Workout]
 }

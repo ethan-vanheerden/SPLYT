@@ -13,7 +13,7 @@ public extension View {
     ///   - backAction: Action for the back button (if not given, there is no back button)
     ///   - content: An additional view to display to the right of the navigation bar if needed
     /// - Returns: This view with the navigation bar applied
-    func navigationBar<Content: View>(state: NavigationBarViewState,
+    func navigationBar<Content: View>(viewState: NavigationBarViewState,
                                       backAction: (() -> Void)? = nil,
                                       content: @escaping () -> Content = { EmptyView() }) -> some View {
         NavigationStack { // Need to wrap in a NavigationStack to show toolbar
@@ -28,11 +28,10 @@ public extension View {
                             }
                         }
                     }
-                    ToolbarItem(placement: getToolbarPlacement(position: state.position)) {
+                    ToolbarItem(placement: getToolbarPlacement(position: viewState.position)) {
                         VStack {
-                            Text(state.title)
-                                .title1()
-                            if let subtitle = state.subtitle {
+                            title(viewState.title, size: viewState.size)
+                            if let subtitle = viewState.subtitle {
                                 Text(subtitle)
                                     .footnote(style: .medium)
                             }
@@ -52,6 +51,21 @@ public extension View {
             return .navigation
         case .center:
             return .principal
+        }
+    }
+    
+    @ViewBuilder
+    private func title(_ title: String, size: NavigationBarSize) -> some View {
+        switch size {
+        case .small:
+            Text(title)
+                .body()
+        case .medium:
+            Text(title)
+                .title4()
+        case .large:
+            Text(title)
+                .title1()
         }
     }
 }

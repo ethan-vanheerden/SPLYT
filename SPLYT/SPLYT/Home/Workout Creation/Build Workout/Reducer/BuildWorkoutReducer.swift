@@ -11,12 +11,17 @@ import DesignSystem
 struct BuildWorkoutReducer {
     func reduce(_ domain: BuildWorkoutDomainResult) -> BuildWorkoutViewState {
         switch domain {
-        case .loaded(let domainObject):
-            return reduceLoaded(domain: domainObject)
+        case .loaded(let domain):
+            let display = reduceLoaded(domain: domain)
+            return .main(display)
         case let .dialog(type, domain):
-            return reduceLoaded(domain: domain, dialog: type)
+            let display = reduceLoaded(domain: domain, dialog: type)
+            return .main(display)
         case .error:
             return .error
+        case .exit(let domain):
+            let display = reduceLoaded(domain: domain)
+            return .exit(display)
         }
     }
 }
@@ -24,7 +29,7 @@ struct BuildWorkoutReducer {
 // MARK: - Private
 
 private extension BuildWorkoutReducer {
-    func reduceLoaded(domain: BuildWorkoutDomainObject, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutViewState {
+    func reduceLoaded(domain: BuildWorkoutDomainObject, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutDisplay {
         let availableExercises: [AddExerciseTileViewState] = domain.exercises.map {
             AddExerciseTileViewState(id: $0.id,
                                      exerciseName: $0.name,
@@ -56,7 +61,7 @@ private extension BuildWorkoutReducer {
                                           backDialog: backDialog,
                                           saveDialog: saveDialog,
                                           canSave: canSave)
-        return .main(display)
+        return display
     }
     
     func getGroupTitles(workout: Workout) -> [String] {
