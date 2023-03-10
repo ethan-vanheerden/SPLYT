@@ -18,7 +18,7 @@ final class TabTypeTests: XCTestCase {
     }
     
     func testTitle() {
-        let expected = ["Workouts", "Profile", "Settings"]
+        let expected = ["Home", "Profile", "Settings"]
         let actual = TabType.allCases.map { $0.title }
         XCTAssertEqual(actual, expected)
     }

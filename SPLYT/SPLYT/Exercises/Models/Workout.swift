@@ -8,7 +8,8 @@
 import Foundation
 
 /// A created workout. This same struct is used for workouts that are planned, in-progress, or completed.
-struct Workout: Equatable {
+struct Workout: Codable, Equatable {
+    let id: String
     let name: String
     let exerciseGroups: [ExerciseGroup]
     let lastCompleted: Date?

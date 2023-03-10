@@ -17,6 +17,10 @@ public extension Text {
         return self.font(.custom(style.rawValue, size: 20))
     }
     
+    func title4(style: SplytFont = .bold) -> Text {
+        return self.font(.custom(style.rawValue, size: 18.5))
+    }
+    
     func body(style: SplytFont = .bold) -> Text {
         return self.font(.custom(style.rawValue, size: 17))
     }

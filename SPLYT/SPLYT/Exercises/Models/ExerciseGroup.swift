@@ -8,6 +8,6 @@
 import Foundation
 
 /// A series of exercises that are performed at a time in a workout.
-struct ExerciseGroup: Equatable {
+struct ExerciseGroup: Codable, Equatable {
     let exercises: [Exercise]
 }

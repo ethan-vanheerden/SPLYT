@@ -18,7 +18,7 @@ public enum SplytColor: String, CaseIterable {
         case .green:
             return Color.green
         case .lightBlue:
-            return Color.blue.opacity(0.6)
+            return Color(uiColor: UIColor(red: 104/255, green: 172/255, blue: 252/255, alpha: 1.0))
         case .red:
             return Color.red
         case .white:

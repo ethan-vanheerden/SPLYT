@@ -102,10 +102,14 @@ private struct SegmentedControlButtonView: View {
             ForEach(titles.indices, id: \.self) { index in
                 Button(action: { selectedIndex = index }) {
                     HStack {
+                        Spacer()
                         Text(titles[index])
                             .footnote()
                             .foregroundColor(selectedIndex == index ? .black : .gray)
+                        Spacer()
+                        
                     }
+                    .contentShape(Rectangle())
                 }
                 .buttonStyle(CustomSegmentButtonStyle())
                 .background(

@@ -31,7 +31,7 @@ final class SettingsViewModelTests: XCTestCase {
 private extension SettingsViewModelTests {
     func expectedMenuItems() -> [MenuItemViewState] {
         return [
-            MenuItemViewState(id: SettingsItem.designShowcase, title: "DESIGN SHOWCASE")
+            MenuItemViewState(id: SettingsItem.designShowcase, title: "Design Showcase")
         ]
     }
 }
