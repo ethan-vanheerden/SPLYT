@@ -17,7 +17,6 @@ final class SettingsNavigationController: UINavigationController {
                                 navigationRouter: navigationRouter)
         let rootVC = UIHostingController(rootView: view)
         super.init(rootViewController: rootVC)
-//        self.setNavigationBarHidden(true, animated: false)
         navigationRouter.navigator = self
     }
     
