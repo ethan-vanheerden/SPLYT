@@ -28,7 +28,9 @@ final class HomeViewModelTests: XCTestCase {
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
                                           workouts: Fixtures.createdWorkouts,
-                                          fab: Fixtures.fabState)
+                                          fab: Fixtures.fabState,
+                                          showDialog: nil,
+                                          deleteDialog: Fixtures.deleteDialog)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
@@ -46,7 +48,44 @@ final class HomeViewModelTests: XCTestCase {
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
                                           workouts: [Fixtures.createdFullBodyWorkout],
-                                          fab: Fixtures.fabState)
+                                          fab: Fixtures.fabState,
+                                          showDialog: nil,
+                                          deleteDialog: Fixtures.deleteDialog)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testReact_ToggleDialog_NoSavedDomain_Error() async {
+        await sut.send(.toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true))
+        
+        XCTAssertEqual(sut.viewState, .error)
+    }
+    
+    func testReact_ToggleDialog_Delete_Show() async {
+        await load()
+        await sut.send(.toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true))
+        
+        let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
+                                          segmentedControlTitles: Fixtures.segmentedControlTitles,
+                                          workouts: Fixtures.createdWorkouts,
+                                          fab: Fixtures.fabState,
+                                          showDialog: .deleteWorkout(id: "leg-workout"),
+                                          deleteDialog: Fixtures.deleteDialog)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testReact_ToggleDialog_Delete_Hide() async {
+        await load()
+        await sut.send(.toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true)) // Open dialog to close it
+        await sut.send(.toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: false))
+        
+        let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
+                                          segmentedControlTitles: Fixtures.segmentedControlTitles,
+                                          workouts: Fixtures.createdWorkouts,
+                                          fab: Fixtures.fabState,
+                                          showDialog: nil,
+                                          deleteDialog: Fixtures.deleteDialog)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }

@@ -44,9 +44,10 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         }
     }
     
-    @ViewBuilder
     private func mainView(display: HomeDisplay) -> some View {
-        ZStack {
+        let deleteDialogId = deleteDialogId(display: display)
+        
+        return ZStack {
             VStack {
                 SegmentedControl(selectedIndex: $segmentedControlIndex.animation(), // Putting .animation() here is magic I guess
                                  titles: display.segmentedControlTitles)
@@ -56,6 +57,19 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
             .navigationBar(viewState: display.navBar)
             fabView(state: display.fab)
             // TODO: Maybe add a filter button like the Peloton app does?
+        }
+        .dialog(isOpen: deleteDialogId != nil,
+                viewState: display.deleteDialog,
+                primaryAction: { viewModel.send(.deleteWorkout(id: deleteDialogId ?? ""), taskPriority: .userInitiated) },
+                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: deleteDialogId ?? ""), isOpen: false), taskPriority: .userInitiated) })
+    }
+    
+    private func deleteDialogId(display: HomeDisplay) -> String? {
+        if let showDialog = display.showDialog,
+           case let .deleteWorkout(id) = showDialog {
+            return id
+        } else {
+            return nil
         }
     }
     
@@ -78,7 +92,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                     CreatedWorkoutView(viewState: viewState,
                                        tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0)) },
                                        editAction:{ navigationRouter.navigate(.editWorkout(id: $0)) },
-                                       deleteAction: { viewModel.send(.deleteWorkout(id: $0), taskPriority: .userInitiated) })
+                                       deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0), isOpen: true), taskPriority: .userInitiated) })
                 }
             }
             .padding(.horizontal, horizontalPadding)

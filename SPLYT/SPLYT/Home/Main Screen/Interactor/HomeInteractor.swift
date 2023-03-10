@@ -12,7 +12,8 @@ import Core
 
 enum HomeDomainAction {
     case load
-    case deleteWorkout(id: String) // TODO: add dialog action here, edit workout skeleton, tests
+    case deleteWorkout(id: String)
+    case toggleDialog(type: HomeDialog, isOpen: Bool)
 }
 
 // MARK: - Domain Results
@@ -20,6 +21,7 @@ enum HomeDomainAction {
 enum HomeDomainResult: Equatable {
     case error
     case loaded(HomeDomain)
+    case dialog(type: HomeDialog, domain: HomeDomain)
 }
 
 // MARK: - Protocol
@@ -44,6 +46,8 @@ final class HomeInteractor: HomeInteractorType {
             return handleLoad()
         case .deleteWorkout(let id):
             return handleDeleteWorkout(id: id)
+        case let .toggleDialog(type, isOpen):
+            return handleToggleDialog(type: type, isOpen: isOpen)
         }
     }
 }
@@ -77,6 +81,12 @@ private extension HomeInteractor {
         } catch {
             return .error
         }
+    }
+    
+    func handleToggleDialog(type: HomeDialog, isOpen: Bool) -> HomeDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        return isOpen ? .dialog(type: type, domain: domain) : .loaded(domain)
     }
 }
 

@@ -7,6 +7,14 @@
 
 import Foundation
 
+// MARK: - Domain
+
 struct HomeDomain: Equatable {
     var workouts: [Workout]
+}
+
+// MARK: - Dialog Type
+
+enum HomeDialog: Equatable {
+    case deleteWorkout(id: String)
 }

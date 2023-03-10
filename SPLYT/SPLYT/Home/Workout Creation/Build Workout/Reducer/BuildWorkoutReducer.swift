@@ -12,15 +12,15 @@ struct BuildWorkoutReducer {
     func reduce(_ domain: BuildWorkoutDomainResult) -> BuildWorkoutViewState {
         switch domain {
         case .loaded(let domain):
-            let display = reduceLoaded(domain: domain)
+            let display = getDisplay(domain: domain)
             return .main(display)
         case let .dialog(type, domain):
-            let display = reduceLoaded(domain: domain, dialog: type)
+            let display = getDisplay(domain: domain, dialog: type)
             return .main(display)
         case .error:
             return .error
         case .exit(let domain):
-            let display = reduceLoaded(domain: domain)
+            let display = getDisplay(domain: domain)
             return .exit(display)
         }
     }
@@ -29,7 +29,7 @@ struct BuildWorkoutReducer {
 // MARK: - Private
 
 private extension BuildWorkoutReducer {
-    func reduceLoaded(domain: BuildWorkoutDomainObject, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutDisplay {
+    func getDisplay(domain: BuildWorkoutDomain, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutDisplay {
         let availableExercises: [AddExerciseTileViewState] = domain.exercises.map {
             AddExerciseTileViewState(id: $0.id,
                                      exerciseName: $0.name,

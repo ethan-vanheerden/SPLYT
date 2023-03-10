@@ -26,10 +26,10 @@ enum BuildWorkoutDomainAction {
 // MARK: - Domain Results
 
 enum BuildWorkoutDomainResult: Equatable {
-    case loaded(BuildWorkoutDomainObject)
-    case dialog(type: BuildWorkoutDialog, domain: BuildWorkoutDomainObject)
+    case loaded(BuildWorkoutDomain)
+    case dialog(type: BuildWorkoutDialog, domain: BuildWorkoutDomain)
     case error
-    case exit(BuildWorkoutDomainObject)
+    case exit(BuildWorkoutDomain)
 }
 
 // MARK: - Interactor
@@ -37,7 +37,7 @@ enum BuildWorkoutDomainResult: Equatable {
 final class BuildWorkoutInteractor {
     private let service: BuildWorkoutServiceType
     private let nameState: NameWorkoutNavigationState
-    private var savedDomain: BuildWorkoutDomainObject?
+    private var savedDomain: BuildWorkoutDomain?
     private let creationDate: Date // Used for the workout's id
     
     init(service: BuildWorkoutServiceType = BuildWorkoutService(),
@@ -89,7 +89,7 @@ private extension BuildWorkoutInteractor {
                                      name: nameState.workoutName,
                                      exerciseGroups: startingGroup,
                                      lastCompleted: nil)
-            let domainObject = BuildWorkoutDomainObject(exercises: exercises,
+            let domainObject = BuildWorkoutDomain(exercises: exercises,
                                                         builtWorkout: newWorkout,
                                                         currentGroup: 0)
             // Save the domain object for future actions
@@ -144,7 +144,7 @@ private extension BuildWorkoutInteractor {
         }
     }
     
-    func handleAddExercise(domain: BuildWorkoutDomainObject,
+    func handleAddExercise(domain: BuildWorkoutDomain,
                            index: Int,
                            group: Int) -> BuildWorkoutDomainResult {
         let availableExercise = domain.exercises[index]
@@ -169,7 +169,7 @@ private extension BuildWorkoutInteractor {
                             currentGroup: domain.currentGroup)
     }
     
-    func handleRemoveExercise(domain: BuildWorkoutDomainObject,
+    func handleRemoveExercise(domain: BuildWorkoutDomain,
                               id: String,
                               index: Int,
                               group: Int) ->  BuildWorkoutDomainResult {
@@ -316,7 +316,7 @@ private extension BuildWorkoutInteractor {
             }
         }
         
-        let newDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let newDomain = BuildWorkoutDomain(exercises: exercises,
                                                  builtWorkout: domain.builtWorkout,
                                                  currentGroup: domain.currentGroup)
         
@@ -336,7 +336,7 @@ private extension BuildWorkoutInteractor {
               group >= 0,
               group < domain.builtWorkout.exerciseGroups.count else { return .error }
         
-        let newDomain = BuildWorkoutDomainObject(exercises: domain.exercises,
+        let newDomain = BuildWorkoutDomain(exercises: domain.exercises,
                                                  builtWorkout: domain.builtWorkout,
                                                  currentGroup: group)
         
@@ -365,8 +365,9 @@ private extension BuildWorkoutInteractor {
 
 private extension BuildWorkoutInteractor {
     
-    /// Returns a string representation of the workout creation date in the form of: 2023-02-15T16:39:57Z. This is used to make workout identifiers unique.
-    /// - Returns: The creation date of the current workout as a string with that format
+    /// Returns a string representation of the workout creation name and date in the form of: name-2023-02-15T16:39:57Z.
+    /// This is used to make workout identifiers unique.
+    /// - Returns: The unique workout id of the current workout being made
     func getWorkoutId() -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -376,7 +377,7 @@ private extension BuildWorkoutInteractor {
         return nameState.workoutName + "-" + formatter.string(from: creationDate)
     }
     
-    func updateSavedDomain(_ newDomain: BuildWorkoutDomainObject) -> BuildWorkoutDomainResult {
+    func updateSavedDomain(_ newDomain: BuildWorkoutDomain) -> BuildWorkoutDomainResult {
         savedDomain = newDomain
         return .loaded(newDomain)
     }
@@ -387,7 +388,7 @@ private extension BuildWorkoutInteractor {
     ///   - exercises: The available exercises to update
     ///   - groups: The exercise groups to update
     /// - Returns: The loaded domain state after updating the saved domain object to have the new exercise groups and available exercises
-    func updateDomain(domain: BuildWorkoutDomainObject,
+    func updateDomain(domain: BuildWorkoutDomain,
                       exercises: [AvailableExercise],
                       groups: [ExerciseGroup],
                       currentGroup: Int) -> BuildWorkoutDomainResult {
@@ -395,7 +396,7 @@ private extension BuildWorkoutInteractor {
                                      name: domain.builtWorkout.name,
                                      exerciseGroups: groups,
                                      lastCompleted: domain.builtWorkout.lastCompleted)
-        let updatedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let updatedDomain = BuildWorkoutDomain(exercises: exercises,
                                                      builtWorkout: updatedWorkout,
                                                      currentGroup: currentGroup)
         return updateSavedDomain(updatedDomain)

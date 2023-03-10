@@ -64,6 +64,29 @@ final class HomeInteractorTests: XCTestCase {
         XCTAssertEqual(result, .loaded(expectedDomain))
         XCTAssertTrue(mockService.saveWorkoutsCalled)
     }
+    
+    func testInteract_ToggleDialog_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true))
+        
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testInteract_ToggleDialog_DeleteDialog_Show_Success() async {
+        await load()
+        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true))
+        let expectedDomain = HomeDomain(workouts: [Fixtures.legWorkout, Fixtures.fullBodyWorkout])
+        
+        XCTAssertEqual(result, .dialog(type: .deleteWorkout(id: "leg-workout"), domain: expectedDomain))
+    }
+    
+    func testInteract_ToggleDialog_DeleteDialog_Hide_Success() async {
+        await load()
+        _ = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true)) // Open dialog to close it
+        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: false))
+        let expectedDomain = HomeDomain(workouts: [Fixtures.legWorkout, Fixtures.fullBodyWorkout])
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+    }
 }
 
 // MARK: - Private

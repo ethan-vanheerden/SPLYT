@@ -34,7 +34,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -54,7 +54,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[1] = []
         let groups = Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 1)
         
@@ -73,7 +73,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[0] = []
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -87,7 +87,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[0] = []
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -102,7 +102,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[0] = []
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -117,7 +117,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[0] = []
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -164,7 +164,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -179,7 +179,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -202,7 +202,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -229,7 +229,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -253,7 +253,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -274,7 +274,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -296,7 +296,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -319,7 +319,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -344,7 +344,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -388,7 +388,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -410,7 +410,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
-        let expectedDomain = BuildWorkoutDomainObject(exercises: exercises,
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -440,7 +440,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[0] = []
         groupMap[1] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 1)
         
@@ -460,7 +460,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -474,7 +474,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
 
@@ -492,7 +492,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -505,7 +505,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         
@@ -519,7 +519,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
-        let expectedDomain = BuildWorkoutDomainObject(exercises: Fixtures.loadedExercisesNoneSelected,
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelected,
                                                       builtWorkout: workout,
                                                       currentGroup: 0)
         

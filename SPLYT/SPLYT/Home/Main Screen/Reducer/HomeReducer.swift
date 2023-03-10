@@ -14,7 +14,11 @@ final class HomeReducer {
         case .error:
             return .error
         case .loaded(let domain):
-            return reduceLoaded(domain: domain)
+            let display = getDisplay(domain: domain)
+            return .main(display)
+        case let .dialog(dialog, domain):
+            let display = getDisplay(domain: domain, dialog: dialog)
+            return .main(display)
         }
     }
 }
@@ -22,13 +26,16 @@ final class HomeReducer {
 // MARK: - Private
 
 private extension HomeReducer {
-    func reduceLoaded(domain: HomeDomain) -> HomeViewState {
+    func getDisplay(domain: HomeDomain, dialog: HomeDialog? = nil) -> HomeDisplay {
+        let workouts = getCreatedWorkouts(workouts: domain.workouts)
         
         let display = HomeDisplay(navBar: navBar,
                                   segmentedControlTitles: segmentedControlTitles,
-                                  workouts: getCreatedWorkouts(workouts: domain.workouts),
-                                  fab: getFABState())
-        return .main(display)
+                                  workouts: workouts,
+                                  fab: FABState,
+                                  showDialog: dialog,
+                                  deleteDialog: deleteDialog)
+        return display
     }
     
     var navBar: NavigationBarViewState {
@@ -50,7 +57,7 @@ private extension HomeReducer {
         }
     }
     
-    func getFABState() -> FABViewState {
+    var FABState: FABViewState {
         let createPlanState = FABRowViewState(id: "plan",
                                               title: Strings.createPlan,
                                               imageName: "calendar")
@@ -77,10 +84,17 @@ private extension HomeReducer {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMMdY"
         formatter.dateStyle = .medium // Feb 3, 2023
-
+        
         
         let dateString = formatter.string(from: date)
         return Strings.lastCompleted + " \(dateString)"
+    }
+    
+    var deleteDialog: DialogViewState {
+        return DialogViewState(title: Strings.deleteWorkout,
+                               subtitle: Strings.cantBeUndone,
+                               primaryButtonTitle: Strings.delete,
+                               secondaryButtonTitle: Strings.cancel)
     }
 }
 
@@ -95,4 +109,8 @@ fileprivate struct Strings {
     static let exercise = "exercise"
     static let exercises = "exercises"
     static let lastCompleted = "Last completed:"
+    static let deleteWorkout = "Delete workout?"
+    static let cantBeUndone = "This action can't be undone."
+    static let delete = "Delete"
+    static let cancel = "Cancel"
 }

@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK: - Domain Object
+// MARK: - Domain
 
-struct BuildWorkoutDomainObject: Equatable {
+struct BuildWorkoutDomain: Equatable {
     let exercises: [AvailableExercise]
     let builtWorkout: Workout
     let currentGroup: Int // Zero-indexed

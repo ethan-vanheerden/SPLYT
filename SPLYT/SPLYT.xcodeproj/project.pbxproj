@@ -75,7 +75,7 @@
 		AAE79AFB296EFA1E0010848E /* BuildWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79AFA296EFA1E0010848E /* BuildWorkoutViewModel.swift */; };
 		AAE79AFD296EFB350010848E /* BuildWorkoutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79AFC296EFB350010848E /* BuildWorkoutInteractor.swift */; };
 		AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79AFE296EFC620010848E /* BuildWorkoutService.swift */; };
-		AAE79B02296EFDD90010848E /* BuildWorkoutDomainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79B01296EFDD90010848E /* BuildWorkoutDomainObject.swift */; };
+		AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79B01296EFDD90010848E /* BuildWorkoutDomain.swift */; };
 		AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79B04296F09C50010848E /* BuildWorkoutViewState.swift */; };
 		AAEBFCF02957FB5F00D284F0 /* HomeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEBFCEF2957FB5F00D284F0 /* HomeReducer.swift */; };
 		AAEBFCF6295E3D0700D284F0 /* HomeFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEBFCF5295E3D0700D284F0 /* HomeFixtures.swift */; };
@@ -180,7 +180,7 @@
 		AAE79AFA296EFA1E0010848E /* BuildWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewModel.swift; sourceTree = "<group>"; };
 		AAE79AFC296EFB350010848E /* BuildWorkoutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutInteractor.swift; sourceTree = "<group>"; };
 		AAE79AFE296EFC620010848E /* BuildWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutService.swift; sourceTree = "<group>"; };
-		AAE79B01296EFDD90010848E /* BuildWorkoutDomainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutDomainObject.swift; sourceTree = "<group>"; };
+		AAE79B01296EFDD90010848E /* BuildWorkoutDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutDomain.swift; sourceTree = "<group>"; };
 		AAE79B04296F09C50010848E /* BuildWorkoutViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewState.swift; sourceTree = "<group>"; };
 		AAEBFCEF2957FB5F00D284F0 /* HomeReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReducer.swift; sourceTree = "<group>"; };
 		AAEBFCF5295E3D0700D284F0 /* HomeFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFixtures.swift; sourceTree = "<group>"; };
@@ -580,7 +580,7 @@
 			children = (
 				AAE79AFE296EFC620010848E /* BuildWorkoutService.swift */,
 				AAE79AFC296EFB350010848E /* BuildWorkoutInteractor.swift */,
-				AAE79B01296EFDD90010848E /* BuildWorkoutDomainObject.swift */,
+				AAE79B01296EFDD90010848E /* BuildWorkoutDomain.swift */,
 				AAF06EF329AE515D00E48918 /* CreatedWorkoutsCacheRequest.swift */,
 			);
 			path = Interactor;
@@ -888,7 +888,7 @@
 				AAF06EF929B016BF00E48918 /* CreatedWorkoutView.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AA825D66287241840041D94A /* TabType.swift in Sources */,
-				AAE79B02296EFDD90010848E /* BuildWorkoutDomainObject.swift in Sources */,
+				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
 				AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */,

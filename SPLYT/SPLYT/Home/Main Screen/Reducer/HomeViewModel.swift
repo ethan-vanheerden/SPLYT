@@ -13,6 +13,7 @@ import Core
 enum HomeViewEvent {
     case load
     case deleteWorkout(id: String)
+    case toggleDialog(type: HomeDialog, isOpen: Bool)
 }
 
 // MARK: - View Model
@@ -32,6 +33,8 @@ final class HomeViewModel: ViewModel {
             await react(domainAction: .load)
         case .deleteWorkout(let id):
             await react(domainAction: .deleteWorkout(id: id))
+        case let .toggleDialog(type, isOpen):
+            await react(domainAction: .toggleDialog(type: type, isOpen: isOpen))
         }
     }
 }

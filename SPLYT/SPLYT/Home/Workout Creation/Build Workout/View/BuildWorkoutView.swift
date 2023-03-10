@@ -13,7 +13,6 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
     @State private var sheetPresented: Bool = false
-    @Environment(\.isPresented) private var isPresented
     private let navigationRouter: BuildWorkoutNavigationRouter
 
     

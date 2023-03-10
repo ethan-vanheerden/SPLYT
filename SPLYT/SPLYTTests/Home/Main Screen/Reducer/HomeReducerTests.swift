@@ -17,7 +17,6 @@ final class HomeReducerTests: XCTestCase {
         self.interactor = HomeInteractor(service: MockHomeService())
     }
     
-
     func testReduce_Error() {
         let result = sut.reduce(.error)
         XCTAssertEqual(result, .error)
@@ -30,7 +29,24 @@ final class HomeReducerTests: XCTestCase {
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
                                           workouts: Fixtures.createdWorkouts,
-                                          fab: Fixtures.fabState)
+                                          fab: Fixtures.fabState,
+                                          showDialog: nil,
+                                          deleteDialog: Fixtures.deleteDialog)
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+    }
+    
+    func testReduce_DeleteDialog() async {
+        _ = await interactor.interact(with: .load)
+        let domain = await interactor.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true))
+        let result = sut.reduce(domain)
+        
+        let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
+                                          segmentedControlTitles: Fixtures.segmentedControlTitles,
+                                          workouts: Fixtures.createdWorkouts,
+                                          fab: Fixtures.fabState,
+                                          showDialog: .deleteWorkout(id: "leg-workout"),
+                                          deleteDialog: Fixtures.deleteDialog)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }

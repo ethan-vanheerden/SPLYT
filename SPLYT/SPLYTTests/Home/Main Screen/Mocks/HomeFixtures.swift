@@ -89,9 +89,9 @@ struct HomeFixtures {
                                                                                     lastCompleted: nil)
     
     static let createdFullBodyWorkout: CreatedWorkoutViewState = CreatedWorkoutViewState(id: "full-body-workout",
-                                                                                    title: "Full Body",
-                                                                                    subtitle: "4 exercises",
-                                                                                    lastCompleted: "Last completed: Feb 3, 2023")
+                                                                                         title: "Full Body",
+                                                                                         subtitle: "4 exercises",
+                                                                                         lastCompleted: "Last completed: Feb 3, 2023")
     
     static let createdWorkouts: [CreatedWorkoutViewState] = [createdLegWorkout, createdFullBodyWorkout]
     
@@ -106,4 +106,9 @@ struct HomeFixtures {
     static let fabState: FABViewState = FABViewState(id: "fab",
                                                      createPlanState: createPlanState,
                                                      createWorkoutState: createWorkoutState)
+    
+    static let deleteDialog: DialogViewState = DialogViewState(title: "Delete workout?",
+                                                               subtitle: "This action can't be undone.",
+                                                               primaryButtonTitle: "Delete",
+                                                               secondaryButtonTitle: "Cancel")
 }
