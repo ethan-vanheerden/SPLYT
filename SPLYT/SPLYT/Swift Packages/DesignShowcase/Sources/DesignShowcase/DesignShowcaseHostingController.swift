@@ -1,3 +1,4 @@
+
 import Foundation
 import SwiftUI
 import Core
@@ -16,7 +17,7 @@ final class DesignShowcaseHostingController: UIHostingController<DesignShowcaseV
 // MARK: - Navigator
 
 extension DesignShowcaseHostingController: Navigator {
-    public func push(_ vc: UIViewController, animated: Bool) {
+    func push(_ vc: UIViewController, animated: Bool) {
         navigationController?.pushViewController(vc, animated: animated)
     }
 }
