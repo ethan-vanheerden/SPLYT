@@ -20,4 +20,4 @@ jobs:
 
     - name: build and test
       working-directory: ./SPLYT
-      run: xcodebuild -project SPLYT.xcodeproj -scheme SPLYT -testPlan AllTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' -showBuildTimingSummary
+      run: xcodebuild -project SPLYT.xcodeproj -scheme SPLYT -testPlan AllTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' test -showBuildTimingSummary
