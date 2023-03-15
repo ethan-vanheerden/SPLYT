@@ -4,7 +4,6 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class FABIconTests: XCTestCase {
-    // TODO: Bug with Xcode and iOS, add snapshot once we can
     func testFABIcon() throws {
         let view = VStack(spacing: Layout.size(6)) {
             FABIcon(type: FABIconType(size: .primary, imageName: "plus"), tapAction: { })
@@ -12,6 +11,6 @@ final class FABIconTests: XCTestCase {
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

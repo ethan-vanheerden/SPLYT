@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "086EE2A2-1942-48F2-8DE2-C1C42A7E001E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT.xcodeproj",
+        "identifier" : "AA825D46287238CB0041D94A",
+        "name" : "SPLYTTests"
+      }
+    }
+  ],
+  "version" : 1
+}

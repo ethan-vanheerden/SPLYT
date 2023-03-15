@@ -1,10 +1,10 @@
+
 import XCTest
 import DesignSystem
 import SwiftUI
 @testable import SnapshotTesting
 
 final class AddExerciseTileTests: XCTestCase {
-    // TODO: Bug with Xcode and iOS, add snapshot once we can
     func testAddExerciseTile() throws {
         let view = VStack {
             AddExerciseTile(viewState: AddExerciseTileViewState(exerciseName: "BACK SQUAT",

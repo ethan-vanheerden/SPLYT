@@ -4,7 +4,6 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class TagTests: XCTestCase {
-    // TODO: Bug with Xcode and iOS, add snapshot once we can
     func testTag() throws {
         let view = VStack(spacing: Layout.size(1)) {
             Spacer()
@@ -19,6 +18,6 @@ final class TagTests: XCTestCase {
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

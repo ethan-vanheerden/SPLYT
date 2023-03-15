@@ -4,7 +4,6 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class FABRowTests: XCTestCase {
-    // TODO: Bug with Xcode and iOS, add snapshot once we can
     let viewStateOne = FABRowViewState(title: "CREATE NEW PLAN",
                                        imageName: "calendar")
     let viewStateTwo = FABRowViewState(title: "CREATE NEW WORKOUT",
@@ -19,6 +18,6 @@ final class FABRowTests: XCTestCase {
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

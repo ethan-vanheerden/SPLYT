@@ -17,8 +17,8 @@ final class MainViewTests: XCTestCase {
         assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }
     
-    func testMainView_Profile() {
-        let vc = UIHostingController(rootView: MainView(viewModel: MainViewModel(), selectedTab: .profile))
+    func testMainView_History() {
+        let vc = UIHostingController(rootView: MainView(viewModel: MainViewModel(), selectedTab: .history))
         assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }
     

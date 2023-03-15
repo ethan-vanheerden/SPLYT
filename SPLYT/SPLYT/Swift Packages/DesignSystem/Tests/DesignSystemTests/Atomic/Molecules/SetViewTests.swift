@@ -3,7 +3,6 @@ import DesignSystem
 import SnapshotTesting
 import SwiftUI
 
-// TODO: run when Xcode fixes UIScene bug
 final class SetViewTests: XCTestCase {
     func testSetView() {
         let view = VStack {
@@ -30,6 +29,6 @@ final class SetViewTests: XCTestCase {
                                             tag: .restPause)) { _, _ in }
         }
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .iPhoneX), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }
 }

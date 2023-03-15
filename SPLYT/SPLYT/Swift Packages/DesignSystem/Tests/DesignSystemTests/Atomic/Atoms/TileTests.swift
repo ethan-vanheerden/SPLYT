@@ -4,7 +4,6 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class TileTests: XCTestCase {
-    // TODO: Bug with Xcode and iOS, add snapshot once we can
     func testTile() throws {
         let view = VStack {
             Tile {
@@ -20,6 +19,6 @@ final class TileTests: XCTestCase {
         
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

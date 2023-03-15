@@ -16,7 +16,7 @@ final class DesignShowcaseHostingController: UIHostingController<DesignShowcaseV
 // MARK: - Navigator
 
 extension DesignShowcaseHostingController: Navigator {
-    func push(_ vc: UIViewController, animated: Bool) {
+    public func push(_ vc: UIViewController, animated: Bool) {
         navigationController?.pushViewController(vc, animated: animated)
     }
 }

@@ -4,7 +4,6 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class FABTests: XCTestCase {
-    // TODO: Bug with Xcode and iOS, add snapshot once we can
     private let viewState = FABViewState(createPlanState: FABRowViewState(title: "CREATE NEW PLAN",
                                                                          imageName: "calendar"),
                                          createWorkoutState: FABRowViewState(title: "CREATE NEW WORKOUT",
@@ -14,26 +13,27 @@ final class FABTests: XCTestCase {
         let view = ZStack {
             Text("Hello, World!")
                 .body()
-            FAB(viewState: viewState,
+            FAB(isPresenting: .constant(false),
+                viewState: viewState,
                 createPlanAction: { },
                 createWorkoutAction: { })
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .mediumImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
     }
     
     func testFABExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
                 .body()
-            FAB(viewState: viewState,
+            FAB(isPresenting: .constant(true),
+                viewState: viewState,
                 createPlanAction: { },
-                createWorkoutAction: { },
-                isPresentingOverride: true)
+                createWorkoutAction: { })
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .mediumImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
     }
 }
