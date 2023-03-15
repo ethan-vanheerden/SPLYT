@@ -20,4 +20,4 @@ jobs:
 
     - name: build and test
       working-directory: ./SPLYT
-      run: xcodebuild clean test -scheme 'MPCF-TestRunner-ios' -destination 'platform=iOS Simulator,OS=16.0,name=iPhone 11' -showBuildTimingSummary
+      run: xcodebuild -project SPLYT.xcodeproj -scheme SPLYT -testPlan AllTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.2' -showBuildTimingSummary
