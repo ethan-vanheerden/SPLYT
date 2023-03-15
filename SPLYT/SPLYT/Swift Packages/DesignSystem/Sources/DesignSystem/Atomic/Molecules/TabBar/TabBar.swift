@@ -13,10 +13,11 @@ public struct TabBar: View {
         HStack {
             ForEach(TabType.allCases, id: \.self) { tab in
                 Spacer()
-                Button(action: { selectedTab = tab }) {
-                    tabView(tab: tab)
-                }
-                .foregroundColor(iconColor(tab: tab))
+                tabView(tab: tab)
+                    .onTapGesture {
+                        selectedTab = tab
+                    }
+                    .foregroundColor(iconColor(tab: tab))
                 Spacer()
             }
             .padding(.top, Layout.size(0.5))
