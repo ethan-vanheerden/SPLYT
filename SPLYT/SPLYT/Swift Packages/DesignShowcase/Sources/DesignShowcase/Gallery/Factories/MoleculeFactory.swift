@@ -22,6 +22,8 @@ struct MoleculeFactory {
             SegmentedControlGallery()
         case .setView:
             SetViewGallery()
+        case .tabBar:
+            TabBarGallery()
         }
     }
 }

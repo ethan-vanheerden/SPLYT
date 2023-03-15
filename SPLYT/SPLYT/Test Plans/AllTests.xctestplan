@@ -1,0 +1,67 @@
+{
+  "configurations" : [
+    {
+      "id" : "E39EA0D6-8872-4B0B-8E08-70C08B19D5F9",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT\/Swift Packages\/Caching",
+        "identifier" : "CachingTests",
+        "name" : "CachingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT\/Swift Packages\/Core",
+        "identifier" : "CoreTests",
+        "name" : "CoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT\/Swift Packages\/DesignShowcase",
+        "identifier" : "DesignShowcaseTests",
+        "name" : "DesignShowcaseTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT\/Swift Packages\/DesignSystem",
+        "identifier" : "DesignSystemTests",
+        "name" : "DesignSystemTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SPLYTTests\/Settings\/Mocking",
+        "identifier" : "MockingTests",
+        "name" : "MockingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT\/Swift Packages\/Networking",
+        "identifier" : "NetworkingTests",
+        "name" : "NetworkingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT.xcodeproj",
+        "identifier" : "AA825D46287238CB0041D94A",
+        "name" : "SPLYTTests"
+      }
+    }
+  ],
+  "version" : 1
+}

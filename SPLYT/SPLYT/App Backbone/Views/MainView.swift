@@ -24,27 +24,23 @@ struct MainView<VM: MainViewModelType>: View {
     }
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            ForEach(TabType.allCases, id: \.self) { tab in
-                tabView(tab: tab)
-                    .tabItem {
-                        Label(tab.title, systemImage: tab.imageName)
-                            .tag(tab)
-                    }
-            }
+        VStack {
+            tabView
+            TabBar(selectedTab: $selectedTab)
         }
     }
-    
+
     @ViewBuilder
-    // The view to show for each tab
-    private func tabView(tab: TabType) -> some View {
-        switch tab {
-        case .home:
+    /// The view to show for the selected tab.
+    /// We have these visibility modifiers so the view doesn't refresh every time we choose a tab.
+    private var tabView: some View {
+        ZStack {
             HomeViewController_SwiftUI()
-        case .profile:
+                .isVisible(selectedTab == .home)
             ProfileView()
-        case .settings:
+                .isVisible(selectedTab == .history)
             SettingsViewController_SwiftUI()
+                .isVisible(selectedTab == .settings)
         }
     }
 }

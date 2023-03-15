@@ -3,7 +3,6 @@ import SnapshotTesting
 import DesignSystem
 import SwiftUI
 
-// TODO: run when Xcode is not broken
 final class NavigationBarTests: XCTestCase {
     let state = NavigationBarViewState(title: "Title")
     let stateLeft = NavigationBarViewState(title: "Title", position: .left)
@@ -12,32 +11,32 @@ final class NavigationBarTests: XCTestCase {
         let view = VStack(alignment: .leading) {
             Text("Hello, World!")
                 .padding(.horizontal)
-                .navigationBar(state: state) { }
+                .navigationBar(viewState: state) { }
         }
         
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
     
     func testNavigationBarNoBackButton() {
         let view = VStack(alignment: .leading) {
             Text("Hello, World!")
                 .padding(.horizontal)
-                .navigationBar(state: state)
+                .navigationBar(viewState: state)
         }
         
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
     
     func testNavigationBarLeft() {
         let view = VStack(alignment: .leading) {
             Text("Hello, World!")
                 .padding(.horizontal)
-                .navigationBar(state: stateLeft) { }
+                .navigationBar(viewState: stateLeft) { }
         }
         
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

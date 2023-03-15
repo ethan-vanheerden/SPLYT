@@ -4,7 +4,6 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class ScrimTests: XCTestCase {
-    // TODO: Bug with Xcode and iOS, add snapshot once we can
     func testScrim() throws {
         let view = ZStack {
             VStack {
@@ -21,6 +20,6 @@ final class ScrimTests: XCTestCase {
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

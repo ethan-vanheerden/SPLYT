@@ -3,7 +3,6 @@ import DesignSystem
 import SnapshotTesting
 import SwiftUI
 
-// TODO: run when Xcode fixes UIScene bug
 final class BuildExerciseViewTests: XCTestCase {
     private let setsOne: [SetViewState] = [
         SetViewState(id: "set-1", title: "Set 1", type: .repsWeight(weightTitle: "lbs", weightPlaceholder: "275", repsTitle: "reps", repsPlaceholder: "6"), tag: nil),
@@ -35,6 +34,6 @@ final class BuildExerciseViewTests: XCTestCase {
                               updateAction: { _, _ in })
         }
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .iPhoneX), record: true)
+        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }
 }

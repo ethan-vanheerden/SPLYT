@@ -13,6 +13,5 @@ protocol MainViewModelType: ObservableObject {
 }
 
 final class MainViewModel: MainViewModelType {
-    
     init() {}
 }
