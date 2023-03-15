@@ -19,4 +19,5 @@ jobs:
       run: xcodebuild -version
 
     - name: build and test
+      working-directory: ./SPLYT
       run: xcodebuild clean test -scheme 'MPCF-TestRunner-ios' -destination 'platform=iOS Simulator,OS=16.0,name=iPhone 11' -showBuildTimingSummary
