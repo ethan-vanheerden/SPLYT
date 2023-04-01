@@ -49,13 +49,13 @@ public struct AddExerciseTile: View {
 
 // MARK: - View State
 
-public struct AddExerciseTileViewState: ItemViewState, Equatable {
-    public let id: AnyHashable
-    let exerciseName: String
+public struct AddExerciseTileViewState: Equatable {
+    public let id: String
+    public let exerciseName: String
     let isSelected: Bool
     let isFavorite: Bool
     
-    public init(id: AnyHashable = UUID(),
+    public init(id: String,
                 exerciseName: String,
                 isSelected: Bool,
                 isFavorite: Bool) {
@@ -69,22 +69,26 @@ public struct AddExerciseTileViewState: ItemViewState, Equatable {
 struct AddExerciseTile_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AddExerciseTile(viewState: AddExerciseTileViewState(exerciseName: "BACK SQUAT",
+            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id1",
+                                                                exerciseName: "BACK SQUAT",
                                                                 isSelected: false,
                                                                 isFavorite: false),
                             tapAction: { },
                             favoriteAction: { })
-            AddExerciseTile(viewState: AddExerciseTileViewState(exerciseName: "BENCH PRESS",
+            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id2",
+                                                                exerciseName: "BENCH PRESS",
                                                                 isSelected: true,
                                                                 isFavorite: false),
                             tapAction: { },
                             favoriteAction: { })
-            AddExerciseTile(viewState: AddExerciseTileViewState(exerciseName: "POWER CLEAN",
+            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id3",
+                                                                exerciseName: "POWER CLEAN",
                                                                 isSelected: false,
                                                                 isFavorite: true),
                             tapAction: { },
                             favoriteAction: { })
-            AddExerciseTile(viewState: AddExerciseTileViewState(exerciseName: "LAT PULLDOWN",
+            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id4",
+                                                                exerciseName: "LAT PULLDOWN",
                                                                 isSelected: true,
                                                                 isFavorite: true),
                             tapAction: { },

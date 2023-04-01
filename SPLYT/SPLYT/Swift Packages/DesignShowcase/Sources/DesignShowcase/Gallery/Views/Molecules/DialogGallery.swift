@@ -33,7 +33,8 @@ struct DialogGallery: View {
                 viewState: viewStateThree,
                 primaryAction: { print("Ok") },
                 secondaryAction: { dialogThreeOpen = false}) {
-            SetEntry(id: "some-entry", title: "Reps", inputType: .reps, doneAction: { _, _ in })
+            Text("Additional View")
+                 .body()
         }
     }
 }

@@ -1,33 +1,36 @@
-import SwiftUI
 
-public struct SetEntry: View {
+import SwiftUI
+import ExerciseCore
+
+struct SetEntry: View {
     @State private var text: String = ""
     @FocusState private var fieldFocused: Bool
-    private let id: AnyHashable
     private let title: String
-    private let placeholder: String?
-    private let inputType: SetEntryType
-    // AnyHashable to represent the setId, Double to represent the new value
-    private let doneAction: (AnyHashable, Double) -> Void
+    private let placeholder: String
+    private let inputType: InputType
+    // We use a Double to represent the changed value of the entry (we cast it to its expected type later)
+    private let updateAction: (Double) -> Void
     
-    public init(id: AnyHashable,
-                title: String,
-                placeholder: String? = nil,
-                inputType: SetEntryType,
-                doneAction: @escaping (AnyHashable, Double) -> Void) {
-        self.id = id
+    init(title: String,
+         startingInput: String? = nil,
+         inputType: InputType,
+         updateAction: @escaping (Double) -> Void) {
         self.title = title
-        self.placeholder = placeholder
         self.inputType = inputType
-        self.doneAction = doneAction
+        self.placeholder = inputType.getString
+        self.updateAction = updateAction
+        
+        if let startingInput = startingInput {
+            self._text = State(initialValue: startingInput)
+        }
     }
     
-    public var body: some View {
+    var body: some View {
         NavigationStack { // Need to wrap in a NavigationStack for iOS bug with duplicated "Done" buttons
             VStack {
                 Spacer()
                 HStack {
-                    TextField(placeholder ?? "", text: $text)
+                    TextField(placeholder, text: $text)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(keyboardType)
                         .multilineTextAlignment(.center)
@@ -49,7 +52,7 @@ public struct SetEntry: View {
                 // If we lose focus, do the action
                 if !isFocused,
                    let value = value {
-                    doneAction(id, value)
+                    updateAction(value)
                 }
             }
             .toolbar {
@@ -80,17 +83,10 @@ public struct SetEntry: View {
     
     private var keyboardType: UIKeyboardType {
         switch inputType {
+        case .reps, .time:
+            return .numberPad
         case .weight:
             return .decimalPad
-        case .reps:
-            return .numberPad
         }
     }
-}
-
-// MARK: - Input Type
-
-public enum SetEntryType {
-    case weight
-    case reps
 }

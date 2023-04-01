@@ -7,6 +7,7 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 struct BuildWorkoutReducer {
     func reduce(_ domain: BuildWorkoutDomainResult) -> BuildWorkoutViewState {
@@ -30,13 +31,6 @@ struct BuildWorkoutReducer {
 
 private extension BuildWorkoutReducer {
     func getDisplay(domain: BuildWorkoutDomain, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutDisplay {
-        let availableExercises: [AddExerciseTileViewState] = domain.exercises.map {
-            AddExerciseTileViewState(id: $0.id,
-                                     exerciseName: $0.name,
-                                     isSelected: $0.isSelected,
-                                     isFavorite: $0.isFavorite)
-        }
-        
         var groups = [[BuildExerciseViewState]]()
         
         for group in domain.builtWorkout.exerciseGroups {
@@ -48,10 +42,9 @@ private extension BuildWorkoutReducer {
         let currentGroup = domain.currentGroup
         let numExercisesInCurrentGroup = groups[currentGroup].count
         let lastGroupEmpty = groups.last?.isEmpty ?? true
-        
         let canSave = groups[0].count > 0 // We can save if there is at least one exercise
         
-        let display = BuildWorkoutDisplay(allExercises: availableExercises,
+        let display = BuildWorkoutDisplay(allExercises: getExerciseTileStates(exerciseMap: domain.exercises),
                                           groups: groups,
                                           currentGroup: currentGroup,
                                           currentGroupTitle: getCurrentGroupTitle(numExercisesInCurrentGroup),
@@ -62,6 +55,19 @@ private extension BuildWorkoutReducer {
                                           saveDialog: saveDialog,
                                           canSave: canSave)
         return display
+    }
+    
+    func getExerciseTileStates(exerciseMap: [String: AvailableExercise]) -> [AddExerciseTileViewState] {
+        return exerciseMap.values.map {
+            AddExerciseTileViewState(id: $0.id,
+                                     exerciseName: $0.name,
+                                     isSelected: $0.isSelected,
+                                     isFavorite: $0.isFavorite)
+        }.sorted {
+            // Maps don't preserve sorted order, so we must sort
+            // TODO: In the future, we can add other custom sorting comparisons here (ex: by favorite, recent, etc.)
+            $0.exerciseName < $1.exerciseName
+        }
     }
     
     func getGroupTitles(workout: Workout) -> [String] {
@@ -89,14 +95,17 @@ private extension BuildWorkoutReducer {
         return exercise.sets.enumerated().map { index, set in
             SetViewState(id: set.id,
                          title: Strings.set + " \(index + 1)",
-                         type: getSetViewType(set.inputType))
+                         type: getSetViewType(set.input))
         }
     }
     
-    func getSetViewType(_ input: SetInputType) -> SetViewType {
+    func getSetViewType(_ input: SetInput) -> SetViewType {
         switch input {
-        case .repsWeight:
-            return .repsWeight(weightTitle: Strings.lbs, repsTitle: Strings.reps)
+        case let .repsWeight(reps, weight):
+            return .repsWeight(weightTitle: Strings.lbs,
+                               weightPlaceholder: weight,
+                               repsTitle: Strings.reps,
+                               repsPlaceholder: reps)
         case .repsOnly:
             return .repsOnly(title: Strings.reps)
         case .time:

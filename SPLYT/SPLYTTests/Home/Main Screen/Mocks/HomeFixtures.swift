@@ -22,7 +22,7 @@ struct HomeFixtures {
         
         for i in 1...numSets {
             let set = Set(id: "\(id)-set-\(i)",
-                          inputType: .repsWeight(reps: nil, weight: nil),
+                          input: .repsWeight(reps: nil, weight: nil),
                           modifier: nil)
             sets.append(set)
         }

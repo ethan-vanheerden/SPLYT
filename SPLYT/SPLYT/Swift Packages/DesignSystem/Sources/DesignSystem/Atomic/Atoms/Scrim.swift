@@ -5,9 +5,7 @@ public struct Scrim: View {
     public init() {}
     
     public var body: some View {
-        Rectangle()
-            .fill(.ultraThinMaterial)
-            .opacity(0.95)
+        Color(splytColor: .gray).opacity(0.15)
     }
 }
 

@@ -32,7 +32,7 @@ public struct FAB: View {
                 VStack(alignment: .trailing) {
                     Spacer()
                     fabItems
-                    FABIcon(type: plusIcon) {
+                    FABIcon(type: isPresenting ? minusIcon : plusIcon) {
                         // Adds a small vibration effect
                         let haptic = UIImpactFeedbackGenerator(style: .rigid)
                         haptic.impactOccurred()
@@ -50,16 +50,18 @@ public struct FAB: View {
         VStack(alignment: .trailing) {
             FABRow(viewState: viewState.createPlanState,
                    tapAction: createPlanAction)
+            .offset(y: isPresenting ? 0 : Layout.size(12.5))
             FABRow(viewState: viewState.createWorkoutState,
                    tapAction: createWorkoutAction)
+            .offset(y: isPresenting ? 0 : Layout.size(6.25))
         }
         .isVisible(isPresenting)
         .padding(.trailing, Layout.size(2))
     }
     
-    private var plusIcon: FABIconType {
-        return FABIconType(size: .primary, imageName: "plus")
-    }
+    private let plusIcon = FABIconType(size: .primary, imageName: "plus")
+    
+    private let minusIcon = FABIconType(size: .primary, imageName: "minus")
 }
 
 // MARK: - View State

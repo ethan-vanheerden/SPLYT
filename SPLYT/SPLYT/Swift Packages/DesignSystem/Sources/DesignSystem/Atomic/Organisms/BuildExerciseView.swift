@@ -1,17 +1,19 @@
+
 import SwiftUI
+import ExerciseCore
 
 public struct BuildExerciseView: View {
     private let viewState: BuildExerciseViewState
     private let addSetAction: () -> Void
     private let removeSetAction: () -> Void
     private let addModiferAction: () -> Void
-    private let updateAction: (AnyHashable, Double) -> Void
+    private let updateAction: (AnyHashable, SetInput) -> Void
     
     public init(viewState: BuildExerciseViewState,
                 addSetAction: @escaping () -> Void,
                 removeSetAction: @escaping () -> Void,
                 addModiferAction: @escaping () -> Void,
-                updateAction: @escaping (AnyHashable, Double) -> Void) {
+                updateAction: @escaping (AnyHashable, SetInput) -> Void) {
         self.viewState = viewState
         self.addSetAction = addSetAction
         self.removeSetAction = removeSetAction

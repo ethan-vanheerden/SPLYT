@@ -125,12 +125,19 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         let currentGroup = display.currentGroup
         return ScrollView {
             VStack(spacing: Layout.size(2)) {
-                ForEach(display.groups[currentGroup], id: \.id) { state in
+                // Use enumerated here so we can get the exercise index in the group to make updating faster
+                ForEach(Array(display.groups[currentGroup].enumerated()), id: \.offset) { index, state in
                     BuildExerciseView(viewState: state,
                                       addSetAction: { viewModel.send(.addSet(group: currentGroup), taskPriority: .userInitiated) },
                                       removeSetAction: { viewModel.send(.removeSet(group: currentGroup)) },
                                       addModiferAction: { /* TODO */ },
-                                      updateAction: { _, _ in /* TODO: SPLYT-31 */ })
+                                      updateAction: { id, setInput in
+                        viewModel.send(.updateSet(id: id,
+                                                  group: display.currentGroup,
+                                                  exerciseIndex: index,
+                                                  with: setInput),
+                                       taskPriority: .userInitiated)
+                    })
                 }
             }
         }

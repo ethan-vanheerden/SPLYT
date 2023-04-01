@@ -7,6 +7,7 @@
 
 import Foundation
 import Core
+import ExerciseCore
 
 // MARK: - Events
 
@@ -17,7 +18,7 @@ enum BuildWorkoutViewEvent {
     case toggleExercise(id: AnyHashable, group: Int)
     case addSet(group: Int)
     case removeSet(group: Int)
-    case updateSet(id: AnyHashable, group: Int, with: SetInputType)
+    case updateSet(id: AnyHashable, group: Int, exerciseIndex: Int, with: SetInput)
     case toggleFavorite(id: AnyHashable)
     case switchGroup(to: Int)
     case save
@@ -49,8 +50,8 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .addSet(group: group))
         case .removeSet(let group):
             await react(domainAction: .removeSet(group: group))
-        case let .updateSet(id, group, newInput):
-            await react(domainAction: .updateSet(id: id, group: group, with: newInput))
+        case let .updateSet(id, group, exerciseIndex, newInput):
+            await react(domainAction: .updateSet(id: id, group: group, exerciseIndex: exerciseIndex, with: newInput))
         case .toggleFavorite(let id):
             await react(domainAction: .toggleFavorite(id: id))
         case .switchGroup(let group):
