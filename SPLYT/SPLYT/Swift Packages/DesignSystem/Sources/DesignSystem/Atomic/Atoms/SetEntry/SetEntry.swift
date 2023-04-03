@@ -3,64 +3,52 @@ import SwiftUI
 import ExerciseCore
 
 struct SetEntry: View {
-    @State private var text: String = ""
+    @State private var text: String
     @FocusState private var fieldFocused: Bool
     private let title: String
-    private let placeholder: String
-    private let inputType: InputType
+    private let input: InputType
     // We use a Double to represent the changed value of the entry (we cast it to its expected type later)
     private let updateAction: (Double) -> Void
     
     init(title: String,
-         startingInput: String? = nil,
-         inputType: InputType,
+         input: InputType,
          updateAction: @escaping (Double) -> Void) {
+        self._text = State(initialValue: input.getString)
         self.title = title
-        self.inputType = inputType
-        self.placeholder = inputType.getString
+        self.input = input
         self.updateAction = updateAction
-        
-        if let startingInput = startingInput {
-            self._text = State(initialValue: startingInput)
-        }
     }
     
     var body: some View {
-        NavigationStack { // Need to wrap in a NavigationStack for iOS bug with duplicated "Done" buttons
-            VStack {
+        VStack {
+            Spacer()
+            HStack {
+                TextField("", text: $text) // First parameter is for a placeholder
+                    .textFieldStyle(.roundedBorder)
+                    .keyboardType(keyboardType)
+                    .multilineTextAlignment(.center)
+                    .focused($fieldFocused)
+                    .minimumScaleFactor(0.8)
+                    .font(Font.system(size: 14, design: .default))
+                    .frame(width: Layout.size(7))
+            }
+            Text(title)
+                .footnote()
+                .foregroundColor(Color(splytColor: .gray))
+                .padding(.top, Layout.size(-0.75)) // Because of automatic padding on TextField
+            Spacer()
+        }
+        .onChange(of: text) { _ in
+            validateText()
+            if let value = value {
+                updateAction(value)
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
-                HStack {
-                    TextField(placeholder, text: $text)
-                        .textFieldStyle(.roundedBorder)
-                        .keyboardType(keyboardType)
-                        .multilineTextAlignment(.center)
-                        .focused($fieldFocused)
-                        .minimumScaleFactor(0.8)
-                        .font(Font.system(size: 14, design: .default))
-                        .frame(width: Layout.size(7))
-                }
-                Text(title)
-                    .footnote()
-                    .foregroundColor(Color(splytColor: .gray))
-                    .padding(.top, Layout.size(-0.75)) // Because of automatic padding on TextField
-                Spacer()
-            }
-            .onChange(of: text) { _ in
-                validateText()
-            }
-            .onChange(of: fieldFocused) { isFocused in
-                // If we lose focus, do the action
-                if !isFocused,
-                   let value = value {
-                    updateAction(value)
-                }
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") {
-                        fieldFocused = false
-                    }
+                Button("Done") {
+                    fieldFocused = false
                 }
             }
         }
@@ -82,7 +70,7 @@ struct SetEntry: View {
     }
     
     private var keyboardType: UIKeyboardType {
-        switch inputType {
+        switch input {
         case .reps, .time:
             return .numberPad
         case .weight:

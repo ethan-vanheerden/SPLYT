@@ -103,13 +103,13 @@ private extension BuildWorkoutReducer {
         switch input {
         case let .repsWeight(reps, weight):
             return .repsWeight(weightTitle: Strings.lbs,
-                               weightPlaceholder: weight,
+                               weight: weight,
                                repsTitle: Strings.reps,
-                               repsPlaceholder: reps)
-        case .repsOnly:
-            return .repsOnly(title: Strings.reps)
-        case .time:
-            return .time(title: Strings.sec)
+                               reps: reps)
+        case .repsOnly(let reps):
+            return .repsOnly(title: Strings.reps, reps: reps)
+        case .time(let seconds):
+            return .time(title: Strings.sec, seconds: seconds)
         }
     }
     

@@ -35,28 +35,27 @@ public struct SetView: View {
     @ViewBuilder
     private var entries: some View {
         switch viewState.type {
-        case let .repsWeight(weightTitle, weightPlaceholder, repsTitle, repsPlaceholder):
+        case let .repsWeight(weightTitle, weight, repsTitle, reps):
             HStack(spacing: Layout.size(4)) {
                 // Reps entry
                 SetEntry(title: repsTitle,
-                         inputType: .reps(repsPlaceholder)) { newReps in
+                         input: .reps(reps)) { newReps in
                     updateAction(viewState.id, .repsWeight(reps: Int(newReps), weight: nil))
                 }
                 // Weight entry
                 SetEntry(title: weightTitle,
-                         startingInput: <#T##String?#>
-                         inputType: .weight(weightPlaceholder)) { newWeight in
+                         input: .weight(weight)) { newWeight in
                     updateAction(viewState.id, .repsWeight(reps: nil, weight: newWeight))
                 }
             }
-        case let .repsOnly(title, placeholder):
+        case let .repsOnly(title, reps):
             SetEntry(title: title,
-                     inputType: .reps(placeholder)) { newReps in
+                     input: .reps(reps)) { newReps in
                 updateAction(viewState.id, .repsOnly(reps: Int(newReps)))
             }
-        case let .time(title, placeholder):
+        case let .time(title, seconds):
             SetEntry(title: title,
-                     inputType: .reps(placeholder)) { newSeconds in
+                     input: .time(seconds)) { newSeconds in
                 updateAction(viewState.id, .time(seconds: Int(newSeconds)))
             }
         }
@@ -73,51 +72,20 @@ public struct SetView: View {
     }
 }
 
-struct SetView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            SetView(viewState: SetViewState(id: "id-1",
-                                            title: "Set 1",
-                                            type: .repsWeight(weightTitle: "lbs", weightPlaceholder: 135, repsTitle: "reps"))) { _, _ in }
-            SetView(viewState: SetViewState(id: "id-2",
-                                            title: "Set 2",
-                                            type: .repsWeight(weightTitle: "lbs", weightPlaceholder: 135, repsTitle: "reps", repsPlaceholder: 225),
-                                            tag: .dropSet)) { _, _ in }
-            SetView(viewState: SetViewState(id: "id-3",
-                                            title: "Set 3",
-                                            type: .repsOnly(title: "reps", placeholder: 8))) { _, _ in }
-            SetView(viewState: SetViewState(id: "id-4",
-                                            title: "Set 4",
-                                            type: .time(title: "sec", placeholder: 30))) { _, _ in }
-            SetView(viewState: SetViewState(id: "id-5",
-                                            title: "Set 5",
-                                            type: .repsOnly(title: "reps"),
-                                            tag: .eccentric)) { _, _ in }
-            SetView(viewState: SetViewState(id: "id-6",
-                                            title: "Set 6",
-                                            type: .repsOnly(title: "reps", placeholder: 12),
-                                            tag: .restPause)) { _, _ in }
-        }
-    }
-}
-
 // MARK: - View State
 
 public struct SetViewState: ItemViewState, Equatable {
     public let id: AnyHashable
     let title: String
-    let startingInput: String?
     let type: SetViewType
     let tag: SetTag?
 
     public init(id: AnyHashable,
                 title: String,
-                startingInput: String? = nil,
                 type: SetViewType,
                 tag: SetTag? = nil) {
         self.id = id
         self.title = title
-        self.startingInput = startingInput
         self.type = type
         self.tag = tag
     }

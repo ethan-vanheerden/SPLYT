@@ -14,7 +14,6 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @Environment(\.dismiss) private var dismiss
     @State private var sheetPresented: Bool = false
     private let navigationRouter: BuildWorkoutNavigationRouter
-
     
     init(viewModel: VM,
          navigationRouter: BuildWorkoutNavigationRouter) {
@@ -91,7 +90,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             VStack {
                 Text(display.currentGroupTitle)
                     .body()
-                sheetButtons(lastGroupEmpty: display.lastGroupEmpty)
+                sheetButtons(display: display)
             }
             .padding(.horizontal, ViewConstants.horizontalPadding)
         }
@@ -103,44 +102,53 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     }
     
     @ViewBuilder
-    private func sheetButtons(lastGroupEmpty: Bool) -> some View {
+    private func sheetButtons(display: BuildWorkoutDisplay) -> some View {
         HStack(spacing: Layout.size(2)) {
             Spacer()
             SplytButton(text: Strings.editSetsReps) { sheetPresented.toggle() }
             SplytButton(text: Strings.addGroup,
-                        isEnabled: !lastGroupEmpty) { viewModel.send(.addGroup, taskPriority: .userInitiated) }
+                        isEnabled: !display.lastGroupEmpty) {
+                viewModel.send(.addGroup, taskPriority: .userInitiated)
+            }
             Spacer()
         }
     }
     
     private func expandedSheetView(display: BuildWorkoutDisplay) -> some View {
         return VStack {
-            SegmentedControl(selectedIndex: currentGroupBinding(value: display.currentGroup),
+            SegmentedControl(selectedIndex: currentGroupBinding(value: display.currentGroup).animation(),
                              titles: display.groupTitles)
             currentSetView(display: display)
         }
     }
     
     private func currentSetView(display: BuildWorkoutDisplay) -> some View {
-        let currentGroup = display.currentGroup
-        return ScrollView {
-            VStack(spacing: Layout.size(2)) {
-                // Use enumerated here so we can get the exercise index in the group to make updating faster
-                ForEach(Array(display.groups[currentGroup].enumerated()), id: \.offset) { index, state in
-                    BuildExerciseView(viewState: state,
-                                      addSetAction: { viewModel.send(.addSet(group: currentGroup), taskPriority: .userInitiated) },
-                                      removeSetAction: { viewModel.send(.removeSet(group: currentGroup)) },
-                                      addModiferAction: { /* TODO */ },
-                                      updateAction: { id, setInput in
-                        viewModel.send(.updateSet(id: id,
-                                                  group: display.currentGroup,
-                                                  exerciseIndex: index,
-                                                  with: setInput),
-                                       taskPriority: .userInitiated)
-                    })
+        
+        return TabView(selection: currentGroupBinding(value: display.currentGroup).animation()) {
+            ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, exercises in
+                ScrollView {
+                    VStack(spacing: Layout.size(2)) {
+                        // Use enumerated here so we can get the exercise index in the group to make updating faster
+                        ForEach(Array(exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseState in
+                            BuildExerciseView(viewState: exerciseState,
+                                              addSetAction: { viewModel.send(.addSet(group: groupIndex), taskPriority: .userInitiated) },
+                                              removeSetAction: { viewModel.send(.removeSet(group: groupIndex)) },
+                                              addModiferAction: { /* TODO */ },
+                                              updateAction: { id, setInput in
+                                viewModel.send(.updateSet(id: id,
+                                                          group: groupIndex,
+                                                          exerciseIndex: exerciseIndex,
+                                                          with: setInput),
+                                               taskPriority: .userInitiated)
+                            })
+                        }
+                    }
                 }
+                .tag(groupIndex)
             }
+            
         }
+        .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     private func currentGroupBinding(value: Int) -> Binding<Int> {

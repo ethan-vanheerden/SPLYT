@@ -1,7 +1,7 @@
 
 import Foundation
 
-/// The data that is used to record a weightlifting set. All of the associated values are optional in case the set is skipped.
+/// The data that is used to record a weightlifting set. All of the associated values are optional in case something is skipped.
 public enum SetInput: Codable, Equatable {
     case repsWeight(reps: Int?, weight: Double?)
     case repsOnly(reps: Int?)
@@ -31,12 +31,4 @@ public enum SetInput: Codable, Equatable {
             return self // Don't do any updates
         }
     }
-}
-
-
-/// Determines the type of view shown for a particular set's input behavior.
-public enum SetViewType: Equatable {
-    case repsWeight(weightTitle: String, weightPlaceholder: Double? = nil, repsTitle: String, repsPlaceholder: Int? = nil)
-    case repsOnly(title: String, placeholder: Int? = nil)
-    case time(title: String, placeholder: Int? = nil)
 }
