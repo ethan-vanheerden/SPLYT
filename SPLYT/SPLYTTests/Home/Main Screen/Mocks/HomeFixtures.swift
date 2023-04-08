@@ -7,6 +7,7 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 @testable import SPLYT
 
 struct HomeFixtures {
@@ -17,50 +18,63 @@ struct HomeFixtures {
     
     static let feb_3_2023_1630: Date = Date(timeIntervalSince1970: 1675441800)
     
-    static func createSets(id: String, numSets: Int) -> [Set] {
+    static func createSets(id: String, inputs: [SetInput]) -> [Set] {
         var sets = [Set]()
         
-        for i in 1...numSets {
-            let set = Set(id: "\(id)-set-\(i)",
-                          input: .repsWeight(reps: nil, weight: nil),
+        for (index, input) in inputs.enumerated() {
+            let set = Set(id: "\(id)-set-\(index + 1)",
+                          input: input,
                           modifier: nil)
             sets.append(set)
         }
         return sets
     }
     
-    static func backSquat(numSets: Int) -> Exercise {
+    static func backSquat(inputs: [SetInput]) -> Exercise {
         return Exercise(id: "back-squat",
                         name: "Back Squat",
-                        sets: createSets(id: "back-squat", numSets: numSets))
+                        sets: createSets(id: "back-squat", inputs: inputs))
     }
     
-    static func barLunges(numSets: Int) -> Exercise {
+    static func barLunges(inputs: [SetInput]) -> Exercise {
         return Exercise(id: "bar-lunges",
                         name: "Bar Lunges",
-                        sets: createSets(id: "bar-lunges", numSets: numSets))
+                        sets: createSets(id: "bar-lunges", inputs: inputs))
     }
     
-    static func benchPress(numSets: Int) -> Exercise {
+    static func benchPress(inputs: [SetInput]) -> Exercise {
         return Exercise(id: "bench-press",
                         name: "Bench Press",
-                        sets: createSets(id: "bench-press", numSets: numSets))
+                        sets: createSets(id: "bench-press", inputs: inputs))
     }
     
-    static func inclineDBRow(numSets: Int) -> Exercise {
+    static func inclineDBRow(inputs: [SetInput]) -> Exercise {
         return Exercise(id: "incline-db-row",
                         name: "Incline Dumbbell Row",
-                        sets: createSets(id: "incline-db-row", numSets: numSets))
+                        sets: createSets(id: "incline-db-row", inputs: inputs))
     }
     
+    static let repsWeight3Sets: [SetInput] = [
+        .repsWeight(reps: 12, weight: 135),
+        .repsWeight(reps: 10, weight: 140),
+        .repsWeight(reps: 8, weight: 155)
+    ]
+    
+    static let repsWeight4Sets: [SetInput] = [
+        .repsWeight(reps: 12, weight: 135),
+        .repsWeight(reps: 10, weight: 140),
+        .repsWeight(reps: 8, weight: 155),
+        .repsWeight(reps: 2, weight: 225)
+    ]
+    
     static let legWorkoutExercises: [ExerciseGroup] = [
-        ExerciseGroup(exercises: [backSquat(numSets: 4)]),
-        ExerciseGroup(exercises: [barLunges(numSets: 3)])
+        ExerciseGroup(exercises: [backSquat(inputs: repsWeight4Sets)]),
+        ExerciseGroup(exercises: [barLunges(inputs: repsWeight3Sets)])
     ]
     
     static let fullBodyWorkoutExercises: [ExerciseGroup] = [
-        ExerciseGroup(exercises: [backSquat(numSets: 3), benchPress(numSets: 3)]),
-        ExerciseGroup(exercises: [barLunges(numSets: 3), inclineDBRow(numSets: 3)])
+        ExerciseGroup(exercises: [backSquat(inputs: repsWeight3Sets), benchPress(inputs: repsWeight3Sets)]),
+        ExerciseGroup(exercises: [barLunges(inputs: repsWeight3Sets), inclineDBRow(inputs: repsWeight3Sets)])
     ]
     
     static let legWorkout: Workout = Workout(id: "leg-workout",

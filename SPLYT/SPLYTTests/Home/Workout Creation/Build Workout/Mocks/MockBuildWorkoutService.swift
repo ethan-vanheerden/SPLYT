@@ -13,9 +13,9 @@ final class MockBuildWorkoutService: BuildWorkoutServiceType {
     typealias Fixtures = BuildWorkoutFixtures
     
     var loadExercisesThrow = false
-    func loadAvailableExercises() throws -> [AvailableExercise] {
+    func loadAvailableExercises() throws -> [String: AvailableExercise] {
         if loadExercisesThrow { throw MockError.someError }
-        return Fixtures.loadedExercisesNoneSelected
+        return Fixtures.loadedExercisesNoneSelectedMap
     }
     
     private(set) var saveExercisesCalled = false

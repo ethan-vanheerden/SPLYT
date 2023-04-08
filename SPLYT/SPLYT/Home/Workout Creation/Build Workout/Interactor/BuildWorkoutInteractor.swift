@@ -202,11 +202,9 @@ private extension BuildWorkoutInteractor {
         availableExercise.isSelected = false
         domain.exercises[id] = availableExercise // Update map
         
-        // If the group is now empty and is not the first group, we can remove it completely
+        // If the group is now empty and is not the only group
         if groups[fromGroupIndex].exercises.isEmpty {
-//            groups.remove(at: domain.currentGroup)
             _ = updateDomain(domain: domain, groups: groups)
-//            savedDomain = domain
             return handleRemoveGroup(index: fromGroupIndex)
         }
         
@@ -312,7 +310,7 @@ private extension BuildWorkoutInteractor {
         
         exercise.isFavorite = !exercise.isFavorite
         domain.exercises[id] = exercise
-
+        
         // Save the changes
         do {
             try service.saveAvailableExercises(Array(domain.exercises.values))
@@ -328,16 +326,6 @@ private extension BuildWorkoutInteractor {
               group >= 0,
               group < domain.builtWorkout.exerciseGroups.count else { return .error }
         
-        // If the group we are leaving from is now empty and is not the first group, we can remove it completely
-//        var groups = domain.builtWorkout.exerciseGroups
-//        let canRemove = group != 0 && groups[domain.currentGroup].exercises.isEmpty
-//        if canRemove {
-//            groups.remove(at: domain.currentGroup)
-//        }
-//
-//        // Update the group index if we are removing a group
-//        let nextGroup = canRemove ? (group > domain.currentGroup ? group - 1 : group) : group
-//
         return updateDomain(domain: domain,
                             currentGroup: group)
     }
