@@ -8,6 +8,7 @@ public enum SplytColor: String, CaseIterable {
     case red = "Red"
     case white = "White"
     case yellow = "Yellow"
+    case clear = "Clear"
     
     public var color: Color {
         switch self {
@@ -25,6 +26,12 @@ public enum SplytColor: String, CaseIterable {
             return Color.white
         case .yellow:
             return Color.yellow
+        case .clear:
+            return Color.clear
         }
+    }
+    
+    public func opacity(_ opacity: Double) -> Color {
+        return self.color.opacity(opacity)
     }
 }
