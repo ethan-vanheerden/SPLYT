@@ -51,7 +51,7 @@ final class BuildWorkoutServiceTests: XCTestCase {
         exerciseCache.stubData = stubData
         
         let exercises = try sut.loadAvailableExercises()
-        XCTAssertEqual(exercises, stubData)
+        XCTAssertEqual(exercises, Fixtures.loadedExercisesNoneSelectedMap)
     }
     
     func testSaveExercises_ErrorSaving() throws {

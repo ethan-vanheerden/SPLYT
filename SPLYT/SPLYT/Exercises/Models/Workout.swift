@@ -12,5 +12,5 @@ struct Workout: Codable, Equatable {
     let id: String
     let name: String
     let exerciseGroups: [ExerciseGroup]
-    let lastCompleted: Date?
+    var lastCompleted: Date?
 }

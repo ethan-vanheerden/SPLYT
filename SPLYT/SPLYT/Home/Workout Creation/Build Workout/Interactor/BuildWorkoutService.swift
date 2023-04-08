@@ -11,7 +11,7 @@ import Caching
 // MARK: - Protocol
 
 protocol BuildWorkoutServiceType {
-    func loadAvailableExercises() throws -> [AvailableExercise]
+    func loadAvailableExercises() throws -> [String: AvailableExercise]
     func saveAvailableExercises(_: [AvailableExercise]) throws
     func saveWorkout(_: Workout) throws
 }
@@ -34,7 +34,7 @@ struct BuildWorkoutService<T: CacheInteractorType, U: CacheInteractorType>: Buil
         self.workoutCacheInteractor = workoutCacheInteractor
     }
     
-    func loadAvailableExercises() throws -> [AvailableExercise] {
+    func loadAvailableExercises() throws -> [String: AvailableExercise] {
         // First check if the user has the cached AvailableExercise file yet
         if !(try exerciseCacheInteractor.fileExists()) {
             
@@ -48,11 +48,11 @@ struct BuildWorkoutService<T: CacheInteractorType, U: CacheInteractorType>: Buil
             
             // Now save the data
             try saveAvailableExercises(exercises)
-            return exercises
+            return mapExercises(exercises)
         }
         
         let exercises = try exerciseCacheInteractor.load()
-        return exercises
+        return mapExercises(exercises)
     }
     
     func saveAvailableExercises(_ exercises: [AvailableExercise]) throws {
@@ -71,5 +71,23 @@ struct BuildWorkoutService<T: CacheInteractorType, U: CacheInteractorType>: Buil
             // Now save the new workout list
             try workoutCacheInteractor.save(data: workouts)
         }
+    }
+}
+
+// MARK: - Private
+
+private extension BuildWorkoutService {
+    
+    /// Converts an `AvailableExercise` list into a dictionary where the keys are the exercises IDs, and the values are the exercises.
+    /// - Parameter exercises: The exercises
+    /// - Returns: The ID -> exercise map
+    func mapExercises(_ exercises: [AvailableExercise]) -> [String: AvailableExercise] {
+        var map = [String: AvailableExercise]()
+        
+        exercises.forEach { exercise in
+            map[exercise.id] = exercise
+        }
+        
+        return map
     }
 }

@@ -8,6 +8,7 @@
 import XCTest
 @testable import SPLYT
 import DesignSystem
+import ExerciseCore
 
 final class BuildWorkoutReducerTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
@@ -54,6 +55,10 @@ final class BuildWorkoutReducerTests: XCTestCase {
         _ = await interactor.interact(with: .addSet(group: 0))
         _ = await interactor.interact(with: .addGroup)
         _ = await interactor.interact(with: .toggleExercise(id: "incline-db-row", group: 1))
+        _ = await interactor.interact(with: .updateSet(id: "back-squat-set-1",
+                                                       group: 0,
+                                                       exerciseIndex: 0,
+                                                       with: .repsWeight(reps: 12, weight: 135)))
         let domain = await interactor.interact(with: .toggleFavorite(id: "incline-db-row"))
         let result = sut.reduce(domain)
         
@@ -62,15 +67,19 @@ final class BuildWorkoutReducerTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: true, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: true, isFavorite: true)
         ]
+        
+        let squatSets: [SetViewType] = [
+            .repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12),
+            Fixtures.emptyRepsWeightSet,
+            Fixtures.emptyRepsWeightSet
+        ]
+        let benchSets: [SetViewType] = Array(repeating: Fixtures.emptyRepsWeightSet, count: 3)
         let groups: [[BuildExerciseViewState]] = [
-            [Fixtures.backSquatViewState(numSets: 3), Fixtures.benchPressViewState(numSets: 3)],
-            [Fixtures.inclineDBRowViewState(numSets: 1)]
+            [Fixtures.backSquatViewState(inputs: squatSets), Fixtures.benchPressViewState(inputs: benchSets)],
+            [Fixtures.inclineDBRowViewState(inputs: [Fixtures.emptyRepsWeightSet])]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1", "Group 2"]
-        
-        // TODO: SPLYT-31: test for set inputs
-        
         let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
                                                   groups: groups,
                                                   currentGroup: 1, currentGroupTitle: currentGroupTitle,
@@ -137,7 +146,9 @@ final class BuildWorkoutReducerTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
-        let groups: [[BuildExerciseViewState]] = [[Fixtures.backSquatViewState(numSets: 1)]]
+        let groups: [[BuildExerciseViewState]] = [
+            [Fixtures.backSquatViewState(inputs: [Fixtures.emptyRepsWeightSet])]
+        ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1"]
         let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,

@@ -1,21 +1,17 @@
 import SwiftUI
-import DesignSystem
+@testable import DesignSystem
 
 struct SetEntryGallery: View {
     var body: some View {
         VStack {
             Spacer()
-            SetEntry(id: "set-1",
-                     title: "lbs",
-                     placeholder: "12.5",
-                     inputType: .weight) { id, value in
-                print("ID: \(id), Weight: \(value)")
+            SetEntry(title: "lbs",
+                     input: .weight(12.5)) { value in
+                print("Value: \(value)")
             }
-            SetEntry(id: "set-2",
-                     title: "reps",
-                     placeholder: "0",
-                     inputType: .reps) { id, value in
-                print("ID: \(id), Reps: \(value)")
+            SetEntry(title: "reps",
+                     input: .reps(0)) { value in
+                print("Value: \(value)")
             }
             Spacer()
         }

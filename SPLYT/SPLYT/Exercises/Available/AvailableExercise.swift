@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import ExerciseCore
 
 /// Represents exercises that users can add when creating a workout.
 struct AvailableExercise: Codable, Equatable {
     let id: String
     let name: String
     let musclesWorked: [MusclesWorked]
-    let isFavorite: Bool
-    let defaultInputType: SetInputType
+    var isFavorite: Bool
+    let defaultInputType: SetInput
     var isSelected = false
 
     private enum CodingKeys: String, CodingKey {

@@ -61,6 +61,13 @@
         "identifier" : "AA825D46287238CB0041D94A",
         "name" : "SPLYTTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ExerciseCoreTests",
+        "name" : "ExerciseCoreTests"
+      }
     }
   ],
   "version" : 1

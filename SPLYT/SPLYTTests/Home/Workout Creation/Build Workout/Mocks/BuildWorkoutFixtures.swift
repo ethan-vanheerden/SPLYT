@@ -8,6 +8,7 @@
 import Foundation
 @testable import SPLYT
 import DesignSystem
+import ExerciseCore
 
 struct BuildWorkoutFixtures {
     
@@ -44,6 +45,12 @@ struct BuildWorkoutFixtures {
         backSquatAvailable(isSelected: false, isFavorite: false),
         benchPressAvailable(isSelected: false, isFavorite: false),
         inclineDBRowAvailable(isSelected: false, isFavorite: false)
+    ]
+    
+    static let loadedExercisesNoneSelectedMap: [String: AvailableExercise] = [
+        "back-squat": backSquatAvailable(isSelected: false, isFavorite: false),
+        "bench-press": benchPressAvailable(isSelected: false, isFavorite: false),
+        "incline-db-row": inclineDBRowAvailable(isSelected: false, isFavorite: false)
     ]
     
     static let workoutName = "Test Workout"
@@ -94,41 +101,41 @@ struct BuildWorkoutFixtures {
         inclineDBRowTileViewState(isSelected: false, isFavorite: false)
     ]
     
-    static func createSetViewStates(id: String, numSets: Int) -> [SetViewState] {
+    static func createSetViewStates(id: String, inputs: [SetViewType]) -> [SetViewState] {
         var sets = [SetViewState]()
         
-        for i in 1...numSets {
-            let set = SetViewState(id: "\(id)-set-\(i)",
-                                   title: "Set \(i)",
-                                   type: .repsWeight(weightTitle: "lbs", repsTitle: "reps"),
+        for (index, input) in inputs.enumerated() {
+            let set = SetViewState(id: "\(id)-set-\(index + 1)",
+                                   title: "Set \(index + 1)",
+                                   type: input,
                                    tag: nil)
             sets.append(set)
         }
         return sets
     }
     
-    static func backSquatViewState(numSets: Int) -> BuildExerciseViewState {
+    static func backSquatViewState(inputs: [SetViewType]) -> BuildExerciseViewState {
         let header = SectionHeaderViewState(id: "Back Squat",
                                             text: "Back Squat")
         return BuildExerciseViewState(id: "back-squat",
                                       header: header,
-                                      sets: createSetViewStates(id: "back-squat", numSets: numSets))
+                                      sets: createSetViewStates(id: "back-squat", inputs: inputs))
     }
     
-    static func benchPressViewState(numSets: Int) -> BuildExerciseViewState {
+    static func benchPressViewState(inputs: [SetViewType]) -> BuildExerciseViewState {
         let header = SectionHeaderViewState(id: "Bench Press",
                                             text: "Bench Press")
         return BuildExerciseViewState(id: "bench-press",
                                       header: header,
-                                      sets: createSetViewStates(id: "bench-press", numSets: numSets))
+                                      sets: createSetViewStates(id: "bench-press", inputs: inputs))
     }
     
-    static func inclineDBRowViewState(numSets: Int) -> BuildExerciseViewState {
+    static func inclineDBRowViewState(inputs: [SetViewType]) -> BuildExerciseViewState {
         let header = SectionHeaderViewState(id: "Incline Dumbbell Row",
                                             text: "Incline Dumbbell Row")
         return BuildExerciseViewState(id: "incline-db-row",
                                       header: header,
-                                      sets: createSetViewStates(id: "incline-db-row", numSets: numSets))
+                                      sets: createSetViewStates(id: "incline-db-row", inputs: inputs))
     }
     
     static var dialogViewState: DialogViewState = DialogViewState(title: "Confirm Exit",
@@ -144,4 +151,10 @@ struct BuildWorkoutFixtures {
     static var saveDialog: DialogViewState = DialogViewState(title: "Error saving",
                                                              subtitle: "Please try again later.",
                                                              primaryButtonTitle: "Ok")
+    
+    static let reps = "reps"
+    
+    static let lbs = "lbs"
+    
+    static let emptyRepsWeightSet: SetViewType = .repsWeight(weightTitle: lbs, repsTitle: reps)
 }

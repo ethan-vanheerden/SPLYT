@@ -102,7 +102,8 @@ struct Dialog_Previews: PreviewProvider {
                                               secondaryButtonTitle: "Cancel"),
                    primaryAction: { },
                    secondaryAction: { }) {
-                SetEntry(id: "some-entry", title: "Reps", inputType: .reps, doneAction: { _, _ in })
+               Text("Additional View")
+                    .body()
             }
         }
     }

@@ -12,14 +12,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../DesignSystem"),
-        .package(path: "../Core")
+        .package(path: "../Core"),
+        .package(path: "../ExerciseCore")
     ],
     targets: [
         .target(
             name: "DesignShowcase",
             dependencies: [
                 "DesignSystem",
-                "Core"
+                "Core",
+                "ExerciseCore"
             ]),
         .testTarget(
             name: "DesignShowcaseTests",
