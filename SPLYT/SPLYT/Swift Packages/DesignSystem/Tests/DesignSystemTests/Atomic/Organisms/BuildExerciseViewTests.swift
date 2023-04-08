@@ -32,14 +32,16 @@ final class BuildExerciseViewTests: XCTestCase {
         let view = VStack(spacing: Layout.size(2)) {
             BuildExerciseView(viewState: BuildExerciseViewState(id: "exercise-1",
                                                                 header: SectionHeaderViewState(text: "BACK SQUAT"),
-                                                                sets: setsOne),
+                                                                sets: setsOne,
+                                                                canRemoveSet: true),
                               addSetAction: { },
                               removeSetAction: { },
                               addModiferAction: { },
                               updateAction: { _, _ in })
             BuildExerciseView(viewState: BuildExerciseViewState(id: "exercise-2",
                                                                 header: SectionHeaderViewState(text: "PUSHUPS"),
-                                                                sets: setsTwo),
+                                                                sets: setsTwo,
+                                                                canRemoveSet: false),
                               addSetAction: { },
                               removeSetAction: { },
                               addModiferAction: { },

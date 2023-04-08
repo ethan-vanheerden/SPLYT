@@ -35,15 +35,17 @@ public struct BuildExerciseView: View {
     @ViewBuilder
     private var setButtons: some View {
         HStack(spacing: Layout.size(2)) {
-            Spacer()
-            SplytButton(text: "Add Set",
-                        size: .secondary) { addSetAction() }
-            SplytButton(text: "Remove Set",
-                        size: .secondary) { removeSetAction() }
-            SplytButton(text: "Add Modifier",
-                        size: .secondary) { addModiferAction() }
+            IconButton(iconName: "minus",
+                       style: .primary(backgroundColor: .lightBlue),
+                       iconColor: .white,
+                       isEnabled: viewState.canRemoveSet) { removeSetAction() }
+            IconButton(iconName: "plus",
+                       style: .primary(backgroundColor: .lightBlue),
+                       iconColor: .white) { addSetAction() }
+            
             Spacer()
         }
+        .padding(.leading, Layout.size(4))
     }
 }
 
@@ -53,12 +55,15 @@ public struct BuildExerciseViewState: ItemViewState, Equatable {
     public let id: AnyHashable
     let header: SectionHeaderViewState
     let sets: [SetViewState]
+    let canRemoveSet: Bool
     
     public init(id: AnyHashable,
                 header: SectionHeaderViewState,
-                sets: [SetViewState]) {
+                sets: [SetViewState],
+                canRemoveSet: Bool) {
         self.id = id
         self.header = header
         self.sets = sets
+        self.canRemoveSet = canRemoveSet
     }
 }
