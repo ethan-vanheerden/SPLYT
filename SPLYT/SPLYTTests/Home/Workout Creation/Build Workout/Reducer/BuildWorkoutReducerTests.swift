@@ -68,12 +68,12 @@ final class BuildWorkoutReducerTests: XCTestCase {
             Fixtures.inclineDBRowTileViewState(isSelected: true, isFavorite: true)
         ]
         
-        let squatSets: [SetViewType] = [
+        let squatSets: [SetInputViewState] = [
             .repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12),
             Fixtures.emptyRepsWeightSet,
             Fixtures.emptyRepsWeightSet
         ]
-        let benchSets: [SetViewType] = Array(repeating: Fixtures.emptyRepsWeightSet, count: 3)
+        let benchSets: [SetInputViewState] = Array(repeating: Fixtures.emptyRepsWeightSet, count: 3)
         let groups: [[BuildExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: squatSets), Fixtures.benchPressViewState(inputs: benchSets)],
             [Fixtures.inclineDBRowViewState(inputs: [Fixtures.emptyRepsWeightSet])]

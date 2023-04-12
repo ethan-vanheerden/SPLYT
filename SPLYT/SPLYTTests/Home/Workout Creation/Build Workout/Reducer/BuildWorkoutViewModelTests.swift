@@ -149,7 +149,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
-        let sets: [SetViewType] = Array(repeating: Fixtures.emptyRepsWeightSet, count: 2)
+        let sets: [SetInputViewState] = Array(repeating: Fixtures.emptyRepsWeightSet, count: 2)
         let groups: [[BuildExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
@@ -212,7 +212,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
-        let sets: [SetViewType] = [
+        let sets: [SetInputViewState] = [
             .repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12)
         ]
         let groups: [[BuildExerciseViewState]] = [

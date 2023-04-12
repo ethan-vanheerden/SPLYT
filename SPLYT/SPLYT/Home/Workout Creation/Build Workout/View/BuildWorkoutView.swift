@@ -8,11 +8,14 @@
 import SwiftUI
 import DesignSystem
 import Core
+import ExerciseCore
 
 struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent, VM.ViewState == BuildWorkoutViewState {
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
-    @State private var sheetPresented: Bool = false
+    @State private var setSheetPresented: Bool = false
+    @State private var showSetModifiers: Bool = false
+    @State private var editSetId: AnyHashable = ""
     private let navigationRouter: BuildWorkoutNavigationRouter
     
     init(viewModel: VM,
@@ -95,7 +98,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             .padding(.horizontal, ViewConstants.horizontalPadding)
         }
         .padding(.horizontal, ViewConstants.horizontalPadding)
-        .sheet(isPresented: $sheetPresented) {
+        .sheet(isPresented: $setSheetPresented) {
             expandedSheetView(display: display)
                 .presentationDetents([.fraction(0.75)])
         }
@@ -105,7 +108,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     private func sheetButtons(display: BuildWorkoutDisplay) -> some View {
         HStack(spacing: Layout.size(2)) {
             Spacer()
-            SplytButton(text: Strings.editSetsReps) { sheetPresented.toggle() }
+            SplytButton(text: Strings.editSetsReps) { setSheetPresented = true }
             SplytButton(text: Strings.addGroup,
                         isEnabled: !display.lastGroupEmpty) {
                 viewModel.send(.addGroup, taskPriority: .userInitiated)
@@ -114,11 +117,16 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         }
     }
     
+    @ViewBuilder
     private func expandedSheetView(display: BuildWorkoutDisplay) -> some View {
-        return VStack {
-            SegmentedControl(selectedIndex: currentGroupBinding(value: display.currentGroup).animation(),
-                             titles: display.groupTitles)
-            currentSetView(display: display)
+        ZStack(alignment: .bottom) {
+            VStack {
+                SegmentedControl(selectedIndex: currentGroupBinding(value: display.currentGroup).animation(),
+                                 titles: display.groupTitles)
+                currentSetView(display: display)
+            }
+            setModifiers()
+                .isVisible(showSetModifiers)
         }
     }
     
@@ -133,7 +141,15 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                             BuildExerciseView(viewState: exerciseState,
                                               addSetAction: { viewModel.send(.addSet(group: groupIndex), taskPriority: .userInitiated) },
                                               removeSetAction: { viewModel.send(.removeSet(group: groupIndex)) },
-                                              addModiferAction: { /* TODO */ },
+                                              addModifierAction: { id in
+                                editSetId = id
+                                withAnimation {
+                                    showSetModifiers = true
+                                }
+                            },
+                                              removeModifierAction: { id in
+                              // TODO
+                            },
                                               updateAction: { id, setInput in
                                 viewModel.send(.updateSet(id: id,
                                                           group: groupIndex,
@@ -156,9 +172,33 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             get: { return value },
             set: { viewModel.send(.switchGroup(to: $0), taskPriority: .userInitiated) })
     }
+    
+    @ViewBuilder
+    private func setModifiers() -> some View {
+        ZStack(alignment: .bottom) {
+            Scrim()
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation {
+                        showSetModifiers = false
+                    }
+                }
+            Tile {
+                HStack(spacing: Layout.size(2.5)) {
+                    Spacer()
+                    ForEach(SetModifierViewType.allCases, id: \.title) { modifier in
+                        Tag(viewState: TagViewState(title: modifier.title, color: .green))
+                    }
+                    Spacer()
+                }
+            }
+            .padding(.horizontal, ViewConstants.horizontalPadding)
+            .scaleEffect(showSetModifiers ? 1 : 0.25)
+        }
+    }
 }
 
-// MARK: - String Constants
+// MARK: - Strings
 
 fileprivate struct Strings {
     static let addYourExercises = "ADD YOUR EXERCISES"

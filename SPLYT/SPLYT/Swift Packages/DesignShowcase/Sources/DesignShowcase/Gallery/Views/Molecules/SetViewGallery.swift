@@ -11,33 +11,46 @@ struct SetViewGallery: View {
                                             title: "Set 1",
                                             type: .repsWeight(weightTitle: "lbs",
                                                               weight: 135,
-                                                              repsTitle: "reps")),
-                    updateAction: action)
+                                                              repsTitle: "reps"),
+                                            modifier: SetModifierViewState(id: "id-1-modifier", type: .dropSet(set: .repsWeight(weightTitle: "lbs", repsTitle: "reps")))),
+                    updateAction: action,
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: SetViewState(id: "id-2",
                                             title: "Set 2",
                                             type: .repsWeight(weightTitle: "lbs",
                                                               weight: 135,
                                                               repsTitle: "reps",
                                                               reps: 225),
-                                            tag: .dropSet),
-                    updateAction: action)
+                                            modifier: SetModifierViewState(id: "id-2-modifier", type: .restPause(set: .repsOnly(title: "reps")))),
+                    updateAction: action,
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: SetViewState(id: "id-3",
                                             title: "Set 3",
-                                            type: .repsOnly(title: "reps", reps: 8)),
-                    updateAction: action)
+                                            type: .repsOnly(title: "reps", reps: 8),
+                                            modifier: SetModifierViewState(id: "id-3-modifier", type: .eccentric)),
+                    updateAction: action,
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: SetViewState(id: "id-4",
                                             title: "Set 4",
-                                            type: .time(title: "sec", seconds: 30))) { _, _ in }
+                                            type: .time(title: "sec", seconds: 30)),
+                    updateAction: action,
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: SetViewState(id: "id-5",
                                             title: "Set 5",
-                                            type: .repsOnly(title: "reps"),
-                                            tag: .eccentric),
-                    updateAction: action)
+                                            type: .repsOnly(title: "reps")),
+                    updateAction: action,
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: SetViewState(id: "id-6",
                                             title: "Set 6",
-                                            type: .repsOnly(title: "reps", reps: 12),
-                                            tag: .restPause),
-                    updateAction: action)
+                                            type: .repsOnly(title: "reps", reps: 12)),
+                    updateAction: action,
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
         }
     }
 }

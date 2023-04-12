@@ -87,7 +87,8 @@ private extension BuildWorkoutReducer {
                                                      text: exercise.name)
             return BuildExerciseViewState(id: exercise.id,
                                           header: headerState,
-                                          sets: getSetStates(exercise: exercise))
+                                          sets: getSetStates(exercise: exercise),
+                                          canRemoveSet: exercise.sets.count > 1)
         }
     }
     
@@ -99,7 +100,7 @@ private extension BuildWorkoutReducer {
         }
     }
     
-    func getSetViewType(_ input: SetInput) -> SetViewType {
+    func getSetViewType(_ input: SetInput) -> SetInputViewState {
         switch input {
         case let .repsWeight(reps, weight):
             return .repsWeight(weightTitle: Strings.lbs,

@@ -69,7 +69,7 @@ struct CreatedWorkoutViewState: Equatable {
     let lastCompleted: String?
 }
 
-// MARK: - String Constants
+// MARK: - Strings
 
 fileprivate struct Strings {
     static let edit = "Edit"

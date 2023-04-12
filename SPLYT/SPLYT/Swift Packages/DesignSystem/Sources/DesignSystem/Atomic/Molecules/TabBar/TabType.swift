@@ -27,7 +27,7 @@ public enum TabType: CaseIterable {
     }
 }
 
-// MARK: - String Constants
+// MARK: - Strings
 
 fileprivate struct Strings {
     static let home = "Home"

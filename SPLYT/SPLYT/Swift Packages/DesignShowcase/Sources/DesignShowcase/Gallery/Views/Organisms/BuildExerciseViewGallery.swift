@@ -1,35 +1,36 @@
 import SwiftUI
 import DesignSystem
+import ExerciseCore
 
 struct BuildExerciseViewGallery: View {
     private let setsOne: [SetViewState] = [
         SetViewState(id: "set-1",
                      title: "Set 1",
                      type: .repsWeight(weightTitle: "lbs", weight: 275, repsTitle: "reps", reps: 6),
-                     tag: nil),
+                     modifier: SetModifierViewState(id: "set-1-modifier", type: .dropSet(set: .repsWeight(weightTitle: "lbs", repsTitle: "reps")))),
         SetViewState(id: "set-2",
                      title: "Set 2",
                      type: .repsWeight(weightTitle: "lbs", repsTitle: "reps"),
-                     tag: nil),
+                     modifier: SetModifierViewState(id: "set-2-modifier", type: .restPause(set: .repsOnly(title: "reps")))),
         SetViewState(id: "set-3",
                      title: "Set 3",
                      type: .repsWeight(weightTitle: "lbs", repsTitle: "reps"),
-                     tag: .dropSet),
+                     modifier: SetModifierViewState(id: "set-3-modifier", type: .eccentric)),
     ]
     
     private let setsTwo: [SetViewState] = [
         SetViewState(id: "set-4",
                      title: "Set 1",
                      type: .repsOnly(title: "reps", reps: 15),
-                     tag: nil),
+                     modifier: nil),
         SetViewState(id: "set-5",
                      title: "Set 2",
                      type: .repsOnly(title: "reps", reps: 15),
-                     tag: .eccentric),
+                     modifier: nil),
         SetViewState(id: "set-6",
                      title: "Set 3",
                      type: .repsOnly(title: "reps", reps: 15),
-                     tag: nil)
+                     modifier: nil)
     ]
     
     
@@ -41,7 +42,8 @@ struct BuildExerciseViewGallery: View {
                                                                 canRemoveSet: true),
                               addSetAction: { },
                               removeSetAction: { },
-                              addModiferAction: { },
+                              addModifierAction: { _ in },
+                              removeModifierAction: { _ in },
                               updateAction: { _, _ in })
             BuildExerciseView(viewState: BuildExerciseViewState(id: "exercise-2",
                                                                 header: SectionHeaderViewState(text: "PUSHUPS"),
@@ -49,7 +51,8 @@ struct BuildExerciseViewGallery: View {
                                                                 canRemoveSet: false),
                               addSetAction: { },
                               removeSetAction: { },
-                              addModiferAction: { },
+                              addModifierAction: { _ in },
+                              removeModifierAction: { _ in },
                               updateAction: { _, _ in })
         }
     }

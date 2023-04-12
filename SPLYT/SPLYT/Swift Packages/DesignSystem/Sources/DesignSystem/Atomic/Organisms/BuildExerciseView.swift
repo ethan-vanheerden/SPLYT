@@ -6,18 +6,21 @@ public struct BuildExerciseView: View {
     private let viewState: BuildExerciseViewState
     private let addSetAction: () -> Void
     private let removeSetAction: () -> Void
-    private let addModiferAction: () -> Void
+    private let addModifierAction: (AnyHashable) -> Void
+    private let removeModifierAction: (AnyHashable) -> Void
     private let updateAction: (AnyHashable, SetInput) -> Void
     
     public init(viewState: BuildExerciseViewState,
                 addSetAction: @escaping () -> Void,
                 removeSetAction: @escaping () -> Void,
-                addModiferAction: @escaping () -> Void,
+                addModifierAction: @escaping (AnyHashable) -> Void,
+                removeModifierAction: @escaping (AnyHashable) -> Void,
                 updateAction: @escaping (AnyHashable, SetInput) -> Void) {
         self.viewState = viewState
         self.addSetAction = addSetAction
         self.removeSetAction = removeSetAction
-        self.addModiferAction = addModiferAction
+        self.addModifierAction = addModifierAction
+        self.removeModifierAction = removeModifierAction
         self.updateAction = updateAction
     }
     
@@ -26,7 +29,10 @@ public struct BuildExerciseView: View {
             SectionHeader(viewState: viewState.header)
                 .padding(.horizontal, Layout.size(2))
             ForEach(viewState.sets, id: \.id) { set in
-                SetView(viewState: set, updateAction: updateAction)
+                SetView(viewState: set,
+                        updateAction: updateAction,
+                        addModifierAction: addModifierAction,
+                        removeModifierAction: removeModifierAction)
             }
             setButtons
         }
