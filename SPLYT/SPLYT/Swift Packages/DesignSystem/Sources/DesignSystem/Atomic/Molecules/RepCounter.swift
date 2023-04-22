@@ -10,24 +10,22 @@ public struct RepCounter: View {
     
     public var body: some View {
         HStack {
-            Button { // TODO: 36: icon buttons
+            IconButton(iconName: "minus",
+                       style: .secondary,
+                       iconColor: .black) {
                 if selectedNumber > 0 {
                     selectedNumber -= 1
                 }
-            } label: {
-                Image(systemName: "minus")
             }
-            .tint(.black)
             Text("\(selectedNumber)")
                 .body()
                 .frame(width: sideLength, height: sideLength)
                 .roundedBackground(cornerRadius: Layout.size(1), fill: Color(splytColor: .lightBlue))
-            Button {
+            IconButton(iconName: "plus",
+                       style: .secondary,
+                       iconColor: .black) {
                 selectedNumber += 1
-            } label: {
-                Image(systemName: "plus")
             }
-            .tint(.black)
         }
     }
 }

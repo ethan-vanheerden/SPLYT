@@ -27,15 +27,12 @@ public struct FABRow: View {
 
 // MARK: - ViewState
 
-public struct FABRowViewState: ItemViewState, Equatable {
-    public let id: AnyHashable
+public struct FABRowViewState: Equatable {
     let title: String
     let imageName: String
     
-    public init(id: AnyHashable = UUID(),
-                title: String,
+    public init(title: String,
                 imageName: String) {
-        self.id = id
         self.title = title
         self.imageName = imageName
     }

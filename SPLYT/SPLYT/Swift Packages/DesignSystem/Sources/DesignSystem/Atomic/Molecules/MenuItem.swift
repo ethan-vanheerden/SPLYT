@@ -61,7 +61,7 @@ public struct MenuItem: View {
 
 // MARK: View State
 
-public struct MenuItemViewState: Equatable, ItemViewState {
+public struct MenuItemViewState: Equatable {
     public let id: AnyHashable
     let title: String
     let subtitle: String?

@@ -29,13 +29,10 @@ public struct SectionHeader: View {
 
 // MARK: - ViewState
 
-public struct SectionHeaderViewState: ItemViewState, Equatable {
-    public let id: AnyHashable
+public struct SectionHeaderViewState: Equatable {
     let text: String
     
-    public init(id: AnyHashable = UUID(),
-                text: String) {
-        self.id = id
+    public init(text: String) {
         self.text = text
     }
 }

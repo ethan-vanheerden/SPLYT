@@ -83,23 +83,23 @@ private extension BuildWorkoutReducer {
     
     func getBuildExerciseStates(exercises: [Exercise]) -> [BuildExerciseViewState] {
         return exercises.map { exercise in
-            let headerState = SectionHeaderViewState(id: exercise.name,
-                                                     text: exercise.name)
-            return BuildExerciseViewState(id: exercise.id,
-                                          header: headerState,
-                                          sets: getSetStates(exercise: exercise))
+            let headerState = SectionHeaderViewState(text: exercise.name)
+            return BuildExerciseViewState(header: headerState,
+                                          sets: getSetStates(exercise: exercise),
+                                          canRemoveSet: exercise.sets.count > 1)
         }
     }
     
     func getSetStates(exercise: Exercise) -> [SetViewState] {
         return exercise.sets.enumerated().map { index, set in
-            SetViewState(id: set.id,
+            SetViewState(setIndex: index,
                          title: Strings.set + " \(index + 1)",
-                         type: getSetViewType(set.input))
+                         type: getSetViewType(set.input),
+                         modifier: getSetModifierState(modifier: set.modifier))
         }
     }
     
-    func getSetViewType(_ input: SetInput) -> SetViewType {
+    func getSetViewType(_ input: SetInput) -> SetInputViewState {
         switch input {
         case let .repsWeight(reps, weight):
             return .repsWeight(weightTitle: Strings.lbs,
@@ -110,6 +110,19 @@ private extension BuildWorkoutReducer {
             return .repsOnly(title: Strings.reps, reps: reps)
         case .time(let seconds):
             return .time(title: Strings.sec, seconds: seconds)
+        }
+    }
+    
+    func getSetModifierState(modifier: SetModifier?) -> SetModifierViewState? {
+        guard let modifier = modifier else { return nil }
+        
+        switch modifier {
+        case .dropSet(let input):
+            return .dropSet(set: getSetViewType(input))
+        case .restPause(let input):
+            return .restPause(set: getSetViewType(input))
+        case .eccentric:
+            return .eccentric
         }
     }
     

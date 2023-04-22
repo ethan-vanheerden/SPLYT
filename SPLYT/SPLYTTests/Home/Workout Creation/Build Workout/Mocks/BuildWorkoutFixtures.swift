@@ -101,41 +101,38 @@ struct BuildWorkoutFixtures {
         inclineDBRowTileViewState(isSelected: false, isFavorite: false)
     ]
     
-    static func createSetViewStates(id: String, inputs: [SetViewType]) -> [SetViewState] {
+    static func createSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [SetViewState] {
         var sets = [SetViewState]()
         
-        for (index, input) in inputs.enumerated() {
-            let set = SetViewState(id: "\(id)-set-\(index + 1)",
+        for (index, (input, modifier)) in inputs.enumerated() {
+            let set = SetViewState(setIndex: index,
                                    title: "Set \(index + 1)",
                                    type: input,
-                                   tag: nil)
+                                   modifier: modifier)
             sets.append(set)
         }
         return sets
     }
     
-    static func backSquatViewState(inputs: [SetViewType]) -> BuildExerciseViewState {
-        let header = SectionHeaderViewState(id: "Back Squat",
-                                            text: "Back Squat")
-        return BuildExerciseViewState(id: "back-squat",
-                                      header: header,
-                                      sets: createSetViewStates(id: "back-squat", inputs: inputs))
+    static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> BuildExerciseViewState {
+        let header = SectionHeaderViewState(text: "Back Squat")
+        return BuildExerciseViewState(header: header,
+                                      sets: createSetViewStates(inputs: inputs),
+                                      canRemoveSet: inputs.count > 1)
     }
     
-    static func benchPressViewState(inputs: [SetViewType]) -> BuildExerciseViewState {
-        let header = SectionHeaderViewState(id: "Bench Press",
-                                            text: "Bench Press")
-        return BuildExerciseViewState(id: "bench-press",
-                                      header: header,
-                                      sets: createSetViewStates(id: "bench-press", inputs: inputs))
+    static func benchPressViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> BuildExerciseViewState {
+        let header = SectionHeaderViewState(text: "Bench Press")
+        return BuildExerciseViewState(header: header,
+                                      sets: createSetViewStates(inputs: inputs),
+                                      canRemoveSet: inputs.count > 1)
     }
     
-    static func inclineDBRowViewState(inputs: [SetViewType]) -> BuildExerciseViewState {
-        let header = SectionHeaderViewState(id: "Incline Dumbbell Row",
-                                            text: "Incline Dumbbell Row")
-        return BuildExerciseViewState(id: "incline-db-row",
-                                      header: header,
-                                      sets: createSetViewStates(id: "incline-db-row", inputs: inputs))
+    static func inclineDBRowViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> BuildExerciseViewState {
+        let header = SectionHeaderViewState(text: "Incline Dumbbell Row")
+        return BuildExerciseViewState(header: header,
+                                      sets: createSetViewStates(inputs: inputs),
+                                      canRemoveSet: inputs.count > 1)
     }
     
     static var dialogViewState: DialogViewState = DialogViewState(title: "Confirm Exit",
@@ -156,5 +153,5 @@ struct BuildWorkoutFixtures {
     
     static let lbs = "lbs"
     
-    static let emptyRepsWeightSet: SetViewType = .repsWeight(weightTitle: lbs, repsTitle: reps)
+    static let emptyRepsWeightSet: SetInputViewState = .repsWeight(weightTitle: lbs, repsTitle: reps)
 }

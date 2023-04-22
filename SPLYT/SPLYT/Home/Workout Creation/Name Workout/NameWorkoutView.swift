@@ -61,7 +61,7 @@ struct NameWorkoutView_Previews: PreviewProvider {
     }
 }
 
-// MARK: - String Constants
+// MARK: - Strings
 
 fileprivate struct Strings {
     static let enterAWorkoutName = "Enter a workout name"

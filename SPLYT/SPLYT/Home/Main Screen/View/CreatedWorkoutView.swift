@@ -41,12 +41,12 @@ struct CreatedWorkoutView: View {
                     }
                 }
                 Spacer()
-                Button(action: { showActionSheet = true }) { // TODO: 36: icon buttons
-                    Image(systemName: "ellipsis")
-                        .tint(Color(splytColor: .black))
-                }
+                IconButton(iconName: "ellipsis",
+                           style: .secondary,
+                           iconColor: .black) { showActionSheet = true }
             }
             .frame(height: Layout.size(6)) // Fixed height even if there is no last completed
+            .padding(.horizontal, Layout.size(1))
         }
         .onTapGesture {
             tapAction(viewState.id)
@@ -69,7 +69,7 @@ struct CreatedWorkoutViewState: Equatable {
     let lastCompleted: String?
 }
 
-// MARK: - String Constants
+// MARK: - Strings
 
 fileprivate struct Strings {
     static let edit = "Edit"

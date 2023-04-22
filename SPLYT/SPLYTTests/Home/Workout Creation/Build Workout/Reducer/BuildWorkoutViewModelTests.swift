@@ -92,15 +92,18 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleExercise_AddExercise() async {
         await load()
-        await sut.send(.toggleExercise(id: "back-squat", group: 0))
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
         
         let exerciseTileViewStates = [
             Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (Fixtures.emptyRepsWeightSet, nil)
+        ]
         let groups: [[BuildExerciseViewState]] = [
-            [Fixtures.backSquatViewState(inputs: [Fixtures.emptyRepsWeightSet])]
+            [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1"]
@@ -120,8 +123,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleExercise_RemoveExercise() async {
         await load()
-        await sut.send(.toggleExercise(id: "back-squat", group: 0)) // Add exercise to remove
-        await sut.send(.toggleExercise(id: "back-squat", group: 0))
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0)) // Add exercise to remove
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
         
         let currentGroupTitle = "Current group: 0 exercises"
         let groupTitles = ["Group 1"]
@@ -141,7 +144,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_AddSet() async {
         await load()
-        await sut.send(.toggleExercise(id: "back-squat", group: 0))
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
         await sut.send(.addSet(group: 0))
         
         let exerciseTileViewStates = [
@@ -149,7 +152,10 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
-        let sets: [SetViewType] = Array(repeating: Fixtures.emptyRepsWeightSet, count: 2)
+        let sets: [(SetInputViewState, SetModifierViewState?)] = Array(
+            repeating: (Fixtures.emptyRepsWeightSet, nil),
+            count: 2
+        )
         let groups: [[BuildExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
@@ -171,7 +177,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_RemoveSet() async {
         await load()
-        await sut.send(.toggleExercise(id: "back-squat", group: 0))
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
         await sut.send(.addSet(group: 0)) // Add set to remove
         await sut.send(.removeSet(group: 0))
         
@@ -180,8 +186,11 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (Fixtures.emptyRepsWeightSet, nil)
+        ]
         let groups: [[BuildExerciseViewState]] = [
-            [Fixtures.backSquatViewState(inputs: [Fixtures.emptyRepsWeightSet])]
+            [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1"]
@@ -201,10 +210,10 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_UpdateSet() async {
         await load()
-        await sut.send(.toggleExercise(id: "back-squat", group: 0))
-        await sut.send(.updateSet(id: "back-squat-set-1",
-                                  group: 0,
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
+        await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
+                                  setIndex: 0,
                                   with: .repsWeight(reps: 12, weight: 135)))
         
         let exerciseTileViewStates = [
@@ -212,8 +221,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
-        let sets: [SetViewType] = [
-            .repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12)
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (.repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12), nil)
         ]
         let groups: [[BuildExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
@@ -236,7 +245,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleFavorite_SelectFavorite() async {
         await load()
-        await sut.send(.toggleFavorite(id: "back-squat"))
+        await sut.send(.toggleFavorite(exerciseId: "back-squat"))
         
         let exerciseTileViewStates = [
             Fixtures.backSquatTileViewState(isSelected: false, isFavorite: true),
@@ -261,8 +270,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleFavorite_DeselectFavorite() async {
         await load()
-        await sut.send(.toggleFavorite(id: "back-squat")) // Mark as favorite
-        await sut.send(.toggleFavorite(id: "back-squat")) // Unmark as favorite
+        await sut.send(.toggleFavorite(exerciseId: "back-squat")) // Mark as favorite
+        await sut.send(.toggleFavorite(exerciseId: "back-squat")) // Unmark as favorite
         
         let currentGroupTitle = "Current group: 0 exercises"
         let groupTitles = ["Group 1"]
@@ -302,7 +311,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_Save_Error_SaveDialog() async {
         await load()
-        await sut.send(.toggleExercise(id: "back-squat", group: 0))
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
         mockService.saveWorkoutThrow = true
         await sut.send(.save)
         
@@ -311,8 +320,11 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (Fixtures.emptyRepsWeightSet, nil)
+        ]
         let groups: [[BuildExerciseViewState]] = [
-            [Fixtures.backSquatViewState(inputs: [Fixtures.emptyRepsWeightSet])]
+            [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1"]
@@ -332,7 +344,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_Save_Success() async {
         await load()
-        await sut.send(.toggleExercise(id: "back-squat", group: 0))
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
         await sut.send(.save)
         
         let exerciseTileViewStates = [
@@ -340,8 +352,11 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (Fixtures.emptyRepsWeightSet, nil)
+        ]
         let groups: [[BuildExerciseViewState]] = [
-            [Fixtures.backSquatViewState(inputs: [Fixtures.emptyRepsWeightSet])]
+            [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1"]
@@ -416,6 +431,130 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   backDialog: Fixtures.backDialog,
                                                   saveDialog: Fixtures.saveDialog,
                                                   canSave: false)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testSend_AddModifier() async {
+        await load()
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
+        await sut.send(.updateSet(group: 0,
+                                  exerciseIndex: 0,
+                                  setIndex: 0,
+                                  with: .repsWeight(reps: 8, weight: 135))) // Update normal set as well
+        await sut.send(.addModifier(group: 0,
+                                    exerciseIndex: 0,
+                                    setIndex: 0,
+                                    modifier: .dropSet(input: .repsWeight(reps: nil, weight: nil))))
+        
+        let exerciseTileViewStates = [
+            Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
+            Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
+            Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
+        ]
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8),
+             .dropSet(set: .repsWeight(weightTitle: "lbs", repsTitle: "reps")))
+        ]
+        let groups: [[BuildExerciseViewState]] = [
+            [Fixtures.backSquatViewState(inputs: sets)]
+        ]
+        let currentGroupTitle = "Current group: 1 exercise"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
+                                                  groups: groups,
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: true)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testSend_RemoveModifier() async {
+        await load()
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
+        await sut.send(.updateSet(group: 0,
+                                  exerciseIndex: 0,
+                                  setIndex: 0,
+                                  with: .repsWeight(reps: 8, weight: 135))) // Update normal set as well
+        await sut.send(.addModifier(group: 0,
+                                    exerciseIndex: 0,
+                                    setIndex: 0,
+                                    modifier: .dropSet(input: .repsWeight(reps: nil, weight: nil)))) // Add to remove
+        await sut.send(.removeModifier(group: 0, exerciseIndex: 0, setIndex: 0))
+        
+        let exerciseTileViewStates = [
+            Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
+            Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
+            Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
+        ]
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8), nil)
+        ]
+        let groups: [[BuildExerciseViewState]] = [
+            [Fixtures.backSquatViewState(inputs: sets)]
+        ]
+        let currentGroupTitle = "Current group: 1 exercise"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
+                                                  groups: groups,
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: true)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testSend_UpdateModifier() async {
+        await load()
+        await sut.send(.toggleExercise(exerciseId: "back-squat", group: 0))
+        await sut.send(.updateSet(group: 0,
+                                  exerciseIndex: 0,
+                                  setIndex: 0,
+                                  with: .repsWeight(reps: 8, weight: 135))) // Update normal set as well
+        await sut.send(.addModifier(group: 0,
+                                    exerciseIndex: 0,
+                                    setIndex: 0,
+                                    modifier: .dropSet(input: .repsWeight(reps: nil, weight: nil))))
+        await sut.send(.updateModifier(group: 0,
+                                       exerciseIndex: 0,
+                                       setIndex: 0,
+                                       with: .repsWeight(reps: 5, weight: 100)))
+        
+        let exerciseTileViewStates = [
+            Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
+            Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false),
+            Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
+        ]
+        let sets: [(SetInputViewState, SetModifierViewState?)] = [
+            (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8),
+             .dropSet(set: .repsWeight(weightTitle: "lbs", weight: 100, repsTitle: "reps", reps: 5)))
+        ]
+        let groups: [[BuildExerciseViewState]] = [
+            [Fixtures.backSquatViewState(inputs: sets)]
+        ]
+        let currentGroupTitle = "Current group: 1 exercise"
+        let groupTitles = ["Group 1"]
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
+                                                  groups: groups,
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: false,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: true)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
