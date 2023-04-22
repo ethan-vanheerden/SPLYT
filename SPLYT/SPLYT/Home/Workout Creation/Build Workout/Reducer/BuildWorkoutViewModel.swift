@@ -23,7 +23,7 @@ enum BuildWorkoutViewEvent {
     case switchGroup(to: Int)
     case save
     case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
-}
+} 
 
 // MARK: - View Model
 
