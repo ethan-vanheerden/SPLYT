@@ -18,7 +18,9 @@ public enum SetInput: Codable, Equatable {
     /// and we only update the associated values if the new values are not nil.
     /// - Parameter newInput: The new input to update this set with
     /// - Returns: The updated set input
-    public func updateSetInput(with newInput: SetInput) -> SetInput {
+    public func updateSetInput(with newInput: SetInput?) -> SetInput {
+        guard let newInput = newInput else { return self }
+        
         switch (self, newInput) {
         case let (.repsWeight(reps, weight), .repsWeight(newReps, newWeight)):
             return .repsWeight(reps: newReps ?? reps,

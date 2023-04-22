@@ -7,12 +7,29 @@ import Foundation
 ///     - Eccentric: Just affects the regular set by slowing down the eccentric (against gravity) part of the exercise (usually 3-5 seconds).
 public enum SetModifier: Codable, Equatable {
     case dropSet(input: SetInput)
-    case restPause(reps: Int)
+    case restPause(input: SetInput) // Will just be a reps only input
     case eccentric
     
     private enum CodingKeys: String, CodingKey {
         case dropSet = "DROP_SET"
         case restPause = "REST_PAUSE"
         case eccentric = "ECCENTRIC"
+    }
+    
+    /// Updates this set modifier to have the new associated input. Note: no updates are made if this set modifier has no associated input.
+    /// - Parameter newInput: The new input to be associated with the set modifier
+    /// - Returns: The updated set modifier
+    public func updateModifierInput(with newInput: SetInput?) -> SetModifier {
+        guard let newInput = newInput else { return self }
+        
+        // We don't care about the old modifier inputs, so ignore in the switch
+        switch self {
+        case .dropSet(let oldInput):
+            return .dropSet(input: oldInput.updateSetInput(with: newInput))
+        case .restPause(let oldInput):
+            return .restPause(input: oldInput.updateSetInput(with: newInput))
+        default:
+            return self // For modifiers with no set inputs
+        }
     }
 }

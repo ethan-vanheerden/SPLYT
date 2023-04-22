@@ -51,6 +51,7 @@
 		AA93405228888C1600309E83 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93405128888C1600309E83 /* ProfileViewTests.swift */; };
 		AABFB5A128BE769100B63DF6 /* AvailableExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFB5A028BE769100B63DF6 /* AvailableExercise.swift */; };
 		AABFB5A328BE76FD00B63DF6 /* MusclesWorked.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABFB5A228BE76FD00B63DF6 /* MusclesWorked.swift */; };
+		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
 		AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCAA7C29784C9B00932085 /* BuildWorkoutReducer.swift */; };
 		AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCAA7E297C5FA700932085 /* BuildWorkoutDisplay.swift */; };
 		AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACF8880287366DC003A50E8 /* MainViewModel.swift */; };
@@ -155,6 +156,7 @@
 		AA93405128888C1600309E83 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		AABFB5A028BE769100B63DF6 /* AvailableExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercise.swift; sourceTree = "<group>"; };
 		AABFB5A228BE76FD00B63DF6 /* MusclesWorked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusclesWorked.swift; sourceTree = "<group>"; };
+		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
 		AACCAA7C29784C9B00932085 /* BuildWorkoutReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutReducer.swift; sourceTree = "<group>"; };
 		AACCAA7E297C5FA700932085 /* BuildWorkoutDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutDisplay.swift; sourceTree = "<group>"; };
 		AACF8880287366DC003A50E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				AAE79B04296F09C50010848E /* BuildWorkoutViewState.swift */,
 				AACCAA7E297C5FA700932085 /* BuildWorkoutDisplay.swift */,
 				AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */,
+				AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -865,6 +868,7 @@
 				AA825D3D287238BF0041D94A /* MainView.swift in Sources */,
 				AAF06EF729AE9B6300E48918 /* HomeDomain.swift in Sources */,
 				AAE79AFB296EFA1E0010848E /* BuildWorkoutViewModel.swift in Sources */,
+				AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */,
 				AA60DA092952183F008C7615 /* HomeViewState.swift in Sources */,
 				AAE79AEF296E0DC20010848E /* BuildWorkoutView.swift in Sources */,
 				AABFB5A328BE76FD00B63DF6 /* MusclesWorked.swift in Sources */,

@@ -15,13 +15,17 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @Environment(\.dismiss) private var dismiss
     @State private var setSheetPresented: Bool = false
     @State private var showSetModifiers: Bool = false
-    @State private var editSetId: AnyHashable = ""
+    @State private var editExerciseIndex: Int = 0
+    @State private var editSetIndex: Int = 0
     private let navigationRouter: BuildWorkoutNavigationRouter
+    private let transformer: BuildWorkoutTransformer
     
     init(viewModel: VM,
-         navigationRouter: BuildWorkoutNavigationRouter) {
+         navigationRouter: BuildWorkoutNavigationRouter,
+         transformer: BuildWorkoutTransformer) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
+        self.transformer = transformer
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
@@ -30,7 +34,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .loading:
             ProgressView()
                 .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
-                    viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated)
+                    viewModel.send(.toggleDialog(type: .leave, isOpen: true),
+                                   taskPriority: .userInitiated)
                 }
         case .main(let display):
             mainView(display: display)
@@ -38,7 +43,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             Text("Error!")
                 .foregroundColor(.red)
                 .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
-                    viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated)
+                    viewModel.send(.toggleDialog(type: .leave, isOpen: true),
+                                   taskPriority: .userInitiated)
                 }
         case .exit(let display):
             mainView(display: display)
@@ -51,13 +57,14 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ViewBuilder
     private func mainView(display: BuildWorkoutDisplay) -> some View {
         VStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVStack {
                     ForEach(display.allExercises, id: \.id) { viewState in
                         AddExerciseTile(viewState: viewState,
-                                        tapAction: { viewModel.send(.toggleExercise(id: viewState.id, group: display.currentGroup),
+                                        tapAction: { viewModel.send(.toggleExercise(exerciseId: viewState.id,
+                                                                                    group: display.currentGroup),
                                                                     taskPriority: .userInitiated) },
-                                        favoriteAction: { viewModel.send(.toggleFavorite(id: viewState.id),
+                                        favoriteAction: { viewModel.send(.toggleFavorite(exerciseId: viewState.id),
                                                                          taskPriority: .userInitiated) })
                     }
                 }
@@ -66,16 +73,19 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             sheetView(display: display)
         }
         .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises),
-                       backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true), taskPriority: .userInitiated) }) {
+                       backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
+                                                    taskPriority: .userInitiated) }) {
             saveButton(canSave: display.canSave)
         }
                        .dialog(isOpen: display.showDialog == .leave,
                                viewState: display.backDialog,
                                primaryAction: { dismiss() },
-                               secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false), taskPriority: .userInitiated) })
+                               secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false),
+                                                                 taskPriority: .userInitiated) })
                        .dialog(isOpen: display.showDialog == .save,
                                viewState: display.saveDialog,
-                               primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false), taskPriority: .userInitiated) })
+                               primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false),
+                                                               taskPriority: .userInitiated) })
     }
     
     @ViewBuilder
@@ -102,6 +112,12 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             expandedSheetView(display: display)
                 .presentationDetents([.fraction(0.75)])
         }
+        .onChange(of: setSheetPresented) { baseSheetOpen in
+            // Make sure to close the modifier view if we are closing the sheet
+            if !baseSheetOpen {
+                showSetModifiers = false
+            }
+        }
     }
     
     @ViewBuilder
@@ -125,38 +141,54 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                  titles: display.groupTitles)
                 currentSetView(display: display)
             }
-            setModifiers()
+            setModifiers(currentGroup: display.currentGroup)
                 .isVisible(showSetModifiers)
         }
     }
     
+    @ViewBuilder
     private func currentSetView(display: BuildWorkoutDisplay) -> some View {
-        
-        return TabView(selection: currentGroupBinding(value: display.currentGroup).animation()) {
+        TabView(selection: currentGroupBinding(value: display.currentGroup).animation()) {
             ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, exercises in
                 ScrollView {
                     VStack(spacing: Layout.size(2)) {
                         // Use enumerated here so we can get the exercise index in the group to make updating faster
                         ForEach(Array(exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseState in
-                            BuildExerciseView(viewState: exerciseState,
-                                              addSetAction: { viewModel.send(.addSet(group: groupIndex), taskPriority: .userInitiated) },
-                                              removeSetAction: { viewModel.send(.removeSet(group: groupIndex)) },
-                                              addModifierAction: { id in
-                                editSetId = id
-                                withAnimation {
-                                    showSetModifiers = true
+                            BuildExerciseView(
+                                viewState: exerciseState,
+                                addSetAction: { viewModel.send(.addSet(group: groupIndex),
+                                                               taskPriority: .userInitiated) },
+                                removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
+                                                                  taskPriority: .userInitiated) },
+                                addModifierAction: { setIndex in
+                                    // Stores the selected set and exercise for when the modifier is actually added
+                                    editSetIndex = setIndex
+                                    editExerciseIndex = exerciseIndex
+                                    withAnimation {
+                                        showSetModifiers = true
+                                    }
+                                },
+                                removeModifierAction: { setIndex in
+                                    viewModel.send(.removeModifier(group: groupIndex,
+                                                                   exerciseIndex: exerciseIndex,
+                                                                   setIndex: setIndex),
+                                                   taskPriority: .userInitiated)
+                                },
+                                updateSetAction: { setIndex, setInput in
+                                    viewModel.send(.updateSet(group: groupIndex,
+                                                              exerciseIndex: exerciseIndex,
+                                                              setIndex: setIndex,
+                                                              with: setInput),
+                                                   taskPriority: .userInitiated)
+                                },
+                                updateModifierAction: { setIndex, setInput in
+                                    viewModel.send(.updateModifier(group: groupIndex,
+                                                                   exerciseIndex: exerciseIndex,
+                                                                   setIndex: setIndex,
+                                                                   with: setInput),
+                                                   taskPriority: .userInitiated)
                                 }
-                            },
-                                              removeModifierAction: { id in
-                              // TODO
-                            },
-                                              updateAction: { id, setInput in
-                                viewModel.send(.updateSet(id: id,
-                                                          group: groupIndex,
-                                                          exerciseIndex: exerciseIndex,
-                                                          with: setInput),
-                                               taskPriority: .userInitiated)
-                            })
+                            )
                         }
                     }
                 }
@@ -174,7 +206,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     }
     
     @ViewBuilder
-    private func setModifiers() -> some View {
+    private func setModifiers(currentGroup: Int) -> some View {
         ZStack(alignment: .bottom) {
             Scrim()
                 .edgesIgnoringSafeArea(.all)
@@ -186,8 +218,16 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             Tile {
                 HStack(spacing: Layout.size(2.5)) {
                     Spacer()
-                    ForEach(SetModifierViewType.allCases, id: \.title) { modifier in
-                        Tag(viewState: TagViewState(title: modifier.title, color: .green))
+                    ForEach(SetModifierViewState.allCases, id: \.title) { modifier in
+                        Tag(viewState: TagFactory.tagFromModifier(modifier: modifier))
+                            .onTapGesture {
+                                viewModel.send(.addModifier(group: currentGroup,
+                                                            exerciseIndex: editExerciseIndex,
+                                                            setIndex: editSetIndex,
+                                                            modifier: transformer.transformModifier(modifier)),
+                                               taskPriority: .userInitiated)
+                                showSetModifiers = false
+                            }
                     }
                     Spacer()
                 }

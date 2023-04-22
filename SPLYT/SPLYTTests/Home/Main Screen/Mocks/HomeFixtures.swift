@@ -18,53 +18,53 @@ struct HomeFixtures {
     
     static let feb_3_2023_1630: Date = Date(timeIntervalSince1970: 1675441800)
     
-    static func createSets(id: String, inputs: [SetInput]) -> [Set] {
+    static func createSets(inputs: [(SetInput, SetModifier?)]) -> [Set] {
         var sets = [Set]()
         
-        for (index, input) in inputs.enumerated() {
-            let set = Set(id: "\(id)-set-\(index + 1)",
-                          input: input,
-                          modifier: nil)
+        for (input, modifier) in inputs {
+            let set = Set(input: input,
+                          modifier: modifier)
             sets.append(set)
         }
         return sets
     }
     
-    static func backSquat(inputs: [SetInput]) -> Exercise {
+    static func backSquat(inputs: [(SetInput, SetModifier?)]) -> Exercise {
         return Exercise(id: "back-squat",
                         name: "Back Squat",
-                        sets: createSets(id: "back-squat", inputs: inputs))
+                        sets: createSets(inputs: inputs))
     }
     
-    static func barLunges(inputs: [SetInput]) -> Exercise {
+    static func barLunges(inputs: [(SetInput, SetModifier?)]) -> Exercise {
         return Exercise(id: "bar-lunges",
                         name: "Bar Lunges",
-                        sets: createSets(id: "bar-lunges", inputs: inputs))
+                        sets: createSets(inputs: inputs))
     }
     
-    static func benchPress(inputs: [SetInput]) -> Exercise {
+    static func benchPress(inputs: [(SetInput, SetModifier?)]) -> Exercise {
         return Exercise(id: "bench-press",
                         name: "Bench Press",
-                        sets: createSets(id: "bench-press", inputs: inputs))
+                        sets: createSets(inputs: inputs))
     }
     
-    static func inclineDBRow(inputs: [SetInput]) -> Exercise {
+    static func inclineDBRow(inputs: [(SetInput, SetModifier?)]) -> Exercise {
         return Exercise(id: "incline-db-row",
                         name: "Incline Dumbbell Row",
-                        sets: createSets(id: "incline-db-row", inputs: inputs))
+                        sets: createSets(inputs: inputs))
     }
     
-    static let repsWeight3Sets: [SetInput] = [
-        .repsWeight(reps: 12, weight: 135),
-        .repsWeight(reps: 10, weight: 140),
-        .repsWeight(reps: 8, weight: 155)
+    static let repsWeight3Sets: [(SetInput, SetModifier?)] = [
+        (.repsWeight(reps: 12, weight: 135), nil),
+        (.repsWeight(reps: 10, weight: 140), nil),
+        (.repsWeight(reps: 8, weight: 155),
+            .dropSet(input: .repsWeight(reps: nil, weight: 100)))
     ]
     
-    static let repsWeight4Sets: [SetInput] = [
-        .repsWeight(reps: 12, weight: 135),
-        .repsWeight(reps: 10, weight: 140),
-        .repsWeight(reps: 8, weight: 155),
-        .repsWeight(reps: 2, weight: 225)
+    static let repsWeight4Sets: [(SetInput, SetModifier?)] = [
+        (.repsWeight(reps: 12, weight: 135), nil),
+        (.repsWeight(reps: 10, weight: 140), nil),
+        (.repsWeight(reps: 8, weight: 155), nil),
+        (.repsWeight(reps: 2, weight: 225), nil)
     ]
     
     static let legWorkoutExercises: [ExerciseGroup] = [
@@ -109,16 +109,13 @@ struct HomeFixtures {
     
     static let createdWorkouts: [CreatedWorkoutViewState] = [createdLegWorkout, createdFullBodyWorkout]
     
-    static let createPlanState: FABRowViewState = FABRowViewState(id: "plan",
-                                                                  title: "CREATE NEW PLAN",
+    static let createPlanState: FABRowViewState = FABRowViewState(title: "CREATE NEW PLAN",
                                                                   imageName: "calendar")
     
-    static let createWorkoutState: FABRowViewState = FABRowViewState(id: "workout",
-                                                                     title: "CREATE NEW WORKOUT",
+    static let createWorkoutState: FABRowViewState = FABRowViewState(title: "CREATE NEW WORKOUT",
                                                                      imageName: "figure.strengthtraining.traditional")
     
-    static let fabState: FABViewState = FABViewState(id: "fab",
-                                                     createPlanState: createPlanState,
+    static let fabState: FABViewState = FABViewState(createPlanState: createPlanState,
                                                      createWorkoutState: createWorkoutState)
     
     static let deleteDialog: DialogViewState = DialogViewState(title: "Delete workout?",

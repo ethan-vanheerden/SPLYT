@@ -32,7 +32,6 @@ struct SetEntry: View {
                     .font(Font.system(size: 14, design: .default))
                     .frame(width: Layout.size(7))
             }
-//            .padding(.top, Layout.size(-0.75)) // Because of automatic padding on TextField
             Text(title)
                 .footnote()
                 .foregroundColor(Color(splytColor: .gray))

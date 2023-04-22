@@ -15,15 +15,18 @@ enum BuildWorkoutViewEvent {
     case load
     case addGroup
     case removeGroup(group: Int)
-    case toggleExercise(id: AnyHashable, group: Int)
+    case toggleExercise(exerciseId: AnyHashable, group: Int)
     case addSet(group: Int)
     case removeSet(group: Int)
-    case updateSet(id: AnyHashable, group: Int, exerciseIndex: Int, with: SetInput)
-    case toggleFavorite(id: AnyHashable)
+    case updateSet(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
+    case toggleFavorite(exerciseId: AnyHashable)
     case switchGroup(to: Int)
     case save
     case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
-} 
+    case addModifier(group: Int, exerciseIndex: Int, setIndex: Int, modifier: SetModifier)
+    case removeModifier(group: Int, exerciseIndex: Int, setIndex: Int)
+    case updateModifier(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
+}
 
 // MARK: - View Model
 
@@ -44,22 +47,39 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .addGroup)
         case .removeGroup(let group):
             await react(domainAction: .removeGroup(group: group))
-        case let .toggleExercise(id, group):
-            await react(domainAction: .toggleExercise(id: id, group: group))
+        case let .toggleExercise(exerciseId, group):
+            await react(domainAction: .toggleExercise(exerciseId: exerciseId, group: group))
         case .addSet(let group):
             await react(domainAction: .addSet(group: group))
         case .removeSet(let group):
             await react(domainAction: .removeSet(group: group))
-        case let .updateSet(id, group, exerciseIndex, newInput):
-            await react(domainAction: .updateSet(id: id, group: group, exerciseIndex: exerciseIndex, with: newInput))
-        case .toggleFavorite(let id):
-            await react(domainAction: .toggleFavorite(id: id))
+        case let .updateSet(group, exerciseIndex, setIndex, newInput):
+            await react(domainAction: .updateSet(group: group,
+                                                 exerciseIndex: exerciseIndex,
+                                                 setIndex: setIndex,
+                                                 with: newInput))
+        case .toggleFavorite(let exerciseId):
+            await react(domainAction: .toggleFavorite(exerciseId: exerciseId))
         case .switchGroup(let group):
             await react(domainAction: .switchGroup(to: group))
         case .save:
             await react(domainAction: .save)
         case let .toggleDialog(type, isOpen):
             await react(domainAction: .toggleDialog(type: type, isOpen: isOpen))
+        case let .addModifier(group, exerciseIndex, setIndex, modifier):
+            await react(domainAction: .addModifier(group: group,
+                                                   exerciseIndex: exerciseIndex,
+                                                   setIndex: setIndex,
+                                                   modifier: modifier))
+        case let .removeModifier(group, exerciseIndex, setIndex):
+            await react(domainAction: .removeModifier(group: group,
+                                                      exerciseIndex: exerciseIndex,
+                                                      setIndex: setIndex))
+        case let .updateModifier(group, exerciseIndex, setIndex, newInput):
+            await react(domainAction: .updateModifier(group: group,
+                                                      exerciseIndex: exerciseIndex,
+                                                      setIndex: setIndex,
+                                                      with: newInput))
         }
     }
 }

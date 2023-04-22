@@ -66,15 +66,12 @@ public struct FAB: View {
 
 // MARK: - View State
 
-public struct FABViewState: ItemViewState, Equatable {
-    public let id: AnyHashable
+public struct FABViewState: Equatable {
     let createPlanState: FABRowViewState
     let createWorkoutState: FABRowViewState
     
-    public init(id: AnyHashable = UUID(),
-                createPlanState: FABRowViewState,
+    public init(createPlanState: FABRowViewState,
                 createWorkoutState: FABRowViewState) {
-        self.id = id
         self.createPlanState = createPlanState
         self.createWorkoutState = createWorkoutState
     }
