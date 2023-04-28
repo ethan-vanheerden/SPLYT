@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RepsOnlyInput: Codable, Equatable {
+public struct RepsOnlyInput: InputType {
     public let reps: Int?
     public let placeholder: Int?
     
@@ -8,5 +8,9 @@ public struct RepsOnlyInput: Codable, Equatable {
                 placeholder: Int? = nil) {
         self.reps = reps
         self.placeholder = placeholder
+    }
+    
+    public var hasPlaceholder: Bool {
+        return placeholder != nil
     }
 }

@@ -31,4 +31,11 @@ public final class MockCacheInteractor<R: CacheRequest>: CacheInteractorType {
         if saveThrow { throw MockError.someError }
         savedData = data // Update the saved data
     }
+    
+    public var deleteThrow = false
+    public private(set) var deleteCalled = false
+    public func deleteFile() throws {
+        deleteCalled = true
+        if deleteThrow { throw MockError.someError }
+    }
 }

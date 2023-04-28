@@ -43,8 +43,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             Text("Error!")
                 .foregroundColor(.red)
                 .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
-                    viewModel.send(.toggleDialog(type: .leave, isOpen: true),
-                                   taskPriority: .userInitiated)
+                    navigationRouter.navigate(.exit)
                 }
         case .exit(let display):
             mainView(display: display)

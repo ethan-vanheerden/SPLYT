@@ -101,11 +101,11 @@ private extension BuildWorkoutReducer {
     
     func getSetViewType(_ input: SetInput) -> SetInputViewState {
         switch input {
-        case let .repsWeight(input):
+        case let .repsWeight(input: input):
             return .repsWeight(weightTitle: Strings.lbs,
                                repsTitle: Strings.reps,
                                input: input)
-        case let .repsOnly(input):
+        case let .repsOnly(input: input):
             return .repsOnly(title: Strings.reps, input: input)
         case let .time(input):
             return .time(title: Strings.sec, input: input)

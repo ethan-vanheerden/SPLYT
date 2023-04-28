@@ -18,11 +18,13 @@ public protocol CacheInteractorType {
     /// - Parameters:
     ///   - data: The data to save
     func save(data: Request.CacheData) throws
+    
+    /// Deletes the cached file associated with the cache request.
+    func deleteFile() throws
 }
 
 // MARK: - Implementation
 
-@available(iOS 16.0, *)
 public struct CacheInteractor<R: CacheRequest>: CacheInteractorType {
     public let request: R
     
@@ -46,5 +48,10 @@ public struct CacheInteractor<R: CacheRequest>: CacheInteractorType {
         let url = try CacheURLCreator.getURL(for: request)
         let data = try JSONEncoder().encode(data)
         try data.write(to: url)
+    }
+    
+    public func deleteFile() throws  {
+        let url = try CacheURLCreator.getURL(for: request)
+        try FileManager.default.removeItem(at: url)
     }
 }

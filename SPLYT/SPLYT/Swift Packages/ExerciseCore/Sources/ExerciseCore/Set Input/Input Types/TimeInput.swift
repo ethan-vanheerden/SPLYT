@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TimeInput: Codable, Equatable {
+public struct TimeInput: InputType {
     public let seconds: Int?
     public let placeholder: Int?
     
@@ -8,5 +8,9 @@ public struct TimeInput: Codable, Equatable {
                 placeholder: Int? = nil) {
         self.seconds = seconds
         self.placeholder = placeholder
+    }
+    
+    public var hasPlaceholder: Bool {
+        return placeholder != nil
     }
 }

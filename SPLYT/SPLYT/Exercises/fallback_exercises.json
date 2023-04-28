@@ -8,8 +8,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -22,8 +26,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -36,8 +44,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -50,8 +62,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -64,8 +80,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -78,8 +98,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -92,8 +116,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -106,8 +134,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -121,8 +153,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -135,8 +171,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -149,8 +189,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -164,8 +208,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -178,8 +226,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -193,8 +245,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -208,8 +264,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -223,8 +283,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -238,8 +302,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -254,8 +322,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -268,8 +340,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -282,8 +358,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -297,8 +377,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -312,8 +396,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -326,8 +414,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -340,8 +432,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -354,8 +450,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -368,8 +468,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -383,8 +487,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -397,8 +505,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -412,8 +524,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -426,8 +542,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -441,8 +561,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -455,8 +579,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -469,8 +597,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -483,8 +615,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -497,8 +633,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -512,8 +652,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -527,8 +671,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -542,8 +690,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -556,8 +708,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -570,8 +726,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -584,8 +744,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -598,8 +762,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -612,8 +780,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -626,8 +798,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -640,8 +816,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -655,8 +835,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -669,8 +853,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -683,8 +871,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -697,8 +889,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -711,8 +907,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -726,8 +926,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -741,8 +945,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -755,8 +963,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -769,8 +981,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -783,8 +999,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -797,8 +1017,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -811,8 +1035,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -825,8 +1053,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -841,8 +1073,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -855,8 +1091,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -869,8 +1109,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -883,8 +1127,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -897,8 +1145,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -911,8 +1163,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -925,8 +1181,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -939,8 +1199,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -953,8 +1217,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -967,8 +1235,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -982,8 +1254,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -997,8 +1273,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1012,8 +1292,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1026,8 +1310,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1041,8 +1329,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1055,8 +1347,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1069,8 +1365,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1083,8 +1383,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1099,8 +1403,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1113,8 +1421,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1127,8 +1439,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1141,8 +1457,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1155,8 +1475,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1169,8 +1493,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1184,8 +1512,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1198,8 +1530,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1212,8 +1548,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1226,8 +1566,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1240,8 +1584,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1255,8 +1603,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1269,8 +1621,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1284,8 +1640,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1298,8 +1658,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1312,8 +1676,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1326,8 +1694,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1341,8 +1713,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1356,8 +1732,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1370,8 +1750,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1385,8 +1769,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1400,8 +1788,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1415,8 +1807,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1430,8 +1826,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1444,8 +1844,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1458,8 +1862,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1472,8 +1880,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1486,8 +1898,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1500,8 +1916,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1514,8 +1934,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1528,8 +1952,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1542,8 +1970,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1558,8 +1990,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1572,8 +2008,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1586,8 +2026,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1600,8 +2044,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1614,8 +2062,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1628,8 +2080,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1642,8 +2098,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1656,8 +2116,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1670,8 +2134,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1684,8 +2152,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1698,8 +2170,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1712,8 +2188,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1726,8 +2206,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1742,8 +2226,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1758,8 +2246,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1773,8 +2265,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1787,8 +2283,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1802,8 +2302,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1816,8 +2320,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1830,8 +2338,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1844,8 +2356,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1859,8 +2375,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1873,8 +2393,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1887,8 +2411,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1902,8 +2430,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1916,8 +2448,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1930,8 +2466,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1944,8 +2484,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1958,8 +2502,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1973,8 +2521,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -1987,8 +2539,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2002,8 +2558,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2016,8 +2576,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2030,8 +2594,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2044,8 +2612,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2059,8 +2631,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2073,8 +2649,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2087,8 +2667,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2101,8 +2685,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2115,8 +2703,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2130,8 +2722,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2145,8 +2741,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2159,8 +2759,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2173,8 +2777,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2187,8 +2795,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2201,8 +2813,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2215,8 +2831,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2229,8 +2849,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2243,8 +2867,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2257,8 +2885,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2271,8 +2903,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2285,8 +2921,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2299,8 +2939,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2313,8 +2957,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2327,8 +2975,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2341,8 +2993,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2355,8 +3011,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2369,8 +3029,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2383,8 +3047,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2397,8 +3065,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2411,8 +3083,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2425,8 +3101,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2439,8 +3119,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2453,8 +3137,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2467,8 +3155,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2482,8 +3174,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2496,8 +3192,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2510,8 +3210,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2524,8 +3228,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2538,8 +3246,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2552,8 +3264,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2566,8 +3282,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2580,8 +3300,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2594,8 +3318,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2609,8 +3337,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2623,8 +3355,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2637,8 +3373,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2653,8 +3393,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2667,8 +3411,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2681,8 +3429,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2695,8 +3447,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2709,8 +3465,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2724,8 +3484,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2738,8 +3502,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2752,8 +3520,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2766,8 +3538,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2780,8 +3556,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2795,8 +3575,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2810,8 +3594,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   },
@@ -2824,8 +3612,12 @@
     "is_favorite": false,
     "default_input_type": {
         "REPS_WEIGHT": {
-            "reps": null,
-            "weight": null
+            "input": {
+                "weight": null,
+                "weight_placeholder": null,
+                "reps": null,
+                "reps_placeholder": null
+            }
         }
     }
   }

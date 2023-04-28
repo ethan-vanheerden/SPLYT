@@ -6,24 +6,38 @@ public struct SetView: View {
     @State private var showBaseActionSheet: Bool = false
     private let viewState: SetViewState
     private let updateSetAction: (Int, SetInput) -> Void // All these Ints represent the set index the action is happening to
-    private let addModifierAction: (Int) -> Void
-    private let removeModifierAction: (Int) -> Void
+    private let secondaryAction: SetSecondaryAction
     private let updateModifierAction: (Int, SetInput) -> Void
     private let horizontalPadding = Layout.size(4)
     
     public init(viewState: SetViewState,
                 updateSetAction: @escaping (Int, SetInput) -> Void,
-                addModifierAction: @escaping (Int) -> Void,
-                removeModifierAction: @escaping (Int) -> Void,
+                secondaryAction: SetSecondaryAction,
                 updateModifierAction: @escaping (Int, SetInput) -> Void) {
         self.viewState = viewState
         self.updateSetAction = updateSetAction
-        self.addModifierAction = addModifierAction
-        self.removeModifierAction = removeModifierAction
+        self.secondaryAction = secondaryAction
         self.updateModifierAction = updateModifierAction
     }
     
     public var body: some View {
+        switch secondaryAction {
+        case let .useModifier(addModifierAction, removeModifierAction):
+            mainView
+                .confirmationDialog("", isPresented: $showBaseActionSheet, titleVisibility: .hidden) {
+                    if let _ = viewState.modifier {
+                        Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
+                    } else {
+                        Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
+                    }
+                }
+        case .usePreviousInput:
+            mainView
+        }
+    }
+    
+    @ViewBuilder
+    private var mainView: some View {
         VStack {
             ZStack(alignment: .top) { // Use ZStack to keep different type of set views center aligned
                 HStack {
@@ -39,15 +53,22 @@ public struct SetView: View {
                 entryView(setIndex: viewState.setIndex,
                           setType: viewState.type,
                           updateAction: updateSetAction)
-                .offset(y: -Layout.size(0.5)) // Text view automatic padding issues
+                .offset(y: -Layout.size(0.5)) // TextField automatic padding issues
             }
             modifierView
         }
-        .confirmationDialog("", isPresented: $showBaseActionSheet, titleVisibility: .hidden) {
-            if let _ = viewState.modifier {
-                Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
-            } else {
-                Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
+    }
+    
+    @ViewBuilder private var iconButton: some View {
+        switch secondaryAction {
+        case .useModifier:
+            IconButton(iconName: "ellipsis",
+                       style: .secondary) { showBaseActionSheet = true }
+                .padding(.trailing, horizontalPadding)
+        case .usePreviousInput(let action):
+            IconButton(iconName: "arrow.counterclockwise",
+                       isEnabled: viewState.type.hasPlaceholder) {
+                action(viewState.setIndex, .repsOnly(input: RepsOnlyInput())) // TODO
             }
         }
     }
@@ -63,24 +84,26 @@ public struct SetView: View {
                 SetEntry(title: repsTitle,
                          input: .reps(input.reps)) { newReps in
                     let newInput = RepsWeightInput(reps: Int(newReps))
-                    updateAction(setIndex, .repsWeight(newInput))
+                    updateAction(setIndex, .repsWeight(input: newInput))
                 }
                 // Weight entry
                 SetEntry(title: weightTitle,
                          input: .weight(input.weight)) { newWeight in
                     let newInput = RepsWeightInput(weight: newWeight)
-                    updateAction(setIndex, .repsWeight(newInput))
+                    updateAction(setIndex, .repsWeight(input: newInput))
                 }
             }
-        case let .repsOnly(title, reps, repsPlaceholder):
+        case let .repsOnly(title, input):
             SetEntry(title: title,
-                     input: .reps(reps)) { newReps in
-                updateAction(setIndex, .repsOnly(reps: Int(newReps)))
+                     input: .reps(input.reps)) { newReps in
+                let newInput = RepsOnlyInput(reps: Int(newReps))
+                updateAction(setIndex, .repsOnly(input: newInput))
             }
-        case let .time(title, seconds, secondsPlaceholder):
+        case let .time(title, input):
             SetEntry(title: title,
-                     input: .time(seconds)) { newSeconds in
-                updateAction(setIndex, .time(seconds: Int(newSeconds)))
+                     input: .time(input.seconds)) { newSeconds in
+                let newInput = TimeInput(seconds: Int(newSeconds))
+                updateAction(setIndex, .time(input: newInput))
             }
         }
     }
@@ -92,11 +115,11 @@ public struct SetView: View {
                 HStack {
                     tagView(modifier: modifier)
                         .padding(.leading, horizontalPadding)
-                        .padding(.top, Layout.size(0.5)) // Text view automatic padding issues
+                        .padding(.top, Layout.size(0.5)) // TextField automatic padding issues
                     Spacer()
                 }
                 additionalSetView(modifier: modifier)
-                    .offset(y: -Layout.size(1)) // Text view automatic padding issues
+                    .offset(y: -Layout.size(1)) // TextField automatic padding issues
             }
         } else {
             EmptyView()
@@ -150,6 +173,16 @@ public struct SetViewState: Equatable {
         self.type = type
         self.modifier = modifier
     }
+}
+
+// MARK: - Secondary Action Type
+
+/// This determines the view and action shown to the right of the set
+public enum SetSecondaryAction {
+    // For adding a modifier when building a workout
+    case useModifier(addModifierAction: (Int) -> Void, removeModifierAction: (Int) -> Void)
+    // For using your last workout's inputs for a set
+    case usePreviousInput(action: (Int, SetInput) -> Void)
 }
 
 // MARK: - Strings
