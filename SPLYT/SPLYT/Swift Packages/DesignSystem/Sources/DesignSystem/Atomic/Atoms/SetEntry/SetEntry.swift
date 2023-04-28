@@ -23,14 +23,15 @@ struct SetEntry: View {
         VStack {
             Spacer()
             HStack {
-                TextField("", text: $text) // First parameter is for a placeholder
+                // First parameter is for a placeholder
+                TextField("", text: $text)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(keyboardType)
                     .multilineTextAlignment(.center)
                     .focused($fieldFocused)
                     .minimumScaleFactor(0.8)
                     .font(Font.system(size: 14, design: .default))
-                    .frame(width: Layout.size(7))
+                    .strokeBorder(cornerRadius: Layout.size(1), color: borderColor, shadowRadius: shadowRadius)
             }
             Text(title)
                 .footnote()
@@ -52,7 +53,7 @@ struct SetEntry: View {
                 }
             }
         }
-        .frame(width: Layout.size(7), height: Layout.size(8))
+        .frame(width: Layout.size(8))
     }
     
     private var value: Double? {
@@ -76,5 +77,13 @@ struct SetEntry: View {
         case .weight:
             return .decimalPad
         }
+    }
+    
+    private var borderColor: SplytColor {
+        return fieldFocused ? .lightBlue : .gray
+    }
+    
+    private var shadowRadius: CGFloat? {
+        return fieldFocused ? Layout.size(0.25) : nil
     }
 }

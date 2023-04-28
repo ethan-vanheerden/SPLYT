@@ -64,7 +64,7 @@
     },
     {
       "target" : {
-        "containerPath" : "container:",
+        "containerPath" : "container:SPLYT\/Swift Packages\/ExerciseCore",
         "identifier" : "ExerciseCoreTests",
         "name" : "ExerciseCoreTests"
       }

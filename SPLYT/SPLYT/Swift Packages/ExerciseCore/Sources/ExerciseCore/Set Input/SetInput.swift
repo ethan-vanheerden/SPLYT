@@ -1,11 +1,10 @@
-
 import Foundation
 
 /// The data that is used to record a weightlifting set. All of the associated values are optional in case something is skipped.
 public enum SetInput: Codable, Equatable {
-    case repsWeight(reps: Int?, weight: Double?)
-    case repsOnly(reps: Int?)
-    case time(seconds: Int?)
+    case repsWeight(RepsWeightInput)
+    case repsOnly(RepsOnlyInput)
+    case time(TimeInput)
     
     private enum CodingKeys: String, CodingKey {
         case repsWeight = "REPS_WEIGHT"
@@ -22,13 +21,20 @@ public enum SetInput: Codable, Equatable {
         guard let newInput = newInput else { return self }
         
         switch (self, newInput) {
-        case let (.repsWeight(reps, weight), .repsWeight(newReps, newWeight)):
-            return .repsWeight(reps: newReps ?? reps,
-                               weight: newWeight ?? weight)
-        case let (.repsOnly(reps), .repsOnly(newReps)):
-            return .repsOnly(reps: newReps ?? reps)
-        case let (.time(seconds), .time(newSeconds)):
-            return .time(seconds: newSeconds ?? seconds)
+        case let (.repsWeight(input), .repsWeight(newInput)):
+            let updatedInput = RepsWeightInput(weight: newInput.weight ?? input.weight,
+                                               weightPlaceholder: newInput.weightPlaceholder ?? input.weightPlaceholder,
+                                               reps: newInput.reps ?? input.reps,
+                                               repsPlaceholder: newInput.repsPlaceholder ?? input.repsPlaceholder)
+            return .repsWeight(updatedInput)
+        case let (.repsOnly(input), .repsOnly(newInput)):
+            let updatedInput = RepsOnlyInput(reps: newInput.reps ?? input.reps,
+                                             placeholder: newInput.placeholder ?? input.placeholder)
+            return .repsOnly(updatedInput)
+        case let (.time(input), .time(newInput)):
+            let updatedInput = TimeInput(seconds: newInput.seconds ?? input.seconds,
+                                     placeholder: newInput.seconds ?? input.seconds)
+            return .time(updatedInput)
         default:
             return self // Don't do any updates
         }

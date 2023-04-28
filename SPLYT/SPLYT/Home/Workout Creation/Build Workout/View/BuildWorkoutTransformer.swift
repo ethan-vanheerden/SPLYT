@@ -29,12 +29,12 @@ struct BuildWorkoutTransformer {
 private extension BuildWorkoutTransformer {
     func transformSetInput(_ set: SetInputViewState) -> SetInput {
         switch set {
-        case let .repsWeight(_, weight, _, reps):
-            return .repsWeight(reps: reps, weight: weight)
-        case let .repsOnly(_, reps):
-            return .repsOnly(reps: reps)
-        case let .time(_, seconds):
-            return .time(seconds: seconds)
+        case let .repsWeight(_, _, input):
+            return .repsWeight(input)
+        case let .repsOnly(_, input):
+            return .repsOnly(input)
+        case let .time(_, input):
+            return .time(input)
         }
     }
 }

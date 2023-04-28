@@ -6,7 +6,9 @@ struct BuildExerciseViewGallery: View {
     private let setsOne: [SetViewState] = [
         SetViewState(setIndex: 0,
                      title: "Set 1",
-                     type: .repsWeight(weightTitle: "lbs", weight: 275, repsTitle: "reps", reps: 6),
+                     type: .repsWeight(weightTitle: "lbs",
+                                       repsTitle: "reps",
+                                       input: RepsWeightInput(weight: 275, reps: 6)),
                      modifier: .dropSet(set: .repsWeight(weightTitle: "lbs", repsTitle: "reps"))),
         SetViewState(setIndex: 1,
                      title: "Set 2",
@@ -21,15 +23,17 @@ struct BuildExerciseViewGallery: View {
     private let setsTwo: [SetViewState] = [
         SetViewState(setIndex: 0,
                      title: "Set 1",
-                     type: .repsOnly(title: "reps", reps: 15),
+                     type: .repsOnly(title: "reps",
+                                     input: RepsOnlyInput(reps: 15)),
                      modifier: nil),
         SetViewState(setIndex: 1,
                      title: "Set 2",
-                     type: .repsOnly(title: "reps", reps: 15),
+                     type: .repsOnly(title: "reps",
+                                     input: RepsOnlyInput(placeholder: 10)),
                      modifier: nil),
         SetViewState(setIndex: 2,
                      title: "Set 3",
-                     type: .repsOnly(title: "reps", reps: 15),
+                     type: .repsOnly(title: "reps"),
                      modifier: nil)
     ]
     

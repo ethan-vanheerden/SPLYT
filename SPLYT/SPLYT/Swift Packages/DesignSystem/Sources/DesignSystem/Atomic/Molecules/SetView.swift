@@ -38,8 +38,8 @@ public struct SetView: View {
                 }
                 entryView(setIndex: viewState.setIndex,
                           setType: viewState.type,
-                updateAction: updateSetAction)
-                    .offset(y: -Layout.size(0.5)) // Text view automatic padding issues
+                          updateAction: updateSetAction)
+                .offset(y: -Layout.size(0.5)) // Text view automatic padding issues
             }
             modifierView
         }
@@ -57,25 +57,27 @@ public struct SetView: View {
                            setType: SetInputViewState,
                            updateAction: @escaping (Int, SetInput) -> Void) -> some View {
         switch setType {
-        case let .repsWeight(weightTitle, weight, repsTitle, reps):
+        case let .repsWeight(weightTitle, repsTitle, input):
             HStack(spacing: Layout.size(4)) {
                 // Reps entry
                 SetEntry(title: repsTitle,
-                         input: .reps(reps)) { newReps in
-                    updateAction(setIndex, .repsWeight(reps: Int(newReps), weight: nil))
+                         input: .reps(input.reps)) { newReps in
+                    let newInput = RepsWeightInput(reps: Int(newReps))
+                    updateAction(setIndex, .repsWeight(newInput))
                 }
                 // Weight entry
                 SetEntry(title: weightTitle,
-                         input: .weight(weight)) { newWeight in
-                    updateAction(setIndex, .repsWeight(reps: nil, weight: newWeight))
+                         input: .weight(input.weight)) { newWeight in
+                    let newInput = RepsWeightInput(weight: newWeight)
+                    updateAction(setIndex, .repsWeight(newInput))
                 }
             }
-        case let .repsOnly(title, reps):
+        case let .repsOnly(title, reps, repsPlaceholder):
             SetEntry(title: title,
                      input: .reps(reps)) { newReps in
                 updateAction(setIndex, .repsOnly(reps: Int(newReps)))
             }
-        case let .time(title, seconds):
+        case let .time(title, seconds, secondsPlaceholder):
             SetEntry(title: title,
                      input: .time(seconds)) { newSeconds in
                 updateAction(setIndex, .time(seconds: Int(newSeconds)))
