@@ -38,6 +38,13 @@ public struct FABRowViewState: Equatable {
     }
 }
 
+// MARK: - Row Type
+
+public enum FABRowType: Equatable {
+    case icon(title: String?, imageName: String)
+    case time(seconds: Int)
+}
+
 struct FABRow_Previews: PreviewProvider {
     static var previews: some View {
         FABRow(viewState: FABRowViewState(title: "CREATE NEW WORKOUT", imageName: "plus"),

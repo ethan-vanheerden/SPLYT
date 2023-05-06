@@ -4,8 +4,8 @@ struct OrganismFactory {
     @ViewBuilder
     func makeView(_ organism: Organism) -> some View {
         switch organism {
-        case .buildExercise:
-            BuildExerciseViewGallery()
+        case .exerciseView:
+            ExerciseViewGallery()
         case .FAB:
             FABGallery()
         }

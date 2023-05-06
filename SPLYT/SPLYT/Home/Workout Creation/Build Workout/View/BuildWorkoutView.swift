@@ -74,17 +74,17 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                                     taskPriority: .userInitiated) }) {
-            saveButton(canSave: display.canSave)
-        }
-                       .dialog(isOpen: display.showDialog == .leave,
-                               viewState: display.backDialog,
-                               primaryAction: { dismiss() },
-                               secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false),
-                                                                 taskPriority: .userInitiated) })
-                       .dialog(isOpen: display.showDialog == .save,
-                               viewState: display.saveDialog,
-                               primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false),
-                                                               taskPriority: .userInitiated) })
+                           saveButton(canSave: display.canSave)
+                       }
+                                                    .dialog(isOpen: display.showDialog == .leave,
+                                                            viewState: display.backDialog,
+                                                            primaryAction: { dismiss() },
+                                                            secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false),
+                                                                                              taskPriority: .userInitiated) })
+                                                    .dialog(isOpen: display.showDialog == .save,
+                                                            viewState: display.saveDialog,
+                                                            primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false),
+                                                                                            taskPriority: .userInitiated) })
     }
     
     @ViewBuilder
@@ -153,26 +153,27 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                     VStack(spacing: Layout.size(2)) {
                         // Use enumerated here so we can get the exercise index in the group to make updating faster
                         ForEach(Array(exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseState in
-                            BuildExerciseView(
+                            ExerciseView(
                                 viewState: exerciseState,
+                                type: .build(
+                                    addModifierAction: { setIndex in
+                                        // Stores the selected set and exercise for when the modifier is actually added
+                                        editSetIndex = setIndex
+                                        editExerciseIndex = exerciseIndex
+                                        withAnimation {
+                                            showSetModifiers = true
+                                        }
+                                    },
+                                    removeModifierAction: { setIndex in
+                                        viewModel.send(.removeModifier(group: groupIndex,
+                                                                       exerciseIndex: exerciseIndex,
+                                                                       setIndex: setIndex),
+                                                       taskPriority: .userInitiated)
+                                    }),
                                 addSetAction: { viewModel.send(.addSet(group: groupIndex),
                                                                taskPriority: .userInitiated) },
                                 removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
                                                                   taskPriority: .userInitiated) },
-                                addModifierAction: { setIndex in
-                                    // Stores the selected set and exercise for when the modifier is actually added
-                                    editSetIndex = setIndex
-                                    editExerciseIndex = exerciseIndex
-                                    withAnimation {
-                                        showSetModifiers = true
-                                    }
-                                },
-                                removeModifierAction: { setIndex in
-                                    viewModel.send(.removeModifier(group: groupIndex,
-                                                                   exerciseIndex: exerciseIndex,
-                                                                   setIndex: setIndex),
-                                                   taskPriority: .userInitiated)
-                                },
                                 updateSetAction: { setIndex, setInput in
                                     viewModel.send(.updateSet(group: groupIndex,
                                                               exerciseIndex: exerciseIndex,

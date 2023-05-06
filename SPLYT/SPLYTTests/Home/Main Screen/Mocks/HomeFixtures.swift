@@ -115,7 +115,7 @@ struct HomeFixtures {
     static let createWorkoutState: FABRowViewState = FABRowViewState(title: "CREATE NEW WORKOUT",
                                                                      imageName: "figure.strengthtraining.traditional")
     
-    static let fabState: FABViewState = FABViewState(createPlanState: createPlanState,
+    static let fabState: HomeFABViewState = HomeFABViewState(createPlanState: createPlanState,
                                                      createWorkoutState: createWorkoutState)
     
     static let deleteDialog: DialogViewState = DialogViewState(title: "Delete workout?",

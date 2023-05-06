@@ -31,11 +31,11 @@ struct BuildWorkoutReducer {
 
 private extension BuildWorkoutReducer {
     func getDisplay(domain: BuildWorkoutDomain, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutDisplay {
-        var groups = [[BuildExerciseViewState]]()
+        var groups = [[ExerciseViewState]]()
         
         for group in domain.builtWorkout.exerciseGroups {
-            // For each group, get the BuildExerciseViewStates of the exercises in it
-            let exercises = getBuildExerciseStates(exercises: group.exercises)
+            // For each group, get the ExerciseViewStates of the exercises in it
+            let exercises = getExerciseViewStates(exercises: group.exercises)
             groups.append(exercises)
         }
         
@@ -81,10 +81,10 @@ private extension BuildWorkoutReducer {
         return titles
     }
     
-    func getBuildExerciseStates(exercises: [Exercise]) -> [BuildExerciseViewState] {
+    func getExerciseViewStates(exercises: [Exercise]) -> [ExerciseViewState] {
         return exercises.map { exercise in
             let headerState = SectionHeaderViewState(text: exercise.name)
-            return BuildExerciseViewState(header: headerState,
+            return ExerciseViewState(header: headerState,
                                           sets: getSetStates(exercise: exercise),
                                           canRemoveSet: exercise.sets.count > 1)
         }

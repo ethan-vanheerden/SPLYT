@@ -102,8 +102,8 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     }
     
     @ViewBuilder
-    private func fabView(state: FABViewState) -> some View {
-        FAB(isPresenting: $fabPresenting,
+    private func fabView(state: HomeFABViewState) -> some View {
+        HomeFAB(isPresenting: $fabPresenting,
             viewState: state,
             createPlanAction: { navigationRouter.navigate(.createPlan) },
             createWorkoutAction: { navigationRouter.navigate(.createWorkout) })

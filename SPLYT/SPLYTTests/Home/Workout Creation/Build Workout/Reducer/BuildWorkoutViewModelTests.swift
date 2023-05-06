@@ -102,7 +102,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (Fixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -156,7 +156,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             repeating: (Fixtures.emptyRepsWeightSet, nil),
             count: 2
         )
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -189,7 +189,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (Fixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -224,7 +224,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (.repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12), nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -323,7 +323,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (Fixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -355,7 +355,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (Fixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -456,7 +456,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8),
              .dropSet(set: .repsWeight(weightTitle: "lbs", repsTitle: "reps")))
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -496,7 +496,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8), nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
@@ -540,7 +540,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8),
              .dropSet(set: .repsWeight(weightTitle: "lbs", weight: 100, repsTitle: "reps", reps: 5)))
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"

@@ -10,8 +10,8 @@ public struct IconButton: View {
     private let action: () -> Void
     
     public init(iconName: String,
-                style: IconButtonConfiguration = .primary(backgroundColor: .white, outlineColor: .lightBlue),
-                iconColor: SplytColor = .lightBlue,
+                style: IconButtonConfiguration = .primary(backgroundColor: .lightBlue, outlineColor: .lightBlue),
+                iconColor: SplytColor = .white,
                 isEnabled: Bool = true,
                 animationEnabled: Bool = true,
                 action: @escaping () -> Void) {

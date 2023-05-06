@@ -4,7 +4,7 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class FABTests: XCTestCase {
-    private let viewState = FABViewState(createPlanState: FABRowViewState(title: "CREATE NEW PLAN",
+    private let viewState = HomeFABViewState(createPlanState: FABRowViewState(title: "CREATE NEW PLAN",
                                                                          imageName: "calendar"),
                                          createWorkoutState: FABRowViewState(title: "CREATE NEW WORKOUT",
                                                                             imageName: "figure.strengthtraining.traditional"))
@@ -13,7 +13,7 @@ final class FABTests: XCTestCase {
         let view = ZStack {
             Text("Hello, World!")
                 .body()
-            FAB(isPresenting: .constant(false),
+            HomeFAB(isPresenting: .constant(false),
                 viewState: viewState,
                 createPlanAction: { },
                 createWorkoutAction: { })
@@ -27,7 +27,7 @@ final class FABTests: XCTestCase {
         let view = ZStack {
             Text("Hello, World!")
                 .body()
-            FAB(isPresenting: .constant(true),
+            HomeFAB(isPresenting: .constant(true),
                 viewState: viewState,
                 createPlanAction: { },
                 createWorkoutAction: { })

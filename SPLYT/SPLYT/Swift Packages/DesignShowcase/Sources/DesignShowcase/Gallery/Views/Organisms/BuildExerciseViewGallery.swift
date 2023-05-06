@@ -2,7 +2,7 @@ import SwiftUI
 import DesignSystem
 import ExerciseCore
 
-struct BuildExerciseViewGallery: View {
+struct ExerciseViewGallery: View {
     private let setsOne: [SetViewState] = [
         SetViewState(setIndex: 0,
                      title: "Set 1",
@@ -39,25 +39,29 @@ struct BuildExerciseViewGallery: View {
     
     
     var body: some View {
-        VStack(spacing: Layout.size(2)) {
-            BuildExerciseView(viewState: BuildExerciseViewState(header: SectionHeaderViewState(text: "BACK SQUAT"),
-                                                                sets: setsOne,
-                                                                canRemoveSet: true),
-                              addSetAction: { },
-                              removeSetAction: { },
-                              addModifierAction: { _ in },
-                              removeModifierAction: { _ in },
-                              updateSetAction: { _, _ in },
-                              updateModifierAction: { _, _ in })
-            BuildExerciseView(viewState: BuildExerciseViewState(header: SectionHeaderViewState(text: "PUSHUPS"),
-                                                                sets: setsTwo,
-                                                                canRemoveSet: false),
-                              addSetAction: { },
-                              removeSetAction: { },
-                              addModifierAction: { _ in },
-                              removeModifierAction: { _ in },
-                              updateSetAction: { _, _ in },
-                              updateModifierAction: { _, _ in })
+        ScrollView {
+            VStack(spacing: Layout.size(2)) {
+                SectionHeader(viewState: SectionHeaderViewState(text: "Build"))
+                    .padding(.horizontal)
+                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "BACK SQUAT"),
+                                                          sets: setsOne,
+                                                          canRemoveSet: true),
+                             type: .build(addModifierAction: { _ in }, removeModifierAction: { _ in }),
+                             addSetAction: { },
+                             removeSetAction: { },
+                             updateSetAction: { _, _ in },
+                             updateModifierAction: { _, _ in })
+                SectionHeader(viewState: SectionHeaderViewState(text: "In Progress"))
+                    .padding(.horizontal)
+                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "PUSHUPS"),
+                                                          sets: setsTwo,
+                                                          canRemoveSet: false),
+                             type: .inProgress(usePreviousAction: { _ in }, addNoteAction: { }),
+                             addSetAction: { },
+                             removeSetAction: { },
+                             updateSetAction: { _, _ in },
+                             updateModifierAction: { _, _ in })
+            }
         }
     }
 }

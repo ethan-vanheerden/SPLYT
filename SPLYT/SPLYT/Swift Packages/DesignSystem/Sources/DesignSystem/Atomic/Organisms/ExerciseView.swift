@@ -2,27 +2,24 @@
 import SwiftUI
 import ExerciseCore
 
-public struct BuildExerciseView: View {
-    private let viewState: BuildExerciseViewState
+public struct ExerciseView: View {
+    private let viewState: ExerciseViewState
+    private let type: ExerciseViewType
     private let addSetAction: () -> Void
     private let removeSetAction: () -> Void
-    private let addModifierAction: (Int) -> Void // All these Ints represent the set index the action is happening to
-    private let removeModifierAction: (Int) -> Void
-    private let updateSetAction: (Int, SetInput) -> Void
+    private let updateSetAction: (Int, SetInput) -> Void // Int to represent the set index the action is happening to
     private let updateModifierAction: (Int, SetInput) -> Void
     
-    public init(viewState: BuildExerciseViewState,
+    public init(viewState: ExerciseViewState,
+                type: ExerciseViewType,
                 addSetAction: @escaping () -> Void,
                 removeSetAction: @escaping () -> Void,
-                addModifierAction: @escaping (Int) -> Void,
-                removeModifierAction: @escaping (Int) -> Void,
                 updateSetAction: @escaping (Int, SetInput) -> Void,
                 updateModifierAction: @escaping (Int, SetInput) -> Void) {
         self.viewState = viewState
+        self.type = type
         self.addSetAction = addSetAction
         self.removeSetAction = removeSetAction
-        self.addModifierAction = addModifierAction
-        self.removeModifierAction = removeModifierAction
         self.updateSetAction = updateSetAction
         self.updateModifierAction = updateModifierAction
     }
@@ -33,9 +30,8 @@ public struct BuildExerciseView: View {
                 .padding(.horizontal, Layout.size(2))
             ForEach(viewState.sets, id: \.setIndex) { set in
                 SetView(viewState: set,
+                        exerciseType: type,
                         updateSetAction: updateSetAction,
-                        addModifierAction: addModifierAction,
-                        removeModifierAction: removeModifierAction,
                         updateModifierAction: updateModifierAction)
             }
             setButtons
@@ -45,23 +41,43 @@ public struct BuildExerciseView: View {
     @ViewBuilder
     private var setButtons: some View {
         HStack(spacing: Layout.size(2)) {
-            IconButton(iconName: "minus",
-                       style: .primary(backgroundColor: .lightBlue),
-                       iconColor: .white,
-                       isEnabled: viewState.canRemoveSet) { removeSetAction() }
-            IconButton(iconName: "plus",
-                       style: .primary(backgroundColor: .lightBlue),
-                       iconColor: .white) { addSetAction() }
-            
+            addRemoveSetButtons
             Spacer()
+            switch type {
+            case .build:
+                EmptyView()
+            case let .inProgress(_, addNoteAction):
+                SplytButton(text: Strings.addNote,
+                            action: addNoteAction)
+                .frame(width: Layout.size(20))
+            }
         }
         .padding(.leading, Layout.size(4))
+        .padding(.trailing, Layout.size(2))
     }
+    
+    @ViewBuilder
+    private var addRemoveSetButtons: some View {
+        IconButton(iconName: "minus",
+                   style: .primary(backgroundColor: .lightBlue),
+                   iconColor: .white,
+                   isEnabled: viewState.canRemoveSet) { removeSetAction() }
+        IconButton(iconName: "plus",
+                   style: .primary(backgroundColor: .lightBlue),
+                   iconColor: .white) { addSetAction() }
+    }
+}
+
+// MARK: - Type
+
+public enum ExerciseViewType {
+    case build(addModifierAction: (Int) -> Void, removeModifierAction: (Int) -> Void)
+    case inProgress(usePreviousAction: (Int) -> Void, addNoteAction: () -> Void) // TODO: probs will need to change the note actoin
 }
 
 // MARK: View State
 
-public struct BuildExerciseViewState: Equatable {
+public struct ExerciseViewState: Equatable {
     let header: SectionHeaderViewState
     let sets: [SetViewState]
     let canRemoveSet: Bool
@@ -73,4 +89,10 @@ public struct BuildExerciseViewState: Equatable {
         self.sets = sets
         self.canRemoveSet = canRemoveSet
     }
+}
+
+// MARK: - Strings
+
+fileprivate struct Strings {
+    static let addNote = "Add note"
 }

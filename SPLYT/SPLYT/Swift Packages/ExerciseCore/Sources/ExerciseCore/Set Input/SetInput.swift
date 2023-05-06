@@ -12,7 +12,6 @@ public enum SetInput: Codable, Equatable {
         case time = "TIME"
     }
     
-    
     /// Updates this set input given a new input. Note: we only want to update if the new input is the same type as this one,
     /// and we only update the associated values if the new values are not nil.
     /// - Parameter newInput: The new input to update this set with

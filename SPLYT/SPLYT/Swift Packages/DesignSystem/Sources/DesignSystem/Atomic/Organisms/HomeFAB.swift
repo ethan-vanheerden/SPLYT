@@ -1,14 +1,13 @@
-
 import SwiftUI
 
-public struct FAB: View {
+public struct HomeFAB: View {
     @Binding private var isPresenting: Bool
-    private let viewState: FABViewState
+    private let viewState: HomeFABViewState
     private let createPlanAction: () -> Void
     private let createWorkoutAction: () -> Void
     
     public init(isPresenting: Binding<Bool>,
-                viewState: FABViewState,
+                viewState: HomeFABViewState,
                 createPlanAction: @escaping () -> Void,
                 createWorkoutAction: @escaping () -> Void) {
         self._isPresenting = isPresenting
@@ -66,7 +65,7 @@ public struct FAB: View {
 
 // MARK: - View State
 
-public struct FABViewState: Equatable {
+public struct HomeFABViewState: Equatable {
     let createPlanState: FABRowViewState
     let createWorkoutState: FABRowViewState
     

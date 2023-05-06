@@ -86,7 +86,7 @@ final class BuildWorkoutReducerTests: XCTestCase {
         let rowSets: [(SetInputViewState, SetModifierViewState?)] = [
             (Fixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: squatSets), Fixtures.benchPressViewState(inputs: benchSets)],
             [Fixtures.inclineDBRowViewState(inputs: rowSets)]
         ]
@@ -161,7 +161,7 @@ final class BuildWorkoutReducerTests: XCTestCase {
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (Fixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
+        let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"

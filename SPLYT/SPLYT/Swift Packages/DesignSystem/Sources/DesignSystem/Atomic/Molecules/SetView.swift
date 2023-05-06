@@ -5,24 +5,24 @@ import ExerciseCore
 public struct SetView: View {
     @State private var showBaseActionSheet: Bool = false
     private let viewState: SetViewState
+    private let exerciseType: ExerciseViewType
     private let updateSetAction: (Int, SetInput) -> Void // All these Ints represent the set index the action is happening to
-    private let secondaryAction: SetSecondaryAction
     private let updateModifierAction: (Int, SetInput) -> Void
     private let horizontalPadding = Layout.size(4)
     
     public init(viewState: SetViewState,
+                exerciseType: ExerciseViewType,
                 updateSetAction: @escaping (Int, SetInput) -> Void,
-                secondaryAction: SetSecondaryAction,
                 updateModifierAction: @escaping (Int, SetInput) -> Void) {
         self.viewState = viewState
+        self.exerciseType = exerciseType
         self.updateSetAction = updateSetAction
-        self.secondaryAction = secondaryAction
         self.updateModifierAction = updateModifierAction
     }
     
     public var body: some View {
-        switch secondaryAction {
-        case let .useModifier(addModifierAction, removeModifierAction):
+        switch exerciseType {
+        case let .build(addModifierAction, removeModifierAction):
             mainView
                 .confirmationDialog("", isPresented: $showBaseActionSheet, titleVisibility: .hidden) {
                     if let _ = viewState.modifier {
@@ -31,7 +31,7 @@ public struct SetView: View {
                         Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
                     }
                 }
-        case .usePreviousInput:
+        case .inProgress:
             mainView
         }
     }
@@ -46,9 +46,7 @@ public struct SetView: View {
                         .padding(.leading, horizontalPadding)
                         .padding(.trailing, Layout.size(4))
                     Spacer()
-                    IconButton(iconName: "ellipsis",
-                               style: .secondary) { showBaseActionSheet = true }
-                        .padding(.trailing, horizontalPadding)
+                    iconButton
                 }
                 entryView(setIndex: viewState.setIndex,
                           setType: viewState.type,
@@ -60,16 +58,18 @@ public struct SetView: View {
     }
     
     @ViewBuilder private var iconButton: some View {
-        switch secondaryAction {
-        case .useModifier:
+        switch exerciseType {
+        case .build:
             IconButton(iconName: "ellipsis",
-                       style: .secondary) { showBaseActionSheet = true }
+                       style: .secondary,
+                       iconColor: .lightBlue) { showBaseActionSheet = true }
                 .padding(.trailing, horizontalPadding)
-        case .usePreviousInput(let action):
-            IconButton(iconName: "arrow.counterclockwise",
-                       isEnabled: viewState.type.hasPlaceholder) {
-                action(viewState.setIndex, .repsOnly(input: RepsOnlyInput())) // TODO
+        case let .inProgress(usePreviousAction, _):
+            IconButton(iconName: "arrow.counterclockwise") {
+                usePreviousAction(viewState.setIndex)
             }
+            .isVisible(viewState.type.hasPlaceholder)
+            .padding(.trailing, horizontalPadding)
         }
     }
     
@@ -82,26 +82,30 @@ public struct SetView: View {
             HStack(spacing: Layout.size(4)) {
                 // Reps entry
                 SetEntry(title: repsTitle,
-                         input: .reps(input.reps)) { newReps in
+                         input: .reps(input.reps),
+                         placeholder: .reps(input.repsPlaceholder)) { newReps in
                     let newInput = RepsWeightInput(reps: Int(newReps))
                     updateAction(setIndex, .repsWeight(input: newInput))
                 }
                 // Weight entry
                 SetEntry(title: weightTitle,
-                         input: .weight(input.weight)) { newWeight in
+                         input: .weight(input.weight),
+                         placeholder: .weight(input.weightPlaceholder)) { newWeight in
                     let newInput = RepsWeightInput(weight: newWeight)
                     updateAction(setIndex, .repsWeight(input: newInput))
                 }
             }
         case let .repsOnly(title, input):
             SetEntry(title: title,
-                     input: .reps(input.reps)) { newReps in
+                     input: .reps(input.reps),
+                     placeholder: .reps(input.placeholder)) { newReps in
                 let newInput = RepsOnlyInput(reps: Int(newReps))
                 updateAction(setIndex, .repsOnly(input: newInput))
             }
         case let .time(title, input):
             SetEntry(title: title,
-                     input: .time(input.seconds)) { newSeconds in
+                     input: .time(input.seconds),
+                     placeholder: .time(input.placeholder)) { newSeconds in
                 let newInput = TimeInput(seconds: Int(newSeconds))
                 updateAction(setIndex, .time(input: newInput))
             }
@@ -173,16 +177,6 @@ public struct SetViewState: Equatable {
         self.type = type
         self.modifier = modifier
     }
-}
-
-// MARK: - Secondary Action Type
-
-/// This determines the view and action shown to the right of the set
-public enum SetSecondaryAction {
-    // For adding a modifier when building a workout
-    case useModifier(addModifierAction: (Int) -> Void, removeModifierAction: (Int) -> Void)
-    // For using your last workout's inputs for a set
-    case usePreviousInput(action: (Int, SetInput) -> Void)
 }
 
 // MARK: - Strings

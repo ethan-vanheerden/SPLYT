@@ -3,7 +3,7 @@ import DesignSystem
 import SnapshotTesting
 import SwiftUI
 
-final class BuildExerciseViewTests: XCTestCase {
+final class ExerciseViewTests: XCTestCase {
     private let setsOne: [SetViewState] = [
         SetViewState(setIndex: 0,
                      title: "Set 1",
@@ -32,9 +32,9 @@ final class BuildExerciseViewTests: XCTestCase {
                      type: .repsOnly(title: "reps", reps: 15))
     ]
     
-    func testBuildExerciseView() {
+    func testExerciseView() {
         let view = VStack(spacing: Layout.size(2)) {
-            BuildExerciseView(viewState: BuildExerciseViewState(header: SectionHeaderViewState(text: "BACK SQUAT"),
+            ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "BACK SQUAT"),
                                                                 sets: setsOne,
                                                                 canRemoveSet: true),
                               addSetAction: { },
@@ -43,7 +43,7 @@ final class BuildExerciseViewTests: XCTestCase {
                               removeModifierAction: { _ in },
                               updateSetAction: { _, _ in },
                               updateModifierAction: { _, _ in })
-            BuildExerciseView(viewState: BuildExerciseViewState(header: SectionHeaderViewState(text: "PUSHUPS"),
+            ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "PUSHUPS"),
                                                                 sets: setsTwo,
                                                                 canRemoveSet: false),
                               addSetAction: { },

@@ -7,15 +7,18 @@ struct SetEntry: View {
     @FocusState private var fieldFocused: Bool
     private let title: String
     private let input: InputType
+    private let placeholder: InputType?
     // We use a Double to represent the changed value of the entry (we cast it to its expected type later)
     private let updateAction: (Double) -> Void
     
     init(title: String,
          input: InputType,
+         placeholder: InputType? = nil,
          updateAction: @escaping (Double) -> Void) {
         self._text = State(initialValue: input.getString)
         self.title = title
         self.input = input
+        self.placeholder = placeholder
         self.updateAction = updateAction
     }
     
@@ -24,7 +27,7 @@ struct SetEntry: View {
             Spacer()
             HStack {
                 // First parameter is for a placeholder
-                TextField("", text: $text)
+                TextField(placeholder?.getString ?? "", text: $text)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(keyboardType)
                     .multilineTextAlignment(.center)
