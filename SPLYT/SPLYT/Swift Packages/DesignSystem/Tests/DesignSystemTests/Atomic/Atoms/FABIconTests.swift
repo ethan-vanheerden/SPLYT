@@ -6,8 +6,8 @@ import SwiftUI
 final class FABIconTests: XCTestCase {
     func testFABIcon() throws {
         let view = VStack(spacing: Layout.size(6)) {
-            FABIcon(type: FABIconType(size: .primary, imageName: "plus"), tapAction: { })
-            FABIcon(type: FABIconType(size: .secondary, imageName: "calendar"), tapAction: { })
+            FABIcon(viewState: FABIconViewState(size: .primary, imageName: "plus"), tapAction: { })
+            FABIcon(viewState: FABIconViewState(size: .secondary, imageName: "calendar"), tapAction: { })
         }
         .padding(.horizontal)
         let vc = UIHostingController(rootView: view)

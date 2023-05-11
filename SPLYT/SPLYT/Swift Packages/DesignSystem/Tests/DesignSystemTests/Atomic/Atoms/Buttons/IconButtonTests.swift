@@ -47,7 +47,7 @@ final class IconButtonTests: XCTestCase {
                        style: .secondary,
                        iconColor: .green,
                        isEnabled: false) { }
-            IconButton(iconName: "bolt.fill.",
+            IconButton(iconName: "bolt.fill",
                        style: .secondary,
                        iconColor: .yellow,
                        isEnabled: false,

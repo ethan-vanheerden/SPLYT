@@ -11,7 +11,7 @@ struct MoleculeFactory {
         case .dialog:
             DialogGallery()
         case .FABRow:
-            FABRowGallery()
+            HomeFABRowGallery()
         case .menuItem:
             MenuItemGallery()
         case .navigationBar:

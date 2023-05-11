@@ -1,11 +1,11 @@
 
 import SwiftUI
 
-public struct FABRow: View {
-    private let viewState: FABRowViewState
+public struct HomeFABRow: View {
+    private let viewState: HomeFABRowViewState
     private let tapAction: () -> Void
     
-    public init(viewState: FABRowViewState,
+    public init(viewState: HomeFABRowViewState,
                 tapAction: @escaping () -> Void) {
         self.viewState = viewState
         self.tapAction = tapAction
@@ -15,19 +15,21 @@ public struct FABRow: View {
         HStack {
             Text(viewState.title)
                 .footnote()
-            FABIcon(type: fabIconType,
+            FABIcon(viewState: fabIconType,
                     tapAction: tapAction)
         }
     }
     
-    private var fabIconType: FABIconType {
-        return FABIconType(size: .secondary, imageName: viewState.imageName)
+    private var fabIconType: FABIconViewState {
+        return FABIconViewState(size: .secondary(backgroundColor: .white,
+                                                 iconColor: .lightBlue),
+                                imageName: viewState.imageName)
     }
 }
 
 // MARK: - ViewState
 
-public struct FABRowViewState: Equatable {
+public struct HomeFABRowViewState: Equatable {
     let title: String
     let imageName: String
     
@@ -38,16 +40,9 @@ public struct FABRowViewState: Equatable {
     }
 }
 
-// MARK: - Row Type
-
-public enum FABRowType: Equatable {
-    case icon(title: String?, imageName: String)
-    case time(seconds: Int)
-}
-
 struct FABRow_Previews: PreviewProvider {
     static var previews: some View {
-        FABRow(viewState: FABRowViewState(title: "CREATE NEW WORKOUT", imageName: "plus"),
-        tapAction: { })
+        HomeFABRow(viewState: HomeFABRowViewState(title: "CREATE NEW WORKOUT", imageName: "plus"),
+                   tapAction: { })
     }
 }

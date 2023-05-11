@@ -30,7 +30,7 @@ struct IconButtonGallery: View {
                        style: .secondary,
                        iconColor: .green,
                        isEnabled: isEnabled) { }
-            IconButton(iconName: "bolt.fill.",
+            IconButton(iconName: "bolt.fill",
                        style: .secondary,
                        iconColor: .yellow,
                        isEnabled: isEnabled,

@@ -4,9 +4,13 @@ import DesignSystem
 struct FABIconGallery: View {
     var body: some View {
         VStack(spacing: Layout.size(6)) {
-            FABIcon(type: FABIconType(size: .primary, imageName: "plus"),
+            FABIcon(viewState: FABIconViewState(size: .primary(backgroundColor: .lightBlue,
+                                                               iconColor: .white),
+                                                imageName: "plus"),
                     tapAction: { print("Primary tapped") })
-            FABIcon(type: FABIconType(size: .secondary, imageName: "calendar"),
+            FABIcon(viewState: FABIconViewState(size: .secondary(backgroundColor: .white,
+                                                                 iconColor: .lightBlue),
+                                                imageName: "calendar"),
                     tapAction: { print("Secondary tapped") })
         }
     }

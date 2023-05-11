@@ -6,8 +6,10 @@ struct OrganismFactory {
         switch organism {
         case .exerciseView:
             ExerciseViewGallery()
-        case .FAB:
-            FABGallery()
+        case .homeFAB:
+            HomeFABGallery()
+        case .restFAB:
+            RestFABGallery()
         }
     }
 }

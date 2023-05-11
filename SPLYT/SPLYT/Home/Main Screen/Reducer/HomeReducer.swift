@@ -58,9 +58,9 @@ private extension HomeReducer {
     }
     
     var FABState: HomeFABViewState {
-        let createPlanState = FABRowViewState(title: Strings.createPlan,
+        let createPlanState = HomeFABRowViewState(title: Strings.createPlan,
                                               imageName: "calendar")
-        let createWorkoutState = FABRowViewState(title: Strings.createWorkout,
+        let createWorkoutState = HomeFABRowViewState(title: Strings.createWorkout,
                                                  imageName: "figure.strengthtraining.traditional")
         
         return HomeFABViewState(createPlanState: createPlanState,
