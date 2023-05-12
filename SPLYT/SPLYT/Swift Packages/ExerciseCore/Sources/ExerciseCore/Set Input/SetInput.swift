@@ -32,7 +32,7 @@ public enum SetInput: Codable, Equatable {
             return .repsOnly(input: updatedInput)
         case let (.time(input: input), .time(input: newInput)):
             let updatedInput = TimeInput(seconds: newInput.seconds ?? input.seconds,
-                                     placeholder: newInput.seconds ?? input.seconds)
+                                         placeholder: newInput.placeholder ?? input.placeholder)
             return .time(input: updatedInput)
         default:
             return self // Don't do any updates

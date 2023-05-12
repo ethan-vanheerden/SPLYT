@@ -54,17 +54,17 @@ struct HomeFixtures {
     }
     
     static let repsWeight3Sets: [(SetInput, SetModifier?)] = [
-        (.repsWeight(reps: 12, weight: 135), nil),
-        (.repsWeight(reps: 10, weight: 140), nil),
-        (.repsWeight(reps: 8, weight: 155),
-            .dropSet(input: .repsWeight(reps: nil, weight: 100)))
+        (.repsWeight(input: .init(weight: 135, reps: 12)), nil),
+        (.repsWeight(input: .init(weight: 140, reps: 10)), nil),
+        (.repsWeight(input: .init(weight: 155, reps: 8)),
+         .dropSet(input: .repsWeight(input: .init(weight: 100))))
     ]
     
     static let repsWeight4Sets: [(SetInput, SetModifier?)] = [
-        (.repsWeight(reps: 12, weight: 135), nil),
-        (.repsWeight(reps: 10, weight: 140), nil),
-        (.repsWeight(reps: 8, weight: 155), nil),
-        (.repsWeight(reps: 2, weight: 225), nil)
+        (.repsWeight(input: .init(weight: 135, reps: 12)), nil),
+        (.repsWeight(input: .init(weight: 140, reps: 10)), nil),
+        (.repsWeight(input: .init(weight: 155, reps: 8)), nil),
+        (.repsWeight(input: .init(weight: 225, reps: 2)), nil)
     ]
     
     static let legWorkoutExercises: [ExerciseGroup] = [
@@ -109,14 +109,14 @@ struct HomeFixtures {
     
     static let createdWorkouts: [CreatedWorkoutViewState] = [createdLegWorkout, createdFullBodyWorkout]
     
-    static let createPlanState: FABRowViewState = FABRowViewState(title: "CREATE NEW PLAN",
-                                                                  imageName: "calendar")
+    static let createPlanState: HomeFABRowViewState = HomeFABRowViewState(title: "CREATE NEW PLAN",
+                                                                          imageName: "calendar")
     
-    static let createWorkoutState: FABRowViewState = FABRowViewState(title: "CREATE NEW WORKOUT",
-                                                                     imageName: "figure.strengthtraining.traditional")
+    static let createWorkoutState: HomeFABRowViewState = HomeFABRowViewState(title: "CREATE NEW WORKOUT",
+                                                                             imageName: "figure.strengthtraining.traditional")
     
     static let fabState: HomeFABViewState = HomeFABViewState(createPlanState: createPlanState,
-                                                     createWorkoutState: createWorkoutState)
+                                                             createWorkoutState: createWorkoutState)
     
     static let deleteDialog: DialogViewState = DialogViewState(title: "Delete workout?",
                                                                subtitle: "This action can't be undone.",

@@ -9,7 +9,7 @@ final class FABTests: XCTestCase {
                                              createWorkoutState: HomeFABRowViewState(title: "CREATE NEW WORKOUT",
                                                                                      imageName: "figure.strengthtraining.traditional"))
     
-    func testFABNotExpanded() throws {
+    func testHomeFABNotExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
                 .body()
@@ -23,7 +23,7 @@ final class FABTests: XCTestCase {
         assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
     }
     
-    func testFABExpanded() throws {
+    func testHomeFABExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
                 .body()

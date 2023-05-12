@@ -2,12 +2,12 @@ import XCTest
 @testable import ExerciseCore
 
 final class SetInputTests: XCTestCase {
-    private let repsWeight: SetInput = .repsWeight(reps: 8, weight: 135)
-    private let repsOnly: SetInput = .repsOnly(reps: 5)
-    private let time: SetInput = .time(seconds: 30)
+    private let repsWeight: SetInput = .repsWeight(input: .init(weight: 135, reps: 8))
+    private let repsOnly: SetInput = .repsOnly(input: .init(reps: 5))
+    private let time: SetInput = .time(input: .init(seconds: 30))
     
     func testUpdateSetInput_RepsWeight() {
-        let old = SetInput.repsWeight(reps: 5, weight: nil)
+        let old = SetInput.repsWeight(input: .init(weight: nil, reps: 5))
         
         XCTAssertEqual(old.updateSetInput(with: repsWeight), repsWeight)
         XCTAssertEqual(old.updateSetInput(with: repsOnly), old)
@@ -15,7 +15,7 @@ final class SetInputTests: XCTestCase {
     }
     
     func testUpdateSetInput_RepsOnly() {
-        let old = SetInput.repsOnly(reps: nil)
+        let old = SetInput.repsOnly(input: .init(reps: nil))
         
         XCTAssertEqual(old.updateSetInput(with: repsWeight), old)
         XCTAssertEqual(old.updateSetInput(with: repsOnly), repsOnly)
@@ -23,7 +23,7 @@ final class SetInputTests: XCTestCase {
     }
     
     func testUpdateSetInput_Time() {
-        let old = SetInput.time(seconds: 60)
+        let old = SetInput.time(input: .init(seconds: 60))
         
         XCTAssertEqual(old.updateSetInput(with: repsWeight), old)
         XCTAssertEqual(old.updateSetInput(with: repsOnly), old)

@@ -8,6 +8,10 @@ struct FABIconGallery: View {
                                                                iconColor: .white),
                                                 imageName: "plus"),
                     tapAction: { print("Primary tapped") })
+            FABIcon(viewState: FABIconViewState(size: .primary(backgroundColor: .white,
+                                                               iconColor: .lightBlue),
+                                                imageName: "timer"),
+                    tapAction: { print("Primary tapped") })
             FABIcon(viewState: FABIconViewState(size: .secondary(backgroundColor: .white,
                                                                  iconColor: .lightBlue),
                                                 imageName: "calendar"),

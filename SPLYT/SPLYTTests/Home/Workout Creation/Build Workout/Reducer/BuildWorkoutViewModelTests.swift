@@ -10,7 +10,6 @@ import XCTest
 import DesignSystem
 import ExerciseCore
 
-/// Tests are pretty straightforward as the Interactor and Reducer tests handle the edge cases
 final class BuildWorkoutViewModelTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
     private var mockService: MockBuildWorkoutService!
@@ -214,7 +213,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
-                                  with: .repsWeight(reps: 12, weight: 135)))
+                                  with: .repsWeight(input: .init(weight: 135, reps: 12))))
         
         let exerciseTileViewStates = [
             Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
@@ -222,7 +221,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
-            (.repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12), nil)
+            (.repsWeight(weightTitle: Fixtures.lbs,
+                         repsTitle: Fixtures.reps,
+                         input: .init(weight: 135, reps: 12)), nil)
         ]
         let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
@@ -441,11 +442,11 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
-                                  with: .repsWeight(reps: 8, weight: 135))) // Update normal set as well
+                                  with: .repsWeight(input: .init(weight: 135, reps: 8)))) // Update normal set as well
         await sut.send(.addModifier(group: 0,
                                     exerciseIndex: 0,
                                     setIndex: 0,
-                                    modifier: .dropSet(input: .repsWeight(reps: nil, weight: nil))))
+                                    modifier: .dropSet(input: .repsWeight(input: .init()))))
         
         let exerciseTileViewStates = [
             Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
@@ -453,8 +454,11 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
-            (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8),
-             .dropSet(set: .repsWeight(weightTitle: "lbs", repsTitle: "reps")))
+            (.repsWeight(weightTitle: Fixtures.lbs,
+                         repsTitle: Fixtures.reps,
+                         input: .init(weight: 135, reps: 8)),
+             .dropSet(set: .repsWeight(weightTitle: Fixtures.lbs,
+                                       repsTitle: Fixtures.reps)))
         ]
         let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
@@ -481,11 +485,11 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
-                                  with: .repsWeight(reps: 8, weight: 135))) // Update normal set as well
+                                  with: .repsWeight(input: .init(weight: 135, reps: 8)))) // Update normal set as well
         await sut.send(.addModifier(group: 0,
                                     exerciseIndex: 0,
                                     setIndex: 0,
-                                    modifier: .dropSet(input: .repsWeight(reps: nil, weight: nil)))) // Add to remove
+                                    modifier: .dropSet(input: .repsWeight(input: .init())))) // Add to remove
         await sut.send(.removeModifier(group: 0, exerciseIndex: 0, setIndex: 0))
         
         let exerciseTileViewStates = [
@@ -494,7 +498,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
-            (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8), nil)
+            (.repsWeight(weightTitle: Fixtures.lbs,
+                         repsTitle: Fixtures.reps,
+                         input: .init(weight: 135, reps: 8)), nil)
         ]
         let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]
@@ -521,15 +527,15 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
-                                  with: .repsWeight(reps: 8, weight: 135))) // Update normal set as well
+                                  with: .repsWeight(input: .init(weight: 135, reps: 8)))) // Update normal set as well
         await sut.send(.addModifier(group: 0,
                                     exerciseIndex: 0,
                                     setIndex: 0,
-                                    modifier: .dropSet(input: .repsWeight(reps: nil, weight: nil))))
+                                    modifier: .dropSet(input: .repsWeight(input: .init()))))
         await sut.send(.updateModifier(group: 0,
                                        exerciseIndex: 0,
                                        setIndex: 0,
-                                       with: .repsWeight(reps: 5, weight: 100)))
+                                       with: .repsWeight(input: .init(weight: 100, reps: 5))))
         
         let exerciseTileViewStates = [
             Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
@@ -537,8 +543,12 @@ final class BuildWorkoutViewModelTests: XCTestCase {
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
-            (.repsWeight(weightTitle: "lbs", weight: 135, repsTitle: "reps", reps: 8),
-             .dropSet(set: .repsWeight(weightTitle: "lbs", weight: 100, repsTitle: "reps", reps: 5)))
+            (.repsWeight(weightTitle: Fixtures.lbs,
+                         repsTitle: Fixtures.reps,
+                         input: .init(weight: 135, reps: 8)),
+             .dropSet(set: .repsWeight(weightTitle: Fixtures.lbs,
+                                       repsTitle: Fixtures.reps,
+                                       input: .init(weight: 100, reps: 5))))
         ]
         let groups: [[ExerciseViewState]] = [
             [Fixtures.backSquatViewState(inputs: sets)]

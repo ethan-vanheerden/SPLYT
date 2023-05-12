@@ -4,9 +4,9 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class HomeFABRowTests: XCTestCase {
-    let viewStateOne = HomeFABRowViewState(title: "CREATE NEW PLAN",
+    private let viewStateOne = HomeFABRowViewState(title: "CREATE NEW PLAN",
                                            imageName: "calendar")
-    let viewStateTwo = HomeFABRowViewState(title: "CREATE NEW WORKOUT",
+    private let viewStateTwo = HomeFABRowViewState(title: "CREATE NEW WORKOUT",
                                            imageName: "figure.strengthtraining.traditional")
     
     func testHomeFABRow() throws {
