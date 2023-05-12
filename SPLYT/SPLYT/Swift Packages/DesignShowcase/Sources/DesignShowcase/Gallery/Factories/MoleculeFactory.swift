@@ -10,7 +10,7 @@ struct MoleculeFactory {
             BottomSheetGallery()
         case .dialog:
             DialogGallery()
-        case .FABRow:
+        case .homeFABRow:
             HomeFABRowGallery()
         case .menuItem:
             MenuItemGallery()
@@ -18,6 +18,8 @@ struct MoleculeFactory {
             NavigationBarGallery()
         case .repCounter:
             RepCounterGallery()
+        case .restFABRow:
+            RestFABRowGallery()
         case .segmentedControl:
             SegmentedControlGallery()
         case .setView:
