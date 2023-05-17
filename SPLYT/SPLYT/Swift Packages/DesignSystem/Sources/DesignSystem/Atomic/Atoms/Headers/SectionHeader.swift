@@ -10,7 +10,7 @@ public struct SectionHeader: View {
     
     public var body: some View {
         HStack {
-            Text(viewState.text)
+            Text(viewState.title)
                 .body()
                 .multilineTextAlignment(.center)
             GeometryReader { proxy in
@@ -30,9 +30,9 @@ public struct SectionHeader: View {
 // MARK: - ViewState
 
 public struct SectionHeaderViewState: Equatable {
-    let text: String
+    fileprivate let title: String
     
-    public init(text: String) {
-        self.text = text
+    public init(title: String) {
+        self.title = title
     }
 }

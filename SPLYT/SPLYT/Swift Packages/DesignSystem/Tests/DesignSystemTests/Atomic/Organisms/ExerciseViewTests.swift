@@ -41,7 +41,7 @@ final class ExerciseViewTests: XCTestCase {
     
     func testExerciseView_Build() {
         let view = VStack {
-            ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "BACK SQUAT"),
+            ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "BACK SQUAT"),
                                                       sets: setsOne,
                                                       canRemoveSet: true),
                          type: .build(addModifierAction: { _ in }, removeModifierAction: { _ in }),
@@ -56,7 +56,7 @@ final class ExerciseViewTests: XCTestCase {
     
     func testExerciseView_InProgress() {
         let view = VStack {
-            ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "PUSHUPS"),
+            ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "PUSHUPS"),
                                                       sets: setsTwo,
                                                       canRemoveSet: false),
                          type: .inProgress(usePreviousAction: { _ in }, addNoteAction: { }),

@@ -56,7 +56,7 @@ struct SetEntry: View {
                 }
             }
         }
-        .frame(width: Layout.size(8))
+        .frame(width: Layout.size(8), height: Layout.size(8))
     }
     
     private var value: Double? {

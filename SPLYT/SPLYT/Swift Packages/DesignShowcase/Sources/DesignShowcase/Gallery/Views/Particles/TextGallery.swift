@@ -6,7 +6,7 @@ struct TextGallery: View {
         ScrollView {
             VStack {
                 ForEach(SplytFont.allCases, id: \.self) { style in
-                    SectionHeader(viewState: SectionHeaderViewState(text: style.rawValue))
+                    SectionHeader(viewState: SectionHeaderViewState(title: style.rawValue))
                     Text("Large Title")
                         .largeTitle(style: style)
                     Text("Title 1")

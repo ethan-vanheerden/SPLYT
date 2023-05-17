@@ -6,8 +6,8 @@ import SwiftUI
 final class SectionHeaderTests: XCTestCase {
     func testSectionHeader() throws {
         let view = VStack {
-            SectionHeader(viewState: SectionHeaderViewState(text: "TITLE"))
-            SectionHeader(viewState: SectionHeaderViewState(text: "LONGER TITLE VERY LONG"))
+            SectionHeader(viewState: SectionHeaderViewState(title: "TITLE"))
+            SectionHeader(viewState: SectionHeaderViewState(title: "LONGER TITLE VERY LONG"))
                 .foregroundColor(.blue)
             Spacer()
         }

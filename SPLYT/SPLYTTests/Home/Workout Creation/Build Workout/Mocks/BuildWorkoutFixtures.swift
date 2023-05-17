@@ -115,21 +115,21 @@ struct BuildWorkoutFixtures {
     }
     
     static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> ExerciseViewState {
-        let header = SectionHeaderViewState(text: "Back Squat")
+        let header = SectionHeaderViewState(title: "Back Squat")
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
                                  canRemoveSet: inputs.count > 1)
     }
     
     static func benchPressViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> ExerciseViewState {
-        let header = SectionHeaderViewState(text: "Bench Press")
+        let header = SectionHeaderViewState(title: "Bench Press")
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
                                  canRemoveSet: inputs.count > 1)
     }
     
     static func inclineDBRowViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> ExerciseViewState {
-        let header = SectionHeaderViewState(text: "Incline Dumbbell Row")
+        let header = SectionHeaderViewState(title: "Incline Dumbbell Row")
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
                                  canRemoveSet: inputs.count > 1)

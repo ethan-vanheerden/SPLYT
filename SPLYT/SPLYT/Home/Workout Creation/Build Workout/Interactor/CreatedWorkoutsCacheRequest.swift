@@ -8,6 +8,6 @@
 import Caching
 
 struct CreatedWorkoutsCacheRequest: CacheRequest {
-    typealias CacheData = [Workout]
+    typealias CacheData = [String: Workout] // Dictionary of the workout ID to the actual workout
     let filename: String = "user_created_workouts"
 }

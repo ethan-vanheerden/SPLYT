@@ -11,8 +11,8 @@ import Caching
 // MARK: - Protocol
 
 protocol HomeServiceType {
-    func loadWorkouts() throws -> [Workout]
-    func saveWorkouts(_: [Workout]) throws
+    func loadWorkouts() throws -> [String: Workout]
+    func saveWorkouts(_: [String: Workout]) throws
 }
 
 // MARK: - Implementation
@@ -24,16 +24,16 @@ struct HomeService<T: CacheInteractorType>: HomeServiceType where T.Request == C
         self.cacheInteractor = cacheInteractor
     }
     
-    func loadWorkouts() throws -> [Workout] {
+    func loadWorkouts() throws -> [String: Workout] {
         // First check if they have any saved workouts yet
         if !(try cacheInteractor.fileExists()) {
             // Create the file by saving an empty list of workouts
-            try cacheInteractor.save(data: [])
+            try cacheInteractor.save(data: [:])
         }
         return try cacheInteractor.load()
     }
     
-    func saveWorkouts(_ workouts: [Workout]) throws {
+    func saveWorkouts(_ workouts: [String: Workout]) throws {
         try cacheInteractor.save(data: workouts)
     }
 }

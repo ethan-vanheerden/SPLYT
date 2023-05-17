@@ -48,12 +48,16 @@ private extension HomeReducer {
         [Strings.workouts, Strings.plans]
     }
     
-    func getCreatedWorkouts(workouts: [Workout]) -> [CreatedWorkoutViewState] {
-        return workouts.map {
+    func getCreatedWorkouts(workouts: [String: Workout]) -> [CreatedWorkoutViewState] {
+        return workouts.values.map {
             CreatedWorkoutViewState(id: $0.id,
                                     title: $0.name,
                                     subtitle: getWorkoutSubtitle(workout: $0),
                                     lastCompleted: getLastCompletedTitle(date: $0.lastCompleted))
+        }.sorted {
+            // Sort by recently added since maps don't preserve sorted order
+            // TODO: Custom sorting operations in the future
+            $0.title < $1.title
         }
     }
     

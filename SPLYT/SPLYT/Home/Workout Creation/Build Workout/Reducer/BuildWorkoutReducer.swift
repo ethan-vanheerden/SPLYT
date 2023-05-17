@@ -83,7 +83,7 @@ private extension BuildWorkoutReducer {
     
     func getExerciseViewStates(exercises: [Exercise]) -> [ExerciseViewState] {
         return exercises.map { exercise in
-            let headerState = SectionHeaderViewState(text: exercise.name)
+            let headerState = SectionHeaderViewState(title: exercise.name)
             return ExerciseViewState(header: headerState,
                                           sets: getSetStates(exercise: exercise),
                                           canRemoveSet: exercise.sets.count > 1)

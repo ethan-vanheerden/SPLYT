@@ -41,9 +41,10 @@ struct ExerciseViewGallery: View {
     var body: some View {
         ScrollView {
             VStack(spacing: Layout.size(2)) {
-                SectionHeader(viewState: SectionHeaderViewState(text: "Build"))
+                SectionHeader(viewState: SectionHeaderViewState(title: "Build"))
+                    .foregroundColor(Color(splytColor: .lightBlue))
                     .padding(.horizontal)
-                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "BACK SQUAT"),
+                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "BACK SQUAT"),
                                                           sets: setsOne,
                                                           canRemoveSet: true),
                              type: .build(addModifierAction: { _ in }, removeModifierAction: { _ in }),
@@ -51,9 +52,10 @@ struct ExerciseViewGallery: View {
                              removeSetAction: { },
                              updateSetAction: { _, _ in },
                              updateModifierAction: { _, _ in })
-                SectionHeader(viewState: SectionHeaderViewState(text: "In Progress"))
+                SectionHeader(viewState: SectionHeaderViewState(title: "In Progress"))
+                    .foregroundColor(Color(splytColor: .lightBlue))
                     .padding(.horizontal)
-                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(text: "PUSHUPS"),
+                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "PUSHUPS"),
                                                           sets: setsTwo,
                                                           canRemoveSet: false),
                              type: .inProgress(usePreviousAction: { _ in }, addNoteAction: { }),

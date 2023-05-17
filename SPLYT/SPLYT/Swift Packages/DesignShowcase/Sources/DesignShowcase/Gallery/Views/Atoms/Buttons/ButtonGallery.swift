@@ -4,9 +4,9 @@ import DesignSystem
 struct ButtonGallery: View {
     var body: some View {
         VStack {
-            SectionHeader(viewState: SectionHeaderViewState(text: "Enabled"))
+            SectionHeader(viewState: SectionHeaderViewState(title: "Enabled"))
             buttons(isEnabled: true)
-            SectionHeader(viewState: SectionHeaderViewState(text: "Disabled"))
+            SectionHeader(viewState: SectionHeaderViewState(title: "Disabled"))
             buttons(isEnabled: false)
             Spacer()
         }
