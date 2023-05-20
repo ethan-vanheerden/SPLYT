@@ -6,6 +6,7 @@
 //
 
 import Caching
+import ExerciseCore
 
 struct AvailableExercisesCacheRequest: CacheRequest {
     typealias CacheData = [AvailableExercise]

@@ -1,12 +1,12 @@
 import Foundation
 
-public struct RepsOnlyInput: InputType {
-    public let reps: Int?
+public struct TimeInput: InputType, Hashable {
+    public let seconds: Int?
     public let placeholder: Int?
     
-    public init(reps: Int? = nil,
+    public init(seconds: Int? = nil,
                 placeholder: Int? = nil) {
-        self.reps = reps
+        self.seconds = seconds
         self.placeholder = placeholder
     }
     

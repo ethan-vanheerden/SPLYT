@@ -72,14 +72,14 @@ public struct ExerciseView: View {
 
 public enum ExerciseViewType {
     case build(addModifierAction: (Int) -> Void, removeModifierAction: (Int) -> Void)
-    case inProgress(usePreviousAction: (Int) -> Void, addNoteAction: () -> Void) // TODO: probs will need to change the note actoin
+    case inProgress(usePreviousAction: (Int) -> Void, addNoteAction: () -> Void) // TODO: probs will need to change the note action
 }
 
 // MARK: View State
 
-public struct ExerciseViewState: Equatable {
-    let header: SectionHeaderViewState
-    let sets: [SetViewState]
+public struct ExerciseViewState: Equatable, Hashable {
+    public let header: SectionHeaderViewState
+    public let sets: [SetViewState]
     let canRemoveSet: Bool
     
     public init(header: SectionHeaderViewState,

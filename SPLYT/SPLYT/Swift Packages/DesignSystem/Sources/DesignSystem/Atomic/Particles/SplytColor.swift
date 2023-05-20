@@ -9,6 +9,7 @@ public enum SplytColor: String, CaseIterable {
     case white = "White"
     case yellow = "Yellow"
     case clear = "Clear"
+    case purple = "Purple"
     
     public var color: Color {
         switch self {
@@ -19,7 +20,7 @@ public enum SplytColor: String, CaseIterable {
         case .green:
             return Color.green
         case .lightBlue:
-            return Color(uiColor: UIColor(red: 104/255, green: 172/255, blue: 252/255, alpha: 1.0))
+            return Color(uiColor: UIColor(red: 104/255, green: 172/255, blue: 252/255, alpha: 1))
         case .red:
             return Color.red
         case .white:
@@ -28,6 +29,8 @@ public enum SplytColor: String, CaseIterable {
             return Color.yellow
         case .clear:
             return Color.clear
+        case .purple:
+            return Color(uiColor: UIColor(red: 42/255, green: 0, blue: 254/255, alpha: 1))
         }
     }
     

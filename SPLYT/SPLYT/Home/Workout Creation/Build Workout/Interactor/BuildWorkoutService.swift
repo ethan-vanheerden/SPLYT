@@ -7,6 +7,7 @@
 
 import Foundation
 import Caching
+import ExerciseCore
 
 // MARK: - Protocol
 

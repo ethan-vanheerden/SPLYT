@@ -1,7 +1,7 @@
 import Foundation
 
 /// Using a struct here since having these all be associated values in an enum hurts me
-public struct RepsWeightInput: InputType {
+public struct RepsWeightInput: InputType, Hashable {
     // Weight first, then reps
     public let weight: Double?
     public let weightPlaceholder: Double?

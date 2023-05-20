@@ -6,6 +6,7 @@
 //
 
 import Caching
+import ExerciseCore
 
 struct CreatedWorkoutsCacheRequest: CacheRequest {
     typealias CacheData = [String: Workout] // Dictionary of the workout ID to the actual workout

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ExerciseCore
 
 // MARK: - Domain
 

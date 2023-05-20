@@ -1,7 +1,7 @@
 import Foundation
 
 /// Determines the type of view shown for a set modifier
-public enum SetModifierViewState: Equatable, CaseIterable {
+public enum SetModifierViewState: Equatable, CaseIterable, Hashable {
     case dropSet(set: SetInputViewState) // Associated type represents the actual drop set
     case restPause(set: SetInputViewState) // Associated type will be a reps only set
     case eccentric

@@ -162,7 +162,7 @@ public struct SetView: View {
 
 // MARK: - View State
 
-public struct SetViewState: Equatable {
+public struct SetViewState: Equatable, Hashable {
     public let setIndex: Int // The set's index in an exercise
     let title: String
     let type: SetInputViewState

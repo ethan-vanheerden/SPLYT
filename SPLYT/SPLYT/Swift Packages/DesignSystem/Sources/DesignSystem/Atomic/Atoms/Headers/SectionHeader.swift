@@ -13,26 +13,33 @@ public struct SectionHeader: View {
             Text(viewState.title)
                 .body()
                 .multilineTextAlignment(.center)
-            GeometryReader { proxy in
-                Path { path in
-                    path.move(to: CGPoint(x: 0, y: proxy.size.height))
-                    path.addLine(to: CGPoint(x: proxy.size.width, y: proxy.size.height))
+            if viewState.includeLine {
+                GeometryReader { proxy in
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: proxy.size.height))
+                        path.addLine(to: CGPoint(x: proxy.size.width, y: proxy.size.height))
+                    }
+                    .frame(height: lineHeight)
+                    .background(Color(splytColor: .gray))
+                    .opacity(0.5)
                 }
                 .frame(height: lineHeight)
-                .background(Color(splytColor: .gray))
-                .opacity(0.5)
+            } else {
+                Spacer()
             }
-            .frame(height: lineHeight)
         }
     }
 }
 
 // MARK: - ViewState
 
-public struct SectionHeaderViewState: Equatable {
+public struct SectionHeaderViewState: Equatable, Hashable {
     fileprivate let title: String
+    fileprivate let includeLine: Bool
     
-    public init(title: String) {
+    public init(title: String,
+                includeLine: Bool = true) {
         self.title = title
+        self.includeLine = includeLine
     }
 }

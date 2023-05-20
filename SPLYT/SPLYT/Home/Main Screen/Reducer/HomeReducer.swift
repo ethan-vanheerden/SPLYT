@@ -7,6 +7,7 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 final class HomeReducer {
     func reduce(_ domain: HomeDomainResult) -> HomeViewState {

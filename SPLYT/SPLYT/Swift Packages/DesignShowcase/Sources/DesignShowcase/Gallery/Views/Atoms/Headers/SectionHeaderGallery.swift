@@ -7,6 +7,8 @@ struct SectionHeaderGallery: View {
             SectionHeader(viewState: SectionHeaderViewState(title: "TITLE"))
             SectionHeader(viewState: SectionHeaderViewState(title: "LONGER TITLE VERY LONG"))
                 .foregroundColor(.blue)
+            SectionHeader(viewState: SectionHeaderViewState(title: "No Line",
+                                                            includeLine: false))
             Spacer()
         }
         .padding(.horizontal)

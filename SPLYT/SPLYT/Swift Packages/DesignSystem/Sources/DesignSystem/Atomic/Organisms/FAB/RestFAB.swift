@@ -76,10 +76,10 @@ public struct RestFAB: View {
         Text(TimeUtils.minSec(seconds: secondsLeft ?? 0))
             .title3()
             .frame(maxWidth: Layout.size(10))
-            .onReceive(timer) { input in
+            .onReceive(timer) { _ in
                 guard let secondsLeft = secondsLeft else { return }
                 // Update the countdown and switch back the FAB state if we need to
-                if secondsLeft == 0 {
+                if secondsLeft <= 0 {
                     withAnimation {
                         self.secondsLeft = nil
                         isPaused = false // Just in case

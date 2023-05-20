@@ -11,8 +11,16 @@ import Foundation
 /// Note: This is different from `AvailableExercise` in the sense that an `AvailableExercise`
 ///      is just a barebones representation of an exercise with no utility. An `Exercise` is the user-completed
 ///      version of an `AvailableExercise`.
-struct Exercise: Codable, Equatable {
-    let id: String
-    let name: String
-    let sets: [Set]
+public struct Exercise: Codable, Equatable {
+    public let id: String
+    public let name: String
+    public let sets: [Set]
+    
+    public init(id: String,
+                name: String,
+                sets: [Set]) {
+        self.id = id
+        self.name = name
+        self.sets = sets
+    }
 }

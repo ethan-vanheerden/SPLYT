@@ -56,10 +56,10 @@ private extension HomeNavigationRouter {
     }
     
     func handleSelectWorkout(id: String) {
-        var navRouter = SelectWorkoutNavigationRouter()
-        let view = SelectWorkoutView() {
-            navRouter.navigator?.dismissSelf(animated: true)
-        }
+        let interactor = DoWorkoutInteractor(workoutId: id)
+        let viewModel = DoWorkoutViewModel(interactor: interactor)
+        var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel)
+        let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
         presentNavController(view: view, navRouter: &navRouter)
     }
     
