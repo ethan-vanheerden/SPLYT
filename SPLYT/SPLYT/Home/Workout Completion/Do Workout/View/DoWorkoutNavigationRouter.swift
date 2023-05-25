@@ -13,7 +13,6 @@ import SwiftUI
 
 enum DoWorkoutNavigationEvent {
     case exit
-    case startCountdown
     case beginWorkout
 }
 
@@ -32,8 +31,6 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
         switch event {
         case .exit:
             handleExit()
-        case .startCountdown:
-            handleStartCountdown()
         case .beginWorkout:
             handleBeginWorkout()
         }
@@ -47,15 +44,9 @@ private extension DoWorkoutNavigationRouter {
         self.navigator?.dismissSelf(animated: true)
     }
     
-    func handleStartCountdown() {
-        let view = WorkoutCountdownView(navigationRouter: self)
-        let vc = UIHostingController(rootView: view)
-        self.navigator?.push(vc, animated: true) // TODO: animation
-    }
-    
     func handleBeginWorkout() {
         let view = DoWorkoutView(viewModel: viewModel, navigationRouter: self)
         let vc = UIHostingController(rootView: view)
-        self.navigator?.push(vc, animated: false) // Don't animate since we will a good luck message first
+        self.navigator?.push(vc, animated: false)
     }
 }

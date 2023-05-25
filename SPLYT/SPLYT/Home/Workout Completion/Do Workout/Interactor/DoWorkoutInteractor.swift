@@ -12,6 +12,8 @@ import ExerciseCore
 
 enum DoWorkoutDomainAction {
     case loadWorkout
+    case stopCountdown
+    case toggleRest(isResting: Bool)
 }
 
 // MARK: - Domain Results
@@ -38,6 +40,10 @@ final class DoWorkoutInteractor {
         switch action {
         case .loadWorkout:
             return handleLoadWorkout()
+        case .stopCountdown:
+            return handleStopCountdown()
+        case .toggleRest(let isResting):
+            return handleToggleRest(isResting: isResting)
         }
     }
 }
@@ -49,11 +55,25 @@ private extension DoWorkoutInteractor {
     func handleLoadWorkout() -> DoWorkoutDomainResult {
         do {
             let workout = try service.loadWorkout(id: workoutId)
-            let domain = DoWorkoutDomain(workout: workout)
+            let domain = DoWorkoutDomain(workout: workout,
+                                         inCountdown: true,
+                                         isResting: false)
             return updateDomain(domain: domain)
         } catch {
             return .error
         }
+    }
+    
+    func handleStopCountdown() -> DoWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        domain.inCountdown = false
+        return updateDomain(domain: domain)
+    }
+    
+    func handleToggleRest(isResting: Bool) -> DoWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        domain.isResting = isResting
+        return updateDomain(domain: domain)
     }
 }
 

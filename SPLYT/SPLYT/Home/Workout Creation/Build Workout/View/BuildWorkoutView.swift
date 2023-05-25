@@ -202,7 +202,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     private func currentGroupBinding(value: Int) -> Binding<Int> {
         return Binding(
             get: { return value },
-            set: { viewModel.send(.switchGroup(to: $0), taskPriority: .userInitiated) })
+            set: { viewModel.send(.switchGroup(to: $0), taskPriority: .userInitiated) }
+        )
     }
     
     @ViewBuilder

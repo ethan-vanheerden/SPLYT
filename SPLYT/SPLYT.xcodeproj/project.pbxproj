@@ -57,7 +57,6 @@
 		AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29822A1558ED00AACB6B /* DoWorkoutService.swift */; };
 		AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29842A16659500AACB6B /* WorkoutPreviewView.swift */; };
 		AACB29872A16902800AACB6B /* DoWorkoutDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29862A16902800AACB6B /* DoWorkoutDisplay.swift */; };
-		AACB298A2A193E6100AACB6B /* WorkoutCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29892A193E6100AACB6B /* WorkoutCountdownView.swift */; };
 		AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCAA7C29784C9B00932085 /* BuildWorkoutReducer.swift */; };
 		AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCAA7E297C5FA700932085 /* BuildWorkoutDisplay.swift */; };
 		AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACF8880287366DC003A50E8 /* MainViewModel.swift */; };
@@ -166,7 +165,6 @@
 		AACB29822A1558ED00AACB6B /* DoWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutService.swift; sourceTree = "<group>"; };
 		AACB29842A16659500AACB6B /* WorkoutPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPreviewView.swift; sourceTree = "<group>"; };
 		AACB29862A16902800AACB6B /* DoWorkoutDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutDisplay.swift; sourceTree = "<group>"; };
-		AACB29892A193E6100AACB6B /* WorkoutCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCountdownView.swift; sourceTree = "<group>"; };
 		AACCAA7C29784C9B00932085 /* BuildWorkoutReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutReducer.swift; sourceTree = "<group>"; };
 		AACCAA7E297C5FA700932085 /* BuildWorkoutDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutDisplay.swift; sourceTree = "<group>"; };
 		AACF8880287366DC003A50E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -474,7 +472,6 @@
 				AACB29802A15583F00AACB6B /* DoWorkoutNavigationRouter.swift */,
 				AACB29842A16659500AACB6B /* WorkoutPreviewView.swift */,
 				AACB29862A16902800AACB6B /* DoWorkoutDisplay.swift */,
-				AACB29892A193E6100AACB6B /* WorkoutCountdownView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -908,7 +905,6 @@
 				AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */,
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,
-				AACB298A2A193E6100AACB6B /* WorkoutCountdownView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

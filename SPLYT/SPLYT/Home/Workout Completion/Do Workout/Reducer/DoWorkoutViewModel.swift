@@ -12,23 +12,30 @@ import Core
 
 enum DoWorkoutViewEvent {
     case loadWorkout
+    case stopCountdown
+    case toggleRest(isResting: Bool)
 }
 
 // MARK: - View Model
 
-final class DoWorkoutViewModel: ViewModel {
-    @Published private(set) var viewState: DoWorkoutViewState = .loading
+final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent> {
     private let interactor: DoWorkoutInteractor
     private let reducer = DoWorkoutReducer()
     
     init(interactor: DoWorkoutInteractor) {
         self.interactor = interactor
+        super.init(viewState: .loading)
     }
     
-    func send(_ event: DoWorkoutViewEvent) async {
+    override func send(_ event: DoWorkoutViewEvent) async {
         switch event {
         case .loadWorkout:
             await react(domainAction: .loadWorkout)
+        case .stopCountdown:
+            await startTime() // Start the workout timer
+            await react(domainAction: .stopCountdown)
+        case .toggleRest(let isResting):
+            await react(domainAction: .toggleRest(isResting: isResting))
         }
     }
 }

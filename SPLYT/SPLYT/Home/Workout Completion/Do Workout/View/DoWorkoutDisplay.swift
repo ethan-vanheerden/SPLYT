@@ -13,4 +13,6 @@ struct DoWorkoutDisplay: Equatable {
     let workoutName: String
     let groups: [[ExerciseViewState]]
     let groupTitles: [String]
+    let inCountdown: Bool
+    let isResting: Bool
 }

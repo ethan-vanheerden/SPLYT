@@ -1,12 +1,12 @@
 import Foundation
 
-struct TimeUtils {
+public struct TimeUtils {
     
     /// Returns a time string in the form of hours:min:sec. We make sure that the hour is 1 digit long,
     /// and the minutes and seconds are 2 digits long. Ex: 1:30:08
     /// - Parameter seconds: The number of total seconds
     /// - Returns: The formatted time string
-    static func hrMinSec(seconds: Int) -> String {
+    public static func hrMinSec(seconds: Int) -> String {
         let hours = hoursElapsed(seconds: seconds)
         let minutes = minutesElapsed(seconds: seconds)
         let seconds = secondsElapsed(seconds: seconds)
@@ -17,7 +17,7 @@ struct TimeUtils {
     /// Returns a time string in the form of min:sec. We make sure that both the minute and seconds are 2 digits long.
     /// - Parameter seconds: The number of total seconds
     /// - Returns: The formatted time string
-    static func minSec(seconds: Int) -> String {
+    public static func minSec(seconds: Int) -> String {
         let minutes = minutesElapsed(seconds: seconds)
         let seconds = secondsElapsed(seconds: seconds)
         
@@ -29,7 +29,7 @@ struct TimeUtils {
     ///   - minutes: The number of minutes
     ///   - seconds: The number of seconds
     /// - Returns: The total number of seconds in the given time
-    static func getSeconds(minutes: Int, seconds: Int) -> Int {
+    public static func getSeconds(minutes: Int, seconds: Int) -> Int {
         return (minutes * 60) + seconds
     }
 }

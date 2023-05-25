@@ -13,7 +13,6 @@ enum Atom: String, CaseIterable, GalleryItem {
     case scrim = "Scrim"
     case sectionHeader = "Section Header"
     case setEntry = "Set Entry"
-    case stopwatchView = "Stopwatch View"
     case tag = "Tag"
     case tile = "Tile"
     

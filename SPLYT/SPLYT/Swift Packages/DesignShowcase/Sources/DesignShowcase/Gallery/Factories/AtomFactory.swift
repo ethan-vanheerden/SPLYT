@@ -20,8 +20,6 @@ struct AtomFactory {
             SectionHeaderGallery()
         case .setEntry:
             SetEntryGallery()
-        case .stopwatchView:
-            StopwatchViewGallery()
         case .tag:
             TagGallery()
         case .tile:

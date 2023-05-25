@@ -56,7 +56,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
                 }
             }
             SplytButton(text: Strings.beginWorkout){
-                navigationRouter.navigate(.startCountdown)
+                navigationRouter.navigate(.beginWorkout)
             } // TODO: on this action we can probs just pop this view since we won't be able to come back to it
                 .padding(.horizontal, horizontalPadding)
         }

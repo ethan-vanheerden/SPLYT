@@ -32,7 +32,9 @@ private extension DoWorkoutReducer {
         
         let display = DoWorkoutDisplay(workoutName: domain.workout.name,
                                        groups: groups,
-                                       groupTitles: groupTitles)
+                                       groupTitles: groupTitles,
+                                       inCountdown: domain.inCountdown,
+                                       isResting: domain.isResting)
         return .loaded(display)
     }
 }

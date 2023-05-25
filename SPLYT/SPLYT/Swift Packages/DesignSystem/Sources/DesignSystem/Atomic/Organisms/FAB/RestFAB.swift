@@ -1,33 +1,32 @@
 import SwiftUI
 
 public struct RestFAB: View {
-    @State private var secondsLeft: Int? = nil // Let this view handle the timer countdown interanally
+    @State private var secondsLeft: Int = 0 // The current number of seconds left in current rest period
     @State private var isPaused = false
     @State private var showTimePicker = false
     @State private var pickerMinutes = 0
     @State private var pickerSeconds = 0
     @Binding private var isPresenting: Bool
+    @Binding private var workoutSeconds: Int // Total number of seconds elapsed in the workout
     private let viewState: RestFABViewState
-    private let selectRestAction: (Int) -> Void
-    private let selectMoreAction: () -> Void
-    private let stopAction: () -> Void
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let selectRestAction: () -> Void
+    private let stopRestAction: () -> Void
     private let pickerWidth = Layout.size(10)
     
     public init(isPresenting: Binding<Bool>,
+                workoutSeconds: Binding<Int>,
                 viewState: RestFABViewState,
-                selectRestAction: @escaping (Int) -> Void,
-                selectMoreAction: @escaping () -> Void,
-                stopAction: @escaping () -> Void) {
+                selectRestAction: @escaping () -> Void,
+                stopRestAction: @escaping () -> Void) {
         self._isPresenting = isPresenting
+        self._workoutSeconds = workoutSeconds
         self.viewState = viewState
         self.selectRestAction = selectRestAction
-        self.selectMoreAction = selectMoreAction
-        self.stopAction = stopAction
+        self.stopRestAction = stopRestAction
     }
     
     public var body: some View {
-        if secondsLeft != nil {
+        if viewState.isResting {
             restingView
         } else {
             fabView
@@ -41,7 +40,7 @@ public struct RestFAB: View {
             HStack {
                 Spacer()
                 HStack {
-                    Image(systemName: "stopwatch")
+                    Image(systemName: "stopwatch") // TODO: icon images
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(Color(splytColor: .lightBlue))
@@ -55,10 +54,7 @@ public struct RestFAB: View {
                     IconButton(iconName: "xmark",
                                style: .secondary,
                                iconColor: .red) {
-                        withAnimation {
-                            secondsLeft = nil
-                            isPaused = false
-                        }
+                        stopRest()
                     }
                 }
                 .padding()
@@ -73,21 +69,29 @@ public struct RestFAB: View {
     
     @ViewBuilder
     private var timeView: some View {
-        Text(TimeUtils.minSec(seconds: secondsLeft ?? 0))
+        Text(TimeUtils.minSec(seconds: secondsLeft))
             .title3()
             .frame(maxWidth: Layout.size(10))
-            .onReceive(timer) { _ in
-                guard let secondsLeft = secondsLeft else { return }
+            .onChange(of: workoutSeconds) { newValue in
+                // Get the relative time changed in case of backgrounding
+                let delta = newValue - workoutSeconds
+                
                 // Update the countdown and switch back the FAB state if we need to
-                if secondsLeft <= 0 {
-                    withAnimation {
-                        self.secondsLeft = nil
-                        isPaused = false // Just in case
-                    }
+                if secondsLeft - delta < 0 {
+                    stopRest()
                 } else if !isPaused {
-                    self.secondsLeft = secondsLeft - 1
+                    secondsLeft -= delta
                 }
             }
+    }
+    
+    /// All the actions to be done when the rest period should be stopped
+    private func stopRest() -> Void {
+        withAnimation {
+            secondsLeft = 0
+            isPaused = false
+            stopRestAction()
+        }
     }
     
     @ViewBuilder
@@ -128,6 +132,7 @@ public struct RestFAB: View {
                     RestFABRow(seconds: seconds) {
                         isPresenting = false
                         withAnimation {
+                            selectRestAction()
                             secondsLeft = seconds
                         }
                     }
@@ -182,6 +187,7 @@ public struct RestFAB: View {
                         isEnabled: !(pickerSeconds == 0 && pickerMinutes == 0)) {
                 showTimePicker = false
                 isPresenting = false
+                selectRestAction()
                 secondsLeft = TimeUtils.getSeconds(minutes: pickerMinutes, seconds: pickerSeconds)
             }
         }
@@ -192,9 +198,12 @@ public struct RestFAB: View {
 // MARK: - View State
 
 public struct RestFABViewState: Equatable {
-    let restPresets: [Int] // In seconds the amount of rest the user's presets are
+    fileprivate let isResting: Bool
+    fileprivate let restPresets: [Int] // In seconds the amount of rest the user's presets are
     
-    public init(restPresets: [Int]) {
+    public init(isResting: Bool,
+                restPresets: [Int]) {
+        self.isResting = isResting
         self.restPresets = restPresets
     }
 }
