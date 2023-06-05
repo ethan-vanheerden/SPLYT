@@ -14,7 +14,7 @@ import Foundation
 public struct Exercise: Codable, Equatable {
     public let id: String
     public let name: String
-    public let sets: [Set]
+    public var sets: [Set]
     
     public init(id: String,
                 name: String,

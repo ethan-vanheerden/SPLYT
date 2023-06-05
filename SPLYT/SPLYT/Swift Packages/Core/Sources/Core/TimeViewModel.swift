@@ -24,7 +24,7 @@ open class TimeViewModel<T, U>: ViewModel {
     @MainActor
     public func startTime() {
         timeStarted = Date()
-        Timer.publish(every: 1, on: .main, in: .common)
+        Timer.publish(every: 0.5, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self,

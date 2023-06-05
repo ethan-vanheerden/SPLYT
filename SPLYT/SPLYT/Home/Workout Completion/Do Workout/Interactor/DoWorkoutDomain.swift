@@ -12,13 +12,22 @@ final class DoWorkoutDomain: Equatable {
     var workout: Workout
     var inCountdown: Bool
     var isResting: Bool
+    var expandedGroups: [Bool] // Indicates which group's headers are expanded (true = expanded)
+    var completedGroups: [Bool] // Indicates which groups have been marked as complete
+    var fractionCompleted: Double // Ex: 0.5 for 50% done
     
     init(workout: Workout,
          inCountdown: Bool,
-         isResting: Bool) {
+         isResting: Bool,
+         expandedGroups: [Bool],
+         completedGroups: [Bool],
+         fractionCompleted: Double) {
         self.workout = workout
         self.inCountdown = inCountdown
         self.isResting = isResting
+        self.expandedGroups = expandedGroups
+        self.completedGroups = completedGroups
+        self.fractionCompleted = fractionCompleted
     }
     
     static func == (lhs: DoWorkoutDomain, rhs: DoWorkoutDomain) -> Bool {

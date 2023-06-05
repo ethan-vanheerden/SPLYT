@@ -1,4 +1,3 @@
-
 import SwiftUI
 import ExerciseCore
 
@@ -71,8 +70,10 @@ public struct ExerciseView: View {
 // MARK: - Type
 
 public enum ExerciseViewType {
+    // Ints for the set index
     case build(addModifierAction: (Int) -> Void, removeModifierAction: (Int) -> Void)
-    case inProgress(usePreviousAction: (Int) -> Void, addNoteAction: () -> Void) // TODO: probs will need to change the note action
+    // Int for set index, Bool for whether it's for a modifier or not
+    case inProgress(usePreviousInputAction: (Int, Bool) -> Void, addNoteAction: () -> Void)
 }
 
 // MARK: View State

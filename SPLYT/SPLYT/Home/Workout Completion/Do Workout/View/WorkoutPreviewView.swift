@@ -49,9 +49,9 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
     private func mainView(display: DoWorkoutDisplay) -> some View {
         VStack {
             ScrollView(showsIndicators: false) {
-                ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, exercises in
+                ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, group in
                     groupView(title: display.groupTitles[groupIndex],
-                              exercises: exercises)
+                              group: group)
                     .padding(.bottom, Layout.size(1))
                 }
             }
@@ -63,7 +63,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
     }
     
     @ViewBuilder
-    private func groupView(title: String, exercises: [ExerciseViewState]) -> some View {
+    private func groupView(title: String, group: DoExerciseGroupViewState) -> some View {
         Tile {
             VStack {
                 HStack {
@@ -73,7 +73,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
                     Spacer()
                 }
                 .padding(.bottom, Layout.size(0.5))
-                ForEach(exercises, id: \.self) { exercise in
+                ForEach(group.exercises, id: \.self) { exercise in
                     HStack {
                         SectionHeader(viewState: exercise.header)
                         Text("\(exercise.sets.count) \(Strings.sets)")

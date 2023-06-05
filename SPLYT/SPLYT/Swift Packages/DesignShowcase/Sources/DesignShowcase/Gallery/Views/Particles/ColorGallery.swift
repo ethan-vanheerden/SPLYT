@@ -21,9 +21,3 @@ struct ColorGallery: View {
         }
     }
 }
-
-struct ColorGallery_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorGallery()
-    }
-}

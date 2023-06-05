@@ -1,8 +1,8 @@
 import Foundation
 
-enum InputType {
-    case reps(Int?)
-    case weight(Double?)
+enum KeyboardInputType {
+    case reps
+    case weight(Doubl
     case time(Int?)
     
     /// Formats the value to be the properly formatted string.

@@ -11,8 +11,10 @@ import DesignSystem
 // Both the exercise preview and the do view will use this
 struct DoWorkoutDisplay: Equatable {
     let workoutName: String
-    let groups: [[ExerciseViewState]]
+    let progressBar: ProgressBarViewState
     let groupTitles: [String]
+    let groups: [DoExerciseGroupViewState]
+    let expandedGroups: [Bool]
     let inCountdown: Bool
     let isResting: Bool
 }

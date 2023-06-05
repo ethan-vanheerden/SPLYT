@@ -19,7 +19,6 @@ public struct CollapseHeader<Content: View>: View {
             content()
                 .collapsible(isExpanded: $isExpanded)
         }
-        .padding(.horizontal, Layout.size(2))
     }
     
     private var header: some View {
@@ -30,6 +29,11 @@ public struct CollapseHeader<Content: View>: View {
                 .title2()
                 .multilineTextAlignment(.center)
             Spacer()
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(Color(splytColor: .green))
+                .imageScale(.large)
+                .isVisible(viewState.isComplete ?? false)
+            
         }
         .foregroundColor(Color(splytColor: viewState.color))
         .onTapGesture {
@@ -43,12 +47,15 @@ public struct CollapseHeader<Content: View>: View {
 // MARK: - View State
 
 public struct CollapseHeaderViewState: Equatable {
-    fileprivate let title: String
+    public let title: String
     fileprivate let color: SplytColor
+    fileprivate let isComplete: Bool?
     
     public init(title: String,
-                color: SplytColor = .black) {
+                color: SplytColor = .black,
+                isComplete: Bool? = nil) {
         self.title = title
         self.color = color
+        self.isComplete = isComplete
     }
 }

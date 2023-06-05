@@ -11,7 +11,7 @@ import Foundation
 public struct Workout: Codable, Equatable {
     public let id: String
     public let name: String
-    public let exerciseGroups: [ExerciseGroup]
+    public var exerciseGroups: [ExerciseGroup]
     public var lastCompleted: Date?
     
     public init(id: String,

@@ -46,7 +46,7 @@ public struct SetView: View {
                         .padding(.leading, horizontalPadding)
                         .padding(.trailing, Layout.size(4))
                     Spacer()
-                    iconButton
+                    iconButton(forModifier: false)
                 }
                 entryView(setIndex: viewState.setIndex,
                           setType: viewState.type,
@@ -54,22 +54,6 @@ public struct SetView: View {
                 .offset(y: -Layout.size(0.5)) // TextField automatic padding issues
             }
             modifierView
-        }
-    }
-    
-    @ViewBuilder private var iconButton: some View {
-        switch exerciseType {
-        case .build:
-            IconButton(iconName: "ellipsis",
-                       style: .secondary,
-                       iconColor: .lightBlue) { showBaseActionSheet = true }
-                .padding(.trailing, horizontalPadding)
-        case let .inProgress(usePreviousAction, _):
-            IconButton(iconName: "arrow.counterclockwise") {
-                usePreviousAction(viewState.setIndex)
-            }
-            .isVisible(viewState.type.hasPlaceholder)
-            .padding(.trailing, horizontalPadding)
         }
     }
     
@@ -113,6 +97,26 @@ public struct SetView: View {
     }
     
     @ViewBuilder
+    private func iconButton(forModifier: Bool) -> some View {
+        switch exerciseType {
+        case .build where forModifier == false:
+            IconButton(iconName: "ellipsis",
+                       style: .secondary,
+                       iconColor: .lightBlue) { showBaseActionSheet = true }
+                .padding(.trailing, horizontalPadding)
+        case let .inProgress(usePreviousInputAction, _):
+            let isVisible: Bool? = forModifier ? viewState.modifier?.hasPlaceholder : viewState.type.hasPlaceholder
+            IconButton(iconName: "arrow.counterclockwise") {
+                usePreviousInputAction(viewState.setIndex, forModifier)
+            }
+            .isVisible(isVisible ?? false)
+            .padding(.trailing, horizontalPadding)
+        default:
+            EmptyView()
+        }
+    }
+    
+    @ViewBuilder
     private var modifierView: some View {
         if let modifier = viewState.modifier {
             ZStack(alignment: .top) {
@@ -121,6 +125,7 @@ public struct SetView: View {
                         .padding(.leading, horizontalPadding)
                         .padding(.top, Layout.size(0.5)) // TextField automatic padding issues
                     Spacer()
+                    iconButton(forModifier: true)
                 }
                 additionalSetView(modifier: modifier)
                     .offset(y: -Layout.size(1)) // TextField automatic padding issues

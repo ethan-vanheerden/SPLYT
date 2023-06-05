@@ -1,10 +1,9 @@
 import Foundation
 import ExerciseCore
 
+/// Contains common reducer functions involving workouts.
 public struct WorkoutReducer {
-    public init() { }
-    
-    public func reduceExerciseGroups(groups: [ExerciseGroup],
+    public static func reduceExerciseGroups(groups: [ExerciseGroup],
                                      includeHeaderLine: Bool = true) -> [[ExerciseViewState]] {
         var result = [[ExerciseViewState]]()
         
@@ -19,7 +18,7 @@ public struct WorkoutReducer {
     }
     
     /// Ex: ["Group 1", "Group 2", "Group 3"]
-    public func getGroupTitles(workout: Workout) -> [String] {
+    public static func getGroupTitles(workout: Workout) -> [String] {
         var titles = [String]()
         
         // We can assume that there is always at least one group
@@ -35,7 +34,7 @@ public struct WorkoutReducer {
 
 private extension WorkoutReducer {
     
-    func getExerciseViewStates(exercises: [Exercise], includeHeaderLine: Bool) -> [ExerciseViewState] {
+    static func getExerciseViewStates(exercises: [Exercise], includeHeaderLine: Bool) -> [ExerciseViewState] {
         return exercises.map { exercise in
             let headerState = SectionHeaderViewState(title: exercise.name,
                                                      includeLine: includeHeaderLine)
@@ -45,7 +44,7 @@ private extension WorkoutReducer {
         }
     }
     
-    func getSetStates(exercise: Exercise) -> [SetViewState] {
+    static func getSetStates(exercise: Exercise) -> [SetViewState] {
         return exercise.sets.enumerated().map { index, set in
             SetViewState(setIndex: index,
                          title: Strings.set + " \(index + 1)",
@@ -54,20 +53,20 @@ private extension WorkoutReducer {
         }
     }
     
-    func getSetViewType(_ input: SetInput) -> SetInputViewState {
+    static func getSetViewType(_ input: SetInput) -> SetInputViewState {
         switch input {
-        case let .repsWeight(input: input):
+        case let .repsWeight(input):
             return .repsWeight(weightTitle: Strings.lbs,
                                repsTitle: Strings.reps,
                                input: input)
-        case let .repsOnly(input: input):
+        case let .repsOnly(input):
             return .repsOnly(title: Strings.reps, input: input)
         case let .time(input):
             return .time(title: Strings.sec, input: input)
         }
     }
     
-    func getSetModifierState(modifier: SetModifier?) -> SetModifierViewState? {
+    static func getSetModifierState(modifier: SetModifier?) -> SetModifierViewState? {
         guard let modifier = modifier else { return nil }
         
         switch modifier {

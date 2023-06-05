@@ -38,4 +38,21 @@ public enum SetInput: Codable, Equatable {
             return self // Don't do any updates
         }
     }
+    
+    /// Creates a new set input where the actual values are the input's placeholders.
+    /// If the input does not have a placeholder, the new input will not have inputs.
+    public var placeholderInput: SetInput {
+        switch self {
+        case .repsWeight(let input):
+            let newInput = RepsWeightInput(weight: input.weightPlaceholder,
+                                           reps: input.repsPlaceholder)
+            return .repsWeight(input: newInput)
+        case .repsOnly(let input):
+            let newInput = RepsOnlyInput(reps: input.placeholder)
+            return .repsOnly(input: newInput)
+        case .time(let input):
+            let newInput = TimeInput(seconds: input.placeholder)
+            return .time(input: newInput)
+        }
+    }
 }

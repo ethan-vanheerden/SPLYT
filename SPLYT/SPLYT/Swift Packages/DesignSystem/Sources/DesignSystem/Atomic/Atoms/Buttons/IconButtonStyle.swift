@@ -28,12 +28,6 @@ struct IconButtonStyle: ButtonStyle {
     }
     
     @ViewBuilder
-    private var baseButton: some View {
-        Image(systemName: iconName)
-            .imageScale(.large)
-    }
-    
-    @ViewBuilder
     private func styleView(configuration: Configuration) -> some View {
         switch style {
         case let .primary(backgroundColor, outlineColor):
@@ -41,7 +35,7 @@ struct IconButtonStyle: ButtonStyle {
                 Spacer()
                 VStack {
                     Spacer()
-                    baseButton
+                    baseImage
                     Spacer()
                 }
                 Spacer()
@@ -52,22 +46,29 @@ struct IconButtonStyle: ButtonStyle {
                                                         normalColor: Color(splytColor: iconColor),
                                                         pressedColor: Color(splytColor: backgroundColor),
                                                         animationEnabled: animationEnabled))
-            .roundedBackground(cornerRadius: cornerRadius, fill: ButtonUtils.animationColor(configuration: configuration,
-                                                                                            normalColor: Color(splytColor: backgroundColor),
-                                                                                            pressedColor: Color(splytColor: iconColor),
-                                                                                            animationEnabled: animationEnabled))
+            .roundedBackground(cornerRadius: cornerRadius,
+                               fill: ButtonUtils.animationColor(configuration: configuration,
+                                                                normalColor: Color(splytColor: backgroundColor),
+                                                                pressedColor: Color(splytColor: iconColor),
+                                                                animationEnabled: animationEnabled))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(lineWidth: Layout.size(0.25))
                     .fill(Color(splytColor: outlineColor ?? backgroundColor))
             )
         case .secondary:
-            baseButton
+            baseImage
                 .frame(width: backgroundSize, height: backgroundSize)
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
                                                             normalColor: Color(splytColor: iconColor),
                                                             pressedColor: Color(splytColor: iconColor).opacity(0.5),
                                                             animationEnabled: animationEnabled))
         }
+    }
+    
+    @ViewBuilder
+    private var baseImage: some View {
+        Image(systemName: iconName)
+            .imageScale(.large)
     }
 }

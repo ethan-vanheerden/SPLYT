@@ -12,11 +12,12 @@ final class CollapseHeaderTests: XCTestCase {
             }
             CollapseHeader(isExpanded: .constant(true),
                            viewState: CollapseHeaderViewState(title: "Another title",
-                                                              color: .lightBlue)) {
+                                                              color: .lightBlue,
+                                                              isComplete: true)) {
                 Text("Hello, world!")
             }
         }
-        .padding(.horizontal)
+            .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }

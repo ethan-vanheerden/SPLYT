@@ -3,7 +3,7 @@ import SwiftUI
 import ExerciseCore
 
 struct SetEntry: View {
-    @State private var text: String
+    @Binding private var text: String // Binding so that the text can be updated via a view model
     @FocusState private var fieldFocused: Bool
     private let title: String
     private let input: InputType

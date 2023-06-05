@@ -9,7 +9,7 @@ import Foundation
 
 /// A series of exercises that are performed at a time in a workout.
 public struct ExerciseGroup: Codable, Equatable {
-    public let exercises: [Exercise]
+    public var exercises: [Exercise]
     
     public init(exercises: [Exercise]) {
         self.exercises = exercises

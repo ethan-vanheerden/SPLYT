@@ -23,4 +23,14 @@ public enum SetModifierViewState: Equatable, CaseIterable, Hashable {
             return "Eccentric"
         }
     }
+    
+    public var hasPlaceholder: Bool {
+        switch self {
+        case .dropSet(let set),
+                .restPause(let set):
+            return set.hasPlaceholder
+        case .eccentric:
+            return false
+        }
+    }
 }

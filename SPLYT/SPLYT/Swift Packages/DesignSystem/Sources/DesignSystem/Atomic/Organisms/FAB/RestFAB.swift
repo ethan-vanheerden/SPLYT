@@ -11,7 +11,6 @@ public struct RestFAB: View {
     private let viewState: RestFABViewState
     private let selectRestAction: () -> Void
     private let stopRestAction: () -> Void
-    private let pickerWidth = Layout.size(10)
     
     public init(isPresenting: Binding<Bool>,
                 workoutSeconds: Binding<Int>,
@@ -125,7 +124,7 @@ public struct RestFAB: View {
             FABIcon(viewState: moreIcon) {
                 showTimePicker = true
             }
-            .offset(y: isPresenting ? 0 : Layout.size(16))
+            .offset(y: isPresenting ? 0 : Layout.size(16)) // TODO: find another way since picker gets messed up with timer
             VStack(spacing: Layout.size(1)) {
                 ForEach(Array(viewState.restPresets.enumerated()), id: \.offset) { index, seconds in
                     let verticalOffset = CGFloat((viewState.restPresets.count - index) * 6)
@@ -152,27 +151,22 @@ public struct RestFAB: View {
     
     private var restPicker: some View {
         VStack {
+            Spacer()
             HStack {
-                Picker(Strings.min, selection: $pickerMinutes) {
-                    ForEach(0...10, id: \.self) { minute in
-                        Text("\(minute)")
-                    }
-                }
-                .frame(width: pickerWidth)
-                Text(Strings.min)
-                Picker(Strings.sec, selection: $pickerSeconds) {
-                    ForEach(0...60, id: \.self) { second in
-                        Text("\(second)")
-                    }
-                }
-                .frame(width: pickerWidth)
-                Text(Strings.sec)
+                Counter(selectedNumber: $pickerMinutes,
+                        viewState: CounterViewState(maxNumber: 10,
+                                                    label: Strings.min,
+                                                    backGroundColor: .lightBlue,
+                                                    textColor: .black))
+                Counter(selectedNumber: $pickerSeconds,
+                        viewState: CounterViewState(maxNumber: 60,
+                                                    label: Strings.sec,
+                                                    backGroundColor: .lightBlue,
+                                                    textColor: .black))
             }
-            .pickerStyle(.wheel)
             Spacer()
             pickerButtons
         }
-        
     }
     
     private var pickerButtons: some View {

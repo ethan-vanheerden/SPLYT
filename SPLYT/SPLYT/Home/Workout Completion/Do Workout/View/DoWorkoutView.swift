@@ -52,18 +52,8 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 // Would have to make this a ZStack to have a blur effect look good
                 headerView(display: display)
                 ScrollView(showsIndicators: false) {
-                    ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, exercises in
-                        CollapseHeader(isExpanded: .constant(true),
-                                       viewState: .init(title: display.groupTitles[groupIndex],
-                                                        color: .lightBlue)) {
-                            groupView(exercises: exercises)
-                        }
-                    }
-                    .padding(.bottom, Layout.size(4))
-                    SplytButton(text: "Finish Workout") {
-                        // TODO
-                    }
-                    .padding(.horizontal, Layout.size(2)) // TODO: move to ZStack?
+                    groupsView(display: display)
+                        .padding(.bottom, Layout.size(2))
                 }
             }
             RestFAB(isPresenting: $restFABPresenting,
@@ -72,21 +62,23 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                     selectRestAction: { viewModel.send(.toggleRest(isResting: true), taskPriority: .userInitiated) },
                     stopRestAction: { viewModel.send(.toggleRest(isResting: false), taskPriority: .userInitiated) })
         }
-//        .animation(.default, value: display.isResting) // This animates the FAB change but it looks weird
     }
     
     @ViewBuilder
     private func headerView(display: DoWorkoutDisplay) -> some View {
         VStack {
-            HStack {
+            HStack(spacing: Layout.size(1)) {
                 Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
                     .title1()
                     .foregroundColor(display.isResting ? Color(splytColor: .lightBlue) : Color(splytColor: .black))
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                 IconButton(iconName: "book.closed", action: { })
+                SplytButton(text: Strings.finish) {}
+                    .fixedSize()
             }
-            Divider() // TODO: don't like
+            ProgressBar(viewState: display.progressBar)
+            Divider()
         }
         .padding(.horizontal, horizontalPadding)
     }
@@ -99,7 +91,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 Spacer()
                 Text("\(countdownSeconds)")
                     .largeTitle()
-                Text("Enjoy your lift 🏋️!")
+                Text(Strings.enjoyYourLift)
                     .title1()
                 Spacer()
             }
@@ -111,7 +103,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                    startPoint: .bottom, endPoint: .top))
         .onReceive(countdownTimer) { _ in
             if countdownSeconds <= 0 {
-                countdownTimer.upstream.connect().cancel() // Can only have one timer running at a time because...
+                countdownTimer.upstream.connect().cancel() // Can only have one timer running at a time idk
                 viewModel.send(.stopCountdown, taskPriority: .userInitiated)
             } else {
                 countdownSeconds -= 1
@@ -120,17 +112,55 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     }
     
     @ViewBuilder
-    private func groupView(exercises: [ExerciseViewState]) -> some View {
-        VStack {
-            ForEach(exercises, id: \.self) { exercise in
-                ExerciseView(viewState: exercise,
-                             type: .inProgress(usePreviousAction: { _ in },
-                                               addNoteAction: { }),
-                             addSetAction: { },
-                             removeSetAction: { },
-                             updateSetAction: { _, _ in },
-                             updateModifierAction: { _, _ in })
-            }
+    private func groupsView(display: DoWorkoutDisplay) -> some View {
+        ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, group in
+            DoExerciseGroupView(isExpanded: groupExpandBinding(group: groupIndex,
+                                                               expandedGroups: display.expandedGroups),
+                                viewState: group,
+                                addSetAction: { viewModel.send(.addSet(group: groupIndex),
+                                                               taskPriority: .userInitiated) },
+                                removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
+                                                                  taskPriority: .userInitiated) },
+                                updateSetAction: { exerciseIndex, setIndex, setInput in
+                viewModel.send(.updateSet(group: groupIndex,
+                                          exerciseIndex: exerciseIndex,
+                                          setIndex: setIndex,
+                                          with: setInput,
+                                         forModifier: false),
+                               taskPriority: .userInitiated)
+            },
+                                updateModifierAction: { exerciseIndex, setIndex, setInput in
+                viewModel.send(.updateSet(group: groupIndex,
+                                               exerciseIndex: exerciseIndex,
+                                               setIndex: setIndex,
+                                               with: setInput,
+                                               forModifier: true),
+                               taskPriority: .userInitiated)
+            },
+                                usePreviousInputAction: { exerciseIndex, setIndex, forModifier in
+                viewModel.send(.usePreviousInput(group: groupIndex,
+                                                 exerciseIndex: exerciseIndex,
+                                                 setIndex: setIndex,
+                                                 forModifier: forModifier),
+                               taskPriority: .userInitiated)
+            },
+                                addNoteAction: { }, // TODO: add notes
+                                finishSlideAction: { viewModel.send(.completeGroup(group: groupIndex),
+                                                                    taskPriority: .userInitiated) })
+            .padding(.horizontal, horizontalPadding)
         }
+        .animation(.default, value: display.expandedGroups) // Preserves collapse animation
     }
+    
+    private func groupExpandBinding(group: Int, expandedGroups: [Bool]) -> Binding<Bool> {
+        return Binding(
+            get: { return expandedGroups[group] },
+            set: { viewModel.send(.toggleGroupExpand(group: group, isExpanded: $0)) }
+        )
+    }
+}
+
+fileprivate struct Strings {
+    static let enjoyYourLift = "Enjoy your lift 🔥!"
+    static let finish = "Finish"
 }

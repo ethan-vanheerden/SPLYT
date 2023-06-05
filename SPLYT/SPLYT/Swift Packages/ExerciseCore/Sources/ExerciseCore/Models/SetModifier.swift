@@ -32,4 +32,15 @@ public enum SetModifier: Codable, Equatable {
             return self // For modifiers with no set inputs
         }
     }
+    
+    public var input: SetInput? {
+        switch self {
+        case .dropSet(let input):
+            return input
+        case .restPause(let input):
+            return input
+        case .eccentric:
+            return nil
+        }
+    }
 }

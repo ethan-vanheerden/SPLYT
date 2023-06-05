@@ -47,14 +47,14 @@ struct SetViewGallery: View {
                                             title: "Set 5",
                                             type: .repsOnly(title: "reps",
                                                             input: RepsOnlyInput(placeholder: 8))),
-                    exerciseType: .inProgress(usePreviousAction: { _ in },
+                    exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
                                               addNoteAction: { }),
                     updateSetAction: { _, _ in },
                     updateModifierAction: { _, _ in })
             SetView(viewState: SetViewState(setIndex: 5,
                                             title: "Set 6",
                                             type: .repsOnly(title: "reps")),
-                    exerciseType: .inProgress(usePreviousAction: { _ in },
+                    exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
                                               addNoteAction: { }),
                     updateSetAction: { _, _ in },
                     updateModifierAction: { _, _ in })

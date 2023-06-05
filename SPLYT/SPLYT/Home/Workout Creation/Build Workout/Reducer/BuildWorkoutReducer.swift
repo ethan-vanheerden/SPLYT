@@ -10,8 +10,6 @@ import DesignSystem
 import ExerciseCore
 
 struct BuildWorkoutReducer {
-    private let workoutReducer = WorkoutReducer()
-    
     func reduce(_ domain: BuildWorkoutDomainResult) -> BuildWorkoutViewState {
         switch domain {
         case .loaded(let domain):
@@ -33,8 +31,8 @@ struct BuildWorkoutReducer {
 
 private extension BuildWorkoutReducer {
     func getDisplay(domain: BuildWorkoutDomain, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutDisplay {
-        let groups = workoutReducer.reduceExerciseGroups(groups: domain.builtWorkout.exerciseGroups)
-        let groupTitles = workoutReducer.getGroupTitles(workout: domain.builtWorkout)
+        let groups = WorkoutReducer.reduceExerciseGroups(groups: domain.builtWorkout.exerciseGroups)
+        let groupTitles = WorkoutReducer.getGroupTitles(workout: domain.builtWorkout)
         let currentGroup = domain.currentGroup
         let numExercisesInCurrentGroup = groups[currentGroup].count
         let lastGroupEmpty = groups.last?.isEmpty ?? true

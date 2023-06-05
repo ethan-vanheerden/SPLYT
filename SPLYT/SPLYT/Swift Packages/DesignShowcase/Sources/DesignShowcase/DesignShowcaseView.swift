@@ -2,7 +2,6 @@ import SwiftUI
 import DesignSystem
 
 struct DesignShowcaseView: View {
-    
     var body: some View {
         List(galleryTypes, id: \.title) { type in
             NavigationLink(type.title) {
@@ -26,6 +25,8 @@ struct DesignShowcaseView: View {
                     MoleculeFactory().makeView(molecule)
                 case let organism as Organism:
                     OrganismFactory().makeView(organism)
+                case let template as Template:
+                    TemplateFactory().makeView(template)
                 default:
                     EmptyView()
                 }
