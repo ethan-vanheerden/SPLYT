@@ -3,9 +3,9 @@ import Foundation
 /// Using a struct here since having these all be associated values in an enum hurts me
 public struct RepsWeightInput: InputType, Hashable {
     // Weight first, then reps
-    public let weight: Double?
+    public var weight: Double?
     public let weightPlaceholder: Double?
-    public let reps: Int?
+    public var reps: Int?
     public let repsPlaceholder: Int?
     
     public init(weight: Double? = nil,
@@ -23,6 +23,10 @@ public struct RepsWeightInput: InputType, Hashable {
         case weightPlaceholder = "weight_placeholder"
         case reps
         case repsPlaceholder = "reps_placeholder"
+    }
+    
+    public var hasValue: Bool {
+        return weight != nil || reps != nil
     }
     
     public var hasPlaceholder: Bool {

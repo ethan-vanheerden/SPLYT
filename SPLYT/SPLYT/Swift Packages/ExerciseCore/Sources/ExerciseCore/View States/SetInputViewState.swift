@@ -16,6 +16,12 @@ public enum SetInputViewState: Equatable, Hashable {
         }
     }
     
+    /// Determines if this input contains an actual value.
+    public var hasInput: Bool {
+        return getInput.hasValue
+    }
+    
+    ///  Determines if this input contains a placeholder.
     public var hasPlaceholder: Bool {
         return getInput.hasPlaceholder
     }

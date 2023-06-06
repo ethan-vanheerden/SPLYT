@@ -71,18 +71,20 @@ public struct WorkoutInteractor {
     ///   - setIndex: The set index in the exercise the set belongs to
     ///   - newSetInput: The new input of the set
     ///   - newModifierInput: The new input of the set's modifier
+    ///   - allowNilInput: Indicates if we should overrwrite set input values with nil.
     /// - Returns: The domain result with the updated set
     public static func updateSet(groupIndex: Int,
                                  groups: [ExerciseGroup],
                                  exerciseIndex: Int,
                                  setIndex: Int,
                                  newSetInput: SetInput?,
-                                 newModifierInput: SetInput?) -> [ExerciseGroup] {
+                                 newModifierInput: SetInput?,
+                                 allowNilInput: Bool = false ) -> [ExerciseGroup] {
         let exercises = groups[groupIndex].exercises
         let targetExercise = exercises[exerciseIndex]
         
         let oldSet = targetExercise.sets[setIndex]
-        let newSet = Set(input: oldSet.input.updateSetInput(with: newSetInput),
+        let newSet = Set(input: newSetInput ?? oldSet.input,
                          modifier: oldSet.modifier?.updateModifierInput(with: newModifierInput))
         
         return replaceSet(groupIndex: groupIndex,

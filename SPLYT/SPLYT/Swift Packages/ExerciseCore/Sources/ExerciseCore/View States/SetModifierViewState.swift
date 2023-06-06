@@ -24,6 +24,18 @@ public enum SetModifierViewState: Equatable, CaseIterable, Hashable {
         }
     }
     
+    /// Dtermines if this modifier has an input which has an inputted value already.
+    public var hasValue: Bool {
+        switch self {
+        case .dropSet(let set),
+                .restPause(let set):
+            return set.hasInput
+        case .eccentric:
+            return false
+        }
+    }
+    
+    /// Determines if this modifier has an input which has a placeholder.
     public var hasPlaceholder: Bool {
         switch self {
         case .dropSet(let set),
