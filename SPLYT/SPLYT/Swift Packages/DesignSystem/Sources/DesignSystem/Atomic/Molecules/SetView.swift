@@ -182,6 +182,14 @@ public struct SetView: View {
         }
     }
     
+    
+    /// Creates a binding to the textfield used for a set entry.
+    /// - Parameters:
+    ///   - value: The value to be present in the text field
+    ///   - input: The type of set input that this text field will represent
+    ///   - repsInRepsWeight: If this is a reps and weight set, indicates if this is for the rep text field
+    ///   - updateAction: The update action to perform when the text value in the text field changes
+    /// - Returns: A binding to use for getting/updating values for the set text fields.
     private func entryBinding(value: String,
                               input: SetInputViewState,
                               repsInRepsWeight: Bool = false,

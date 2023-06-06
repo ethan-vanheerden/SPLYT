@@ -8,8 +8,6 @@ struct SetEntry: View {
     private let title: String
     private let keyboardType: KeyboardInputType
     private let placeholder: String?
-    // We use a Double to represent the changed value of the entry (we cast it to its expected type later)
-//    private let updateAction: (Double) -> Void
     
     init(input: Binding<String>,
          title: String,
@@ -19,7 +17,6 @@ struct SetEntry: View {
         self.title = title
         self.keyboardType = keyboardType
         self.placeholder = placeholder
-//        self.updateAction = updateAction
     }
     
     var body: some View {
@@ -42,12 +39,6 @@ struct SetEntry: View {
                 .padding(.top, Layout.size(-0.75)) // Because of automatic padding on TextField
             Spacer()
         }
-//        .onChange(of: text) { _ in
-//            validateText()
-//            if let value = value {
-//                updateAction(value)
-//            }
-//        }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
@@ -57,30 +48,14 @@ struct SetEntry: View {
             }
         }
         .frame(width: Layout.size(8), height: Layout.size(8))
+        .onTapGesture {
+            // Dismiss keyboard if we tap again
+            if fieldFocused {
+                fieldFocused = false
+                
+            }
+        }
     }
-    
-//    private var value: Double? {
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        return formatter.number(from: text)?.doubleValue
-//    }
-//
-//    /// Ensures we only update the text field if the user entered a valid number
-//    private func validateText() {
-//        guard let _ = value else {
-//            text = ""
-//            return
-//        }
-//    }
-//
-//    private var keyboardType: UIKeyboardType {
-//        switch input {
-//        case .reps, .time:
-//            return .numberPad
-//        case .weight:
-//            return .decimalPad
-//        }
-//    }
     
     private var borderColor: SplytColor {
         return fieldFocused ? .lightBlue : .gray
