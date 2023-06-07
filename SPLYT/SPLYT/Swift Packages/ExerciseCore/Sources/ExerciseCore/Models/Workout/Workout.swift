@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// A created workout. This same struct is used for workouts that are planned, in-progress, or completed.
+/// A workout. This same struct is used for workouts that are planned, in-progress, or completed.
 public struct Workout: Codable, Equatable {
     public let id: String
     public let name: String

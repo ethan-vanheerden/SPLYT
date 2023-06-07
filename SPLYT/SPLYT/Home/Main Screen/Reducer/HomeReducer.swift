@@ -49,27 +49,25 @@ private extension HomeReducer {
         [Strings.workouts, Strings.plans]
     }
     
-    func getCreatedWorkouts(workouts: [String: Workout]) -> [CreatedWorkoutViewState] {
-        return workouts.values.map {
-            CreatedWorkoutViewState(id: $0.id,
-                                    title: $0.name,
-                                    subtitle: getWorkoutSubtitle(workout: $0),
-                                    lastCompleted: getLastCompletedTitle(date: $0.lastCompleted))
-        }.sorted {
-            // Sort by recently added since maps don't preserve sorted order
-            // TODO: Custom sorting operations in the future
-            $0.title < $1.title
-        }
+    func getCreatedWorkouts(workouts: [CreatedWorkout]) -> [CreatedWorkoutViewState] {
+        return workouts.sorted {  $0.createdAt < $1.createdAt }
+            .map { createdWorkout in
+                // Use the filename as the ID so we know where to look when a workout is selected
+                CreatedWorkoutViewState(id: createdWorkout.filename,
+                                        title: createdWorkout.workout.name,
+                                        subtitle: getWorkoutSubtitle(workout: createdWorkout.workout),
+                                        lastCompleted: getLastCompletedTitle(date: createdWorkout.workout.lastCompleted))
+            }
     }
     
     var FABState: HomeFABViewState {
         let createPlanState = HomeFABRowViewState(title: Strings.createPlan,
-                                              imageName: "calendar")
+                                                  imageName: "calendar")
         let createWorkoutState = HomeFABRowViewState(title: Strings.createWorkout,
-                                                 imageName: "figure.strengthtraining.traditional")
+                                                     imageName: "figure.strengthtraining.traditional")
         
         return HomeFABViewState(createPlanState: createPlanState,
-                            createWorkoutState: createWorkoutState)
+                                createWorkoutState: createWorkoutState)
     }
     
     func getWorkoutSubtitle(workout: Workout) -> String {

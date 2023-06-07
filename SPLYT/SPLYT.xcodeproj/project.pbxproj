@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA0C18DC2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C18DB2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift */; };
 		AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A33FD2882DF0300BCB792 /* SettingsView.swift */; };
 		AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */; };
 		AA1A34032882E14100BCB792 /* SettingsNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */; };
@@ -109,6 +110,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA0C18DB2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryCacheRequest.swift; sourceTree = "<group>"; };
 		AA1A33FD2882DF0300BCB792 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationRouter.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				AAF06EF329AE515D00E48918 /* CreatedWorkoutsCacheRequest.swift */,
 				AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */,
 				AA60DA02294D01EB008C7615 /* fallback_exercises.json */,
+				AA0C18DB2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift */,
 			);
 			path = Caching;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */,
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
 				AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */,
+				AA0C18DC2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift in Sources */,
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,
 			);

@@ -61,7 +61,8 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         .dialog(isOpen: deleteDialogId != nil,
                 viewState: display.deleteDialog,
                 primaryAction: { viewModel.send(.deleteWorkout(id: deleteDialogId ?? ""), taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: deleteDialogId ?? ""), isOpen: false), taskPriority: .userInitiated) })
+                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: deleteDialogId ?? ""), isOpen: false),
+                                                  taskPriority: .userInitiated) })
     }
     
     private func deleteDialogId(display: HomeDisplay) -> String? {
@@ -92,7 +93,8 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                     CreatedWorkoutView(viewState: viewState,
                                        tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0)) },
                                        editAction:{ navigationRouter.navigate(.editWorkout(id: $0)) },
-                                       deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0), isOpen: true), taskPriority: .userInitiated) })
+                                       deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0), isOpen: true),
+                                                                      taskPriority: .userInitiated) })
                 }
             }
             .padding(.horizontal, horizontalPadding)

@@ -79,7 +79,7 @@ private extension DoWorkoutInteractor {
     
     func handleLoadWorkout() -> DoWorkoutDomainResult {
         do {
-            let loadedWorkout = try service.loadWorkout(id: workoutId) // TODO: file used in the home screen just needs to be basic workout info - but we can use the id to get the workout history file of that workout where prev values can be used as placeholders
+            let loadedWorkout = try service.loadWorkout(id: workoutId)
             let workout = createPlaceholders(previousWorkout: loadedWorkout)
             let expandedGroups = getStartingExpandedGroups(groups: workout.exerciseGroups)
             let completedGroups = workout.exerciseGroups.map { _ in return false }

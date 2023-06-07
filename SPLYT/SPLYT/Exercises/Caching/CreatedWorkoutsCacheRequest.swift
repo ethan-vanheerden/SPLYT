@@ -9,9 +9,7 @@ import Caching
 import ExerciseCore
 
 struct CreatedWorkoutsCacheRequest: CacheRequest {
-    /* Dictionary of the workout ID to the actual workout. The associated workout will be
-       the most recent version of the workout completed that the user would like saved. */
-    typealias CacheData = [String: Workout]
+    typealias CacheData = [CreatedWorkout]
     let filename: String = "user_created_workouts"
     
     /*
@@ -27,3 +25,20 @@ struct CreatedWorkoutsCacheRequest: CacheRequest {
      Cons: This could take up a lot of space
      */
 }
+
+
+/*
+ 1. File for [ID: CreatedWorkout] for all workouts created
+ 2. File for [Workout] for all the times that workout has been done
+ 
+ File will use 1 to show all required info
+ 
+ Actual workout will use the specific workout file
+ 
+ Do we have an additional file for all workouts completed? (limit this to a specific amount at least on the cachine side?)
+ 
+ 
+ 1. File for [ID: Workout] for all workouts created
+ 2. File for [Workout] for a certain workout's history
+ 
+ */

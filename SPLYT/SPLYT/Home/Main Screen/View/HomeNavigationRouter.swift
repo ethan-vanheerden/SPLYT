@@ -56,7 +56,10 @@ private extension HomeNavigationRouter {
     }
     
     func handleSelectWorkout(id: String) {
-        let interactor = DoWorkoutInteractor(workoutId: id)
+        // TODO: 44 - remove with cache refactor
+        let cache = WorkoutHistoryCacheRequest(filename: id)
+        let service = DoWorkoutService(workoutCacheInteractor: cache)
+        let interactor = DoWorkoutInteractor(workoutId: id, service: service)
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel)
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)

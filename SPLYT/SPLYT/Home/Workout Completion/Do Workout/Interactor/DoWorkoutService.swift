@@ -23,16 +23,17 @@ enum DoWorkoutError: Error {
 
 // MARK: - Implementation
 
-struct DoWorkoutService<T: CacheInteractorType>: DoWorkoutServiceType where T.Request == CreatedWorkoutsCacheRequest {
+struct DoWorkoutService<T: CacheInteractorType>: DoWorkoutServiceType where T.Request == WorkoutHistoryCacheRequest {
     private let workoutCacheInteractor: T
     
-    init(workoutCacheInteractor: T = CacheInteractor(request: CreatedWorkoutsCacheRequest())) {
-        self.workoutCacheInteractor = workoutCacheInteractor
+    init(cache: T.Request) {
+        self.workoutCacheInteractor = CacheInteractor(request: cache)
     }
     
     func loadWorkout(id: String) throws -> Workout {
         let workoutDict = try workoutCacheInteractor.load()
-        guard let workout = workoutDict[id] else {
+        // The first workout in this list will be the most recent one
+        guard let workout = workoutDict.first else {
             throw DoWorkoutError.workoutNoExist
         }
         return workout
