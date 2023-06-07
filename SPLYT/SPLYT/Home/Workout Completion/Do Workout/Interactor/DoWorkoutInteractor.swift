@@ -20,6 +20,8 @@ enum DoWorkoutDomainAction {
     case removeSet(group: Int)
     case updateSet(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput, forModifier: Bool)
     case usePreviousInput(group: Int, exerciseIndex: Int, setIndex: Int, forModifier: Bool)
+    case toggleDialog(dialog: DoWorkoutDialog, isOpen: Bool)
+    case saveWorkout
 }
 
 // MARK: - Domain Results
@@ -27,18 +29,23 @@ enum DoWorkoutDomainAction {
 enum DoWorkoutDomainResult {
     case error
     case loaded(DoWorkoutDomain)
+    case dialog(dialog: DoWorkoutDialog, domain: DoWorkoutDomain)
+    case exit(DoWorkoutDomain)
 }
 
 // MARK: - Interactor
 
 final class DoWorkoutInteractor {
     private let workoutId: String
+    private let filename: String
     private let service: DoWorkoutServiceType
     private var savedDomain: DoWorkoutDomain?
     
     init(workoutId: String,
+         filename: String,
          service: DoWorkoutServiceType = DoWorkoutService()) {
         self.workoutId = workoutId
+        self.filename = filename
         self.service = service
     }
     
@@ -69,6 +76,10 @@ final class DoWorkoutInteractor {
                                           exerciseIndex: exerciseIndex,
                                           setIndex: setIndex,
                                           forModifier: forModifier)
+        case let .toggleDialog(dialog, isOpen):
+            return handleToggleDialog(dialog: dialog, isOpen: isOpen)
+        case .saveWorkout:
+            return handleSaveWorkout()
         }
     }
 }
@@ -79,7 +90,8 @@ private extension DoWorkoutInteractor {
     
     func handleLoadWorkout() -> DoWorkoutDomainResult {
         do {
-            let loadedWorkout = try service.loadWorkout(id: workoutId)
+            // TODO: use the workout ID to make a network call first instead of a cache lookup
+            let loadedWorkout = try service.loadWorkout(filename: filename, workoutId: workoutId)
             let workout = createPlaceholders(previousWorkout: loadedWorkout)
             let expandedGroups = getStartingExpandedGroups(groups: workout.exerciseGroups)
             let completedGroups = workout.exerciseGroups.map { _ in return false }
@@ -91,7 +103,8 @@ private extension DoWorkoutInteractor {
                                          completedGroups: completedGroups,
                                          fractionCompleted: 0)
             return updateDomain(domain: domain)
-        } catch {
+        } catch let error {
+            print(error)
             return .error
         }
     }
@@ -189,6 +202,22 @@ private extension DoWorkoutInteractor {
         
         return updateDomain(domain: domain)
     }
+    
+    func handleToggleDialog(dialog: DoWorkoutDialog, isOpen: Bool) -> DoWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        return isOpen ? .dialog(dialog: dialog, domain: domain) : .loaded(domain)
+    }
+    
+    func handleSaveWorkout() -> DoWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        do {
+            try service.saveWorkout(workout: domain.workout, filename: filename)
+            return .exit(domain)
+        } catch {
+            return .error
+        }
+    }
 }
 
 // MARK: - Other Private Helpers
@@ -204,7 +233,6 @@ private extension DoWorkoutInteractor {
         savedDomain = domain
         return .loaded(domain)
     }
-    
     
     /// Creates a new workout where all the sets in the new workout have placeholders which are the inputs of the
     /// old workout. This is so that users can see what they did last time easily.

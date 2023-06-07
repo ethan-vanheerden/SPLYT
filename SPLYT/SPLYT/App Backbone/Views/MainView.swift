@@ -37,7 +37,7 @@ struct MainView<VM: MainViewModelType>: View {
         ZStack {
             HomeViewController_SwiftUI()
                 .isVisible(selectedTab == .home)
-            ProfileView()
+            HistoryView()
                 .isVisible(selectedTab == .history)
             SettingsViewController_SwiftUI()
                 .isVisible(selectedTab == .settings)

@@ -21,6 +21,8 @@ enum DoWorkoutViewEvent {
     case removeSet(group: Int)
     case updateSet(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput, forModifier: Bool)
     case usePreviousInput(group: Int, exerciseIndex: Int, setIndex: Int, forModifier: Bool)
+    case toggleDialog(dialog: DoWorkoutDialog, isOpen: Bool)
+    case saveWorkout
 }
 
 // MARK: - View Model
@@ -46,6 +48,7 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
         case let .toggleGroupExpand(group, isExpanded):
             await react(domainAction: .toggleGroupExpand(group: group, isExpanded: isExpanded))
         case .completeGroup(let group):
+            // TODO: any placeholder which does not have an input over it should become the input after this
             await react(domainAction: .completeGroup(group: group))
         case .addSet(let group):
             await react(domainAction: .addSet(group: group))
@@ -62,6 +65,10 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
                                                         exerciseIndex: exerciseIndex,
                                                         setIndex: setIndex,
                                                         forModifier: forModifier))
+        case let .toggleDialog(dialog, isOpen):
+            await react(domainAction: .toggleDialog(dialog: dialog, isOpen: isOpen))
+        case .saveWorkout:
+            await react(domainAction: .saveWorkout)
         }
     }
 }

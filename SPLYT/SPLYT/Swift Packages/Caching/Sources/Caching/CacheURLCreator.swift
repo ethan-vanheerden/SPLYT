@@ -2,7 +2,6 @@ import Foundation
 
 /// Helper struct to get the URL associated with a `CacheRequest`
 // TODO: Look at ScenePhases for when we should be saving data in the background
-@available(iOS 16.0, *)
 struct CacheURLCreator {
     
     /// Gets the URL associated with the given CacheRequest

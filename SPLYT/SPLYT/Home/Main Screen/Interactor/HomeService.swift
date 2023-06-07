@@ -12,29 +12,30 @@ import ExerciseCore
 // MARK: - Protocol
 
 protocol HomeServiceType {
-    func loadWorkouts() throws -> [CreatedWorkout]
-    func saveWorkouts(_: [CreatedWorkout]) throws
+    func loadWorkouts() throws -> [String: CreatedWorkout]
+    func saveWorkouts(_: [String: CreatedWorkout]) throws
 }
 
 // MARK: - Implementation
 
-struct HomeService<T: CacheInteractorType>: HomeServiceType where T.Request == CreatedWorkoutsCacheRequest {
-    private let cacheInteractor: T
+struct HomeService: HomeServiceType {
+    private let cacheInteractor: CacheInteractor.Type
+    private let cacheRequest = CreatedWorkoutsCacheRequest()
     
-    init(cacheInteractor: T = CacheInteractor(request: CreatedWorkoutsCacheRequest())) {
+    init(cacheInteractor: CacheInteractor.Type = CacheInteractor.self) {
         self.cacheInteractor = cacheInteractor
     }
     
-    func loadWorkouts() throws -> [CreatedWorkout] {
+    func loadWorkouts() throws -> [String: CreatedWorkout] {
         // First check if they have any saved workouts yet
-        if !(try cacheInteractor.fileExists()) {
-            // Create the file by saving an empty list of workouts
-            try cacheInteractor.save(data: [])
+        if !(try cacheInteractor.fileExists(request: cacheRequest)) {
+            // Create the file by saving an empty dictionary of workouts
+            try cacheInteractor.save(request: cacheRequest, data: [:])
         }
-        return try cacheInteractor.load()
+        return try cacheInteractor.load(request: cacheRequest)
     }
     
-    func saveWorkouts(_ workouts: [CreatedWorkout]) throws {
-        try cacheInteractor.save(data: workouts)
+    func saveWorkouts(_ workouts: [String: CreatedWorkout]) throws {
+        try cacheInteractor.save(request: cacheRequest, data: workouts)
     }
 }

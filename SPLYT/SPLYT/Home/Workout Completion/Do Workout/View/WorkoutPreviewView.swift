@@ -35,7 +35,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
         switch viewModel.viewState {
         case .loading:
             ProgressView()
-        case .error:
+        case .error, .exit: // Should never get the .exit state in this view
             Text("Error!")
         case .loaded(let display):
             mainView(display: display)

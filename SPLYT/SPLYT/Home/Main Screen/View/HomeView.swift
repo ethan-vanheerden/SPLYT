@@ -91,7 +91,8 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
             VStack(spacing: Layout.size(1.5)) {
                 ForEach(workouts, id: \.id) { viewState in
                     CreatedWorkoutView(viewState: viewState,
-                                       tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0)) },
+                                       tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0,
+                                                                                               filename: viewState.filename)) },
                                        editAction:{ navigationRouter.navigate(.editWorkout(id: $0)) },
                                        deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0), isOpen: true),
                                                                       taskPriority: .userInitiated) })

@@ -9,7 +9,8 @@ import Caching
 import ExerciseCore
 
 struct CreatedWorkoutsCacheRequest: CacheRequest {
-    typealias CacheData = [CreatedWorkout]
+    // Dictionary of the workout ID to its associated object
+    typealias CacheData = [String: CreatedWorkout]
     let filename: String = "user_created_workouts"
     
     /*

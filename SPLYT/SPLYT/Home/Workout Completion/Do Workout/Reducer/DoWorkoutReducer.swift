@@ -14,7 +14,14 @@ struct DoWorkoutReducer {
         case .error:
             return .error
         case .loaded(let domain):
-            return reduceLoaded(domain: domain)
+            let display = getDisplay(domain: domain)
+            return .loaded(display)
+        case let .dialog(dialog, domain):
+            let display = getDisplay(domain: domain, dialog: dialog)
+            return .loaded(display)
+        case .exit(let domain):
+            let display = getDisplay(domain: domain)
+            return .exit(display)
         }
     }
 }
@@ -22,8 +29,7 @@ struct DoWorkoutReducer {
 // MARK: - Private
 
 private extension DoWorkoutReducer {
-    
-    func reduceLoaded(domain: DoWorkoutDomain) -> DoWorkoutViewState {
+    func getDisplay(domain: DoWorkoutDomain, dialog: DoWorkoutDialog? = nil) -> DoWorkoutDisplay {
         let progressBar = getProgressBar(fractionCompleted: domain.fractionCompleted)
         let groupTitles = WorkoutReducer.getGroupTitles(workout: domain.workout)
         let groups = getExerciseGroupStates(domain: domain, groupTitles: groupTitles)
@@ -34,8 +40,11 @@ private extension DoWorkoutReducer {
                                        groups: groups,
                                        expandedGroups: domain.expandedGroups,
                                        inCountdown: domain.inCountdown,
-                                       isResting: domain.isResting)
-        return .loaded(display)
+                                       isResting: domain.isResting,
+                                       presentedDialog: dialog,
+                                       finishDialog: finishDialog)
+
+        return display
     }
     
     func getProgressBar(fractionCompleted: Double) -> ProgressBarViewState {
@@ -74,8 +83,19 @@ private extension DoWorkoutReducer {
         
         return slider
     }
+    
+    var finishDialog: DialogViewState {
+        return DialogViewState(title: Strings.finishWorkout,
+                               subtitle: Strings.changesSaved,
+                               primaryButtonTitle: Strings.finish,
+                               secondaryButtonTitle: Strings.cancel)
+    }
 }
 
 fileprivate struct Strings {
     static let markAsComplete = "Mark as complete"
+    static let finishWorkout = "Finish Workout"
+    static let changesSaved = "All of you changes will be saved."
+    static let finish = "Finish"
+    static let cancel = "Cancel"
 }

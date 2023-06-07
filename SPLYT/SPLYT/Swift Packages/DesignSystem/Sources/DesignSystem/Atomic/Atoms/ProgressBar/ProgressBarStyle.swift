@@ -17,7 +17,6 @@ struct ProgressBarStyle: ProgressViewStyle {
             HStack {
                 RoundedRectangle(cornerRadius: Layout.size(1))
                     .fill(Color(splytColor: color))
-                    .shadow(color: Color(splytColor: color), radius: Layout.size(0.5))
                     .frame(width: proxy.size.width * fractionCompleted)
                 Spacer()
             }

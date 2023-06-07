@@ -32,6 +32,11 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             Text("Error")
         case .loaded(let display):
             mainView(display: display)
+        case .exit(let display):
+            mainView(display: display)
+                .onAppear {
+                    navigationRouter.navigate(.exit)
+                }
         }
     }
     
@@ -43,6 +48,11 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 .isVisible(display.inCountdown)
                 .animation(.default, value: display.inCountdown)
         }
+        .dialog(isOpen: display.presentedDialog == .finishWorkout,
+                viewState: display.finishDialog,
+                primaryAction: { viewModel.send(.saveWorkout, taskPriority: .userInitiated) }, // TODO: progress indicator?
+                secondaryAction: { viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: false),
+                                                  taskPriority: .userInitiated) })
     }
     
     @ViewBuilder
@@ -74,8 +84,11 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                 IconButton(iconName: "book.closed", action: { })
-                SplytButton(text: Strings.finish) {}
-                    .fixedSize()
+                SplytButton(text: Strings.finish) {
+                    viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: true),
+                                   taskPriority: .userInitiated)
+                }
+                .fixedSize()
             }
             ProgressBar(viewState: display.progressBar)
             Divider()
@@ -126,15 +139,15 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                           exerciseIndex: exerciseIndex,
                                           setIndex: setIndex,
                                           with: setInput,
-                                         forModifier: false),
+                                          forModifier: false),
                                taskPriority: .userInitiated)
             },
                                 updateModifierAction: { exerciseIndex, setIndex, setInput in
                 viewModel.send(.updateSet(group: groupIndex,
-                                               exerciseIndex: exerciseIndex,
-                                               setIndex: setIndex,
-                                               with: setInput,
-                                               forModifier: true),
+                                          exerciseIndex: exerciseIndex,
+                                          setIndex: setIndex,
+                                          with: setInput,
+                                          forModifier: true),
                                taskPriority: .userInitiated)
             },
                                 usePreviousInputAction: { exerciseIndex, setIndex, forModifier in

@@ -17,4 +17,6 @@ struct DoWorkoutDisplay: Equatable {
     let expandedGroups: [Bool]
     let inCountdown: Bool
     let isResting: Bool
+    let presentedDialog: DoWorkoutDialog?
+    let finishDialog: DialogViewState
 }

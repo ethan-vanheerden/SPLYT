@@ -14,7 +14,8 @@ import SwiftUI
 enum HomeNavigationEvent {
     case createPlan
     case createWorkout
-    case seletectWorkout(id: String)
+    // TODO: ID for a netowork call, filename for a cache call if needed
+    case seletectWorkout(id: String, filename: String)
     case editWorkout(id: String)
 }
 
@@ -29,8 +30,8 @@ final class HomeNavigationRouter: NavigationRouter {
             handleCreatePlan()
         case .createWorkout:
             handleCreateWorkout()
-        case .seletectWorkout(let id):
-            handleSelectWorkout(id: id)
+        case let .seletectWorkout(id, filename):
+            handleSelectWorkout(id: id, filename: filename)
         case .editWorkout(let id):
             handleEditWorkout(id: id)
         }
@@ -55,11 +56,8 @@ private extension HomeNavigationRouter {
         presentNavController(view: view, navRouter: &navRouter)
     }
     
-    func handleSelectWorkout(id: String) {
-        // TODO: 44 - remove with cache refactor
-        let cache = WorkoutHistoryCacheRequest(filename: id)
-        let service = DoWorkoutService(workoutCacheInteractor: cache)
-        let interactor = DoWorkoutInteractor(workoutId: id, service: service)
+    func handleSelectWorkout(id: String, filename: String) {
+        let interactor = DoWorkoutInteractor(workoutId: id, filename: filename)
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel)
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)

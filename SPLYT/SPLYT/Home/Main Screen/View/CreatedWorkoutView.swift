@@ -62,7 +62,8 @@ struct CreatedWorkoutView: View {
 // MARK: - View State
 
 struct CreatedWorkoutViewState: Equatable {
-    let id: String
+    let id: String // Workout ID
+    let filename: String
     let title: String
     let subtitle: String
     let lastCompleted: String?

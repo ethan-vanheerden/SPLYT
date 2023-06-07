@@ -49,14 +49,14 @@ private extension HomeReducer {
         [Strings.workouts, Strings.plans]
     }
     
-    func getCreatedWorkouts(workouts: [CreatedWorkout]) -> [CreatedWorkoutViewState] {
-        return workouts.sorted {  $0.createdAt < $1.createdAt }
-            .map { createdWorkout in
-                // Use the filename as the ID so we know where to look when a workout is selected
-                CreatedWorkoutViewState(id: createdWorkout.filename,
-                                        title: createdWorkout.workout.name,
-                                        subtitle: getWorkoutSubtitle(workout: createdWorkout.workout),
-                                        lastCompleted: getLastCompletedTitle(date: createdWorkout.workout.lastCompleted))
+    func getCreatedWorkouts(workouts: [String: CreatedWorkout]) -> [CreatedWorkoutViewState] {
+        return workouts.values.sorted { $0.createdAt > $1.createdAt }
+            .map {
+                CreatedWorkoutViewState(id: $0.workout.id,
+                                        filename: $0.filename,
+                                        title: $0.workout.name,
+                                        subtitle: getWorkoutSubtitle(workout: $0.workout),
+                                        lastCompleted: getLastCompletedTitle(date: $0.workout.lastCompleted))
             }
     }
     

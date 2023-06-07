@@ -16,7 +16,7 @@
 		AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewHostingController.swift */; };
 		AA2A22D428A069C4002357E4 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = AA2A22D328A069C4002357E4 /* Networking */; };
 		AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31442882CD1C003E7C64 /* HomeView.swift */; };
-		AA4A31472882CE63003E7C64 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* ProfileView.swift */; };
+		AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* HistoryView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
 		AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */; };
 		AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBAD29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift */; };
@@ -45,7 +45,7 @@
 		AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */; };
 		AA934048288888EF00309E83 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA934047288888EF00309E83 /* MainViewTests.swift */; };
 		AA93405028888B9B00309E83 /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93404F28888B9B00309E83 /* HomeViewTests.swift */; };
-		AA93405228888C1600309E83 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93405128888C1600309E83 /* ProfileViewTests.swift */; };
+		AA93405228888C1600309E83 /* HistoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93405128888C1600309E83 /* HistoryViewTests.swift */; };
 		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
 		AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */; };
 		AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */; };
@@ -120,7 +120,7 @@
 		AA2A22D228A05C61002357E4 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
 		AA2A22D728A2E7FD002357E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA4A31442882CD1C003E7C64 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		AA4A31462882CE63003E7C64 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		AA4A31462882CE63003E7C64 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		AA4A314D2882DAF7003E7C64 /* DesignShowcase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignShowcase; sourceTree = "<group>"; };
 		AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutNavigationRouter.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 		AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SnapshotTesting+Extensions.swift"; sourceTree = "<group>"; };
 		AA934047288888EF00309E83 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
 		AA93404F28888B9B00309E83 /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
-		AA93405128888C1600309E83 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
+		AA93405128888C1600309E83 /* HistoryViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewTests.swift; sourceTree = "<group>"; };
 		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
 		AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformerTests.swift; sourceTree = "<group>"; };
 		AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -343,7 +343,7 @@
 				AA4A31482882D089003E7C64 /* Swift Packages */,
 				AA825D6428723CDD0041D94A /* App Backbone */,
 				AA2A22D828A5BE88002357E4 /* Exercises */,
-				AA93404B28888B2400309E83 /* Profile */,
+				AA93404B28888B2400309E83 /* History */,
 				AA1A33FF2882E0B300BCB792 /* Settings */,
 				AA93404A28888B0400309E83 /* Home */,
 				AA825D40287238C90041D94A /* Preview Content */,
@@ -366,7 +366,7 @@
 				AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */,
 				AA93403C2888826400309E83 /* App Backbone */,
 				AADEC4B628A8420B00A5463B /* Exercises */,
-				AA93404D28888B5000309E83 /* Profile */,
+				AA93404D28888B5000309E83 /* History */,
 				AA93404E28888B5800309E83 /* Settings */,
 				AA93404C28888B4500309E83 /* Home */,
 			);
@@ -421,12 +421,12 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		AA93404B28888B2400309E83 /* Profile */ = {
+		AA93404B28888B2400309E83 /* History */ = {
 			isa = PBXGroup;
 			children = (
-				AA4A31462882CE63003E7C64 /* ProfileView.swift */,
+				AA4A31462882CE63003E7C64 /* HistoryView.swift */,
 			);
-			path = Profile;
+			path = History;
 			sourceTree = "<group>";
 		};
 		AA93404C28888B4500309E83 /* Home */ = {
@@ -438,12 +438,12 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		AA93404D28888B5000309E83 /* Profile */ = {
+		AA93404D28888B5000309E83 /* History */ = {
 			isa = PBXGroup;
 			children = (
-				AA93405128888C1600309E83 /* ProfileViewTests.swift */,
+				AA93405128888C1600309E83 /* HistoryViewTests.swift */,
 			);
-			path = Profile;
+			path = History;
 			sourceTree = "<group>";
 		};
 		AA93404E28888B5800309E83 /* Settings */ = {
@@ -897,7 +897,7 @@
 				AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */,
 				AACB297D2A1557E400AACB6B /* DoWorkoutView.swift in Sources */,
 				AAE79AEA296C610B0010848E /* NameWorkoutNavigationRouter.swift in Sources */,
-				AA4A31472882CE63003E7C64 /* ProfileView.swift in Sources */,
+				AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */,
 				AA1A34032882E14100BCB792 /* SettingsNavigationRouter.swift in Sources */,
 				AA60DA05295215DF008C7615 /* HomeNavigationController.swift in Sources */,
 				AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */,
@@ -937,7 +937,7 @@
 				AAF0FB46299815E700167B02 /* BuildWorkoutReducerTests.swift in Sources */,
 				AADCABDC2888944100FF09B9 /* SettingsNavigationRouterTests.swift in Sources */,
 				AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */,
-				AA93405228888C1600309E83 /* ProfileViewTests.swift in Sources */,
+				AA93405228888C1600309E83 /* HistoryViewTests.swift in Sources */,
 				AAF0FB48299962CF00167B02 /* BuildWorkoutViewModelTests.swift in Sources */,
 				AA52BBB229B78802009CDBDA /* MockHomeService.swift in Sources */,
 				AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */,
