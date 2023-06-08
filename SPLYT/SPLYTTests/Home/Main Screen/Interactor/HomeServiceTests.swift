@@ -11,11 +11,11 @@ import Mocking
 
 final class HomeServiceTests: XCTestCase {
     typealias Fixtures = HomeFixtures
-    private var cacheInteractor: MockCacheInteractor.Type!
+    private var cacheInteractor = MockCacheInteractor.self
     private var sut: HomeService!
     
     override func setUpWithError() throws {
-        self.cacheInteractor = MockCacheInteractor.self
+        cacheInteractor.reset()
         sut = HomeService(cacheInteractor: cacheInteractor)
     }
     

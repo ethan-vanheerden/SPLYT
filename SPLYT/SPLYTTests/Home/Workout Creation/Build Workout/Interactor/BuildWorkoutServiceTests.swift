@@ -11,12 +11,12 @@ import Mocking
 
 final class BuildWorkoutServiceTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
-    private var cacheInteractor: MockCacheInteractor.Type!
+    private var cacheInteractor = MockCacheInteractor.self
     private var sut: BuildWorkoutService!
     
     override func setUp() async throws {
-        self.cacheInteractor = MockCacheInteractor.self
-        self.sut = BuildWorkoutService(cacheInteractor: self.cacheInteractor)
+        cacheInteractor.reset()
+        self.sut = BuildWorkoutService(cacheInteractor: cacheInteractor)
     }
     
     func testLoadExercises_FileNoExist_LoadsAndSavesFallback_ErrorSaving() throws {
@@ -83,7 +83,7 @@ final class BuildWorkoutServiceTests: XCTestCase {
     
     func testSaveWorkout_FileExists_Success() {
         cacheInteractor.stubFileExists = true
-        cacheInteractor.stubData = [HomeFixtures.fullBodyWorkout]
+        cacheInteractor.stubData = HomeFixtures.loadedCreatedWorkouts
         XCTAssertNoThrow(try sut.saveWorkout(HomeFixtures.legWorkout))
         XCTAssertTrue(cacheInteractor.saveCalled)
     }

@@ -34,7 +34,7 @@ final class SetInputTests: XCTestCase {
         let inputTwo: SetInput = .time(input: .init(seconds: 60,
                                                     placeholder: 30))
         let expected: SetInput = .time(input: .init(seconds: 30,
-                                                    placeholder: 60))
+                                                    placeholder: 30))
         
         XCTAssertEqual(inputOne.placeholderInput, inputOne)
         XCTAssertEqual(inputTwo.placeholderInput, expected)

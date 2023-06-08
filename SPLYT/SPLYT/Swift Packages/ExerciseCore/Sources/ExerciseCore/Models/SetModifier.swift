@@ -25,10 +25,8 @@ public enum SetModifier: Codable, Equatable {
         // We don't care about the old modifier inputs, so ignore in the switch
         switch self {
         case .dropSet:
-//            return .dropSet(input: oldInput.updateSetInput(with: newInput))
             return .dropSet(input: newInput)
         case .restPause:
-//            return .restPause(input: oldInput.updateSetInput(with: newInput))
             return .restPause(input: newInput)
         default:
             return self // For modifiers with no set inputs

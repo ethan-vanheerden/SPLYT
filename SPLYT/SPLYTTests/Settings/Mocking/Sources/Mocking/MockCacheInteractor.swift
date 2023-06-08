@@ -1,8 +1,6 @@
 import Caching
 
-public final class MockCacheInteractor: CacheInteractorType {
-    public private(set) static var savedData: Codable? = nil
-    
+public final class MockCacheInteractor: CacheInteractorType {    
     public static var fileExistsThrow = false
     public static var stubFileExists = false
     public static func fileExists(request: any CacheRequest) throws -> Bool {
@@ -23,7 +21,7 @@ public final class MockCacheInteractor: CacheInteractorType {
     public static func save<T: CacheRequest>(request: T, data: T.CacheData) throws {
         saveCalled = true
         if saveThrow { throw MockError.someError }
-        savedData = data // Update the saved data
+        stubData = data // Update the saved data
     }
     
     public static var deleteThrow = false
@@ -31,5 +29,17 @@ public final class MockCacheInteractor: CacheInteractorType {
     public static func deleteFile(request: any CacheRequest) throws {
         deleteCalled = true
         if deleteThrow { throw MockError.someError }
+    }
+    
+    /// Use this function in the setUp of your tests
+    public static func reset() {
+        fileExistsThrow = false
+        stubFileExists = false
+        loadThrow = false
+        stubData = nil
+        saveThrow = false
+        saveCalled = false
+        deleteThrow = false
+        deleteCalled = false
     }
 }
