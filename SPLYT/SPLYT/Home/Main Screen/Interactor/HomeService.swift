@@ -19,10 +19,10 @@ protocol HomeServiceType {
 // MARK: - Implementation
 
 struct HomeService: HomeServiceType {
-    private let cacheInteractor: CacheInteractor.Type
+    private let cacheInteractor: CacheInteractorType.Type
     private let cacheRequest = CreatedWorkoutsCacheRequest()
     
-    init(cacheInteractor: CacheInteractor.Type = CacheInteractor.self) {
+    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
         self.cacheInteractor = cacheInteractor
     }
     

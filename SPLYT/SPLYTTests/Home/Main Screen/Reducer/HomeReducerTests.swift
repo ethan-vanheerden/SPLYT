@@ -28,7 +28,7 @@ final class HomeReducerTests: XCTestCase {
         
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkouts,
+                                          workouts: Fixtures.createdWorkoutViewStates,
                                           fab: Fixtures.fabState,
                                           showDialog: nil,
                                           deleteDialog: Fixtures.deleteDialog)
@@ -43,7 +43,7 @@ final class HomeReducerTests: XCTestCase {
         
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkouts,
+                                          workouts: Fixtures.createdWorkoutViewStates,
                                           fab: Fixtures.fabState,
                                           showDialog: .deleteWorkout(id: "leg-workout"),
                                           deleteDialog: Fixtures.deleteDialog)

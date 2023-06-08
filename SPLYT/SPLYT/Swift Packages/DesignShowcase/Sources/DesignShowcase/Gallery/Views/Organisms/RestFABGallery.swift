@@ -4,20 +4,28 @@ import DesignSystem
 struct RestFABGallery: View {
     @State private var isPresenting = false
     private let restPresets: [Int] = [60, 90, 120]
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher()
     
     var body: some View {
-        ZStack {
-//            RestFAB(isPresenting: $isPresenting,
-//                    viewState: viewState,
-//                    timer: timer,
-//                    selectRestAction: { _ in },
-//                    selectMoreAction: { },
-//                    stopAction: { })
+        VStack {
+            SectionHeader(viewState: .init(title: "Resting"))
+                .padding(.horizontal, Layout.size(2))
+            RestFAB(isPresenting: $isPresenting,
+                    workoutSeconds: .constant(0),
+                    viewState: viewState(isResting: true),
+                    selectRestAction: { },
+                    stopRestAction: { })
+            SectionHeader(viewState: .init(title: "Not Resting"))
+                .padding(.horizontal, Layout.size(2))
+            RestFAB(isPresenting: $isPresenting,
+                    workoutSeconds: .constant(0),
+                    viewState: viewState(isResting: false),
+                    selectRestAction: { },
+                    stopRestAction: { })
         }
     }
     
-//    private var viewState: RestFABViewState {
-//        return RestFABViewState(restPresets: restPresets)
-//    }
+    private func viewState(isResting: Bool) -> RestFABViewState {
+        return RestFABViewState(isResting: isResting,
+                                restPresets: restPresets)
+    }
 }

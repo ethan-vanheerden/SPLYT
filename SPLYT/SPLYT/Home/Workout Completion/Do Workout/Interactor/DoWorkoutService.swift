@@ -49,6 +49,9 @@ struct DoWorkoutService: DoWorkoutServiceType {
     
     func saveWorkout(workout: Workout, filename: String) throws {
         let request = WorkoutHistoryCacheRequest(filename: filename)
+        // Update the workout's last completed date
+        var workout = workout
+        workout.lastCompleted = Date.now
         
         if !(try cacheInteractor.fileExists(request: request)) {
             // If the file doesn't exist, save this workout as the only history

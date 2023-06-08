@@ -7,8 +7,7 @@ public struct SetView: View {
     @State private var showBaseActionSheet: Bool = false
     private let viewState: SetViewState
     private let exerciseType: ExerciseViewType
-    // Set index, the updated input, whether or not we should overwrite with nil values
-    private let updateSetAction: (Int, SetInput) -> Void
+    private let updateSetAction: (Int, SetInput) -> Void // Set index, the new input
     private let updateModifierAction: (Int, SetInput) -> Void
     private let iconButtonOffset = Layout.size(1)
     
@@ -82,28 +81,6 @@ public struct SetView: View {
             }
         }
     }
-    
-//    @ViewBuilder
-//    private var mainView: some View {
-//        VStack(alignment: .leading) {
-//            HStack {
-//                Text(viewState.title)
-//                    .subhead(style: .semiBold)
-//                    .alignmentGuide(VerticalAlignment.center) { d in
-//                        d[.bottom]
-//                    }
-//                Spacer()
-//                entryView(setInput: viewState.input,
-//                          updateAction: updateSetAction)
-//                Spacer()
-//                iconButton(forModifier: false)
-//                    .alignmentGuide(VerticalAlignment.center) { d in
-//                        d[.bottom] - iconButtonOffset
-//                    }
-//            }
-//            modifierView
-//        }
-//    }
     
     @ViewBuilder
     private func entryView(setInput: SetInputViewState,
@@ -204,7 +181,6 @@ public struct SetView: View {
             EmptyView()
         }
     }
-    
     
     /// Creates a binding to the textfield used for a set entry.
     /// - Parameters:

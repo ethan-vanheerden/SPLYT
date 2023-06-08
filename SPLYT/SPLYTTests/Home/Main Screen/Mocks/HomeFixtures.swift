@@ -87,7 +87,18 @@ struct HomeFixtures {
                                                   exerciseGroups: fullBodyWorkoutExercises,
                                                   lastCompleted: feb_3_2023_1630)
     
-    static let loadedWorkouts: [Workout] = [legWorkout, fullBodyWorkout]
+    static let createdLegWorkout: CreatedWorkout = CreatedWorkout(workout: legWorkout,
+                                                                  filename: "workout_history_leg-workout",
+                                                                  createdAt: feb_3_2023_1630)
+    
+    static let createdFullBodyWorkout: CreatedWorkout = CreatedWorkout(workout: fullBodyWorkout,
+                                                                       filename: "workout_history_full=body-workout",
+                                                                       createdAt: jan_1_2023_0800)
+    
+    static let loadedCreatedWorkouts: [String: CreatedWorkout] = [
+        "leg-workout": createdLegWorkout,
+        "full-body-workout": createdFullBodyWorkout
+    ]
     
     // MARK: - View State
     
@@ -97,17 +108,22 @@ struct HomeFixtures {
     
     static let segmentedControlTitles: [String] = ["WORKOUTS", "PLANS"]
     
-    static let createdLegWorkout: CreatedWorkoutViewState = CreatedWorkoutViewState(id: "leg-workout",
-                                                                                    title: "Legs",
-                                                                                    subtitle: "2 exercises",
-                                                                                    lastCompleted: nil)
+    static let createdLegWorkoutViewState: CreatedWorkoutViewState = CreatedWorkoutViewState(id: "leg-workout",
+                                                                                             filename: "workout_history_leg-workout",
+                                                                                             title: "Legs",
+                                                                                             subtitle: "2 exercises",
+                                                                                             lastCompleted: nil)
     
-    static let createdFullBodyWorkout: CreatedWorkoutViewState = CreatedWorkoutViewState(id: "full-body-workout",
-                                                                                         title: "Full Body",
-                                                                                         subtitle: "4 exercises",
-                                                                                         lastCompleted: "Last completed: Feb 3, 2023")
+    static let createdFullBodyWorkoutViewState: CreatedWorkoutViewState = CreatedWorkoutViewState(id: "full-body-workout",
+                                                                                                  filename: "workout_history_full=body-workout",
+                                                                                                  title: "Full Body",
+                                                                                                  subtitle: "4 exercises",
+                                                                                                  lastCompleted: "Last completed: Feb 3, 2023")
     
-    static let createdWorkouts: [CreatedWorkoutViewState] = [createdLegWorkout, createdFullBodyWorkout]
+    static let createdWorkoutViewStates: [CreatedWorkoutViewState] = [
+        createdLegWorkoutViewState,
+        createdFullBodyWorkoutViewState
+    ]
     
     static let createPlanState: HomeFABRowViewState = HomeFABRowViewState(title: "CREATE NEW PLAN",
                                                                           imageName: "calendar")

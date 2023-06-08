@@ -8,6 +8,7 @@
 import Foundation
 @testable import SPLYT
 import Mocking
+import ExerciseCore
 
 final class MockBuildWorkoutService: BuildWorkoutServiceType {
     typealias Fixtures = BuildWorkoutFixtures
@@ -27,7 +28,7 @@ final class MockBuildWorkoutService: BuildWorkoutServiceType {
     
     private(set) var saveWorkoutCalled = false
     var saveWorkoutThrow = false
-    func saveWorkout(_: SPLYT.Workout) throws {
+    func saveWorkout(_: Workout) throws {
         saveWorkoutCalled = true
         if saveWorkoutThrow { throw MockError.someError }
     }

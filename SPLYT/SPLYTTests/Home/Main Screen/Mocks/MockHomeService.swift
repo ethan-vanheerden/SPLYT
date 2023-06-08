@@ -8,19 +8,20 @@
 import Foundation
 @testable import SPLYT
 import Mocking
+import ExerciseCore
 
 final class MockHomeService: HomeServiceType {
     typealias Fixtures = HomeFixtures
     
     var loadWorkoutsThrow = false
-    func loadWorkouts() throws -> [SPLYT.Workout] {
+    func loadWorkouts() throws -> [String: CreatedWorkout] {
         if loadWorkoutsThrow { throw MockError.someError }
-        return Fixtures.loadedWorkouts
+        return Fixtures.loadedCreatedWorkouts
     }
     
     var saveWorkoutsThrow = false
     private(set) var saveWorkoutsCalled = false
-    func saveWorkouts(_: [SPLYT.Workout]) throws {
+    func saveWorkouts(_: [String: CreatedWorkout]) throws {
         saveWorkoutsCalled = true
         if saveWorkoutsThrow { throw MockError.someError }
     }

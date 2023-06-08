@@ -4,33 +4,52 @@ import SwiftUI
 @testable import SnapshotTesting
 
 final class RestFABTests: XCTestCase {
-    func testRestFABNotExpanded() throws {
+    private let restPresets = [60, 90, 120]
+    
+    func testRestFABNotRestingNotExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
                 .body()
-            RestFAB(isPresenting: .constant(false),
-                    viewState: RestFABViewState(restPresets: [30, 60, 90]),
-                    selectRestAction: { _ in },
-                    selectMoreAction: { },
-                    stopAction: { })
+            RestFAB(isPresenting:.constant(false),
+                    workoutSeconds: .constant(0),
+                    viewState: viewState(isResting: false),
+                    selectRestAction: { },
+                    stopRestAction: { })
         }
-            .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
     }
     
-    func testRestFABExpanded() throws {
+    func testRestFABNotRestingExpanded() throws {
         let view = ZStack {
             Text("Hello, World!")
                 .body()
-            RestFAB(isPresenting: .constant(true),
-                    viewState: RestFABViewState(restPresets: [30, 60, 90]),
-                    selectRestAction: { _ in },
-                    selectMoreAction: { },
-                    stopAction: { })
+            RestFAB(isPresenting:.constant(true),
+                    workoutSeconds: .constant(0),
+                    viewState: viewState(isResting: false),
+                    selectRestAction: { },
+                    stopRestAction: { })
         }
-            .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
+    }
+    
+    func testRestFABResting() throws {
+        let view = ZStack {
+            Text("Hello, World!")
+                .body()
+            RestFAB(isPresenting:.constant(false),
+                    workoutSeconds: .constant(0),
+                    viewState: viewState(isResting: true),
+                    selectRestAction: { },
+                    stopRestAction: { })
+        }
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
+    }
+    
+    private func viewState(isResting: Bool) -> RestFABViewState {
+        return RestFABViewState(isResting: isResting,
+                                restPresets: restPresets)
     }
 }

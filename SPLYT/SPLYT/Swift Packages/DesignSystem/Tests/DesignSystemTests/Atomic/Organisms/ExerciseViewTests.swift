@@ -59,7 +59,7 @@ final class ExerciseViewTests: XCTestCase {
             ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "PUSHUPS"),
                                                       sets: setsTwo,
                                                       canRemoveSet: false),
-                         type: .inProgress(usePreviousAction: { _ in }, addNoteAction: { }),
+                         type: .inProgress(usePreviousInputAction: { _, _ in }, addNoteAction: { }),
                          addSetAction: { },
                          removeSetAction: { },
                          updateSetAction: { _, _ in },
