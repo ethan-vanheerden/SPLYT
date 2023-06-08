@@ -8,6 +8,7 @@ public struct ExerciseView: View {
     private let removeSetAction: () -> Void
     private let updateSetAction: (Int, SetInput) -> Void // Int to represent the set index the action is happening to
     private let updateModifierAction: (Int, SetInput) -> Void
+    private let horizontalPadding = Layout.size(2)
     
     public init(viewState: ExerciseViewState,
                 type: ExerciseViewType,
@@ -33,7 +34,7 @@ public struct ExerciseView: View {
                         updateSetAction: updateSetAction,
                         updateModifierAction: updateModifierAction)
             }
-            .padding(.horizontal, Layout.size(2))
+            .padding(.horizontal, horizontalPadding)
             setButtons
         }
     }
@@ -52,8 +53,7 @@ public struct ExerciseView: View {
                 .frame(width: Layout.size(20))
             }
         }
-        .padding(.leading, Layout.size(4))
-        .padding(.trailing, Layout.size(2))
+        .padding(.horizontal, horizontalPadding)
     }
     
     @ViewBuilder

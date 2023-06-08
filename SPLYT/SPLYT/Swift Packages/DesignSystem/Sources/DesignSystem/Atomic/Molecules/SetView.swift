@@ -41,24 +41,69 @@ public struct SetView: View {
     @ViewBuilder
     private var mainView: some View {
         VStack(alignment: .leading) {
+            setRow(modifier: nil)
+            if let modifier = viewState.modifier {
+                setRow(modifier: modifier)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func setRow(modifier: SetModifierViewState?) -> some View {
+        HStack {
+            rowTitle(modifier: modifier)
+                .alignmentGuide(VerticalAlignment.center) { d in
+                    d[.bottom]
+                }
+                .frame(width: Layout.size(6), alignment: .leading) // Fixed width for consistent text field placement
+            Spacer()
+            if let modifier = modifier {
+                additionalSetView(modifier: modifier)
+            } else {
+                entryView(setInput: viewState.input, updateAction: updateSetAction)
+            }
+            Spacer()
+            iconButton(forModifier: modifier != nil)
+                .alignmentGuide(VerticalAlignment.center) { d in
+                    d[.bottom] - iconButtonOffset
+                }
+        }
+    }
+    
+    @ViewBuilder
+    private func rowTitle(modifier: SetModifierViewState?) -> some View {
+        if let modifier = modifier {
+            tagView(modifier: modifier)
+        } else {
             HStack {
                 Text(viewState.title)
                     .subhead(style: .semiBold)
-                    .alignmentGuide(VerticalAlignment.center) { d in
-                        d[.bottom]
-                    }
                 Spacer()
-                entryView(setInput: viewState.input,
-                          updateAction: updateSetAction)
-                Spacer()
-                iconButton(forModifier: false)
-                    .alignmentGuide(VerticalAlignment.center) { d in
-                        d[.bottom] - iconButtonOffset
-                    }
             }
-            modifierView
         }
     }
+    
+//    @ViewBuilder
+//    private var mainView: some View {
+//        VStack(alignment: .leading) {
+//            HStack {
+//                Text(viewState.title)
+//                    .subhead(style: .semiBold)
+//                    .alignmentGuide(VerticalAlignment.center) { d in
+//                        d[.bottom]
+//                    }
+//                Spacer()
+//                entryView(setInput: viewState.input,
+//                          updateAction: updateSetAction)
+//                Spacer()
+//                iconButton(forModifier: false)
+//                    .alignmentGuide(VerticalAlignment.center) { d in
+//                        d[.bottom] - iconButtonOffset
+//                    }
+//            }
+//            modifierView
+//        }
+//    }
     
     @ViewBuilder
     private func entryView(setInput: SetInputViewState,
@@ -117,7 +162,10 @@ public struct SetView: View {
             }
             .isVisible(usePreviousIconVisible(forModifier: forModifier))
         default:
-            EmptyView()
+            IconButton(iconName: "ellipsis",
+                       style: .secondary,
+                       iconColor: .lightBlue) { }
+                .isVisible(false) // Keeps spacing consistent even with no button
         }
     }
     
@@ -135,36 +183,13 @@ public struct SetView: View {
         return isVisible
     }
     
-    @ViewBuilder
-    private var modifierView: some View {
-        if let modifier = viewState.modifier {
-            VStack(alignment: .leading) {
-                tagView(modifier: modifier)
-                if modifier.hasAdditionalInput {
-                    HStack {
-                        Text(viewState.title)
-                            .subhead(style: .semiBold)
-                            .isVisible(false) // To keep center spacing consistent with normal sets
-                        Spacer()
-                        additionalSetView(modifier: modifier)
-                        Spacer()
-                        iconButton(forModifier: true)
-                            .alignmentGuide(VerticalAlignment.center) { d in
-                                d[.bottom] - iconButtonOffset
-                            }
-                    }
-                    .offset(y: -Layout.size(5)) // Because of automatic padding on text field
-                }
-            }
-        }
-    }
-    
     private func tagView(modifier: SetModifierViewState) -> some View {
         // If a tag has no associated SetInput, we can move it up
         let offset: CGFloat = modifier.hasAdditionalInput ? 0 : -Layout.size(3)
         let viewState = TagFactory.tagFromModifier(modifier: modifier)
         
         return Tag(viewState: viewState)
+            .fixedSize()
             .offset(y: offset)
     }
     

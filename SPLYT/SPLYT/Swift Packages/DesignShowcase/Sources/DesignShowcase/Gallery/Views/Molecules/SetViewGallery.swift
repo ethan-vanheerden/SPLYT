@@ -60,6 +60,7 @@ struct SetViewGallery: View {
                         updateSetAction: { _, _ in },
                         updateModifierAction: { _, _ in })
             }
+            .padding(.horizontal, Layout.size(2))
         }
     }
 }

@@ -191,6 +191,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                             )
                         }
                     }
+                    .padding(.horizontal, Layout.size(2))
                 }
                 .tag(groupIndex)
             }
