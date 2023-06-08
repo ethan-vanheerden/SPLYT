@@ -10,7 +10,7 @@ public struct SetView: View {
     // Set index, the updated input, whether or not we should overwrite with nil values
     private let updateSetAction: (Int, SetInput) -> Void
     private let updateModifierAction: (Int, SetInput) -> Void
-    private let horizontalPadding = Layout.size(4)
+    private let iconButtonOffset = Layout.size(1)
     
     public init(viewState: SetViewState,
                 exerciseType: ExerciseViewType,
@@ -40,19 +40,21 @@ public struct SetView: View {
     
     @ViewBuilder
     private var mainView: some View {
-        VStack {
-            ZStack(alignment: .top) { // Use ZStack to keep different type of set views center aligned
-                HStack {
-                    Text(viewState.title)
-                        .subhead(style: .semiBold)
-                        .padding(.leading, horizontalPadding)
-                        .padding(.trailing, Layout.size(4))
-                    Spacer()
-                    iconButton(forModifier: false)
-                }
+        VStack(alignment: .leading) {
+            HStack {
+                Text(viewState.title)
+                    .subhead(style: .semiBold)
+                    .alignmentGuide(VerticalAlignment.center) { d in
+                        d[.bottom]
+                    }
+                Spacer()
                 entryView(setInput: viewState.input,
                           updateAction: updateSetAction)
-                .offset(y: -Layout.size(0.5)) // TextField automatic padding issues
+                Spacer()
+                iconButton(forModifier: false)
+                    .alignmentGuide(VerticalAlignment.center) { d in
+                        d[.bottom] - iconButtonOffset
+                    }
             }
             modifierView
         }
@@ -109,13 +111,11 @@ public struct SetView: View {
             IconButton(iconName: "ellipsis",
                        style: .secondary,
                        iconColor: .lightBlue) { showBaseActionSheet = true }
-                .padding(.trailing, horizontalPadding)
         case let .inProgress(usePreviousInputAction, _):
             IconButton(iconName: "arrow.counterclockwise") {
                 usePreviousInputAction(viewState.setIndex, forModifier)
             }
             .isVisible(usePreviousIconVisible(forModifier: forModifier))
-            .padding(.trailing, horizontalPadding)
         default:
             EmptyView()
         }
@@ -138,32 +138,30 @@ public struct SetView: View {
     @ViewBuilder
     private var modifierView: some View {
         if let modifier = viewState.modifier {
-            ZStack(alignment: .top) {
-                HStack {
-                    tagView(modifier: modifier)
-                        .padding(.leading, horizontalPadding)
-                        .padding(.top, Layout.size(0.5)) // TextField automatic padding issues
-                    Spacer()
-                    iconButton(forModifier: true)
+            VStack(alignment: .leading) {
+                tagView(modifier: modifier)
+                if modifier.hasAdditionalInput {
+                    HStack {
+                        Text(viewState.title)
+                            .subhead(style: .semiBold)
+                            .isVisible(false) // To keep center spacing consistent with normal sets
+                        Spacer()
+                        additionalSetView(modifier: modifier)
+                        Spacer()
+                        iconButton(forModifier: true)
+                            .alignmentGuide(VerticalAlignment.center) { d in
+                                d[.bottom] - iconButtonOffset
+                            }
+                    }
+                    .offset(y: -Layout.size(5)) // Because of automatic padding on text field
                 }
-                additionalSetView(modifier: modifier)
-                    .offset(y: -Layout.size(1)) // TextField automatic padding issues
             }
-        } else {
-            EmptyView()
         }
     }
     
     private func tagView(modifier: SetModifierViewState) -> some View {
-        var offset: CGFloat = 0 // If a tag has no associated SetInput, we can move it up
-        
-        switch modifier {
-        case .eccentric:
-            offset = -Layout.size(6)
-        default:
-            break
-        }
-        
+        // If a tag has no associated SetInput, we can move it up
+        let offset: CGFloat = modifier.hasAdditionalInput ? 0 : -Layout.size(3)
         let viewState = TagFactory.tagFromModifier(modifier: modifier)
         
         return Tag(viewState: viewState)

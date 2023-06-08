@@ -26,13 +26,14 @@ public struct ExerciseView: View {
     public var body: some View {
         VStack {
             SectionHeader(viewState: viewState.header)
-                .padding(.horizontal, Layout.size(2))
+                
             ForEach(viewState.sets, id: \.setIndex) { set in
                 SetView(viewState: set,
                         exerciseType: type,
                         updateSetAction: updateSetAction,
                         updateModifierAction: updateModifierAction)
             }
+            .padding(.horizontal, Layout.size(2))
             setButtons
         }
     }

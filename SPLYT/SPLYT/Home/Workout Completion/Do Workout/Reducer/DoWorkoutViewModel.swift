@@ -48,7 +48,6 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
         case let .toggleGroupExpand(group, isExpanded):
             await react(domainAction: .toggleGroupExpand(group: group, isExpanded: isExpanded))
         case .completeGroup(let group):
-            // TODO: any placeholder which does not have an input over it should become the input after this
             await react(domainAction: .completeGroup(group: group))
         case .addSet(let group):
             await react(domainAction: .addSet(group: group))

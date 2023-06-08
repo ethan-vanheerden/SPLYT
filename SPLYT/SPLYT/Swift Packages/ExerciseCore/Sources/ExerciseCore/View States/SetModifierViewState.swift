@@ -45,4 +45,15 @@ public enum SetModifierViewState: Equatable, CaseIterable, Hashable {
             return false
         }
     }
+    
+    /// Determines if this modifier has additional input associated with it.
+    public var hasAdditionalInput: Bool {
+        switch self {
+        case .dropSet,
+                .restPause:
+            return true
+        case .eccentric:
+            return false
+        }
+    }
 }
