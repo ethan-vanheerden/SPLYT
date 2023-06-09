@@ -25,7 +25,6 @@ struct HomeService: HomeServiceType {
         self.workoutService = workoutService
     }
     
-    
     func loadWorkouts() throws -> [String: CreatedWorkout] {
         return try workoutService.loadWorkouts()
     }

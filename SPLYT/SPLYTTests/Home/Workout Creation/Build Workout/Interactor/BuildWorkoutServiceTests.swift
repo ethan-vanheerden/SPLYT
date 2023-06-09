@@ -8,9 +8,11 @@
 import XCTest
 @testable import SPLYT
 import Mocking
+@testable import ExerciseCore
 
 final class BuildWorkoutServiceTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
     private var cacheInteractor = MockCacheInteractor.self
     private var sut: BuildWorkoutService!
     
@@ -66,25 +68,25 @@ final class BuildWorkoutServiceTests: XCTestCase {
     
     func testSaveWorkout_FileNoExist_ErrorSaving() {
         cacheInteractor.saveThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(HomeFixtures.legWorkout))
+        XCTAssertThrowsError(try sut.saveWorkout(WorkoutFixtures.legWorkout))
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileNoExist_Success() {
-        XCTAssertNoThrow(try sut.saveWorkout(HomeFixtures.legWorkout))
+        XCTAssertNoThrow(try sut.saveWorkout(WorkoutFixtures.legWorkout))
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileExists_ErrorLoadingWorkouts() {
         cacheInteractor.stubFileExists = true
-        XCTAssertThrowsError(try sut.saveWorkout(HomeFixtures.legWorkout))
+        XCTAssertThrowsError(try sut.saveWorkout(WorkoutFixtures.legWorkout))
         XCTAssertFalse(cacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileExists_Success() {
         cacheInteractor.stubFileExists = true
-        cacheInteractor.stubData = HomeFixtures.loadedCreatedWorkouts
-        XCTAssertNoThrow(try sut.saveWorkout(HomeFixtures.legWorkout))
+        cacheInteractor.stubData = WorkoutFixtures.loadedCreatedWorkouts
+        XCTAssertNoThrow(try sut.saveWorkout(WorkoutFixtures.legWorkout))
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
 }

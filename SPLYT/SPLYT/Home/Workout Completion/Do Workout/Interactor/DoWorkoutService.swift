@@ -67,7 +67,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
         }
         
         // Save the CreatedWorkout so we update the last completed field
-        var createdWorkout = try workoutService.loadWorkout(id: workout.id)
+        let createdWorkout = try workoutService.loadWorkout(id: workout.id)
         let newCreatedWorkout = CreatedWorkout(workout: workout,
                                                filename: createdWorkout.filename,
                                                createdAt: createdWorkout.createdAt)

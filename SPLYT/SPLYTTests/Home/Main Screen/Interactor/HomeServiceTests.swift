@@ -8,15 +8,17 @@
 import XCTest
 @testable import SPLYT
 import Mocking
+@testable import ExerciseCore
 
 final class HomeServiceTests: XCTestCase {
-    typealias Fixtures = HomeFixtures
+    typealias Fixtures = WorkoutModelFixtures
     private var cacheInteractor = MockCacheInteractor.self
     private var sut: HomeService!
     
     override func setUpWithError() throws {
         cacheInteractor.reset()
-        sut = HomeService(cacheInteractor: cacheInteractor)
+        let workoutService = CreatedWorkoutsService(cacheInteractor: cacheInteractor)
+        sut = HomeService(workoutService: workoutService)
     }
     
     func testLoadWorkouts_FileNoExist_SaveError() {

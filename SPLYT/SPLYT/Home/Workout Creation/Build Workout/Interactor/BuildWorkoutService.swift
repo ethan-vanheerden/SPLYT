@@ -29,10 +29,9 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
     private let cacheInteractor: CacheInteractorType.Type
     private let workoutService: CreatedWorkoutsServiceType
     
-    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self,
-         workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
+    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
         self.cacheInteractor = cacheInteractor
-        self.workoutService = workoutService
+        self.workoutService = CreatedWorkoutsService(cacheInteractor: cacheInteractor)
     }
     
     func loadAvailableExercises() throws -> [String: AvailableExercise] {

@@ -8,10 +8,10 @@
 import Foundation
 @testable import SPLYT
 import Mocking
-import ExerciseCore
+@testable import ExerciseCore
 
 final class MockHomeService: HomeServiceType {
-    typealias Fixtures = HomeFixtures
+    typealias Fixtures = WorkoutModelFixtures
     
     var loadWorkoutsThrow = false
     func loadWorkouts() throws -> [String: CreatedWorkout] {

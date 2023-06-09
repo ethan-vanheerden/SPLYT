@@ -12,7 +12,8 @@ let package = Package(
             targets: ["ExerciseCore"]),
     ],
     dependencies: [
-        .package(path: "../Caching")
+        .package(path: "../Caching"),
+        .package(path: "../Mocking")
     ],
     targets: [
         .target(
@@ -23,7 +24,8 @@ let package = Package(
         .testTarget(
             name: "ExerciseCoreTests",
             dependencies: [
-                "ExerciseCore"
+                "ExerciseCore",
+                "Mocking"
             ]),
     ]
 )
