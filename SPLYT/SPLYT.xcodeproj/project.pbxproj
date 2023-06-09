@@ -15,6 +15,7 @@
 		AA1A34082882E24D00BCB792 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34072882E24D00BCB792 /* Core */; };
 		AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewHostingController.swift */; };
 		AA2A22D428A069C4002357E4 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = AA2A22D328A069C4002357E4 /* Networking */; };
+		AA3FC96A2A329A5600873137 /* CreatedWorkoutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FC9692A329A5600873137 /* CreatedWorkoutViewTests.swift */; };
 		AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31442882CD1C003E7C64 /* HomeView.swift */; };
 		AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* HistoryView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
@@ -85,7 +86,6 @@
 		AAEBFCFB295E406D00D284F0 /* HomeInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEBFCFA295E406D00D284F0 /* HomeInteractorTests.swift */; };
 		AAEBFCFD295E412400D284F0 /* HomeNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEBFCFC295E412400D284F0 /* HomeNavigationRouterTests.swift */; };
 		AAEBFCFF295E427E00D284F0 /* HomeReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEBFCFE295E427E00D284F0 /* HomeReducerTests.swift */; };
-		AAF06EF429AE515D00E48918 /* CreatedWorkoutsCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF06EF329AE515D00E48918 /* CreatedWorkoutsCacheRequest.swift */; };
 		AAF06EF729AE9B6300E48918 /* HomeDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF06EF629AE9B6300E48918 /* HomeDomain.swift */; };
 		AAF06EF929B016BF00E48918 /* CreatedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF06EF829B016BF00E48918 /* CreatedWorkoutView.swift */; };
 		AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB372989B9C100167B02 /* BuildWorkoutServiceTests.swift */; };
@@ -119,6 +119,7 @@
 		AA1A340D2884893800BCB792 /* Architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Architecture.md; sourceTree = "<group>"; };
 		AA2A22D228A05C61002357E4 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
 		AA2A22D728A2E7FD002357E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AA3FC9692A329A5600873137 /* CreatedWorkoutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedWorkoutViewTests.swift; sourceTree = "<group>"; };
 		AA4A31442882CD1C003E7C64 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AA4A31462882CE63003E7C64 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
@@ -194,7 +195,6 @@
 		AAEBFCFA295E406D00D284F0 /* HomeInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractorTests.swift; sourceTree = "<group>"; };
 		AAEBFCFC295E412400D284F0 /* HomeNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationRouterTests.swift; sourceTree = "<group>"; };
 		AAEBFCFE295E427E00D284F0 /* HomeReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReducerTests.swift; sourceTree = "<group>"; };
-		AAF06EF329AE515D00E48918 /* CreatedWorkoutsCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedWorkoutsCacheRequest.swift; sourceTree = "<group>"; };
 		AAF06EF629AE9B6300E48918 /* HomeDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDomain.swift; sourceTree = "<group>"; };
 		AAF06EF829B016BF00E48918 /* CreatedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedWorkoutView.swift; sourceTree = "<group>"; };
 		AAF0FB372989B9C100167B02 /* BuildWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutServiceTests.swift; sourceTree = "<group>"; };
@@ -386,7 +386,6 @@
 		AA893136294A4A2900D7B4B1 /* Caching */ = {
 			isa = PBXGroup;
 			children = (
-				AAF06EF329AE515D00E48918 /* CreatedWorkoutsCacheRequest.swift */,
 				AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */,
 				AA60DA02294D01EB008C7615 /* fallback_exercises.json */,
 				AA0C18DB2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift */,
@@ -712,6 +711,7 @@
 			children = (
 				AA93404F28888B9B00309E83 /* HomeViewTests.swift */,
 				AAEBFCFC295E412400D284F0 /* HomeNavigationRouterTests.swift */,
+				AA3FC9692A329A5600873137 /* CreatedWorkoutViewTests.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -883,7 +883,6 @@
 				AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */,
 				AA60DA07295217CF008C7615 /* HomeViewModel.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
-				AAF06EF429AE515D00E48918 /* CreatedWorkoutsCacheRequest.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
@@ -931,6 +930,7 @@
 				AAEBFCF9295E3EC400D284F0 /* HomeViewModelTests.swift in Sources */,
 				AA934048288888EF00309E83 /* MainViewTests.swift in Sources */,
 				AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */,
+				AA3FC96A2A329A5600873137 /* CreatedWorkoutViewTests.swift in Sources */,
 				AAE79AF6296E13100010848E /* NameWorkoutNavigationRouterTests.swift in Sources */,
 				AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */,
 				AA52BBB029B69938009CDBDA /* HomeServiceTests.swift in Sources */,

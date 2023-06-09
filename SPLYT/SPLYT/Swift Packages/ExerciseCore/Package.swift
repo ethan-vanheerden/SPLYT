@@ -12,11 +12,13 @@ let package = Package(
             targets: ["ExerciseCore"]),
     ],
     dependencies: [
+        .package(path: "../Caching")
     ],
     targets: [
         .target(
             name: "ExerciseCore",
             dependencies: [
+                "Caching"
             ]),
         .testTarget(
             name: "ExerciseCoreTests",

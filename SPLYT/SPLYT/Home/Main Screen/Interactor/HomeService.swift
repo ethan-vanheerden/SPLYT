@@ -19,23 +19,18 @@ protocol HomeServiceType {
 // MARK: - Implementation
 
 struct HomeService: HomeServiceType {
-    private let cacheInteractor: CacheInteractorType.Type
-    private let cacheRequest = CreatedWorkoutsCacheRequest()
+    private let workoutService: CreatedWorkoutsServiceType
     
-    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
-        self.cacheInteractor = cacheInteractor
+    init(workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
+        self.workoutService = workoutService
     }
     
+    
     func loadWorkouts() throws -> [String: CreatedWorkout] {
-        // First check if they have any saved workouts yet
-        if !(try cacheInteractor.fileExists(request: cacheRequest)) {
-            // Create the file by saving an empty dictionary of workouts
-            try cacheInteractor.save(request: cacheRequest, data: [:])
-        }
-        return try cacheInteractor.load(request: cacheRequest)
+        return try workoutService.loadWorkouts()
     }
     
     func saveWorkouts(_ workouts: [String: CreatedWorkout]) throws {
-        try cacheInteractor.save(request: cacheRequest, data: workouts)
+        try workoutService.saveWorkouts(workouts)
     }
 }

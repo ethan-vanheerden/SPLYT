@@ -6,7 +6,6 @@
 //
 
 import Caching
-import ExerciseCore
 
 struct CreatedWorkoutsCacheRequest: CacheRequest {
     // Dictionary of the workout ID to its associated object

@@ -31,7 +31,12 @@ final class DoWorkoutDomain: Equatable {
     }
     
     static func == (lhs: DoWorkoutDomain, rhs: DoWorkoutDomain) -> Bool {
-        return true // TODO
+        return lhs.workout == rhs.workout &&
+        lhs.inCountdown == rhs.inCountdown &&
+        lhs.isResting == rhs.isResting &&
+        lhs.expandedGroups == rhs.expandedGroups &&
+        lhs.completedGroups == rhs.completedGroups &&
+        lhs.fractionCompleted == rhs.fractionCompleted
     }
 }
 

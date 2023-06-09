@@ -27,9 +27,12 @@ enum BuildWorkoutError: Error {
 
 struct BuildWorkoutService: BuildWorkoutServiceType  {
     private let cacheInteractor: CacheInteractorType.Type
+    private let workoutService: CreatedWorkoutsServiceType
     
-    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
+    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self,
+         workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
         self.cacheInteractor = cacheInteractor
+        self.workoutService = workoutService
     }
     
     func loadAvailableExercises() throws -> [String: AvailableExercise] {
@@ -60,22 +63,11 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
     }
     
     func saveWorkout(_ workout: Workout) throws {
-        let request = CreatedWorkoutsCacheRequest()
         // The workout filename will be "workout_history_{workout_id}"
         let createdWorkout = CreatedWorkout(workout: workout,
                                             filename: "workout_history_\(workout.id)",
                                             createdAt: Date.now)
-        // First load the user's current workouts so we can add the new one
-        if !(try cacheInteractor.fileExists(request: request)) {
-            // No workouts created yet, so just save the new one
-            try cacheInteractor.save(request: request, data: [workout.id: createdWorkout])
-        } else {
-            var createdWorkouts = try cacheInteractor.load(request: request)
-            createdWorkouts[workout.id] = createdWorkout
-            
-            // Now save the new workout list
-            try cacheInteractor.save(request: request, data: createdWorkouts)
-        }
+        try workoutService.saveWorkout(createdWorkout)
     }
 }
 
