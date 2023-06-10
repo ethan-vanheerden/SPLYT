@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: move to test target but xcode is broken
 /// Contains test models for things related to workouts.
 struct WorkoutModelFixtures {
     static let jan_1_2023_0800: Date = Date(timeIntervalSince1970: 1672560000)
@@ -42,17 +43,17 @@ struct WorkoutModelFixtures {
     }
     
     static let repsWeight3Sets: [(SetInput, SetModifier?)] = [
-        (.repsWeight(input: .init(weight: 135, reps: 12)), nil),
+        (.repsWeight(input: .init(weight: 135, weightPlaceholder: 100, reps: 12)), nil),
         (.repsWeight(input: .init(weight: 140, reps: 10)), nil),
         (.repsWeight(input: .init(weight: 155, reps: 8)),
          .dropSet(input: .repsWeight(input: .init(weight: 100))))
     ]
     
     static let repsWeight4Sets: [(SetInput, SetModifier?)] = [
-        (.repsWeight(input: .init(weight: 135, reps: 12)), nil),
+        (.repsWeight(input: .init(weight: 135, weightPlaceholder: 100, reps: 12)), nil),
         (.repsWeight(input: .init(weight: 140, reps: 10)), nil),
         (.repsWeight(input: .init(weight: 155, reps: 8)), nil),
-        (.repsWeight(input: .init(weight: 225, reps: 2)), nil)
+        (.repsWeight(input: .init(weight: 225, reps: 2, repsPlaceholder: 0)), nil)
     ]
     
     static let legWorkoutExercises: [ExerciseGroup] = [
@@ -87,4 +88,14 @@ struct WorkoutModelFixtures {
         "leg-workout": createdLegWorkout,
         "full-body-workout": createdFullBodyWorkout
     ]
+    
+    static func exerciseGroups(numGroups: Int, groupExercises: [Int: [Exercise]]) -> [ExerciseGroup] {
+        var groups = [ExerciseGroup]()
+        
+        for i in stride(from: 0, to: numGroups, by: 1) {
+            let exercises = groupExercises[i]!
+            groups.append(ExerciseGroup(exercises: exercises))
+        }
+        return groups
+    }
 }

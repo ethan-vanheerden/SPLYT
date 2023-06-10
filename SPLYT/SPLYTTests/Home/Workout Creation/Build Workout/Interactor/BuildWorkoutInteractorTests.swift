@@ -35,8 +35,8 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await loadExercises()
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1,
-                                                                                    groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
+                                                                                           groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0)
@@ -55,7 +55,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         groupMap[1] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
@@ -74,7 +74,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeGroup(group: 0))
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
@@ -88,7 +88,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeGroup(group: 1)) // Not a group
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
@@ -103,7 +103,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeGroup(group: 1)) // Remove the added group
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
@@ -118,7 +118,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeGroup(group: 0)) // Remove the first group
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
@@ -134,7 +134,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeGroup(group: 0)) // Remove our current group
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
@@ -183,7 +183,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             (.repsWeight(input: .init()), nil)
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -213,7 +213,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             WorkoutFixtures.backSquat(inputs: sets),
             WorkoutFixtures.benchPress(inputs: sets) // Added exercises has 2 sets as well
         ]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -230,7 +230,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1,
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
                                                                                     groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
@@ -258,7 +258,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[0] = [
             WorkoutFixtures.benchPress(inputs: sets) // Now in group 0
         ]
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1,
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
                                                                                     groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                 builtWorkout: workout,
@@ -288,7 +288,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             count: 2
         )
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -319,7 +319,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             WorkoutFixtures.backSquat(inputs: sets),
             WorkoutFixtures.benchPress(inputs: sets)
         ]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -340,7 +340,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
@@ -364,7 +364,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: [
             (.repsWeight(input: .init()), nil)])
         ]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -390,7 +390,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             (.repsWeight(input: .init()), nil)
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -422,7 +422,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             WorkoutFixtures.backSquat(inputs: sets),
             WorkoutFixtures.benchPress(inputs: sets)
         ]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -458,7 +458,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             (.repsWeight(input: .init(weight: 135, reps: 12)), nil)
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -502,7 +502,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             WorkoutFixtures.benchPress(inputs: benchSets),
             WorkoutFixtures.inclineDBRow(inputs: rowSets)
         ]
-        let groups = Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -532,7 +532,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             count: 2
         )
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -574,7 +574,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         ]
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -591,7 +591,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
@@ -623,7 +623,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         groupMap[1] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 1)
@@ -643,7 +643,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0)
@@ -657,7 +657,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0)
@@ -675,7 +675,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleDialog(type: .leave, isOpen: true))
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0)
@@ -688,7 +688,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleDialog(type: .save, isOpen: true))
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0)
@@ -702,7 +702,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleDialog(type: .leave, isOpen: false))
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0)
@@ -734,7 +734,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = [(.repsWeight(input: .init()), .eccentric)]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -777,7 +777,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: squatSets)]
         groupMap[1] = [WorkoutFixtures.benchPress(inputs: benchSets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -811,7 +811,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
             (.repsWeight(input: .init()), nil)
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -854,7 +854,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: squatSets)]
         groupMap[1] = [WorkoutFixtures.benchPress(inputs: benchSets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -896,7 +896,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
              .restPause(input: .repsOnly(input: .init(reps: 8))))
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -945,7 +945,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         ]
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: squatSets)]
         groupMap[1] = [WorkoutFixtures.benchPress(inputs: benchSets)]
-        let groups = Fixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
         let workout = Fixtures.builtWorkout(exerciseGroups: groups)
         
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,

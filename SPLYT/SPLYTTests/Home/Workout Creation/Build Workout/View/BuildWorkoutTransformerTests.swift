@@ -8,16 +8,16 @@
 import XCTest
 @testable import SPLYT
 import ExerciseCore
-import DesignSystem
+@testable import DesignSystem
 
 final class BuildWorkoutTransformerTests: XCTestCase {
-    typealias Fixtures = BuildWorkoutFixtures
+    typealias StateFixtures = WorkoutViewStateFixtures
     private let sut = BuildWorkoutTransformer()
     
     
     func testTransformModifier_DropSet_RepsWeight() {
-        let setInputViewState: SetInputViewState = .repsWeight(weightTitle: Fixtures.lbs,
-                                                               repsTitle: Fixtures.reps,
+        let setInputViewState: SetInputViewState = .repsWeight(weightTitle: StateFixtures.lbs,
+                                                               repsTitle: StateFixtures.reps,
                                                                input: .init(weight: 100, reps: 8))
         let modifierViewState: SetModifierViewState = .dropSet(set: setInputViewState)
         
@@ -42,7 +42,7 @@ final class BuildWorkoutTransformerTests: XCTestCase {
     }
     
     func testTransformModifier_DropSet_Time() {
-        let setInputViewState: SetInputViewState = .time(title: Fixtures.sec,
+        let setInputViewState: SetInputViewState = .time(title: StateFixtures.sec,
                                                          input: .init(seconds: 10))
         let modifierViewState: SetModifierViewState = .dropSet(set: setInputViewState)
         

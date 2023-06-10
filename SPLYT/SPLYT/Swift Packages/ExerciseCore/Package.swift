@@ -26,6 +26,6 @@ let package = Package(
             dependencies: [
                 "ExerciseCore",
                 "Mocking"
-            ]),
+            ])
     ]
 )

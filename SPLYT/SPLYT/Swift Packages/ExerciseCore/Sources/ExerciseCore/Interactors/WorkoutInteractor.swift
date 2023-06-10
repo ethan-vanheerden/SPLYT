@@ -19,7 +19,7 @@ public struct WorkoutInteractor {
             let numSets = sets.count
             guard numSets >= 1 else { continue }
             
-            // The new set should have the same input (without placeholder) as the previous set
+            // The new set should have the same input as the previous set
             let set = Set(input: sets[numSets - 1].input, // Has same input (with values) as previous set
                           modifier: nil)
             sets.append(set)

@@ -1,0 +1,119 @@
+@testable import ExerciseCore
+
+// TODO: this needs to be moved to the test target but xcode is broken
+struct WorkoutViewStateFixtures {
+    typealias ModelFixtures = WorkoutModelFixtures
+    
+    static let reps = "reps"
+    
+    static let lbs = "lbs"
+    
+    static let sec = "sec"
+    
+    static func createSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [SetViewState] {
+        var sets = [SetViewState]()
+        
+        for (index, (input, modifier)) in inputs.enumerated() {
+            let set = SetViewState(setIndex: index,
+                                   title: "Set \(index + 1)",
+                                   type: input,
+                                   modifier: modifier)
+            sets.append(set)
+        }
+        return sets
+    }
+    
+    static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                   includeHeaderLine: Bool = true) -> ExerciseViewState {
+        let header = SectionHeaderViewState(title: "Back Squat",
+                                            includeLine: includeHeaderLine)
+        return ExerciseViewState(header: header,
+                                 sets: createSetViewStates(inputs: inputs),
+                                 canRemoveSet: inputs.count > 1)
+    }
+    
+    static func barLungesViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                   includeHeaderLine: Bool = true) -> ExerciseViewState {
+        let header = SectionHeaderViewState(title: "Bar Lunges",
+                                            includeLine: includeHeaderLine)
+        return ExerciseViewState(header: header,
+                                 sets: createSetViewStates(inputs: inputs),
+                                 canRemoveSet: inputs.count > 1)
+    }
+    
+    static func benchPressViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                    includeHeaderLine: Bool = true) -> ExerciseViewState {
+        let header = SectionHeaderViewState(title: "Bench Press",
+                                            includeLine: includeHeaderLine)
+        return ExerciseViewState(header: header,
+                                 sets: createSetViewStates(inputs: inputs),
+                                 canRemoveSet: inputs.count > 1)
+    }
+    
+    static func inclineDBRowViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                      includeHeaderLine: Bool = true) -> ExerciseViewState {
+        let header = SectionHeaderViewState(title: "Incline Dumbbell Row",
+                                            includeLine: includeHeaderLine)
+        return ExerciseViewState(header: header,
+                                 sets: createSetViewStates(inputs: inputs),
+                                 canRemoveSet: inputs.count > 1)
+    }
+    
+    static let repsWeight3Sets: [(SetInputViewState, SetModifierViewState?)] = [
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weight: 135, weightPlaceholder: 100, reps: 12)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weight: 140, reps: 10)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weight: 155, reps: 8)),
+         .dropSet(set: .repsWeight(weightTitle: lbs,
+                                   repsTitle: reps,
+                                   input: .init(weight: 100))))
+    ]
+    
+    static let repsWeight4Sets: [(SetInputViewState, SetModifierViewState?)] = [
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weight: 135, weightPlaceholder: 100, reps: 12)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weight: 140, reps: 10)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weight: 155, reps: 8)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weight: 225, reps: 2, repsPlaceholder: 0)),
+         nil)
+    ]
+    
+    static func legWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+        [
+            [backSquatViewState(inputs: repsWeight4Sets, includeHeaderLine: includeHeaderLine)],
+            [barLungesViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine)]
+        ]
+    }
+    
+    static func fullBodyWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+        [
+            [
+                backSquatViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine),
+                benchPressViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine)
+            ],
+            [
+                barLungesViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine),
+                inclineDBRowViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine)
+            ]
+        ]
+    }
+    
+    static let emptyRepsWeightSet: SetInputViewState = .repsWeight(weightTitle: lbs, repsTitle: reps)
+}
