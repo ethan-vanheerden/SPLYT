@@ -68,6 +68,7 @@
 		AADCABE1288898A100FF09B9 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */; };
 		AADCABE328889A0C00FF09B9 /* SettingsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */; };
 		AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */; };
+		AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */; };
 		AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */; };
 		AADEC4B928A8428900A5463B /* GetAvailableExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */; };
 		AAE79AEA296C610B0010848E /* NameWorkoutNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79AE9296C610B0010848E /* NameWorkoutNavigationRouter.swift */; };
@@ -177,6 +178,7 @@
 		AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewTests.swift; sourceTree = "<group>"; };
 		AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsViewModel.swift; sourceTree = "<group>"; };
+		AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutServiceTests.swift; sourceTree = "<group>"; };
 		AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequest.swift; sourceTree = "<group>"; };
 		AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequestTests.swift; sourceTree = "<group>"; };
 		AAE79AE9296C610B0010848E /* NameWorkoutNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameWorkoutNavigationRouter.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 		AA93404C28888B4500309E83 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AADCC9B12A36319400B45827 /* Workout Completion */,
 				AAF0FB4F29997AFF00167B02 /* Main Screen */,
 				AAE79AF0296E12090010848E /* Workout Creation */,
 			);
@@ -503,6 +506,54 @@
 				AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AADCC9B12A36319400B45827 /* Workout Completion */ = {
+			isa = PBXGroup;
+			children = (
+				AADCC9B22A3631A300B45827 /* Do Workout */,
+			);
+			path = "Workout Completion";
+			sourceTree = "<group>";
+		};
+		AADCC9B22A3631A300B45827 /* Do Workout */ = {
+			isa = PBXGroup;
+			children = (
+				AADCC9B62A3631DC00B45827 /* Reducer */,
+				AADCC9B52A3631D600B45827 /* Interactor */,
+				AADCC9B42A3631C400B45827 /* View */,
+				AADCC9B32A3631BA00B45827 /* Mocks */,
+			);
+			path = "Do Workout";
+			sourceTree = "<group>";
+		};
+		AADCC9B32A3631BA00B45827 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AADCC9B42A3631C400B45827 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AADCC9B52A3631D600B45827 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AADCC9B62A3631DC00B45827 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reducer;
 			sourceTree = "<group>";
 		};
 		AADEC4B128A8398F00A5463B /* Networking */ = {
@@ -916,6 +967,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA93405028888B9B00309E83 /* HomeViewTests.swift in Sources */,
+				AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */,
 				AAE79AF9296E15550010848E /* NameWorkoutViewTests.swift in Sources */,
 				AAF0FB3D298ABBA900167B02 /* BuildWorkoutFixtures.swift in Sources */,
 				AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */,

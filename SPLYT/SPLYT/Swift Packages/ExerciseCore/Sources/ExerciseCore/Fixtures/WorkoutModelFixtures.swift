@@ -66,27 +66,35 @@ struct WorkoutModelFixtures {
         ExerciseGroup(exercises: [barLunges(inputs: repsWeight3Sets), inclineDBRow(inputs: repsWeight3Sets)])
     ]
     
-    static let legWorkout: Workout = Workout(id: "leg-workout",
+    static let legWorkoutId = "leg-workout"
+    
+    static let fullBodyWorkoutId = "full-body-workout"
+    
+    static let legWorkout: Workout = Workout(id: legWorkoutId,
                                              name: "Legs",
                                              exerciseGroups: legWorkoutExercises,
                                              lastCompleted: nil)
     
-    static let fullBodyWorkout: Workout = Workout(id: "full-body-workout",
+    static let fullBodyWorkout: Workout = Workout(id: fullBodyWorkoutId,
                                                   name: "Full Body",
                                                   exerciseGroups: fullBodyWorkoutExercises,
                                                   lastCompleted: feb_3_2023_1630)
     
+    static let legWorkoutFilename = "workout_history_leg-workout"
+    
+    static let fullBodyWorkoutFilename = "workout_history_full-body-workout"
+    
     static let createdLegWorkout: CreatedWorkout = CreatedWorkout(workout: legWorkout,
-                                                                  filename: "workout_history_leg-workout",
+                                                                  filename: legWorkoutFilename,
                                                                   createdAt: feb_3_2023_1630)
     
     static let createdFullBodyWorkout: CreatedWorkout = CreatedWorkout(workout: fullBodyWorkout,
-                                                                       filename: "workout_history_full=body-workout",
+                                                                       filename: fullBodyWorkoutFilename,
                                                                        createdAt: jan_1_2023_0800)
     
     static let loadedCreatedWorkouts: [String: CreatedWorkout] = [
-        "leg-workout": createdLegWorkout,
-        "full-body-workout": createdFullBodyWorkout
+        legWorkoutId: createdLegWorkout,
+        fullBodyWorkoutId: createdFullBodyWorkout
     ]
     
     static func exerciseGroups(numGroups: Int, groupExercises: [Int: [Exercise]]) -> [ExerciseGroup] {
