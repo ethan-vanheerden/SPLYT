@@ -41,6 +41,8 @@
 		AA825D3D287238BF0041D94A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA825D3C287238BF0041D94A /* MainView.swift */; };
 		AA825D3F287238C90041D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA825D3E287238C90041D94A /* Assets.xcassets */; };
 		AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA825D41287238C90041D94A /* Preview Assets.xcassets */; };
+		AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */; };
+		AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */; };
 		AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */; };
 		AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93403D288882AB00309E83 /* MainViewModelTests.swift */; };
 		AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */; };
@@ -150,6 +152,8 @@
 		AA825D3E287238C90041D94A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA825D41287238C90041D94A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA825D47287238CB0041D94A /* SPLYTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPLYTTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutInteractorTests.swift; sourceTree = "<group>"; };
+		AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDoWorkoutService.swift; sourceTree = "<group>"; };
 		AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercisesCacheRequest.swift; sourceTree = "<group>"; };
 		AA893139294A4FA600D7B4B1 /* Caching */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Caching; sourceTree = "<group>"; };
 		AA93403D288882AB00309E83 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
@@ -530,6 +534,7 @@
 		AADCC9B32A3631BA00B45827 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */,
+				AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -981,12 +987,14 @@
 				AAEBFCFF295E427E00D284F0 /* HomeReducerTests.swift in Sources */,
 				AAEBFCF9295E3EC400D284F0 /* HomeViewModelTests.swift in Sources */,
 				AA934048288888EF00309E83 /* MainViewTests.swift in Sources */,
+				AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */,
 				AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */,
 				AA3FC96A2A329A5600873137 /* CreatedWorkoutViewTests.swift in Sources */,
 				AAE79AF6296E13100010848E /* NameWorkoutNavigationRouterTests.swift in Sources */,
 				AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */,
 				AA52BBB029B69938009CDBDA /* HomeServiceTests.swift in Sources */,
 				AAF0FB46299815E700167B02 /* BuildWorkoutReducerTests.swift in Sources */,
+				AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */,
 				AADCABDC2888944100FF09B9 /* SettingsNavigationRouterTests.swift in Sources */,
 				AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */,
 				AA93405228888C1600309E83 /* HistoryViewTests.swift in Sources */,

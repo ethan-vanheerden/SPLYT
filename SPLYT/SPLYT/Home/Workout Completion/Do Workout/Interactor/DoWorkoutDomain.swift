@@ -41,6 +41,7 @@ final class DoWorkoutDomain: Equatable {
 }
 
 // MARK: - Dialog Type
+
 enum DoWorkoutDialog: Equatable {
     case finishWorkout
 }

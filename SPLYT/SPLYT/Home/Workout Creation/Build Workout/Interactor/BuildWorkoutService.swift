@@ -26,12 +26,13 @@ enum BuildWorkoutError: Error {
 // MARK: - Implementation
 
 struct BuildWorkoutService: BuildWorkoutServiceType  {
-    private let cacheInteractor: CacheInteractorType.Type
+    private let cacheInteractor: CacheInteractorType
     private let workoutService: CreatedWorkoutsServiceType
     
-    init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
+    init(cacheInteractor: CacheInteractorType = CacheInteractor(),
+         workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
         self.cacheInteractor = cacheInteractor
-        self.workoutService = CreatedWorkoutsService(cacheInteractor: cacheInteractor)
+        self.workoutService = workoutService
     }
     
     func loadAvailableExercises() throws -> [String: AvailableExercise] {

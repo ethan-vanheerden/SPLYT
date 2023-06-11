@@ -1,38 +1,41 @@
 import Caching
 
-public final class MockCacheInteractor: CacheInteractorType {    
-    public static var fileExistsThrow = false
-    public static var stubFileExists = false
-    public static func fileExists(request: any CacheRequest) throws -> Bool {
+public final class MockCacheInteractor: CacheInteractorType {
+    
+    public init() { }
+    
+    public var fileExistsThrow = false
+    public var stubFileExists = false
+    public func fileExists(request: any CacheRequest) throws -> Bool {
         if fileExistsThrow { throw MockError.someError }
         return stubFileExists
     }
     
-    public static var loadThrow = false
-    public static var stubData: Codable? = nil
-    public static func load<T: CacheRequest>(request: T) throws -> T.CacheData {
+    public var loadThrow = false
+    public var stubData: Codable? = nil
+    public func load<T: CacheRequest>(request: T) throws -> T.CacheData {
         guard !loadThrow,
               let stubData = stubData as? T.CacheData else { throw MockError.someError }
         return stubData
     }
     
-    public static var saveThrow = false
-    public private(set) static var saveCalled = false
-    public static func save<T: CacheRequest>(request: T, data: T.CacheData) throws {
+    public var saveThrow = false
+    public private(set) var saveCalled = false
+    public func save<T: CacheRequest>(request: T, data: T.CacheData) throws {
         saveCalled = true
         if saveThrow { throw MockError.someError }
         stubData = data // Update the saved data
     }
     
-    public static var deleteThrow = false
-    public private(set) static var deleteCalled = false
-    public static func deleteFile(request: any CacheRequest) throws {
+    public var deleteThrow = false
+    public private(set) var deleteCalled = false
+    public func deleteFile(request: any CacheRequest) throws {
         deleteCalled = true
         if deleteThrow { throw MockError.someError }
     }
     
     /// Use this function in the setUp of your tests
-    public static func reset() {
+    public func reset() {
         fileExistsThrow = false
         stubFileExists = false
         loadThrow = false

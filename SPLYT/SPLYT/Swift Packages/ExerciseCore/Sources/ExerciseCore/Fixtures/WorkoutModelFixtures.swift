@@ -49,6 +49,13 @@ struct WorkoutModelFixtures {
          .dropSet(input: .repsWeight(input: .init(weight: 100))))
     ]
     
+    static let repsWeight3SetsPlaceholders: [(SetInput, SetModifier?)] = [
+        (.repsWeight(input: .init(weightPlaceholder: 135, repsPlaceholder: 12)), nil),
+        (.repsWeight(input: .init(weightPlaceholder: 140, repsPlaceholder: 10)), nil),
+        (.repsWeight(input: .init(weightPlaceholder: 155, repsPlaceholder: 8)),
+         .dropSet(input: .repsWeight(input: .init(weightPlaceholder: 100))))
+    ]
+    
     static let repsWeight4Sets: [(SetInput, SetModifier?)] = [
         (.repsWeight(input: .init(weight: 135, weightPlaceholder: 100, reps: 12)), nil),
         (.repsWeight(input: .init(weight: 140, reps: 10)), nil),
@@ -56,15 +63,46 @@ struct WorkoutModelFixtures {
         (.repsWeight(input: .init(weight: 225, reps: 2, repsPlaceholder: 0)), nil)
     ]
     
+    static let repsWeight4SetsPlaceholders: [(SetInput, SetModifier?)] = [
+        (.repsWeight(input: .init(weightPlaceholder: 135, repsPlaceholder: 12)), nil),
+        (.repsWeight(input: .init(weightPlaceholder: 140, repsPlaceholder: 10)), nil),
+        (.repsWeight(input: .init(weightPlaceholder: 155, repsPlaceholder: 8)), nil),
+        (.repsWeight(input: .init(weightPlaceholder: 225, repsPlaceholder: 2)), nil)
+    ]
+    
     static let legWorkoutExercises: [ExerciseGroup] = [
         ExerciseGroup(exercises: [backSquat(inputs: repsWeight4Sets)]),
         ExerciseGroup(exercises: [barLunges(inputs: repsWeight3Sets)])
     ]
     
-    static let fullBodyWorkoutExercises: [ExerciseGroup] = [
-        ExerciseGroup(exercises: [backSquat(inputs: repsWeight3Sets), benchPress(inputs: repsWeight3Sets)]),
-        ExerciseGroup(exercises: [barLunges(inputs: repsWeight3Sets), inclineDBRow(inputs: repsWeight3Sets)])
+    /// What the planned workout will be transformed into when we do a workout
+    static let legWorkoutExercises_WorkoutStart: [ExerciseGroup] = [
+        ExerciseGroup(exercises: [backSquat(inputs: repsWeight4SetsPlaceholders)]),
+        ExerciseGroup(exercises: [barLunges(inputs: repsWeight3SetsPlaceholders)])
     ]
+    
+    static let fullBodyWorkoutExercises: [ExerciseGroup] = [
+        ExerciseGroup(exercises: [
+            backSquat(inputs: repsWeight3Sets),
+            benchPress(inputs: repsWeight3Sets)
+        ]),
+        ExerciseGroup(exercises: [
+            barLunges(inputs: repsWeight3Sets),
+            inclineDBRow(inputs: repsWeight3Sets)
+        ])
+    ]
+    
+    static let fullBodyWorkoutExercises_WorkoutStart: [ExerciseGroup] = [
+        ExerciseGroup(exercises: [
+            backSquat(inputs: repsWeight3SetsPlaceholders),
+            benchPress(inputs: repsWeight3SetsPlaceholders)
+        ]),
+        ExerciseGroup(exercises: [
+            barLunges(inputs: repsWeight3SetsPlaceholders),
+            inclineDBRow(inputs: repsWeight3SetsPlaceholders)
+        ])
+    ]
+    
     
     static let legWorkoutId = "leg-workout"
     
@@ -75,10 +113,20 @@ struct WorkoutModelFixtures {
                                              exerciseGroups: legWorkoutExercises,
                                              lastCompleted: nil)
     
+    static let legWorkout_WorkoutStart: Workout = Workout(id: legWorkoutId,
+                                                          name: "Legs",
+                                                          exerciseGroups: legWorkoutExercises_WorkoutStart,
+                                                          lastCompleted: nil)
+    
     static let fullBodyWorkout: Workout = Workout(id: fullBodyWorkoutId,
                                                   name: "Full Body",
                                                   exerciseGroups: fullBodyWorkoutExercises,
                                                   lastCompleted: feb_3_2023_1630)
+    
+    static let fullBodyWorkout_WorkoutStart: Workout = Workout(id: fullBodyWorkoutId,
+                                                               name: "Full Body",
+                                                               exerciseGroups: fullBodyWorkoutExercises_WorkoutStart,
+                                                               lastCompleted: feb_3_2023_1630)
     
     static let legWorkoutFilename = "workout_history_leg-workout"
     

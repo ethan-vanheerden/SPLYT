@@ -17,10 +17,10 @@ public protocol CreatedWorkoutsServiceType {
 // MARK: - Implementation
 
 public struct CreatedWorkoutsService: CreatedWorkoutsServiceType {
-    private let cacheInteractor: CacheInteractorType.Type
+    private let cacheInteractor: CacheInteractorType
     private let cacheRequest = CreatedWorkoutsCacheRequest()
     
-    public init(cacheInteractor: CacheInteractorType.Type = CacheInteractor.self) {
+    public init(cacheInteractor: CacheInteractorType = CacheInteractor()) {
         self.cacheInteractor = cacheInteractor
     }
     

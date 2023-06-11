@@ -26,7 +26,7 @@ enum DoWorkoutDomainAction {
 
 // MARK: - Domain Results
 
-enum DoWorkoutDomainResult {
+enum DoWorkoutDomainResult: Equatable {
     case error
     case loaded(DoWorkoutDomain)
     case dialog(dialog: DoWorkoutDialog, domain: DoWorkoutDomain)
@@ -103,8 +103,7 @@ private extension DoWorkoutInteractor {
                                          completedGroups: completedGroups,
                                          fractionCompleted: 0)
             return updateDomain(domain: domain)
-        } catch let error {
-            print(error)
+        } catch {
             return .error
         }
     }
@@ -132,14 +131,20 @@ private extension DoWorkoutInteractor {
         domain.completedGroups[group] = true
         domain.expandedGroups[group] = false // Close the completed group
         
-        // Expand the next incomplete group
-        var nextGroupIndex = group + 1
-        while domain.expandedGroups.count > nextGroupIndex {
-            if !domain.completedGroups[nextGroupIndex] {
-                domain.expandedGroups[nextGroupIndex] = true
-                break
-            }
-            nextGroupIndex += 1
+        // Look for the next group to expand after this group
+        var nextExpandedGroupIndex = getNextFalseIndex(completedGroups: domain.completedGroups,
+                                                       startIndex: group + 1,
+                                                       endIndex: domain.completedGroups.count)
+        
+        // If not found, wrap around and search from the start
+        if nextExpandedGroupIndex == nil {
+            nextExpandedGroupIndex = getNextFalseIndex(completedGroups: domain.completedGroups,
+                                                       startIndex: 0,
+                                                       endIndex: group)
+        }
+        
+        if let nextExpandedGroupIndex = nextExpandedGroupIndex {
+            domain.expandedGroups[nextExpandedGroupIndex] = true
         }
         
         // Update the fraction completed
@@ -280,6 +285,9 @@ private extension DoWorkoutInteractor {
         return numTrue / Double(completedGroups.count)
     }
     
+    /// Creates a new set where the new set's placeholders are the actual inputs of the given set.
+    /// - Parameter setInput: The set to create placeholders from
+    /// - Returns: A set which only has placeholders
     func createSetPlaceholder(setInput: SetInput) -> SetInput {
         switch setInput {
         case .repsWeight(let input):
@@ -295,6 +303,10 @@ private extension DoWorkoutInteractor {
         }
     }
     
+    /// Creates a new modifier like the one given, except if the given modifier has inputs, the new modifier
+    /// will have these inputs be the placeholders of its input.
+    /// - Parameter modifier: The modifier to create the placeholders from
+    /// - Returns: A modifier whose input (if any) only has placeholders
     func createModifierPlaceholder(modifier: SetModifier?) -> SetModifier? {
         guard let modifier = modifier else { return nil }
         switch modifier {
@@ -305,5 +317,23 @@ private extension DoWorkoutInteractor {
         case .eccentric:
             return .eccentric
         }
+    }
+    
+    /// Finds the next false value in the list between the given indices.
+    /// - Parameters:
+    ///   - completedGroups: The list of booleans
+    ///   - startIndex: The index to start searching for a false value (inclusive)
+    ///   - endIndex: The index to stop searching for a false value (exclusive)
+    /// - Returns: The index of the next false value in the list, if it exists (nil otherwise)
+    func getNextFalseIndex(completedGroups: [Bool], startIndex: Int, endIndex: Int) -> Int? {
+        var currentIndex = startIndex
+        
+        while currentIndex < endIndex {
+            if !completedGroups[currentIndex] {
+                return currentIndex
+            }
+            currentIndex += 1
+        }
+        return nil
     }
 }

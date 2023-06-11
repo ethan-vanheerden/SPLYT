@@ -5,7 +5,7 @@ public struct WorkoutInteractor {
     
     /// Adds a set to all the exercises in an exercise group.
     /// - Parameters:
-    ///   - group: The group index to add the set to
+    ///   - group: The group index to add the set to (assumed to be valid)
     ///   - groups: The different exercise groups in the wokout.
     /// - Returns: The same exercise groups with the appropriate group having a set added.
     public static func addSet(group: Int, groups: [ExerciseGroup]) -> [ExerciseGroup] {
@@ -36,7 +36,7 @@ public struct WorkoutInteractor {
     
     /// Removes a set from all the exercises in an exercise group.
     /// - Parameters:
-    ///   - group: The group index to remove the set from
+    ///   - group: The group index to remove the set from (assumed to be valid)
     ///   - groups: The different exercise groups in the workout
     /// - Returns: The same exercise groups with the appropriate group having a set removed
     public static func removeSet(group: Int, groups: [ExerciseGroup]) -> [ExerciseGroup] {
@@ -65,10 +65,10 @@ public struct WorkoutInteractor {
     
     /// Updates a set to have the new input and modifier (if present). Assumes all the indices are valid.
     /// - Parameters:
-    ///   - groupIndex: The group index the set belongs to
+    ///   - groupIndex: The group index the set belongs to (assumed to be valid)
     ///   - groups: The different exericse groups in the workout
     ///   - exerciseIndex: The exercise index in the group the set belongs to
-    ///   - setIndex: The set index in the exercise the set belongs to
+    ///   - setIndex: The set index in the exercise the set belongs to (assumed to be valid)
     ///   - newSetInput: The new input of the set
     ///   - newModifierInput: The new input of the set's modifier
     ///   - allowNilInput: Indicates if we should overrwrite set input values with nil.
