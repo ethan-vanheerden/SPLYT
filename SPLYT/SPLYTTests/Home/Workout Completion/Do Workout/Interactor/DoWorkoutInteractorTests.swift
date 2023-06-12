@@ -306,7 +306,201 @@ final class DoWorkoutInteractorTests: XCTestCase {
         XCTAssertEqual(result, .loaded(domain))
     }
     
+    func testInteract_UpdateSet_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .updateSet(group: 0,
+                                                         exerciseIndex: 0,
+                                                         setIndex: 0,
+                                                         with: .repsWeight(input: .init(weight: 315, reps: 1)),
+                                                         forModifier: false))
+        XCTAssertEqual(result, .error)
+    }
     
+    func testInteract_UpdateSet_NormalInput_Success() async {
+        await loadWorkout()
+        let updatedInput: SetInput = .repsWeight(input: .init(weight: 315, reps: 1))
+        let result = await sut.interact(with: .updateSet(group: 0,
+                                                         exerciseIndex: 0,
+                                                         setIndex: 0,
+                                                         with: updatedInput,
+                                                         forModifier: false))
+        
+        var newSets = WorkoutFixtures.repsWeight4SetsPlaceholders
+        newSets[0].0 = updatedInput
+        
+        var newGroups = WorkoutFixtures.legWorkoutExercises_WorkoutStart
+        newGroups[0].exercises = [WorkoutFixtures.backSquat(inputs: newSets)]
+        
+        var workout = WorkoutFixtures.legWorkout_WorkoutStart
+        workout.exerciseGroups = newGroups
+        
+        let domain = DoWorkoutDomain(workout: workout,
+                                     inCountdown: false,
+                                     isResting: false,
+                                     expandedGroups: [true, false],
+                                     completedGroups: [false, false],
+                                     fractionCompleted: 0)
+        
+        XCTAssertEqual(result, .loaded(domain))
+    }
+    
+    func testInteract_UpdateSet_ModifierInput_Success() async {
+        await loadWorkout()
+        let updatedInput: SetInput = .repsWeight(input: .init(weight: 100, reps: 4))
+        let result = await sut.interact(with: .updateSet(group: 1,
+                                                         exerciseIndex: 0,
+                                                         setIndex: 2,
+                                                         with: updatedInput,
+                                                         forModifier: true))
+        
+        var newSets = WorkoutFixtures.repsWeight3SetsPlaceholders
+        newSets[2].1 = .dropSet(input: updatedInput)
+        
+        var newGroups = WorkoutFixtures.legWorkoutExercises_WorkoutStart
+        newGroups[1].exercises = [WorkoutFixtures.barLunges(inputs: newSets)]
+        
+        var workout = WorkoutFixtures.legWorkout_WorkoutStart
+        workout.exerciseGroups = newGroups
+        
+        let domain = DoWorkoutDomain(workout: workout,
+                                     inCountdown: false,
+                                     isResting: false,
+                                     expandedGroups: [true, false],
+                                     completedGroups: [false, false],
+                                     fractionCompleted: 0)
+        
+        XCTAssertEqual(result, .loaded(domain))
+    }
+    
+    func testInteract_UsePreviousInput_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .usePreviousInput(group: 0,
+                                                                exerciseIndex: 0,
+                                                                setIndex: 0,
+                                                                forModifier: false))
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testInteract_UsePreviousInput_NormalInput_Success() async {
+        await loadWorkout()
+        let result = await sut.interact(with: .usePreviousInput(group: 0,
+                                                                exerciseIndex: 0,
+                                                                setIndex: 0,
+                                                                forModifier: false))
+        
+        // Should keep the placeholders
+        let expectedInput: SetInput = .repsWeight(input: .init(weight: 135,
+                                                               weightPlaceholder: 135,
+                                                               reps: 12,
+                                                               repsPlaceholder: 12))
+        var newSets = WorkoutFixtures.repsWeight4SetsPlaceholders
+        newSets[0].0 = expectedInput
+        
+        var newGroups = WorkoutFixtures.legWorkoutExercises_WorkoutStart
+        newGroups[0].exercises = [WorkoutFixtures.backSquat(inputs: newSets)]
+        
+        var workout = WorkoutFixtures.legWorkout_WorkoutStart
+        workout.exerciseGroups = newGroups
+        
+        let domain = DoWorkoutDomain(workout: workout,
+                                     inCountdown: false,
+                                     isResting: false,
+                                     expandedGroups: [true, false],
+                                     completedGroups: [false, false],
+                                     fractionCompleted: 0)
+        
+        XCTAssertEqual(result, .loaded(domain))
+    }
+    
+    func testInteract_UsePreviousInput_ModifierInput_Success() async {
+        await loadWorkout()
+        let result = await sut.interact(with: .usePreviousInput(group: 1,
+                                                                exerciseIndex: 0,
+                                                                setIndex: 2,
+                                                                forModifier: true))
+        
+        // Should keep the placeholders
+        let expectedInput: SetInput = .repsWeight(input: .init(weight: 100,
+                                                               weightPlaceholder: 100))
+        var newSets = WorkoutFixtures.repsWeight3SetsPlaceholders
+        newSets[2].1 = .dropSet(input: expectedInput)
+        
+        var newGroups = WorkoutFixtures.legWorkoutExercises_WorkoutStart
+        newGroups[1].exercises = [WorkoutFixtures.barLunges(inputs: newSets)]
+        
+        var workout = WorkoutFixtures.legWorkout_WorkoutStart
+        workout.exerciseGroups = newGroups
+        
+        let domain = DoWorkoutDomain(workout: workout,
+                                     inCountdown: false,
+                                     isResting: false,
+                                     expandedGroups: [true, false],
+                                     completedGroups: [false, false],
+                                     fractionCompleted: 0)
+        
+        XCTAssertEqual(result, .loaded(domain))
+    }
+    
+    func testInteract_ToggleDialog_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .toggleDialog(dialog: .finishWorkout, isOpen: true))
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testInteract_ToggleDialog_FinishWorkout_Open_Success() async {
+        await loadWorkout()
+        let result = await sut.interact(with: .toggleDialog(dialog: .finishWorkout, isOpen: true))
+        
+        let domain = DoWorkoutDomain(workout: WorkoutFixtures.legWorkout_WorkoutStart,
+                                     inCountdown: false,
+                                     isResting: false,
+                                     expandedGroups: [true, false],
+                                     completedGroups: [false, false],
+                                     fractionCompleted: 0)
+        
+        XCTAssertEqual(result, .dialog(dialog: .finishWorkout, domain: domain))
+    }
+    
+    func testInteract_ToggleDialog_FinishWorkout_Close_Success() async {
+        await loadWorkout()
+        _ = await sut.interact(with: .toggleDialog(dialog: .finishWorkout, isOpen: true)) // Open so we can close
+        let result = await sut.interact(with: .toggleDialog(dialog: .finishWorkout, isOpen: false))
+        
+        let domain = DoWorkoutDomain(workout: WorkoutFixtures.legWorkout_WorkoutStart,
+                                     inCountdown: false,
+                                     isResting: false,
+                                     expandedGroups: [true, false],
+                                     completedGroups: [false, false],
+                                     fractionCompleted: 0)
+        
+        XCTAssertEqual(result, .loaded(domain))
+    }
+    
+    func testInteract_SaveWorkout_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .saveWorkout)
+        XCTAssertEqual(result, .error)
+        XCTAssertFalse(mockService.saveCalled)
+    }
+    
+    func testInteract_SaveWorkout_ServiceError() async {
+        await loadWorkout()
+        mockService.saveThrow = true
+        let result = await sut.interact(with: .saveWorkout)
+        XCTAssertEqual(result, .error)
+        XCTAssertTrue(mockService.saveCalled)
+    }
+    
+    func testInteract_SaveWorkout_Success() async {
+        await loadWorkout()
+        let result = await sut.interact(with: .saveWorkout)
+        
+        let domain = DoWorkoutDomain(workout: WorkoutFixtures.legWorkout_WorkoutStart,
+                                     inCountdown: false,
+                                     isResting: false,
+                                     expandedGroups: [true, false],
+                                     completedGroups: [false, false],
+                                     fractionCompleted: 0)
+        
+        XCTAssertEqual(result, .exit(domain))
+        XCTAssertTrue(mockService.saveCalled)
+    }
 }
 
 // MARK: - Private

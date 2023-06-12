@@ -23,7 +23,7 @@ final class MockDoWorkoutService: DoWorkoutServiceType {
     var saveThrow = false
     private(set) var saveCalled = false
     func saveWorkout(workout: Workout, filename: String) throws {
-        guard !saveThrow else { throw MockError.someError }
         saveCalled = true
+        guard !saveThrow else { throw MockError.someError }
     }
 }
