@@ -13,7 +13,6 @@ import ExerciseCore
 final class BuildWorkoutReducerTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
     typealias StateFixtures = WorkoutViewStateFixtures
-    
     private let sut = BuildWorkoutReducer()
     private var interactor: BuildWorkoutInteractor! // Used to construct the domain object
     

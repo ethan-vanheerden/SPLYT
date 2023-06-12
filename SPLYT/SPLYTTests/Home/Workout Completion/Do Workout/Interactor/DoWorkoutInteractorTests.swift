@@ -419,7 +419,9 @@ final class DoWorkoutInteractorTests: XCTestCase {
         
         // Should keep the placeholders
         let expectedInput: SetInput = .repsWeight(input: .init(weight: 100,
-                                                               weightPlaceholder: 100))
+                                                               weightPlaceholder: 100,
+                                                               reps: 5,
+                                                               repsPlaceholder: 5))
         var newSets = WorkoutFixtures.repsWeight3SetsPlaceholders
         newSets[2].1 = .dropSet(input: expectedInput)
         

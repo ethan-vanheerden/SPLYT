@@ -62,7 +62,7 @@ struct BuildWorkoutFixtures {
                        lastCompleted: nil)
     }
     
-    // MARK: - View State
+    // MARK: - View States
     
     static func backSquatTileViewState(isSelected: Bool, isFavorite: Bool) -> AddExerciseTileViewState {
         return AddExerciseTileViewState(id: "back-squat",
@@ -91,17 +91,17 @@ struct BuildWorkoutFixtures {
         inclineDBRowTileViewState(isSelected: false, isFavorite: false)
     ]
     
-    static var dialogViewState: DialogViewState = DialogViewState(title: "Confirm Exit",
+    static let dialogViewState: DialogViewState = DialogViewState(title: "Confirm Exit",
                                                                   subtitle: "If you exit now, all progress will be lost.",
                                                                   primaryButtonTitle: "Confirm",
                                                                   secondaryButtonTitle: "Cancel")
     
-    static var backDialog: DialogViewState = DialogViewState(title: "Confirm Exit",
+    static let backDialog: DialogViewState = DialogViewState(title: "Confirm Exit",
                                                              subtitle: "If you exit now, all progress will be lost.",
                                                              primaryButtonTitle: "Confirm",
                                                              secondaryButtonTitle: "Cancel")
     
-    static var saveDialog: DialogViewState = DialogViewState(title: "Error saving",
+    static let saveDialog: DialogViewState = DialogViewState(title: "Error saving",
                                                              subtitle: "Please try again later.",
                                                              primaryButtonTitle: "Ok")
 }

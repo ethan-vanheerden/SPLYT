@@ -1,6 +1,7 @@
 @testable import ExerciseCore
 
 // TODO: this needs to be moved to the test target but xcode is broken
+/// Contains test view states for things related to workouts.
 struct WorkoutViewStateFixtures {
     typealias ModelFixtures = WorkoutModelFixtures
     
@@ -73,7 +74,26 @@ struct WorkoutViewStateFixtures {
                      input: .init(weight: 155, reps: 8)),
          .dropSet(set: .repsWeight(weightTitle: lbs,
                                    repsTitle: reps,
-                                   input: .init(weight: 100))))
+                                   input: .init(weight: 100,
+                                                repsPlaceholder: 5))))
+    ]
+    
+    static let repsWeight3SetsPlaceholders: [(SetInputViewState, SetModifierViewState?)] = [
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weightPlaceholder: 135, repsPlaceholder: 12)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weightPlaceholder: 140, repsPlaceholder: 10)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weightPlaceholder: 155, repsPlaceholder: 8)),
+         .dropSet(set: .repsWeight(weightTitle: lbs,
+                                   repsTitle: reps,
+                                   input: .init(weightPlaceholder: 100,
+                                                repsPlaceholder: 5))))
     ]
     
     static let repsWeight4Sets: [(SetInputViewState, SetModifierViewState?)] = [
@@ -95,10 +115,36 @@ struct WorkoutViewStateFixtures {
          nil)
     ]
     
+    static let repsWeight4SetsPlaceholders: [(SetInputViewState, SetModifierViewState?)] = [
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weightPlaceholder: 135, repsPlaceholder: 12)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weightPlaceholder: 140, repsPlaceholder: 10)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weightPlaceholder: 155, repsPlaceholder: 8)),
+         nil),
+        (.repsWeight(weightTitle: lbs,
+                     repsTitle: reps,
+                     input: .init(weightPlaceholder: 225, repsPlaceholder: 2)),
+         nil)
+    ]
+    
     static func legWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
         [
             [backSquatViewState(inputs: repsWeight4Sets, includeHeaderLine: includeHeaderLine)],
             [barLungesViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine)]
+        ]
+    }
+    
+    static func legWorkoutExercisesPlaceholders(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+        [
+            [backSquatViewState(inputs: repsWeight4SetsPlaceholders, includeHeaderLine: includeHeaderLine)],
+            [barLungesViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine)]
         ]
     }
     
@@ -111,6 +157,19 @@ struct WorkoutViewStateFixtures {
             [
                 barLungesViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine),
                 inclineDBRowViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine)
+            ]
+        ]
+    }
+    
+    static func fullBodyWorkoutExercisesPlaceholders(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+        [
+            [
+                backSquatViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine),
+                benchPressViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine)
+            ],
+            [
+                barLungesViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine),
+                inclineDBRowViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine)
             ]
         ]
     }

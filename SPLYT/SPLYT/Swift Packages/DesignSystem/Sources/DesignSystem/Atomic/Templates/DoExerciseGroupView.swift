@@ -68,9 +68,9 @@ public struct DoExerciseGroupView: View {
 // MARK: - View State
 
 public struct DoExerciseGroupViewState: Equatable {
-    fileprivate let header: CollapseHeaderViewState
+    let header: CollapseHeaderViewState
     public let exercises: [ExerciseViewState]
-    fileprivate let slider: ActionSliderViewState? // Not shown once completed
+    let slider: ActionSliderViewState? // Not shown once completed
     
     public init(header: CollapseHeaderViewState,
                 exercises: [ExerciseViewState],

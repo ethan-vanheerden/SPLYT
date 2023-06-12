@@ -46,14 +46,16 @@ struct WorkoutModelFixtures {
         (.repsWeight(input: .init(weight: 135, weightPlaceholder: 100, reps: 12)), nil),
         (.repsWeight(input: .init(weight: 140, reps: 10)), nil),
         (.repsWeight(input: .init(weight: 155, reps: 8)),
-         .dropSet(input: .repsWeight(input: .init(weight: 100))))
+         .dropSet(input: .repsWeight(input: .init(weight: 100,
+                                                  repsPlaceholder: 5))))
     ]
     
     static let repsWeight3SetsPlaceholders: [(SetInput, SetModifier?)] = [
         (.repsWeight(input: .init(weightPlaceholder: 135, repsPlaceholder: 12)), nil),
         (.repsWeight(input: .init(weightPlaceholder: 140, repsPlaceholder: 10)), nil),
         (.repsWeight(input: .init(weightPlaceholder: 155, repsPlaceholder: 8)),
-         .dropSet(input: .repsWeight(input: .init(weightPlaceholder: 100))))
+         .dropSet(input: .repsWeight(input: .init(weightPlaceholder: 100,
+                                                  repsPlaceholder: 5))))
     ]
     
     static let repsWeight4Sets: [(SetInput, SetModifier?)] = [
@@ -106,25 +108,30 @@ struct WorkoutModelFixtures {
     
     static let legWorkoutId = "leg-workout"
     
+    static let legWorkoutName = "Legs"
+    
     static let fullBodyWorkoutId = "full-body-workout"
     
+    static let fullBodyWorkoutName = "Full Body"
+    
+    
     static let legWorkout: Workout = Workout(id: legWorkoutId,
-                                             name: "Legs",
+                                             name: legWorkoutName,
                                              exerciseGroups: legWorkoutExercises,
                                              lastCompleted: nil)
     
     static let legWorkout_WorkoutStart: Workout = Workout(id: legWorkoutId,
-                                                          name: "Legs",
+                                                          name: legWorkoutName,
                                                           exerciseGroups: legWorkoutExercises_WorkoutStart,
                                                           lastCompleted: nil)
     
     static let fullBodyWorkout: Workout = Workout(id: fullBodyWorkoutId,
-                                                  name: "Full Body",
+                                                  name: fullBodyWorkoutName,
                                                   exerciseGroups: fullBodyWorkoutExercises,
                                                   lastCompleted: feb_3_2023_1630)
     
     static let fullBodyWorkout_WorkoutStart: Workout = Workout(id: fullBodyWorkoutId,
-                                                               name: "Full Body",
+                                                               name: fullBodyWorkoutName,
                                                                exerciseGroups: fullBodyWorkoutExercises_WorkoutStart,
                                                                lastCompleted: feb_3_2023_1630)
     
