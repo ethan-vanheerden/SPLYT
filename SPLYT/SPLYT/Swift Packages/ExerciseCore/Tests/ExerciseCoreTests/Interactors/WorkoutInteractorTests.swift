@@ -22,7 +22,7 @@ final class WorkoutInteractorTests: XCTestCase {
     func testAddSet_SingleSet() {
         let result = sut.addSet(group: 0, groups: Fixtures.legWorkoutExercises)
         
-        let addedSet: SetInput = .repsWeight(input: .init(weight: 225, reps: 2))
+        let addedSet: SetInput = .repsWeight(input: .init(weight: 225, reps: 2, repsPlaceholder: 0))
         var newSets = Fixtures.repsWeight4Sets
         newSets.append((addedSet, nil))
         

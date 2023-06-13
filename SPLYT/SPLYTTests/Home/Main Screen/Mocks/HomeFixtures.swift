@@ -7,10 +7,11 @@
 
 import Foundation
 import DesignSystem
-import ExerciseCore
+@testable import ExerciseCore
 @testable import SPLYT
 
 struct HomeFixtures {
+    typealias ModelFixtures = WorkoutModelFixtures
 
     // MARK: - View State
     
@@ -20,14 +21,14 @@ struct HomeFixtures {
     
     static let segmentedControlTitles: [String] = ["WORKOUTS", "PLANS"]
     
-    static let createdLegWorkoutViewState: CreatedWorkoutViewState = CreatedWorkoutViewState(id: "leg-workout",
-                                                                                             filename: "workout_history_leg-workout",
+    static let createdLegWorkoutViewState: CreatedWorkoutViewState = CreatedWorkoutViewState(id: ModelFixtures.legWorkoutId,
+                                                                                             filename: ModelFixtures.legWorkoutFilename,
                                                                                              title: "Legs",
                                                                                              subtitle: "2 exercises",
                                                                                              lastCompleted: nil)
     
-    static let createdFullBodyWorkoutViewState: CreatedWorkoutViewState = CreatedWorkoutViewState(id: "full-body-workout",
-                                                                                                  filename: "workout_history_full=body-workout",
+    static let createdFullBodyWorkoutViewState: CreatedWorkoutViewState = CreatedWorkoutViewState(id: ModelFixtures.fullBodyWorkoutId,
+                                                                                                  filename: ModelFixtures.fullBodyWorkoutFilename,
                                                                                                   title: "Full Body",
                                                                                                   subtitle: "4 exercises",
                                                                                                   lastCompleted: "Last completed: Feb 3, 2023")
