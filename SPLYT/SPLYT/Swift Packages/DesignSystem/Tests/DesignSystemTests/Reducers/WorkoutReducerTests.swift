@@ -21,4 +21,9 @@ final class WorkoutReducerTests: XCTestCase {
             XCTAssertEqual(result, Fixtures.legWorkoutExercises(includeHeaderLine: $0))
         }
     }
+    
+    func testGetGroupTitles() {
+        let result = sut.getGroupTitles(workout: ModelFixtures.legWorkout)
+        XCTAssertEqual(result, ["Group 1", "Group 2"])
+    }
 }

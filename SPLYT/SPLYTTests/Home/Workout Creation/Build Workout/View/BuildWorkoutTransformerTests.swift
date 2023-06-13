@@ -14,7 +14,6 @@ final class BuildWorkoutTransformerTests: XCTestCase {
     typealias StateFixtures = WorkoutViewStateFixtures
     private let sut = BuildWorkoutTransformer()
     
-    
     func testTransformModifier_DropSet_RepsWeight() {
         let setInputViewState: SetInputViewState = .repsWeight(weightTitle: StateFixtures.lbs,
                                                                repsTitle: StateFixtures.reps,

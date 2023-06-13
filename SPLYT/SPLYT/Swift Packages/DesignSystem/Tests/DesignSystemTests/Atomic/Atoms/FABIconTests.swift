@@ -21,6 +21,6 @@ final class FABIconTests: XCTestCase {
         }
             .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
+        assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
     }
 }

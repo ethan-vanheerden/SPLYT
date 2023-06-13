@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-/// Abstract class for time keeping
+/// Abstract class for time keeping in view models
 open class TimeViewModel<T, U>: ViewModel {
     public typealias Event = U
     @Published public var viewState: T
@@ -24,6 +24,7 @@ open class TimeViewModel<T, U>: ViewModel {
     @MainActor
     public func startTime() {
         timeStarted = Date()
+        // Publish every 0.5 seconds to ensure we don't lag
         Timer.publish(every: 0.5, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in

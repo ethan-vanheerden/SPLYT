@@ -2,11 +2,12 @@ import XCTest
 @testable import Caching
 
 final class CacheInteractorTests: XCTestCase {
-    private let sut = CacheInteractor.self
+    private var sut: CacheInteractor!
     private let request = MockCacheRequest()
     private let mockData = "Hello World!"
     
     override func setUp() async throws {
+        sut = CacheInteractor()
         // Get rid of any mock loaded data if it exists
         let url = try CacheURLCreator.getURL(for: request)
         if FileManager.default.fileExists(atPath: url.relativePath) {
@@ -36,7 +37,11 @@ final class CacheInteractorTests: XCTestCase {
         // Now file should exist
         XCTAssertTrue(try sut.fileExists(request: request))
     }
-    
+}
+
+// MARK: - Private
+
+private extension CacheInteractorTests {
     private func saveMockData() throws {
         try sut.save(request: request, data: mockData)
     }

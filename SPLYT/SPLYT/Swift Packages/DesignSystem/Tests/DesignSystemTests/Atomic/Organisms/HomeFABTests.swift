@@ -3,7 +3,7 @@ import XCTest
 import SwiftUI
 @testable import SnapshotTesting
 
-final class FABTests: XCTestCase {
+final class HomeFABTests: XCTestCase {
     private let viewState = HomeFABViewState(createPlanState: HomeFABRowViewState(title: "CREATE NEW PLAN",
                                                                                   imageName: "calendar"),
                                              createWorkoutState: HomeFABRowViewState(title: "CREATE NEW WORKOUT",

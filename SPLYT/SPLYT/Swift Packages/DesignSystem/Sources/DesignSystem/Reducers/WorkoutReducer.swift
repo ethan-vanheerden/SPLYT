@@ -3,8 +3,9 @@ import ExerciseCore
 
 /// Contains common reducer functions involving workouts.
 public struct WorkoutReducer {
+    
     public static func reduceExerciseGroups(groups: [ExerciseGroup],
-                                     includeHeaderLine: Bool = true) -> [[ExerciseViewState]] {
+                                            includeHeaderLine: Bool = true) -> [[ExerciseViewState]] {
         var result = [[ExerciseViewState]]()
         
         for group in groups {
@@ -39,8 +40,8 @@ private extension WorkoutReducer {
             let headerState = SectionHeaderViewState(title: exercise.name,
                                                      includeLine: includeHeaderLine)
             return ExerciseViewState(header: headerState,
-                                          sets: getSetStates(exercise: exercise),
-                                          canRemoveSet: exercise.sets.count > 1)
+                                     sets: getSetStates(exercise: exercise),
+                                     canRemoveSet: exercise.sets.count > 1)
         }
     }
     

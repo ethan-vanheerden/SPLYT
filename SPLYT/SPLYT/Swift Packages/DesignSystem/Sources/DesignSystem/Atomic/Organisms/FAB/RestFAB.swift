@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 
 public struct RestFAB: View {
     @State private var secondsLeft: Int = 0 // The current number of seconds left in current rest period

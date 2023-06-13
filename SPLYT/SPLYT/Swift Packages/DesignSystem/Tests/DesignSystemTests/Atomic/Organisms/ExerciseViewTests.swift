@@ -50,6 +50,7 @@ final class ExerciseViewTests: XCTestCase {
                          updateSetAction: { _, _ in },
                          updateModifierAction: { _, _ in })
         }
+            .padding(.horizontal, Layout.size(2))
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }
@@ -65,6 +66,7 @@ final class ExerciseViewTests: XCTestCase {
                          updateSetAction: { _, _ in },
                          updateModifierAction: { _, _ in })
         }
+            .padding(.horizontal, Layout.size(2))
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }

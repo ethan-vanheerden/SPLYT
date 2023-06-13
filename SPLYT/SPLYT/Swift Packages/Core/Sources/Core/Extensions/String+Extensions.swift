@@ -12,7 +12,7 @@ public extension String {
         self.init("\(int)")
     }
     
-    /// Constructs a string using the optional double, creating "" if it is nil. This gets rid of any decimals if the double is x.0.
+    /// Constructs a string using the optional double, creating "" if it is nil. This gets rid of any decimals if the double is like "x.0"
     /// - Parameter double: The double to create the string from
     init(_ double: Double?) {
         guard let double = double else {

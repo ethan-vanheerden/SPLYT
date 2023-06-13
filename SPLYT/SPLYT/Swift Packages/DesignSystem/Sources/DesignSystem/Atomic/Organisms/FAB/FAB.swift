@@ -31,7 +31,7 @@ struct FAB<RowContent: View>: View {
                     rows()
                     FABIcon(viewState: baseIcon) {
                         // Adds a small vibration effect
-                        let haptic = UIImpactFeedbackGenerator(style: .rigid)
+                        let haptic = UIImpactFeedbackGenerator(style: .light)
                         haptic.impactOccurred()
                         withAnimation(Animation.easeOut) {
                             isPresenting.toggle()

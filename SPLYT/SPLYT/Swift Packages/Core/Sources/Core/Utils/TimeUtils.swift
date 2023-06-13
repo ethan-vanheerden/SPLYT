@@ -14,7 +14,7 @@ public struct TimeUtils {
         return String(format: "%01d:%02d:%02d", hours, minutes, seconds)
     }
     
-    /// Returns a time string in the form of min:sec. We make sure that both the minute and seconds are 2 digits long.
+    /// Returns a time string in the form of min:sec. We make sure that both the minute and seconds are 2 digits long. Ex: 04:30
     /// - Parameter seconds: The number of total seconds
     /// - Returns: The formatted time string
     public static func minSec(seconds: Int) -> String {

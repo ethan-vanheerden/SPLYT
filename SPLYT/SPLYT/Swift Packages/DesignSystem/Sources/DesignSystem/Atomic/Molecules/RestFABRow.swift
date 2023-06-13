@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 
 struct RestFABRow: View {
     @State private var isPressed = false

@@ -20,7 +20,7 @@ final class IconButtonTests: XCTestCase {
                        style: .secondary,
                        iconColor: .green,
                        isEnabled: true) { }
-            IconButton(iconName: "bolt.fill.",
+            IconButton(iconName: "bolt.fill",
                        style: .secondary,
                        iconColor: .yellow,
                        isEnabled: true,
