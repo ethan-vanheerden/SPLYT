@@ -3,6 +3,7 @@ import SwiftUI
 public enum SplytColor: String, CaseIterable {
     case black = "Black"
     case gray = "Gray"
+    case gray50 = "Gray 50"
     case green = "Green"
     case lightBlue = "Light Blue"
     case red = "Red"
@@ -17,6 +18,8 @@ public enum SplytColor: String, CaseIterable {
             return Color.black
         case .gray:
             return Color.gray
+        case .gray50:
+            return Color.gray.opacity(0.5)
         case .green:
             return Color.green
         case .lightBlue:
@@ -33,7 +36,10 @@ public enum SplytColor: String, CaseIterable {
         case .clear:
             return Color.clear
         case .purple:
-            return Color(uiColor: UIColor(red: 42/255, green: 0, blue: 254/255, alpha: 1))
+            return Color(uiColor: UIColor(red: 42/255,
+                                          green: 0,
+                                          blue: 254/255,
+                                          alpha: 1))
         }
     }
     

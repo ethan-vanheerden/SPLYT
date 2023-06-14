@@ -20,3 +20,17 @@ struct BuildWorkoutDisplay: Equatable {
     let saveDialog: DialogViewState
     let canSave: Bool
 }
+
+// MARK: - View State
+
+struct AddExerciseTileSectionViewState: Equatable, Hashable {
+    let header: SectionHeaderViewState
+    let exercises: [AddExerciseTileViewState]
+    
+    init(header: SectionHeaderViewState,
+         exercises: [AddExerciseTileViewState]) {
+        self.header = header
+        self.exercises = exercises
+    }
+}
+
