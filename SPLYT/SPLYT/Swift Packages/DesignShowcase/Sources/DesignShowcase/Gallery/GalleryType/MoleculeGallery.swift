@@ -17,6 +17,7 @@ enum Molecule: String, CaseIterable, GalleryItem {
     case segmentedControl = "Segmented Control"
     case setView = "Set View"
     case tabBar = "Tab Bar"
+    case textEntry = "Text Entry"
     
     var title: String {
         return self.rawValue

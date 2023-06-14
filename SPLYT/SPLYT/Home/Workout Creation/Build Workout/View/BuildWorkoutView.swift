@@ -118,7 +118,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 filterSheetPresented = true
             }
             SplytButton(text: Strings.save,
-                        size: .secondary,
+                        type: .secondary(),
                         isEnabled: canSave) {
                 viewModel.send(.save, taskPriority: .userInitiated)
             }

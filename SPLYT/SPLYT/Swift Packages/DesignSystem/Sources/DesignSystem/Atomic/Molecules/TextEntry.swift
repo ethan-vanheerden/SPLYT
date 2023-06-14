@@ -14,17 +14,15 @@ public struct TextEntry: View {
     public var body: some View {
         HStack {
             textField
-            if viewState.includeCancelButton && !text.isEmpty {
+            if viewState.includeCancelButton && showCancel {
                 SplytButton(text: "cancel",
-                            color: .gray50,
+                            type: .textOnly,
                             textColor: .lightBlue) {
                     text = ""
                     isFocused = false
                 }
-                            .transition(.move(edge: .trailing))
             }
         }
-        .animation(.default, value: text.isEmpty)
     }
     
     @ViewBuilder
@@ -38,6 +36,7 @@ public struct TextEntry: View {
             TextField(viewState.placeholder, text: $text)
                 .font(.subhead(style: .medium))
                 .padding(.vertical, Layout.size(1))
+                .padding(.leading, Layout.size(1))
                 .focused($isFocused)
             clearButton
         }
@@ -60,6 +59,10 @@ public struct TextEntry: View {
                        .padding(.trailing, Layout.size(1))
         }
     }
+    
+    private var showCancel: Bool {
+        return !text.isEmpty || isFocused
+    }
 }
 
 // MARK: - View State
@@ -77,5 +80,3 @@ public struct TextEntryViewState: Equatable {
         self.includeCancelButton = includeCancelButton
     }
 }
-
-// placeholder, icon, x mark, cancel button (optional)

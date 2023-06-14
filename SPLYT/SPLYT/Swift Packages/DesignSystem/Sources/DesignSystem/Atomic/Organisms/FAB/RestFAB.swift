@@ -173,9 +173,8 @@ public struct RestFAB: View {
     private var pickerButtons: some View {
         HStack(spacing: Layout.size(2)) {
             SplytButton(text: "Cancel",
-                        color: .white,
-                        textColor: .gray,
-                        outlineColor: .gray) {
+                        type: .primary(color: .white),
+                        textColor: .gray) {
                 showTimePicker = false
             }
             SplytButton(text: "Confirm",

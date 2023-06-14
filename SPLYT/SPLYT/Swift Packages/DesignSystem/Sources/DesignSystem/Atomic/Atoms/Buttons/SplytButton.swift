@@ -9,7 +9,7 @@ public struct SplytButton: View {
     private let action: () -> Void
     
     public init(text: String,
-                type: SplytButtonType = .primary(color: .lightBlue),
+                type: SplytButtonType = .primary(),
                 textColor: SplytColor = .white,
                 isEnabled: Bool = true,
                 animationEnabled: Bool = true,
@@ -36,8 +36,8 @@ public struct SplytButton: View {
 // MARK: - Button Type
 
 public enum SplytButtonType {
-    case primary(color: SplytColor)
-    case secondary(color: SplytColor)
+    case primary(color: SplytColor = .lightBlue)
+    case secondary(color: SplytColor = .lightBlue)
     case textOnly
 }
 

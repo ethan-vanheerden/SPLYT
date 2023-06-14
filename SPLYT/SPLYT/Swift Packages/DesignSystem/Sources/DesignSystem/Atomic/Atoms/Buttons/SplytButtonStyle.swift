@@ -46,7 +46,8 @@ struct SplytButtonStyle: ButtonStyle {
                         .fill(Color(splytColor: color))
                 )
         case .textOnly:
-            baseButton
+            textView
+                .lineLimit(1)
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
                                                             normalColor: Color(splytColor: textColor),
                                                             pressedColor: Color(splytColor: textColor).opacity(0.5),

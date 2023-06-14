@@ -32,11 +32,7 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NoViewEvent, VM.Vi
                 Spacer()
             }
             .padding(.top, Layout.size(3))
-//            TextField(Strings.enterAWorkoutName, text: $workoutName)
-//                .textFieldStyle(.roundedBorder)
-            TextEntry(text: $workoutName, viewState: .init(placeholder: Strings.enterAWorkoutName,
-                                                           iconName: "magnifyingglass",
-                                                          includeCancelButton: true))
+            TextEntry(text: $workoutName, viewState: .init(placeholder: Strings.enterAWorkoutName))
             nextButton
             Spacer()
         }

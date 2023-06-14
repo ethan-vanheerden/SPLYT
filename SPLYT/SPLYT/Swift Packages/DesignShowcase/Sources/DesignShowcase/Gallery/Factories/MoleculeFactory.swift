@@ -28,6 +28,8 @@ struct MoleculeFactory {
             SetViewGallery()
         case .tabBar:
             TabBarGallery()
+        case .textEntry:
+            TextEntryGallery()
         }
     }
 }

@@ -11,24 +11,26 @@ final class SplytButtonTests: XCTestCase {
             HStack(spacing: Layout.size(2)) {
                 Spacer()
                 SplytButton(text: "cancel",
-                            color: .red,
+                            type: .primary(color: .red),
                             textColor: .black,
                             isEnabled: true) { }
                 SplytButton(text: "Confirm",
-                            color: .green,
+                            type: .primary(color: .green),
                             isEnabled: true) { }
                 Spacer()
             }
             SplytButton(text: "Secondary Button",
-                        size: .secondary,
+                        type: .secondary(),
                         isEnabled: true) { }
             SplytButton(text: "Button no animations",
-                        size: .primary,
-                        color: .white,
+                        type: .primary(color: .white),
                         textColor: .black,
-                        outlineColor: .black,
                         isEnabled: true,
                         animationEnabled: false) { }
+            SplytButton(text: "Text Only",
+                        type: .textOnly,
+                        textColor: .lightBlue,
+                        isEnabled: true) { }
         }
             .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
@@ -42,24 +44,26 @@ final class SplytButtonTests: XCTestCase {
             HStack(spacing: Layout.size(2)) {
                 Spacer()
                 SplytButton(text: "cancel",
-                            color: .red,
+                            type: .primary(color: .red),
                             textColor: .black,
                             isEnabled: false) { }
                 SplytButton(text: "Confirm",
-                            color: .green,
+                            type: .primary(color: .green),
                             isEnabled: false) { }
                 Spacer()
             }
             SplytButton(text: "Secondary Button",
-                        size: .secondary,
+                        type: .secondary(),
                         isEnabled: false) { }
             SplytButton(text: "Button no animations",
-                        size: .primary,
-                        color: .white,
+                        type: .primary(color: .white),
                         textColor: .black,
-                        outlineColor: .black,
                         isEnabled: false,
                         animationEnabled: false) { }
+            SplytButton(text: "Text Only",
+                        type: .textOnly,
+                        textColor: .lightBlue,
+                        isEnabled: false) { }
         }
             .padding(.horizontal)
         let vc = UIHostingController(rootView: view)

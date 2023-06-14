@@ -21,24 +21,26 @@ struct ButtonGallery: View {
             HStack(spacing: Layout.size(2)) {
                 Spacer()
                 SplytButton(text: "cancel",
-                            color: .red,
+                            type: .primary(color: .red),
                             textColor: .black,
                             isEnabled: isEnabled) { print("Button tapped!") }
                 SplytButton(text: "Confirm",
-                            color: .green,
+                            type: .primary(color: .green),
                             isEnabled: isEnabled) { print("Button tapped!") }
                 Spacer()
             }
             SplytButton(text: "Secondary Button",
-                        size: .secondary,
+                        type: .secondary(),
                         isEnabled: isEnabled) { print("Button tapped!") }
             SplytButton(text: "Button no animations",
-                        size: .primary,
-                        color: .white,
+                        type: .primary(color: .white),
                         textColor: .black,
-                        outlineColor: .black,
                         isEnabled: isEnabled,
                         animationEnabled: false) { print("Button tapped!") }
+            SplytButton(text: "Text Only",
+                        type: .textOnly,
+                        textColor: .lightBlue,
+                        isEnabled: isEnabled) { print("Button tapped!") }
         }
     }
 }
