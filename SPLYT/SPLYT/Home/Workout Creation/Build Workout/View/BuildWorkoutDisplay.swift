@@ -9,7 +9,7 @@ import Foundation
 import DesignSystem
 
 struct BuildWorkoutDisplay: Equatable {
-    let allExercises: [AddExerciseTileViewState] // Exercises that can be selected
+    let allExercises: [AddExerciseTileSectionViewState]
     let groups: [[ExerciseViewState]] // Each item in list represents the exercises in the group
     let currentGroup: Int // Zero-indexed
     let currentGroupTitle: String

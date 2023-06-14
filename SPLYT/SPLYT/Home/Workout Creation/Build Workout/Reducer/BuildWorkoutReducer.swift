@@ -51,17 +51,15 @@ private extension BuildWorkoutReducer {
         return display
     }
     
-    func getExerciseTileStates(exerciseMap: [String: AvailableExercise]) -> [AddExerciseTileViewState] {
-        return exerciseMap.values.map {
+    func getExerciseTileStates(exerciseMap: [String: AvailableExercise]) -> [AddExerciseTileSectionViewState] {
+        // We first filter, then we sort by name alphabetically
+        let exercises = exerciseMap.values.map {
             AddExerciseTileViewState(id: $0.id,
                                      exerciseName: $0.name,
                                      isSelected: $0.isSelected,
                                      isFavorite: $0.isFavorite)
-        }.sorted {
-            // Maps don't preserve sorted order, so we must sort
-            // TODO: In the future, we can add other custom sorting comparisons here (ex: by favorite, recent, etc.)
-            $0.exerciseName < $1.exerciseName
         }
+        return partitionTileStates(exercises: exercises)
     }
     
     func getCurrentGroupTitle(_ numExercises: Int) -> String {
@@ -80,6 +78,30 @@ private extension BuildWorkoutReducer {
         return DialogViewState(title: Strings.errorSaving,
                                subtitle: Strings.tryAgain,
                                primaryButtonTitle: Strings.ok)
+    }
+    
+    
+    /// Constructs the sectioned `AddExerciseTileViewStates` so that each section's exercise starts with the same letter.
+    /// - Parameter exercises: the `AddExerciseTileViewStates` to section off
+    /// - Returns: the `AddExerciseTileSectionViewState` for the exercises
+    func partitionTileStates(exercises: [AddExerciseTileViewState]) -> [AddExerciseTileSectionViewState] {
+        // This creates a dictionary where the keys are a letter and the values are the
+        // exercise states which start with that letter
+        let groupedItems: [String: [AddExerciseTileViewState]] = Dictionary(grouping: exercises) {
+            $0.exerciseName.first?.uppercased() ?? ""
+        }
+        let sortedKeys = groupedItems.keys.sorted(by: <)
+        var sections = [AddExerciseTileSectionViewState]()
+        
+        for key in sortedKeys {
+            guard let exercises = groupedItems[key] else { continue }
+            let header = SectionHeaderViewState(title: key)
+            let section = AddExerciseTileSectionViewState(header: header,
+                                                          exercises: exercises)
+            sections.append(section)
+        }
+        
+        return sections
     }
 }
 

@@ -14,6 +14,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
     @State private var setSheetPresented: Bool = false
+    @State private var filterSheetPresented: Bool = false
     @State private var showSetModifiers: Bool = false
     @State private var editExerciseIndex: Int = 0
     @State private var editSetIndex: Int = 0
@@ -56,20 +57,43 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ViewBuilder
     private func mainView(display: BuildWorkoutDisplay) -> some View {
         VStack {
-            ScrollView(showsIndicators: false) {
-                LazyVStack {
-                    ForEach(display.allExercises, id: \.id) { viewState in
-                        AddExerciseTile(viewState: viewState,
-                                        tapAction: { viewModel.send(.toggleExercise(exerciseId: viewState.id,
-                                                                                    group: display.currentGroup),
-                                                                    taskPriority: .userInitiated) },
-                                        favoriteAction: { viewModel.send(.toggleFavorite(exerciseId: viewState.id),
-                                                                         taskPriority: .userInitiated) })
+            ZStack(alignment: .bottom) {
+                ScrollView {
+                    LazyVStack(pinnedViews: .sectionHeaders) {
+                        ForEach(display.allExercises, id: \.self) { viewState in
+                            Section {
+                                ForEach(viewState.exercises, id: \.self) { exerciseViewState in
+                                    AddExerciseTile(viewState: exerciseViewState,
+                                                    tapAction: { viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id,
+                                                                                                group: display.currentGroup),
+                                                                                taskPriority: .userInitiated) },
+                                                    favoriteAction: { viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
+                                                                                     taskPriority: .userInitiated) })
+                                    .padding(.bottom, Layout.size(1))
+                                }
+                                .padding(.horizontal, ViewConstants.horizontalPadding)
+                            } header: {
+                                HStack {
+                                    Spacer()
+                                    SectionHeader(viewState: viewState.header)
+                                        .padding(.horizontal, ViewConstants.horizontalPadding)
+                                        .padding(.vertical, Layout.size(1))
+                                    Spacer()
+                                }
+                                .background(Color(uiColor: UIColor.systemBackground))
+                            }
+                        }
                     }
                 }
-                .padding(ViewConstants.horizontalPadding)
+                SplytButton(text: "Filter") {
+                    filterSheetPresented = true
+                }
+                .frame(width: Layout.size(15))
             }
             sheetView(display: display)
+        }
+        .sheet(isPresented: $filterSheetPresented) {
+            Text("Filter")
         }
         .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
@@ -89,11 +113,17 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func saveButton(canSave: Bool) -> some View {
-        SplytButton(text: Strings.save,
-                    size: .secondary,
-                    isEnabled: canSave) {
-            viewModel.send(.save, taskPriority: .userInitiated)
+        HStack {
+            IconButton(iconName: "line.3.horizontal.decrease.circle") {
+                filterSheetPresented = true
+            }
+            SplytButton(text: Strings.save,
+                        size: .secondary,
+                        isEnabled: canSave) {
+                viewModel.send(.save, taskPriority: .userInitiated)
+            }
         }
+        
     }
     
     @ViewBuilder
