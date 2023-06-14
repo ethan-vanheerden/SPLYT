@@ -98,11 +98,11 @@ private extension BuildWorkoutInteractor {
             let newWorkout = Workout(id: workoutId,
                                      name: nameState.workoutName,
                                      exerciseGroups: startingGroup)
-            let domainObject = BuildWorkoutDomain(exercises: exercises,
-                                                  builtWorkout: newWorkout,
-                                                  currentGroup: 0)
+            let domain = BuildWorkoutDomain(exercises: exercises,
+                                            builtWorkout: newWorkout,
+                                            currentGroup: 0)
             // Save the domain object for future actions
-            return updateSavedDomain(domainObject)
+            return updateDomain(domain: domain)
         } catch {
             return .error
         }
@@ -118,11 +118,10 @@ private extension BuildWorkoutInteractor {
         // Set current group to the added group
         let currentGroup = groups.count - 1 // Zero-indexed
         
+        domain.builtWorkout.exerciseGroups = groups
+        domain.currentGroup = currentGroup
         
-        return updateDomain(domain: domain,
-                            exercises: domain.exercises,
-                            groups: groups,
-                            currentGroup: currentGroup)
+        return updateDomain(domain: domain)
     }
     
     func handleRemoveGroup(index: Int) -> BuildWorkoutDomainResult {
@@ -138,10 +137,10 @@ private extension BuildWorkoutInteractor {
         let currentGroup = domain.currentGroup
         let newGroup = currentGroup >= index && currentGroup != 0 ? currentGroup - 1 : currentGroup
         
-        return updateDomain(domain: domain,
-                            exercises: domain.exercises,
-                            groups: groups,
-                            currentGroup: newGroup)
+        domain.builtWorkout.exerciseGroups = groups
+        domain.currentGroup = newGroup
+        
+        return updateDomain(domain: domain)
     }
     
     func handleToggleExercise(exerciseId: AnyHashable, group: Int) -> BuildWorkoutDomainResult {
@@ -172,15 +171,15 @@ private extension BuildWorkoutInteractor {
         // Add to group
         var exercisesInGroup = groups[group].exercises
         exercisesInGroup.append(exercise)
-        groups[group] = ExerciseGroup(exercises: exercisesInGroup)
+        groups[group].exercises = exercisesInGroup
         
         // Mark as selected
         availableExercise.isSelected = true
-        domain.exercises[availableExercise.id] = availableExercise
         
-        return updateDomain(domain: domain,
-                            groups: groups,
-                            currentGroup: domain.currentGroup)
+        domain.exercises[availableExercise.id] = availableExercise
+        domain.builtWorkout.exerciseGroups = groups
+        
+        return updateDomain(domain: domain)
     }
     
     func handleRemoveExercise(domain: BuildWorkoutDomain,
@@ -205,87 +204,55 @@ private extension BuildWorkoutInteractor {
         var exercises = fromGroup.exercises
         exercises.removeAll { $0.id == id }
         
-        groups[fromGroupIndex] = ExerciseGroup(exercises: exercises)
+        groups[fromGroupIndex].exercises = exercises
         
         // Mark as not selected
         availableExercise.isSelected = false
         domain.exercises[id] = availableExercise // Update map
         
-        // If the group is now empty and is not the only group
+        domain.builtWorkout.exerciseGroups = groups
+        
+        // If the group is now empty and is not the only group, remove it
         if groups[fromGroupIndex].exercises.isEmpty {
-            _ = updateDomain(domain: domain, groups: groups)
+            _ = updateDomain(domain: domain)
             return handleRemoveGroup(index: fromGroupIndex)
         }
         
-        return updateDomain(domain: domain,
-                            groups: groups)
+        return updateDomain(domain: domain)
     }
     
     func handleAddSet(group: Int) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.addSet(group: group,
+                                                     groups: domain.builtWorkout.exerciseGroups)
+        domain.builtWorkout.exerciseGroups = updatedGroups
         
-        var groups = domain.builtWorkout.exerciseGroups
-        let fromGroup = groups[group]
-        var exercises = fromGroup.exercises
-        
-        // We want to add a set to each exercise in the group
-        for (index, exercise) in fromGroup.exercises.enumerated() {
-            var sets = exercise.sets
-            let numSets = sets.count
-            let set = Set(input: sets[numSets - 1].input, // Has same input (with values) as previous set
-                          modifier: nil)
-            sets.append(set)
-            let newExercise = Exercise(id: exercise.id,
-                                       name: exercise.name,
-                                       sets: sets)
-            exercises[index] = newExercise
-        }
-        
-        groups[group] = ExerciseGroup(exercises: exercises)
-        
-        return updateDomain(domain: domain,
-                            groups: groups,
-                            currentGroup: domain.currentGroup)
+        return updateDomain(domain: domain)
     }
     
     func handleRemoveSet(group: Int) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.removeSet(group: group,
+                                                        groups: domain.builtWorkout.exerciseGroups)
+        domain.builtWorkout.exerciseGroups = updatedGroups
         
-        var groups = domain.builtWorkout.exerciseGroups
-        let fromGroup = groups[group]
-        
-        var exercises = fromGroup.exercises
-        
-        // We want to remove a set from each exercise in the group
-        guard exercises.count >= 1,
-              exercises.first?.sets.count ?? 0 > 1 else { return .loaded(domain) } // Do nothing
-        
-        for (index, exercise) in fromGroup.exercises.enumerated() {
-            var sets = exercise.sets
-            sets.removeLast()
-            let newExercise = Exercise(id: exercise.id,
-                                       name: exercise.name,
-                                       sets: sets)
-            exercises[index] = newExercise
-        }
-        
-        groups[group] = ExerciseGroup(exercises: exercises)
-        
-        return updateDomain(domain: domain,
-                            exercises: domain.exercises,
-                            groups: groups,
-                            currentGroup: domain.currentGroup)
+        return updateDomain(domain: domain)
     }
     
     func handleUpdateSet(group: Int,
                          exerciseIndex: Int,
                          setIndex: Int,
                          with newInput: SetInput) -> BuildWorkoutDomainResult {
-        return updateSet(group: group,
-                         exerciseIndex: exerciseIndex,
-                         setIndex: setIndex,
-                         newSetInput: newInput,
-                         newModifierInput: nil)
+        guard let domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.updateSet(groupIndex: group,
+                                                        groups: domain.builtWorkout.exerciseGroups,
+                                                        exerciseIndex: exerciseIndex,
+                                                        setIndex: setIndex,
+                                                        newSetInput: newInput,
+                                                        newModifierInput: nil)
+        domain.builtWorkout.exerciseGroups = updatedGroups
+        
+        return updateDomain(domain: domain)
     }
     
     func handleToggleFavorite(exerciseId: AnyHashable) -> BuildWorkoutDomainResult {
@@ -310,9 +277,9 @@ private extension BuildWorkoutInteractor {
         guard let domain = savedDomain,
               group >= 0,
               group < domain.builtWorkout.exerciseGroups.count else { return .error }
+        domain.currentGroup = group
         
-        return updateDomain(domain: domain,
-                            currentGroup: group)
+        return updateDomain(domain: domain)
     }
     
     func handleSave() -> BuildWorkoutDomainResult {
@@ -336,29 +303,44 @@ private extension BuildWorkoutInteractor {
                            exerciseIndex: Int,
                            setIndex: Int,
                            modifier: SetModifier) -> BuildWorkoutDomainResult {
-        return editModifier(group: group,
-                            exerciseIndex: exerciseIndex,
-                            setIndex: setIndex,
-                            modifier: modifier)
+        guard let domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.editModifier(groupIndex: group,
+                                                           groups: domain.builtWorkout.exerciseGroups,
+                                                           exerciseIndex: exerciseIndex,
+                                                           setIndex: setIndex,
+                                                           modifier: modifier)
+        domain.builtWorkout.exerciseGroups = updatedGroups
+        
+        return updateDomain(domain: domain)
     }
     
     // Assumes there is a modifier to remove
     func handleRemoveModifier(group: Int, exerciseIndex: Int, setIndex: Int) -> BuildWorkoutDomainResult {
-        return editModifier(group: group,
-                            exerciseIndex: exerciseIndex,
-                            setIndex: setIndex,
-                            modifier: nil)
+        guard let domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.editModifier(groupIndex: group,
+                                                           groups: domain.builtWorkout.exerciseGroups,
+                                                           exerciseIndex: exerciseIndex,
+                                                           setIndex: setIndex,
+                                                           modifier: nil)
+        domain.builtWorkout.exerciseGroups = updatedGroups
+        
+        return updateDomain(domain: domain)
     }
     
     func handleUpdateModifier(group: Int,
                               exerciseIndex: Int,
                               setIndex: Int,
                               with newInput: SetInput) -> BuildWorkoutDomainResult {
-        return updateSet(group: group,
-                         exerciseIndex: exerciseIndex,
-                         setIndex: setIndex,
-                         newSetInput: nil,
-                         newModifierInput: newInput)
+        guard let domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.updateSet(groupIndex: group,
+                                                        groups: domain.builtWorkout.exerciseGroups,
+                                                        exerciseIndex: exerciseIndex,
+                                                        setIndex: setIndex,
+                                                        newSetInput: nil,
+                                                        newModifierInput: newInput)
+        domain.builtWorkout.exerciseGroups = updatedGroups
+        
+        return updateDomain(domain: domain)
     }
 }
 
@@ -378,31 +360,15 @@ private extension BuildWorkoutInteractor {
         return nameState.workoutName + "-" + formatter.string(from: creationDate)
     }
     
-    func updateSavedDomain(_ newDomain: BuildWorkoutDomain) -> BuildWorkoutDomainResult {
-        savedDomain = newDomain
-        return .loaded(newDomain)
-    }
-    
     /// Updates and saves the domain object. Note: most of the arguments are nil so that we only have to update what we want.
     /// - Parameters:
     ///   - domain: The saved domain object (not nil)
     ///   - exercises: The available exercises to update
     ///   - groups: The exercise groups to update
     /// - Returns: The loaded domain state after updating the saved domain object
-    func updateDomain(domain: BuildWorkoutDomain,
-                      exercises: [String: AvailableExercise]? = nil,
-                      groups: [ExerciseGroup]? = nil,
-                      currentGroup: Int? = nil) -> BuildWorkoutDomainResult {
-        let groups = groups ?? domain.builtWorkout.exerciseGroups
-        let updatedWorkout = Workout(id: domain.builtWorkout.id,
-                                     name: domain.builtWorkout.name,
-                                     exerciseGroups: groups,
-                                     lastCompleted: domain.builtWorkout.lastCompleted)
-        domain.exercises = exercises ?? domain.exercises
-        domain.builtWorkout = updatedWorkout
-        domain.currentGroup = currentGroup ?? domain.currentGroup
-        
-        return updateSavedDomain(domain)
+    func updateDomain(domain: BuildWorkoutDomain) -> BuildWorkoutDomainResult {
+        savedDomain = domain
+        return .loaded(domain)
     }
     
     /// Creates a new exercise with the given number of sets.
@@ -432,104 +398,5 @@ private extension BuildWorkoutInteractor {
     /// - Returns: The `AvailableExercise` if it exists, nil otherwise
     func findExercise(id: String, exercises: [AvailableExercise]) -> AvailableExercise? {
         return exercises.first { $0.id == id }
-    }
-    
-    /// Either adds or removes a modifier into a set. Assumes all the indices are valid.
-    /// - Parameters:
-    ///   - group: The group index that the set belongs to
-    ///   - exerciseIndex: The exercise index in the group which has the target set
-    ///   - setIndex: The set index in the exercise that we want to add the modifier to
-    ///   - modifier: The modifier to add or remove. If nil, we remove, else we add
-    /// - Returns: The domain result with the updated set
-    func editModifier(group: Int,
-                      exerciseIndex: Int,
-                      setIndex: Int,
-                      modifier: SetModifier?) -> BuildWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
-        
-        var groups = domain.builtWorkout.exerciseGroups
-        let exercises = groups[group].exercises
-        let targetExercise = exercises[exerciseIndex]
-        
-        let oldSet = targetExercise.sets[setIndex]
-        let newSet = Set(input: oldSet.input,
-                         modifier: modifier)
-
-        return replaceSet(domain: domain,
-                          groupIndex: group,
-                          targetExercise: targetExercise,
-                          oldExercises: exercises,
-                          newSet: newSet,
-                          newSetIndex: setIndex,
-                          exerciseIndex: exerciseIndex,
-                          groups: &groups)
-    }
-    
-    /// Updates a set to have the new input and modifier (if present). Assumes all the indices are valid.
-    /// - Parameters:
-    ///   - group: The group index the set belongs to
-    ///   - exerciseIndex: The exercise index in the group the set belongs to
-    ///   - setIndex: The set index in the exercise the set belongs to
-    ///   - newSetInput: The new input of the set
-    ///   - newModifierInput: The new input of the set's modifier
-    /// - Returns: The domain result with the updated set
-    func updateSet(group: Int,
-                   exerciseIndex: Int,
-                   setIndex: Int,
-                   newSetInput: SetInput?,
-                   newModifierInput: SetInput?) -> BuildWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
-        
-        var groups = domain.builtWorkout.exerciseGroups
-        let exercises = groups[group].exercises
-        let targetExercise = exercises[exerciseIndex]
-        
-        let oldSet = targetExercise.sets[setIndex]
-        let newSet = Set(input: oldSet.input.updateSetInput(with: newSetInput),
-                         modifier: oldSet.modifier?.updateModifierInput(with: newModifierInput))
-        
-        return replaceSet(domain: domain,
-                          groupIndex: group,
-                          targetExercise: targetExercise,
-                          oldExercises: exercises,
-                          newSet: newSet,
-                          newSetIndex: setIndex,
-                          exerciseIndex: exerciseIndex,
-                          groups: &groups)
-    }
-    
-    /// Replaces a given set in the workout.
-    /// - Parameters:
-    ///   - domain: The domain object
-    ///   - groupIndex: The group index of the set we want to replace
-    ///   - targetExercise: The exercise that the set belongs to
-    ///   - oldExercises: The list of exercises which includes the old set
-    ///   - newSet: The new set that we want to use
-    ///   - newSetIndex: The set index of the one to be replaced
-    ///   - exerciseIndex: The exercise index in the group which will have the new set
-    ///   - groups: The exercise groups which includes the old set
-    /// - Returns: The domain result with the replaced set
-    func replaceSet(domain: BuildWorkoutDomain,
-                    groupIndex: Int,
-                    targetExercise: Exercise,
-                    oldExercises: [Exercise],
-                    newSet: Set,
-                    newSetIndex: Int,
-                    exerciseIndex: Int,
-                    groups: inout [ExerciseGroup]) -> BuildWorkoutDomainResult {
-        var newSets = targetExercise.sets
-        newSets[newSetIndex] = newSet
-        
-        // Add the new sets to the exercise
-        var newExercises = oldExercises
-        let newExercise = Exercise(id: targetExercise.id,
-                                   name: targetExercise.name,
-                                   sets: newSets)
-        newExercises[exerciseIndex] = newExercise
-        
-        // Replace the exercise in its group
-        groups[groupIndex] = ExerciseGroup(exercises: newExercises)
-        
-        return updateDomain(domain: domain, groups: groups)
     }
 }

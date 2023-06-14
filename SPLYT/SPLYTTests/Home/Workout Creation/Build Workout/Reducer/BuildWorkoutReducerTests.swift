@@ -7,11 +7,12 @@
 
 import XCTest
 @testable import SPLYT
-import DesignSystem
+@testable import DesignSystem
 import ExerciseCore
 
 final class BuildWorkoutReducerTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
+    typealias StateFixtures = WorkoutViewStateFixtures
     private let sut = BuildWorkoutReducer()
     private var interactor: BuildWorkoutInteractor! // Used to construct the domain object
     
@@ -58,12 +59,12 @@ final class BuildWorkoutReducerTests: XCTestCase {
         _ = await interactor.interact(with: .updateSet(group: 0,
                                                        exerciseIndex: 0,
                                                        setIndex: 0,
-                                                       with: .repsWeight(reps: 12, weight: 135)))
+                                                       with: .repsWeight(input: .init(weight: 135, reps: 12))))
         _ = await interactor.interact(with: .addModifier(group: 0,
                                                          exerciseIndex: 1,
                                                          setIndex: 2,
-                                                         modifier: .dropSet(input: .repsWeight(reps: 5,
-                                                                                               weight: 100))))
+                                                         modifier: .dropSet(input: .repsWeight(input: .init(weight: 100,
+                                                                                                            reps: 5)))))
         let domain = await interactor.interact(with: .toggleFavorite(exerciseId: "incline-db-row"))
         let result = sut.reduce(domain)
         
@@ -73,22 +74,26 @@ final class BuildWorkoutReducerTests: XCTestCase {
             Fixtures.inclineDBRowTileViewState(isSelected: true, isFavorite: true)
         ]
         let squatSets: [(SetInputViewState, SetModifierViewState?)] = [
-            (.repsWeight(weightTitle: Fixtures.lbs, weight: 135, repsTitle: Fixtures.reps, reps: 12), nil),
-            (Fixtures.emptyRepsWeightSet, nil),
-            (Fixtures.emptyRepsWeightSet, nil)
+            (.repsWeight(weightTitle: StateFixtures.lbs,
+                         repsTitle: StateFixtures.reps,
+                         input: .init(weight: 135, reps: 12)), nil),
+            (StateFixtures.emptyRepsWeightSet, nil),
+            (StateFixtures.emptyRepsWeightSet, nil)
         ]
         let benchSets: [(SetInputViewState, SetModifierViewState?)] = [
-            (Fixtures.emptyRepsWeightSet, nil),
-            (Fixtures.emptyRepsWeightSet, nil),
-            (Fixtures.emptyRepsWeightSet,
-             .dropSet(set: .repsWeight(weightTitle: "lbs", weight: 100, repsTitle: "reps", reps: 5)))
+            (StateFixtures.emptyRepsWeightSet, nil),
+            (StateFixtures.emptyRepsWeightSet, nil),
+            (StateFixtures.emptyRepsWeightSet,
+             .dropSet(set: .repsWeight(weightTitle: StateFixtures.lbs,
+                                       repsTitle: StateFixtures.reps,
+                                       input: .init(weight: 100, reps: 5))))
         ]
         let rowSets: [(SetInputViewState, SetModifierViewState?)] = [
-            (Fixtures.emptyRepsWeightSet, nil)
+            (StateFixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
-            [Fixtures.backSquatViewState(inputs: squatSets), Fixtures.benchPressViewState(inputs: benchSets)],
-            [Fixtures.inclineDBRowViewState(inputs: rowSets)]
+        let groups: [[ExerciseViewState]] = [
+            [StateFixtures.backSquatViewState(inputs: squatSets), StateFixtures.benchPressViewState(inputs: benchSets)],
+            [StateFixtures.inclineDBRowViewState(inputs: rowSets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1", "Group 2"]
@@ -159,10 +164,10 @@ final class BuildWorkoutReducerTests: XCTestCase {
             Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
         ]
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
-            (Fixtures.emptyRepsWeightSet, nil)
+            (StateFixtures.emptyRepsWeightSet, nil)
         ]
-        let groups: [[BuildExerciseViewState]] = [
-            [Fixtures.backSquatViewState(inputs: sets)]
+        let groups: [[ExerciseViewState]] = [
+            [StateFixtures.backSquatViewState(inputs: sets)]
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1"]

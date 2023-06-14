@@ -37,9 +37,9 @@ final class HomeNavigationRouterTests: XCTestCase {
     }
     
     func testNavigate_SelectWorkout() {
-        sut.navigate(.seletectWorkout(id: "my-awesome-workout"))
+        sut.navigate(.seletectWorkout(id: "my-awesome-workout", filename: "filename"))
         let expectedNavController = UINavigationController.self
-        let expectedVC = UIHostingController<SelectWorkoutView>.self
+        let expectedVC = UIHostingController<WorkoutPreviewView<DoWorkoutViewModel>>.self
 
         XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedNavController) ?? false)
         let navController = mockNavigator.stubPresentedVC as? UINavigationController

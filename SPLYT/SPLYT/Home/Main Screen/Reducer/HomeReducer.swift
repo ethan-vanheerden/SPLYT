@@ -7,6 +7,7 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 final class HomeReducer {
     func reduce(_ domain: HomeDomainResult) -> HomeViewState {
@@ -48,23 +49,25 @@ private extension HomeReducer {
         [Strings.workouts, Strings.plans]
     }
     
-    func getCreatedWorkouts(workouts: [Workout]) -> [CreatedWorkoutViewState] {
-        return workouts.map {
-            CreatedWorkoutViewState(id: $0.id,
-                                    title: $0.name,
-                                    subtitle: getWorkoutSubtitle(workout: $0),
-                                    lastCompleted: getLastCompletedTitle(date: $0.lastCompleted))
-        }
+    func getCreatedWorkouts(workouts: [String: CreatedWorkout]) -> [CreatedWorkoutViewState] {
+        return workouts.values.sorted { $0.createdAt > $1.createdAt }
+            .map {
+                CreatedWorkoutViewState(id: $0.workout.id,
+                                        filename: $0.filename,
+                                        title: $0.workout.name,
+                                        subtitle: getWorkoutSubtitle(workout: $0.workout),
+                                        lastCompleted: getLastCompletedTitle(date: $0.workout.lastCompleted))
+            }
     }
     
-    var FABState: FABViewState {
-        let createPlanState = FABRowViewState(title: Strings.createPlan,
-                                              imageName: "calendar")
-        let createWorkoutState = FABRowViewState(title: Strings.createWorkout,
-                                                 imageName: "figure.strengthtraining.traditional")
+    var FABState: HomeFABViewState {
+        let createPlanState = HomeFABRowViewState(title: Strings.createPlan,
+                                                  imageName: "calendar")
+        let createWorkoutState = HomeFABRowViewState(title: Strings.createWorkout,
+                                                     imageName: "figure.strengthtraining.traditional")
         
-        return FABViewState(createPlanState: createPlanState,
-                            createWorkoutState: createWorkoutState)
+        return HomeFABViewState(createPlanState: createPlanState,
+                                createWorkoutState: createWorkoutState)
     }
     
     func getWorkoutSubtitle(workout: Workout) -> String {

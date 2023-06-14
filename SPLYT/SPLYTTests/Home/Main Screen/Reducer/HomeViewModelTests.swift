@@ -27,7 +27,7 @@ final class HomeViewModelTests: XCTestCase {
         
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkouts,
+                                          workouts: Fixtures.createdWorkoutViewStates,
                                           fab: Fixtures.fabState,
                                           showDialog: nil,
                                           deleteDialog: Fixtures.deleteDialog)
@@ -47,7 +47,7 @@ final class HomeViewModelTests: XCTestCase {
         
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: [Fixtures.createdFullBodyWorkout],
+                                          workouts: [Fixtures.createdFullBodyWorkoutViewState],
                                           fab: Fixtures.fabState,
                                           showDialog: nil,
                                           deleteDialog: Fixtures.deleteDialog)
@@ -67,7 +67,7 @@ final class HomeViewModelTests: XCTestCase {
         
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkouts,
+                                          workouts: Fixtures.createdWorkoutViewStates,
                                           fab: Fixtures.fabState,
                                           showDialog: .deleteWorkout(id: "leg-workout"),
                                           deleteDialog: Fixtures.deleteDialog)
@@ -82,7 +82,7 @@ final class HomeViewModelTests: XCTestCase {
         
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkouts,
+                                          workouts: Fixtures.createdWorkoutViewStates,
                                           fab: Fixtures.fabState,
                                           showDialog: nil,
                                           deleteDialog: Fixtures.deleteDialog)

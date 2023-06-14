@@ -14,9 +14,8 @@ final class TagFactoryTests: XCTestCase {
     
     func testTagFromModifier_DropSet() {
         let modifier: SetModifierViewState = .dropSet(set: .repsWeight(weightTitle: "lbs",
-                                                                       weight: 100,
                                                                        repsTitle: "reps",
-                                                                       reps: 5))
+                                                                       input: .init(weight: 100, reps: 5)))
         let result = sut.tagFromModifier(modifier: modifier)
         
         let expected = TagViewState(title: "Drop Set", color: .green)

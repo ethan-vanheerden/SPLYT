@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import ExerciseCore
 
 // MARK: - Domain
 
 struct HomeDomain: Equatable {
-    var workouts: [Workout]
+    var workouts: [String: CreatedWorkout]
 }
 
 // MARK: - Dialog Type

@@ -1,12 +1,11 @@
 import Foundation
 
-/// View Models which publish a state for views to observe.
+/// View models which publish a state for views to observe.
 public protocol ViewModel: ObservableObject {
     /// The published state that views will subscribe to
     associatedtype ViewState
     /// The events that a `View` can send to its `ViewModel`
     associatedtype Event
-    
     
     /// The published state that views will subscribe to
     var viewState: ViewState { get }
@@ -33,7 +32,6 @@ public extension ViewModel {
 public struct NoViewEvent { }
 
 public extension ViewModel where Self.Event == NoViewEvent {
-    
     /// Do nothing
     func send(_ event: NoViewEvent) async { }
 }

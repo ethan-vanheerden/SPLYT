@@ -19,7 +19,7 @@ struct BuildWorkoutFixtures {
                                  name: "Back Squat",
                                  musclesWorked: [.quads, .glutes],
                                  isFavorite: isFavorite,
-                                 defaultInputType: .repsWeight(reps: nil, weight: nil),
+                                 defaultInputType: .repsWeight(input: .init()),
                                  isSelected: isSelected)
     }
     
@@ -28,7 +28,7 @@ struct BuildWorkoutFixtures {
                                  name: "Bench Press",
                                  musclesWorked: [.chest],
                                  isFavorite: isFavorite,
-                                 defaultInputType: .repsWeight(reps: nil, weight: nil),
+                                 defaultInputType: .repsWeight(input: .init()),
                                  isSelected: isSelected)
     }
     
@@ -37,7 +37,7 @@ struct BuildWorkoutFixtures {
                                  name: "Incline Dumbbell Row",
                                  musclesWorked: [.back],
                                  isFavorite: isFavorite,
-                                 defaultInputType: .repsWeight(reps: nil, weight: nil),
+                                 defaultInputType: .repsWeight(input: .init()),
                                  isSelected: isSelected)
     }
     
@@ -62,17 +62,7 @@ struct BuildWorkoutFixtures {
                        lastCompleted: nil)
     }
     
-    static func exerciseGroups(numGroups: Int, groupExercises: [Int: [Exercise]]) -> [ExerciseGroup] {
-        var groups = [ExerciseGroup]()
-        
-        for i in stride(from: 0, to: numGroups, by: 1) {
-            let exercises = groupExercises[i]!
-            groups.append(ExerciseGroup(exercises: exercises))
-        }
-        return groups
-    }
-    
-    // MARK: - View State
+    // MARK: - View States
     
     static func backSquatTileViewState(isSelected: Bool, isFavorite: Bool) -> AddExerciseTileViewState {
         return AddExerciseTileViewState(id: "back-squat",
@@ -101,57 +91,17 @@ struct BuildWorkoutFixtures {
         inclineDBRowTileViewState(isSelected: false, isFavorite: false)
     ]
     
-    static func createSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [SetViewState] {
-        var sets = [SetViewState]()
-        
-        for (index, (input, modifier)) in inputs.enumerated() {
-            let set = SetViewState(setIndex: index,
-                                   title: "Set \(index + 1)",
-                                   type: input,
-                                   modifier: modifier)
-            sets.append(set)
-        }
-        return sets
-    }
-    
-    static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> BuildExerciseViewState {
-        let header = SectionHeaderViewState(text: "Back Squat")
-        return BuildExerciseViewState(header: header,
-                                      sets: createSetViewStates(inputs: inputs),
-                                      canRemoveSet: inputs.count > 1)
-    }
-    
-    static func benchPressViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> BuildExerciseViewState {
-        let header = SectionHeaderViewState(text: "Bench Press")
-        return BuildExerciseViewState(header: header,
-                                      sets: createSetViewStates(inputs: inputs),
-                                      canRemoveSet: inputs.count > 1)
-    }
-    
-    static func inclineDBRowViewState(inputs: [(SetInputViewState, SetModifierViewState?)]) -> BuildExerciseViewState {
-        let header = SectionHeaderViewState(text: "Incline Dumbbell Row")
-        return BuildExerciseViewState(header: header,
-                                      sets: createSetViewStates(inputs: inputs),
-                                      canRemoveSet: inputs.count > 1)
-    }
-    
-    static var dialogViewState: DialogViewState = DialogViewState(title: "Confirm Exit",
+    static let dialogViewState: DialogViewState = DialogViewState(title: "Confirm Exit",
                                                                   subtitle: "If you exit now, all progress will be lost.",
                                                                   primaryButtonTitle: "Confirm",
                                                                   secondaryButtonTitle: "Cancel")
     
-    static var backDialog: DialogViewState = DialogViewState(title: "Confirm Exit",
+    static let backDialog: DialogViewState = DialogViewState(title: "Confirm Exit",
                                                              subtitle: "If you exit now, all progress will be lost.",
                                                              primaryButtonTitle: "Confirm",
                                                              secondaryButtonTitle: "Cancel")
     
-    static var saveDialog: DialogViewState = DialogViewState(title: "Error saving",
+    static let saveDialog: DialogViewState = DialogViewState(title: "Error saving",
                                                              subtitle: "Please try again later.",
                                                              primaryButtonTitle: "Ok")
-    
-    static let reps = "reps"
-    
-    static let lbs = "lbs"
-    
-    static let emptyRepsWeightSet: SetInputViewState = .repsWeight(weightTitle: lbs, repsTitle: reps)
 }

@@ -31,14 +31,8 @@ struct BuildWorkoutReducer {
 
 private extension BuildWorkoutReducer {
     func getDisplay(domain: BuildWorkoutDomain, dialog: BuildWorkoutDialog? = nil) -> BuildWorkoutDisplay {
-        var groups = [[BuildExerciseViewState]]()
-        
-        for group in domain.builtWorkout.exerciseGroups {
-            // For each group, get the BuildExerciseViewStates of the exercises in it
-            let exercises = getBuildExerciseStates(exercises: group.exercises)
-            groups.append(exercises)
-        }
-        
+        let groups = WorkoutReducer.reduceExerciseGroups(groups: domain.builtWorkout.exerciseGroups)
+        let groupTitles = WorkoutReducer.getGroupTitles(workout: domain.builtWorkout)
         let currentGroup = domain.currentGroup
         let numExercisesInCurrentGroup = groups[currentGroup].count
         let lastGroupEmpty = groups.last?.isEmpty ?? true
@@ -48,7 +42,7 @@ private extension BuildWorkoutReducer {
                                           groups: groups,
                                           currentGroup: currentGroup,
                                           currentGroupTitle: getCurrentGroupTitle(numExercisesInCurrentGroup),
-                                          groupTitles: getGroupTitles(workout: domain.builtWorkout),
+                                          groupTitles: groupTitles,
                                           lastGroupEmpty: lastGroupEmpty,
                                           showDialog: dialog,
                                           backDialog: backDialog,
@@ -67,62 +61,6 @@ private extension BuildWorkoutReducer {
             // Maps don't preserve sorted order, so we must sort
             // TODO: In the future, we can add other custom sorting comparisons here (ex: by favorite, recent, etc.)
             $0.exerciseName < $1.exerciseName
-        }
-    }
-    
-    func getGroupTitles(workout: Workout) -> [String] {
-        var titles = [String]()
-        
-        // We can assume that there is always at least one group
-        for i in 1...workout.exerciseGroups.count {
-            titles.append(Strings.group + " \(i)")
-        }
-        
-        return titles
-    }
-    
-    func getBuildExerciseStates(exercises: [Exercise]) -> [BuildExerciseViewState] {
-        return exercises.map { exercise in
-            let headerState = SectionHeaderViewState(text: exercise.name)
-            return BuildExerciseViewState(header: headerState,
-                                          sets: getSetStates(exercise: exercise),
-                                          canRemoveSet: exercise.sets.count > 1)
-        }
-    }
-    
-    func getSetStates(exercise: Exercise) -> [SetViewState] {
-        return exercise.sets.enumerated().map { index, set in
-            SetViewState(setIndex: index,
-                         title: Strings.set + " \(index + 1)",
-                         type: getSetViewType(set.input),
-                         modifier: getSetModifierState(modifier: set.modifier))
-        }
-    }
-    
-    func getSetViewType(_ input: SetInput) -> SetInputViewState {
-        switch input {
-        case let .repsWeight(reps, weight):
-            return .repsWeight(weightTitle: Strings.lbs,
-                               weight: weight,
-                               repsTitle: Strings.reps,
-                               reps: reps)
-        case .repsOnly(let reps):
-            return .repsOnly(title: Strings.reps, reps: reps)
-        case .time(let seconds):
-            return .time(title: Strings.sec, seconds: seconds)
-        }
-    }
-    
-    func getSetModifierState(modifier: SetModifier?) -> SetModifierViewState? {
-        guard let modifier = modifier else { return nil }
-        
-        switch modifier {
-        case .dropSet(let input):
-            return .dropSet(set: getSetViewType(input))
-        case .restPause(let input):
-            return .restPause(set: getSetViewType(input))
-        case .eccentric:
-            return .eccentric
         }
     }
     
@@ -148,11 +86,6 @@ private extension BuildWorkoutReducer {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let group = "Group"
-    static let set = "Set"
-    static let lbs = "lbs"
-    static let reps = "reps"
-    static let sec = "sec"
     static let exercise = "exercise"
     static let exercises = "exercises"
     static let currentGroup = "Current group"

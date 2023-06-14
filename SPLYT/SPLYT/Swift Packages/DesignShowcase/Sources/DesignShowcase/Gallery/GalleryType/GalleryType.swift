@@ -14,5 +14,6 @@ let galleryTypes: [GalleryType] = [
     ParticleGallery(),
     AtomGallery(),
     MoleculeGallery(),
-    OrganismGallery()
+    OrganismGallery(),
+    TemplateGallery()
 ]

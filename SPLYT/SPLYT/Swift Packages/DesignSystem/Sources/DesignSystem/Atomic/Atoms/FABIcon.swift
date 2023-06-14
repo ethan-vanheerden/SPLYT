@@ -1,26 +1,27 @@
 import SwiftUI
 
 public struct FABIcon: View {
-    private let type: FABIconType
-    private let tapAction: () -> Void
     @State private var isPressed = false
+    private let viewState: FABIconViewState
+    private let tapAction: () -> Void
     
-    public init(type: FABIconType,
+    public init(viewState: FABIconViewState,
                 tapAction: @escaping () -> Void) {
-        self.type = type
+        self.viewState = viewState
         self.tapAction = tapAction
     }
     
     public var body: some View {
         ZStack {
             Circle()
-                .fill(circleColor.shadow(.drop(radius: Layout.size(2))))
+                .fill(Color(splytColor: viewState.size.backgroundColor)
+                    .shadow(.drop(radius: Layout.size(2))))
                 .frame(width: circleSize)
-            Image(systemName: type.imageName)
+            Image(systemName: viewState.imageName)
                 .resizable()
                 .scaledToFit()
                 .frame(width: iconSize)
-                .foregroundColor(iconColor)
+                .foregroundColor(Color(splytColor: viewState.size.iconColor))
         }
         .gesture(press)
         .frame(width: circleFrame, height: circleFrame)
@@ -43,7 +44,7 @@ public struct FABIcon: View {
     }
     
     private var circleFrame: CGFloat {
-        switch type.size {
+        switch viewState.size {
         case .primary:
             return Layout.size(8)
         case .secondary:
@@ -51,17 +52,8 @@ public struct FABIcon: View {
         }
     }
     
-    private var circleColor: Color {
-        switch type.size {
-        case .primary:
-            return Color(splytColor: .lightBlue)
-        case .secondary:
-            return Color(splytColor: .white)
-        }
-    }
-    
     private var circleSize: CGFloat {
-        switch type.size {
+        switch viewState.size {
         case .primary:
             return isPressed ? Layout.size(7) : Layout.size(8)
         case .secondary:
@@ -69,17 +61,8 @@ public struct FABIcon: View {
         }
     }
     
-    private var iconColor: Color {
-        switch type.size {
-        case .primary:
-            return Color(splytColor: .white)
-        case .secondary:
-            return Color(splytColor: .lightBlue)
-        }
-    }
-    
     private var iconSize: CGFloat {
-        switch type.size {
+        switch viewState.size {
         case .primary:
             return isPressed ? Layout.size(2.2) : Layout.size(2.5)
         case .secondary:
@@ -88,18 +71,9 @@ public struct FABIcon: View {
     }
 }
 
-struct FABIcon_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: Layout.size(6)) {
-            FABIcon(type: FABIconType(size: .primary, imageName: "plus"),
-                    tapAction: {})
-            FABIcon(type: FABIconType(size: .secondary, imageName: "calendar"),
-                    tapAction: {})
-        }
-    }
-}
+// MARK: - View State
 
-public struct FABIconType {
+public struct FABIconViewState: Equatable {
     let size: FABIconSize
     let imageName: String
     
@@ -110,7 +84,25 @@ public struct FABIconType {
     }
 }
 
-public enum FABIconSize {
-    case primary
-    case secondary
+// MARK: - Size
+
+public enum FABIconSize: Equatable {
+    case primary(backgroundColor: SplytColor, iconColor: SplytColor)
+    case secondary(backgroundColor: SplytColor, iconColor: SplytColor)
+    
+    var backgroundColor: SplytColor {
+        switch self {
+        case let .primary(color, _),
+            let .secondary(color, _):
+            return color
+        }
+    }
+    
+    var iconColor: SplytColor {
+        switch self {
+        case let .primary(_, color),
+            let .secondary(_, color):
+            return color
+        }
+    }
 }

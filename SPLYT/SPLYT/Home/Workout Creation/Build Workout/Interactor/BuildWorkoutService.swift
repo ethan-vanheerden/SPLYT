@@ -7,6 +7,7 @@
 
 import Foundation
 import Caching
+import ExerciseCore
 
 // MARK: - Protocol
 
@@ -24,19 +25,20 @@ enum BuildWorkoutError: Error {
 
 // MARK: - Implementation
 
-struct BuildWorkoutService<T: CacheInteractorType, U: CacheInteractorType>: BuildWorkoutServiceType where T.Request == AvailableExercisesCacheRequest, U.Request == CreatedWorkoutsCacheRequest  {
-    private let exerciseCacheInteractor: T
-    private let workoutCacheInteractor: U
+struct BuildWorkoutService: BuildWorkoutServiceType  {
+    private let cacheInteractor: CacheInteractorType
+    private let workoutService: CreatedWorkoutsServiceType
     
-    init(exerciseCacheInteractor: T = CacheInteractor(request: AvailableExercisesCacheRequest()),
-         workoutCacheInteractor: U = CacheInteractor(request: CreatedWorkoutsCacheRequest())) {
-        self.exerciseCacheInteractor = exerciseCacheInteractor
-        self.workoutCacheInteractor = workoutCacheInteractor
+    init(cacheInteractor: CacheInteractorType = CacheInteractor(),
+         workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
+        self.cacheInteractor = cacheInteractor
+        self.workoutService = workoutService
     }
     
     func loadAvailableExercises() throws -> [String: AvailableExercise] {
+        let request = AvailableExercisesCacheRequest()
         // First check if the user has the cached AvailableExercise file yet
-        if !(try exerciseCacheInteractor.fileExists()) {
+        if !(try cacheInteractor.fileExists(request: request)) {
             
             // Save the fallback file
             guard let url = Bundle.main.url(forResource: "fallback_exercises", withExtension: "json") else {
@@ -51,26 +53,21 @@ struct BuildWorkoutService<T: CacheInteractorType, U: CacheInteractorType>: Buil
             return mapExercises(exercises)
         }
         
-        let exercises = try exerciseCacheInteractor.load()
+        let exercises = try cacheInteractor.load(request: request)
         return mapExercises(exercises)
     }
     
     func saveAvailableExercises(_ exercises: [AvailableExercise]) throws {
-        try exerciseCacheInteractor.save(data: exercises)
+        let request = AvailableExercisesCacheRequest()
+        try cacheInteractor.save(request: request, data: exercises)
     }
     
     func saveWorkout(_ workout: Workout) throws {
-        // First load the user's current workouts so we can prepend the new one
-        if !(try workoutCacheInteractor.fileExists()) {
-            // No workouts created yet, so just ssave the given one
-            try workoutCacheInteractor.save(data: [workout])
-        } else {
-            var workouts = try workoutCacheInteractor.load()
-            workouts.insert(workout, at: 0)
-            
-            // Now save the new workout list
-            try workoutCacheInteractor.save(data: workouts)
-        }
+        // The workout filename will be "workout_history_{workout_id}"
+        let createdWorkout = CreatedWorkout(workout: workout,
+                                            filename: "workout_history_\(workout.id)",
+                                            createdAt: Date.now)
+        try workoutService.saveWorkout(createdWorkout)
     }
 }
 

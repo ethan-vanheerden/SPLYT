@@ -8,21 +8,21 @@
 import XCTest
 @testable import SPLYT
 import ExerciseCore
-import DesignSystem
+@testable import DesignSystem
 
 final class BuildWorkoutTransformerTests: XCTestCase {
+    typealias StateFixtures = WorkoutViewStateFixtures
     private let sut = BuildWorkoutTransformer()
     
     func testTransformModifier_DropSet_RepsWeight() {
-        let setInputViewState: SetInputViewState = .repsWeight(weightTitle: "lbs",
-                                                        weight: 100,
-                                                        repsTitle: "reps",
-                                                        reps: 8)
+        let setInputViewState: SetInputViewState = .repsWeight(weightTitle: StateFixtures.lbs,
+                                                               repsTitle: StateFixtures.reps,
+                                                               input: .init(weight: 100, reps: 8))
         let modifierViewState: SetModifierViewState = .dropSet(set: setInputViewState)
         
         let result = sut.transformModifier(modifierViewState)
         
-        let expectedSetInput: SetInput = .repsWeight(reps: 8, weight: 100)
+        let expectedSetInput: SetInput = .repsWeight(input: .init(weight: 100, reps: 8))
         let expectedModifier: SetModifier = .dropSet(input: expectedSetInput)
         
         XCTAssertEqual(result, expectedModifier)
@@ -34,31 +34,33 @@ final class BuildWorkoutTransformerTests: XCTestCase {
         
         let result = sut.transformModifier(modifierViewState)
         
-        let expectedSetInput: SetInput = .repsOnly(reps: nil)
+        let expectedSetInput: SetInput = .repsOnly(input: .init())
         let expectedModifier: SetModifier = .dropSet(input: expectedSetInput)
         
         XCTAssertEqual(result, expectedModifier)
     }
     
     func testTransformModifier_DropSet_Time() {
-        let setInputViewState: SetInputViewState = .time(title: "sec", seconds: 10)
+        let setInputViewState: SetInputViewState = .time(title: StateFixtures.sec,
+                                                         input: .init(seconds: 10))
         let modifierViewState: SetModifierViewState = .dropSet(set: setInputViewState)
         
         let result = sut.transformModifier(modifierViewState)
         
-        let expectedSetInput: SetInput = .time(seconds: 10)
+        let expectedSetInput: SetInput = .time(input: .init(seconds: 10))
         let expectedModifier: SetModifier = .dropSet(input: expectedSetInput)
         
         XCTAssertEqual(result, expectedModifier)
     }
     
     func testTransformModifier_RestPause() {
-        let setInputViewState: SetInputViewState = .repsOnly(title: "reps", reps: 5)
+        let setInputViewState: SetInputViewState = .repsOnly(title: "reps",
+                                                             input: .init(reps: 5))
         let modifierViewState: SetModifierViewState = .restPause(set: setInputViewState)
         
         let result = sut.transformModifier(modifierViewState)
         
-        let expectedSetInput: SetInput = .repsOnly(reps: 5)
+        let expectedSetInput: SetInput = .repsOnly(input: .init(reps: 5))
         let expectedModifier: SetModifier = .restPause(input: expectedSetInput)
         
         XCTAssertEqual(result, expectedModifier)

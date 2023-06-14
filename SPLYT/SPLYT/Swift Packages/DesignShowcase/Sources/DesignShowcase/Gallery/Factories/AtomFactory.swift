@@ -6,10 +6,14 @@ struct AtomFactory {
         switch atom {
         case .buttons:
             ButtonGallery()
+        case .collapseHeader:
+            CollapseHeaderGallery()
         case .FABIcon:
             FABIconGallery()
         case .iconButtons:
             IconButtonGallery()
+        case .progressBar:
+            ProgressBarGallery()
         case .scrim:
             ScrimGallery()
         case .sectionHeader:

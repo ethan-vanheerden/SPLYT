@@ -61,7 +61,8 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         .dialog(isOpen: deleteDialogId != nil,
                 viewState: display.deleteDialog,
                 primaryAction: { viewModel.send(.deleteWorkout(id: deleteDialogId ?? ""), taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: deleteDialogId ?? ""), isOpen: false), taskPriority: .userInitiated) })
+                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: deleteDialogId ?? ""), isOpen: false),
+                                                  taskPriority: .userInitiated) })
     }
     
     private func deleteDialogId(display: HomeDisplay) -> String? {
@@ -90,9 +91,11 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
             VStack(spacing: Layout.size(1.5)) {
                 ForEach(workouts, id: \.id) { viewState in
                     CreatedWorkoutView(viewState: viewState,
-                                       tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0)) },
+                                       tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0,
+                                                                                               filename: viewState.filename)) },
                                        editAction:{ navigationRouter.navigate(.editWorkout(id: $0)) },
-                                       deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0), isOpen: true), taskPriority: .userInitiated) })
+                                       deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0), isOpen: true),
+                                                                      taskPriority: .userInitiated) })
                 }
             }
             .padding(.horizontal, horizontalPadding)
@@ -102,11 +105,11 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     }
     
     @ViewBuilder
-    private func fabView(state: FABViewState) -> some View {
-        FAB(isPresenting: $fabPresenting,
-            viewState: state,
-            createPlanAction: { navigationRouter.navigate(.createPlan) },
-            createWorkoutAction: { navigationRouter.navigate(.createWorkout) })
+    private func fabView(state: HomeFABViewState) -> some View {
+        HomeFAB(isPresenting: $fabPresenting,
+                viewState: state,
+                createPlanAction: { navigationRouter.navigate(.createPlan) },
+                createWorkoutAction: { navigationRouter.navigate(.createWorkout) })
     }
 }
 

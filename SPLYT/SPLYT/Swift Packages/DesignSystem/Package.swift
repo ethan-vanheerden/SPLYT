@@ -12,13 +12,15 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", exact: "1.11.0"),
-        .package(path: "../ExerciseCore")
+        .package(path: "../ExerciseCore"),
+        .package(path: "../Core")
     ],
     targets: [
         .target(
             name: "DesignSystem",
             dependencies: [
-                "ExerciseCore"
+                "ExerciseCore",
+                "Core"
             ]),
         .testTarget(
             name: "DesignSystemTests",

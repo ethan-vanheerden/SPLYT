@@ -73,7 +73,7 @@ private extension HomeInteractor {
         
         do {
             // Remove the workout
-            domain.workouts = domain.workouts.filter { $0.id != id }
+            domain.workouts.removeValue(forKey: id)
             
             // Save the results
             try service.saveWorkouts(domain.workouts)

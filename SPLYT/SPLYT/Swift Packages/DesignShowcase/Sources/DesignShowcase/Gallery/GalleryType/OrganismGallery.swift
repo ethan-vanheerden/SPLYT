@@ -5,8 +5,9 @@ struct OrganismGallery: GalleryType {
 }
 
 enum Organism: String, CaseIterable, GalleryItem {
-    case buildExercise = "Build Exercise View"
-    case FAB = "FAB"
+    case exerciseView = "Exercise View"
+    case homeFAB = "Home FAB"
+    case restFAB = "Rest FAB"
     
     var title: String {
         return self.rawValue

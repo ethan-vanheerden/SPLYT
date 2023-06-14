@@ -59,11 +59,11 @@ struct CreatedWorkoutView: View {
     }
 }
 
-
 // MARK: - View State
 
 struct CreatedWorkoutViewState: Equatable {
-    let id: String
+    let id: String // Workout ID
+    let filename: String
     let title: String
     let subtitle: String
     let lastCompleted: String?
@@ -74,25 +74,4 @@ struct CreatedWorkoutViewState: Equatable {
 fileprivate struct Strings {
     static let edit = "Edit"
     static let delete = "Delete"
-}
-
-struct CreatedWorkoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            CreatedWorkoutView(viewState: CreatedWorkoutViewState(id: "workout-legs-1",
-                                                                  title: "Legs",
-                                                                  subtitle: "5 exercises",
-                                                                  lastCompleted: "Last completed: 3/1/2023"),
-                               tapAction: { _ in },
-                               editAction: { _ in },
-                               deleteAction: { _ in })
-            CreatedWorkoutView(viewState: CreatedWorkoutViewState(id: "workout-legs-1",
-                                                                  title: "Legs",
-                                                                  subtitle: "5 exercises",
-                                                                  lastCompleted: nil),
-                               tapAction: { _ in },
-                               editAction: { _ in },
-                               deleteAction: { _ in })
-        }
-    }
 }
