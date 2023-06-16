@@ -18,7 +18,7 @@ public extension View {
                 .toolbar {
                     if let backAction = backAction {
                         ToolbarItem(placement: .navigation) {
-                            IconButton(iconName: "chevron.backward",
+                            IconButton(iconName: viewState.backIconName,
                                        style: .secondary,
                                        iconColor: .black) { backAction() }
                         }

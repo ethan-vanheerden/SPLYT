@@ -7,6 +7,7 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 struct BuildWorkoutDisplay: Equatable {
     let allExercises: [AddExerciseTileSectionViewState] // Exercises that can be selected
@@ -19,6 +20,16 @@ struct BuildWorkoutDisplay: Equatable {
     let backDialog: DialogViewState
     let saveDialog: DialogViewState
     let canSave: Bool
+    let filterDisplay: BuildWorkoutFilterDisplay
+    let isFiltering: Bool
+}
+
+
+// MARK: - Filter Display
+
+struct BuildWorkoutFilterDisplay: Equatable {
+    let isFavorite: Bool
+    let musclesWorked: [MusclesWorked: Bool]
 }
 
 // MARK: - View State
@@ -33,4 +44,3 @@ struct AddExerciseTileSectionViewState: Equatable, Hashable {
         self.exercises = exercises
     }
 }
-

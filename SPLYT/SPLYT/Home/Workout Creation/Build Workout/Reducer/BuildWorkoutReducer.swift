@@ -47,7 +47,9 @@ private extension BuildWorkoutReducer {
                                           showDialog: dialog,
                                           backDialog: backDialog,
                                           saveDialog: saveDialog,
-                                          canSave: canSave)
+                                          canSave: canSave,
+                                          filterDisplay: getFilterDisplay(filterDomain: domain.filterDomain),
+                                          isFiltering: getIsFiltering(filterDomain: domain.filterDomain))
         return display
     }
     
@@ -95,13 +97,23 @@ private extension BuildWorkoutReducer {
         
         for key in sortedKeys {
             guard let exercises = groupedItems[key] else { continue }
+            let sortedExercises = exercises.sorted { $0.exerciseName < $1.exerciseName }
             let header = SectionHeaderViewState(title: key)
             let section = AddExerciseTileSectionViewState(header: header,
-                                                          exercises: exercises)
+                                                          exercises: sortedExercises)
             sections.append(section)
         }
         
         return sections
+    }
+    
+    func getFilterDisplay(filterDomain: BuildWorkoutFilterDomain) -> BuildWorkoutFilterDisplay {
+        return .init(isFavorite: filterDomain.isFavorite,
+                     musclesWorked: filterDomain.musclesWorked)
+    }
+    
+    func getIsFiltering(filterDomain: BuildWorkoutFilterDomain) -> Bool {
+        return filterDomain.isFavorite || filterDomain.musclesWorked.values.contains(true)
     }
 }
 

@@ -18,8 +18,10 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @State private var showSetModifiers: Bool = false
     @State private var editExerciseIndex: Int = 0
     @State private var editSetIndex: Int = 0
+    @State private var searchText = ""
     private let navigationRouter: BuildWorkoutNavigationRouter
     private let transformer: BuildWorkoutTransformer
+    private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
          navigationRouter: BuildWorkoutNavigationRouter,
@@ -57,73 +59,167 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ViewBuilder
     private func mainView(display: BuildWorkoutDisplay) -> some View {
         VStack {
-            ZStack(alignment: .bottom) {
-                ScrollView {
-                    LazyVStack(pinnedViews: .sectionHeaders) {
-                        ForEach(display.allExercises, id: \.self) { viewState in
-                            Section {
-                                ForEach(viewState.exercises, id: \.self) { exerciseViewState in
-                                    AddExerciseTile(viewState: exerciseViewState,
-                                                    tapAction: { viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id,
-                                                                                                group: display.currentGroup),
-                                                                                taskPriority: .userInitiated) },
-                                                    favoriteAction: { viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
-                                                                                     taskPriority: .userInitiated) })
-                                    .padding(.bottom, Layout.size(1))
-                                }
-                                .padding(.horizontal, ViewConstants.horizontalPadding)
-                            } header: {
-                                HStack {
-                                    Spacer()
-                                    SectionHeader(viewState: viewState.header)
-                                        .padding(.horizontal, ViewConstants.horizontalPadding)
-                                        .padding(.vertical, Layout.size(1))
-                                    Spacer()
-                                }
-                                .background(Color(uiColor: UIColor.systemBackground))
-                            }
-                        }
+            HStack {
+                ZStack(alignment: .topLeading) {
+                    IconButton(iconName: "line.3.horizontal.decrease.circle",
+                               style: .secondary,
+                               iconColor: .lightBlue) {
+                        filterSheetPresented = true
+                    }
+                    if display.isFiltering {
+                        Circle()
+                            .fill(Color(splytColor: .red))
+                            .frame(width: Layout.size(1))
+                            .offset(x: Layout.size(0.5), y: Layout.size(0.5))
+
                     }
                 }
-                SplytButton(text: "Filter") {
-                    filterSheetPresented = true
-                }
-                .frame(width: Layout.size(15))
+                TextEntry(text: $searchText, viewState: TextEntryBuilder.searchEntry)
             }
+            .padding(.horizontal, horizontalPadding)
+            exerciseList(display: display)
             sheetView(display: display)
         }
         .sheet(isPresented: $filterSheetPresented) {
-            Text("Filter")
+            filterSheet(display: display.filterDisplay)
         }
         .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
-                                                    taskPriority: .userInitiated) }) {
-                           saveButton(canSave: display.canSave)
-                       }
-                                                    .dialog(isOpen: display.showDialog == .leave,
-                                                            viewState: display.backDialog,
-                                                            primaryAction: { dismiss() },
-                                                            secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false),
-                                                                                              taskPriority: .userInitiated) })
-                                                    .dialog(isOpen: display.showDialog == .save,
-                                                            viewState: display.saveDialog,
-                                                            primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false),
-                                                                                            taskPriority: .userInitiated) })
+                                                    taskPriority: .userInitiated) },
+                       content: { saveButton(canSave: display.canSave) })
+        .dialog(isOpen: display.showDialog == .leave,
+                viewState: display.backDialog,
+                primaryAction: { dismiss() },
+                secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false),
+                                                  taskPriority: .userInitiated) })
+        .dialog(isOpen: display.showDialog == .save,
+                viewState: display.saveDialog,
+                primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false),
+                                                taskPriority: .userInitiated) })
+        .onChange(of: searchText) { newValue in
+            viewModel.send(.filter(by: .search(searchText: newValue)),
+                           taskPriority: .userInitiated)
+        }
+    }
+    
+    @ViewBuilder
+    private func exerciseList(display: BuildWorkoutDisplay) -> some View {
+        if display.allExercises.isEmpty {
+            emptyExerciseView(isFiltering: display.isFiltering)
+        } else {
+            ScrollView {
+                LazyVStack(pinnedViews: .sectionHeaders) {
+                    ForEach(display.allExercises, id: \.self) { viewState in
+                        Section {
+                            ForEach(viewState.exercises, id: \.self) { exerciseViewState in
+                                AddExerciseTile(viewState: exerciseViewState,
+                                                tapAction: { viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id,
+                                                                                            group: display.currentGroup),
+                                                                            taskPriority: .userInitiated) },
+                                                favoriteAction: { viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
+                                                                                 taskPriority: .userInitiated) })
+                                .padding(.bottom, Layout.size(1))
+                            }
+                            .padding(.horizontal, horizontalPadding)
+                        } header: {
+                            HStack {
+                                Spacer()
+                                SectionHeader(viewState: viewState.header)
+                                    .padding(.horizontal, horizontalPadding)
+                                    .padding(.vertical, Layout.size(1))
+                                Spacer()
+                            }
+                            .background(Color(splytColor: .white))
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func emptyExerciseView(isFiltering: Bool) -> some View {
+        VStack {
+            Spacer()
+            Text("No exercises found 😅")
+                .body()
+            if isFiltering {
+                SplytButton(text: "Remove filters") {
+                    viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
+                }
+            }
+            Spacer()
+        }
+        .padding(.horizontal, horizontalPadding)
+    }
+    
+    @ViewBuilder
+    private func filterSheet(display: BuildWorkoutFilterDisplay) -> some View {
+        VStack(spacing: Layout.size(2)) {
+            Tile {
+                HStack {
+                    Toggle(isOn: isFavoriteBinding(isFavorite: display.isFavorite)) {
+                        Text("Favorites")
+                            .body()
+                    }
+                    .tint(Color(splytColor: .lightBlue))
+                }
+            }
+            Tile {
+                VStack {
+                    SectionHeader(viewState: .init(title: "Muscles worked", includeLine: false))
+                    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
+                    LazyVGrid(columns: columns) {
+                        ForEach(MusclesWorked.allCases, id: \.self) { muscle in
+                            Toggle(isOn: muscleWorkedBinding(musclesWorked: display.musclesWorked,
+                                                             currentMuscle: muscle)) {
+                                Text(muscle.rawValue)
+                                    .body(style: .medium)
+                                    .frame(width: Layout.size(17))
+                                    .foregroundColor(Color(splytColor: .black))
+                            }
+                            .toggleStyle(.button)
+                            .tint(Color(splytColor: .lightBlue))
+                        }
+                    }
+                }
+            }
+            Spacer()
+        }
+        .padding(.horizontal, horizontalPadding)
+        .padding(.top, Layout.size(2))
+        .navigationBar(viewState: .init(title: "Filter",
+                                        size: .small),
+                       content: { IconButton(iconName: "checkmark",
+                                             style: .secondary,
+                                             iconColor: .lightBlue, action: { filterSheetPresented = false })})
+    }
+    
+    private func isFavoriteBinding(isFavorite: Bool) -> Binding<Bool> {
+        return Binding(
+            get: { return isFavorite },
+            set: { viewModel.send(.filter(by: .favorite(isFavorite: $0)),
+                                  taskPriority: .userInitiated) }
+        )
+    }
+    
+    private func muscleWorkedBinding(musclesWorked: [MusclesWorked: Bool],
+                                     currentMuscle: MusclesWorked) -> Binding<Bool> {
+        return Binding(
+            get: { return musclesWorked[currentMuscle] ?? false },
+            set: { viewModel.send(.filter(by: .muscleWorked(muscle: currentMuscle, isSelected: $0)),
+                                  taskPriority: .userInitiated) }
+        )
     }
     
     @ViewBuilder
     private func saveButton(canSave: Bool) -> some View {
-        HStack {
-            IconButton(iconName: "line.3.horizontal.decrease.circle") {
-                filterSheetPresented = true
-            }
-            SplytButton(text: Strings.save,
-                        type: .secondary(),
-                        isEnabled: canSave) {
-                viewModel.send(.save, taskPriority: .userInitiated)
-            }
+        IconButton(iconName: "checkmark",
+                   style: .secondary,
+                   iconColor: .lightBlue,
+                   isEnabled: canSave) {
+            viewModel.send(.save, taskPriority: .userInitiated)
         }
-        
     }
     
     @ViewBuilder
@@ -134,9 +230,9 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                     .body()
                 sheetButtons(display: display)
             }
-            .padding(.horizontal, ViewConstants.horizontalPadding)
+            .padding(.horizontal, horizontalPadding)
         }
-        .padding(.horizontal, ViewConstants.horizontalPadding)
+        .padding(.horizontal, horizontalPadding)
         .sheet(isPresented: $setSheetPresented) {
             expandedSheetView(display: display)
                 .presentationDetents([.fraction(0.75)])
@@ -147,6 +243,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 showSetModifiers = false
             }
         }
+        .ignoresSafeArea(.keyboard)
     }
     
     @ViewBuilder
@@ -264,7 +361,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                     Spacer()
                 }
             }
-            .padding(.horizontal, ViewConstants.horizontalPadding)
+            .padding(.horizontal, horizontalPadding)
             .scaleEffect(showSetModifiers ? 1 : 0.25)
         }
     }
@@ -277,10 +374,4 @@ fileprivate struct Strings {
     static let addGroup = "Add group"
     static let editSetsReps = "Edit sets/reps"
     static let save = "SAVE"
-}
-
-// MARK: - View Constants
-
-fileprivate struct ViewConstants {
-    static let horizontalPadding = Layout.size(2)
 }

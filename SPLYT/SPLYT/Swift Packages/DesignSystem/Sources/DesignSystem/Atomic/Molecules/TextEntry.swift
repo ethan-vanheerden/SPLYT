@@ -80,3 +80,16 @@ public struct TextEntryViewState: Equatable {
         self.includeCancelButton = includeCancelButton
     }
 }
+
+// MARK: - Common View States
+
+public struct TextEntryBuilder {
+    public static var searchEntry: TextEntryViewState = .init(placeholder: Strings.search,
+                                                              iconName: "magnifyingglass")
+}
+
+// MARK: - Strings
+
+fileprivate struct Strings {
+    static let search = "Search..."
+}

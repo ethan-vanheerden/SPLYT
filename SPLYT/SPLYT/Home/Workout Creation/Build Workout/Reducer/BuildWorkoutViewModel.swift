@@ -26,6 +26,8 @@ enum BuildWorkoutViewEvent {
     case addModifier(group: Int, exerciseIndex: Int, setIndex: Int, modifier: SetModifier)
     case removeModifier(group: Int, exerciseIndex: Int, setIndex: Int)
     case updateModifier(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
+    case filter(by: BuildWorkoutFilter)
+    case removeAllFilters
 }
 
 // MARK: - View Model
@@ -80,6 +82,10 @@ final class BuildWorkoutViewModel: ViewModel {
                                                       exerciseIndex: exerciseIndex,
                                                       setIndex: setIndex,
                                                       with: newInput))
+        case .filter(let filter):
+            await react(domainAction: .filter(by: filter))
+        case .removeAllFilters:
+            await react(domainAction: .removeAllFilters)
         }
     }
 }
