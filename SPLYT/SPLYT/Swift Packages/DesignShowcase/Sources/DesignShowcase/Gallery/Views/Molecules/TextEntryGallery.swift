@@ -5,7 +5,8 @@ struct TextEntryGallery: View {
     @State private var textOne = ""
     @State private var textTwo = ""
     @State private var textThree = ""
-    private let viewStateOne = TextEntryViewState(placeholder: "Placeholder text")
+    private let viewStateOne = TextEntryViewState(title: "Title",
+                                                  placeholder: "Placeholder text")
     private let viewStateTwo = TextEntryViewState(placeholder: "No cancel button",
                                                   includeCancelButton: false)
     private let viewStateThree = TextEntryViewState(placeholder: "Search...",

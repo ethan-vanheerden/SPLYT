@@ -12,7 +12,7 @@ import SwiftUI
 // MARK: - Navigation Events
 
 enum NameWorkoutNavigationEvent {
-    case next(NameWorkoutNavigationState)
+    case next(type: NameWorkoutBuildType, navState: NameWorkoutNavigationState)
 }
 
 // MARK: - Navigation State
@@ -29,8 +29,8 @@ final class NameWorkoutNavigationRouter: NavigationRouter {
     
     func navigate(_ event: NameWorkoutNavigationEvent) {
         switch event {
-        case .next(let state):
-            handleNext(state: state)
+        case let .next(type, navState):
+            handleNext(type: type, navState: navState)
         }
     }
 }
@@ -38,8 +38,18 @@ final class NameWorkoutNavigationRouter: NavigationRouter {
 // MARK: - Private
 
 private extension NameWorkoutNavigationRouter {
-    func handleNext(state: NameWorkoutNavigationState) {
-        let interactor = BuildWorkoutInteractor(nameState: state)
+    
+    func handleNext(type: NameWorkoutBuildType, navState: NameWorkoutNavigationState) {
+        switch type {
+        case .workout:
+            startBuildWorkout(navState: navState)
+        case .plan:
+            startBuildPlan(navState: navState)
+        }
+    }
+    
+    func startBuildWorkout(navState: NameWorkoutNavigationState) {
+        let interactor = BuildWorkoutInteractor(nameState: navState)
         let viewModel = BuildWorkoutViewModel(interactor: interactor)
         let navRouter = BuildWorkoutNavigationRouter()
         navRouter.navigator = navigator
@@ -49,5 +59,9 @@ private extension NameWorkoutNavigationRouter {
         let vc = UIHostingController(rootView: view)
         
         navigator?.push(vc, animated: true)
+    }
+    
+    func startBuildPlan(navState: NameWorkoutNavigationState) {
+        
     }
 }

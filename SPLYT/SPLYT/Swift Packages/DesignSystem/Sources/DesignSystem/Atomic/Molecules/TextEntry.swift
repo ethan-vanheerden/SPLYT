@@ -12,14 +12,23 @@ public struct TextEntry: View {
     }
     
     public var body: some View {
-        HStack {
-            textField
-            if viewState.includeCancelButton && showCancel {
-                SplytButton(text: "cancel",
-                            type: .textOnly,
-                            textColor: .lightBlue) {
-                    text = ""
-                    isFocused = false
+        VStack {
+            if let title = viewState.title {
+                HStack {
+                    Text(title)
+                        .body()
+                    Spacer()
+                }
+            }
+            HStack {
+                textField
+                if viewState.includeCancelButton && showCancel {
+                    SplytButton(text: "cancel",
+                                type: .textOnly,
+                                textColor: .lightBlue) {
+                        text = ""
+                        isFocused = false
+                    }
                 }
             }
         }
@@ -68,13 +77,16 @@ public struct TextEntry: View {
 // MARK: - View State
 
 public struct TextEntryViewState: Equatable {
+    let title: String?
     let placeholder: String
     let iconName: String?
     let includeCancelButton: Bool
     
-    public init(placeholder: String,
+    public init(title: String? = nil,
+                placeholder: String,
                 iconName: String? = nil,
                 includeCancelButton: Bool = true) {
+        self.title = title
         self.placeholder = placeholder
         self.iconName = iconName
         self.includeCancelButton = includeCancelButton

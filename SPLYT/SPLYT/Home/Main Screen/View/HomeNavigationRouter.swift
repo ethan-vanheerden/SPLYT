@@ -27,9 +27,9 @@ final class HomeNavigationRouter: NavigationRouter {
     func navigate(_ event: HomeNavigationEvent) {
         switch event {
         case .createPlan:
-            handleCreatePlan()
+            handleCreate(buildType: .plan)
         case .createWorkout:
-            handleCreateWorkout()
+            handleCreate(buildType: .workout)
         case let .seletectWorkout(id, filename):
             handleSelectWorkout(id: id, filename: filename)
         case .editWorkout(let id):
@@ -41,20 +41,34 @@ final class HomeNavigationRouter: NavigationRouter {
 // MARK: - Private
 
 private extension HomeNavigationRouter {
-    func handleCreatePlan() {
-        let view = Text("CREATE PLAN")
-        navigator?.present(UIHostingController(rootView: view), animated: true)
-
-    }
     
-    func handleCreateWorkout() {
-        let viewModel = NameWorkoutViewModel()
+    func handleCreate(buildType: NameWorkoutBuildType) {
+        let interactor = NameWorkoutInteractor(buildType: buildType)
+        let viewModel = NameWorkoutViewModel(interactor: interactor)
         var navRouter = NameWorkoutNavigationRouter() // var because used as inout parameter
-        let view = NameWorkoutView(viewModel: viewModel, navigationRouter: navRouter) {
+        let view = NameWorkoutView(viewModel: viewModel,
+                                   navigationRouter: navRouter) {
             navRouter.navigator?.dismissSelf(animated: true)
         }
         presentNavController(view: view, navRouter: &navRouter)
     }
+//    func handleCreatePlan() {
+//        let interactor = NameWorkou
+//        let viewModel = NameWorkoutViewModel()
+//        let view = Text("CREATE PLAN")
+//        navigator?.present(UIHostingController(rootView: view), animated: true)
+//
+//    }
+//
+//    func handleCreateWorkout() {
+//        let viewModel = NameWorkoutViewModel()
+//        var navRouter = NameWorkoutNavigationRouter() // var because used as inout parameter
+//        let view = NameWorkoutView(viewModel: viewModel, navigationRouter: navRouter) {
+//            navRouter.navigator?.dismissSelf(animated: true)
+//        }
+//        presentNavController(view: view, navRouter: &navRouter)
+//    }
+//
     
     func handleSelectWorkout(id: String, filename: String) {
         let interactor = DoWorkoutInteractor(workoutId: id, filename: filename)
@@ -69,6 +83,7 @@ private extension HomeNavigationRouter {
     }
     
     func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {
+        // NOTE: this assigned the navigator for the given nav router
         // Use a navigation controller since we will be pushing views on top of a presented view
         let navController = UINavigationController(rootViewController: UIHostingController(rootView: view))
         navController.setNavigationBarHidden(true, animated: false)
