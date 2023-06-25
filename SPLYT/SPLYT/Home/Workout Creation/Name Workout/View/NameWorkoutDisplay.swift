@@ -12,6 +12,6 @@ struct NameWorkoutDisplay: Equatable {
     let navBar: NavigationBarViewState
     let workoutName: String
     let textEntry: TextEntryViewState
-    let buildType: NameWorkoutBuildType
+    let buildType: BuildWorkoutType
     let nextButtonEnabled: Bool
 }

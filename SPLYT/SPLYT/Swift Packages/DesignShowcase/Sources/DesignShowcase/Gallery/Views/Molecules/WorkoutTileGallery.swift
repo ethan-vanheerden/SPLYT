@@ -1,9 +1,7 @@
-import XCTest
-import DesignSystem
 import SwiftUI
-@testable import SnapshotTesting
+import DesignSystem
 
-final class WorkoutTileTests: XCTestCase {
+struct WorkoutTileGallery: View {
     private let viewStateOne = WorkoutTileViewState(id: "id1",
                                                     workoutName: "Legs",
                                                     numExercises: "5 exercises")
@@ -12,8 +10,8 @@ final class WorkoutTileTests: XCTestCase {
                                                     numExercises: "8 exercises",
                                                     lastCompleted: "Last completed: Jun 9, 2023")
     
-    func testWorkoutTile() throws {
-        let view = VStack {
+    var body: some View {
+        VStack {
             WorkoutTile(viewState: viewStateOne,
                         tapAction: { },
                         editAction: { },
@@ -25,8 +23,5 @@ final class WorkoutTileTests: XCTestCase {
             Spacer()
         }
         .padding(.horizontal, Layout.size(2))
-        
-        let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

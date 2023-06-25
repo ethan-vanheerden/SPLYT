@@ -124,6 +124,22 @@ public struct WorkoutInteractor {
                           newSetIndex: setIndex,
                           exerciseIndex: exerciseIndex)
     }
+    
+    
+    /// Creates a unique workout/plan id using the workout/plan name and creation date
+    /// in the form of: name-2023-02-15T16:39:57Z.
+    /// - Parameters:
+    ///   - name: The name of the workout/plan
+    ///   - creationDate: The date the workout/plan was created
+    /// - Returns: The id of the workout/plan
+    public static func getId(name: String, creationDate: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        return name + "-" + formatter.string(from: creationDate)
+    }
 }
 
 // MARK: - Private

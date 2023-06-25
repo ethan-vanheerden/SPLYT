@@ -75,7 +75,7 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NameWorkoutViewEve
     }
     
     private func navState(workoutName: String) -> NameWorkoutNavigationState {
-        return NameWorkoutNavigationState(workoutName: workoutName)
+        return NameWorkoutNavigationState(name: workoutName)
     }
 }
 

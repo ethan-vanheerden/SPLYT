@@ -12,7 +12,7 @@ import Core
 
 enum HomeDomainAction {
     case load
-    case deleteWorkout(id: String)
+    case deleteWorkout(id: String, filename: String?)
     case toggleDialog(type: HomeDialog, isOpen: Bool)
 }
 
@@ -44,8 +44,8 @@ final class HomeInteractor: HomeInteractorType {
         switch action {
         case .load:
             return handleLoad()
-        case .deleteWorkout(let id):
-            return handleDeleteWorkout(id: id)
+        case let .deleteWorkout(id, filename):
+            return handleDeleteWorkout(id: id, filename: filename)
         case let .toggleDialog(type, isOpen):
             return handleToggleDialog(type: type, isOpen: isOpen)
         }
@@ -68,8 +68,9 @@ private extension HomeInteractor {
         }
     }
     
-    func handleDeleteWorkout(id: String) -> HomeDomainResult {
-        guard var domain = savedDomain else { return .error }
+    func handleDeleteWorkout(id: String, filename: String?) -> HomeDomainResult {
+        guard var domain = savedDomain,
+              let filename = filename else { return .error }
         
         do {
             // Remove the workout
@@ -77,6 +78,7 @@ private extension HomeInteractor {
             
             // Save the results
             try service.saveWorkouts(domain.workouts)
+            try service.deleteWorkoutHistory(filename: filename)
             return updateDomain(domain)
         } catch {
             return .error

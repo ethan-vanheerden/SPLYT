@@ -31,7 +31,7 @@ private extension NameWorkoutReducer {
                                   nextButtonEnabled: !domain.workoutName.isEmpty)
     }
     
-    func getNavBar(buildType: NameWorkoutBuildType) -> NavigationBarViewState {
+    func getNavBar(buildType: BuildWorkoutType) -> NavigationBarViewState {
         let title: String
         switch buildType {
         case .workout:
@@ -43,7 +43,7 @@ private extension NameWorkoutReducer {
         return NavigationBarViewState(title: title)
     }
     
-    func getTextEntry(buildType: NameWorkoutBuildType) -> TextEntryViewState {
+    func getTextEntry(buildType: BuildWorkoutType) -> TextEntryViewState {
         let title: String
         let placeholder: String
         switch buildType {

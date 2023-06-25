@@ -12,7 +12,7 @@ import Core
 
 enum HomeViewEvent {
     case load
-    case deleteWorkout(id: String)
+    case deleteWorkout(id: String, filename: String?)
     case toggleDialog(type: HomeDialog, isOpen: Bool)
 }
 
@@ -31,8 +31,8 @@ final class HomeViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .load)
-        case .deleteWorkout(let id):
-            await react(domainAction: .deleteWorkout(id: id))
+        case let .deleteWorkout(id, filename):
+            await react(domainAction: .deleteWorkout(id: id, filename: filename))
         case let .toggleDialog(type, isOpen):
             await react(domainAction: .toggleDialog(type: type, isOpen: isOpen))
         }

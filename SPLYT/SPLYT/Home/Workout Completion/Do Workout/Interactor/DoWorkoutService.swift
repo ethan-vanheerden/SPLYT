@@ -55,6 +55,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
         var workout = workout
         workout.lastCompleted = Date.now
         
+        // First save the workout-specific history
         if !(try cacheInteractor.fileExists(request: request)) {
             // If the file doesn't exist, save this workout as the only history
             try cacheInteractor.save(request: request, data: [workout])
@@ -66,7 +67,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
             try cacheInteractor.save(request: request, data: workouts)
         }
         
-        // Save the CreatedWorkout so we update the last completed field
+        // Then save this version of the workout to the all workout list
         let createdWorkout = try workoutService.loadWorkout(id: workout.id)
         let newCreatedWorkout = CreatedWorkout(workout: workout,
                                                filename: createdWorkout.filename,

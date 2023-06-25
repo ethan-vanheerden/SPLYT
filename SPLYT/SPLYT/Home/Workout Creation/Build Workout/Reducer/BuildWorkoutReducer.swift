@@ -36,7 +36,6 @@ private extension BuildWorkoutReducer {
         let currentGroup = domain.currentGroup
         let numExercisesInCurrentGroup = groups[currentGroup].count
         let lastGroupEmpty = groups.last?.isEmpty ?? true
-        let canSave = groups[0].count > 0 // We can save if there is at least one exercise
         
         let display = BuildWorkoutDisplay(allExercises: getExerciseTileStates(exerciseMap: domain.exercises),
                                           groups: groups,
@@ -47,7 +46,7 @@ private extension BuildWorkoutReducer {
                                           showDialog: dialog,
                                           backDialog: backDialog,
                                           saveDialog: saveDialog,
-                                          canSave: canSave,
+                                          canSave: domain.canSave,
                                           filterDisplay: getFilterDisplay(filterDomain: domain.filterDomain),
                                           isFiltering: getIsFiltering(filterDomain: domain.filterDomain))
         return display

@@ -17,5 +17,5 @@ struct HomeDomain: Equatable {
 // MARK: - Dialog Type
 
 enum HomeDialog: Equatable {
-    case deleteWorkout(id: String)
+    case deleteWorkout(id: String, filename: String?)
 }

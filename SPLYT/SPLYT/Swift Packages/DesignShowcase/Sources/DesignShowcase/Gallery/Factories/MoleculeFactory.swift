@@ -30,6 +30,8 @@ struct MoleculeFactory {
             TabBarGallery()
         case .textEntry:
             TextEntryGallery()
+        case .workoutTile:
+            WorkoutTileGallery()
         }
     }
 }

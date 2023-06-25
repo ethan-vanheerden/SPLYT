@@ -24,10 +24,10 @@ enum NameWorkoutDomainResult {
 // MARK: - Interactor
 
 final class NameWorkoutInteractor {
-    private let buildType: NameWorkoutBuildType
+    private let buildType: BuildWorkoutType
     private var savedDomain: NameWorkoutDomain?
     
-    init(buildType: NameWorkoutBuildType) {
+    init(buildType: BuildWorkoutType) {
         self.buildType = buildType
     }
     

@@ -60,15 +60,18 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         }
         .dialog(isOpen: deleteDialogId != nil,
                 viewState: display.deleteDialog,
-                primaryAction: { viewModel.send(.deleteWorkout(id: deleteDialogId ?? ""), taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: deleteDialogId ?? ""), isOpen: false),
+                primaryAction: { viewModel.send(.deleteWorkout(id: deleteDialogId?.0 ?? "",
+                                                               filename: deleteDialogId?.1), taskPriority: .userInitiated) },
+                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: "", filename: nil),
+                                                                isOpen: false),
                                                   taskPriority: .userInitiated) })
     }
     
-    private func deleteDialogId(display: HomeDisplay) -> String? {
+    /// Returns a tuple of (workoutId, filename?)
+    private func deleteDialogId(display: HomeDisplay) -> (String, String?)? {
         if let showDialog = display.showDialog,
-           case let .deleteWorkout(id) = showDialog {
-            return id
+           case let .deleteWorkout(id, filename) = showDialog {
+            return (id, filename)
         } else {
             return nil
         }
@@ -86,16 +89,18 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     }
     
     @ViewBuilder
-    private func workoutsView(workouts: [CreatedWorkoutViewState]) -> some View {
+    private func workoutsView(workouts: [WorkoutTileViewState]) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: Layout.size(1.5)) {
-                ForEach(workouts, id: \.id) { viewState in
-                    CreatedWorkoutView(viewState: viewState,
-                                       tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0,
-                                                                                               filename: viewState.filename)) },
-                                       editAction:{ navigationRouter.navigate(.editWorkout(id: $0)) },
-                                       deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0), isOpen: true),
-                                                                      taskPriority: .userInitiated) })
+                ForEach(workouts, id: \.self) { viewState in
+                    WorkoutTile(viewState: viewState,
+                                tapAction: { navigationRouter.navigate(.seletectWorkout(id: viewState.id,
+                                                                                        filename: viewState.filename)) },
+                                editAction:{ navigationRouter.navigate(.editWorkout(id: viewState.id)) },
+                                deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: viewState.id,
+                                                                                                  filename: viewState.filename),
+                                                                             isOpen: true),
+                                                               taskPriority: .userInitiated) })
                 }
             }
             .padding(.horizontal, horizontalPadding)

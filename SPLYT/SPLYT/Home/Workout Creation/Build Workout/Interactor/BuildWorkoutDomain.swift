@@ -15,22 +15,26 @@ final class BuildWorkoutDomain: Equatable {
     var builtWorkout: Workout
     var currentGroup: Int // Zero-indexed
     var filterDomain: BuildWorkoutFilterDomain
+    var canSave: Bool
     
     init(exercises: [String: AvailableExercise],
          builtWorkout: Workout,
          currentGroup: Int,
-         filterDomain: BuildWorkoutFilterDomain) {
+         filterDomain: BuildWorkoutFilterDomain,
+         canSave: Bool) {
         self.exercises = exercises
         self.builtWorkout = builtWorkout
         self.currentGroup = currentGroup
         self.filterDomain = filterDomain
+        self.canSave = canSave
     }
     
     static func == (lhs: BuildWorkoutDomain, rhs: BuildWorkoutDomain) -> Bool {
         return lhs.exercises == rhs.exercises &&
         lhs.builtWorkout == rhs.builtWorkout &&
         lhs.currentGroup == rhs.currentGroup &&
-        lhs.currentGroup == rhs.currentGroup
+        lhs.filterDomain == rhs.filterDomain &&
+        lhs.canSave == rhs.canSave
     }
 }
 

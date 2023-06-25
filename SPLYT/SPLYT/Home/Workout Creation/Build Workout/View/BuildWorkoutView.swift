@@ -141,10 +141,10 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     private func emptyExerciseView(isFiltering: Bool) -> some View {
         VStack {
             Spacer()
-            Text("No exercises found 😅")
-                .body()
+            Text(Strings.noExercisesFound)
+                .body(style: .medium)
             if isFiltering {
-                SplytButton(text: "Remove filters") {
+                SplytButton(text: Strings.removeFilters) {
                     viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
                 }
             }
@@ -159,7 +159,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             Tile {
                 HStack {
                     Toggle(isOn: isFavoriteBinding(isFavorite: display.isFavorite)) {
-                        Text("Favorites")
+                        Text(Strings.favorites)
                             .body()
                     }
                     .tint(Color(splytColor: .lightBlue))
@@ -167,7 +167,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             Tile {
                 VStack {
-                    SectionHeader(viewState: .init(title: "Muscles worked", includeLine: false))
+                    SectionHeader(viewState: .init(title: Strings.musclesWorked, includeLine: false))
                     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
                     LazyVGrid(columns: columns) {
                         ForEach(MusclesWorked.allCases, id: \.self) { muscle in
@@ -188,7 +188,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         }
         .padding(.horizontal, horizontalPadding)
         .padding(.top, Layout.size(2))
-        .navigationBar(viewState: .init(title: "Filter",
+        .navigationBar(viewState: .init(title: Strings.filter,
                                         size: .small),
                        content: { IconButton(iconName: "checkmark",
                                              style: .secondary,
@@ -373,5 +373,9 @@ fileprivate struct Strings {
     static let addYourExercises = "ADD YOUR EXERCISES"
     static let addGroup = "Add group"
     static let editSetsReps = "Edit sets/reps"
-    static let save = "SAVE"
+    static let noExercisesFound = "No exercises found 😅"
+    static let removeFilters = "Remove filters"
+    static let favorites = "Favorites"
+    static let musclesWorked = "Muscles worked"
+    static let filter = "Filter"
 }

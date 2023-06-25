@@ -29,6 +29,19 @@ public struct WorkoutReducer {
         
         return titles
     }
+    
+    
+    /// Returns a string representation of the number of exercises in the given workout.
+    /// - Parameter workout: The workout to get the number of exercises from
+    /// - Returns: A title describing the number of exercises, ex: "5 exercises"
+    public static func getNumExercisesTitle(workout: Workout) -> String {
+        var numExercises = 0
+        for group in workout.exerciseGroups {
+            numExercises += group.exercises.count
+        }
+        let exercisePlural = numExercises == 1 ? Strings.exercise : Strings.exercises
+        return "\(numExercises) \(exercisePlural)"
+    }
 }
 
 // MARK: - Private
@@ -89,4 +102,6 @@ fileprivate struct Strings {
     static let reps = "reps"
     static let sec = "sec"
     static let group = "Group"
+    static let exercise = "exercise"
+    static let exercises = "exercises"
 }

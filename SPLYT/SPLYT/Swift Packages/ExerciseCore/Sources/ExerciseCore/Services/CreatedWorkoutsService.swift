@@ -16,6 +16,7 @@ public protocol CreatedWorkoutsServiceType {
 
 // MARK: - Implementation
 
+///  Service for getting a user's created workouts
 public struct CreatedWorkoutsService: CreatedWorkoutsServiceType {
     private let cacheInteractor: CacheInteractorType
     private let cacheRequest = CreatedWorkoutsCacheRequest()

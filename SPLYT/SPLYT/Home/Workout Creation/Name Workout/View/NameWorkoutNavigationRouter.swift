@@ -8,24 +8,30 @@
 import Foundation
 import Core
 import SwiftUI
+import ExerciseCore
 
 // MARK: - Navigation Events
 
 enum NameWorkoutNavigationEvent {
-    case next(type: NameWorkoutBuildType, navState: NameWorkoutNavigationState)
+    case next(type: BuildWorkoutType, navState: NameWorkoutNavigationState)
 }
 
 // MARK: - Navigation State
 
 /// This is used to send needed information from the Name Workout screen to the next screen
 struct NameWorkoutNavigationState {
-    let workoutName: String
+    let name: String
 }
 
 // MARK: - Router
 
 final class NameWorkoutNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
+    private let saveAction: ((Workout) -> Void)? // Custom override save workout action
+    
+    init(saveAction: ((Workout) -> Void)? = nil) {
+        self.saveAction = saveAction
+    }
     
     func navigate(_ event: NameWorkoutNavigationEvent) {
         switch event {
@@ -39,7 +45,7 @@ final class NameWorkoutNavigationRouter: NavigationRouter {
 
 private extension NameWorkoutNavigationRouter {
     
-    func handleNext(type: NameWorkoutBuildType, navState: NameWorkoutNavigationState) {
+    func handleNext(type: BuildWorkoutType, navState: NameWorkoutNavigationState) {
         switch type {
         case .workout:
             startBuildWorkout(navState: navState)
@@ -49,7 +55,7 @@ private extension NameWorkoutNavigationRouter {
     }
     
     func startBuildWorkout(navState: NameWorkoutNavigationState) {
-        let interactor = BuildWorkoutInteractor(nameState: navState)
+        let interactor = BuildWorkoutInteractor(nameState: navState, saveAction: saveAction)
         let viewModel = BuildWorkoutViewModel(interactor: interactor)
         let navRouter = BuildWorkoutNavigationRouter()
         navRouter.navigator = navigator
@@ -62,6 +68,14 @@ private extension NameWorkoutNavigationRouter {
     }
     
     func startBuildPlan(navState: NameWorkoutNavigationState) {
+        let interactor = BuildPlanInteractor(nameState: navState)
+        let viewModel = BuildPlanViewModel(interactor: interactor)
+        let navRouter = BuildPlanNavigationRouter(viewModel: viewModel)
+        navRouter.navigator = navigator
+        let view = BuildPlanView(viewModel: viewModel,
+                                 navigationRouter: navRouter)
+        let vc = UIHostingController(rootView: view)
         
+        navigator?.push(vc, animated: true)
     }
 }

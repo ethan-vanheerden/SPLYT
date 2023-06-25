@@ -9,12 +9,12 @@ import Foundation
 
 struct NameWorkoutDomain: Equatable {
     var workoutName: String
-    let buildType: NameWorkoutBuildType
+    let buildType: BuildWorkoutType
 }
 
 // MARK: - Build Type
 
-enum NameWorkoutBuildType {
+enum BuildWorkoutType {
     case workout
     case plan
 }

@@ -18,6 +18,7 @@ enum Molecule: String, CaseIterable, GalleryItem {
     case setView = "Set View"
     case tabBar = "Tab Bar"
     case textEntry = "Text Entry"
+    case workoutTile = "Workout Tile"
     
     var title: String {
         return self.rawValue
