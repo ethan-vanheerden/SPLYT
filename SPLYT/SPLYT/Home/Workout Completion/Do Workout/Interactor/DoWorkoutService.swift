@@ -26,12 +26,12 @@ enum DoWorkoutError: Error {
 
 struct DoWorkoutService: DoWorkoutServiceType {
     private let cacheInteractor: CacheInteractorType
-    private let workoutService: CreatedWorkoutsServiceType
+    private let routineService: CreatedRoutinesServiceType
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
-         workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
+         routineService: CreatedRoutinesServiceType = CreatedRoutinesService()) {
         self.cacheInteractor = cacheInteractor
-        self.workoutService = workoutService
+        self.routineService = routineService
     }
     
     func loadWorkout(filename: String, workoutId: String) throws -> Workout {
@@ -39,8 +39,8 @@ struct DoWorkoutService: DoWorkoutServiceType {
         
         if !(try cacheInteractor.fileExists(request: request)) {
             // If this is their first time doing this workout, we will load the workout for the first time
-            let createdWorkout = try workoutService.loadWorkout(id: workoutId)
-            return createdWorkout.workout
+            let workout = try routineService.loadWorkout(id: workoutId)
+            return workout
         } else {
             // Load the most recent version they completed this specific workout (should be head of list)
             let workouts = try cacheInteractor.load(request: request)
@@ -67,12 +67,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
             try cacheInteractor.save(request: request, data: workouts)
         }
         
-        // Then save this version of the workout to the all workout list
-        let createdWorkout = try workoutService.loadWorkout(id: workout.id)
-        let newCreatedWorkout = CreatedWorkout(workout: workout,
-                                               filename: createdWorkout.filename,
-                                               createdAt: createdWorkout.createdAt)
-        try workoutService.saveWorkout(newCreatedWorkout)
-        
+        // Then save this version of the workout to the created routines
+        try routineService.saveWorkout(workout)
     }
 }

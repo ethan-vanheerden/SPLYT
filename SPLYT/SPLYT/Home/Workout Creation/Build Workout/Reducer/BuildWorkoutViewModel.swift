@@ -15,11 +15,11 @@ enum BuildWorkoutViewEvent {
     case load
     case addGroup
     case removeGroup(group: Int)
-    case toggleExercise(exerciseId: AnyHashable, group: Int)
+    case toggleExercise(exerciseId: String) // Adds to the current group
     case addSet(group: Int)
     case removeSet(group: Int)
     case updateSet(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
-    case toggleFavorite(exerciseId: AnyHashable)
+    case toggleFavorite(exerciseId: String)
     case switchGroup(to: Int)
     case save
     case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
@@ -49,8 +49,8 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .addGroup)
         case .removeGroup(let group):
             await react(domainAction: .removeGroup(group: group))
-        case let .toggleExercise(exerciseId, group):
-            await react(domainAction: .toggleExercise(exerciseId: exerciseId, group: group))
+        case let .toggleExercise(exerciseId):
+            await react(domainAction: .toggleExercise(exerciseId: exerciseId))
         case .addSet(let group):
             await react(domainAction: .addSet(group: group))
         case .removeSet(let group):

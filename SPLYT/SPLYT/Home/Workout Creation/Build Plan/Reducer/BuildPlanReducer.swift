@@ -20,6 +20,9 @@ struct BuildPlanReducer {
         case let .dialog(dialog, domain):
             let display = getDisplay(domain: domain, dialog: dialog)
             return .loaded(display)
+        case .exit(let domain):
+            let display = getDisplay(domain: domain, dialog: nil)
+            return .exit(display)
         }
     }
 }
@@ -39,13 +42,13 @@ private extension BuildPlanReducer {
         return display
     }
     
-    private func getWorkoutTileStates(workouts: [Workout]) -> [WorkoutTileViewState] {
+    private func getWorkoutTileStates(workouts: [Workout]) -> [RoutineTileViewState] {
         return workouts.map { workout in
             let numExercisesTitle = WorkoutReducer.getNumExercisesTitle(workout: workout)
             
-            return WorkoutTileViewState(id: workout.id,
-                                        workoutName: workout.name,
-                                        numExercises: numExercisesTitle)
+            return RoutineTileViewState(id: workout.id,
+                                        title: workout.name,
+                                        subtitle: numExercisesTitle)
             
         }
     }

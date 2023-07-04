@@ -17,6 +17,8 @@ enum HomeNavigationEvent {
     // TODO: ID for a netowork call, filename for a cache call if needed
     case seletectWorkout(id: String, filename: String?)
     case editWorkout(id: String)
+    case selectPlan(id: String)
+    case editPlan(id: String)
 }
 
 // MARK: - Router
@@ -34,6 +36,10 @@ final class HomeNavigationRouter: NavigationRouter {
             handleSelectWorkout(id: id, filename: filename)
         case .editWorkout(let id):
             handleEditWorkout(id: id)
+        case .selectPlan(let id):
+            handleSelectPlan(id: id)
+        case .editPlan(let id):
+            handleEditPlan(id: id)
         }
     }
 }
@@ -64,6 +70,14 @@ private extension HomeNavigationRouter {
     
     func handleEditWorkout(id: String) {
         return // TODO
+    }
+    
+    func handleSelectPlan(id: String) {
+        // TODO: implement
+    }
+    
+    func handleEditPlan(id: String) {
+        // TODO
     }
     
     func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {

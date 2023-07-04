@@ -9,7 +9,7 @@ import Foundation
 import DesignSystem
 
 struct BuildPlanDisplay: Equatable {
-    let workouts: [WorkoutTileViewState]
+    let workouts: [RoutineTileViewState]
     let canSave: Bool
     let presentedDialog: BuildPlanDialog?
     let backDialog: DialogViewState

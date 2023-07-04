@@ -14,11 +14,11 @@ enum BuildWorkoutDomainAction {
     case loadExercises
     case addGroup
     case removeGroup(group: Int)
-    case toggleExercise(exerciseId: AnyHashable, group: Int)
+    case toggleExercise(exerciseId: String)
     case addSet(group: Int)
     case removeSet(group: Int)
     case updateSet(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
-    case toggleFavorite(exerciseId: AnyHashable)
+    case toggleFavorite(exerciseId: String)
     case switchGroup(to: Int)
     case save
     case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
@@ -66,8 +66,8 @@ final class BuildWorkoutInteractor {
             return handleAddGroup()
         case .removeGroup(let index):
             return handleRemoveGroup(index: index)
-        case let .toggleExercise(exerciseId, group):
-            return handleToggleExercise(exerciseId: exerciseId, group: group)
+        case let .toggleExercise(exerciseId):
+            return handleToggleExercise(exerciseId: exerciseId)
         case .addSet(let group):
             return handleAddSet(group: group)
         case .removeSet(let group):
@@ -107,9 +107,14 @@ private extension BuildWorkoutInteractor {
             let startingGroup = [ExerciseGroup(exercises: [])]
             let workoutId = WorkoutInteractor.getId(name: nameState.name,
                                                     creationDate: creationDate)
+            
+            // The workout filename will be "workout_history_{workout_id}"
             let newWorkout = Workout(id: workoutId,
                                      name: nameState.name,
-                                     exerciseGroups: startingGroup)
+                                     exerciseGroups: startingGroup,
+                                     historyFilename: "workout_history_\(workoutId)",
+                                     createdAt: creationDate)
+            
             let domain = BuildWorkoutDomain(exercises: exercises,
                                             builtWorkout: newWorkout,
                                             currentGroup: 0,
@@ -157,27 +162,24 @@ private extension BuildWorkoutInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleToggleExercise(exerciseId: AnyHashable, group: Int) -> BuildWorkoutDomainResult {
+    func handleToggleExercise(exerciseId: String) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain,
-              let id = exerciseId as? String,
-              var exercise = domain.exercises[id],
-              domain.builtWorkout.exerciseGroups.count > group else { return .error }
+              var exercise = domain.exercises[exerciseId],
+              domain.builtWorkout.exerciseGroups.count > domain.currentGroup else { return .error }
         
         if exercise.isSelected {
             return handleRemoveExercise(domain: domain,
                                         availableExercise: &exercise)
         } else {
             return handleAddExercise(domain: domain,
-                                     availableExercise: &exercise,
-                                     group: group)
+                                     availableExercise: &exercise)
         }
     }
     
     func handleAddExercise(domain: BuildWorkoutDomain,
-                           availableExercise: inout AvailableExercise,
-                           group: Int) -> BuildWorkoutDomainResult {
-        
+                           availableExercise: inout AvailableExercise) -> BuildWorkoutDomainResult {
         // Need to calculate how many sets the other exerices in the group have
+        let group = domain.currentGroup
         var groups = domain.builtWorkout.exerciseGroups
         let numSets = groups[group].exercises.first?.sets.count ?? 1 // If first exercise in group, starts with 1 set
         let exercise = createExercise(from: availableExercise, numSets: numSets)
@@ -273,16 +275,15 @@ private extension BuildWorkoutInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleToggleFavorite(exerciseId: AnyHashable) -> BuildWorkoutDomainResult {
+    func handleToggleFavorite(exerciseId: String) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain,
-              let id = exerciseId as? String,
-              var exercise = domain.exercises[id],
+              var exercise = domain.exercises[exerciseId],
               var exercises = allExercises else { return .error }
         
         let isFavorite = !exercise.isFavorite
         exercise.isFavorite = isFavorite
-        domain.exercises[id] = exercise
-        exercises[id]?.isFavorite = isFavorite
+        domain.exercises[exerciseId] = exercise
+        exercises[exerciseId]?.isFavorite = isFavorite
         
         // Save the changes
         do {
@@ -468,7 +469,7 @@ private extension BuildWorkoutInteractor {
     func filterExercises(domain: BuildWorkoutDomain) -> BuildWorkoutDomainResult {
         guard let allExercises = allExercises else { return .error }
         
-        let filterecExercises = allExercises.filter {
+        let filteredExercises = allExercises.filter {
             let exercise = $0.value
             var shouldInclude = true
             
@@ -500,7 +501,7 @@ private extension BuildWorkoutInteractor {
             return shouldInclude
         }
         
-        domain.exercises = filterecExercises
+        domain.exercises = filteredExercises
         return updateDomain(domain: domain)
     }
 }

@@ -42,6 +42,16 @@ public struct WorkoutReducer {
         let exercisePlural = numExercises == 1 ? Strings.exercise : Strings.exercises
         return "\(numExercises) \(exercisePlural)"
     }
+    
+    /// Returns a string representation of the number of workouts in the given plan.
+    /// - Parameter plan: The plan to get the number of exercises from
+    /// - Returns: A title describing the number of workouts, ex: "4 workouts"
+    public static func getNumWorkoutsTitle(plan: Plan) -> String {
+        let numWorkouts = plan.workouts.count
+        let workoutsPlural = numWorkouts == 1 ? Strings.workout : Strings.workouts
+        
+        return "\(numWorkouts) \(workoutsPlural)"
+    }
 }
 
 // MARK: - Private
@@ -104,4 +114,6 @@ fileprivate struct Strings {
     static let group = "Group"
     static let exercise = "exercise"
     static let exercises = "exercises"
+    static let workout = "workout"
+    static let workouts = "workouts"
 }

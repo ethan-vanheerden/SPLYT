@@ -32,6 +32,11 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
             ProgressView()
         case .loaded(let display):
             mainView(display: display)
+        case .exit(let display):
+            mainView(display: display)
+                .onAppear {
+                    navigationRouter.navigate(.exit)
+                }
         }
     }
     
@@ -92,11 +97,11 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
     }
     
     @ViewBuilder
-    private func workoutsList(workouts: [WorkoutTileViewState]) -> some View {
+    private func workoutsList(workouts: [RoutineTileViewState]) -> some View {
         ScrollView {
             VStack(spacing: Layout.size(1.5)) {
                 ForEach(workouts, id: \.self) { viewState in
-                    WorkoutTile(viewState: viewState,
+                    RoutineTile(viewState: viewState,
                                 tapAction: { },
                                 editAction: { }, // TODO: Edit workouts
                                 deleteAction: { viewModel.send(.toggleDialog(dialog: .deleteWorkout(id: viewState.id),

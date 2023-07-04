@@ -24,6 +24,7 @@ enum BuildPlanDomainResult {
     case error
     case loaded(BuildPlanDomain)
     case dialog(dialog: BuildPlanDialog, domain: BuildPlanDomain)
+    case exit(BuildPlanDomain)
 }
 
 // MARK: - Interactor
@@ -51,7 +52,7 @@ final class BuildPlanInteractor {
         case .removeWorkout(let workoutId):
             return handleRemoveWorkout(workoutId: workoutId)
         case .savePlan:
-            return .error // TODO: implement this
+            return hanldeSavePlan()
         case let .toggleDialog(dialog, isOpen):
             return handleToggleDialog(dialog: dialog, isOpen: isOpen)
         }
@@ -85,6 +86,16 @@ private extension BuildPlanInteractor {
         domain.builtPlan.workouts.removeAll { $0.id == workoutId }
         
         return updateDomain(domain: domain)
+    }
+    
+    func hanldeSavePlan() -> BuildPlanDomainResult {
+        guard let domain = savedDomain else { return .error }
+        do {
+            try service.savePlan(domain.builtPlan)
+            return .exit(domain)
+        } catch {
+            return .error
+        }
     }
     
     func handleToggleDialog(dialog: BuildPlanDialog, isOpen: Bool) -> BuildPlanDomainResult {

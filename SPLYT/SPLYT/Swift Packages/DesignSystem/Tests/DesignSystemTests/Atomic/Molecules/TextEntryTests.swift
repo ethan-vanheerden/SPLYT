@@ -3,29 +3,22 @@ import DesignSystem
 import SwiftUI
 @testable import SnapshotTesting
 
-final class WorkoutTileTests: XCTestCase {
-    private let viewStateOne = WorkoutTileViewState(id: "id1",
-                                                    workoutName: "Legs",
-                                                    numExercises: "5 exercises")
-    private let viewStateTwo = WorkoutTileViewState(id: "id2",
-                                                    workoutName: "Upper Body",
-                                                    numExercises: "8 exercises",
-                                                    lastCompleted: "Last completed: Jun 9, 2023")
+final class TextEntryTests: XCTestCase {
+    private let viewStateOne = TextEntryViewState(placeholder: "Placeholder text")
+    private let viewStateTwo = TextEntryViewState(placeholder: "No cancel button",
+                                                  includeCancelButton: false)
+    private let viewStateThree = TextEntryViewState(placeholder: "Search...",
+                                                    iconName: "magnifyingglass")
     
-    func testWorkoutTile() throws {
+    func testTextEntry() throws {
         let view = VStack {
-            WorkoutTile(viewState: viewStateOne,
-                        tapAction: { },
-                        editAction: { },
-                        deleteAction: { })
-            WorkoutTile(viewState: viewStateTwo,
-                        tapAction: { },
-                        editAction: { },
-                        deleteAction: { })
+            Spacer()
+            TextEntry(text:.constant(""), viewState: viewStateOne)
+            TextEntry(text: .constant("Text"), viewState: viewStateTwo)
+            TextEntry(text: .constant(""), viewState: viewStateThree)
             Spacer()
         }
-        .padding(.horizontal, Layout.size(2))
-        
+            .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }

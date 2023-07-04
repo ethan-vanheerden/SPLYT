@@ -12,8 +12,8 @@ import ExerciseCore
 // MARK: - Protocol
 
 protocol HomeServiceType {
-    func loadWorkouts() throws -> [String: CreatedWorkout]
-    func saveWorkouts(_: [String: CreatedWorkout]) throws
+    func loadRoutines() throws -> CreatedRoutines
+    func saveRoutines(_: CreatedRoutines) throws
     func deleteWorkoutHistory(filename: String) throws
 }
 
@@ -21,24 +21,26 @@ protocol HomeServiceType {
 
 struct HomeService: HomeServiceType {
     private let cacheInteractor: CacheInteractorType
-    private let workoutService: CreatedWorkoutsServiceType
+    private let routineService: CreatedRoutinesServiceType
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
-         workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
+         routineService: CreatedRoutinesServiceType = CreatedRoutinesService()) {
         self.cacheInteractor = cacheInteractor
-        self.workoutService = workoutService
+        self.routineService = routineService
     }
     
-    func loadWorkouts() throws -> [String: CreatedWorkout] {
-        return try workoutService.loadWorkouts()
+    func loadRoutines() throws -> CreatedRoutines {
+        return try routineService.loadRoutines()
     }
     
-    func saveWorkouts(_ workouts: [String: CreatedWorkout]) throws {
-        try workoutService.saveWorkouts(workouts)
+    func saveRoutines(_ routines: CreatedRoutines) throws {
+        try routineService.saveRoutines(routines)
     }
     
     func deleteWorkoutHistory(filename: String) throws {
         let request = WorkoutHistoryCacheRequest(filename: filename)
-        try cacheInteractor.deleteFile(request: request)
+        if try cacheInteractor.fileExists(request: request) {
+            try cacheInteractor.deleteFile(request: request)
+        }
     }
 }

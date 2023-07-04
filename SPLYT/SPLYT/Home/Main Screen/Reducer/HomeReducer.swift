@@ -28,14 +28,17 @@ final class HomeReducer {
 
 private extension HomeReducer {
     func getDisplay(domain: HomeDomain, dialog: HomeDialog? = nil) -> HomeDisplay {
-        let workouts = getCreatedWorkouts(workouts: domain.workouts)
+        let workoutStates = getWorkoutStates(workouts: domain.routines.workouts)
+        let planStates = getPlanStates(plans: domain.routines.plans)
         
         let display = HomeDisplay(navBar: navBar,
                                   segmentedControlTitles: segmentedControlTitles,
-                                  workouts: workouts,
+                                  workouts: workoutStates,
+                                  plans: planStates,
                                   fab: FABState,
-                                  showDialog: dialog,
-                                  deleteDialog: deleteDialog)
+                                  presentedDialog: dialog,
+                                  deleteWorkoutDialog: deleteWorkoutDialog,
+                                  deletePlanDialog: deletePlanDialog)
         return display
     }
     
@@ -49,17 +52,28 @@ private extension HomeReducer {
         [Strings.workouts, Strings.plans]
     }
     
-    func getCreatedWorkouts(workouts: [String: CreatedWorkout]) -> [WorkoutTileViewState] {
+    func getWorkoutStates(workouts: [String: Workout]) -> [RoutineTileViewState] {
         return workouts.values.sorted { $0.createdAt > $1.createdAt }
-            .map {
-                let workout = $0.workout
+            .map { workout in
                 let numExercisesTitle = WorkoutReducer.getNumExercisesTitle(workout: workout)
                 
-                return WorkoutTileViewState(id: workout.id,
-                                            filename: $0.filename,
-                                            workoutName: workout.name,
-                                            numExercises: numExercisesTitle,
-                                            lastCompleted: getLastCompletedTitle(date: workout.lastCompleted))
+                return RoutineTileViewState(id: workout.id,
+                                            historyFilename: workout.historyFilename,
+                                            title: workout.name,
+                                            subtitle: numExercisesTitle,
+                                            lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted))
+            }
+    }
+    
+    func getPlanStates(plans: [String: Plan]) -> [RoutineTileViewState] {
+        return plans.values.sorted { $0.createdAt > $1.createdAt }
+            .map { plan in
+                let numWorkoutsTitle = WorkoutReducer.getNumWorkoutsTitle(plan: plan)
+                
+                return RoutineTileViewState(id: plan.id,
+                                            title: plan.name,
+                                            subtitle: numWorkoutsTitle,
+                                            lastCompletedTitle: getLastCompletedTitle(date: plan.lastCompleted))
             }
     }
     
@@ -84,9 +98,16 @@ private extension HomeReducer {
         return Strings.lastCompleted + " \(dateString)"
     }
     
-    var deleteDialog: DialogViewState {
+    var deleteWorkoutDialog: DialogViewState {
         return DialogViewState(title: Strings.deleteWorkout,
                                subtitle: Strings.cantBeUndone,
+                               primaryButtonTitle: Strings.delete,
+                               secondaryButtonTitle: Strings.cancel)
+    }
+    
+    var deletePlanDialog: DialogViewState {
+        return DialogViewState(title: Strings.deletePlan,
+                               subtitle: Strings.workoutsDeleted,
                                primaryButtonTitle: Strings.delete,
                                secondaryButtonTitle: Strings.cancel)
     }
@@ -105,4 +126,6 @@ fileprivate struct Strings {
     static let cantBeUndone = "This action can't be undone."
     static let delete = "Delete"
     static let cancel = "Cancel"
+    static let deletePlan = "Delete plan?"
+    static let workoutsDeleted = "This will also delete all of the associated workouts. This action can't be undone."
 }

@@ -113,8 +113,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         Section {
                             ForEach(viewState.exercises, id: \.self) { exerciseViewState in
                                 AddExerciseTile(viewState: exerciseViewState,
-                                                tapAction: { viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id,
-                                                                                            group: display.currentGroup),
+                                                tapAction: { viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id),
                                                                             taskPriority: .userInitiated) },
                                                 favoriteAction: { viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
                                                                                  taskPriority: .userInitiated) })

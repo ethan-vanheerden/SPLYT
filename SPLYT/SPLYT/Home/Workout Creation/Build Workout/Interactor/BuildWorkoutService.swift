@@ -27,12 +27,12 @@ enum BuildWorkoutError: Error {
 
 struct BuildWorkoutService: BuildWorkoutServiceType  {
     private let cacheInteractor: CacheInteractorType
-    private let workoutService: CreatedWorkoutsServiceType
+    private let routineService: CreatedRoutinesServiceType
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
-         workoutService: CreatedWorkoutsServiceType = CreatedWorkoutsService()) {
+         routineService: CreatedRoutinesServiceType = CreatedRoutinesService()) {
         self.cacheInteractor = cacheInteractor
-        self.workoutService = workoutService
+        self.routineService = routineService
     }
     
     func loadAvailableExercises() throws -> [String: AvailableExercise] {
@@ -63,11 +63,7 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
     }
     
     func saveWorkout(_ workout: Workout) throws {
-        // The workout filename will be "workout_history_{workout_id}"
-        let createdWorkout = CreatedWorkout(workout: workout,
-                                            filename: "workout_history_\(workout.id)",
-                                            createdAt: Date.now)
-        try workoutService.saveWorkout(createdWorkout)
+        try routineService.saveWorkout(workout)
     }
 }
 

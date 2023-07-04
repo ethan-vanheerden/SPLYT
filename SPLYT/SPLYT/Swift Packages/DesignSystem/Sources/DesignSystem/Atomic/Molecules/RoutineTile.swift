@@ -1,13 +1,13 @@
 import SwiftUI
 
-public struct WorkoutTile: View {
+public struct RoutineTile: View {
     @State private var showActionSheet: Bool = false
-    private let viewState: WorkoutTileViewState
+    private let viewState: RoutineTileViewState
     private let tapAction: () -> Void
     private let editAction: () -> Void
     private let deleteAction: () -> Void
     
-    public init(viewState: WorkoutTileViewState,
+    public init(viewState: RoutineTileViewState,
                 tapAction: @escaping () -> Void,
                 editAction: @escaping () -> Void,
                 deleteAction: @escaping () -> Void) {
@@ -21,12 +21,12 @@ public struct WorkoutTile: View {
         Tile {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(viewState.workoutName)
+                    Text(viewState.title)
                         .body()
-                    Text(viewState.numExercises)
+                    Text(viewState.subtitle)
                         .subhead()
                         .foregroundColor(.init(splytColor: .lightBlue))
-                    if let lastCompleted = viewState.lastCompleted {
+                    if let lastCompleted = viewState.lastCompletedTitle {
                         Text(lastCompleted)
                             .footnote()
                             .foregroundColor(.init(splytColor: .gray))
@@ -53,23 +53,23 @@ public struct WorkoutTile: View {
 
 // MARK: - View State
 
-public struct WorkoutTileViewState: Hashable {
-    public let id: String // Workout ID
-    public let filename: String? // Where the workout's history is cached
-    let workoutName: String
-    let numExercises: String
-    let lastCompleted: String?
+public struct RoutineTileViewState: Hashable {
+    public let id: String
+    public let historyFilename: String? // Where this routine's history is cached, if it is
+    let title: String
+    let subtitle: String
+    let lastCompletedTitle: String?
     
     public init(id: String,
-                filename: String? = nil,
-                workoutName: String,
-                numExercises: String,
-                lastCompleted: String? = nil) {
+                historyFilename: String? = nil,
+                title: String,
+                subtitle: String,
+                lastCompletedTitle: String? = nil) {
         self.id = id
-        self.filename = filename
-        self.workoutName = workoutName
-        self.numExercises = numExercises
-        self.lastCompleted = lastCompleted
+        self.historyFilename = historyFilename
+        self.title = title
+        self.subtitle = subtitle
+        self.lastCompletedTitle = lastCompletedTitle
     }
 }
 

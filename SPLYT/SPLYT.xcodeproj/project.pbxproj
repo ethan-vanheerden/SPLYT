@@ -387,9 +387,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AA5073712A546A0100F0BAD2 /* Do Plan */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Do Plan";
+			sourceTree = "<group>";
+		};
 		AA52BBA329B54565009CDBDA /* Workout Completion */ = {
 			isa = PBXGroup;
 			children = (
+				AA5073712A546A0100F0BAD2 /* Do Plan */,
 				AACB29702A1556F200AACB6B /* Do Workout */,
 			);
 			path = "Workout Completion";

@@ -11,4 +11,5 @@ enum BuildPlanViewState: Equatable {
     case error
     case loading
     case loaded(BuildPlanDisplay)
+    case exit(BuildPlanDisplay)
 }
