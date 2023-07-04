@@ -37,6 +37,15 @@
 		AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31442882CD1C003E7C64 /* HomeView.swift */; };
 		AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* HistoryView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
+		AA5073762A546A4600F0BAD2 /* DoPlanInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073752A546A4600F0BAD2 /* DoPlanInteractor.swift */; };
+		AA5073782A546A5000F0BAD2 /* DoPlanDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073772A546A5000F0BAD2 /* DoPlanDomain.swift */; };
+		AA50737A2A546A6700F0BAD2 /* DoPlanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073792A546A6700F0BAD2 /* DoPlanService.swift */; };
+		AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50737B2A546AEF00F0BAD2 /* DoPlanDisplay.swift */; };
+		AA50737E2A546B0400F0BAD2 /* DoPlanReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50737D2A546B0400F0BAD2 /* DoPlanReducer.swift */; };
+		AA5073802A546B2400F0BAD2 /* DoPlanViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50737F2A546B2400F0BAD2 /* DoPlanViewState.swift */; };
+		AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073812A546B8D00F0BAD2 /* DoPlanViewModel.swift */; };
+		AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073832A546BEF00F0BAD2 /* DoPlanView.swift */; };
+		AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073852A546C2300F0BAD2 /* DoPlanNavigationRouter.swift */; };
 		AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */; };
 		AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBAD29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift */; };
 		AA52BBB029B69938009CDBDA /* HomeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBAF29B69938009CDBDA /* HomeServiceTests.swift */; };
@@ -163,6 +172,15 @@
 		AA4A31462882CE63003E7C64 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		AA4A314D2882DAF7003E7C64 /* DesignShowcase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignShowcase; sourceTree = "<group>"; };
+		AA5073752A546A4600F0BAD2 /* DoPlanInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanInteractor.swift; sourceTree = "<group>"; };
+		AA5073772A546A5000F0BAD2 /* DoPlanDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanDomain.swift; sourceTree = "<group>"; };
+		AA5073792A546A6700F0BAD2 /* DoPlanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanService.swift; sourceTree = "<group>"; };
+		AA50737B2A546AEF00F0BAD2 /* DoPlanDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanDisplay.swift; sourceTree = "<group>"; };
+		AA50737D2A546B0400F0BAD2 /* DoPlanReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanReducer.swift; sourceTree = "<group>"; };
+		AA50737F2A546B2400F0BAD2 /* DoPlanViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanViewState.swift; sourceTree = "<group>"; };
+		AA5073812A546B8D00F0BAD2 /* DoPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanViewModel.swift; sourceTree = "<group>"; };
+		AA5073832A546BEF00F0BAD2 /* DoPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanView.swift; sourceTree = "<group>"; };
+		AA5073852A546C2300F0BAD2 /* DoPlanNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanNavigationRouter.swift; sourceTree = "<group>"; };
 		AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutNavigationRouter.swift; sourceTree = "<group>"; };
 		AA52BBAD29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutNavigationRouterTests.swift; sourceTree = "<group>"; };
 		AA52BBAF29B69938009CDBDA /* HomeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceTests.swift; sourceTree = "<group>"; };
@@ -390,8 +408,41 @@
 		AA5073712A546A0100F0BAD2 /* Do Plan */ = {
 			isa = PBXGroup;
 			children = (
+				AA5073742A546A3000F0BAD2 /* Reducer */,
+				AA5073732A546A2A00F0BAD2 /* Interactor */,
+				AA5073722A546A2500F0BAD2 /* View */,
 			);
 			path = "Do Plan";
+			sourceTree = "<group>";
+		};
+		AA5073722A546A2500F0BAD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA50737B2A546AEF00F0BAD2 /* DoPlanDisplay.swift */,
+				AA50737F2A546B2400F0BAD2 /* DoPlanViewState.swift */,
+				AA5073832A546BEF00F0BAD2 /* DoPlanView.swift */,
+				AA5073852A546C2300F0BAD2 /* DoPlanNavigationRouter.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA5073732A546A2A00F0BAD2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA5073752A546A4600F0BAD2 /* DoPlanInteractor.swift */,
+				AA5073772A546A5000F0BAD2 /* DoPlanDomain.swift */,
+				AA5073792A546A6700F0BAD2 /* DoPlanService.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA5073742A546A3000F0BAD2 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA50737D2A546B0400F0BAD2 /* DoPlanReducer.swift */,
+				AA5073812A546B8D00F0BAD2 /* DoPlanViewModel.swift */,
+			);
+			path = Reducer;
 			sourceTree = "<group>";
 		};
 		AA52BBA329B54565009CDBDA /* Workout Completion */ = {
@@ -1038,6 +1089,7 @@
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
 				AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */,
+				AA5073782A546A5000F0BAD2 /* DoPlanDomain.swift in Sources */,
 				AA825D3D287238BF0041D94A /* MainView.swift in Sources */,
 				AA2C244C2A3CC035004FC939 /* NameWorkoutDomain.swift in Sources */,
 				AACB29792A1557A300AACB6B /* DoWorkoutInteractor.swift in Sources */,
@@ -1052,6 +1104,7 @@
 				AA2C24562A3F72FB004FC939 /* BuildPlanService.swift in Sources */,
 				AA2C245A2A3F74C4004FC939 /* BuildPlanViewState.swift in Sources */,
 				AAE79AEF296E0DC20010848E /* BuildWorkoutView.swift in Sources */,
+				AA5073802A546B2400F0BAD2 /* DoPlanViewState.swift in Sources */,
 				AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */,
 				AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */,
 				AACB29772A15576700AACB6B /* DoWorkoutReducer.swift in Sources */,
@@ -1065,9 +1118,11 @@
 				AA2C24522A3F72A1004FC939 /* BuildPlanInteractor.swift in Sources */,
 				AAE79AFD296EFB350010848E /* BuildWorkoutInteractor.swift in Sources */,
 				AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */,
+				AA50737E2A546B0400F0BAD2 /* DoPlanReducer.swift in Sources */,
 				AA2C244A2A3CBED3004FC939 /* NameWorkoutDisplay.swift in Sources */,
 				AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */,
 				AA60DA07295217CF008C7615 /* HomeViewModel.swift in Sources */,
+				AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */,
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
@@ -1077,11 +1132,13 @@
 				AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */,
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
 				AAF06EF929B016BF00E48918 /* CreatedWorkoutView.swift in Sources */,
+				AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */,
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
+				AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */,
 				AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */,
 				AACB297D2A1557E400AACB6B /* DoWorkoutView.swift in Sources */,
 				AAE79AEA296C610B0010848E /* NameWorkoutNavigationRouter.swift in Sources */,
@@ -1095,7 +1152,10 @@
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
 				AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */,
 				AA0C18DC2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift in Sources */,
+				AA50737A2A546A6700F0BAD2 /* DoPlanService.swift in Sources */,
+				AA5073762A546A4600F0BAD2 /* DoPlanInteractor.swift in Sources */,
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,
+				AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
