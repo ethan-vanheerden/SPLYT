@@ -57,7 +57,7 @@ public struct SetView: View {
                 .frame(width: Layout.size(6), alignment: .leading) // Fixed width for consistent text field placement
             Spacer()
             if let modifier = modifier {
-                additionalSetView(modifier: modifier)
+                modifierView(modifier: modifier)
             } else {
                 entryView(setInput: viewState.input, updateAction: updateSetAction)
             }
@@ -171,7 +171,7 @@ public struct SetView: View {
     }
     
     @ViewBuilder
-    private func additionalSetView(modifier: SetModifierViewState) -> some View {
+    private func modifierView(modifier: SetModifierViewState) -> some View {
         switch modifier {
         case .dropSet(let set),
                 .restPause(let set):

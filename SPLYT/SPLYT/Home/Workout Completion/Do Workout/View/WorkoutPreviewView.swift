@@ -27,7 +27,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
     var body: some View {
         viewStateView
             .navigationBar(viewState: NavigationBarViewState(title: navTitle),
-                           backAction: { navigationRouter.navigate(.exit) })
+                           backAction: { navigationRouter.navigate(.back) })
     }
     
     @ViewBuilder
@@ -52,8 +52,9 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
                 ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, group in
                     groupView(title: display.groupTitles[groupIndex],
                               group: group)
-                    .padding(.bottom, Layout.size(1))
+                    .padding(.bottom, Layout.size(0.5))
                 }
+                .padding(.top, Layout.size(1))
             }
             SplytButton(text: Strings.beginWorkout){
                 navigationRouter.navigate(.beginWorkout)

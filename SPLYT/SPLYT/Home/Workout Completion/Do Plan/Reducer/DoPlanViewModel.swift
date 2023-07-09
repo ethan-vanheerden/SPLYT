@@ -26,7 +26,10 @@ final class DoPlanViewModel: ViewModel {
     }
     
     func send(_ event: DoPlanViewEvent) async {
-        return
+        switch event {
+        case .load:
+            await react(domainAction: .load)
+        }
     }
 }
 

@@ -52,6 +52,35 @@ public struct WorkoutReducer {
         
         return "\(numWorkouts) \(workoutsPlural)"
     }
+    
+    /// Maps the given workouts into a list of `RoutineTileViewState`s
+    /// - Parameter workouts: The workouts to reduce
+    /// - Returns: The `RoutineTileViewState`s representing the given workouts
+    public static func createWorkoutRoutineTiles(workouts: [Workout]) -> [RoutineTileViewState] {
+        return workouts.map { workout in
+            let numExercisesTitle = getNumExercisesTitle(workout: workout)
+            
+            return RoutineTileViewState(id: workout.id,
+                                        historyFilename: workout.historyFilename,
+                                        title: workout.name,
+                                        subtitle: numExercisesTitle,
+                                        lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted))
+        }
+    }
+    
+    /// Creates a formatted date string to display for the routine's last completed date.
+    /// - Parameter date: The date the routine was last completed
+    /// - Returns: A formatted Date string in the form: "Last completed: Feb 3, 2023"
+    public static func getLastCompletedTitle(date: Date?) -> String? {
+        guard let date = date else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMMdY"
+        formatter.dateStyle = .medium // Feb 3, 2023
+        
+        
+        let dateString = formatter.string(from: date)
+        return Strings.lastCompleted + " \(dateString)"
+    }
 }
 
 // MARK: - Private
@@ -116,4 +145,5 @@ fileprivate struct Strings {
     static let exercises = "exercises"
     static let workout = "workout"
     static let workouts = "workouts"
+    static let lastCompleted = "Last completed:"
 }

@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import DesignSystem
 
 struct DoPlanDisplay: Equatable {
-    
+    let navBar: NavigationBarViewState
+    let workouts: [RoutineTileViewState]
 }

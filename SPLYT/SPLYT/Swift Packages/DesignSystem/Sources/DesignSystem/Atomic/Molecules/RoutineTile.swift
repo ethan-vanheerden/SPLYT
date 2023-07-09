@@ -33,9 +33,11 @@ public struct RoutineTile: View {
                     }
                 }
                 Spacer()
-                IconButton(iconName: "ellipsis",
-                           style: .secondary,
-                           iconColor: .black) { showActionSheet = true }
+                if viewState.includeIcon {
+                    IconButton(iconName: "ellipsis",
+                               style: .secondary,
+                               iconColor: .black) { showActionSheet = true }
+                }
             }
             .frame(height: Layout.size(6)) // Fixed height even if there is no last completed
             .padding(.horizontal, Layout.size(1))
@@ -59,17 +61,20 @@ public struct RoutineTileViewState: Hashable {
     let title: String
     let subtitle: String
     let lastCompletedTitle: String?
+    let includeIcon: Bool // For edit and delete actions
     
     public init(id: String,
                 historyFilename: String? = nil,
                 title: String,
                 subtitle: String,
-                lastCompletedTitle: String? = nil) {
+                lastCompletedTitle: String? = nil,
+                includeIcon: Bool = true) {
         self.id = id
         self.historyFilename = historyFilename
         self.title = title
         self.subtitle = subtitle
         self.lastCompletedTitle = lastCompletedTitle
+        self.includeIcon = includeIcon
     }
 }
 
@@ -79,4 +84,3 @@ fileprivate struct Strings {
     static let edit = "Edit"
     static let delete = "Delete"
 }
-

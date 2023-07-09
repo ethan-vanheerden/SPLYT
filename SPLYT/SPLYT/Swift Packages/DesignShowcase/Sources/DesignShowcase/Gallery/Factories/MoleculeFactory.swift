@@ -10,6 +10,8 @@ struct MoleculeFactory {
             AddExerciseTileGallery()
         case .bottomSheet:
             BottomSheetGallery()
+        case .completedSetView:
+            CompletedSetViewGallery()
         case .counter:
             CounterGallery()
         case .dialog:
@@ -22,6 +24,8 @@ struct MoleculeFactory {
             NavigationBarGallery()
         case .restFABRow:
             RestFABRowGallery()
+        case .routineTile:
+            RoutineTileGallery()
         case .segmentedControl:
             SegmentedControlGallery()
         case .setView:
@@ -30,8 +34,6 @@ struct MoleculeFactory {
             TabBarGallery()
         case .textEntry:
             TextEntryGallery()
-        case .workoutTile:
-            WorkoutTileGallery()
         }
     }
 }

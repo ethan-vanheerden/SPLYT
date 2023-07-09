@@ -15,7 +15,7 @@ enum HomeNavigationEvent {
     case createPlan
     case createWorkout
     // TODO: ID for a netowork call, filename for a cache call if needed
-    case seletectWorkout(id: String, filename: String?)
+    case seletectWorkout(id: String, historyFilename: String?)
     case editWorkout(id: String)
     case selectPlan(id: String)
     case editPlan(id: String)
@@ -32,8 +32,8 @@ final class HomeNavigationRouter: NavigationRouter {
             handleCreate(buildType: .plan)
         case .createWorkout:
             handleCreate(buildType: .workout)
-        case let .seletectWorkout(id, filename):
-            handleSelectWorkout(id: id, filename: filename)
+        case let .seletectWorkout(id, historyFilename):
+            handleSelectWorkout(id: id, historyFilename: historyFilename)
         case .editWorkout(let id):
             handleEditWorkout(id: id)
         case .selectPlan(let id):
@@ -59,11 +59,13 @@ private extension HomeNavigationRouter {
         presentNavController(view: view, navRouter: &navRouter)
     }
     
-    func handleSelectWorkout(id: String, filename: String?) {
-        guard let filename = filename else { return }
-        let interactor = DoWorkoutInteractor(workoutId: id, filename: filename)
+    func handleSelectWorkout(id: String, historyFilename: String?) {
+        guard let historyFilename = historyFilename else { return }
+        let interactor = DoWorkoutInteractor(workoutId: id, historyFilename: historyFilename)
         let viewModel = DoWorkoutViewModel(interactor: interactor)
-        var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel)
+        var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
+            self?.navigator?.dismiss(animated: true)
+        }
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
         presentNavController(view: view, navRouter: &navRouter)
     }
@@ -73,7 +75,11 @@ private extension HomeNavigationRouter {
     }
     
     func handleSelectPlan(id: String) {
-        // TODO: implement
+        let interactor = DoPlanInteractor(planId: id)
+        let viewModel = DoPlanViewModel(interactor: interactor)
+        var navRouter = DoPlanNavigationRouter(planId: id)
+        let view = DoPlanView(viewModel: viewModel, navigationRouter: navRouter)
+        presentNavController(view: view, navRouter: &navRouter)
     }
     
     func handleEditPlan(id: String) {

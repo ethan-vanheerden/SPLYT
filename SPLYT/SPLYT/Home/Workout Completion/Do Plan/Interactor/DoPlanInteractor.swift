@@ -23,15 +23,21 @@ enum DoPlanDomainResult {
 // MARK: - Interactor
 
 final class DoPlanInteractor {
+    private let planId: String
     private let service: DoPlanServiceType
     private var savedDomain: DoPlanDomain?
     
-    init(service: DoPlanServiceType = DoPlanService()) {
+    init(planId: String,
+         service: DoPlanServiceType = DoPlanService()) {
+        self.planId = planId
         self.service = service
     }
     
     func interact(with action: DoPlanDomainAction) async -> DoPlanDomainResult {
-        return .error
+        switch action {
+        case .load:
+            return handleLoad()
+        }
     }
 }
 
@@ -39,6 +45,15 @@ final class DoPlanInteractor {
 
 private extension DoPlanInteractor {
     
+    func handleLoad() -> DoPlanDomainResult {
+        do {
+            let plan = try service.loadPlan(planId: planId)
+            let domain = DoPlanDomain(plan: plan)
+            return updateDomain(domain: domain)
+        } catch {
+            return .error
+        }
+    }
 }
 
 // MARK: - Other Private Helpers

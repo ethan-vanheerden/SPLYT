@@ -100,7 +100,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         TabView(selection: $segmentedControlIndex) {
             routinesView(routines: display.workouts,
                          tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0.id,
-                                                                                 filename: $0.historyFilename)) },
+                                                                                 historyFilename: $0.historyFilename)) },
                          editAction: { navigationRouter.navigate(.editWorkout(id: $0.id)) },
                          deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0.id,
                                                                                            filename: $0.historyFilename),

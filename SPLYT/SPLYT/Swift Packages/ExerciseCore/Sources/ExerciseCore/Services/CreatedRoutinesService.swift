@@ -11,13 +11,24 @@ public protocol CreatedRoutinesServiceType {
     func saveRoutines(_: CreatedRoutines) throws
     
     /// Workout actions
-    func loadWorkout(id: String) throws -> Workout
+    
+    /// Loads the workout with the given id.
+    /// - Parameters:
+    ///   - workoutId: The id of the workout
+    ///   - planId: The id of the plan which owns this workout if this workout is in a plan
+    /// - Returns: The workout
+    func loadWorkout(workoutId: String, planId: String?) throws -> Workout
     
     func saveWorkouts(_: [String: Workout]) throws
     
-    func saveWorkout(_: Workout) throws
+    /// Saves the given workout.
+    /// - Parameters:
+    ///   - workout: The workout to save
+    ///   - planId: The plan to save the workout to, if any
+    func saveWorkout(workout: Workout, planId: String?) throws
     
     /// Plan actions
+    
     func loadPlan(id: String) throws -> Plan
     
     func savePlans(_: [String: Plan]) throws
@@ -46,10 +57,17 @@ public struct CreatedRoutinesService: CreatedRoutinesServiceType {
         try cacheInteractor.save(request: cacheRequest, data: routines)
     }
     
-    public func loadWorkout(id: String) throws -> Workout {
+    public func loadWorkout(workoutId: String, planId: String?) throws -> Workout {
         let routines = try loadRoutines()
+        var workout: Workout?
         
-        guard let workout = routines.workouts[id] else {
+        if let planId = planId {
+            workout = routines.plans[planId]?.workouts.first { $0.id == workoutId }
+        } else {
+            workout = routines.workouts[workoutId]
+        }
+        
+        guard let workout = workout else {
             throw Errors.notFound
         }
         
@@ -62,9 +80,22 @@ public struct CreatedRoutinesService: CreatedRoutinesServiceType {
         try saveRoutines(routines)
     }
     
-    public func saveWorkout(_ workout: Workout) throws {
+    public func saveWorkout(workout: Workout, planId: String?) throws {
         var routines = try loadRoutines()
-        routines.workouts[workout.id] = workout
+        
+        if let planId = planId {
+            // Replace the workout in the plan with the new one
+            guard var plan = routines.plans[planId],
+                  let workoutIndex = plan.workouts.firstIndex(where: { $0.id == workout.id }) else {
+                throw Errors.notFound
+            }
+            plan.workouts[workoutIndex] = workout
+            plan.lastCompleted = Date.now
+            routines.plans[planId] = plan
+        } else {
+            routines.workouts[workout.id] = workout
+        }
+        
         try saveRoutines(routines)
     }
     
