@@ -13,16 +13,23 @@ import Mocking
 final class MockHomeService: HomeServiceType {
     typealias Fixtures = WorkoutModelFixtures
     
-    var loadWorkoutsThrow = false
-    func loadWorkouts() throws -> [String: CreatedWorkout] {
-        if loadWorkoutsThrow { throw MockError.someError }
-        return Fixtures.loadedCreatedWorkouts
+    var loadRoutinesThrow = false
+    func loadRoutines() throws -> CreatedRoutines {
+        if loadRoutinesThrow { throw MockError.someError }
+        return Fixtures.loadedRoutines
     }
     
-    var saveWorkoutsThrow = false
-    private(set) var saveWorkoutsCalled = false
-    func saveWorkouts(_: [String: CreatedWorkout]) throws {
-        saveWorkoutsCalled = true
-        if saveWorkoutsThrow { throw MockError.someError }
+    var saveRoutinesThrow = false
+    private(set) var saveRoutinesCalled = false
+    func saveRoutines(_: CreatedRoutines) throws {
+        saveRoutinesCalled = true
+        if saveRoutinesThrow { throw MockError.someError }
+    }
+    
+    var deleteWorkoutHistoryThrow = false
+    private(set) var deleteWorkoutHistoryCalled = false
+    func deleteWorkoutHistory(historyFilename: String) throws {
+        deleteWorkoutHistoryCalled = true
+        if deleteWorkoutHistoryThrow { throw MockError.someError }
     }
 }

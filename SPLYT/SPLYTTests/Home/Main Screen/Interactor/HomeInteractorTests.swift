@@ -20,7 +20,7 @@ final class HomeInteractorTests: XCTestCase {
     }
     
     func testInteract_Load_ServiceError() async {
-        mockService.loadWorkoutsThrow = true
+        mockService.loadRoutinesThrow = true
         let result = await sut.interact(with: .load)
         
         XCTAssertEqual(result, .error)
@@ -28,46 +28,55 @@ final class HomeInteractorTests: XCTestCase {
     
     func testInteract_Load_Success() async {
         let result = await sut.interact(with: .load)
-        let expectedDomain = HomeDomain(workouts: WorkoutFixtures.loadedCreatedWorkouts)
+        let expectedDomain = HomeDomain(routines: WorkoutFixtures.loadedRoutines)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
     }
     
     func testInteract_DeleteWorkout_NoSavedDomain_Error() async {
-        let result = await sut.interact(with: .deleteWorkout(id: "leg-workout"))
+        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                                                             historyFilename: WorkoutFixtures.legWorkoutFilename))
         
         XCTAssertEqual(result, .error)
     }
     
     func testInteract_DeleteWorkout_ServiceError() async {
         await load()
-        mockService.saveWorkoutsThrow = true
-        let result = await sut.interact(with: .deleteWorkout(id: "leg-workout"))
+        mockService.saveRoutinesThrow = true
+        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                                                             historyFilename: WorkoutFixtures.legWorkoutFilename))
         
         XCTAssertEqual(result, .error)
-        XCTAssertTrue(mockService.saveWorkoutsCalled)
+        XCTAssertTrue(mockService.deleteWorkoutHistoryCalled)
+        XCTAssertTrue(mockService.saveRoutinesCalled)
     }
     
     func testInteract_DeleteWorkout_BadId_DoesNothing() async {
         await load()
-        let result = await sut.interact(with: .deleteWorkout(id: "not-a-workout"))
-        let expectedDomain = HomeDomain(workouts: WorkoutFixtures.loadedCreatedWorkouts)
+        let result = await sut.interact(with: .deleteWorkout(id: "not-a-workout",
+                                                             historyFilename: "bad-filename"))
+        let expectedDomain = HomeDomain(routines: WorkoutFixtures.loadedRoutines)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
-        XCTAssertTrue(mockService.saveWorkoutsCalled)
+        XCTAssertTrue(mockService.saveRoutinesCalled)
     }
     
     func testInteract_DeleteWorkout_Success() async {
         await load()
-        let result = await sut.interact(with: .deleteWorkout(id: "leg-workout"))
-        let expectedDomain = HomeDomain(workouts: ["full-body-workout": WorkoutFixtures.createdFullBodyWorkout])
+        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                                                             historyFilename: WorkoutFixtures.legWorkoutFilename))
+        
+        var routines = WorkoutFixtures.loadedRoutines
+        routines.workouts.removeValue(forKey: WorkoutFixtures.legWorkoutId)
+        let expectedDomain = HomeDomain(routines: routines)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
-        XCTAssertTrue(mockService.saveWorkoutsCalled)
+        XCTAssertTrue(mockService.saveRoutinesCalled)
     }
     
     func testInteract_ToggleDialog_NoSavedDomain_Error() async {
-        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"),
+        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                                                                                 historyFilename: WorkoutFixtures.legWorkoutFilename),
                                                             isOpen: true))
         
         XCTAssertEqual(result, .error)
@@ -75,20 +84,23 @@ final class HomeInteractorTests: XCTestCase {
     
     func testInteract_ToggleDialog_DeleteDialog_Show_Success() async {
         await load()
-        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"),
-                                                            isOpen: true))
-        let expectedDomain = HomeDomain(workouts: WorkoutFixtures.loadedCreatedWorkouts)
+        let dialog: HomeDialog = .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                                                historyFilename: WorkoutFixtures.legWorkoutFilename)
+        let result = await sut.interact(with: .toggleDialog(type: dialog, isOpen: true))
+        let expectedDomain = HomeDomain(routines: WorkoutFixtures.loadedRoutines)
         
-        XCTAssertEqual(result, .dialog(type: .deleteWorkout(id: "leg-workout"), domain: expectedDomain))
+        XCTAssertEqual(result, .dialog(type: dialog, domain: expectedDomain))
     }
     
     func testInteract_ToggleDialog_DeleteDialog_Hide_Success() async {
         await load()
-        _ = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"),
+        let dialog: HomeDialog = .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                                                historyFilename: WorkoutFixtures.legWorkoutFilename)
+        _ = await sut.interact(with: .toggleDialog(type: dialog,
                                                    isOpen: true)) // Open dialog to close it
-        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"),
+        let result = await sut.interact(with: .toggleDialog(type: dialog,
                                                             isOpen: false))
-        let expectedDomain = HomeDomain(workouts: WorkoutFixtures.loadedCreatedWorkouts)
+        let expectedDomain = HomeDomain(routines: WorkoutFixtures.loadedRoutines)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
     }

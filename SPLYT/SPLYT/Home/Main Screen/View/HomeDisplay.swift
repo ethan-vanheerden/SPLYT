@@ -19,6 +19,3 @@ struct HomeDisplay: Equatable {
     let deleteWorkoutDialog: DialogViewState
     let deletePlanDialog: DialogViewState
 }
-
-
-// TODO: implement the home methods that we have for workouts but for plans

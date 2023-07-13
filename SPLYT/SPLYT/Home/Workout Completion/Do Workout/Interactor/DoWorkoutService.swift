@@ -34,7 +34,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
         self.routineService = routineService
     }
     
-    func loadWorkout(workoutId: String, historyFilename: String, planId: String?) throws -> Workout {
+    func loadWorkout(workoutId: String, historyFilename: String, planId: String? = nil) throws -> Workout {
         let request = WorkoutHistoryCacheRequest(filename: historyFilename)
         
         if !(try cacheInteractor.fileExists(request: request)) {
@@ -49,7 +49,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
         }
     }
     
-    func saveWorkout(workout: Workout, historyFilename: String, planId: String?) throws {
+    func saveWorkout(workout: Workout, historyFilename: String, planId: String? = nil) throws {
         let request = WorkoutHistoryCacheRequest(filename: historyFilename)
         // Update the workout's last completed date
         var workout = workout

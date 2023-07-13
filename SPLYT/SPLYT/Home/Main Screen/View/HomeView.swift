@@ -62,9 +62,9 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         .dialog(isOpen: deletedWorkout != nil,
                 viewState: display.deleteWorkoutDialog,
                 primaryAction: { viewModel.send(.deleteWorkout(id: deletedWorkout?.0 ?? "",
-                                                               filename: deletedWorkout?.1),
+                                                               historyFilename: deletedWorkout?.1),
                                                 taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: "", filename: nil),
+                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: "", historyFilename: nil),
                                                                 isOpen: false),
                                                   taskPriority: .userInitiated) })
         .dialog(isOpen: deletedPlanId != nil,
@@ -103,7 +103,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                                                                                  historyFilename: $0.historyFilename)) },
                          editAction: { navigationRouter.navigate(.editWorkout(id: $0.id)) },
                          deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0.id,
-                                                                                           filename: $0.historyFilename),
+                                                                                           historyFilename: $0.historyFilename),
                                                                       isOpen: true),
                                                         taskPriority: .userInitiated) })
             .tag(0)

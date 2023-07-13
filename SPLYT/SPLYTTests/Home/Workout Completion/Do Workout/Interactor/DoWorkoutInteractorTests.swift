@@ -17,12 +17,12 @@ final class DoWorkoutInteractorTests: XCTestCase {
     override func setUpWithError() throws {
         self.mockService = MockDoWorkoutService()
         self.sut = DoWorkoutInteractor(workoutId: WorkoutFixtures.legWorkoutId,
-                                       filename: WorkoutFixtures.legWorkoutFilename,
+                                       historyFilename: WorkoutFixtures.legWorkoutFilename,
                                        service: mockService)
     }
     
     func testInteract_LoadWorkout_ServiceError() async {
-        mockService.loadThrow = true
+        mockService.loadWorkoutThrow = true
         let result = await sut.interact(with: .loadWorkout)
         XCTAssertEqual(result, .error)
     }
@@ -478,15 +478,15 @@ final class DoWorkoutInteractorTests: XCTestCase {
     func testInteract_SaveWorkout_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .saveWorkout)
         XCTAssertEqual(result, .error)
-        XCTAssertFalse(mockService.saveCalled)
+        XCTAssertFalse(mockService.saveWorkoutCalled)
     }
     
     func testInteract_SaveWorkout_ServiceError() async {
         await loadWorkout()
-        mockService.saveThrow = true
+        mockService.saveWorkoutThrow = true
         let result = await sut.interact(with: .saveWorkout)
         XCTAssertEqual(result, .error)
-        XCTAssertTrue(mockService.saveCalled)
+        XCTAssertTrue(mockService.saveWorkoutCalled)
     }
     
     func testInteract_SaveWorkout_Success() async {
@@ -501,7 +501,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      fractionCompleted: 0)
         
         XCTAssertEqual(result, .exit(domain))
-        XCTAssertTrue(mockService.saveCalled)
+        XCTAssertTrue(mockService.saveWorkoutCalled)
     }
 }
 

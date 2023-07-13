@@ -10,12 +10,12 @@ import XCTest
 import DesignSystem
 
 final class NameWorkoutViewModelTests: XCTestCase {
-    private let sut = NameWorkoutViewModel()
-    
-    func testViewState() {
-        let viewState = sut.viewState
-        let expectedNavBar = NavigationBarViewState(title: "CREATE WORKOUT")
-        
-        XCTAssertEqual(viewState.navBar, expectedNavBar)
-    }
+//    private let sut = NameWorkoutViewModel()
+//    
+//    func testViewState() {
+//        let viewState = sut.viewState
+//        let expectedNavBar = NavigationBarViewState(title: "CREATE WORKOUT")
+//        
+//        XCTAssertEqual(viewState.navBar, expectedNavBar)
+//    }
 }

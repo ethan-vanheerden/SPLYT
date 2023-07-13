@@ -25,7 +25,7 @@ final class NameWorkoutsViewTests: XCTestCase {
         vc = UIHostingController(rootView: sut)
     }
     
-    func testView() {
+    func testLoading() {
         assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }
 }
@@ -33,6 +33,6 @@ final class NameWorkoutsViewTests: XCTestCase {
 // MARK: - Mock View Model
 
 final class MockNameWorkoutViewModel: ViewModel {
-    typealias Event = NoViewEvent
-    @Published var viewState: NameWorkoutViewState = NameWorkoutViewState()
+    @Published var viewState: NameWorkoutViewState = .loading
+    func send(_ event: NameWorkoutViewEvent) async { }
 }

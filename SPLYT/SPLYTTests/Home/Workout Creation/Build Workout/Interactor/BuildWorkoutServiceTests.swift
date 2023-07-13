@@ -14,15 +14,15 @@ final class BuildWorkoutServiceTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
     typealias WorkoutFixtures = WorkoutModelFixtures
     private var cacheInteractor: MockCacheInteractor!
-    private var workoutCacheInteractor: MockCacheInteractor!
+    private var routineCacheInteractor: MockCacheInteractor!
     private var sut: BuildWorkoutService!
     
     override func setUp() async throws {
         self.cacheInteractor = MockCacheInteractor()
-        self.workoutCacheInteractor = MockCacheInteractor()
-        let workoutService = CreatedWorkoutsService(cacheInteractor: workoutCacheInteractor)
+        self.routineCacheInteractor = MockCacheInteractor()
+        let routineService = CreatedRoutinesService(cacheInteractor: routineCacheInteractor)
         self.sut = BuildWorkoutService(cacheInteractor: cacheInteractor,
-                                       workoutService: workoutService)
+                                       routineService: routineService)
     }
     
     func testLoadExercises_FileNoExist_LoadsAndSavesFallback_ErrorSaving() throws {
@@ -71,26 +71,26 @@ final class BuildWorkoutServiceTests: XCTestCase {
     }
     
     func testSaveWorkout_FileNoExist_ErrorSaving() {
-        workoutCacheInteractor.saveThrow = true
+        routineCacheInteractor.saveThrow = true
         XCTAssertThrowsError(try sut.saveWorkout(WorkoutFixtures.legWorkout))
-        XCTAssertTrue(workoutCacheInteractor.saveCalled)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileNoExist_Success() {
         XCTAssertNoThrow(try sut.saveWorkout(WorkoutFixtures.legWorkout))
-        XCTAssertTrue(workoutCacheInteractor.saveCalled)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileExists_ErrorLoadingWorkouts() {
-        workoutCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubFileExists = true
         XCTAssertThrowsError(try sut.saveWorkout(WorkoutFixtures.legWorkout))
         XCTAssertFalse(cacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileExists_Success() {
-        workoutCacheInteractor.stubFileExists = true
-        workoutCacheInteractor.stubData = WorkoutFixtures.loadedCreatedWorkouts
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         XCTAssertNoThrow(try sut.saveWorkout(WorkoutFixtures.legWorkout))
-        XCTAssertTrue(workoutCacheInteractor.saveCalled)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
 }

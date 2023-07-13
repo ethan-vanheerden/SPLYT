@@ -20,26 +20,34 @@ struct WorkoutModelFixtures {
         return sets
     }
     
+    static let backSquatId = "back-squat"
+    
+    static let barLungesId = "bar-lunges"
+    
+    static let benchPressId = "bench-press"
+    
+    static let inclineRowId = "incline-db-row"
+    
     static func backSquat(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "back-squat",
+        return Exercise(id: backSquatId,
                         name: "Back Squat",
                         sets: createSets(inputs: inputs))
     }
     
     static func barLunges(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "bar-lunges",
+        return Exercise(id: barLungesId,
                         name: "Bar Lunges",
                         sets: createSets(inputs: inputs))
     }
     
     static func benchPress(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "bench-press",
+        return Exercise(id: benchPressId,
                         name: "Bench Press",
                         sets: createSets(inputs: inputs))
     }
     
     static func inclineDBRow(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "incline-db-row",
+        return Exercise(id: inclineRowId,
                         name: "Incline Dumbbell Row",
                         sets: createSets(inputs: inputs))
     }
@@ -153,6 +161,9 @@ struct WorkoutModelFixtures {
         legWorkoutId: legWorkout,
         fullBodyWorkoutId: fullBodyWorkout
     ]
+    
+    static let loadedRoutines: CreatedRoutines = CreatedRoutines(workouts: loadedWorkouts,
+                                                                 plans: [:])
     
     static func exerciseGroups(numGroups: Int, groupExercises: [Int: [Exercise]]) -> [ExerciseGroup] {
         var groups = [ExerciseGroup]()

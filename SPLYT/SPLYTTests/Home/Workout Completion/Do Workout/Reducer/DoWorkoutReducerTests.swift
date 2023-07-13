@@ -19,7 +19,7 @@ final class DoWorkoutReducerTests: XCTestCase {
     
     override func setUpWithError() throws {
         self.interactor = DoWorkoutInteractor(workoutId: WorkoutFixtures.legWorkoutId,
-                                              filename: WorkoutFixtures.legWorkoutFilename,
+                                              historyFilename: WorkoutFixtures.legWorkoutFilename,
                                               service: MockDoWorkoutService())
     }
     

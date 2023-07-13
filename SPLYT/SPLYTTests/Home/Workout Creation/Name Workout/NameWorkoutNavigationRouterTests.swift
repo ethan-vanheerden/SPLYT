@@ -13,6 +13,7 @@ import SwiftUI
 final class NameWorkoutNavigationRouterTests: XCTestCase {
     private var sut: NameWorkoutNavigationRouter!
     private var mockNavigator: MockNavigator!
+    private let navState = NameWorkoutNavigationState(name: "Test")
 
     override func setUp() {
         sut = NameWorkoutNavigationRouter()
@@ -20,11 +21,17 @@ final class NameWorkoutNavigationRouterTests: XCTestCase {
         sut.navigator = mockNavigator
     }
     
-    func testNavigate_Next() {
-        let navState = NameWorkoutNavigationState(workoutName: "Test")
-        sut.navigate(.next(navState))
+    func testNavigate_Next_BuildWorkout() {
+        sut.navigate(.next(type: .workout, navState: navState))
         
         let expectedVC = UIHostingController<BuildWorkoutView<BuildWorkoutViewModel>>.self
+        XCTAssertTrue(mockNavigator.stubPushedVC?.isKind(of: expectedVC) ?? false)
+    }
+    
+    func testNavigate_Next_BuildPlan() {
+        sut.navigate(.next(type: .plan, navState: navState))
+        
+        let expectedVC = UIHostingController<BuildPlanView<BuildPlanViewModel>>.self
         XCTAssertTrue(mockNavigator.stubPushedVC?.isKind(of: expectedVC) ?? false)
     }
 }

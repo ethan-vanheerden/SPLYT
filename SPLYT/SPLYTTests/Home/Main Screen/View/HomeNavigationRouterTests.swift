@@ -37,7 +37,7 @@ final class HomeNavigationRouterTests: XCTestCase {
     }
     
     func testNavigate_SelectWorkout() {
-        sut.navigate(.seletectWorkout(id: "my-awesome-workout", filename: "filename"))
+        sut.navigate(.seletectWorkout(id: "my-awesome-workout", historyFilename: "filename"))
         let expectedNavController = UINavigationController.self
         let expectedVC = UIHostingController<WorkoutPreviewView<DoWorkoutViewModel>>.self
 
