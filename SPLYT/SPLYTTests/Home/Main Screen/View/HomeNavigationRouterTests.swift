@@ -20,20 +20,19 @@ final class HomeNavigationRouterTests: XCTestCase {
         sut.navigator = mockNavigator
     }
     
-    func testNavigate_CreatePlan() {
-        sut.navigate(.createPlan)
-        let expectedVC = UIHostingController<Text>.self
-        XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedVC) ?? false)
-    }
-    
-    func testNavigate_CreateWorkout() {
-        sut.navigate(.createWorkout)
-        let expectedNavController = UINavigationController.self
-        let expectedVC = UIHostingController<NameWorkoutView<NameWorkoutViewModel>>.self
+    func testNavigate_Create() {
         
-        XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedNavController) ?? false)
-        let navController = mockNavigator.stubPresentedVC as? UINavigationController
-        XCTAssertTrue(navController?.topViewController?.isKind(of: expectedVC) ?? false)
+        let createTypes: [HomeNavigationEvent] = [.createPlan, .createWorkout]
+        
+        for createType in createTypes {
+            sut.navigate(createType)
+            let expectedNavController = UINavigationController.self
+            let expectedVC = UIHostingController<NameWorkoutView<NameWorkoutViewModel>>.self
+            
+            XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedNavController) ?? false)
+            let navController = mockNavigator.stubPresentedVC as? UINavigationController
+            XCTAssertTrue(navController?.topViewController?.isKind(of: expectedVC) ?? false)
+        }
     }
     
     func testNavigate_SelectWorkout() {
@@ -44,5 +43,23 @@ final class HomeNavigationRouterTests: XCTestCase {
         XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedNavController) ?? false)
         let navController = mockNavigator.stubPresentedVC as? UINavigationController
         XCTAssertTrue(navController?.topViewController?.isKind(of: expectedVC) ?? false)
+    }
+    
+    func testNavigate_EditWorkout() {
+        // TODO
+    }
+    
+    func testNavigate_SelectPlan() {
+        sut.navigate(.selectPlan(id: "my-awesome-plan"))
+        let expectedNavController = UINavigationController.self
+        let expectedVC = UIHostingController<DoPlanView<DoPlanViewModel>>.self
+
+        XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedNavController) ?? false)
+        let navController = mockNavigator.stubPresentedVC as? UINavigationController
+        XCTAssertTrue(navController?.topViewController?.isKind(of: expectedVC) ?? false)
+    }
+    
+    func testNavigate_EditPlan() {
+        // TODO
     }
 }

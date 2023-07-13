@@ -35,7 +35,7 @@ struct DoWorkoutFixtures {
     static let actionSlider: ActionSliderViewState = .init(sliderColor: .lightBlue,
                                                            backgroundText: markAsComplete)
     
-    static let finishDialog: DialogViewState = .init(title: "Finish Workout",
+    static let finishDialog: DialogViewState = .init(title: "Finish Workout?",
                                                      subtitle: "All of your changes will be saved.",
                                                      primaryButtonTitle: "Finish",
                                                      secondaryButtonTitle: "Cancel")

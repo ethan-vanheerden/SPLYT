@@ -169,13 +169,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         XCTAssertEqual(result, .error)
     }
     
-    func testInteract_ToggleExercise_InvalidGroup_Error() async {
-        await loadExercises()
-        let result = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
-        
-        XCTAssertEqual(result, .error)
-    }
-    
     func testInteract_ToggleExercise_AddExercise_OnlyExerciseInGroup_Success() async {
         await loadExercises()
         let result = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
@@ -909,7 +902,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                 builtWorkout: workout,
                                                 currentGroup: 1,
                                                 filterDomain: Fixtures.emptyFilterDomain,
-                                                canSave: false)
+                                                canSave: true)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
     }

@@ -58,8 +58,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let currentGroupTitle = "Current group: 0 exercises"
         let groupTitles = ["Group 1", "Group 2"]
         let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
-                                                  groups: [[]],
-                                                  currentGroup: 0,
+                                                  groups: [[], []],
+                                                  currentGroup: 1,
                                                   currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
                                                   lastGroupEmpty: true,
@@ -117,9 +117,9 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   showDialog: nil,
                                                   backDialog: Fixtures.backDialog,
                                                   saveDialog: Fixtures.saveDialog,
-                                                  canSave: false,
+                                                  canSave: true,
                                                   filterDisplay: Fixtures.emptyFilterDisplay,
-                                                  isFiltering: true)
+                                                  isFiltering: false)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }

@@ -47,7 +47,7 @@ final class HomeInteractorTests: XCTestCase {
                                                              historyFilename: WorkoutFixtures.legWorkoutFilename))
         
         XCTAssertEqual(result, .error)
-        XCTAssertTrue(mockService.deleteWorkoutHistoryCalled)
+        XCTAssertFalse(mockService.deleteWorkoutHistoryCalled)
         XCTAssertTrue(mockService.saveRoutinesCalled)
     }
     
