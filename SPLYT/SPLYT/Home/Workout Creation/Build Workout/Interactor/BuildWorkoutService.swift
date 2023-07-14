@@ -63,7 +63,9 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
     }
     
     func saveWorkout(_ workout: Workout) throws {
-        try routineService.saveWorkout(workout: workout, planId: nil)
+        try routineService.saveWorkout(workout: workout,
+                                       planId: nil,
+                                       lastCompletedDate: nil)
     }
 }
 

@@ -162,8 +162,23 @@ struct WorkoutModelFixtures {
         fullBodyWorkoutId: fullBodyWorkout
     ]
     
+    static let myPlanId = "my-plan"
+    
+    static let myPlan: Plan = Plan(id: myPlanId,
+                                   name: "My Plan 1",
+                                   workouts: [
+                                    legWorkout,
+                                    fullBodyWorkout
+                                   ],
+                                   createdAt: jan_1_2023_0800,
+                                   lastCompleted: feb_3_2023_1630)
+    
+    static let loadedPlans: [String: Plan] = [
+        myPlanId: myPlan
+    ]
+    
     static let loadedRoutines: CreatedRoutines = CreatedRoutines(workouts: loadedWorkouts,
-                                                                 plans: [:])
+                                                                 plans: loadedPlans)
     
     static func exerciseGroups(numGroups: Int, groupExercises: [Int: [Exercise]]) -> [ExerciseGroup] {
         var groups = [ExerciseGroup]()

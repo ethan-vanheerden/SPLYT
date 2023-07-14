@@ -19,19 +19,16 @@ public protocol CreatedRoutinesServiceType {
     /// - Returns: The workout
     func loadWorkout(workoutId: String, planId: String?) throws -> Workout
     
-    func saveWorkouts(_: [String: Workout]) throws
-    
     /// Saves the given workout.
     /// - Parameters:
     ///   - workout: The workout to save
     ///   - planId: The plan to save the workout to, if any
-    func saveWorkout(workout: Workout, planId: String?) throws
+    ///   - lastCompletedDate: The date the workout was last completed, if any
+    func saveWorkout(workout: Workout, planId: String?, lastCompletedDate: Date?) throws
     
     /// Plan actions
     
     func loadPlan(id: String) throws -> Plan
-    
-    func savePlans(_: [String: Plan]) throws
     
     func savePlan(_: Plan) throws
 }
@@ -74,14 +71,10 @@ public struct CreatedRoutinesService: CreatedRoutinesServiceType {
         return workout
     }
     
-    public func saveWorkouts(_ workouts: [String: Workout]) throws {
+    public func saveWorkout(workout: Workout, planId: String?, lastCompletedDate: Date?) throws {
         var routines = try loadRoutines()
-        routines.workouts = workouts
-        try saveRoutines(routines)
-    }
-    
-    public func saveWorkout(workout: Workout, planId: String?) throws {
-        var routines = try loadRoutines()
+        var workout = workout
+        workout.lastCompleted = lastCompletedDate ?? workout.lastCompleted
         
         if let planId = planId {
             // Replace the workout in the plan with the new one
@@ -89,8 +82,8 @@ public struct CreatedRoutinesService: CreatedRoutinesServiceType {
                   let workoutIndex = plan.workouts.firstIndex(where: { $0.id == workout.id }) else {
                 throw Errors.notFound
             }
+            plan.lastCompleted = lastCompletedDate ?? plan.lastCompleted
             plan.workouts[workoutIndex] = workout
-            plan.lastCompleted = Date.now
             routines.plans[planId] = plan
         } else {
             routines.workouts[workout.id] = workout
@@ -107,12 +100,6 @@ public struct CreatedRoutinesService: CreatedRoutinesServiceType {
         }
         
         return plan
-    }
-    
-    public func savePlans(_ plans: [String : Plan]) throws {
-        var routines = try loadRoutines()
-        routines.plans = plans
-        try saveRoutines(routines)
     }
     
     public func savePlan(_ plan: Plan) throws {

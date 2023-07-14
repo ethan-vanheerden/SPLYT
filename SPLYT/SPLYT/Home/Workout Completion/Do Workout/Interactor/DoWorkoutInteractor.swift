@@ -85,7 +85,7 @@ final class DoWorkoutInteractor {
         case .saveWorkout:
             return handleSaveWorkout()
         }
-    }
+      }
 }
 
 // MARK: - Private Handlers

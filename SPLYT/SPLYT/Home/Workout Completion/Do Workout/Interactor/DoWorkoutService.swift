@@ -51,7 +51,6 @@ struct DoWorkoutService: DoWorkoutServiceType {
     
     func saveWorkout(workout: Workout, historyFilename: String, planId: String? = nil) throws {
         let request = WorkoutHistoryCacheRequest(filename: historyFilename)
-        // Update the workout's last completed date
         var workout = workout
         workout.lastCompleted = Date.now
         
@@ -70,6 +69,8 @@ struct DoWorkoutService: DoWorkoutServiceType {
         }
         
         // Then save this version of the workout to the created routines
-        try routineService.saveWorkout(workout: workout, planId: planId)
+        try routineService.saveWorkout(workout: workout,
+                                       planId: planId,
+                                       lastCompletedDate: Date.now)
     }
 }
