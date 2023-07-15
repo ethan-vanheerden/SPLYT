@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NameWorkoutViewState {
+enum NameWorkoutViewState: Equatable {
     case error
     case loading
     case loaded(NameWorkoutDisplay)

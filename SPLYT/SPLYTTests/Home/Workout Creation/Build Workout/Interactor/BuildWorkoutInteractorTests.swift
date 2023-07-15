@@ -646,7 +646,8 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
         groupMap[1] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 2,
+                                                                                           groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 1,
@@ -668,7 +669,8 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
+                                                                                           groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0,
@@ -684,14 +686,42 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
+                                                                                           groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0,
                                                 filterDomain: Fixtures.emptyFilterDomain,
                                                 canSave: false)
         
+        XCTAssertTrue(mockService.saveWorkoutCalled)
         XCTAssertEqual(result, .exit(expectedDomain))
+    }
+    
+    func testInteract_Save_CustomSave_Success() async {
+        var workout: Workout?// Will hold the saved workout
+        sut = BuildWorkoutInteractor(service: mockService,
+                                          nameState: navState,
+                                     creationDate: WorkoutFixtures.jan_1_2023_0800,
+                                     saveAction: { workout = $0 })
+        
+        await loadExercises()
+        let result = await sut.interact(with: .save)
+        
+        var groupMap = [Int: [Exercise]]()
+        groupMap[0] = []
+        let expectedWorkout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
+                                                                                                   groupExercises: groupMap))
+        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
+                                                builtWorkout: expectedWorkout,
+                                                currentGroup: 0,
+                                                filterDomain: Fixtures.emptyFilterDomain,
+                                                canSave: false)
+        
+        XCTAssertFalse(mockService.saveWorkoutCalled)
+        XCTAssertEqual(workout, expectedWorkout)
+        XCTAssertEqual(result, .exit(expectedDomain))
+        
     }
     
     func testInteract_ToggleDialog_NoSavedDomain_Error() async {
@@ -704,7 +734,8 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleDialog(type: .leave, isOpen: true))
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
+                                                                                           groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0,
@@ -719,7 +750,8 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleDialog(type: .save, isOpen: true))
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
+                                                                                           groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0,
@@ -735,7 +767,8 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleDialog(type: .leave, isOpen: false))
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
-        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap))
+        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
+                                                                                           groupExercises: groupMap))
         let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
                                                 builtWorkout: workout,
                                                 currentGroup: 0,

@@ -61,7 +61,6 @@ struct DoWorkoutService: DoWorkoutServiceType {
         } else {
             // Load the existing history and place this workout at the head
             // Truncate the list to the last 10 workouts
-            // TODO: Do we want to limit how many we store here?
             var workouts = try cacheInteractor.load(request: request)
             workouts.insert(workout, at: 0)
             let truncatedWorkouts = Array(workouts.prefix(10))

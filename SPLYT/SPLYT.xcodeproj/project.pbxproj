@@ -45,6 +45,16 @@
 		AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073812A546B8D00F0BAD2 /* DoPlanViewModel.swift */; };
 		AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073832A546BEF00F0BAD2 /* DoPlanView.swift */; };
 		AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073852A546C2300F0BAD2 /* DoPlanNavigationRouter.swift */; };
+		AA50738B2A62F70800F0BAD2 /* NameWorkoutInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50738A2A62F70800F0BAD2 /* NameWorkoutInteractorTests.swift */; };
+		AA50738D2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50738C2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift */; };
+		AA50738F2A62FA4200F0BAD2 /* NameWorkoutFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50738E2A62FA4200F0BAD2 /* NameWorkoutFixtures.swift */; };
+		AA5073972A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073962A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift */; };
+		AA5073992A63007900F0BAD2 /* BuildPlanServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073982A63007900F0BAD2 /* BuildPlanServiceTests.swift */; };
+		AA50739B2A63035B00F0BAD2 /* MockBuildPlanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50739A2A63035B00F0BAD2 /* MockBuildPlanService.swift */; };
+		AA50739D2A6303FD00F0BAD2 /* BuildPlanInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50739C2A6303FD00F0BAD2 /* BuildPlanInteractorTests.swift */; };
+		AA50739F2A63066F00F0BAD2 /* BuildPlanFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50739E2A63066F00F0BAD2 /* BuildPlanFixtures.swift */; };
+		AA5073A12A630DD900F0BAD2 /* BuildPlanReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073A02A630DD900F0BAD2 /* BuildPlanReducerTests.swift */; };
+		AA5073A32A6350B000F0BAD2 /* BuildPlanViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5073A22A6350B000F0BAD2 /* BuildPlanViewModelTests.swift */; };
 		AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */; };
 		AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBAD29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift */; };
 		AA52BBB029B69938009CDBDA /* HomeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA52BBAF29B69938009CDBDA /* HomeServiceTests.swift */; };
@@ -178,6 +188,16 @@
 		AA5073812A546B8D00F0BAD2 /* DoPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanViewModel.swift; sourceTree = "<group>"; };
 		AA5073832A546BEF00F0BAD2 /* DoPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanView.swift; sourceTree = "<group>"; };
 		AA5073852A546C2300F0BAD2 /* DoPlanNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoPlanNavigationRouter.swift; sourceTree = "<group>"; };
+		AA50738A2A62F70800F0BAD2 /* NameWorkoutInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameWorkoutInteractorTests.swift; sourceTree = "<group>"; };
+		AA50738C2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameWorkoutReducerTests.swift; sourceTree = "<group>"; };
+		AA50738E2A62FA4200F0BAD2 /* NameWorkoutFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameWorkoutFixtures.swift; sourceTree = "<group>"; };
+		AA5073962A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanNavigationRouterTests.swift; sourceTree = "<group>"; };
+		AA5073982A63007900F0BAD2 /* BuildPlanServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanServiceTests.swift; sourceTree = "<group>"; };
+		AA50739A2A63035B00F0BAD2 /* MockBuildPlanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBuildPlanService.swift; sourceTree = "<group>"; };
+		AA50739C2A6303FD00F0BAD2 /* BuildPlanInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanInteractorTests.swift; sourceTree = "<group>"; };
+		AA50739E2A63066F00F0BAD2 /* BuildPlanFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanFixtures.swift; sourceTree = "<group>"; };
+		AA5073A02A630DD900F0BAD2 /* BuildPlanReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanReducerTests.swift; sourceTree = "<group>"; };
+		AA5073A22A6350B000F0BAD2 /* BuildPlanViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanViewModelTests.swift; sourceTree = "<group>"; };
 		AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutNavigationRouter.swift; sourceTree = "<group>"; };
 		AA52BBAD29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutNavigationRouterTests.swift; sourceTree = "<group>"; };
 		AA52BBAF29B69938009CDBDA /* HomeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeServiceTests.swift; sourceTree = "<group>"; };
@@ -437,6 +457,86 @@
 			children = (
 				AA50737D2A546B0400F0BAD2 /* DoPlanReducer.swift */,
 				AA5073812A546B8D00F0BAD2 /* DoPlanViewModel.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA5073872A62F6CD00F0BAD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AAE79AF5296E13100010848E /* NameWorkoutNavigationRouterTests.swift */,
+				AAE79AF8296E15550010848E /* NameWorkoutViewTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA5073882A62F6D300F0BAD2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA50738A2A62F70800F0BAD2 /* NameWorkoutInteractorTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA5073892A62F6DF00F0BAD2 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AAE79AF3296E12350010848E /* NameWorkoutViewModelTests.swift */,
+				AA50738C2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA5073902A62FA5300F0BAD2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AA50738E2A62FA4200F0BAD2 /* NameWorkoutFixtures.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AA5073912A62FE4300F0BAD2 /* Build Plan */ = {
+			isa = PBXGroup;
+			children = (
+				AA5073952A62FE6800F0BAD2 /* Reducer */,
+				AA5073942A62FE6200F0BAD2 /* Interactor */,
+				AA5073932A62FE5C00F0BAD2 /* View */,
+				AA5073922A62FE5700F0BAD2 /* Mocks */,
+			);
+			path = "Build Plan";
+			sourceTree = "<group>";
+		};
+		AA5073922A62FE5700F0BAD2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AA50739A2A63035B00F0BAD2 /* MockBuildPlanService.swift */,
+				AA50739E2A63066F00F0BAD2 /* BuildPlanFixtures.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AA5073932A62FE5C00F0BAD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA5073962A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA5073942A62FE6200F0BAD2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA5073982A63007900F0BAD2 /* BuildPlanServiceTests.swift */,
+				AA50739C2A6303FD00F0BAD2 /* BuildPlanInteractorTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA5073952A62FE6800F0BAD2 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA5073A02A630DD900F0BAD2 /* BuildPlanReducerTests.swift */,
+				AA5073A22A6350B000F0BAD2 /* BuildPlanViewModelTests.swift */,
 			);
 			path = Reducer;
 			sourceTree = "<group>";
@@ -764,6 +864,7 @@
 		AAE79AF0296E12090010848E /* Workout Creation */ = {
 			isa = PBXGroup;
 			children = (
+				AA5073912A62FE4300F0BAD2 /* Build Plan */,
 				AAE79AF2296E12170010848E /* Build Workout */,
 				AAE79AF1296E12110010848E /* Name Workout */,
 			);
@@ -773,9 +874,10 @@
 		AAE79AF1296E12110010848E /* Name Workout */ = {
 			isa = PBXGroup;
 			children = (
-				AAE79AF3296E12350010848E /* NameWorkoutViewModelTests.swift */,
-				AAE79AF5296E13100010848E /* NameWorkoutNavigationRouterTests.swift */,
-				AAE79AF8296E15550010848E /* NameWorkoutViewTests.swift */,
+				AA5073892A62F6DF00F0BAD2 /* Reducer */,
+				AA5073882A62F6D300F0BAD2 /* Interactor */,
+				AA5073872A62F6CD00F0BAD2 /* View */,
+				AA5073902A62FA5300F0BAD2 /* Mocks */,
 			);
 			path = "Name Workout";
 			sourceTree = "<group>";
@@ -1157,16 +1259,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA50738B2A62F70800F0BAD2 /* NameWorkoutInteractorTests.swift in Sources */,
+				AA50739B2A63035B00F0BAD2 /* MockBuildPlanService.swift in Sources */,
 				AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */,
+				AA50739F2A63066F00F0BAD2 /* BuildPlanFixtures.swift in Sources */,
 				AA93405028888B9B00309E83 /* HomeViewTests.swift in Sources */,
 				AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */,
 				AAE79AF9296E15550010848E /* NameWorkoutViewTests.swift in Sources */,
+				AA5073A12A630DD900F0BAD2 /* BuildPlanReducerTests.swift in Sources */,
 				AAF0FB3D298ABBA900167B02 /* BuildWorkoutFixtures.swift in Sources */,
 				AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */,
 				AAF0FB41298AD30300167B02 /* MockBuildWorkoutService.swift in Sources */,
 				AAE79AF4296E12350010848E /* NameWorkoutViewModelTests.swift in Sources */,
 				AADCABE328889A0C00FF09B9 /* SettingsViewTests.swift in Sources */,
+				AA50738F2A62FA4200F0BAD2 /* NameWorkoutFixtures.swift in Sources */,
 				AAEBFCF6295E3D0700D284F0 /* HomeFixtures.swift in Sources */,
+				AA50738D2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift in Sources */,
 				AAEBFCFB295E406D00D284F0 /* HomeInteractorTests.swift in Sources */,
 				AAEBFCFD295E412400D284F0 /* HomeNavigationRouterTests.swift in Sources */,
 				AADEC4B928A8428900A5463B /* GetAvailableExercisesRequestTests.swift in Sources */,
@@ -1177,11 +1285,13 @@
 				AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */,
 				AAE79AF6296E13100010848E /* NameWorkoutNavigationRouterTests.swift in Sources */,
 				AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */,
+				AA5073A32A6350B000F0BAD2 /* BuildPlanViewModelTests.swift in Sources */,
 				AA2C243D2A37A45F004FC939 /* DoWorkoutViewModelTests.swift in Sources */,
 				AA52BBB029B69938009CDBDA /* HomeServiceTests.swift in Sources */,
 				AAF0FB46299815E700167B02 /* BuildWorkoutReducerTests.swift in Sources */,
 				AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */,
 				AADCABDC2888944100FF09B9 /* SettingsNavigationRouterTests.swift in Sources */,
+				AA50739D2A6303FD00F0BAD2 /* BuildPlanInteractorTests.swift in Sources */,
 				AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */,
 				AA93405228888C1600309E83 /* HistoryViewTests.swift in Sources */,
 				AAF0FB48299962CF00167B02 /* BuildWorkoutViewModelTests.swift in Sources */,
@@ -1192,7 +1302,9 @@
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,
 				AAF0FB3F298AC0BB00167B02 /* BuildWorkoutInteractorTests.swift in Sources */,
 				AA2C243F2A37B2D8004FC939 /* DoWorkoutNavigationRouterTests.swift in Sources */,
+				AA5073972A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift in Sources */,
 				AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */,
+				AA5073992A63007900F0BAD2 /* BuildPlanServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

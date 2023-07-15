@@ -14,7 +14,7 @@ struct NameWorkoutDomain: Equatable {
 
 // MARK: - Build Type
 
-enum BuildWorkoutType {
+enum BuildWorkoutType: CaseIterable {
     case workout
     case plan
 }

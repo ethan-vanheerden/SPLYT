@@ -16,7 +16,7 @@ enum NameWorkoutDomainAction {
 
 // MARK: - Domain Results
 
-enum NameWorkoutDomainResult {
+enum NameWorkoutDomainResult: Equatable {
     case error
     case loaded(NameWorkoutDomain)
 }

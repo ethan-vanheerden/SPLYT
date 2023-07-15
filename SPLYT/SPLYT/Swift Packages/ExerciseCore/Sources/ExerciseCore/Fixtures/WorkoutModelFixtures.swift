@@ -162,10 +162,18 @@ struct WorkoutModelFixtures {
         fullBodyWorkoutId: fullBodyWorkout
     ]
     
-    static let myPlanId = "my-plan"
+    static let myPlanName = "My Plan 1"
+    
+    static let myPlanId = "\(myPlanName)-2023-01-01T08:00:00Z"
+    
+    static let myPlanEmpty: Plan = Plan(id: myPlanId,
+                                        name: myPlanName,
+                                        workouts: [],
+                                        createdAt: jan_1_2023_0800,
+                                        lastCompleted: nil)
     
     static let myPlan: Plan = Plan(id: myPlanId,
-                                   name: "My Plan 1",
+                                   name: myPlanName,
                                    workouts: [
                                     legWorkout,
                                     fullBodyWorkout

@@ -44,10 +44,7 @@ final class CreatedRoutinesServiceTests: XCTestCase {
     func testSaveRoutines_Success() throws {
         try sut.saveRoutines(WorkoutFixtures.loadedRoutines)
         
-        guard let savedData = cacheInteractor.stubData as? CreatedRoutines else {
-            XCTFail()
-            return
-        }
+        let savedData = cacheInteractor.stubData as? CreatedRoutines
         
         XCTAssertEqual(savedData, WorkoutFixtures.loadedRoutines)
         XCTAssertTrue(cacheInteractor.saveCalled)
@@ -110,16 +107,13 @@ final class CreatedRoutinesServiceTests: XCTestCase {
                             planId: nil,
                             lastCompletedDate: WorkoutFixtures.jan_1_2023_0800)
         
-        guard let savedData = cacheInteractor.stubData as? CreatedRoutines else {
-            XCTFail()
-            return
-        }
+        let savedData = cacheInteractor.stubData as? CreatedRoutines
         workout.lastCompleted = WorkoutFixtures.jan_1_2023_0800
         let expectedWorkouts: [String: Workout] = [
             WorkoutFixtures.legWorkoutId: workout
         ]
         
-        XCTAssertEqual(savedData.workouts, expectedWorkouts)
+        XCTAssertEqual(savedData?.workouts, expectedWorkouts)
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
     
@@ -153,11 +147,7 @@ final class CreatedRoutinesServiceTests: XCTestCase {
                             planId: WorkoutFixtures.myPlanId,
                             lastCompletedDate: WorkoutFixtures.jan_1_2023_0800)
         
-        guard let savedData = cacheInteractor.stubData as? CreatedRoutines else {
-            XCTFail()
-            return
-        }
-        
+        let savedData = cacheInteractor.stubData as? CreatedRoutines
         workout.lastCompleted = WorkoutFixtures.jan_1_2023_0800
         var expectedPlan = WorkoutFixtures.myPlan
         expectedPlan.workouts = [
@@ -169,7 +159,7 @@ final class CreatedRoutinesServiceTests: XCTestCase {
             WorkoutFixtures.myPlanId: expectedPlan
         ]
         
-        XCTAssertEqual(savedData.plans, expectedPlans)
+        XCTAssertEqual(savedData?.plans, expectedPlans)
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
     
@@ -180,11 +170,7 @@ final class CreatedRoutinesServiceTests: XCTestCase {
                             planId: WorkoutFixtures.myPlanId,
                             lastCompletedDate: nil)
         
-        guard let savedData = cacheInteractor.stubData as? CreatedRoutines else {
-            XCTFail()
-            return
-        }
-        
+        let savedData = cacheInteractor.stubData as? CreatedRoutines
         var expectedPlan = WorkoutFixtures.myPlan
         expectedPlan.workouts = [
             WorkoutFixtures.legWorkout,
@@ -194,7 +180,7 @@ final class CreatedRoutinesServiceTests: XCTestCase {
             WorkoutFixtures.myPlanId: expectedPlan
         ]
         
-        XCTAssertEqual(savedData.plans, expectedPlans)
+        XCTAssertEqual(savedData?.plans, expectedPlans)
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
     
@@ -231,16 +217,12 @@ final class CreatedRoutinesServiceTests: XCTestCase {
         
         try sut.savePlan(WorkoutFixtures.myPlan)
         
+        let savedData = cacheInteractor.stubData as? CreatedRoutines
         let expectedPlans: [String: Plan] = [
             WorkoutFixtures.myPlanId: WorkoutFixtures.myPlan
         ]
         
-        guard let savedData = cacheInteractor.stubData as? CreatedRoutines else {
-            XCTFail()
-            return
-        }
-        
-        XCTAssertEqual(savedData.plans, expectedPlans)
+        XCTAssertEqual(savedData?.plans, expectedPlans)
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
 }

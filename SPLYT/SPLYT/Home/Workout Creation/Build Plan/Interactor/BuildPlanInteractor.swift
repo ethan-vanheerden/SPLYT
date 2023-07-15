@@ -20,7 +20,7 @@ enum BuildPlanDomainAction {
 
 // MARK: - Domain Results
 
-enum BuildPlanDomainResult {
+enum BuildPlanDomainResult: Equatable {
     case error
     case loaded(BuildPlanDomain)
     case dialog(dialog: BuildPlanDialog, domain: BuildPlanDomain)
