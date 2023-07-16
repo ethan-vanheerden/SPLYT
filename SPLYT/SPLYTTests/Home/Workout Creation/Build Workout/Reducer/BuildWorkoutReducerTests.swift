@@ -68,10 +68,10 @@ final class BuildWorkoutReducerTests: XCTestCase {
                                                          setIndex: 2,
                                                          modifier: .dropSet(input: .repsWeight(input: .init(weight: 100,
                                                                                                             reps: 5)))))
-        let domain = await interactor.interact(with: .toggleFavorite(exerciseId: ModelFixtures.inclineRowId))
-        let result = sut.reduce(domain)
+        var domain = await interactor.interact(with: .toggleFavorite(exerciseId: ModelFixtures.inclineRowId))
+        var result = sut.reduce(domain)
         
-        let exerciseTileViewStates: [AddExerciseTileSectionViewState] = [
+        var exerciseTileViewStates: [AddExerciseTileSectionViewState] = [
             AddExerciseTileSectionViewState(header: .init(title: "B"),
                                             exercises: [
                                                 Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
@@ -106,9 +106,10 @@ final class BuildWorkoutReducerTests: XCTestCase {
         ]
         let currentGroupTitle = "Current group: 1 exercise"
         let groupTitles = ["Group 1", "Group 2"]
-        let expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
+        var expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
                                                   groups: groups,
-                                                  currentGroup: 1, currentGroupTitle: currentGroupTitle,
+                                                  currentGroup: 1,
+                                                  currentGroupTitle: currentGroupTitle,
                                                   groupTitles: groupTitles,
                                                   lastGroupEmpty: false,
                                                   showDialog: nil,
@@ -117,6 +118,54 @@ final class BuildWorkoutReducerTests: XCTestCase {
                                                   canSave: true,
                                                   filterDisplay: Fixtures.emptyFilterDisplay,
                                                   isFiltering: false)
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+        
+        // Adding some filters
+        domain = await interactor.interact(with: .filter(by: .search(searchText: "row")))
+        result = sut.reduce(domain)
+        
+        exerciseTileViewStates = [
+            AddExerciseTileSectionViewState(header: .init(title: "I"),
+                                            exercises: [
+                                                Fixtures.inclineDBRowTileViewState(isSelected: true, isFavorite: true)
+                                            ])
+        ]
+        expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
+                                              groups: groups,
+                                              currentGroup: 1,
+                                              currentGroupTitle: currentGroupTitle,
+                                              groupTitles: groupTitles,
+                                              lastGroupEmpty: false,
+                                              showDialog: nil,
+                                              backDialog: Fixtures.backDialog,
+                                              saveDialog: Fixtures.saveDialog,
+                                              canSave: true,
+                                              filterDisplay: Fixtures.emptyFilterDisplay,
+                                              isFiltering: false) // Not filtering since just search
+        
+        XCTAssertEqual(result, .main(expectedDisplay))
+        
+        _ = await interactor.interact(with: .filter(by: .favorite(isFavorite: true)))
+        domain = await interactor.interact(with: .filter(by: .muscleWorked(muscle: .glutes, isSelected: true)))
+        result = sut.reduce(domain)
+        
+        var musclesWorkedMap = Fixtures.musclesWorkedMap
+        musclesWorkedMap[.glutes] = true
+        let filterDisplay = BuildWorkoutFilterDisplay(isFavorite: true,
+                                                      musclesWorked: musclesWorkedMap)
+        expectedDisplay = BuildWorkoutDisplay(allExercises: [],
+                                              groups: groups,
+                                              currentGroup: 1,
+                                              currentGroupTitle: currentGroupTitle,
+                                              groupTitles: groupTitles,
+                                              lastGroupEmpty: false,
+                                              showDialog: nil,
+                                              backDialog: Fixtures.backDialog,
+                                              saveDialog: Fixtures.saveDialog,
+                                              canSave: true,
+                                              filterDisplay: filterDisplay,
+                                              isFiltering: true)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }

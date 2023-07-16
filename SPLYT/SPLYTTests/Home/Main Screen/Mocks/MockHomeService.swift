@@ -11,12 +11,12 @@ import Mocking
 @testable import ExerciseCore
 
 final class MockHomeService: HomeServiceType {
-    typealias Fixtures = WorkoutModelFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
     
     var loadRoutinesThrow = false
     func loadRoutines() throws -> CreatedRoutines {
         if loadRoutinesThrow { throw MockError.someError }
-        return Fixtures.loadedRoutines
+        return WorkoutFixtures.loadedRoutines
     }
     
     var saveRoutinesThrow = false
@@ -27,9 +27,9 @@ final class MockHomeService: HomeServiceType {
     }
     
     var deleteWorkoutHistoryThrow = false
-    private(set) var deleteWorkoutHistoryCalled = false
+    private(set) var numWorkoutHistoryDeleted = 0
     func deleteWorkoutHistory(historyFilename: String) throws {
-        deleteWorkoutHistoryCalled = true
+        numWorkoutHistoryDeleted += 1
         if deleteWorkoutHistoryThrow { throw MockError.someError }
     }
 }

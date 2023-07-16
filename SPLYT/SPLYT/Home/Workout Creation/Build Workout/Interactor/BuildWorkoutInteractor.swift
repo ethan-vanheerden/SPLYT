@@ -108,7 +108,6 @@ private extension BuildWorkoutInteractor {
             let workoutId = WorkoutInteractor.getId(name: nameState.name,
                                                     creationDate: creationDate)
             
-            // The workout filename will be "workout_history_{workout_id}"
             let newWorkout = Workout(id: workoutId,
                                      name: nameState.name,
                                      exerciseGroups: startingGroup,
@@ -277,8 +276,8 @@ private extension BuildWorkoutInteractor {
     
     func handleToggleFavorite(exerciseId: String) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain,
-              var exercise = domain.exercises[exerciseId],
-              var exercises = allExercises else { return .error }
+              var exercises = allExercises,
+              var exercise = exercises[exerciseId] else { return .error }
         
         let isFavorite = !exercise.isFavorite
         exercise.isFavorite = isFavorite

@@ -53,7 +53,7 @@ struct BuildWorkoutFilterDomain: Equatable {
     var musclesWorked: [MusclesWorked: Bool] // Dictionary of each muscle worked to whether it is being filtered
 }
 
-// MARK: - Enums
+// MARK: - Filters
 
 enum BuildWorkoutFilter {
     case search(searchText: String)

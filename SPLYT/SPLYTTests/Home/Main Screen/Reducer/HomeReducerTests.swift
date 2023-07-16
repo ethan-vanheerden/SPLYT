@@ -8,12 +8,19 @@
 import XCTest
 @testable import SPLYT
 @testable import ExerciseCore
+@testable import DesignSystem
 
 final class HomeReducerTests: XCTestCase {
     typealias Fixtures = HomeFixtures
+    typealias StateFixtures = WorkoutViewStateFixtures
     typealias WorkoutFixtures = WorkoutModelFixtures
     private let sut = HomeReducer()
     private var interactor: HomeInteractor!
+    private let workouts: [RoutineTileViewState] = [
+        StateFixtures.doLegWorkoutRoutineTile,
+        StateFixtures.doFullBodyWorkoutRoutineTile
+    ]
+    private let plans: [RoutineTileViewState] = [StateFixtures.myPlanRoutineTile]
     
     override func setUpWithError() throws {
         self.interactor = HomeInteractor(service: MockHomeService())
@@ -28,10 +35,11 @@ final class HomeReducerTests: XCTestCase {
         let domain = await interactor.interact(with: .load)
         let result = sut.reduce(domain)
         
+        
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkoutViewStates,
-                                          plans: [], // TODO
+                                          workouts: workouts,
+                                          plans: plans,
                                           fab: Fixtures.fabState,
                                           presentedDialog: nil,
                                           deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
@@ -41,11 +49,10 @@ final class HomeReducerTests: XCTestCase {
     }
     
     func testReduce_Dialog() async {
-        
         let dialogs: [HomeDialog] = [
             .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
                            historyFilename: WorkoutFixtures.legWorkoutFilename),
-            .deletePlan(id: "") // TODO
+            .deletePlan(id: WorkoutFixtures.myPlanId)
         ]
         
         for dialog in dialogs {
@@ -55,8 +62,8 @@ final class HomeReducerTests: XCTestCase {
             
             let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                               segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                              workouts: Fixtures.createdWorkoutViewStates,
-                                              plans: [], // TODO
+                                              workouts: workouts,
+                                              plans: plans,
                                               fab: Fixtures.fabState,
                                               presentedDialog: dialog,
                                               deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,

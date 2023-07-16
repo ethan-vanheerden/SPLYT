@@ -8,12 +8,19 @@
 import XCTest
 @testable import SPLYT
 @testable import ExerciseCore
+@testable import DesignSystem
 
 final class HomeViewModelTests: XCTestCase {
     typealias Fixtures = HomeFixtures
     typealias WorkoutFixtures = WorkoutModelFixtures
+    typealias StateFixtures = WorkoutViewStateFixtures
     private var interactor: HomeInteractor!
     private var sut: HomeViewModel!
+    private let workouts: [RoutineTileViewState] = [
+        StateFixtures.doLegWorkoutRoutineTile,
+        StateFixtures.doFullBodyWorkoutRoutineTile
+    ]
+    private let plans: [RoutineTileViewState] = [StateFixtures.myPlanRoutineTile]
     
     override func setUpWithError() throws {
         self.interactor = HomeInteractor(service: MockHomeService())
@@ -29,8 +36,8 @@ final class HomeViewModelTests: XCTestCase {
         
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkoutViewStates,
-                                          plans: [], // TODO
+                                          workouts: workouts,
+                                          plans: plans,
                                           fab: Fixtures.fabState,
                                           presentedDialog: nil,
                                           deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
@@ -51,10 +58,28 @@ final class HomeViewModelTests: XCTestCase {
         await sut.send(.deleteWorkout(id: WorkoutFixtures.legWorkoutId,
                                       historyFilename: WorkoutFixtures.legWorkoutFilename))
         
+        var workouts = workouts
+        workouts.remove(at: 0)
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: [Fixtures.createdFullBodyWorkoutViewState],
-                                          plans: [], // TODO
+                                          workouts: workouts,
+                                          plans: plans,
+                                          fab: Fixtures.fabState,
+                                          presentedDialog: nil,
+                                          deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
+                                          deletePlanDialog: Fixtures.deletePlanDialog)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testReact_DeletePlan_Success() async {
+        await load()
+        await sut.send(.deletePlan(id: WorkoutFixtures.myPlanId))
+        
+        let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
+                                          segmentedControlTitles: Fixtures.segmentedControlTitles,
+                                          workouts: workouts,
+                                          plans: [],
                                           fab: Fixtures.fabState,
                                           presentedDialog: nil,
                                           deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
@@ -71,41 +96,41 @@ final class HomeViewModelTests: XCTestCase {
         XCTAssertEqual(sut.viewState, .error)
     }
     
-    func testReact_ToggleDialog_Delete_Show() async {
-        let dialog: HomeDialog = .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                historyFilename: WorkoutFixtures.legWorkoutFilename)
-        await load()
-        await sut.send(.toggleDialog(type: dialog, isOpen: true))
+    func testReact_ToggleDialog_Delete_Open() async {
+        let dialogs: [HomeDialog] = [
+            .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                           historyFilename: WorkoutFixtures.legWorkoutFilename),
+            .deletePlan(id: WorkoutFixtures.myPlanId)
+        ]
         
-        let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
-                                          segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkoutViewStates,
-                                          plans: [], // TODO
-                                          fab: Fixtures.fabState,
-                                          presentedDialog: dialog,
-                                          deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
-                                          deletePlanDialog: Fixtures.deletePlanDialog)
-        
-        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
-    }
-    
-    func testReact_ToggleDialog_Delete_Hide() async {
-        let dialog: HomeDialog = .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                historyFilename: WorkoutFixtures.legWorkoutFilename)
-        await load()
-        await sut.send(.toggleDialog(type: dialog, isOpen: true)) // Open dialog to close it
-        await sut.send(.toggleDialog(type: dialog, isOpen: false))
-        
-        let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
-                                          segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkoutViewStates,
-                                          plans: [], // TODO
-                                          fab: Fixtures.fabState,
-                                          presentedDialog: nil,
-                                          deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
-                                          deletePlanDialog: Fixtures.deletePlanDialog)
-        
-        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+        for dialog in dialogs {
+            await load()
+            await sut.send(.toggleDialog(type: dialog, isOpen: true))
+            
+            var expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
+                                              segmentedControlTitles: Fixtures.segmentedControlTitles,
+                                              workouts: workouts,
+                                              plans: plans,
+                                              fab: Fixtures.fabState,
+                                              presentedDialog: dialog,
+                                              deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
+                                              deletePlanDialog: Fixtures.deletePlanDialog)
+            
+            XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+            
+            await sut.send(.toggleDialog(type: dialog, isOpen: false))
+            
+            expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
+                                              segmentedControlTitles: Fixtures.segmentedControlTitles,
+                                              workouts: workouts,
+                                              plans: plans,
+                                              fab: Fixtures.fabState,
+                                              presentedDialog: nil,
+                                              deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
+                                              deletePlanDialog: Fixtures.deletePlanDialog)
+            
+            XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+        }
     }
 }
 

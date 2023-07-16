@@ -11,7 +11,7 @@ import Mocking
 @testable import ExerciseCore
 
 final class HomeServiceTests: XCTestCase {
-    typealias Fixtures = WorkoutModelFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
     private var cacheInteractor: MockCacheInteractor!
     private var routineCacheInteractor: MockCacheInteractor!
     private var sut: HomeService!
@@ -57,7 +57,7 @@ final class HomeServiceTests: XCTestCase {
     
     func testLoadRoutines_FileExists_Success() throws {
         routineCacheInteractor.stubFileExists = true
-        let routines = Fixtures.loadedRoutines
+        let routines = WorkoutFixtures.loadedRoutines
         routineCacheInteractor.stubData = routines
         
         let result = try sut.loadRoutines()
@@ -75,12 +75,32 @@ final class HomeServiceTests: XCTestCase {
     
     func testSaveRoutines_Success() throws {
         routineCacheInteractor.stubFileExists = true
-        let routines = Fixtures.loadedRoutines
+        let routines = WorkoutFixtures.loadedRoutines
         
         try sut.saveRoutines(routines)
         let result = try sut.loadRoutines() // Load the saved routines
         
         XCTAssertEqual(result, routines)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
+    }
+    
+    func testDeleteWorkoutHistory_DeleteError() {
+        cacheInteractor.stubFileExists = true
+        cacheInteractor.deleteThrow = true
+        
+        XCTAssertThrowsError(try sut.deleteWorkoutHistory(historyFilename: WorkoutFixtures.legWorkoutFilename))
+        XCTAssertTrue(cacheInteractor.deleteCalled)
+    }
+    
+    func testDeleteWorkoutHistory_FileNoExist_DoesNothing() throws {
+        try sut.deleteWorkoutHistory(historyFilename: WorkoutFixtures.legWorkoutFilename)
+        XCTAssertFalse(cacheInteractor.deleteCalled)
+    }
+    
+    func testDeleteWorkoutHistory_Success() throws {
+        cacheInteractor.stubFileExists = true
+        
+        try sut.deleteWorkoutHistory(historyFilename: WorkoutFixtures.legWorkoutFilename)
+        XCTAssertTrue(cacheInteractor.deleteCalled)
     }
 }

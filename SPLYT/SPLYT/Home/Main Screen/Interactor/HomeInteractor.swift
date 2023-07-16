@@ -76,7 +76,6 @@ private extension HomeInteractor {
               let historyFilename = historyFilename else { return .error }
         
         do {
-            // Remove the workout
             domain.routines.workouts.removeValue(forKey: id)
             
             // Save the results

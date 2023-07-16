@@ -13,7 +13,7 @@ import DesignSystem
 struct HomeFixtures {
     typealias ModelFixtures = WorkoutModelFixtures
     
-    // MARK: - View State
+    // MARK: - View States
     
     static let navBar: NavigationBarViewState = NavigationBarViewState(title: "Home",
                                                                        size: .large,
@@ -21,31 +21,14 @@ struct HomeFixtures {
     
     static let segmentedControlTitles: [String] = ["WORKOUTS", "PLANS"]
     
-    static let createdLegWorkoutViewState: RoutineTileViewState = RoutineTileViewState(id: ModelFixtures.legWorkoutId,
-                                                                                       historyFilename: ModelFixtures.legWorkoutFilename,
-                                                                                       title: "Legs",
-                                                                                       subtitle: "2 exercises",
-                                                                                       lastCompletedTitle: nil)
-    
-    static let createdFullBodyWorkoutViewState: RoutineTileViewState = RoutineTileViewState(id: ModelFixtures.fullBodyWorkoutId,
-                                                                                            historyFilename: ModelFixtures.fullBodyWorkoutFilename,
-                                                                                            title: "Full Body",
-                                                                                            subtitle: "4 exercises",
-                                                                                            lastCompletedTitle: "Last completed: Feb 3, 2023")
-    
-    static let createdWorkoutViewStates: [RoutineTileViewState] = [
-        createdLegWorkoutViewState,
-        createdFullBodyWorkoutViewState
-    ]
-    
-    static let createPlanState: HomeFABRowViewState = HomeFABRowViewState(title: "CREATE NEW PLAN",
+    static let createPlanFABState: HomeFABRowViewState = HomeFABRowViewState(title: "CREATE NEW PLAN",
                                                                           imageName: "calendar")
     
-    static let createWorkoutState: HomeFABRowViewState = HomeFABRowViewState(title: "CREATE NEW WORKOUT",
+    static let createWorkoutFABState: HomeFABRowViewState = HomeFABRowViewState(title: "CREATE NEW WORKOUT",
                                                                              imageName: "figure.strengthtraining.traditional")
     
-    static let fabState: HomeFABViewState = HomeFABViewState(createPlanState: createPlanState,
-                                                             createWorkoutState: createWorkoutState)
+    static let fabState: HomeFABViewState = HomeFABViewState(createPlanState: createPlanFABState,
+                                                             createWorkoutState: createWorkoutFABState)
     
     static let deleteWorkoutDialog: DialogViewState = DialogViewState(title: "Delete workout?",
                                                                       subtitle: "This action can't be undone.",

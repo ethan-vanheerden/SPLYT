@@ -13,7 +13,7 @@ import XCTest
 final class BuildWorkoutViewModelTests: XCTestCase {
     typealias Fixtures = BuildWorkoutFixtures
     typealias StateFixtures = WorkoutViewStateFixtures
-    typealias ModelFixtures = WorkoutModelFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
     private var mockService: MockBuildWorkoutService!
     private var interactor: BuildWorkoutInteractor!
     private var sut: BuildWorkoutViewModel!
@@ -98,7 +98,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleExercise_AddExercise() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
             (StateFixtures.emptyRepsWeightSet, nil)
@@ -126,8 +126,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleExercise_RemoveExercise() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId)) // Add exercise to remove
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId)) // Add exercise to remove
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         
         let currentGroupTitle = "Current group: 0 exercises"
         let groupTitles = ["Group 1"]
@@ -149,7 +149,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_AddSet() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         await sut.send(.addSet(group: 0))
         
         let sets: [(SetInputViewState, SetModifierViewState?)] = Array(
@@ -179,7 +179,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_RemoveSet() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         await sut.send(.addSet(group: 0)) // Add set to remove
         await sut.send(.removeSet(group: 0))
         
@@ -209,7 +209,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_UpdateSet() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
@@ -243,7 +243,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleFavorite_SelectFavorite() async {
         await load()
-        await sut.send(.toggleFavorite(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleFavorite(exerciseId: WorkoutFixtures.backSquatId))
         
         let exerciseTileViewStates: [AddExerciseTileSectionViewState] = [
             AddExerciseTileSectionViewState(header: .init(title: "B"),
@@ -276,8 +276,8 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_ToggleFavorite_DeselectFavorite() async {
         await load()
-        await sut.send(.toggleFavorite(exerciseId: ModelFixtures.backSquatId)) // Mark as favorite
-        await sut.send(.toggleFavorite(exerciseId: ModelFixtures.backSquatId)) // Unmark as favorite
+        await sut.send(.toggleFavorite(exerciseId: WorkoutFixtures.backSquatId)) // Mark as favorite
+        await sut.send(.toggleFavorite(exerciseId: WorkoutFixtures.backSquatId)) // Unmark as favorite
         
         let currentGroupTitle = "Current group: 0 exercises"
         let groupTitles = ["Group 1"]
@@ -321,7 +321,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_Save_Error_SaveDialog() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         mockService.saveWorkoutThrow = true
         await sut.send(.save)
         
@@ -351,7 +351,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_Save_Success() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         await sut.send(.save)
         
         let sets: [(SetInputViewState, SetModifierViewState?)] = [
@@ -447,7 +447,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_AddModifier() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
@@ -487,7 +487,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_RemoveModifier() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
@@ -526,7 +526,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
     
     func testSend_UpdateModifier() async {
         await load()
-        await sut.send(.toggleExercise(exerciseId: ModelFixtures.backSquatId))
+        await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         await sut.send(.updateSet(group: 0,
                                   exerciseIndex: 0,
                                   setIndex: 0,
@@ -564,6 +564,71 @@ final class BuildWorkoutViewModelTests: XCTestCase {
                                                   saveDialog: Fixtures.saveDialog,
                                                   canSave: true,
                                                   filterDisplay: Fixtures.emptyFilterDisplay,
+                                                  isFiltering: false)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testSend_Filter() async {
+        await load()
+        await sut.send(.toggleFavorite(exerciseId: WorkoutFixtures.backSquatId))
+        await sut.send(.filter(by: .search(searchText: "squat")))
+        await sut.send(.filter(by: .muscleWorked(muscle: .quads, isSelected: true)))
+        await sut.send(.filter(by: .favorite(isFavorite: true)))
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let exercises: [AddExerciseTileSectionViewState] = [
+            .init(header: .init(title: "B"),
+                  exercises: [Fixtures.backSquatTileViewState(isSelected: false, isFavorite: true)])
+        ]
+        var musclesWorkedMap = Fixtures.musclesWorkedMap
+        musclesWorkedMap[.quads] = true
+        let filterDisplay = BuildWorkoutFilterDisplay(isFavorite: true,
+                                                      musclesWorked: musclesWorkedMap)
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: exercises,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: false,
+                                                  filterDisplay: filterDisplay,
+                                                  isFiltering: true)
+        
+        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
+    }
+    
+    func testSend_RemoveAllFilters() async {
+        await load()
+        await sut.send(.toggleFavorite(exerciseId: WorkoutFixtures.backSquatId))
+        await sut.send(.filter(by: .search(searchText: "DUMBBELL")))
+        await sut.send(.filter(by: .muscleWorked(muscle: .quads, isSelected: true)))
+        await sut.send(.filter(by: .favorite(isFavorite: true)))
+        await sut.send(.removeAllFilters)
+        
+        let currentGroupTitle = "Current group: 0 exercises"
+        let groupTitles = ["Group 1"]
+        let exercises: [AddExerciseTileSectionViewState] = [
+            .init(header: .init(title: "I"),
+                  exercises: [Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)])
+        ]
+        let filterDisplay = BuildWorkoutFilterDisplay(isFavorite: false,
+                                                      musclesWorked: Fixtures.musclesWorkedMap)
+        let expectedDisplay = BuildWorkoutDisplay(allExercises: exercises,
+                                                  groups: [[]],
+                                                  currentGroup: 0,
+                                                  currentGroupTitle: currentGroupTitle,
+                                                  groupTitles: groupTitles,
+                                                  lastGroupEmpty: true,
+                                                  showDialog: nil,
+                                                  backDialog: Fixtures.backDialog,
+                                                  saveDialog: Fixtures.saveDialog,
+                                                  canSave: false,
+                                                  filterDisplay: filterDisplay,
                                                   isFiltering: false)
         
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
