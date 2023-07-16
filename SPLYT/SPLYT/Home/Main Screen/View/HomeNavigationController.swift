@@ -8,7 +8,7 @@
 import SwiftUI
 import Core
 
-/// The base view controller for Workouts
+/// The base view controller for Home
 final class HomeNavigationController: UINavigationController {
     init() {
         let viewModel = HomeViewModel()
@@ -33,7 +33,5 @@ struct HomeViewController_SwiftUI: UIViewControllerRepresentable {
         return HomeNavigationController()
     }
     
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
-    }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
 }

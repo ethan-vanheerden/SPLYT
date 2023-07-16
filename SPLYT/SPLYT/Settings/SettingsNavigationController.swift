@@ -33,7 +33,5 @@ struct SettingsViewController_SwiftUI: UIViewControllerRepresentable {
         return SettingsNavigationController()
     }
     
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
-    }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
 }

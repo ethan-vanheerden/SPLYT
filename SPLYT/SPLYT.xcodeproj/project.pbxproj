@@ -76,6 +76,16 @@
 		AA60DA0D2956AFC1008C7615 /* HomeDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA60DA0C2956AFC0008C7615 /* HomeDisplay.swift */; };
 		AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA60DA0E2956B453008C7615 /* HomeInteractor.swift */; };
 		AA60DA112956B84E008C7615 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA60DA102956B84E008C7615 /* HomeService.swift */; };
+		AA672A452A6494440009919E /* HistoryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A442A6494440009919E /* HistoryNavigationController.swift */; };
+		AA672A472A6495080009919E /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A462A6495080009919E /* HistoryService.swift */; };
+		AA672A492A6495360009919E /* HistoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A482A6495360009919E /* HistoryInteractor.swift */; };
+		AA672A4B2A64954D0009919E /* HistoryDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A4A2A64954D0009919E /* HistoryDomain.swift */; };
+		AA672A4D2A64955C0009919E /* HistoryDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A4C2A64955C0009919E /* HistoryDisplay.swift */; };
+		AA672A4F2A6495650009919E /* HistoryViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A4E2A6495650009919E /* HistoryViewState.swift */; };
+		AA672A512A6495720009919E /* HistoryNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A502A6495720009919E /* HistoryNavigationRouter.swift */; };
+		AA672A532A6495830009919E /* HistoryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A522A6495830009919E /* HistoryReducer.swift */; };
+		AA672A552A64958D0009919E /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A542A64958D0009919E /* HistoryViewModel.swift */; };
+		AA672A572A64991C0009919E /* CompletedWorkoutsCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A562A64991C0009919E /* CompletedWorkoutsCacheRequest.swift */; };
 		AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */; };
 		AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */; };
 		AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */; };
@@ -226,6 +236,16 @@
 		AA60DA102956B84E008C7615 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		AA63175F29C13E1D00F8CDBE /* NonPackageTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = NonPackageTests.xctestplan; path = "SPLYT/Test Plans/NonPackageTests.xctestplan"; sourceTree = "<group>"; };
 		AA63176029C13E8100F8CDBE /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = AllTests.xctestplan; path = "SPLYT/Test Plans/AllTests.xctestplan"; sourceTree = "<group>"; };
+		AA672A442A6494440009919E /* HistoryNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryNavigationController.swift; sourceTree = "<group>"; };
+		AA672A462A6495080009919E /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
+		AA672A482A6495360009919E /* HistoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryInteractor.swift; sourceTree = "<group>"; };
+		AA672A4A2A64954D0009919E /* HistoryDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDomain.swift; sourceTree = "<group>"; };
+		AA672A4C2A64955C0009919E /* HistoryDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDisplay.swift; sourceTree = "<group>"; };
+		AA672A4E2A6495650009919E /* HistoryViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewState.swift; sourceTree = "<group>"; };
+		AA672A502A6495720009919E /* HistoryNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryNavigationRouter.swift; sourceTree = "<group>"; };
+		AA672A522A6495830009919E /* HistoryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryReducer.swift; sourceTree = "<group>"; };
+		AA672A542A64958D0009919E /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		AA672A562A64991C0009919E /* CompletedWorkoutsCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedWorkoutsCacheRequest.swift; sourceTree = "<group>"; };
 		AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewState.swift; sourceTree = "<group>"; };
 		AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
@@ -627,6 +647,48 @@
 			path = "Name Workout";
 			sourceTree = "<group>";
 		};
+		AA672A402A6494000009919E /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				AA672A432A6494170009919E /* Reducer */,
+				AA672A422A6494110009919E /* Interactor */,
+				AA672A412A64940B0009919E /* View */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		AA672A412A64940B0009919E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA4A31462882CE63003E7C64 /* HistoryView.swift */,
+				AA672A442A6494440009919E /* HistoryNavigationController.swift */,
+				AA672A4C2A64955C0009919E /* HistoryDisplay.swift */,
+				AA672A4E2A6495650009919E /* HistoryViewState.swift */,
+				AA672A502A6495720009919E /* HistoryNavigationRouter.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA672A422A6494110009919E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA672A462A6495080009919E /* HistoryService.swift */,
+				AA672A482A6495360009919E /* HistoryInteractor.swift */,
+				AA672A4A2A64954D0009919E /* HistoryDomain.swift */,
+				AA672A562A64991C0009919E /* CompletedWorkoutsCacheRequest.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA672A432A6494170009919E /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA672A522A6495830009919E /* HistoryReducer.swift */,
+				AA672A542A64958D0009919E /* HistoryViewModel.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
 		AA7AA65B28848F6200CB0A6B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,7 +809,7 @@
 		AA93404B28888B2400309E83 /* History */ = {
 			isa = PBXGroup;
 			children = (
-				AA4A31462882CE63003E7C64 /* HistoryView.swift */,
+				AA672A402A6494000009919E /* Main Screen */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -1242,6 +1304,7 @@
 			files = (
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
+				AA672A4B2A64954D0009919E /* HistoryDomain.swift in Sources */,
 				AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */,
 				AA5073782A546A5000F0BAD2 /* DoPlanDomain.swift in Sources */,
 				AA825D3D287238BF0041D94A /* MainView.swift in Sources */,
@@ -1250,6 +1313,7 @@
 				AA2C24622A3F75DC004FC939 /* BuildPlanReducer.swift in Sources */,
 				AAF06EF729AE9B6300E48918 /* HomeDomain.swift in Sources */,
 				AACB29872A16902800AACB6B /* DoWorkoutDisplay.swift in Sources */,
+				AA672A472A6495080009919E /* HistoryService.swift in Sources */,
 				AAE79AFB296EFA1E0010848E /* BuildWorkoutViewModel.swift in Sources */,
 				AA2C24502A3CC16A004FC939 /* NameWorkoutReducer.swift in Sources */,
 				AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */,
@@ -1259,6 +1323,8 @@
 				AA2C245A2A3F74C4004FC939 /* BuildPlanViewState.swift in Sources */,
 				AAE79AEF296E0DC20010848E /* BuildWorkoutView.swift in Sources */,
 				AA5073802A546B2400F0BAD2 /* DoPlanViewState.swift in Sources */,
+				AA672A512A6495720009919E /* HistoryNavigationRouter.swift in Sources */,
+				AA672A452A6494440009919E /* HistoryNavigationController.swift in Sources */,
 				AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */,
 				AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */,
 				AACB29772A15576700AACB6B /* DoWorkoutReducer.swift in Sources */,
@@ -1276,10 +1342,13 @@
 				AA2C244A2A3CBED3004FC939 /* NameWorkoutDisplay.swift in Sources */,
 				AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */,
 				AA60DA07295217CF008C7615 /* HomeViewModel.swift in Sources */,
+				AA672A4F2A6495650009919E /* HistoryViewState.swift in Sources */,
 				AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */,
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
+				AA672A532A6495830009919E /* HistoryReducer.swift in Sources */,
+				AA672A492A6495360009919E /* HistoryInteractor.swift in Sources */,
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
@@ -1299,10 +1368,13 @@
 				AA1A34032882E14100BCB792 /* SettingsNavigationRouter.swift in Sources */,
 				AA60DA05295215DF008C7615 /* HomeNavigationController.swift in Sources */,
 				AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */,
+				AA672A4D2A64955C0009919E /* HistoryDisplay.swift in Sources */,
 				AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */,
 				AACB297F2A15580E00AACB6B /* DoWorkoutViewState.swift in Sources */,
 				AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */,
+				AA672A572A64991C0009919E /* CompletedWorkoutsCacheRequest.swift in Sources */,
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
+				AA672A552A64958D0009919E /* HistoryViewModel.swift in Sources */,
 				AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */,
 				AA0C18DC2A2FCA580090FFD9 /* WorkoutHistoryCacheRequest.swift in Sources */,
 				AA50737A2A546A6700F0BAD2 /* DoPlanService.swift in Sources */,

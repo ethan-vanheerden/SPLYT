@@ -50,21 +50,22 @@ struct DoWorkoutService: DoWorkoutServiceType {
     }
     
     func saveWorkout(workout: Workout, historyFilename: String, planId: String? = nil) throws {
-        let request = WorkoutHistoryCacheRequest(filename: historyFilename)
+        let historyRequest = WorkoutHistoryCacheRequest(filename: historyFilename)
+        let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
         var workout = workout
         workout.lastCompleted = Date.now
         
         // First save the workout-specific history
-        if !(try cacheInteractor.fileExists(request: request)) {
+        if !(try cacheInteractor.fileExists(request: historyRequest)) {
             // If the file doesn't exist, save this workout as the only history
-            try cacheInteractor.save(request: request, data: [workout])
+            try cacheInteractor.save(request: historyRequest, data: [workout])
         } else {
             // Load the existing history and place this workout at the head
             // Truncate the list to the last 10 workouts
-            var workouts = try cacheInteractor.load(request: request)
+            var workouts = try cacheInteractor.load(request: historyRequest)
             workouts.insert(workout, at: 0)
             let truncatedWorkouts = Array(workouts.prefix(10))
-            try cacheInteractor.save(request: request, data: truncatedWorkouts)
+            try cacheInteractor.save(request: historyRequest, data: truncatedWorkouts)
         }
         
         // Then save this version of the workout to the created routines

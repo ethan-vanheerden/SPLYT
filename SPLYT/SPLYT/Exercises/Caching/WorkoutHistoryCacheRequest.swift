@@ -8,8 +8,8 @@
 import Caching
 import ExerciseCore
 
+/// Stores all the histories for a specifc Workout (most recent first).
 struct WorkoutHistoryCacheRequest: CacheRequest {
-    // Contains a list of workouts in decreasing order of completed at date (Most recent first).
     typealias CacheData = [Workout]
     let filename: String
     
