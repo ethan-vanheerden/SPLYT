@@ -8,10 +8,12 @@
 import XCTest
 @testable import SPLYT
 @testable import ExerciseCore
+@testable import DesignSystem
 
 final class BuildPlanViewModelTests: XCTestCase {
     typealias Fixtures = BuildPlanFixtures
     typealias WorkoutFixtures = WorkoutModelFixtures
+    typealias StateFixtures = WorkoutViewStateFixtures
     private var interactor: BuildPlanInteractor!
     private var sut: BuildPlanViewModel!
     
@@ -48,7 +50,7 @@ final class BuildPlanViewModelTests: XCTestCase {
         await sut.send(.load)
         await sut.send(.addWorkout(WorkoutFixtures.fullBodyWorkout))
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [Fixtures.fullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,
@@ -78,7 +80,7 @@ final class BuildPlanViewModelTests: XCTestCase {
         await sut.send(.addWorkout(WorkoutFixtures.fullBodyWorkout))
         await sut.send(.savePlan)
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [Fixtures.fullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,

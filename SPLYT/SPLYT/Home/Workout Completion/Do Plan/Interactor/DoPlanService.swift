@@ -18,12 +18,9 @@ protocol DoPlanServiceType {
 // MARK: - Implementation
 
 struct DoPlanService: DoPlanServiceType {
-    private let cacheInteractor: CacheInteractorType
     private let routineService: CreatedRoutinesServiceType
     
-    init(cacheInteractor: CacheInteractorType = CacheInteractor(),
-         routineService: CreatedRoutinesServiceType = CreatedRoutinesService()) {
-        self.cacheInteractor = cacheInteractor
+    init(routineService: CreatedRoutinesServiceType = CreatedRoutinesService()) {
         self.routineService = routineService
     }
     

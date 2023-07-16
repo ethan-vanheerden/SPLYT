@@ -15,7 +15,7 @@ enum DoPlanDomainAction {
 
 // MARK: - Domain Results
 
-enum DoPlanDomainResult {
+enum DoPlanDomainResult: Equatable {
     case error
     case loaded(DoPlanDomain)
 }

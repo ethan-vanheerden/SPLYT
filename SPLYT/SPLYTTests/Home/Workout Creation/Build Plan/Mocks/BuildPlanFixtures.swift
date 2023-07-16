@@ -29,8 +29,4 @@ struct BuildPlanFixtures {
                                                      subtitle: "This action can't be undone.",
                                                      primaryButtonTitle: "Delete",
                                                      secondaryButtonTitle: "Cancel")
-    
-    static let fullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: WorkoutFixtures.fullBodyWorkoutId,
-                                                                        title: WorkoutFixtures.fullBodyWorkoutName,
-                                                                        subtitle: "4 exercises")
 }

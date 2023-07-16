@@ -8,10 +8,12 @@
 import XCTest
 @testable import SPLYT
 @testable import ExerciseCore
+@testable import DesignSystem
 
 final class BuildPlanReducerTests: XCTestCase {
-    typealias WorkoutFixtures = WorkoutModelFixtures
     typealias Fixtures = BuildPlanFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
+    typealias StateFixtures = WorkoutViewStateFixtures
     private var interactor: BuildPlanInteractor!
     private var sut: BuildPlanReducer!
     
@@ -45,7 +47,7 @@ final class BuildPlanReducerTests: XCTestCase {
         let domain = await load()
         let result = sut.reduce(domain)
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [Fixtures.fullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,
@@ -67,7 +69,7 @@ final class BuildPlanReducerTests: XCTestCase {
             let domain = await interactor.interact(with: .toggleDialog(dialog: dialog, isOpen: true))
             let result = sut.reduce(domain)
             
-            let expectedDisplay = BuildPlanDisplay(workouts: [Fixtures.fullBodyWorkoutRoutineTile],
+            let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
                                                    canSave: true,
                                                    presentedDialog: dialog,
                                                    backDialog: Fixtures.backDisloag,
@@ -83,7 +85,7 @@ final class BuildPlanReducerTests: XCTestCase {
         let domain = await interactor.interact(with: .savePlan)
         let result = sut.reduce(domain)
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [Fixtures.fullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,

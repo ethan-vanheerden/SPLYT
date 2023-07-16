@@ -8,10 +8,9 @@
 import Foundation
 @testable import SPLYT
 import Mocking
-@testable import ExerciseCore
+import ExerciseCore
 
 final class MockBuildPlanService: BuildPlanServiceType {
-    typealias WorkoutFixtures = WorkoutModelFixtures
     
     var savePlanThrow = false
     private(set) var savePlanCalled = false
