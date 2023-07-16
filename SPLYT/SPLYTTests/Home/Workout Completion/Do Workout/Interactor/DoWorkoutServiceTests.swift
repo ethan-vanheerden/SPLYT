@@ -112,7 +112,8 @@ final class DoWorkoutServiceTests: XCTestCase {
         routineCacheInteractor.stubFileExists = true
         routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                            historyFilename: WorkoutFixtures.legWorkoutFilename)
+                            historyFilename: WorkoutFixtures.legWorkoutFilename,
+                            planId: WorkoutFixtures.myPlanId)
         XCTAssertTrue(cacheInteractor.saveCalled)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
     }

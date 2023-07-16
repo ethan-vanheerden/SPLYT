@@ -30,7 +30,6 @@ public struct WorkoutReducer {
         return titles
     }
     
-    
     /// Returns a string representation of the number of exercises in the given workout.
     /// - Parameter workout: The workout to get the number of exercises from
     /// - Returns: A title describing the number of exercises, ex: "5 exercises"

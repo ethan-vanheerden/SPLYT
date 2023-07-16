@@ -23,7 +23,7 @@ public struct TextEntry: View {
             HStack {
                 textField
                 if viewState.includeCancelButton && showCancel {
-                    SplytButton(text: "cancel",
+                    SplytButton(text: Strings.cancel,
                                 type: .textOnly,
                                 textColor: .lightBlue) {
                         text = ""
@@ -104,4 +104,5 @@ public struct TextEntryBuilder {
 
 fileprivate struct Strings {
     static let search = "Search..."
+    static let cancel = "cancel"
 }

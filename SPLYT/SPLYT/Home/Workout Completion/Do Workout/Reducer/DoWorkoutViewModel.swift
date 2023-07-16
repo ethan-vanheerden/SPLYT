@@ -9,7 +9,7 @@ import Foundation
 import Core
 import ExerciseCore
 
-// MARK: -
+// MARK: - Events
 
 enum DoWorkoutViewEvent {
     case loadWorkout

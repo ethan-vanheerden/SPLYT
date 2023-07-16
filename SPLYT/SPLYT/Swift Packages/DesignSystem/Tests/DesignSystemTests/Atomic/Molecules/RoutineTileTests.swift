@@ -32,9 +32,9 @@ final class RoutineTileTests: XCTestCase {
                         deleteAction: { })
             Spacer()
         }
-            .padding(.horizontal, Layout.size(2))
+            .padding(Layout.size(2))
         
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
+        assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
     }
 }

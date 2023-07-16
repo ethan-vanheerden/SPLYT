@@ -53,7 +53,6 @@ private extension BuildWorkoutReducer {
     }
     
     func getExerciseTileStates(exerciseMap: [String: AvailableExercise]) -> [AddExerciseTileSectionViewState] {
-        // We first filter, then we sort by name alphabetically
         let exercises = exerciseMap.values.map {
             AddExerciseTileViewState(id: $0.id,
                                      exerciseName: $0.name,
