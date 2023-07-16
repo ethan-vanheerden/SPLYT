@@ -7,15 +7,18 @@ public struct NavigationBarViewState: Equatable {
     let subtitle: String?
     let size: NavigationBarSize
     let position: NavigationBarPosition
+    let backIconName: String
     
     public init(title: String,
                 subtitle: String? = nil,
                 size: NavigationBarSize = .medium,
-                position: NavigationBarPosition = .center) {
+                position: NavigationBarPosition = .center,
+                backIconName: String = "chevron.backward") {
         self.title = title
         self.subtitle = subtitle
         self.size = size
         self.position = position
+        self.backIconName = backIconName
     }
 }
 

@@ -7,9 +7,10 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 struct BuildWorkoutDisplay: Equatable {
-    let allExercises: [AddExerciseTileViewState] // Exercises that can be selected
+    let allExercises: [AddExerciseTileSectionViewState] // Exercises that can be selected
     let groups: [[ExerciseViewState]] // Each item in list represents the exercises in the group
     let currentGroup: Int // Zero-indexed
     let currentGroupTitle: String
@@ -19,4 +20,27 @@ struct BuildWorkoutDisplay: Equatable {
     let backDialog: DialogViewState
     let saveDialog: DialogViewState
     let canSave: Bool
+    let filterDisplay: BuildWorkoutFilterDisplay
+    let isFiltering: Bool
+}
+
+
+// MARK: - Filter Display
+
+struct BuildWorkoutFilterDisplay: Equatable {
+    let isFavorite: Bool
+    let musclesWorked: [MusclesWorked: Bool]
+}
+
+// MARK: - View State
+
+struct AddExerciseTileSectionViewState: Equatable, Hashable {
+    let header: SectionHeaderViewState
+    let exercises: [AddExerciseTileViewState]
+    
+    init(header: SectionHeaderViewState,
+         exercises: [AddExerciseTileViewState]) {
+        self.header = header
+        self.exercises = exercises
+    }
 }

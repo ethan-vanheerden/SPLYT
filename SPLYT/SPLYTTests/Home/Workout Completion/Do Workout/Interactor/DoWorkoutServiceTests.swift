@@ -13,30 +13,29 @@ import Mocking
 final class DoWorkoutServiceTests: XCTestCase {
     typealias WorkoutFixtures = WorkoutModelFixtures
     private var cacheInteractor: MockCacheInteractor!
-    private var workoutCacheInteractor: MockCacheInteractor!
+    private var routineCacheInteractor: MockCacheInteractor!
     private var sut: DoWorkoutService!
     
     override func setUpWithError() throws {
         cacheInteractor = MockCacheInteractor()
-        workoutCacheInteractor = MockCacheInteractor()
-        cacheInteractor.reset()
-        workoutCacheInteractor.reset()
-        let workoutService = CreatedWorkoutsService(cacheInteractor: workoutCacheInteractor)
+        routineCacheInteractor = MockCacheInteractor()
+        let routineService = CreatedRoutinesService(cacheInteractor: routineCacheInteractor)
         self.sut = DoWorkoutService(cacheInteractor: cacheInteractor,
-                                    workoutService: workoutService)
+                                    routineService: routineService)
     }
     
     func testLoadWorkout_FileNoExist_ErrorLoading() {
-        workoutCacheInteractor.fileExistsThrow = true
-        XCTAssertThrowsError(try sut.loadWorkout(filename: WorkoutFixtures.legWorkoutFilename, workoutId: WorkoutFixtures.legWorkoutId))
+        routineCacheInteractor.fileExistsThrow = true
+        XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
     }
     
     func testLoadWorkout_FileNoExist_LoadsFromCreatedWorkouts() throws {
-        workoutCacheInteractor.stubFileExists = true
-        workoutCacheInteractor.stubData = WorkoutFixtures.loadedCreatedWorkouts
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         
-        let result = try sut.loadWorkout(filename: WorkoutFixtures.legWorkoutFilename,
-                                         workoutId: WorkoutFixtures.legWorkoutId)
+        let result = try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
+                                         historyFilename: WorkoutFixtures.legWorkoutFilename)
         
         XCTAssertEqual(result, WorkoutFixtures.legWorkout)
     }
@@ -44,71 +43,78 @@ final class DoWorkoutServiceTests: XCTestCase {
     func testLoadWorkout_FileExists_ErrorLoading() {
         cacheInteractor.stubFileExists = true
         cacheInteractor.loadThrow = true
-        XCTAssertThrowsError(try sut.loadWorkout(filename: WorkoutFixtures.legWorkoutFilename, workoutId: WorkoutFixtures.legWorkoutId))
+        XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
     }
     
     func testLoadWorkout_FileExists_NoWorkoutsFound() {
         cacheInteractor.stubFileExists = true
         cacheInteractor.stubData = [Workout]()
-        XCTAssertThrowsError(try sut.loadWorkout(filename: WorkoutFixtures.legWorkoutFilename, workoutId: WorkoutFixtures.legWorkoutId))
+        XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
     }
     
     func testLoadWorkout_FileExists_Success() throws {
         cacheInteractor.stubFileExists = true
         cacheInteractor.stubData = [WorkoutFixtures.legWorkout]
         
-        let result = try sut.loadWorkout(filename: WorkoutFixtures.legWorkoutFilename,
-                                         workoutId: WorkoutFixtures.legWorkoutId)
+        let result = try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
+                                         historyFilename: WorkoutFixtures.legWorkoutFilename)
         
         XCTAssertEqual(result, WorkoutFixtures.legWorkout)
     }
     
     func testSaveWorkout_FileNoExist_ErrorSaving() {
         cacheInteractor.saveThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout, filename: WorkoutFixtures.legWorkoutFilename))
+        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
         XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertFalse(workoutCacheInteractor.saveCalled)
+        XCTAssertFalse(routineCacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileExist_ErrorLoading() {
         cacheInteractor.stubFileExists = true
         cacheInteractor.loadThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout, filename: WorkoutFixtures.legWorkoutFilename))
+        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
         XCTAssertFalse(cacheInteractor.saveCalled)
-        XCTAssertFalse(workoutCacheInteractor.saveCalled)
+        XCTAssertFalse(routineCacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_FileExist_ErrorSaving() {
         cacheInteractor.stubFileExists = true
         cacheInteractor.stubData = [WorkoutFixtures.legWorkout]
         cacheInteractor.saveThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout, filename: WorkoutFixtures.legWorkoutFilename))
+        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
         XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertFalse(workoutCacheInteractor.saveCalled)
+        XCTAssertFalse(routineCacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_ErrorLoadingCreatedWorkouts() {
-        workoutCacheInteractor.loadThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout, filename: WorkoutFixtures.legWorkoutFilename))
+        routineCacheInteractor.loadThrow = true
+        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
         XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertTrue(workoutCacheInteractor.saveCalled)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_ErrorSavingCreatedWorkout() {
-        workoutCacheInteractor.stubData = WorkoutFixtures.loadedCreatedWorkouts
-        workoutCacheInteractor.saveThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout, filename: WorkoutFixtures.legWorkoutFilename))
+        routineCacheInteractor.saveThrow = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
+                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
         XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertTrue(workoutCacheInteractor.saveCalled)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_Success() throws {
-        workoutCacheInteractor.stubFileExists = true
-        workoutCacheInteractor.stubData = WorkoutFixtures.loadedCreatedWorkouts
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                            filename: WorkoutFixtures.legWorkoutFilename)
+                            historyFilename: WorkoutFixtures.legWorkoutFilename,
+                            planId: WorkoutFixtures.myPlanId)
         XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertTrue(workoutCacheInteractor.saveCalled)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
-    
 }

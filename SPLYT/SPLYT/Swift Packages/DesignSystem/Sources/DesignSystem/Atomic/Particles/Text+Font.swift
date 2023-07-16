@@ -2,37 +2,73 @@ import SwiftUI
 
 public extension Text {
     func largeTitle(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 34))
+        return self.font(.largeTitle(style: style))
     }
     
     func title1(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 28))
+        return self.font(.title1(style: style))
     }
     
     func title2(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 22))
+        return self.font(.title2(style: style))
     }
     
     func title3(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 20))
+        return self.font(.title3(style: style))
     }
     
     func title4(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 18.5))
+        return self.font(.title4(style: style))
     }
     
     func body(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 17))
+        return self.font(.body(style: style))
     }
     
     func subhead(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 15))
+        return self.font(.subhead(style: style))
     }
     
     func footnote(style: SplytFont = .bold) -> Text {
-        return self.font(.custom(style.rawValue, size: 13))
+        return self.font(.footnote(style: style))
     }
 }
+
+extension Font {
+    static func largeTitle(style: SplytFont) -> Font {
+        return .custom(style.rawValue, size: 34)
+    }
+    
+    static func title1(style: SplytFont = .bold) -> Font {
+        return .custom(style.rawValue, size: 28)
+    }
+    
+    static func title2(style: SplytFont = .bold) -> Font {
+        return .custom(style.rawValue, size: 22)
+    }
+    
+    static func title3(style: SplytFont = .bold) -> Font {
+        return .custom(style.rawValue, size: 20)
+    }
+    
+    static func title4(style: SplytFont = .bold) -> Font {
+        return .custom(style.rawValue, size: 18.5)
+    }
+    
+    static func body(style: SplytFont = .bold) -> Font {
+        return .custom(style.rawValue, size: 17)
+    }
+    
+    static func subhead(style: SplytFont = .bold) -> Font {
+        return .custom(style.rawValue, size: 15)
+    }
+    
+    static func footnote(style: SplytFont = .bold) -> Font {
+        return .custom(style.rawValue, size: 13)
+    }
+}
+
+
 /**
  Fonts used by Apple:
  

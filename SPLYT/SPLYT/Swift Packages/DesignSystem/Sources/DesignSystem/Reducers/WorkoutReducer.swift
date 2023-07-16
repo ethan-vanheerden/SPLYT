@@ -29,6 +29,57 @@ public struct WorkoutReducer {
         
         return titles
     }
+    
+    /// Returns a string representation of the number of exercises in the given workout.
+    /// - Parameter workout: The workout to get the number of exercises from
+    /// - Returns: A title describing the number of exercises, ex: "5 exercises"
+    public static func getNumExercisesTitle(workout: Workout) -> String {
+        var numExercises = 0
+        for group in workout.exerciseGroups {
+            numExercises += group.exercises.count
+        }
+        let exercisePlural = numExercises == 1 ? Strings.exercise : Strings.exercises
+        return "\(numExercises) \(exercisePlural)"
+    }
+    
+    /// Returns a string representation of the number of workouts in the given plan.
+    /// - Parameter plan: The plan to get the number of exercises from
+    /// - Returns: A title describing the number of workouts, ex: "4 workouts"
+    public static func getNumWorkoutsTitle(plan: Plan) -> String {
+        let numWorkouts = plan.workouts.count
+        let workoutsPlural = numWorkouts == 1 ? Strings.workout : Strings.workouts
+        
+        return "\(numWorkouts) \(workoutsPlural)"
+    }
+    
+    /// Maps the given workouts into a list of `RoutineTileViewState`s
+    /// - Parameter workouts: The workouts to reduce
+    /// - Returns: The `RoutineTileViewState`s representing the given workouts
+    public static func createWorkoutRoutineTiles(workouts: [Workout]) -> [RoutineTileViewState] {
+        return workouts.map { workout in
+            let numExercisesTitle = getNumExercisesTitle(workout: workout)
+            
+            return RoutineTileViewState(id: workout.id,
+                                        historyFilename: workout.historyFilename,
+                                        title: workout.name,
+                                        subtitle: numExercisesTitle,
+                                        lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted))
+        }
+    }
+    
+    /// Creates a formatted date string to display for the routine's last completed date.
+    /// - Parameter date: The date the routine was last completed
+    /// - Returns: A formatted Date string in the form: "Last completed: Feb 3, 2023"
+    public static func getLastCompletedTitle(date: Date?) -> String? {
+        guard let date = date else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMMdY"
+        formatter.dateStyle = .medium // Feb 3, 2023
+        
+        
+        let dateString = formatter.string(from: date)
+        return Strings.lastCompleted + " \(dateString)"
+    }
 }
 
 // MARK: - Private
@@ -89,4 +140,9 @@ fileprivate struct Strings {
     static let reps = "reps"
     static let sec = "sec"
     static let group = "Group"
+    static let exercise = "exercise"
+    static let exercises = "exercises"
+    static let workout = "workout"
+    static let workouts = "workouts"
+    static let lastCompleted = "Last completed:"
 }

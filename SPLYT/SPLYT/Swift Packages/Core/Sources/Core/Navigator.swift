@@ -23,6 +23,10 @@ public protocol Navigator: AnyObject {
     /// Dismisses all of the views that this Navigator handles.
     /// - Parameter animated: Whether or not to animate the UI change
     func dismissSelf(animated: Bool)
+    
+    /// Pops the top view controller on the current navigation stack.
+    /// - Parameter animated: Whether or not to animate the UI change
+    func pop(animated: Bool)
 }
 
 /// Default methods since not every `Navigator` will need to implement each one
@@ -31,6 +35,7 @@ public extension Navigator {
     func present(_ vc: UIViewController, animated: Bool) { }
     func dismiss(animated: Bool) { }
     func dismissSelf(animated: Bool) { }
+    func pop(animated: Bool) { }
 }
 
 /// Default methods for base UINavigationControllers
@@ -50,6 +55,10 @@ public extension Navigator where Self: UINavigationController {
     
    func dismissSelf(animated: Bool) {
        self.presentationController?.presentingViewController.dismiss(animated: true)
+    }
+    
+    func pop(animated: Bool) {
+        self.popViewController(animated: animated)
     }
 }
 

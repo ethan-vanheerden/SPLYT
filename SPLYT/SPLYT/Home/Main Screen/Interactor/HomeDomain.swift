@@ -11,11 +11,12 @@ import ExerciseCore
 // MARK: - Domain
 
 struct HomeDomain: Equatable {
-    var workouts: [String: CreatedWorkout]
+    var routines: CreatedRoutines
 }
 
 // MARK: - Dialog Type
 
 enum HomeDialog: Equatable {
-    case deleteWorkout(id: String)
+    case deleteWorkout(id: String, historyFilename: String?)
+    case deletePlan(id: String)
 }

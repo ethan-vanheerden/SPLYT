@@ -28,14 +28,17 @@ final class HomeReducer {
 
 private extension HomeReducer {
     func getDisplay(domain: HomeDomain, dialog: HomeDialog? = nil) -> HomeDisplay {
-        let workouts = getCreatedWorkouts(workouts: domain.workouts)
+        let workoutStates = getWorkoutStates(workouts: domain.routines.workouts)
+        let planStates = getPlanStates(plans: domain.routines.plans)
         
         let display = HomeDisplay(navBar: navBar,
                                   segmentedControlTitles: segmentedControlTitles,
-                                  workouts: workouts,
+                                  workouts: workoutStates,
+                                  plans: planStates,
                                   fab: FABState,
-                                  showDialog: dialog,
-                                  deleteDialog: deleteDialog)
+                                  presentedDialog: dialog,
+                                  deleteWorkoutDialog: deleteWorkoutDialog,
+                                  deletePlanDialog: deletePlanDialog)
         return display
     }
     
@@ -49,14 +52,21 @@ private extension HomeReducer {
         [Strings.workouts, Strings.plans]
     }
     
-    func getCreatedWorkouts(workouts: [String: CreatedWorkout]) -> [CreatedWorkoutViewState] {
-        return workouts.values.sorted { $0.createdAt > $1.createdAt }
-            .map {
-                CreatedWorkoutViewState(id: $0.workout.id,
-                                        filename: $0.filename,
-                                        title: $0.workout.name,
-                                        subtitle: getWorkoutSubtitle(workout: $0.workout),
-                                        lastCompleted: getLastCompletedTitle(date: $0.workout.lastCompleted))
+    func getWorkoutStates(workouts: [String: Workout]) -> [RoutineTileViewState] {
+        let workoutsSorted = workouts.values.sorted { $0.createdAt > $1.createdAt }
+        return WorkoutReducer.createWorkoutRoutineTiles(workouts: workoutsSorted)
+    }
+    
+    func getPlanStates(plans: [String: Plan]) -> [RoutineTileViewState] {
+        return plans.values.sorted { $0.createdAt > $1.createdAt }
+            .map { plan in
+                let numWorkoutsTitle = WorkoutReducer.getNumWorkoutsTitle(plan: plan)
+                let lastCompletedTitle = WorkoutReducer.getLastCompletedTitle(date: plan.lastCompleted)
+                
+                return RoutineTileViewState(id: plan.id,
+                                            title: plan.name,
+                                            subtitle: numWorkoutsTitle,
+                                            lastCompletedTitle: lastCompletedTitle)
             }
     }
     
@@ -70,29 +80,16 @@ private extension HomeReducer {
                                 createWorkoutState: createWorkoutState)
     }
     
-    func getWorkoutSubtitle(workout: Workout) -> String {
-        var numExercises = 0
-        for group in workout.exerciseGroups {
-            numExercises += group.exercises.count
-        }
-        let exercisePlural = numExercises == 1 ? Strings.exercise : Strings.exercises
-        return "\(numExercises) \(exercisePlural)"
-    }
-    
-    func getLastCompletedTitle(date: Date?) -> String? {
-        guard let date = date else { return nil }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMMdY"
-        formatter.dateStyle = .medium // Feb 3, 2023
-        
-        
-        let dateString = formatter.string(from: date)
-        return Strings.lastCompleted + " \(dateString)"
-    }
-    
-    var deleteDialog: DialogViewState {
+    var deleteWorkoutDialog: DialogViewState {
         return DialogViewState(title: Strings.deleteWorkout,
                                subtitle: Strings.cantBeUndone,
+                               primaryButtonTitle: Strings.delete,
+                               secondaryButtonTitle: Strings.cancel)
+    }
+    
+    var deletePlanDialog: DialogViewState {
+        return DialogViewState(title: Strings.deletePlan,
+                               subtitle: Strings.workoutsDeleted,
                                primaryButtonTitle: Strings.delete,
                                secondaryButtonTitle: Strings.cancel)
     }
@@ -106,11 +103,10 @@ fileprivate struct Strings {
     static let home = "Home"
     static let workouts = "WORKOUTS"
     static let plans = "PLANS"
-    static let exercise = "exercise"
-    static let exercises = "exercises"
-    static let lastCompleted = "Last completed:"
     static let deleteWorkout = "Delete workout?"
     static let cantBeUndone = "This action can't be undone."
     static let delete = "Delete"
     static let cancel = "Cancel"
+    static let deletePlan = "Delete plan?"
+    static let workoutsDeleted = "This will also delete all of the associated workouts. This action can't be undone."
 }

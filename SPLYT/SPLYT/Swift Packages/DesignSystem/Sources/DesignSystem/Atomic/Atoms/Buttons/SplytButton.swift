@@ -2,27 +2,21 @@ import SwiftUI
 
 public struct SplytButton: View {
     private let text: String
-    private let size: ButtonSize
-    private let color: SplytColor
+    private let type: SplytButtonType
     private let textColor: SplytColor
-    private let outlineColor: SplytColor
     private let isEnabled: Bool
     private let animationEnabled: Bool
     private let action: () -> Void
     
     public init(text: String,
-                size: ButtonSize = .primary,
-                color: SplytColor = .lightBlue,
+                type: SplytButtonType = .primary(),
                 textColor: SplytColor = .white,
-                outlineColor: SplytColor? = nil,
                 isEnabled: Bool = true,
                 animationEnabled: Bool = true,
                 action: @escaping () -> Void) {
         self.text = text
-        self.size = size
-        self.color = color
+        self.type = type
         self.textColor = textColor
-        self.outlineColor = outlineColor ?? color
         self.isEnabled = isEnabled
         self.animationEnabled = animationEnabled
         self.action = action
@@ -31,21 +25,20 @@ public struct SplytButton: View {
     public var body: some View {
         Button("") { action() }
             .buttonStyle(SplytButtonStyle(text: text,
-                                          size: size,
-                                          color: color,
+                                          type: type,
                                           textColor: textColor,
-                                          outlineColor: outlineColor,
                                           isEnabled: isEnabled,
                                           animationEnabled: animationEnabled))
             .allowsHitTesting(isEnabled)
     }
 }
 
-// MARK: - Button Size
+// MARK: - Button Type
 
-public enum ButtonSize {
-    case primary
-    case secondary
+public enum SplytButtonType {
+    case primary(color: SplytColor = .lightBlue)
+    case secondary(color: SplytColor = .lightBlue)
+    case textOnly
 }
 
 // NOTE: Custom fonts are not rendered in previews

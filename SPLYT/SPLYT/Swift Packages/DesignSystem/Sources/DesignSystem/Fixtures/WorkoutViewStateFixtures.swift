@@ -175,4 +175,28 @@ struct WorkoutViewStateFixtures {
     }
     
     static let emptyRepsWeightSet: SetInputViewState = .repsWeight(weightTitle: lbs, repsTitle: reps)
+    
+    static let buildLegWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutId,
+                                                                        title: ModelFixtures.legWorkoutName,
+                                                                        subtitle: "2 exercises")
+    
+    static let buildFullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutId,
+                                                                             title: ModelFixtures.fullBodyWorkoutName,
+                                                                             subtitle: "4 exercises")
+    
+    static let doLegWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutId,
+                                                                     historyFilename: ModelFixtures.legWorkoutFilename,
+                                                                     title: ModelFixtures.legWorkoutName,
+                                                                     subtitle: "2 exercises")
+    
+    static let doFullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutId,
+                                                                          historyFilename: ModelFixtures.fullBodyWorkoutFilename,
+                                                                          title: ModelFixtures.fullBodyWorkoutName,
+                                                                          subtitle: "4 exercises",
+                                                                          lastCompletedTitle: "Last completed: Feb 3, 2023")
+    
+    static let myPlanRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.myPlanId,
+                                                               title: ModelFixtures.myPlanName,
+                                                               subtitle: "2 workouts",
+                                                               lastCompletedTitle: "Last completed: Feb 3, 2023")
 }

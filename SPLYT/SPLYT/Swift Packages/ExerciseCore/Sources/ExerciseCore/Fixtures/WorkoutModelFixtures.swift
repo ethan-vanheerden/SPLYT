@@ -3,6 +3,8 @@ import Foundation
 // TODO: move to test target but xcode is broken
 /// Contains test models for things related to workouts.
 struct WorkoutModelFixtures {
+    static let dec_27_2022_1000: Date = Date(timeIntervalSince1970: 1672135200)
+    
     static let jan_1_2023_0800: Date = Date(timeIntervalSince1970: 1672560000)
     
     static let feb_3_2023_1630: Date = Date(timeIntervalSince1970: 1675441800)
@@ -18,26 +20,34 @@ struct WorkoutModelFixtures {
         return sets
     }
     
+    static let backSquatId = "back-squat"
+    
+    static let barLungesId = "bar-lunges"
+    
+    static let benchPressId = "bench-press"
+    
+    static let inclineRowId = "incline-db-row"
+    
     static func backSquat(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "back-squat",
+        return Exercise(id: backSquatId,
                         name: "Back Squat",
                         sets: createSets(inputs: inputs))
     }
     
     static func barLunges(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "bar-lunges",
+        return Exercise(id: barLungesId,
                         name: "Bar Lunges",
                         sets: createSets(inputs: inputs))
     }
     
     static func benchPress(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "bench-press",
+        return Exercise(id: benchPressId,
                         name: "Bench Press",
                         sets: createSets(inputs: inputs))
     }
     
     static func inclineDBRow(inputs: [(SetInput, SetModifier?)]) -> Exercise {
-        return Exercise(id: "incline-db-row",
+        return Exercise(id: inclineRowId,
                         name: "Incline Dumbbell Row",
                         sets: createSets(inputs: inputs))
     }
@@ -114,43 +124,69 @@ struct WorkoutModelFixtures {
     
     static let fullBodyWorkoutName = "Full Body"
     
+    static let legWorkoutFilename = "workout_history_leg-workout"
+    
+    static let fullBodyWorkoutFilename = "workout_history_full-body-workout"
+    
     
     static let legWorkout: Workout = Workout(id: legWorkoutId,
                                              name: legWorkoutName,
                                              exerciseGroups: legWorkoutExercises,
+                                             historyFilename: legWorkoutFilename,
+                                             createdAt: feb_3_2023_1630,
                                              lastCompleted: nil)
     
     static let legWorkout_WorkoutStart: Workout = Workout(id: legWorkoutId,
                                                           name: legWorkoutName,
                                                           exerciseGroups: legWorkoutExercises_WorkoutStart,
+                                                          historyFilename: legWorkoutFilename,
+                                                          createdAt: feb_3_2023_1630,
                                                           lastCompleted: nil)
     
     static let fullBodyWorkout: Workout = Workout(id: fullBodyWorkoutId,
                                                   name: fullBodyWorkoutName,
                                                   exerciseGroups: fullBodyWorkoutExercises,
+                                                  historyFilename: fullBodyWorkoutFilename,
+                                                  createdAt: jan_1_2023_0800,
                                                   lastCompleted: feb_3_2023_1630)
     
     static let fullBodyWorkout_WorkoutStart: Workout = Workout(id: fullBodyWorkoutId,
                                                                name: fullBodyWorkoutName,
                                                                exerciseGroups: fullBodyWorkoutExercises_WorkoutStart,
+                                                               historyFilename: fullBodyWorkoutFilename,
+                                                               createdAt: jan_1_2023_0800,
                                                                lastCompleted: feb_3_2023_1630)
     
-    static let legWorkoutFilename = "workout_history_leg-workout"
-    
-    static let fullBodyWorkoutFilename = "workout_history_full-body-workout"
-    
-    static let createdLegWorkout: CreatedWorkout = CreatedWorkout(workout: legWorkout,
-                                                                  filename: legWorkoutFilename,
-                                                                  createdAt: feb_3_2023_1630)
-    
-    static let createdFullBodyWorkout: CreatedWorkout = CreatedWorkout(workout: fullBodyWorkout,
-                                                                       filename: fullBodyWorkoutFilename,
-                                                                       createdAt: jan_1_2023_0800)
-    
-    static let loadedCreatedWorkouts: [String: CreatedWorkout] = [
-        legWorkoutId: createdLegWorkout,
-        fullBodyWorkoutId: createdFullBodyWorkout
+    static let loadedWorkouts: [String: Workout] = [
+        legWorkoutId: legWorkout,
+        fullBodyWorkoutId: fullBodyWorkout
     ]
+    
+    static let myPlanName = "My Plan 1"
+    
+    static let myPlanId = "\(myPlanName)-2023-01-01T08:00:00Z"
+    
+    static let myPlanEmpty: Plan = Plan(id: myPlanId,
+                                        name: myPlanName,
+                                        workouts: [],
+                                        createdAt: jan_1_2023_0800,
+                                        lastCompleted: nil)
+    
+    static let myPlan: Plan = Plan(id: myPlanId,
+                                   name: myPlanName,
+                                   workouts: [
+                                    legWorkout,
+                                    fullBodyWorkout
+                                   ],
+                                   createdAt: jan_1_2023_0800,
+                                   lastCompleted: feb_3_2023_1630)
+    
+    static let loadedPlans: [String: Plan] = [
+        myPlanId: myPlan
+    ]
+    
+    static let loadedRoutines: CreatedRoutines = CreatedRoutines(workouts: loadedWorkouts,
+                                                                 plans: loadedPlans)
     
     static func exerciseGroups(numGroups: Int, groupExercises: [Int: [Exercise]]) -> [ExerciseGroup] {
         var groups = [ExerciseGroup]()

@@ -15,17 +15,19 @@ enum BuildWorkoutViewEvent {
     case load
     case addGroup
     case removeGroup(group: Int)
-    case toggleExercise(exerciseId: AnyHashable, group: Int)
+    case toggleExercise(exerciseId: String) // Adds to the current group
     case addSet(group: Int)
     case removeSet(group: Int)
     case updateSet(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
-    case toggleFavorite(exerciseId: AnyHashable)
+    case toggleFavorite(exerciseId: String)
     case switchGroup(to: Int)
     case save
     case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
     case addModifier(group: Int, exerciseIndex: Int, setIndex: Int, modifier: SetModifier)
     case removeModifier(group: Int, exerciseIndex: Int, setIndex: Int)
     case updateModifier(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
+    case filter(by: BuildWorkoutFilter)
+    case removeAllFilters
 }
 
 // MARK: - View Model
@@ -47,8 +49,8 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .addGroup)
         case .removeGroup(let group):
             await react(domainAction: .removeGroup(group: group))
-        case let .toggleExercise(exerciseId, group):
-            await react(domainAction: .toggleExercise(exerciseId: exerciseId, group: group))
+        case let .toggleExercise(exerciseId):
+            await react(domainAction: .toggleExercise(exerciseId: exerciseId))
         case .addSet(let group):
             await react(domainAction: .addSet(group: group))
         case .removeSet(let group):
@@ -80,6 +82,10 @@ final class BuildWorkoutViewModel: ViewModel {
                                                       exerciseIndex: exerciseIndex,
                                                       setIndex: setIndex,
                                                       with: newInput))
+        case .filter(let filter):
+            await react(domainAction: .filter(by: filter))
+        case .removeAllFilters:
+            await react(domainAction: .removeAllFilters)
         }
     }
 }

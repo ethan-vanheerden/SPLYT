@@ -37,16 +37,20 @@ enum DoWorkoutDomainResult: Equatable {
 
 final class DoWorkoutInteractor {
     private let workoutId: String
-    private let filename: String
+    private let historyFilename: String
     private let service: DoWorkoutServiceType
+    private let planId: String?
     private var savedDomain: DoWorkoutDomain?
     
+    
     init(workoutId: String,
-         filename: String,
-         service: DoWorkoutServiceType = DoWorkoutService()) {
+         historyFilename: String,
+         service: DoWorkoutServiceType = DoWorkoutService(),
+         planId: String? = nil) {
         self.workoutId = workoutId
-        self.filename = filename
+        self.historyFilename = historyFilename
         self.service = service
+        self.planId = planId
     }
     
     func interact(with action: DoWorkoutDomainAction) async -> DoWorkoutDomainResult {
@@ -81,7 +85,7 @@ final class DoWorkoutInteractor {
         case .saveWorkout:
             return handleSaveWorkout()
         }
-    }
+      }
 }
 
 // MARK: - Private Handlers
@@ -91,7 +95,9 @@ private extension DoWorkoutInteractor {
     func handleLoadWorkout() -> DoWorkoutDomainResult {
         do {
             // TODO: use the workout ID to make a network call first instead of a cache lookup
-            let loadedWorkout = try service.loadWorkout(filename: filename, workoutId: workoutId)
+            let loadedWorkout = try service.loadWorkout(workoutId: workoutId,
+                                                        historyFilename: historyFilename,
+                                                        planId: planId)
             let workout = createPlaceholders(previousWorkout: loadedWorkout)
             let expandedGroups = getStartingExpandedGroups(groups: workout.exerciseGroups)
             let completedGroups = workout.exerciseGroups.map { _ in return false }
@@ -217,7 +223,9 @@ private extension DoWorkoutInteractor {
     func handleSaveWorkout() -> DoWorkoutDomainResult {
         guard let domain = savedDomain else { return .error }
         do {
-            try service.saveWorkout(workout: domain.workout, filename: filename)
+            try service.saveWorkout(workout: domain.workout,
+                                    historyFilename: historyFilename,
+                                    planId: planId)
             return .exit(domain)
         } catch {
             return .error

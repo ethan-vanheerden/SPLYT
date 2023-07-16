@@ -150,4 +150,10 @@ final class WorkoutInteractorTests: XCTestCase {
         
         XCTAssertEqual(result, newGroups)
     }
+    
+    func testGetId() {
+        let result = sut.getId(name: Fixtures.myPlanName,
+                               creationDate: Fixtures.jan_1_2023_0800)
+        XCTAssertEqual(result, Fixtures.myPlanId)
+    }
 }

@@ -94,7 +94,7 @@ private extension DoWorkoutReducer {
 
 fileprivate struct Strings {
     static let markAsComplete = "Mark as complete"
-    static let finishWorkout = "Finish Workout"
+    static let finishWorkout = "Finish Workout?"
     static let changesSaved = "All of your changes will be saved."
     static let finish = "Finish"
     static let cancel = "Cancel"

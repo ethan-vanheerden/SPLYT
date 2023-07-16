@@ -43,21 +43,23 @@ struct Dialog<Content: View>: View {
            let secondaryAction = secondaryAction {
             HStack(spacing: Layout.size(2)) {
                 SplytButton(text: secondaryButtonTitle,
-                            size: .secondary,
-                            color: .white,
+                            type: .secondary(color: .white),
                             textColor: .gray,
-                            outlineColor: .gray,
+                            animationEnabled: false,
                             action: secondaryAction)
-                SplytButton(text: viewState.primaryButtonTitle,
-                            size: .secondary,
-                            action: primaryAction)
+                primaryButton
             }
         } else {
-            SplytButton(text: viewState.primaryButtonTitle,
-                        size: .secondary,
-                        action: primaryAction)
+            primaryButton
             .padding(.horizontal, Layout.size(5))
         }
+    }
+    
+    @ViewBuilder
+    private var primaryButton: some View {
+        SplytButton(text: viewState.primaryButtonTitle,
+                    type: .secondary(),
+                    action: primaryAction)
     }
 }
 

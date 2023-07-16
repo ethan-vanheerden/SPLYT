@@ -49,7 +49,7 @@ public struct AddExerciseTile: View {
 
 // MARK: - View State
 
-public struct AddExerciseTileViewState: Equatable {
+public struct AddExerciseTileViewState: Equatable, Hashable {
     public let id: String
     public let exerciseName: String
     let isSelected: Bool

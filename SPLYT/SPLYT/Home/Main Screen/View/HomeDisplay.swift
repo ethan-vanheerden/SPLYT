@@ -12,8 +12,10 @@ import DesignSystem
 struct HomeDisplay: Equatable {
     let navBar: NavigationBarViewState
     let segmentedControlTitles: [String] // ["WORKOUTS", "PLANS"]
-    let workouts: [CreatedWorkoutViewState]
+    let workouts: [RoutineTileViewState]
+    let plans: [RoutineTileViewState]
     let fab: HomeFABViewState
-    let showDialog: HomeDialog?
-    let deleteDialog: DialogViewState
+    let presentedDialog: HomeDialog?
+    let deleteWorkoutDialog: DialogViewState
+    let deletePlanDialog: DialogViewState
 }

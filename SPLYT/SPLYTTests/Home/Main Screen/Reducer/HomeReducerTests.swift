@@ -7,11 +7,20 @@
 
 import XCTest
 @testable import SPLYT
+@testable import ExerciseCore
+@testable import DesignSystem
 
 final class HomeReducerTests: XCTestCase {
     typealias Fixtures = HomeFixtures
+    typealias StateFixtures = WorkoutViewStateFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
     private let sut = HomeReducer()
     private var interactor: HomeInteractor!
+    private let workouts: [RoutineTileViewState] = [
+        StateFixtures.doLegWorkoutRoutineTile,
+        StateFixtures.doFullBodyWorkoutRoutineTile
+    ]
+    private let plans: [RoutineTileViewState] = [StateFixtures.myPlanRoutineTile]
     
     override func setUpWithError() throws {
         self.interactor = HomeInteractor(service: MockHomeService())
@@ -26,28 +35,41 @@ final class HomeReducerTests: XCTestCase {
         let domain = await interactor.interact(with: .load)
         let result = sut.reduce(domain)
         
+        
         let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
                                           segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkoutViewStates,
+                                          workouts: workouts,
+                                          plans: plans,
                                           fab: Fixtures.fabState,
-                                          showDialog: nil,
-                                          deleteDialog: Fixtures.deleteDialog)
+                                          presentedDialog: nil,
+                                          deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
+                                          deletePlanDialog: Fixtures.deletePlanDialog)
         
         XCTAssertEqual(result, .main(expectedDisplay))
     }
     
-    func testReduce_DeleteDialog() async {
-        _ = await interactor.interact(with: .load)
-        let domain = await interactor.interact(with: .toggleDialog(type: .deleteWorkout(id: "leg-workout"), isOpen: true))
-        let result = sut.reduce(domain)
+    func testReduce_Dialog() async {
+        let dialogs: [HomeDialog] = [
+            .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
+                           historyFilename: WorkoutFixtures.legWorkoutFilename),
+            .deletePlan(id: WorkoutFixtures.myPlanId)
+        ]
         
-        let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
-                                          segmentedControlTitles: Fixtures.segmentedControlTitles,
-                                          workouts: Fixtures.createdWorkoutViewStates,
-                                          fab: Fixtures.fabState,
-                                          showDialog: .deleteWorkout(id: "leg-workout"),
-                                          deleteDialog: Fixtures.deleteDialog)
-        
-        XCTAssertEqual(result, .main(expectedDisplay))
+        for dialog in dialogs {
+            _ = await interactor.interact(with: .load)
+            let domain = await interactor.interact(with: .toggleDialog(type: dialog, isOpen: true))
+            let result = sut.reduce(domain)
+            
+            let expectedDisplay = HomeDisplay(navBar: Fixtures.navBar,
+                                              segmentedControlTitles: Fixtures.segmentedControlTitles,
+                                              workouts: workouts,
+                                              plans: plans,
+                                              fab: Fixtures.fabState,
+                                              presentedDialog: dialog,
+                                              deleteWorkoutDialog: Fixtures.deleteWorkoutDialog,
+                                              deletePlanDialog: Fixtures.deletePlanDialog)
+            
+            XCTAssertEqual(result, .main(expectedDisplay))
+        }
     }
 }

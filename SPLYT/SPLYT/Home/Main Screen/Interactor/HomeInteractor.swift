@@ -12,7 +12,8 @@ import Core
 
 enum HomeDomainAction {
     case load
-    case deleteWorkout(id: String)
+    case deleteWorkout(id: String, historyFilename: String?)
+    case deletePlan(id: String)
     case toggleDialog(type: HomeDialog, isOpen: Bool)
 }
 
@@ -44,8 +45,10 @@ final class HomeInteractor: HomeInteractorType {
         switch action {
         case .load:
             return handleLoad()
-        case .deleteWorkout(let id):
-            return handleDeleteWorkout(id: id)
+        case let .deleteWorkout(id, historyFilename):
+            return handleDeleteWorkout(id: id, historyFilename: historyFilename)
+        case .deletePlan(let id):
+            return handleDeletePlan(id: id)
         case let .toggleDialog(type, isOpen):
             return handleToggleDialog(type: type, isOpen: isOpen)
         }
@@ -57,8 +60,8 @@ final class HomeInteractor: HomeInteractorType {
 private extension HomeInteractor {
     func handleLoad() -> HomeDomainResult {
         do {
-            let workouts = try service.loadWorkouts()
-            let domain = HomeDomain(workouts: workouts)
+            let routines = try service.loadRoutines()
+            let domain = HomeDomain(routines: routines)
             
             // Update the saved domain
             savedDomain = domain
@@ -68,15 +71,36 @@ private extension HomeInteractor {
         }
     }
     
-    func handleDeleteWorkout(id: String) -> HomeDomainResult {
-        guard var domain = savedDomain else { return .error }
+    func handleDeleteWorkout(id: String, historyFilename: String?) -> HomeDomainResult {
+        guard var domain = savedDomain,
+              let historyFilename = historyFilename else { return .error }
         
         do {
-            // Remove the workout
-            domain.workouts.removeValue(forKey: id)
+            domain.routines.workouts.removeValue(forKey: id)
             
             // Save the results
-            try service.saveWorkouts(domain.workouts)
+            try service.saveRoutines(domain.routines)
+            try service.deleteWorkoutHistory(historyFilename: historyFilename)
+            
+            return updateDomain(domain)
+        } catch {
+            return .error
+        }
+    }
+    
+    func handleDeletePlan(id: String) -> HomeDomainResult {
+        guard var domain = savedDomain,
+              let plan = domain.routines.plans[id] else { return .error }
+        
+        do {
+            domain.routines.plans.removeValue(forKey: id)
+            
+            try service.saveRoutines(domain.routines)
+            // We delete the workout history file for each of the workouts in the plan
+            for workout in plan.workouts {
+                try service.deleteWorkoutHistory(historyFilename: workout.historyFilename)
+            }
+            
             return updateDomain(domain)
         } catch {
             return .error

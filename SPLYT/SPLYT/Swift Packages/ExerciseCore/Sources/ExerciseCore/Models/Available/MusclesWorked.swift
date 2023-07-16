@@ -8,7 +8,7 @@
 import Foundation
 
 /// Muscles worked in an exercise.
-public enum MusclesWorked: String, Codable {
+public enum MusclesWorked: String, Codable, CaseIterable {
     case chest = "CHEST"
     case shoulders = "SHOULDERS"
     case back = "BACK"

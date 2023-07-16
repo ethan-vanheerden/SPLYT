@@ -13,17 +13,17 @@ import Mocking
 final class MockDoWorkoutService: DoWorkoutServiceType {
     typealias WorkoutFixtures = WorkoutModelFixtures
     
-    var loadThrow = false
+    var loadWorkoutThrow = false
     var stubWorkout: Workout? = nil
-    func loadWorkout(filename: String, workoutId: String) throws -> Workout {
-        guard !loadThrow else { throw MockError.someError }
+    func loadWorkout(workoutId: String, historyFilename: String, planId: String?) throws -> Workout {
+        guard !loadWorkoutThrow else { throw MockError.someError }
         return stubWorkout ?? WorkoutFixtures.legWorkout
     }
     
-    var saveThrow = false
-    private(set) var saveCalled = false
-    func saveWorkout(workout: Workout, filename: String) throws {
-        saveCalled = true
-        guard !saveThrow else { throw MockError.someError }
+    var saveWorkoutThrow = false
+    private(set) var saveWorkoutCalled = false
+    func saveWorkout(workout: Workout, historyFilename: String, planId: String?) throws {
+        saveWorkoutCalled = true
+        guard !saveWorkoutThrow else { throw MockError.someError }
     }
 }

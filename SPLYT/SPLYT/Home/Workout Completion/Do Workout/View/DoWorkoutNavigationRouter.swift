@@ -12,6 +12,7 @@ import SwiftUI
 // MARK: - Navigation Events
 
 enum DoWorkoutNavigationEvent {
+    case back
     case exit
     case beginWorkout
 }
@@ -22,13 +23,18 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
     // Has reference since multiple screens will have this same view model
     private let viewModel: DoWorkoutViewModel
+    private let backAction: () -> Void
     
-    init(viewModel: DoWorkoutViewModel) {
+    init(viewModel: DoWorkoutViewModel,
+         backAction: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.backAction = backAction
     }
     
     func navigate(_ event: DoWorkoutNavigationEvent) {
         switch event {
+        case .back:
+            handleBack()
         case .exit:
             handleExit()
         case .beginWorkout:
@@ -40,8 +46,12 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
 // MARK: - Private
 
 private extension DoWorkoutNavigationRouter {
+    func handleBack() {
+        backAction()
+    }
+    
     func handleExit() {
-        self.navigator?.dismissSelf(animated: true)
+        navigator?.dismiss(animated: true)
     }
     
     func handleBeginWorkout() {
