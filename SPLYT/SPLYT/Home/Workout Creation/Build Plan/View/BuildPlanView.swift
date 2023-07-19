@@ -86,14 +86,9 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
     
     @ViewBuilder
     private var emptyWorkoutsView: some View {
-        VStack {
-            Spacer()
-            Text(Strings.noWorkoutsYet)
-                .body(style: .medium)
-                .multilineTextAlignment(.center)
-            Spacer()
-        }
-        .padding(.horizontal, horizontalPadding)
+        EmojiTitle(emoji: "💪", title: Strings.noWorkoutsYet)
+            .padding(.bottom, Layout.size(10))
+            .padding(.horizontal, horizontalPadding)
     }
     
     @ViewBuilder
@@ -140,6 +135,6 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
 
 fileprivate struct Strings {
     static let addWorkouts = "Add your workouts"
-    static let noWorkoutsYet = "You have no workouts in this plan yet. Select the button below to get started 💪"
+    static let noWorkoutsYet = "You have no workouts in this plan yet. Select the button below to get started!"
     static let addWorkout = "Add workout"
 }

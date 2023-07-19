@@ -6,7 +6,16 @@
 //
 
 import Foundation
+import ExerciseCore
+
+// MARK: - Domain
 
 struct HistoryDomain: Equatable {
-    
+    var workouts: [Workout]
+}
+
+// MARK: - Dialog Type
+
+enum HistoryDialog: Equatable {
+    case deleteWorkoutHistory(workoutId: String, completionDate: Date?)
 }

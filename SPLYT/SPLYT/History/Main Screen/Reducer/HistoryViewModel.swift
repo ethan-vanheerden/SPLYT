@@ -12,6 +12,8 @@ import Core
 
 enum HistoryViewEvent {
     case load
+    case deleteWorkoutHistory(workoutId: String, completionDate: Date?)
+    case toggleDialog(dialog: HistoryDialog, isOpen: Bool)
 }
 
 // MARK: - View Model
@@ -26,7 +28,15 @@ final class HistoryViewModel: ViewModel {
     }
     
     func send(_ event: HistoryViewEvent) async {
-        return
+        switch event {
+        case .load:
+            await react(domainAction: .load)
+        case let .deleteWorkoutHistory(workoutId, completionDate):
+            await react(domainAction: .deleteWorkoutHistory(workoutId: workoutId,
+                                                            completionDate: completionDate))
+        case let .toggleDialog(dialog, isOpen):
+            await react(domainAction: .toggleDialog(dialog: dialog, isOpen: isOpen))
+        }
     }
 }
 

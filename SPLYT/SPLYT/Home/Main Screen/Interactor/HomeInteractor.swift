@@ -63,9 +63,7 @@ private extension HomeInteractor {
             let routines = try service.loadRoutines()
             let domain = HomeDomain(routines: routines)
             
-            // Update the saved domain
-            savedDomain = domain
-            return .loaded(domain)
+            return updateDomain(domain)
         } catch {
             return .error
         }

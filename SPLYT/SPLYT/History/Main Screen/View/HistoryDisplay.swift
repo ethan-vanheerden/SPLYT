@@ -9,5 +9,7 @@ import Foundation
 import DesignSystem
 
 struct HistoryDisplay: Equatable {
-    
+    let workouts: [RoutineTileViewState]
+    let presentedDialog: HistoryDialog?
+    let deleteWorkoutHistoryDialog: DialogViewState
 }

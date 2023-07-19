@@ -54,22 +54,25 @@ public struct WorkoutReducer {
     
     /// Maps the given workouts into a list of `RoutineTileViewState`s
     /// - Parameter workouts: The workouts to reduce
+    /// - Parameter isHistory: Whether or not this workout is being presented from the history page
     /// - Returns: The `RoutineTileViewState`s representing the given workouts
-    public static func createWorkoutRoutineTiles(workouts: [Workout]) -> [RoutineTileViewState] {
+    public static func createWorkoutRoutineTiles(workouts: [Workout], isHistory: Bool = false) -> [RoutineTileViewState] {
         return workouts.map { workout in
             let numExercisesTitle = getNumExercisesTitle(workout: workout)
             
             return RoutineTileViewState(id: workout.id,
                                         title: workout.name,
                                         subtitle: numExercisesTitle,
-                                        lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted))
+                                        lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted,
+                                                                                  isHistory: isHistory),
+                                        lastCompletedDate: workout.lastCompleted)
         }
     }
     
     /// Creates a formatted date string to display for the routine's last completed date.
     /// - Parameter date: The date the routine was last completed
     /// - Returns: A formatted Date string in the form: "Last completed: Feb 3, 2023"
-    public static func getLastCompletedTitle(date: Date?) -> String? {
+    public static func getLastCompletedTitle(date: Date?, isHistory: Bool = false) -> String? {
         guard let date = date else { return nil }
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMMdY"
@@ -77,7 +80,8 @@ public struct WorkoutReducer {
         
         
         let dateString = formatter.string(from: date)
-        return Strings.lastCompleted + " \(dateString)"
+        let completedPrefix = isHistory ? Strings.completed : Strings.lastCompleted
+        return "\(completedPrefix): \(dateString)"
     }
 }
 
@@ -143,5 +147,6 @@ fileprivate struct Strings {
     static let exercises = "exercises"
     static let workout = "workout"
     static let workouts = "workouts"
-    static let lastCompleted = "Last completed:"
+    static let lastCompleted = "Last completed"
+    static let completed = "Completed"
 }

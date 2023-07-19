@@ -49,6 +49,7 @@ private extension DoPlanInteractor {
         do {
             let plan = try service.loadPlan(planId: planId)
             let domain = DoPlanDomain(plan: plan)
+            
             return updateDomain(domain: domain)
         } catch {
             return .error

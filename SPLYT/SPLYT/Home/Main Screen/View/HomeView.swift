@@ -8,6 +8,7 @@
 import SwiftUI
 import Core
 import DesignSystem
+import ExerciseCore
 
 struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewState == HomeViewState {
     @ObservedObject private var viewModel: VM
@@ -110,7 +111,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                          deleteAction: { viewModel.send(.toggleDialog(type: .deletePlan(id: $0.id),
                                                                       isOpen: true),
                                                         taskPriority: .userInitiated) })
-                .tag(1)
+            .tag(1)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
@@ -120,19 +121,29 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                               tapAction: @escaping (RoutineTileViewState) -> Void,
                               editAction: @escaping (RoutineTileViewState) -> Void,
                               deleteAction: @escaping (RoutineTileViewState) -> Void) -> some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: Layout.size(1.5)) {
-                ForEach(routines, id: \.self) { viewState in
-                    RoutineTile(viewState: viewState,
-                                tapAction: { tapAction(viewState) },
-                                editAction: { editAction(viewState) },
-                                deleteAction: { deleteAction(viewState) })
+        if routines.isEmpty {
+            emptyRoutinesView
+        } else {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: Layout.size(1.5)) {
+                    ForEach(routines, id: \.self) { viewState in
+                        RoutineTile(viewState: viewState,
+                                    tapAction: { tapAction(viewState) },
+                                    editAction: { editAction(viewState) },
+                                    deleteAction: { deleteAction(viewState) })
+                    }
                 }
+                .padding(.horizontal, horizontalPadding)
+                .padding(.top, Layout.size(1))
+                .padding(.bottom, Layout.size(10)) // Extra padding so FAB doesn't cover the bottom
             }
-            .padding(.horizontal, horizontalPadding)
-            .padding(.top, Layout.size(1))
-            .padding(.bottom, Layout.size(10)) // Extra padding so FAB doesn't cover the bottom
         }
+    }
+    
+    private var emptyRoutinesView: some View {
+        EmojiTitle(emoji: "🏋️‍♂️", title: Strings.getStarted)
+            .padding(.bottom, Layout.size(10))
+            .padding(.horizontal, horizontalPadding)
     }
     
     @ViewBuilder
@@ -142,4 +153,10 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                 createPlanAction: { navigationRouter.navigate(.createPlan) },
                 createWorkoutAction: { navigationRouter.navigate(.createWorkout) })
     }
+}
+
+// MARK: - Strings
+
+fileprivate struct Strings {
+    static let getStarted = "Select the plus button below to get started!"
 }
