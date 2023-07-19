@@ -47,16 +47,14 @@ final class HomeViewModelTests: XCTestCase {
     }
     
     func testReact_DeleteWorkout_NoSavedDomain_Error() async {
-        await sut.send(.deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                      historyFilename: WorkoutFixtures.legWorkoutFilename))
+        await sut.send(.deleteWorkout(id: WorkoutFixtures.legWorkoutId))
         
         XCTAssertEqual(sut.viewState, .error)
     }
     
     func testReact_DeleteWorkout_Success() async {
         await load()
-        await sut.send(.deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                      historyFilename: WorkoutFixtures.legWorkoutFilename))
+        await sut.send(.deleteWorkout(id: WorkoutFixtures.legWorkoutId))
         
         var workouts = workouts
         workouts.remove(at: 0)
@@ -89,8 +87,7 @@ final class HomeViewModelTests: XCTestCase {
     }
     
     func testReact_ToggleDialog_NoSavedDomain_Error() async {
-        let dialog: HomeDialog = .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                historyFilename: WorkoutFixtures.legWorkoutFilename)
+        let dialog: HomeDialog = .deleteWorkout(id: WorkoutFixtures.legWorkoutId)
         await sut.send(.toggleDialog(type: dialog, isOpen: true))
         
         XCTAssertEqual(sut.viewState, .error)
@@ -98,8 +95,7 @@ final class HomeViewModelTests: XCTestCase {
     
     func testReact_ToggleDialog_Delete_Open() async {
         let dialogs: [HomeDialog] = [
-            .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                           historyFilename: WorkoutFixtures.legWorkoutFilename),
+            .deleteWorkout(id: WorkoutFixtures.legWorkoutId),
             .deletePlan(id: WorkoutFixtures.myPlanId)
         ]
         

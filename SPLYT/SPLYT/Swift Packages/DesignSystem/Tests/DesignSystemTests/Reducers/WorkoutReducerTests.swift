@@ -33,7 +33,6 @@ final class WorkoutReducerTests: XCTestCase {
                                          exerciseGroups: [
                                             ExerciseGroup(exercises: [WorkoutFixtures.backSquat(inputs: [])])
                                          ],
-                                         historyFilename: "filename",
                                          createdAt: WorkoutFixtures.jan_1_2023_0800)
         
         

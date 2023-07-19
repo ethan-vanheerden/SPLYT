@@ -58,13 +58,10 @@ struct BuildWorkoutFixtures {
     
     static let workoutId = "Test Workout-2023-01-01T08:00:00Z"
     
-    static let workoutHistoryFilename = "workout_history_\(workoutId)"
-    
     static func builtWorkout(exerciseGroups: [ExerciseGroup]) -> Workout {
         return Workout(id: workoutId,
                        name: workoutName,
                        exerciseGroups: exerciseGroups,
-                       historyFilename: workoutHistoryFilename,
                        createdAt: WorkoutFixtures.jan_1_2023_0800,
                        lastCompleted: nil)
     }

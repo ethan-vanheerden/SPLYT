@@ -13,7 +13,9 @@ public final class MockCacheInteractor: CacheInteractorType {
     
     public var loadThrow = false
     public var stubData: Codable? = nil
+    public private(set) var loadCalled = false
     public func load<T: CacheRequest>(request: T) throws -> T.CacheData {
+        loadCalled = true
         guard !loadThrow,
               let stubData = stubData as? T.CacheData else { throw MockError.someError }
         return stubData
@@ -34,7 +36,7 @@ public final class MockCacheInteractor: CacheInteractorType {
         if deleteThrow { throw MockError.someError }
     }
     
-    /// Use this function in the setUp of your tests
+    /// Use this function to reset state if needed
     public func reset() {
         fileExistsThrow = false
         stubFileExists = false

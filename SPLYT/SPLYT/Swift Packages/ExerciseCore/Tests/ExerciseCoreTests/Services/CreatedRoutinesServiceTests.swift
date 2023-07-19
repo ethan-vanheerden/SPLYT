@@ -130,7 +130,6 @@ final class CreatedRoutinesServiceTests: XCTestCase {
         let notFoundWorkout = Workout(id: "id",
                                       name: "Test",
                                       exerciseGroups: [],
-                                      historyFilename: "history",
                                       createdAt: WorkoutFixtures.dec_27_2022_1000)
         
         XCTAssertThrowsError(try sut.saveWorkout(workout: notFoundWorkout,

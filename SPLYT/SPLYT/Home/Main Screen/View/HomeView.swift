@@ -45,7 +45,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     }
     
     private func mainView(display: HomeDisplay) -> some View {
-        let deletedWorkout = deletedWorkout(dialog: display.presentedDialog)
+        let deletedWorkoutId = deletedWorkoutId(dialog: display.presentedDialog)
         let deletedPlanId = deletedPlanId(dialog: display.presentedDialog)
         
         return ZStack {
@@ -59,12 +59,11 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
             fabView(state: display.fab)
             // TODO: Maybe add some filters?
         }
-        .dialog(isOpen: deletedWorkout != nil,
+        .dialog(isOpen: deletedWorkoutId != nil,
                 viewState: display.deleteWorkoutDialog,
-                primaryAction: { viewModel.send(.deleteWorkout(id: deletedWorkout?.0 ?? "",
-                                                               historyFilename: deletedWorkout?.1),
+                primaryAction: { viewModel.send(.deleteWorkout(id: deletedWorkoutId ?? ""),
                                                 taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: "", historyFilename: nil),
+                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: ""),
                                                                 isOpen: false),
                                                   taskPriority: .userInitiated) })
         .dialog(isOpen: deletedPlanId != nil,
@@ -76,11 +75,11 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                                                   taskPriority: .userInitiated) })
     }
     
-    /// Returns a tuple of (workoutId, filename?)
-    private func deletedWorkout(dialog: HomeDialog?) -> (String, String?)? {
+    /// Returns the workoutId to be deleted
+    private func deletedWorkoutId(dialog: HomeDialog?) -> String? {
         if let dialog = dialog,
-           case let .deleteWorkout(id, filename) = dialog {
-            return (id, filename)
+           case let .deleteWorkout(id) = dialog {
+            return id
         } else {
             return nil
         }
@@ -99,11 +98,9 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     private func workoutPlanView(display: HomeDisplay) -> some View {
         TabView(selection: $segmentedControlIndex) {
             routinesView(routines: display.workouts,
-                         tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0.id,
-                                                                                 historyFilename: $0.historyFilename)) },
+                         tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0.id)) },
                          editAction: { navigationRouter.navigate(.editWorkout(id: $0.id)) },
-                         deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0.id,
-                                                                                           historyFilename: $0.historyFilename),
+                         deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0.id),
                                                                       isOpen: true),
                                                         taskPriority: .userInitiated) })
             .tag(0)

@@ -12,8 +12,8 @@ import ExerciseCore
 // MARK: - Protocol
 
 protocol DoWorkoutServiceType {
-    func loadWorkout(workoutId: String, historyFilename: String, planId: String?) throws -> Workout
-    func saveWorkout(workout: Workout, historyFilename: String, planId: String?) throws
+    func loadWorkout(workoutId: String, planId: String?) throws -> Workout
+    func saveWorkout(workout: Workout, planId: String?, completionDate: Date) throws
 }
 
 // MARK: - Errors
@@ -34,43 +34,23 @@ struct DoWorkoutService: DoWorkoutServiceType {
         self.routineService = routineService
     }
     
-    func loadWorkout(workoutId: String, historyFilename: String, planId: String? = nil) throws -> Workout {
-        let request = WorkoutHistoryCacheRequest(filename: historyFilename)
-        
-        if !(try cacheInteractor.fileExists(request: request)) {
-            // If this is their first time doing this workout, we will load the workout for the first time
-            let workout = try routineService.loadWorkout(workoutId: workoutId, planId: planId)
-            return workout
-        } else {
-            // Load the most recent version they completed this specific workout (should be head of list)
-            let workouts = try cacheInteractor.load(request: request)
-            guard let workout = workouts.first else { throw DoWorkoutError.workoutNoExist }
-            return workout
-        }
+    func loadWorkout(workoutId: String, planId: String? = nil) throws -> Workout {
+        return try routineService.loadWorkout(workoutId: workoutId, planId: planId)
     }
     
-    func saveWorkout(workout: Workout, historyFilename: String, planId: String? = nil) throws {
-        let historyRequest = WorkoutHistoryCacheRequest(filename: historyFilename)
+    func saveWorkout(workout: Workout, planId: String? = nil, completionDate: Date) throws {
         let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
         var workout = workout
-        workout.lastCompleted = Date.now
+        workout.lastCompleted = completionDate
         
-        // First save the workout-specific history
-        if !(try cacheInteractor.fileExists(request: historyRequest)) {
-            // If the file doesn't exist, save this workout as the only history
-            try cacheInteractor.save(request: historyRequest, data: [workout])
-        } else {
-            // Load the existing history and place this workout at the head
-            // Truncate the list to the last 10 workouts
-            var workouts = try cacheInteractor.load(request: historyRequest)
-            workouts.insert(workout, at: 0)
-            let truncatedWorkouts = Array(workouts.prefix(10))
-            try cacheInteractor.save(request: historyRequest, data: truncatedWorkouts)
-        }
-        
-        // Then save this version of the workout to the created routines
+        // Save this version of the workout to the created routines
         try routineService.saveWorkout(workout: workout,
                                        planId: planId,
-                                       lastCompletedDate: Date.now)
+                                       lastCompletedDate: completionDate)
+        
+        // Then load the existing history and place this workout at the head
+        var completedWorkouts = try cacheInteractor.load(request: completedWorkoutsRequest)
+        completedWorkouts.insert(workout, at: 0)
+        try cacheInteractor.save(request: completedWorkoutsRequest, data: completedWorkouts)
     }
 }

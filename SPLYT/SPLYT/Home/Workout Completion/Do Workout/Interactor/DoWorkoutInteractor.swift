@@ -37,18 +37,15 @@ enum DoWorkoutDomainResult: Equatable {
 
 final class DoWorkoutInteractor {
     private let workoutId: String
-    private let historyFilename: String
     private let service: DoWorkoutServiceType
     private let planId: String?
     private var savedDomain: DoWorkoutDomain?
     
     
     init(workoutId: String,
-         historyFilename: String,
          service: DoWorkoutServiceType = DoWorkoutService(),
          planId: String? = nil) {
         self.workoutId = workoutId
-        self.historyFilename = historyFilename
         self.service = service
         self.planId = planId
     }
@@ -96,7 +93,6 @@ private extension DoWorkoutInteractor {
         do {
             // TODO: use the workout ID to make a network call first instead of a cache lookup
             let loadedWorkout = try service.loadWorkout(workoutId: workoutId,
-                                                        historyFilename: historyFilename,
                                                         planId: planId)
             let workout = createPlaceholders(previousWorkout: loadedWorkout)
             let expandedGroups = getStartingExpandedGroups(groups: workout.exerciseGroups)
@@ -224,8 +220,8 @@ private extension DoWorkoutInteractor {
         guard let domain = savedDomain else { return .error }
         do {
             try service.saveWorkout(workout: domain.workout,
-                                    historyFilename: historyFilename,
-                                    planId: planId)
+                                    planId: planId,
+                                    completionDate: Date.now)
             return .exit(domain)
         } catch {
             return .error

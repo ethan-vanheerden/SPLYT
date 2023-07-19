@@ -12,7 +12,6 @@ public struct Workout: Codable, Equatable {
     public let id: String
     public let name: String
     public var exerciseGroups: [ExerciseGroup]
-    public let historyFilename: String // The file where the workout history is locally cached
     public let planName: String? // The name of the owning plan
     public var createdAt: Date
     public var lastCompleted: Date?
@@ -20,14 +19,12 @@ public struct Workout: Codable, Equatable {
     public init(id: String,
                 name: String,
                 exerciseGroups: [ExerciseGroup],
-                historyFilename: String,
                 planName: String? = nil,
                 createdAt: Date,
                 lastCompleted: Date? = nil) {
         self.id = id
         self.name = name
         self.exerciseGroups = exerciseGroups
-        self.historyFilename = historyFilename
         self.planName = planName
         self.createdAt = createdAt
         self.lastCompleted = lastCompleted

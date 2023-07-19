@@ -57,20 +57,17 @@ public struct RoutineTile: View {
 
 public struct RoutineTileViewState: Hashable {
     public let id: String
-    public let historyFilename: String? // Where this routine's history is cached, if it is
     let title: String
     let subtitle: String
     let lastCompletedTitle: String?
     let includeIcon: Bool // For edit and delete actions
     
     public init(id: String,
-                historyFilename: String? = nil,
                 title: String,
                 subtitle: String,
                 lastCompletedTitle: String? = nil,
                 includeIcon: Bool = true) {
         self.id = id
-        self.historyFilename = historyFilename
         self.title = title
         self.subtitle = subtitle
         self.lastCompletedTitle = lastCompletedTitle

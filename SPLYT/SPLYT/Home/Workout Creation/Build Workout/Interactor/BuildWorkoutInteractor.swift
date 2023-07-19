@@ -111,7 +111,6 @@ private extension BuildWorkoutInteractor {
             let newWorkout = Workout(id: workoutId,
                                      name: nameState.name,
                                      exerciseGroups: startingGroup,
-                                     historyFilename: "workout_history_\(workoutId)",
                                      createdAt: creationDate)
             
             let domain = BuildWorkoutDomain(exercises: exercises,

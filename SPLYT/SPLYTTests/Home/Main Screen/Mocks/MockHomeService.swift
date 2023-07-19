@@ -28,7 +28,7 @@ final class MockHomeService: HomeServiceType {
     
     var deleteWorkoutHistoryThrow = false
     private(set) var numWorkoutHistoryDeleted = 0
-    func deleteWorkoutHistory(historyFilename: String) throws {
+    func deleteWorkoutHistory(workoutId: String) throws {
         numWorkoutHistoryDeleted += 1
         if deleteWorkoutHistoryThrow { throw MockError.someError }
     }

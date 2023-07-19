@@ -12,7 +12,7 @@ import Core
 
 enum HomeDomainAction {
     case load
-    case deleteWorkout(id: String, historyFilename: String?)
+    case deleteWorkout(id: String)
     case deletePlan(id: String)
     case toggleDialog(type: HomeDialog, isOpen: Bool)
 }
@@ -45,8 +45,8 @@ final class HomeInteractor: HomeInteractorType {
         switch action {
         case .load:
             return handleLoad()
-        case let .deleteWorkout(id, historyFilename):
-            return handleDeleteWorkout(id: id, historyFilename: historyFilename)
+        case let .deleteWorkout(id):
+            return handleDeleteWorkout(id: id)
         case .deletePlan(let id):
             return handleDeletePlan(id: id)
         case let .toggleDialog(type, isOpen):
@@ -71,16 +71,15 @@ private extension HomeInteractor {
         }
     }
     
-    func handleDeleteWorkout(id: String, historyFilename: String?) -> HomeDomainResult {
-        guard var domain = savedDomain,
-              let historyFilename = historyFilename else { return .error }
+    func handleDeleteWorkout(id: String) -> HomeDomainResult {
+        guard var domain = savedDomain else { return .error }
         
         do {
             domain.routines.workouts.removeValue(forKey: id)
             
             // Save the results
             try service.saveRoutines(domain.routines)
-            try service.deleteWorkoutHistory(historyFilename: historyFilename)
+            try service.deleteWorkoutHistory(workoutId: id)
             
             return updateDomain(domain)
         } catch {
@@ -96,9 +95,9 @@ private extension HomeInteractor {
             domain.routines.plans.removeValue(forKey: id)
             
             try service.saveRoutines(domain.routines)
-            // We delete the workout history file for each of the workouts in the plan
+            // We delete the workout history for each of the workouts in the plan
             for workout in plan.workouts {
-                try service.deleteWorkoutHistory(historyFilename: workout.historyFilename)
+                try service.deleteWorkoutHistory(workoutId: workout.id)
             }
             
             return updateDomain(domain)

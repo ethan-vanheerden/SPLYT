@@ -14,8 +14,7 @@ import SwiftUI
 enum HomeNavigationEvent {
     case createPlan
     case createWorkout
-    // TODO: ID for a netowork call, filename for a cache call if needed
-    case seletectWorkout(id: String, historyFilename: String?)
+    case seletectWorkout(id: String)
     case editWorkout(id: String)
     case selectPlan(id: String)
     case editPlan(id: String)
@@ -32,8 +31,8 @@ final class HomeNavigationRouter: NavigationRouter {
             handleCreate(buildType: .plan)
         case .createWorkout:
             handleCreate(buildType: .workout)
-        case let .seletectWorkout(id, historyFilename):
-            handleSelectWorkout(id: id, historyFilename: historyFilename)
+        case let .seletectWorkout(id):
+            handleSelectWorkout(id: id)
         case .editWorkout(let id):
             handleEditWorkout(id: id)
         case .selectPlan(let id):
@@ -59,9 +58,8 @@ private extension HomeNavigationRouter {
         presentNavController(view: view, navRouter: &navRouter)
     }
     
-    func handleSelectWorkout(id: String, historyFilename: String?) {
-        guard let historyFilename = historyFilename else { return }
-        let interactor = DoWorkoutInteractor(workoutId: id, historyFilename: historyFilename)
+    func handleSelectWorkout(id: String) {
+        let interactor = DoWorkoutInteractor(workoutId: id)
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
             self?.navigator?.dismiss(animated: true)

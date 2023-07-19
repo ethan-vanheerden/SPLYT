@@ -39,8 +39,7 @@ struct DoPlanView<VM: ViewModel>: View where VM.Event == DoPlanViewEvent, VM.Vie
             VStack(spacing: Layout.size(1.5)) {
                 ForEach(display.workouts, id: \.self) { viewState in
                     RoutineTile(viewState: viewState,
-                                tapAction: { navigationRouter.navigate(.doWorkout(workoutId: viewState.id,
-                                                                                  historyFilename: viewState.historyFilename)) },
+                                tapAction: { navigationRouter.navigate(.doWorkout(workoutId: viewState.id)) },
                                 editAction: { },
                                 deleteAction: { })
                     

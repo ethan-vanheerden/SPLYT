@@ -27,15 +27,8 @@ final class DoPlanNavigationRouterTests: XCTestCase {
         XCTAssertTrue(mockNavigator.calledDismiss)
     }
     
-    func testNavigate_DoWorkout_NoHistoryFilename() {
-        sut.navigate(.doWorkout(workoutId: WorkoutFixtures.fullBodyWorkoutId,
-                                historyFilename: nil))
-        XCTAssertNil(mockNavigator.stubPushedVC)
-    }
-    
     func testNavigate_DoWorkout() {
-        sut.navigate(.doWorkout(workoutId: WorkoutFixtures.fullBodyWorkoutId,
-                                historyFilename: WorkoutFixtures.fullBodyWorkoutFilename))
+        sut.navigate(.doWorkout(workoutId: WorkoutFixtures.fullBodyWorkoutId))
         
         let expectedVC = UIHostingController<WorkoutPreviewView<DoWorkoutViewModel>>.self
         

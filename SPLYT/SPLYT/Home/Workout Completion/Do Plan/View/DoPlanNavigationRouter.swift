@@ -13,7 +13,7 @@ import SwiftUI
 
 enum DoPlanNavigationEvent {
     case exit
-    case doWorkout(workoutId: String, historyFilename: String?)
+    case doWorkout(workoutId: String)
 }
 
 // MARK: - Router
@@ -30,8 +30,8 @@ final class DoPlanNavigationRouter: NavigationRouter {
         switch event {
         case .exit:
             handleExit()
-        case let .doWorkout(workoutId, historyFilename):
-            handleDoWorkout(workoutId: workoutId, historyFilename: historyFilename)
+        case let .doWorkout(workoutId):
+            handleDoWorkout(workoutId: workoutId)
         }
     }
 }
@@ -43,10 +43,8 @@ private extension DoPlanNavigationRouter {
         navigator?.dismiss(animated: true)
     }
     
-    func handleDoWorkout(workoutId: String, historyFilename: String?) {
-        guard let historyFilename = historyFilename else { return }
+    func handleDoWorkout(workoutId: String) {
         let interactor = DoWorkoutInteractor(workoutId: workoutId,
-                                             historyFilename: historyFilename,
                                              planId: planId)
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         let navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in

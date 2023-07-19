@@ -34,24 +34,14 @@ final class HomeInteractorTests: XCTestCase {
     }
     
     func testInteract_DeleteWorkout_NoSavedDomain_Error() async {
-        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                             historyFilename: WorkoutFixtures.legWorkoutFilename))
-        XCTAssertEqual(result, .error)
-    }
-    
-    func testInteract_DeleteWorkout_NoHistoryFilename_Error() async {
-        await load()
-        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                             historyFilename: nil))
-        
+        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId))
         XCTAssertEqual(result, .error)
     }
     
     func testInteract_DeleteWorkout_SaveRoutines_ServiceError() async {
         await load()
         mockService.saveRoutinesThrow = true
-        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                             historyFilename: WorkoutFixtures.legWorkoutFilename))
+        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId))
         
         XCTAssertEqual(result, .error)
         XCTAssertTrue(mockService.saveRoutinesCalled)
@@ -61,8 +51,7 @@ final class HomeInteractorTests: XCTestCase {
     func testInteract_DeleteWorkout_DeleteWorkoutHistory_ServiceError() async {
         await load()
         mockService.deleteWorkoutHistoryThrow = true
-        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                             historyFilename: WorkoutFixtures.legWorkoutFilename))
+        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId))
         
         XCTAssertEqual(result, .error)
         XCTAssertTrue(mockService.saveRoutinesCalled)
@@ -71,8 +60,7 @@ final class HomeInteractorTests: XCTestCase {
     
     func testInteract_DeleteWorkout_BadId_DoesNothing() async {
         await load()
-        let result = await sut.interact(with: .deleteWorkout(id: "not-a-workout",
-                                                             historyFilename: "bad-filename"))
+        let result = await sut.interact(with: .deleteWorkout(id: "not-a-workout"))
         let expectedDomain = HomeDomain(routines: WorkoutFixtures.loadedRoutines)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
@@ -81,8 +69,7 @@ final class HomeInteractorTests: XCTestCase {
     
     func testInteract_DeleteWorkout_Success() async {
         await load()
-        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                             historyFilename: WorkoutFixtures.legWorkoutFilename))
+        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId))
         
         var routines = WorkoutFixtures.loadedRoutines
         routines.workouts.removeValue(forKey: WorkoutFixtures.legWorkoutId)
@@ -138,8 +125,7 @@ final class HomeInteractorTests: XCTestCase {
     }
     
     func testInteract_ToggleDialog_NoSavedDomain_Error() async {
-        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                                                                                 historyFilename: WorkoutFixtures.legWorkoutFilename),
+        let result = await sut.interact(with: .toggleDialog(type: .deleteWorkout(id: WorkoutFixtures.legWorkoutId),
                                                             isOpen: true))
         
         XCTAssertEqual(result, .error)
@@ -147,8 +133,7 @@ final class HomeInteractorTests: XCTestCase {
     
     func testInteract_ToggleDialog_Success() async {
         let dialogs: [HomeDialog] = [
-            .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                           historyFilename: WorkoutFixtures.legWorkoutFilename),
+            .deleteWorkout(id: WorkoutFixtures.legWorkoutId),
             .deletePlan(id: WorkoutFixtures.myPlanId)
         ]
         

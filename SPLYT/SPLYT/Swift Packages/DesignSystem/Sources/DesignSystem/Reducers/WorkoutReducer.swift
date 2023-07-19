@@ -60,7 +60,6 @@ public struct WorkoutReducer {
             let numExercisesTitle = getNumExercisesTitle(workout: workout)
             
             return RoutineTileViewState(id: workout.id,
-                                        historyFilename: workout.historyFilename,
                                         title: workout.name,
                                         subtitle: numExercisesTitle,
                                         lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted))

@@ -15,14 +15,14 @@ final class MockDoWorkoutService: DoWorkoutServiceType {
     
     var loadWorkoutThrow = false
     var stubWorkout: Workout? = nil
-    func loadWorkout(workoutId: String, historyFilename: String, planId: String?) throws -> Workout {
+    func loadWorkout(workoutId: String, planId: String?) throws -> Workout {
         guard !loadWorkoutThrow else { throw MockError.someError }
         return stubWorkout ?? WorkoutFixtures.legWorkout
     }
     
     var saveWorkoutThrow = false
     private(set) var saveWorkoutCalled = false
-    func saveWorkout(workout: Workout, historyFilename: String, planId: String?) throws {
+    func saveWorkout(workout: Workout, planId: String?, completionDate: Date) throws {
         saveWorkoutCalled = true
         guard !saveWorkoutThrow else { throw MockError.someError }
     }
