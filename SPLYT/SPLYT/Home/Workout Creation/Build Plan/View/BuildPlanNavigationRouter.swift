@@ -12,6 +12,7 @@ import SwiftUI
 // MARK: - Navigation Events
 
 enum BuildPlanNavigationEvent {
+    case back
     case exit
     case createNewWorkout
 }
@@ -29,6 +30,8 @@ final class BuildPlanNavigationRouter: NavigationRouter {
     
     func navigate(_ event: BuildPlanNavigationEvent) {
         switch event {
+        case .back:
+            handleBack()
         case .exit:
             handleExit()
         case .createNewWorkout:
@@ -40,6 +43,10 @@ final class BuildPlanNavigationRouter: NavigationRouter {
 // MARK: - Private
 
 private extension BuildPlanNavigationRouter {
+    func handleBack() {
+        navigator?.pop(animated: true)
+    }
+    
     func handleExit() {
         navigator?.dismissSelf(animated: true)
     }

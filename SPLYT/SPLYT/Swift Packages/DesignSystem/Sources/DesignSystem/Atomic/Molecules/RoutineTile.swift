@@ -65,20 +65,17 @@ public struct RoutineTileViewState: Hashable {
     let subtitle: String
     let lastCompletedTitle: String?
     let includeIcon: Bool // For edit and delete actions
-    public let lastCompletedDate: Date?
     
     public init(id: String,
                 title: String,
                 subtitle: String,
                 lastCompletedTitle: String? = nil,
-                includeIcon: Bool = true,
-                lastCompletedDate: Date? = nil) {
+                includeIcon: Bool = true) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
         self.lastCompletedTitle = lastCompletedTitle
         self.includeIcon = includeIcon
-        self.lastCompletedDate = lastCompletedDate
     }
 }
 

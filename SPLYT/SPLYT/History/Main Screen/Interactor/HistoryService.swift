@@ -12,9 +12,8 @@ import ExerciseCore
 // MARK: - Protocol
 
 protocol HistoryServiceType {
-    func loadWorkoutHistory() throws -> [Workout]
-    func deleteWorkoutHistory(workoutId: String,
-                              completionDate: Date) throws -> [Workout] // Returns the history with the workout deleted
+    func loadWorkoutHistory() throws -> [WorkoutHistory]
+    func deleteWorkoutHistory(historyId: String) throws -> [WorkoutHistory] // Returns the history with the workout deleted
 }
 
 // MARK: - Implementation
@@ -26,22 +25,22 @@ struct HistoryService: HistoryServiceType {
         self.cacheInteractor = cacheInteractor
     }
     
-    func loadWorkoutHistory() throws -> [Workout] {
+    func loadWorkoutHistory() throws -> [WorkoutHistory] {
         let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
         
         if !(try cacheInteractor.fileExists(request: completedWorkoutsRequest)) {
             try cacheInteractor.save(request: completedWorkoutsRequest,
-                                     data: [Workout]())
+                                     data: [WorkoutHistory]())
         }
         
         return try cacheInteractor.load(request: completedWorkoutsRequest)
     }
     
-    func deleteWorkoutHistory(workoutId: String, completionDate: Date) throws -> [Workout] {
+    func deleteWorkoutHistory(historyId: String) throws -> [WorkoutHistory] {
         let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
         var workoutHistory = try loadWorkoutHistory()
         
-        workoutHistory.removeAll { $0.id == workoutId && $0.lastCompleted == completionDate }
+        workoutHistory.removeAll { $0.id == historyId }
         try cacheInteractor.save(request: completedWorkoutsRequest, data: workoutHistory)
         
         return workoutHistory

@@ -12,7 +12,7 @@ public struct Workout: Codable, Equatable {
     public let id: String
     public let name: String
     public var exerciseGroups: [ExerciseGroup]
-    public let planName: String? // The name of the owning plan
+    public var planName: String? // The name of the owning plan
     public var createdAt: Date
     public var lastCompleted: Date?
     

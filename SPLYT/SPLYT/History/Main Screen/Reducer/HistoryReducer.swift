@@ -28,14 +28,37 @@ struct HistoryReducer {
 
 private extension HistoryReducer {
     func getDisplay(domain: HistoryDomain, dialog: HistoryDialog? = nil) -> HistoryDisplay {
-        let workouts = WorkoutReducer.createWorkoutRoutineTiles(workouts: domain.workouts,
-                                                                isHistory: true)
+        let workouts = getHistoryTileStates(histories: domain.workouts)
         
         let display = HistoryDisplay(workouts: workouts,
                                      presentedDialog: dialog,
                                      deleteWorkoutHistoryDialog: deleteWorkoutHistoryDialog)
         
         return display
+    }
+    
+    func getHistoryTileStates(histories: [WorkoutHistory]) -> [RoutineTileViewState] {
+        return histories.map { history in
+            let workout = history.workout
+            let tileTitle = getTileTitle(workoutName: workout.name, planName: workout.planName)
+            let numExercisesTitle = WorkoutReducer.getNumExercisesTitle(workout: workout)
+            let lastCompletedTitle = WorkoutReducer.getLastCompletedTitle(date: workout.lastCompleted,
+                                                                          isHistory: true)
+            
+            return RoutineTileViewState(id: history.id, // Use the history id instead of the workout id
+                                        title: tileTitle,
+                                        subtitle: numExercisesTitle,
+                                        lastCompletedTitle: lastCompletedTitle)
+        }
+    }
+    
+    private func getTileTitle(workoutName: String, planName: String?) -> String {
+        var planTitle = ""
+        if let planName = planName {
+            planTitle = " | \(planName)"
+        }
+        
+        return workoutName + planTitle
     }
     
     var deleteWorkoutHistoryDialog: DialogViewState {
@@ -50,7 +73,8 @@ private extension HistoryReducer {
 
 fileprivate struct Strings {
     static let deleteWorkoutHistory = "Delete workout history?"
-    static let deleteThisVersion = "This will delete only this completed version of the workout. This action can't be undone"
+    static let deleteThisVersion = "This will delete only this completed version of the workout. This action can't be undone."
     static let delete = "Delete"
     static let cancel = "Cancel"
+    static let completed = "Completed"
 }

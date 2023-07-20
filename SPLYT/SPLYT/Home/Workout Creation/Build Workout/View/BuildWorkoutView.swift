@@ -138,16 +138,14 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func emptyExerciseView(isFiltering: Bool) -> some View {
-        VStack {
-            Spacer()
-            Text(Strings.noExercisesFound)
-                .body(style: .medium)
+        EmojiTitle(emoji: "😅", title: Strings.noExercisesFound) {
             if isFiltering {
                 SplytButton(text: Strings.removeFilters) {
                     viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
                 }
+            } else {
+                EmptyView()
             }
-            Spacer()
         }
         .padding(.horizontal, horizontalPadding)
     }
@@ -372,7 +370,7 @@ fileprivate struct Strings {
     static let addYourExercises = "ADD YOUR EXERCISES"
     static let addGroup = "Add group"
     static let editSetsReps = "Edit sets/reps"
-    static let noExercisesFound = "No exercises found 😅"
+    static let noExercisesFound = "No exercises found"
     static let removeFilters = "Remove filters"
     static let favorites = "Favorites"
     static let musclesWorked = "Muscles worked"

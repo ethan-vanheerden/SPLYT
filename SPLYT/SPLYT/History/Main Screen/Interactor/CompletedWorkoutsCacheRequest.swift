@@ -11,6 +11,6 @@ import ExerciseCore
 
 /// Stores all the workout instances the user has completed in a long list (most recent first).
 struct CompletedWorkoutsCacheRequest: CacheRequest {
-    typealias CacheData = [Workout]
+    typealias CacheData = [WorkoutHistory]
     let filename = "all_completed_workouts"
 }

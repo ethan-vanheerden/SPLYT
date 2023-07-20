@@ -76,7 +76,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                                                   taskPriority: .userInitiated) })
     }
     
-    /// Returns the workoutId to be deleted
+    /// Returns the workoutId related to a delete workout dialog
     private func deletedWorkoutId(dialog: HomeDialog?) -> String? {
         if let dialog = dialog,
            case let .deleteWorkout(id) = dialog {

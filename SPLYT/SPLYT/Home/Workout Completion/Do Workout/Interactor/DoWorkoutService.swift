@@ -50,7 +50,13 @@ struct DoWorkoutService: DoWorkoutServiceType {
         
         // Then load the existing history and place this workout at the head
         var completedWorkouts = try cacheInteractor.load(request: completedWorkoutsRequest)
-        completedWorkouts.insert(workout, at: 0)
+        
+        // Construct the new history id using the current date and the workout's id
+        let historyId = WorkoutInteractor.getId(name: workout.id, creationDate: completionDate)
+        let workoutHistory = WorkoutHistory(id: historyId,
+                                            workout: workout)
+        
+        completedWorkouts.insert(workoutHistory, at: 0)
         try cacheInteractor.save(request: completedWorkoutsRequest, data: completedWorkouts)
     }
 }

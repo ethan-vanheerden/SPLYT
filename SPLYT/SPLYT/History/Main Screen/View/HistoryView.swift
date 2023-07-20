@@ -18,7 +18,6 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent, VM.V
          navigationRouter: HistoryNavigationRouter) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
-        self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
     var body: some View {
@@ -26,6 +25,9 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent, VM.V
             .navigationBar(viewState: .init(title: Strings.history,
                                             size: .large,
                                             position: .left))
+            .onAppear {
+                viewModel.send(.load, taskPriority: .userInitiated)
+            }
     }
     
     @ViewBuilder
@@ -42,26 +44,25 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent, VM.V
     
     @ViewBuilder
     private func mainView(display: HistoryDisplay) -> some View {
-        let deleteWorkoutHistory = deleteWorkoutHistoryInfo(dialog: display.presentedDialog)
+        let deleteHistoryId = deletedHistoryId(dialog: display.presentedDialog)
         
         VStack {
             workoutsView(workouts: display.workouts)
         }
-        .dialog(isOpen: deleteWorkoutHistory != nil,
+        .dialog(isOpen: deleteHistoryId != nil,
                 viewState: display.deleteWorkoutHistoryDialog,
-                primaryAction: { viewModel.send(.deleteWorkoutHistory(workoutId: deleteWorkoutHistory?.0 ?? "",
-                                                                      completionDate: deleteWorkoutHistory?.1),
+                primaryAction: { viewModel.send(.deleteWorkoutHistory(historyId: deleteHistoryId ?? ""),
                                                 taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(dialog: .deleteWorkoutHistory(workoutId: "",
-                                                                                              completionDate: nil),
+                secondaryAction: { viewModel.send(.toggleDialog(dialog: .deleteWorkoutHistory(historyId: ""),
                                                                 isOpen: false),
                                                   taskPriority: .userInitiated) })
     }
     
-    private func deleteWorkoutHistoryInfo(dialog: HistoryDialog?) -> (String, Date?)? {
+    /// Returns the historyId releated to a delete history dialog
+    private func deletedHistoryId(dialog: HistoryDialog?) -> String? {
         if let dialog = dialog,
-           case let .deleteWorkoutHistory(workoutId, completionDate) = dialog {
-            return (workoutId, completionDate)
+           case .deleteWorkoutHistory(let historyId) = dialog {
+            return historyId
         } else {
             return nil
         }
@@ -78,13 +79,12 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent, VM.V
                         RoutineTile(viewState: viewState,
                                     tapAction: { },
                                     deleteAction: { viewModel.send(
-                                        .toggleDialog(
-                                            dialog: .deleteWorkoutHistory(workoutId: viewState.id,
-                                                                          completionDate: viewState.lastCompletedDate),
-                                            isOpen: true ),
+                                        .toggleDialog(dialog: .deleteWorkoutHistory(historyId: viewState.id),
+                                                      isOpen: true ),
                                         taskPriority: .userInitiated) })
                     }
                 }
+                .padding(.top, Layout.size(2))
                 .padding(.horizontal, horizontalPadding)
             }
         }

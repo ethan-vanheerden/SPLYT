@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 public struct TabBar: View {
@@ -35,7 +34,7 @@ public struct TabBar: View {
             Image(systemName: tab.imageName(isSelected: selectedTab == tab))
                 .padding(.bottom, Layout.size(0.25))
             Text(tab.title)
-                .footnote()
+                .footnote(style: .semiBold)
         }
         .frame(width: Layout.size(10)) // Fixed height so properly centered
     }

@@ -54,7 +54,7 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
         }
         .dialog(isOpen: display.presentedDialog == .back,
                 viewState: display.backDialog,
-                primaryAction: { navigationRouter.navigate(.exit) },
+                primaryAction: { navigationRouter.navigate(.back) },
                 secondaryAction: { viewModel.send(.toggleDialog(dialog: .back, isOpen: false),
                                                   taskPriority: .userInitiated) })
         .dialog(isOpen: deleteWorkoutId != nil,

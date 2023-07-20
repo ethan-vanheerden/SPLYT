@@ -12,7 +12,7 @@ import Core
 
 enum HistoryViewEvent {
     case load
-    case deleteWorkoutHistory(workoutId: String, completionDate: Date?)
+    case deleteWorkoutHistory(historyId: String)
     case toggleDialog(dialog: HistoryDialog, isOpen: Bool)
 }
 
@@ -31,9 +31,8 @@ final class HistoryViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .load)
-        case let .deleteWorkoutHistory(workoutId, completionDate):
-            await react(domainAction: .deleteWorkoutHistory(workoutId: workoutId,
-                                                            completionDate: completionDate))
+        case .deleteWorkoutHistory(let historyId):
+            await react(domainAction: .deleteWorkoutHistory(historyId: historyId))
         case let .toggleDialog(dialog, isOpen):
             await react(domainAction: .toggleDialog(dialog: dialog, isOpen: isOpen))
         }

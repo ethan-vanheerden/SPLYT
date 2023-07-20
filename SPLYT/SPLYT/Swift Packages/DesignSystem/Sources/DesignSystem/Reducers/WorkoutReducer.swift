@@ -54,23 +54,21 @@ public struct WorkoutReducer {
     
     /// Maps the given workouts into a list of `RoutineTileViewState`s
     /// - Parameter workouts: The workouts to reduce
-    /// - Parameter isHistory: Whether or not this workout is being presented from the history page
     /// - Returns: The `RoutineTileViewState`s representing the given workouts
-    public static func createWorkoutRoutineTiles(workouts: [Workout], isHistory: Bool = false) -> [RoutineTileViewState] {
+    public static func createWorkoutRoutineTiles(workouts: [Workout]) -> [RoutineTileViewState] {
         return workouts.map { workout in
             let numExercisesTitle = getNumExercisesTitle(workout: workout)
             
             return RoutineTileViewState(id: workout.id,
                                         title: workout.name,
                                         subtitle: numExercisesTitle,
-                                        lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted,
-                                                                                  isHistory: isHistory),
-                                        lastCompletedDate: workout.lastCompleted)
+                                        lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted))
         }
     }
     
     /// Creates a formatted date string to display for the routine's last completed date.
     /// - Parameter date: The date the routine was last completed
+    /// - Parameter isHistory: Indicates if this title will be used in the History view or not.
     /// - Returns: A formatted Date string in the form: "Last completed: Feb 3, 2023"
     public static func getLastCompletedTitle(date: Date?, isHistory: Bool = false) -> String? {
         guard let date = date else { return nil }

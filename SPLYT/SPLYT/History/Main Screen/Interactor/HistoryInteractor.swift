@@ -11,7 +11,7 @@ import Foundation
 
 enum HistoryDomainAction {
     case load
-    case deleteWorkoutHistory(workoutId: String, completionDate: Date?)
+    case deleteWorkoutHistory(historyId: String)
     case toggleDialog(dialog: HistoryDialog, isOpen: Bool)
 }
 
@@ -37,8 +37,8 @@ final class HistoryInteractor {
         switch action {
         case .load:
             return handleLoad()
-        case let .deleteWorkoutHistory(workoutId, completionDate):
-            return handleDeleteWorkoutHistory(workoutId: workoutId, completionDate: completionDate)
+        case .deleteWorkoutHistory(let historyId):
+            return handleDeleteWorkoutHistory(historyId: historyId)
         case let .toggleDialog(dialog, isOpen):
             return handleToggleDialog(dialog: dialog, isOpen: isOpen)
         }
@@ -59,13 +59,11 @@ private extension HistoryInteractor {
         }
     }
     
-    func handleDeleteWorkoutHistory(workoutId: String, completionDate: Date?) -> HistoryDomainResult {
-        guard var domain = savedDomain,
-              let completionDate = completionDate else { return .error }
+    func handleDeleteWorkoutHistory(historyId: String) -> HistoryDomainResult {
+        guard var domain = savedDomain else { return .error }
         
         do {
-            let updatedWorkouts = try service.deleteWorkoutHistory(workoutId: workoutId,
-                                                                   completionDate: completionDate)
+            let updatedWorkouts = try service.deleteWorkoutHistory(historyId: historyId)
             domain.workouts = updatedWorkouts
             
             return updateDomain(domain: domain)
