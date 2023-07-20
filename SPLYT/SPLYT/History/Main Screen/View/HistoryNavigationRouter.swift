@@ -11,7 +11,7 @@ import Core
 // MARK: - Navigation Events
 
 enum HistoryNavigationEvent {
-    
+    case selectWorkoutHistory(historyId: String)
 }
 
 // MARK: - Router
@@ -20,12 +20,17 @@ final class HistoryNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
     
     func navigate(_ event: HistoryNavigationEvent) {
-        return
+        switch event {
+        case .selectWorkoutHistory(let historyId):
+            handleSelectWorkoutHistory(historyId: historyId)
+        }
     }
 }
 
 // MARK: - Private
 
 private extension HistoryNavigationRouter {
-    
+    func handleSelectWorkoutHistory(historyId: String) {
+        
+    }
 }

@@ -9,7 +9,8 @@ import SwiftUI
 import Core
 import DesignSystem
 
-struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent, VM.ViewState == HistoryViewState {
+struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent,
+                                              VM.ViewState == HistoryViewState {
     @ObservedObject private var viewModel: VM
     private let navigationRouter: HistoryNavigationRouter
     private let horizontalPadding = Layout.size(2)
@@ -77,7 +78,8 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent, VM.V
                 LazyVStack(spacing: Layout.size(1.5)) {
                     ForEach(workouts, id: \.self) { viewState in
                         RoutineTile(viewState: viewState,
-                                    tapAction: { },
+                                    tapAction: { navigationRouter.navigate(
+                                        .selectWorkoutHistory(historyId: viewState.id)) },
                                     deleteAction: { viewModel.send(
                                         .toggleDialog(dialog: .deleteWorkoutHistory(historyId: viewState.id),
                                                       isOpen: true ),
