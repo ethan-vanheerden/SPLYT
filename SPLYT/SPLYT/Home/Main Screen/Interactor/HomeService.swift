@@ -30,7 +30,8 @@ struct HomeService: HomeServiceType {
     }
     
     func loadRoutines() throws -> CreatedRoutines {
-        return try routineService.loadRoutines()
+        let routines = try routineService.loadRoutines()
+        return routines
     }
     
     func saveRoutines(_ routines: CreatedRoutines) throws {

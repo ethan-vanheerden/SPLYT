@@ -14,6 +14,7 @@ struct SPLYTApp: App {
         WindowGroup {
             MainViewHostingController_SwiftUI()
                 .ignoresSafeArea(.keyboard)
+                .preferredColorScheme(.light)
 //                .environmentObject(UserSettings()) -> This would allow us to access the all of the user info we need throughout the app
         }
     }

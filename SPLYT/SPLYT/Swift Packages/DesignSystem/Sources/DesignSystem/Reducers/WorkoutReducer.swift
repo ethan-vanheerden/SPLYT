@@ -94,6 +94,18 @@ public struct WorkoutReducer {
         let completedPrefix = isHistory ? Strings.completed : Strings.lastCompleted
         return "\(completedPrefix): \(dateString)"
     }
+    
+    /// Creates a string combining the given workout's name and plane name if it has one.
+    /// - Parameter workout: the workout to get the name of
+    /// - Returns: The workout name with ifs plan name if it has one
+    public static func getWorkoutAndPlanName(workout: Workout) -> String {
+        var planTitle = ""
+        if let planName = workout.planName {
+            planTitle = " | \(planName)"
+        }
+        
+        return workout.name + planTitle
+    }
 }
 
 // MARK: - Private

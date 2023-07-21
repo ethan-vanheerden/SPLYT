@@ -32,9 +32,17 @@ struct WorkoutDetailsReducer {
 private extension WorkoutDetailsReducer {
     func getDisplay(domain: WorkoutDetailsDomain,
                     dialog: WorkoutDetailsDialog? = nil) -> WorkoutDetailsDisplay {
-        let groups = getCompletedGroupStates(workout: domain.workout)
+        let workout = domain.workout
+        let workoutName = WorkoutReducer.getWorkoutAndPlanName(workout: workout)
+        let numExercisesTitle = WorkoutReducer.getNumExercisesTitle(workout: workout)
+        let completedTitle = WorkoutReducer.getLastCompletedTitle(date: workout.lastCompleted,
+                                                                  isHistory: true)
+        let groups = getCompletedGroupStates(workout: workout)
         
-        let display = WorkoutDetailsDisplay(groups: groups,
+        let display = WorkoutDetailsDisplay(workoutName: workoutName,
+                                            numExercisesTitle: numExercisesTitle,
+                                            completedTitle: completedTitle ?? "",
+                                            groups: groups,
                                             expandedGroups: domain.expandedGroups,
                                             presentedDialog: dialog,
                                             deleteDialog: HistoryDialogViewStates.deleteWorkoutHistory)

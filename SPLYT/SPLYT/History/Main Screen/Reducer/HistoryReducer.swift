@@ -40,7 +40,7 @@ private extension HistoryReducer {
     func getHistoryTileStates(histories: [WorkoutHistory]) -> [RoutineTileViewState] {
         return histories.map { history in
             let workout = history.workout
-            let tileTitle = getTileTitle(workoutName: workout.name, planName: workout.planName)
+            let tileTitle = WorkoutReducer.getWorkoutAndPlanName(workout: workout)
             let numExercisesTitle = WorkoutReducer.getNumExercisesTitle(workout: workout)
             let lastCompletedTitle = WorkoutReducer.getLastCompletedTitle(date: workout.lastCompleted,
                                                                           isHistory: true)

@@ -50,11 +50,16 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
     @ViewBuilder
     private func mainView(display: WorkoutDetailsDisplay) -> some View {
         ScrollView(showsIndicators: false) {
-            groupsView(display: display)
+            VStack(alignment: .leading) {
+                header(display: display)
+                    .padding(.bottom, Layout.size(1.5))
+                groupsView(display: display)
+            }
+            .padding(.horizontal, horizontalPadding)
         }
         .animation(.default, value: display.expandedGroups)
         .confirmationDialog("", isPresented: $optionsSheetPresented, titleVisibility: .hidden) {
-            Button(Strings.deleteWorkout, role: .destructive) {
+            Button(Strings.delete, role: .destructive) {
                 viewModel.send(.toggleDialog(dialog: .delete, isOpen: true),
                                taskPriority: .userInitiated)
             }
@@ -69,6 +74,21 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
     }
     
     @ViewBuilder
+    private func header(display: WorkoutDetailsDisplay) -> some View {
+        VStack(alignment: .leading) {
+            Text(display.workoutName)
+                .title1()
+                .foregroundColor(Color(splytColor: .black))
+            Text(display.numExercisesTitle)
+                .title2()
+                .foregroundColor(Color(splytColor: .lightBlue))
+            Text(display.completedTitle)
+                .title3()
+                .foregroundColor(Color(splytColor: .gray))
+        }
+    }
+    
+    @ViewBuilder
     private func groupsView(display: WorkoutDetailsDisplay) -> some View {
         VStack {
             ForEach(Array(display.groups.enumerated()), id: \.element) { groupIndex, groupState in
@@ -77,7 +97,6 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
                                            viewState: groupState)
             }
         }
-        .padding(.horizontal, horizontalPadding)
     }
     
     private func groupExpandBinding(group: Int, expandedGroups: [Bool]) -> Binding<Bool> {
@@ -101,5 +120,5 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
 
 fileprivate struct Strings {
     static let workoutDetails = "Workout Details"
-    static let deleteWorkout = "Delete Workout"
+    static let delete = "Delete"
 }
