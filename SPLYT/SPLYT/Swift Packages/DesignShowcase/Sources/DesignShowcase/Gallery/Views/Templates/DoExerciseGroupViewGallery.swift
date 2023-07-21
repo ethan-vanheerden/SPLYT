@@ -6,7 +6,7 @@ struct DoExerciseGroupViewGallery: View {
     @State private var groupExpanded = true
     private let header: CollapseHeaderViewState = .init(title: "Group 1",
                                                         color: .lightBlue)
-    private let exercises: [ExerciseViewState] = StateFixtures.legWorkoutExercisesPlaceholders(includeHeaderLine: false)[0]
+    private let exercises: [ExerciseViewState] = StateFixtures.fullBodyWorkoutExercises(includeHeaderLine: false)[0]
     private let slider: ActionSliderViewState = .init(sliderColor: .lightBlue,
                                                       backgroundText: "Mark as complete")
     private var viewState: DoExerciseGroupViewState {
@@ -16,18 +16,20 @@ struct DoExerciseGroupViewGallery: View {
     }
     
     var body: some View {
-        VStack {
-            DoExerciseGroupView(isExpanded: $groupExpanded,
-                                viewState: viewState,
-                                addSetAction: { },
-                                removeSetAction: { },
-                                updateSetAction: { _, _, _ in },
-                                updateModifierAction: { _, _, _ in },
-                                usePreviousInputAction: { _, _, _ in },
-                                addNoteAction: { },
-                                finishSlideAction: { })
-            Spacer()
+        ScrollView {
+            VStack {
+                DoExerciseGroupView(isExpanded: $groupExpanded,
+                                    viewState: viewState,
+                                    addSetAction: { },
+                                    removeSetAction: { },
+                                    updateSetAction: { _, _, _ in },
+                                    updateModifierAction: { _, _, _ in },
+                                    usePreviousInputAction: { _, _, _ in },
+                                    addNoteAction: { },
+                                    finishSlideAction: { })
+                Spacer()
+            }
+            .padding(.horizontal, Layout.size(2))
         }
-        .padding(.horizontal, Layout.size(2))
     }
 }

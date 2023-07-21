@@ -84,7 +84,6 @@
 		AA672A512A6495720009919E /* HistoryNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A502A6495720009919E /* HistoryNavigationRouter.swift */; };
 		AA672A532A6495830009919E /* HistoryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A522A6495830009919E /* HistoryReducer.swift */; };
 		AA672A552A64958D0009919E /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A542A64958D0009919E /* HistoryViewModel.swift */; };
-		AA672A572A64991C0009919E /* CompletedWorkoutsCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A562A64991C0009919E /* CompletedWorkoutsCacheRequest.swift */; };
 		AA672A5D2A69B8520009919E /* WorkoutDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A5C2A69B8520009919E /* WorkoutDetailsService.swift */; };
 		AA672A5F2A69B85E0009919E /* WorkoutDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A5E2A69B85E0009919E /* WorkoutDetailsInteractor.swift */; };
 		AA672A612A69B8700009919E /* WorkoutDetailsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A602A69B8700009919E /* WorkoutDetailsDomain.swift */; };
@@ -94,6 +93,7 @@
 		AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A682A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift */; };
 		AA672A6B2A69B8BE0009919E /* WorkoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A6A2A69B8BE0009919E /* WorkoutDetailsView.swift */; };
 		AA672A6D2A69BA620009919E /* WorkoutDetailsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A6C2A69BA620009919E /* WorkoutDetailsViewState.swift */; };
+		AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A702A6A11280009919E /* HistoryDialogViewStates.swift */; };
 		AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */; };
 		AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */; };
 		AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */; };
@@ -252,7 +252,6 @@
 		AA672A502A6495720009919E /* HistoryNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryNavigationRouter.swift; sourceTree = "<group>"; };
 		AA672A522A6495830009919E /* HistoryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryReducer.swift; sourceTree = "<group>"; };
 		AA672A542A64958D0009919E /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
-		AA672A562A64991C0009919E /* CompletedWorkoutsCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedWorkoutsCacheRequest.swift; sourceTree = "<group>"; };
 		AA672A5C2A69B8520009919E /* WorkoutDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsService.swift; sourceTree = "<group>"; };
 		AA672A5E2A69B85E0009919E /* WorkoutDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsInteractor.swift; sourceTree = "<group>"; };
 		AA672A602A69B8700009919E /* WorkoutDetailsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsDomain.swift; sourceTree = "<group>"; };
@@ -262,6 +261,7 @@
 		AA672A682A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsNavigationRouter.swift; sourceTree = "<group>"; };
 		AA672A6A2A69B8BE0009919E /* WorkoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsView.swift; sourceTree = "<group>"; };
 		AA672A6C2A69BA620009919E /* WorkoutDetailsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsViewState.swift; sourceTree = "<group>"; };
+		AA672A702A6A11280009919E /* HistoryDialogViewStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDialogViewStates.swift; sourceTree = "<group>"; };
 		AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewState.swift; sourceTree = "<group>"; };
 		AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
@@ -691,7 +691,6 @@
 				AA672A462A6495080009919E /* HistoryService.swift */,
 				AA672A482A6495360009919E /* HistoryInteractor.swift */,
 				AA672A4A2A64954D0009919E /* HistoryDomain.swift */,
-				AA672A562A64991C0009919E /* CompletedWorkoutsCacheRequest.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -699,6 +698,7 @@
 		AA672A432A6494170009919E /* Reducer */ = {
 			isa = PBXGroup;
 			children = (
+				AA672A702A6A11280009919E /* HistoryDialogViewStates.swift */,
 				AA672A522A6495830009919E /* HistoryReducer.swift */,
 				AA672A542A64958D0009919E /* HistoryViewModel.swift */,
 			);
@@ -1359,6 +1359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
+				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
 				AA672A4B2A64954D0009919E /* HistoryDomain.swift in Sources */,
@@ -1435,7 +1436,6 @@
 				AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */,
 				AACB297F2A15580E00AACB6B /* DoWorkoutViewState.swift in Sources */,
 				AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */,
-				AA672A572A64991C0009919E /* CompletedWorkoutsCacheRequest.swift in Sources */,
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
 				AA672A552A64958D0009919E /* HistoryViewModel.swift in Sources */,
 				AA672A632A69B87F0009919E /* WorkoutDetailsViewModel.swift in Sources */,

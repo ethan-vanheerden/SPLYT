@@ -5,6 +5,7 @@ struct TemplateGallery: GalleryType {
 }
 
 enum Template: String, CaseIterable, GalleryItem {
+    case completedExerciseGroup = "Completed Exercise Group"
     case doExerciseGroup = "Do Exercise Group"
     
     var title: String {

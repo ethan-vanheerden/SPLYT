@@ -20,30 +20,26 @@ protocol HistoryServiceType {
 
 struct HistoryService: HistoryServiceType {
     private let cacheInteractor: CacheInteractorType
+    private let completedWorkoutsService: CompletedWorkoutsServiceType
+    private let completedWorkoutsCacheRequest = CompletedWorkoutsCacheRequest()
     
-    init(cacheInteractor: CacheInteractorType = CacheInteractor()) {
+    init(completedWorkoutsService: CompletedWorkoutsServiceType = CompletedWorkoutsService(),
+         cacheInteractor: CacheInteractorType = CacheInteractor()) {
+        self.completedWorkoutsService = completedWorkoutsService
         self.cacheInteractor = cacheInteractor
     }
     
     func loadWorkoutHistory() throws -> [WorkoutHistory] {
-        let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
-        
-        if !(try cacheInteractor.fileExists(request: completedWorkoutsRequest)) {
-            try cacheInteractor.save(request: completedWorkoutsRequest,
+        if !(try cacheInteractor.fileExists(request: completedWorkoutsCacheRequest)) {
+            try cacheInteractor.save(request: completedWorkoutsCacheRequest,
                                      data: [WorkoutHistory]())
         }
         
-        return try cacheInteractor.load(request: completedWorkoutsRequest)
+        return try cacheInteractor.load(request: completedWorkoutsCacheRequest)
     }
     
     func deleteWorkoutHistory(historyId: String) throws -> [WorkoutHistory] {
-        let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
-        var workoutHistory = try loadWorkoutHistory()
-        
-        workoutHistory.removeAll { $0.id == historyId }
-        try cacheInteractor.save(request: completedWorkoutsRequest, data: workoutHistory)
-        
-        return workoutHistory
+        return try completedWorkoutsService.deleteWorkoutHistory(historyId: historyId)
     }
 }
 

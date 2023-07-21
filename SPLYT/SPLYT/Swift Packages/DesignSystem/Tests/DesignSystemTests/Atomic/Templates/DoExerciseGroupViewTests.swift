@@ -12,18 +12,17 @@ import SnapshotTesting
 
 final class DoExerciseGroupViewTests: XCTestCase {
     typealias StateFixtures = WorkoutViewStateFixtures
-    private let header: CollapseHeaderViewState = .init(title: "Group 1",
-                                                        color: .lightBlue)
-    private let exercises: [ExerciseViewState] = StateFixtures.legWorkoutExercisesPlaceholders(includeHeaderLine: false)[0]
-    private let slider: ActionSliderViewState = .init(sliderColor: .lightBlue,
-                                                      backgroundText: "Mark as complete")
-    private var viewState: DoExerciseGroupViewState {
-        return .init(header: header,
-                     exercises: exercises,
-                     slider: slider)
-    }
     
     func testDoExerciseGroupView() {
+        let header = CollapseHeaderViewState(title: "Group 1",
+                                            color: .lightBlue)
+        let exercises = StateFixtures.legWorkoutExercisesPlaceholders(includeHeaderLine: false)[0]
+        let slider = ActionSliderViewState(sliderColor: .lightBlue,
+                                          backgroundText: "Mark as complete")
+        let viewState = DoExerciseGroupViewState(header: header,
+                                                 exercises: exercises,
+                                                 slider: slider)
+        
         let view = VStack {
             DoExerciseGroupView(isExpanded: .constant(true),
                                 viewState: viewState,

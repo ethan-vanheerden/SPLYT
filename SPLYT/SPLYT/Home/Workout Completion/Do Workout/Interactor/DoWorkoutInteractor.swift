@@ -88,7 +88,6 @@ final class DoWorkoutInteractor {
 // MARK: - Private Handlers
 
 private extension DoWorkoutInteractor {
-    
     func handleLoadWorkout() -> DoWorkoutDomainResult {
         do {
             // TODO: use the workout ID to make a network call first instead of a cache lookup

@@ -168,7 +168,8 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     private func groupExpandBinding(group: Int, expandedGroups: [Bool]) -> Binding<Bool> {
         return Binding(
             get: { return expandedGroups[group] },
-            set: { viewModel.send(.toggleGroupExpand(group: group, isExpanded: $0)) }
+            set: { viewModel.send(.toggleGroupExpand(group: group, isExpanded: $0),
+                                  taskPriority: .userInitiated) }
         )
     }
 }

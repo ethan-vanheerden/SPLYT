@@ -13,6 +13,8 @@ public struct SectionHeader: View {
             Text(viewState.title)
                 .body()
                 .multilineTextAlignment(.center)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
             if viewState.includeLine {
                 GeometryReader { proxy in
                     Path { path in

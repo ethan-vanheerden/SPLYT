@@ -18,6 +18,19 @@ public struct WorkoutReducer {
         return result
     }
     
+    public static func reduceCompletedExerciseGroups(groups: [ExerciseGroup],
+                                                     includeHeaderLine: Bool = true) -> [[CompletedExerciseViewState]] {
+        var result = [[CompletedExerciseViewState]]()
+        
+        for group in groups {
+            let exercises = getCompletedExerciseViewStates(exercises: group.exercises,
+                                                           includeHeaderLine: includeHeaderLine)
+            result.append(exercises)
+        }
+        
+        return result
+    }
+    
     /// Ex: ["Group 1", "Group 2", "Group 3"]
     public static func getGroupTitles(workout: Workout) -> [String] {
         var titles = [String]()
@@ -97,12 +110,30 @@ private extension WorkoutReducer {
         }
     }
     
+    static func getCompletedExerciseViewStates(exercises: [Exercise],
+                                               includeHeaderLine: Bool) -> [CompletedExerciseViewState] {
+        return exercises.map { exercise in
+            let headerState = SectionHeaderViewState(title: exercise.name,
+                                                     includeLine: includeHeaderLine)
+            return CompletedExerciseViewState(header: headerState,
+                                              sets: getCompletedSetStates(exercise: exercise))
+        }
+    }
+    
     static func getSetStates(exercise: Exercise) -> [SetViewState] {
         return exercise.sets.enumerated().map { index, set in
             SetViewState(setIndex: index,
                          title: Strings.set + " \(index + 1)",
                          type: getSetViewType(set.input),
                          modifier: getSetModifierState(modifier: set.modifier))
+        }
+    }
+    
+    static func getCompletedSetStates(exercise: Exercise) -> [CompletedSetViewState] {
+        return exercise.sets.enumerated().map { index, set in
+            CompletedSetViewState(title: Strings.set + " \(index + 1)",
+                                  type: getSetViewType(set.input),
+                                  modifier: getSetModifierState(modifier: set.modifier))
         }
     }
     

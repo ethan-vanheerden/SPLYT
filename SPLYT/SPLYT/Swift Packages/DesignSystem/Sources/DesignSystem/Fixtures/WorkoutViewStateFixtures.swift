@@ -24,6 +24,18 @@ struct WorkoutViewStateFixtures {
         return sets
     }
     
+    static func createCompletedSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [CompletedSetViewState] {
+        var sets = [CompletedSetViewState]()
+        
+        for (index, (input, modifier)) in inputs.enumerated() {
+            let set = CompletedSetViewState(title: "Set \(index + 1)",
+                                            type: input,
+                                            modifier: modifier)
+            sets.append(set)
+        }
+        return sets
+    }
+    
     static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
                                    includeHeaderLine: Bool = true) -> ExerciseViewState {
         let header = SectionHeaderViewState(title: "Back Squat",
@@ -58,6 +70,38 @@ struct WorkoutViewStateFixtures {
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
                                  canRemoveSet: inputs.count > 1)
+    }
+    
+    static func backSquatViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                            includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+        let header = SectionHeaderViewState(title: "Back Squat",
+                                            includeLine: includeHeaderLine)
+        return CompletedExerciseViewState(header: header,
+                                          sets: createCompletedSetViewStates(inputs: inputs))
+    }
+    
+    static func barLungesViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                            includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+        let header = SectionHeaderViewState(title: "Bar Lunges",
+                                            includeLine: includeHeaderLine)
+        return CompletedExerciseViewState(header: header,
+                                          sets: createCompletedSetViewStates(inputs: inputs))
+    }
+    
+    static func benchPressViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                             includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+        let header = SectionHeaderViewState(title: "Bench Press",
+                                            includeLine: includeHeaderLine)
+        return CompletedExerciseViewState(header: header,
+                                          sets: createCompletedSetViewStates(inputs: inputs))
+    }
+    
+    static func inclineDBRowViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                               includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+        let header = SectionHeaderViewState(title: "Incline Dumbbell Row",
+                                            includeLine: includeHeaderLine)
+        return CompletedExerciseViewState(header: header,
+                                          sets: createCompletedSetViewStates(inputs: inputs))
     }
     
     static let repsWeight3Sets: [(SetInputViewState, SetModifierViewState?)] = [
@@ -148,6 +192,15 @@ struct WorkoutViewStateFixtures {
         ]
     }
     
+    static func legWorkoutExercisesCompleted(includeHeaderLine: Bool) -> [[CompletedExerciseViewState]] {
+        [
+            [backSquatViewStateCompleted(inputs: repsWeight4Sets,
+                                         includeHeaderLine: includeHeaderLine)],
+            [barLungesViewStateCompleted(inputs: repsWeight3Sets,
+                                         includeHeaderLine: includeHeaderLine)]
+        ]
+    }
+    
     static func fullBodyWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
         [
             [
@@ -170,6 +223,23 @@ struct WorkoutViewStateFixtures {
             [
                 barLungesViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine),
                 inclineDBRowViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine)
+            ]
+        ]
+    }
+    
+    static func fullBodyWorkoutExercisesCompleted(includeHeaderLine: Bool) -> [[CompletedExerciseViewState]] {
+        [
+            [
+                backSquatViewStateCompleted(inputs: repsWeight3Sets,
+                                            includeHeaderLine: includeHeaderLine),
+                benchPressViewStateCompleted(inputs: repsWeight3Sets,
+                                             includeHeaderLine: includeHeaderLine)
+            ],
+            [
+                barLungesViewStateCompleted(inputs: repsWeight3Sets,
+                                            includeHeaderLine: includeHeaderLine),
+                inclineDBRowViewStateCompleted(inputs: repsWeight3Sets,
+                                               includeHeaderLine: includeHeaderLine)
             ]
         ]
     }

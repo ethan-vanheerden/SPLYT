@@ -2,21 +2,23 @@ import Foundation
 
 public extension String {
     
-    /// Constructs a string using the optional integer, creating "" if it is nil
+    /// Constructs a string using the optional integer, creating "" or "--" if it is nil
     /// - Parameter int: The integer is create the string from
-    init(_ int: Int?) {
-        guard let int = int else {
-            self.init("")
-            return
+    /// - Parameter defaultDash: Whether or not to return "--" if the given Int is nil
+    init(_ int: Int?, defaultDash: Bool = false) {
+        var double: Double?
+        if let int = int {
+            double = Double(int)
         }
-        self.init("\(int)")
+        self.init(double, defaultDash: defaultDash)
     }
     
-    /// Constructs a string using the optional double, creating "" if it is nil. This gets rid of any decimals if the double is like "x.0"
+    /// Constructs a string using the optional double, creating "" or "--" if it is nil. This gets rid of any decimals if the double is like "x.0"
     /// - Parameter double: The double to create the string from
-    init(_ double: Double?) {
+    /// - Parameter defaultDash: Whether or not to return "--" if the given double is nil
+    init(_ double: Double?, defaultDash: Bool = false) {
         guard let double = double else {
-            self.init("")
+            self.init(defaultDash ? "--" : "")
             return
         }
         

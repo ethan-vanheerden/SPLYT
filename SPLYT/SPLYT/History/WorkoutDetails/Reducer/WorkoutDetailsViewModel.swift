@@ -12,6 +12,9 @@ import Core
 
 enum WorkoutDetailsViewEvent {
     case load
+    case toggleGroupExpand(group: Int, isExpanded: Bool)
+    case toggleDialog(dialog: WorkoutDetailsDialog, isOpen: Bool)
+    case delete
 }
 
 // MARK: - View Model
@@ -26,7 +29,16 @@ final class WorkoutDetailsViewModel: ViewModel {
     }
     
     func send(_ event: WorkoutDetailsViewEvent) async {
-        return
+        switch event {
+        case .load:
+            await react(domainAction: .load)
+        case let .toggleGroupExpand(group, isExpanded):
+            await react(domainAction: .toggleGroupExpand(group: group, isExpanded: isExpanded))
+        case let .toggleDialog(dialog, isOpen):
+            await react(domainAction: .toggleDialog(dialog: dialog, isOpen: isOpen))
+        case .delete:
+            await react(domainAction: .delete)
+        }
     }
 }
 

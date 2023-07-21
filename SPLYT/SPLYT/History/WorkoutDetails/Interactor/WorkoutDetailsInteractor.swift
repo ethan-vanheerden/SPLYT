@@ -11,6 +11,9 @@ import Foundation
 
 enum WorkoutDetailsDomainAction {
     case load
+    case toggleGroupExpand(group: Int, isExpanded: Bool)
+    case toggleDialog(dialog: WorkoutDetailsDialog, isOpen: Bool)
+    case delete
 }
 
 // MARK: - Domain Results
@@ -18,6 +21,8 @@ enum WorkoutDetailsDomainAction {
 enum WorkoutDetailsDomainResult {
     case error
     case loaded(WorkoutDetailsDomain)
+    case dialog(dialog: WorkoutDetailsDialog, domain: WorkoutDetailsDomain)
+    case exit(WorkoutDetailsDomain)
 }
 
 // MARK: - Interactor
@@ -34,14 +39,58 @@ final class WorkoutDetailsInteractor {
     }
     
     func interact(with action: WorkoutDetailsDomainAction) async -> WorkoutDetailsDomainResult {
-        return .error
+        switch action {
+        case .load:
+            return handleLoad()
+        case let .toggleGroupExpand(group, isExpanded):
+            return handleToggleGroupExpand(group: group, isExpanded: isExpanded)
+        case let .toggleDialog(dialog, isOpen):
+            return handleToggleDialog(dialog: dialog, isOpen: isOpen)
+        case .delete:
+            return handleDelete()
+        }
     }
 }
 
 // MARK: - Private Handlers
 
 private extension WorkoutDetailsInteractor {
+    func handleLoad() -> WorkoutDetailsDomainResult {
+        do {
+            let workout = try service.loadWorkout(historyId: historyId)
+            let expandedGroups = workout.exerciseGroups.map { _ in return true }
+            let domain = WorkoutDetailsDomain(workout: workout,
+                                              expandedGroups: expandedGroups)
+            
+            return updateDomain(domain: domain)
+        } catch {
+            return .error
+        }
+    }
     
+    func handleToggleGroupExpand(group: Int, isExpanded: Bool) -> WorkoutDetailsDomainResult {
+        guard var domain = savedDomain else { return .error }
+        domain.expandedGroups[group] = isExpanded
+        return updateDomain(domain: domain)
+    }
+    
+    func handleToggleDialog(dialog: WorkoutDetailsDialog, isOpen: Bool) -> WorkoutDetailsDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        return isOpen ? .dialog(dialog: dialog, domain: domain) : .loaded(domain)
+    }
+    
+    func handleDelete() -> WorkoutDetailsDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        do {
+            try service.deleteWorkoutHistory(historyId: historyId)
+        } catch {
+            return .error
+        }
+        
+        return .exit(domain)
+    }
 }
 
 // MARK: - Other Private Helpers

@@ -46,7 +46,7 @@ public struct CollapseHeader<Content: View>: View {
 
 // MARK: - View State
 
-public struct CollapseHeaderViewState: Equatable {
+public struct CollapseHeaderViewState: Hashable {
     public let title: String
     fileprivate let color: SplytColor
     fileprivate let isComplete: Bool?

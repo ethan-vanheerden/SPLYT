@@ -12,15 +12,94 @@ import Core
 struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsViewEvent,
                                                      VM.ViewState == WorkoutDetailsViewState {
     @ObservedObject private var viewModel: VM
+    @State private var optionsSheetPresented = false
     private let navigationRouter: WorkoutDetailsNavigationRouter
+    private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
          navigationRouter: WorkoutDetailsNavigationRouter) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
+        self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        viewStateView
+            .navigationBar(viewState: .init(title: Strings.workoutDetails),
+                           backAction: { navigationRouter.navigate(.exit) },
+                           content: { optionsButton })
     }
+    
+    @ViewBuilder
+    var viewStateView: some View {
+        switch viewModel.viewState {
+        case .loading:
+            ProgressView()
+        case .error:
+            Text("Error!")
+        case .loaded(let display):
+            mainView(display: display)
+        case .exit(let display):
+            mainView(display: display)
+                .onAppear {
+                    navigationRouter.navigate(.exit)
+                }
+        }
+    }
+    
+    @ViewBuilder
+    private func mainView(display: WorkoutDetailsDisplay) -> some View {
+        ScrollView(showsIndicators: false) {
+            groupsView(display: display)
+        }
+        .animation(.default, value: display.expandedGroups)
+        .confirmationDialog("", isPresented: $optionsSheetPresented, titleVisibility: .hidden) {
+            Button(Strings.deleteWorkout, role: .destructive) {
+                viewModel.send(.toggleDialog(dialog: .delete, isOpen: true),
+                               taskPriority: .userInitiated)
+            }
+        }
+        .dialog(isOpen: display.presentedDialog == .delete,
+                viewState: display.deleteDialog,
+                primaryAction: { viewModel.send(.delete,
+                                                taskPriority: .userInitiated) },
+                secondaryAction: { viewModel.send(.toggleDialog(dialog: .delete, isOpen: false),
+                                                  taskPriority: .userInitiated) })
+    
+    }
+    
+    @ViewBuilder
+    private func groupsView(display: WorkoutDetailsDisplay) -> some View {
+        VStack {
+            ForEach(Array(display.groups.enumerated()), id: \.element) { groupIndex, groupState in
+                CompletedExerciseGroupView(isExpanded: groupExpandBinding(group: groupIndex,
+                                                                          expandedGroups: display.expandedGroups),
+                                           viewState: groupState)
+            }
+        }
+        .padding(.horizontal, horizontalPadding)
+    }
+    
+    private func groupExpandBinding(group: Int, expandedGroups: [Bool]) -> Binding<Bool> {
+        return Binding(
+            get: { return expandedGroups[group] },
+            set: { viewModel.send(.toggleGroupExpand(group: group, isExpanded: $0),
+                                  taskPriority: .userInitiated) }
+        )
+    }
+    
+    private var optionsButton: some View {
+        IconButton(iconName: "ellipsis",
+                   style: .secondary,
+                   iconColor: .black) {
+            optionsSheetPresented = true
+        }
+    }
+}
+
+// MARK: - Strings
+
+fileprivate struct Strings {
+    static let workoutDetails = "Workout Details"
+    static let deleteWorkout = "Delete Workout"
 }

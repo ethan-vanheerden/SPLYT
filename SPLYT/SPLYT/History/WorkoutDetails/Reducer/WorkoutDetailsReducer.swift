@@ -7,17 +7,54 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 struct WorkoutDetailsReducer {
     func reduce(_ domain: WorkoutDetailsDomainResult) -> WorkoutDetailsViewState {
-        return .error
+        switch domain {
+        case .error:
+            return .error
+        case .loaded(let domain):
+            let display = getDisplay(domain: domain)
+            return .loaded(display)
+        case let .dialog(dialog, domain):
+            let display = getDisplay(domain: domain, dialog: dialog)
+            return .loaded(display)
+        case .exit(let domain):
+            let display = getDisplay(domain: domain)
+            return .exit(display)
+        }
     }
 }
 
 // MARK: - Private
 
 private extension WorkoutDetailsReducer {
-    func getDisplay(domain: WorkoutDetailsDomain) -> WorkoutDetailsDisplay {
-        return .init()
+    func getDisplay(domain: WorkoutDetailsDomain,
+                    dialog: WorkoutDetailsDialog? = nil) -> WorkoutDetailsDisplay {
+        let groups = getCompletedGroupStates(workout: domain.workout)
+        
+        let display = WorkoutDetailsDisplay(groups: groups,
+                                            expandedGroups: domain.expandedGroups,
+                                            presentedDialog: dialog,
+                                            deleteDialog: HistoryDialogViewStates.deleteWorkoutHistory)
+        
+        return display
+    }
+    
+    func getCompletedGroupStates(workout: Workout) -> [CompletedExerciseGroupViewState] {
+        var result = [CompletedExerciseGroupViewState]()
+        let groups = WorkoutReducer.reduceCompletedExerciseGroups(groups: workout.exerciseGroups)
+        let groupTitles = WorkoutReducer.getGroupTitles(workout: workout)
+        
+        for (index, exercises) in groups.enumerated() {
+            let header = CollapseHeaderViewState(title: groupTitles[index],
+                                                 color: .lightBlue)
+            let newGroupState = CompletedExerciseGroupViewState(header: header,
+                                                                exercises: exercises)
+            result.append(newGroupState)
+        }
+        
+        return result
     }
 }

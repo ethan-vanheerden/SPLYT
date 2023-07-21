@@ -36,7 +36,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         switch viewModel.viewState {
         case .loading:
             ProgressView()
-                .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
+                .navigationBar(viewState: .init(title: Strings.addYourExercises)) {
                     viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                    taskPriority: .userInitiated)
                 }
@@ -45,7 +45,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .error:
             Text("Error!")
                 .foregroundColor(.red)
-                .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
+                .navigationBar(viewState: .init(title: Strings.addYourExercises)) {
                     navigationRouter.navigate(.exit)
                 }
         case .exit(let display):
@@ -71,7 +71,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                             .fill(Color(splytColor: .red))
                             .frame(width: Layout.size(1))
                             .offset(x: Layout.size(0.5), y: Layout.size(0.5))
-
+                        
                     }
                 }
                 TextEntry(text: $searchText, viewState: TextEntryBuilder.searchEntry)
@@ -83,7 +83,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
         }
-        .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises),
+        .navigationBar(viewState: .init(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                                     taskPriority: .userInitiated) },
                        content: { saveButton(canSave: display.canSave) })
@@ -175,8 +175,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                     .frame(width: Layout.size(17))
                                     .foregroundColor(Color(splytColor: .black))
                             }
-                            .toggleStyle(.button)
-                            .tint(Color(splytColor: .lightBlue))
+                                                             .toggleStyle(.button)
+                                                             .tint(Color(splytColor: .lightBlue))
                         }
                     }
                 }

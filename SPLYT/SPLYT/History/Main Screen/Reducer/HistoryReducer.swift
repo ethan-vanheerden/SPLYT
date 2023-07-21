@@ -32,7 +32,7 @@ private extension HistoryReducer {
         
         let display = HistoryDisplay(workouts: workouts,
                                      presentedDialog: dialog,
-                                     deleteWorkoutHistoryDialog: deleteWorkoutHistoryDialog)
+                                     deleteWorkoutHistoryDialog: HistoryDialogViewStates.deleteWorkoutHistory)
         
         return display
     }
@@ -60,21 +60,10 @@ private extension HistoryReducer {
         
         return workoutName + planTitle
     }
-    
-    var deleteWorkoutHistoryDialog: DialogViewState {
-        return .init(title: Strings.deleteWorkoutHistory,
-                     subtitle: Strings.deleteThisVersion,
-                     primaryButtonTitle: Strings.delete,
-                     secondaryButtonTitle: Strings.cancel)
-    }
 }
 
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let deleteWorkoutHistory = "Delete workout history?"
-    static let deleteThisVersion = "This will delete only this completed version of the workout. This action can't be undone."
-    static let delete = "Delete"
-    static let cancel = "Cancel"
     static let completed = "Completed"
 }

@@ -1,7 +1,6 @@
 import SwiftUI
 import ExerciseCore
 
-// TODO: Worry about this when we do workout history
 public struct CompletedSetView: View {
     private let viewState: CompletedSetViewState
     
@@ -33,13 +32,6 @@ public struct CompletedSetView: View {
             }
             .offset(x: -Layout.size(4))
             Spacer()
-            if let progression = viewState.progression { // fix me
-                progressionView(status: progression)
-            } else {
-                Image(systemName: "chart.line.uptrend.xyaxis.circle")
-                    .imageScale(.large)
-                    .isVisible(false) // Hide so we keep spacing consistent
-            }
         }
     }
     
@@ -61,13 +53,13 @@ public struct CompletedSetView: View {
         switch setInput {
         case let .repsWeight(weightTitle, repsTitle, input):
             HStack(spacing: Layout.size(6)) {
-                inputEntry(title: repsTitle, input: String(input.reps))
-                inputEntry(title: weightTitle, input: String(input.weight))
+                inputEntry(title: repsTitle, input: String(input.reps, defaultDash: true))
+                inputEntry(title: weightTitle, input: String(input.weight, defaultDash: true))
             }
         case let .repsOnly(title, input):
-            inputEntry(title: title, input: String(input.reps))
+            inputEntry(title: title, input: String(input.reps, defaultDash: true))
         case let .time(title, input):
-            inputEntry(title: title, input: String(input.seconds))
+            inputEntry(title: title, input: String(input.seconds, defaultDash: true))
         }
     }
     
@@ -98,27 +90,6 @@ public struct CompletedSetView: View {
         
         Tag(viewState: viewState)
     }
-    
-    private func progressionView(status: SetProgressionStatus) -> some View {
-        let imageName: String
-        let imageColor: SplytColor
-        
-        switch status {
-        case .positive:
-            imageName = "chart.line.uptrend.xyaxis.circle"
-            imageColor = .green
-        case .negative:
-            imageName = "chart.line.downtrend.xyaxis.circle"
-            imageColor = .red
-        case .neutral:
-            imageName = "chart.line.flattrend.xyaxis.circle"
-            imageColor = .gray
-        }
-        
-        return Image(systemName: imageName)
-            .foregroundColor(Color(splytColor: imageColor))
-            .imageScale(.large)
-    }
 }
 
 // MARK: - View State
@@ -127,23 +98,12 @@ public struct CompletedSetViewState: Hashable {
     let title: String
     let input: SetInputViewState
     let modifier: SetModifierViewState?
-    let progression: SetProgressionStatus?
     
     public init(title: String,
                 type: SetInputViewState,
-                modifier: SetModifierViewState? = nil,
-                progression: SetProgressionStatus? = nil) {
+                modifier: SetModifierViewState? = nil) {
         self.title = title
         self.input = type
         self.modifier = modifier
-        self.progression = progression
     }
-}
-
-// MARK: - Status
-
-public enum SetProgressionStatus: Equatable {
-    case positive // Increase in volume
-    case negative // Decrease in volume
-    case neutral // No change in volume
 }

@@ -11,4 +11,5 @@ enum WorkoutDetailsViewState: Equatable {
     case loading
     case error
     case loaded(WorkoutDetailsDisplay)
+    case exit(WorkoutDetailsDisplay)
 }

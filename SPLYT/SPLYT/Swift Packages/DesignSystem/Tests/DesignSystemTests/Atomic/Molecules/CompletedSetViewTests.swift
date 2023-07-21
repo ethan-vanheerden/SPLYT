@@ -1,7 +1,9 @@
-import SwiftUI
+import XCTest
 import DesignSystem
+import SnapshotTesting
+import SwiftUI
 
-struct CompletedSetViewGallery: View {
+final class CompletedSetViewTests: XCTestCase {
     private let viewStateOne = CompletedSetViewState(title: "Set 1",
                                                      type: .repsOnly(title: "reps",
                                                                      input: .init(reps: 10)))
@@ -30,8 +32,8 @@ struct CompletedSetViewGallery: View {
                                                      modifier: .restPause(set: .repsOnly(title: "reps",
                                                                                          input: .init())))
     
-    var body: some View {
-        VStack(spacing: Layout.size(1)) {
+    func testCompletedSetView() {
+        let view = VStack(spacing: Layout.size(1)) {
             CompletedSetView(viewState: viewStateOne)
             CompletedSetView(viewState: viewStateTwo)
             CompletedSetView(viewState: viewStateThree)
@@ -41,5 +43,7 @@ struct CompletedSetViewGallery: View {
             Spacer()
         }
         .padding(.horizontal, Layout.size(2))
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(matching: vc, as: .image(on: .mediumImage()))
     }
 }
