@@ -52,7 +52,7 @@ private extension BuildPlanNavigationRouter {
     }
     
     func handleCreateNewWorkout() {
-        let interactor = NameWorkoutInteractor(buildType: .workout)
+        let interactor = NameWorkoutInteractor(routineType: .workout)
         let nameViewModel = NameWorkoutViewModel(interactor: interactor)
         let navRouter = NameWorkoutNavigationRouter() { [weak self] workout in
             // Custom save action to just add the workout to the plan instead of full-saving the workout

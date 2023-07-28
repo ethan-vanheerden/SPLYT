@@ -7,6 +7,7 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 struct NameWorkoutReducer {
     func reduce(_ domain: NameWorkoutDomainResult) -> NameWorkoutViewState {
@@ -24,16 +25,16 @@ struct NameWorkoutReducer {
 
 private extension NameWorkoutReducer {
     func getDisplay(domain: NameWorkoutDomain) -> NameWorkoutDisplay {
-        return NameWorkoutDisplay(navBar: getNavBar(buildType: domain.buildType),
+        return NameWorkoutDisplay(navBar: getNavBar(routineType: domain.routineType),
                                   workoutName: domain.workoutName,
-                                  textEntry: getTextEntry(buildType: domain.buildType),
-                                  buildType: domain.buildType,
+                                  textEntry: getTextEntry(routineType: domain.routineType),
+                                  routineType: domain.routineType,
                                   nextButtonEnabled: !domain.workoutName.isEmpty)
     }
     
-    func getNavBar(buildType: BuildWorkoutType) -> NavigationBarViewState {
+    func getNavBar(routineType: RoutineType) -> NavigationBarViewState {
         let title: String
-        switch buildType {
+        switch routineType {
         case .workout:
             title = Strings.createWorkout
         case .plan:
@@ -43,10 +44,10 @@ private extension NameWorkoutReducer {
         return NavigationBarViewState(title: title)
     }
     
-    func getTextEntry(buildType: BuildWorkoutType) -> TextEntryViewState {
+    func getTextEntry(routineType: RoutineType) -> TextEntryViewState {
         let title: String
         let placeholder: String
-        switch buildType {
+        switch routineType {
         case .workout:
             title = Strings.workoutName
             placeholder = Strings.enterWorkoutName

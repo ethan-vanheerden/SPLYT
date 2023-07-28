@@ -8,6 +8,7 @@
 import Foundation
 import Core
 import SwiftUI
+import ExerciseCore
 
 // MARK: - Navigation Events
 
@@ -28,9 +29,9 @@ final class HomeNavigationRouter: NavigationRouter {
     func navigate(_ event: HomeNavigationEvent) {
         switch event {
         case .createPlan:
-            handleCreate(buildType: .plan)
+            handleCreate(routineType: .plan)
         case .createWorkout:
-            handleCreate(buildType: .workout)
+            handleCreate(routineType: .workout)
         case let .seletectWorkout(id):
             handleSelectWorkout(id: id)
         case .editWorkout(let id):
@@ -47,8 +48,8 @@ final class HomeNavigationRouter: NavigationRouter {
 
 private extension HomeNavigationRouter {
     
-    func handleCreate(buildType: BuildWorkoutType) {
-        let interactor = NameWorkoutInteractor(buildType: buildType)
+    func handleCreate(routineType: RoutineType) {
+        let interactor = NameWorkoutInteractor(routineType: routineType)
         let viewModel = NameWorkoutViewModel(interactor: interactor)
         var navRouter = NameWorkoutNavigationRouter() // var because used as inout parameter
         let view = NameWorkoutView(viewModel: viewModel,

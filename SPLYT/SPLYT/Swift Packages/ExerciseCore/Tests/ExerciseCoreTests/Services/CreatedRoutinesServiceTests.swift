@@ -6,7 +6,7 @@ final class CreatedRoutinesServiceTests: XCTestCase {
     typealias WorkoutFixtures = WorkoutModelFixtures
     private var cacheInteractor: MockCacheInteractor!
     private var sut: CreatedRoutinesService!
-    private let emptyRoutines = CreatedRoutines(workouts: [:], plans: [:])
+    private let emptyRoutines: CreatedRoutines = CreatedRoutines(workouts: [:], plans: [:])
     
     override func setUp() async throws {
         self.cacheInteractor = MockCacheInteractor()

@@ -6,15 +6,9 @@
 //
 
 import Foundation
+import ExerciseCore
 
 struct NameWorkoutDomain: Equatable {
     var workoutName: String
-    let buildType: BuildWorkoutType
-}
-
-// MARK: - Build Type
-
-enum BuildWorkoutType: CaseIterable {
-    case workout
-    case plan
+    let routineType: RoutineType
 }
