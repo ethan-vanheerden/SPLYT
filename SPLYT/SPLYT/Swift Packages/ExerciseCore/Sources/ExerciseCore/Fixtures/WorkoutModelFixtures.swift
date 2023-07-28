@@ -153,6 +153,7 @@ struct WorkoutModelFixtures {
     static let fullBodyWorkout_WorkoutStart: Workout = Workout(id: fullBodyWorkoutId,
                                                                name: fullBodyWorkoutName,
                                                                exerciseGroups: fullBodyWorkoutExercises_WorkoutStart,
+                                                               planName: myPlanName,
                                                                createdAt: jan_1_2023_0800,
                                                                lastCompleted: feb_3_2023_1630)
     

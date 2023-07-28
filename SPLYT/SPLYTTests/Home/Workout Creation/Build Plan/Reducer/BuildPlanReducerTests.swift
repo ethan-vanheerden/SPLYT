@@ -47,7 +47,7 @@ final class BuildPlanReducerTests: XCTestCase {
         let domain = await load()
         let result = sut.reduce(domain)
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildLegWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,
@@ -61,7 +61,7 @@ final class BuildPlanReducerTests: XCTestCase {
         let dialogs: [BuildPlanDialog] = [
             .back,
             .save,
-            .deleteWorkout(id: WorkoutFixtures.fullBodyWorkoutId)
+            .deleteWorkout(id: WorkoutFixtures.legWorkoutId)
         ]
         
         for dialog in dialogs {
@@ -69,7 +69,7 @@ final class BuildPlanReducerTests: XCTestCase {
             let domain = await interactor.interact(with: .toggleDialog(dialog: dialog, isOpen: true))
             let result = sut.reduce(domain)
             
-            let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
+            let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildLegWorkoutRoutineTile],
                                                    canSave: true,
                                                    presentedDialog: dialog,
                                                    backDialog: Fixtures.backDisloag,
@@ -85,7 +85,7 @@ final class BuildPlanReducerTests: XCTestCase {
         let domain = await interactor.interact(with: .savePlan)
         let result = sut.reduce(domain)
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildLegWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,
@@ -103,6 +103,6 @@ private extension BuildPlanReducerTests {
     /// Loads a starting workout as well
     func load() async -> BuildPlanDomainResult {
         _ = await interactor.interact(with: .load)
-        return await interactor.interact(with: .addWorkout(workout: WorkoutFixtures.fullBodyWorkout))
+        return await interactor.interact(with: .addWorkout(workout: WorkoutFixtures.legWorkout))
     }
 }

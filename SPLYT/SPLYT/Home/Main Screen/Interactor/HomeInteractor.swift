@@ -77,7 +77,8 @@ private extension HomeInteractor {
             
             // Save the results
             try service.saveRoutines(domain.routines)
-            try service.deleteWorkoutHistory(workoutId: id)
+            // I'm not sure if we want this logic
+//            try service.deleteWorkoutHistory(workoutId: id)
             
             return updateDomain(domain)
         } catch {
@@ -87,16 +88,17 @@ private extension HomeInteractor {
     
     func handleDeletePlan(id: String) -> HomeDomainResult {
         guard var domain = savedDomain,
-              let plan = domain.routines.plans[id] else { return .error }
+              let _ = domain.routines.plans[id] else { return .error }
         
         do {
             domain.routines.plans.removeValue(forKey: id)
             
             try service.saveRoutines(domain.routines)
             // We delete the workout history for each of the workouts in the plan
-            for workout in plan.workouts {
-                try service.deleteWorkoutHistory(workoutId: workout.id)
-            }
+            // I'm not sure if we want this logic
+//            for workout in plan.workouts {
+//                try service.deleteWorkoutHistory(workoutId: workout.id)
+//            }
             
             return updateDomain(domain)
         } catch {

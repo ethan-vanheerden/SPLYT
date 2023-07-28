@@ -110,7 +110,7 @@ final class DoWorkoutServiceTests: XCTestCase {
         let workoutHistory = cacheInteractor.stubData as? [WorkoutHistory]
         var workout = WorkoutFixtures.legWorkout
         workout.lastCompleted = completionDate
-        var newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
+        let newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
                                      workout: workout)
         var expectedHistories = WorkoutFixtures.workoutHistories
         expectedHistories.insert(newHistory, at: 0)
@@ -161,7 +161,7 @@ final class DoWorkoutServiceTests: XCTestCase {
         let workoutHistory = cacheInteractor.stubData as? [WorkoutHistory]
         var workout = WorkoutFixtures.legWorkout
         workout.lastCompleted = completionDate
-        var newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
+        let newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
                                      workout: workout)
         var expectedHistories = WorkoutFixtures.workoutHistories
         expectedHistories.insert(newHistory, at: 0)

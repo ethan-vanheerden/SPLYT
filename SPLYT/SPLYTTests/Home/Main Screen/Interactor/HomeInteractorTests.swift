@@ -45,17 +45,6 @@ final class HomeInteractorTests: XCTestCase {
         
         XCTAssertEqual(result, .error)
         XCTAssertTrue(mockService.saveRoutinesCalled)
-        XCTAssertEqual(mockService.numWorkoutHistoryDeleted, 0)
-    }
-    
-    func testInteract_DeleteWorkout_DeleteWorkoutHistory_ServiceError() async {
-        await load()
-        mockService.deleteWorkoutHistoryThrow = true
-        let result = await sut.interact(with: .deleteWorkout(id: WorkoutFixtures.legWorkoutId))
-        
-        XCTAssertEqual(result, .error)
-        XCTAssertTrue(mockService.saveRoutinesCalled)
-        XCTAssertEqual(mockService.numWorkoutHistoryDeleted, 1)
     }
     
     func testInteract_DeleteWorkout_BadId_DoesNothing() async {
@@ -98,17 +87,6 @@ final class HomeInteractorTests: XCTestCase {
         
         XCTAssertEqual(result, .error)
         XCTAssertTrue(mockService.saveRoutinesCalled)
-        XCTAssertEqual(mockService.numWorkoutHistoryDeleted, 0)
-    }
-    
-    func testInteract_DeletePlan_DeleteWorkoutHistory_ServiceError() async {
-        await load()
-        mockService.deleteWorkoutHistoryThrow = true
-        let result = await sut.interact(with: .deletePlan(id: WorkoutFixtures.myPlanId))
-        
-        XCTAssertEqual(result, .error)
-        XCTAssertTrue(mockService.saveRoutinesCalled)
-        XCTAssertEqual(mockService.numWorkoutHistoryDeleted, 1)
     }
     
     func testInteract_DeletePlan_Success() async {
@@ -121,7 +99,6 @@ final class HomeInteractorTests: XCTestCase {
         
         XCTAssertEqual(result, .loaded(expectedDomain))
         XCTAssertTrue(mockService.saveRoutinesCalled)
-        XCTAssertEqual(mockService.numWorkoutHistoryDeleted, 2)
     }
     
     func testInteract_ToggleDialog_NoSavedDomain_Error() async {

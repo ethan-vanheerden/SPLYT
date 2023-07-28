@@ -14,7 +14,7 @@ import ExerciseCore
 protocol HomeServiceType {
     func loadRoutines() throws -> CreatedRoutines
     func saveRoutines(_: CreatedRoutines) throws
-    func deleteWorkoutHistory(workoutId: String) throws
+//    func deleteWorkoutHistory(workoutId: String) throws
 }
 
 // MARK: - Implementation
@@ -36,15 +36,5 @@ struct HomeService: HomeServiceType {
     
     func saveRoutines(_ routines: CreatedRoutines) throws {
         try routineService.saveRoutines(routines)
-    }
-    
-    func deleteWorkoutHistory(workoutId: String) throws {
-        let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
-        
-        if try cacheInteractor.fileExists(request: completedWorkoutsRequest) {
-            var completedWorkouts = try cacheInteractor.load(request: completedWorkoutsRequest)
-            completedWorkouts.removeAll { $0.id == workoutId }
-            try cacheInteractor.save(request: completedWorkoutsRequest, data: completedWorkouts)
-        }
     }
 }

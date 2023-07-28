@@ -42,15 +42,15 @@ final class BuildPlanViewModelTests: XCTestCase {
     }
     
     func testSend_NoSavedDomain_Error() async {
-        await sut.send(.addWorkout(WorkoutFixtures.fullBodyWorkout))
+        await sut.send(.addWorkout(WorkoutFixtures.legWorkout))
         XCTAssertEqual(sut.viewState, .error)
     }
     
     func testSend_AddWorkout() async {
         await sut.send(.load)
-        await sut.send(.addWorkout(WorkoutFixtures.fullBodyWorkout))
+        await sut.send(.addWorkout(WorkoutFixtures.legWorkout))
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildLegWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,
@@ -62,8 +62,8 @@ final class BuildPlanViewModelTests: XCTestCase {
     
     func testSend_RemoveWorkout() async {
         await sut.send(.load)
-        await sut.send(.addWorkout(WorkoutFixtures.fullBodyWorkout))
-        await sut.send(.removeWorkout(workoutId: WorkoutFixtures.fullBodyWorkoutId))
+        await sut.send(.addWorkout(WorkoutFixtures.legWorkout))
+        await sut.send(.removeWorkout(workoutId: WorkoutFixtures.legWorkoutId))
         
         let expectedDisplay = BuildPlanDisplay(workouts: [],
                                                canSave: false,
@@ -77,10 +77,10 @@ final class BuildPlanViewModelTests: XCTestCase {
     
     func testSend_SavePlan() async {
         await sut.send(.load)
-        await sut.send(.addWorkout(WorkoutFixtures.fullBodyWorkout))
+        await sut.send(.addWorkout(WorkoutFixtures.legWorkout))
         await sut.send(.savePlan)
         
-        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildFullBodyWorkoutRoutineTile],
+        let expectedDisplay = BuildPlanDisplay(workouts: [StateFixtures.buildLegWorkoutRoutineTile],
                                                canSave: true,
                                                presentedDialog: nil,
                                                backDialog: Fixtures.backDisloag,
@@ -94,7 +94,7 @@ final class BuildPlanViewModelTests: XCTestCase {
         let dialogs: [BuildPlanDialog] = [
             .back,
             .save,
-            .deleteWorkout(id: WorkoutFixtures.fullBodyWorkoutId)
+            .deleteWorkout(id: WorkoutFixtures.legWorkoutId)
         ]
         
         for dialog in dialogs {

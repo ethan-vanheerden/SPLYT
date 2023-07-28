@@ -15,7 +15,7 @@ struct HomeFixtures {
     
     // MARK: - View States
     
-    static let navBar: NavigationBarViewState = NavigationBarViewState(title: "Home",
+    static let navBar: NavigationBarViewState = NavigationBarViewState(title: "🏠 Home",
                                                                        size: .large,
                                                                        position: .left)
     

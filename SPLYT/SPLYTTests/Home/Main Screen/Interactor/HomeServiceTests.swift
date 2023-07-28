@@ -83,29 +83,4 @@ final class HomeServiceTests: XCTestCase {
         XCTAssertEqual(result, routines)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
-    
-    func testDeleteWorkoutHistory_LoadError() {
-        cacheInteractor.stubFileExists = true
-        cacheInteractor.loadThrow = true
-        
-        XCTAssertThrowsError(try sut.deleteWorkoutHistory(workoutId: WorkoutFixtures.legWorkoutId))
-    }
-    
-    func testDeleteWorkoutHistory_FileNoExist_DoesNothing() throws {
-        try sut.deleteWorkoutHistory(workoutId: WorkoutFixtures.legWorkoutId)
-        XCTAssertFalse(cacheInteractor.saveCalled)
-    }
-    
-    func testDeleteWorkoutHistory_Success() throws {
-        cacheInteractor.stubFileExists = true
-        cacheInteractor.stubData = [WorkoutFixtures.legWorkout, WorkoutFixtures.fullBodyWorkout]
-        
-        try sut.deleteWorkoutHistory(workoutId: WorkoutFixtures.legWorkoutId)
-        
-        let savedWorkouts = cacheInteractor.stubData as? [Workout]
-        let expectedWorkouts = [WorkoutFixtures.fullBodyWorkout]
-        
-        XCTAssertEqual(savedWorkouts, expectedWorkouts)
-        XCTAssertTrue(cacheInteractor.saveCalled)
-    }
 }
