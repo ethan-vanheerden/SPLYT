@@ -14,11 +14,19 @@ final class WorkoutReducerTests: XCTestCase {
     typealias WorkoutFixtures = WorkoutModelFixtures
     private let sut = WorkoutReducer.self
     
-    func testReduceExerciseGroups_HeaderLine() {
+    func testReduceExerciseGroups() {
         [true, false].forEach {
             let result = sut.reduceExerciseGroups(groups: WorkoutFixtures.legWorkoutExercises,
                                                   includeHeaderLine: $0)
             XCTAssertEqual(result, Fixtures.legWorkoutExercises(includeHeaderLine: $0))
+        }
+    }
+    
+    func testReduceCompletedExerciseGroups() {
+        [true, false].forEach {
+            let result = sut.reduceCompletedExerciseGroups(groups: WorkoutFixtures.fullBodyWorkoutExercises,
+                                                           includeHeaderLine: $0)
+            XCTAssertEqual(result, Fixtures.fullBodyWorkoutExercisesCompleted(includeHeaderLine: $0))
         }
     }
     
@@ -75,5 +83,26 @@ final class WorkoutReducerTests: XCTestCase {
         XCTAssertEqual(resultOne, "Last completed: Dec 27, 2022")
         XCTAssertEqual(resultTwo, "Last completed: Feb 3, 2023")
         XCTAssertEqual(resultThree, "Last completed: Jan 1, 2023")
+    }
+    
+    func testGetLastCompletedTitle_History() {
+        let resultOne = sut.getLastCompletedTitle(date: WorkoutFixtures.dec_27_2022_1000,
+                                                  isHistory: true)
+        let resultTwo = sut.getLastCompletedTitle(date: WorkoutFixtures.feb_3_2023_1630,
+                                                  isHistory: true)
+        let resultThree = sut.getLastCompletedTitle(date: WorkoutFixtures.jan_1_2023_0800,
+                                                    isHistory: true)
+        
+        XCTAssertEqual(resultOne, "Completed: Dec 27, 2022")
+        XCTAssertEqual(resultTwo, "Completed: Feb 3, 2023")
+        XCTAssertEqual(resultThree, "Completed: Jan 1, 2023")
+    }
+    
+    func testGetWorkoutAndPlanName() {
+        let resultOne = sut.getWorkoutAndPlanName(workout: WorkoutFixtures.legWorkout)
+        let resultTwo = sut.getWorkoutAndPlanName(workout: WorkoutFixtures.fullBodyWorkout)
+        
+        XCTAssertEqual(resultOne, "Legs")
+        XCTAssertEqual(resultTwo, "Full Body | My Plan 1")
     }
 }

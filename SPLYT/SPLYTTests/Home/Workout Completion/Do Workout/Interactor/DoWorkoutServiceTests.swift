@@ -101,16 +101,21 @@ final class DoWorkoutServiceTests: XCTestCase {
         routineCacheInteractor.stubFileExists = true
         routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         cacheInteractor.stubFileExists = true
-        cacheInteractor.stubData = [Workout]()
+        cacheInteractor.stubData = WorkoutFixtures.workoutHistories
+        let completionDate = WorkoutFixtures.jan_1_2023_0800
         
         try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                            completionDate: WorkoutFixtures.jan_1_2023_0800)
+                            completionDate: completionDate)
         
-        let workoutHistory = cacheInteractor.stubData as? [Workout]
-        var expectedWorkout = WorkoutFixtures.legWorkout
-        expectedWorkout.lastCompleted = WorkoutFixtures.jan_1_2023_0800
+        let workoutHistory = cacheInteractor.stubData as? [WorkoutHistory]
+        var workout = WorkoutFixtures.legWorkout
+        workout.lastCompleted = completionDate
+        var newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
+                                     workout: workout)
+        var expectedHistories = WorkoutFixtures.workoutHistories
+        expectedHistories.insert(newHistory, at: 0)
         
-        XCTAssertEqual(workoutHistory, [expectedWorkout])
+        XCTAssertEqual(workoutHistory, expectedHistories)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
@@ -146,17 +151,22 @@ final class DoWorkoutServiceTests: XCTestCase {
         routineCacheInteractor.stubFileExists = true
         routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         cacheInteractor.stubFileExists = true
-        cacheInteractor.stubData = [Workout]()
+        cacheInteractor.stubData = WorkoutFixtures.workoutHistories
+        let completionDate = WorkoutFixtures.jan_1_2023_0800
         
         try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
                             planId: WorkoutFixtures.myPlanId,
-                            completionDate: WorkoutFixtures.jan_1_2023_0800)
+                            completionDate: completionDate)
         
-        let workoutHistory = cacheInteractor.stubData as? [Workout]
-        var expectedWorkout = WorkoutFixtures.legWorkout
-        expectedWorkout.lastCompleted = WorkoutFixtures.jan_1_2023_0800
+        let workoutHistory = cacheInteractor.stubData as? [WorkoutHistory]
+        var workout = WorkoutFixtures.legWorkout
+        workout.lastCompleted = completionDate
+        var newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
+                                     workout: workout)
+        var expectedHistories = WorkoutFixtures.workoutHistories
+        expectedHistories.insert(newHistory, at: 0)
         
-        XCTAssertEqual(workoutHistory, [expectedWorkout])
+        XCTAssertEqual(workoutHistory, expectedHistories)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertTrue(cacheInteractor.saveCalled)
     }

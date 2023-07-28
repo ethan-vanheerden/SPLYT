@@ -26,6 +26,7 @@ final class HomeNavigationRouterTests: XCTestCase {
         
         for createType in createTypes {
             sut.navigate(createType)
+            
             let expectedNavController = UINavigationController.self
             let expectedVC = UIHostingController<NameWorkoutView<NameWorkoutViewModel>>.self
             
@@ -38,6 +39,7 @@ final class HomeNavigationRouterTests: XCTestCase {
     func testNavigate_SelectWorkout() {
         sut.navigate(.seletectWorkout(id: "my-awesome-workout"))
         let expectedNavController = UINavigationController.self
+        
         let expectedVC = UIHostingController<WorkoutPreviewView<DoWorkoutViewModel>>.self
 
         XCTAssertTrue(mockNavigator.stubPresentedVC?.isKind(of: expectedNavController) ?? false)
@@ -51,6 +53,7 @@ final class HomeNavigationRouterTests: XCTestCase {
     
     func testNavigate_SelectPlan() {
         sut.navigate(.selectPlan(id: "my-awesome-plan"))
+        
         let expectedNavController = UINavigationController.self
         let expectedVC = UIHostingController<DoPlanView<DoPlanViewModel>>.self
 

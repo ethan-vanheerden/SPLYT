@@ -18,7 +18,7 @@ enum WorkoutDetailsDomainAction {
 
 // MARK: - Domain Results
 
-enum WorkoutDetailsDomainResult {
+enum WorkoutDetailsDomainResult: Equatable {
     case error
     case loaded(WorkoutDetailsDomain)
     case dialog(dialog: WorkoutDetailsDialog, domain: WorkoutDetailsDomain)
@@ -69,7 +69,8 @@ private extension WorkoutDetailsInteractor {
     }
     
     func handleToggleGroupExpand(group: Int, isExpanded: Bool) -> WorkoutDetailsDomainResult {
-        guard var domain = savedDomain else { return .error }
+        guard var domain = savedDomain,
+              domain.expandedGroups.count > group else { return .error }
         domain.expandedGroups[group] = isExpanded
         return updateDomain(domain: domain)
     }

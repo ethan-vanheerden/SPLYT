@@ -19,8 +19,8 @@ protocol WorkoutDetailsServiceType {
 // MARK: - Implementation
 
 struct WorkoutDetailsService: WorkoutDetailsServiceType {
-    private let cacheInteractor: CacheInteractorType
     private let completedWorkoutsService: CompletedWorkoutsServiceType
+    private let cacheInteractor: CacheInteractorType
     private let completedWorkoutsCache = CompletedWorkoutsCacheRequest()
     
     init(completedWorkoutsService: CompletedWorkoutsServiceType = CompletedWorkoutsService(),
@@ -31,7 +31,7 @@ struct WorkoutDetailsService: WorkoutDetailsServiceType {
     
     func loadWorkout(historyId: String) throws -> Workout {
         let histories = try cacheInteractor.load(request: completedWorkoutsCache)
-        let history = histories.first { $0.id == historyId}
+        let history = histories.first { $0.id == historyId }
         
         guard let history = history else {
             throw WorkoutDetailsError.workoutNotFound

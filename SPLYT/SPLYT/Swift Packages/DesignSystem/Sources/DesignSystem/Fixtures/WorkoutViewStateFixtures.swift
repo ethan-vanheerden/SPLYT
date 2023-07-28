@@ -258,10 +258,23 @@ struct WorkoutViewStateFixtures {
                                                                      title: ModelFixtures.legWorkoutName,
                                                                      subtitle: "2 exercises")
     
+    static let legWorkoutHistoryRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutHistoryId,
+                                                                          title: ModelFixtures.legWorkoutName,
+                                                                          subtitle: "2 exercises")
+    
     static let doFullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutId,
                                                                           title: ModelFixtures.fullBodyWorkoutName,
                                                                           subtitle: "4 exercises",
                                                                           lastCompletedTitle: "Last completed: Feb 3, 2023")
+    
+    static let fullBodyWorkoutHistoryName = "\(ModelFixtures.fullBodyWorkoutName) | \(ModelFixtures.myPlanName)"
+    
+    static let fullBodyWorkoutHistoryCompletedTitle = "Completed: Feb 3, 2023"
+    
+    static let fullBodyWorkoutHistoryRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutHistoryId,
+                                                                                 title: fullBodyWorkoutHistoryName,
+                                                                                 subtitle: "4 exercises",
+                                                                                 lastCompletedTitle: fullBodyWorkoutHistoryCompletedTitle)
     
     static let myPlanRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.myPlanId,
                                                                title: ModelFixtures.myPlanName,

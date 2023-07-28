@@ -118,9 +118,13 @@ struct WorkoutModelFixtures {
     
     static let legWorkoutId = "leg-workout"
     
+    static let legWorkoutHistoryId = "\(legWorkoutId)-history"
+    
     static let legWorkoutName = "Legs"
     
     static let fullBodyWorkoutId = "full-body-workout"
+    
+    static let  fullBodyWorkoutHistoryId = "\(fullBodyWorkoutId)-history"
     
     static let fullBodyWorkoutName = "Full Body"
     
@@ -136,9 +140,13 @@ struct WorkoutModelFixtures {
                                                           createdAt: feb_3_2023_1630,
                                                           lastCompleted: nil)
     
+    static let legWorkout_WorkoutHistory: WorkoutHistory = .init(id: legWorkoutHistoryId,
+                                                                 workout: legWorkout)
+    
     static let fullBodyWorkout: Workout = Workout(id: fullBodyWorkoutId,
                                                   name: fullBodyWorkoutName,
                                                   exerciseGroups: fullBodyWorkoutExercises,
+                                                  planName: myPlanName,
                                                   createdAt: jan_1_2023_0800,
                                                   lastCompleted: feb_3_2023_1630)
     
@@ -148,9 +156,17 @@ struct WorkoutModelFixtures {
                                                                createdAt: jan_1_2023_0800,
                                                                lastCompleted: feb_3_2023_1630)
     
+    static let fullBodyWorkout_WorkoutHistory: WorkoutHistory = .init(id: fullBodyWorkoutHistoryId,
+                                                                      workout: fullBodyWorkout)
+    
     static let loadedWorkouts: [String: Workout] = [
         legWorkoutId: legWorkout,
         fullBodyWorkoutId: fullBodyWorkout
+    ]
+    
+    static let workoutHistories: [WorkoutHistory] = [
+        legWorkout_WorkoutHistory,
+        fullBodyWorkout_WorkoutHistory
     ]
     
     static let myPlanName = "My Plan 1"

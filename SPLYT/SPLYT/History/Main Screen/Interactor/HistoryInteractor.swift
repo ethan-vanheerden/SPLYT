@@ -17,7 +17,7 @@ enum HistoryDomainAction {
 
 // MARK: - Domain Results
 
-enum HistoryDomainResult {
+enum HistoryDomainResult: Equatable {
     case error
     case loaded(HistoryDomain)
     case dialog(type: HistoryDialog, domain: HistoryDomain)
