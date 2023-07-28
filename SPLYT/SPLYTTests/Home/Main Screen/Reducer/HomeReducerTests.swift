@@ -50,8 +50,7 @@ final class HomeReducerTests: XCTestCase {
     
     func testReduce_Dialog() async {
         let dialogs: [HomeDialog] = [
-            .deleteWorkout(id: WorkoutFixtures.legWorkoutId,
-                           historyFilename: WorkoutFixtures.legWorkoutFilename),
+            .deleteWorkout(id: WorkoutFixtures.legWorkoutId),
             .deletePlan(id: WorkoutFixtures.myPlanId)
         ]
         

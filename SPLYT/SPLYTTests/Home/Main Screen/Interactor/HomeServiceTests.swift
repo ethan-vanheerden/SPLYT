@@ -83,24 +83,4 @@ final class HomeServiceTests: XCTestCase {
         XCTAssertEqual(result, routines)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
     }
-    
-    func testDeleteWorkoutHistory_DeleteError() {
-        cacheInteractor.stubFileExists = true
-        cacheInteractor.deleteThrow = true
-        
-        XCTAssertThrowsError(try sut.deleteWorkoutHistory(historyFilename: WorkoutFixtures.legWorkoutFilename))
-        XCTAssertTrue(cacheInteractor.deleteCalled)
-    }
-    
-    func testDeleteWorkoutHistory_FileNoExist_DoesNothing() throws {
-        try sut.deleteWorkoutHistory(historyFilename: WorkoutFixtures.legWorkoutFilename)
-        XCTAssertFalse(cacheInteractor.deleteCalled)
-    }
-    
-    func testDeleteWorkoutHistory_Success() throws {
-        cacheInteractor.stubFileExists = true
-        
-        try sut.deleteWorkoutHistory(historyFilename: WorkoutFixtures.legWorkoutFilename)
-        XCTAssertTrue(cacheInteractor.deleteCalled)
-    }
 }

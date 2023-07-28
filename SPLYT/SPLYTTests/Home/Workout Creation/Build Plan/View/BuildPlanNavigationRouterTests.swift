@@ -26,6 +26,11 @@ final class BuildPlanNavigationRouterTests: XCTestCase {
         sut.navigator = mockNavigator
     }
     
+    func testNavigate_Back() {
+        sut.navigate(.back)
+        XCTAssertTrue(mockNavigator.calledPop)
+    }
+    
     func testNavigate_Exit() {
         sut.navigate(.exit)
         XCTAssertTrue(mockNavigator.calledDismissSelf)

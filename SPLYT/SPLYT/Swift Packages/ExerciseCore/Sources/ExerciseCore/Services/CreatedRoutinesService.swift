@@ -3,7 +3,7 @@ import Caching
 
 // MARK: - Protocol
 
-/// Operations needed with the user's created routines.
+/// Operations needed with a user's created routines.
 public protocol CreatedRoutinesServiceType {
     /// Routine actions
     func loadRoutines() throws -> CreatedRoutines
@@ -35,7 +35,6 @@ public protocol CreatedRoutinesServiceType {
 
 // MARK: - Implementation
 
-///  Service for getting a user's created workouts
 public struct CreatedRoutinesService: CreatedRoutinesServiceType {
     typealias Errors = CreatedRoutinesServiceError
     private let cacheInteractor: CacheInteractorType

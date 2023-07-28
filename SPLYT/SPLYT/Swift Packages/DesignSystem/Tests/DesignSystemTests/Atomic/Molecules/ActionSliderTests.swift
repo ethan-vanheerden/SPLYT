@@ -1,20 +1,24 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Ethan Van Heerden on 5/27/23.
-//
-
+import XCTest
+import DesignSystem
+import SnapshotTesting
 import SwiftUI
 
-struct SwiftUIView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        SwiftUIView()
+final class ActionSliderTests: XCTestCase {
+    private let viewStateOne = ActionSliderViewState(sliderColor: .green,
+                                                     backgroundText: "Finish")
+    private let viewStateTwo = ActionSliderViewState(sliderColor: .purple,
+                                                     backgroundText: "Slide to complete")
+    func testActionSlider() {
+        let view = VStack {
+            Spacer()
+            ActionSlider(viewState: viewStateOne,
+                         finishSlideAction: { })
+            ActionSlider(viewState: viewStateTwo,
+                         finishSlideAction: { })
+            Spacer()
+        }
+        .padding(.horizontal, Layout.size(1))
+        let vc = UIHostingController(rootView: view)
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }
 }

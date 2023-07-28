@@ -8,6 +8,7 @@
 import SwiftUI
 import Core
 import DesignSystem
+import ExerciseCore
 
 struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewState == HomeViewState {
     @ObservedObject private var viewModel: VM
@@ -45,7 +46,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     }
     
     private func mainView(display: HomeDisplay) -> some View {
-        let deletedWorkout = deletedWorkout(dialog: display.presentedDialog)
+        let deletedWorkoutId = deletedWorkoutId(dialog: display.presentedDialog)
         let deletedPlanId = deletedPlanId(dialog: display.presentedDialog)
         
         return ZStack {
@@ -59,12 +60,11 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
             fabView(state: display.fab)
             // TODO: Maybe add some filters?
         }
-        .dialog(isOpen: deletedWorkout != nil,
+        .dialog(isOpen: deletedWorkoutId != nil,
                 viewState: display.deleteWorkoutDialog,
-                primaryAction: { viewModel.send(.deleteWorkout(id: deletedWorkout?.0 ?? "",
-                                                               historyFilename: deletedWorkout?.1),
+                primaryAction: { viewModel.send(.deleteWorkout(id: deletedWorkoutId ?? ""),
                                                 taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: "", historyFilename: nil),
+                secondaryAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: ""),
                                                                 isOpen: false),
                                                   taskPriority: .userInitiated) })
         .dialog(isOpen: deletedPlanId != nil,
@@ -76,11 +76,11 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                                                   taskPriority: .userInitiated) })
     }
     
-    /// Returns a tuple of (workoutId, filename?)
-    private func deletedWorkout(dialog: HomeDialog?) -> (String, String?)? {
+    /// Returns the workoutId related to a delete workout dialog
+    private func deletedWorkoutId(dialog: HomeDialog?) -> String? {
         if let dialog = dialog,
-           case let .deleteWorkout(id, filename) = dialog {
-            return (id, filename)
+           case let .deleteWorkout(id) = dialog {
+            return id
         } else {
             return nil
         }
@@ -99,11 +99,9 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     private func workoutPlanView(display: HomeDisplay) -> some View {
         TabView(selection: $segmentedControlIndex) {
             routinesView(routines: display.workouts,
-                         tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0.id,
-                                                                                 historyFilename: $0.historyFilename)) },
+                         tapAction: { navigationRouter.navigate(.seletectWorkout(id: $0.id)) },
                          editAction: { navigationRouter.navigate(.editWorkout(id: $0.id)) },
-                         deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0.id,
-                                                                                           historyFilename: $0.historyFilename),
+                         deleteAction: { viewModel.send(.toggleDialog(type: .deleteWorkout(id: $0.id),
                                                                       isOpen: true),
                                                         taskPriority: .userInitiated) })
             .tag(0)
@@ -113,7 +111,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                          deleteAction: { viewModel.send(.toggleDialog(type: .deletePlan(id: $0.id),
                                                                       isOpen: true),
                                                         taskPriority: .userInitiated) })
-                .tag(1)
+            .tag(1)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
@@ -123,19 +121,29 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                               tapAction: @escaping (RoutineTileViewState) -> Void,
                               editAction: @escaping (RoutineTileViewState) -> Void,
                               deleteAction: @escaping (RoutineTileViewState) -> Void) -> some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: Layout.size(1.5)) {
-                ForEach(routines, id: \.self) { viewState in
-                    RoutineTile(viewState: viewState,
-                                tapAction: { tapAction(viewState) },
-                                editAction: { editAction(viewState) },
-                                deleteAction: { deleteAction(viewState) })
+        if routines.isEmpty {
+            emptyRoutinesView
+        } else {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: Layout.size(1.5)) {
+                    ForEach(routines, id: \.self) { viewState in
+                        RoutineTile(viewState: viewState,
+                                    tapAction: { tapAction(viewState) },
+                                    editAction: { editAction(viewState) },
+                                    deleteAction: { deleteAction(viewState) })
+                    }
                 }
+                .padding(.horizontal, horizontalPadding)
+                .padding(.top, Layout.size(1))
+                .padding(.bottom, Layout.size(10)) // Extra padding so FAB doesn't cover the bottom
             }
-            .padding(.horizontal, horizontalPadding)
-            .padding(.top, Layout.size(1))
-            .padding(.bottom, Layout.size(10)) // Extra padding so FAB doesn't cover the bottom
         }
+    }
+    
+    private var emptyRoutinesView: some View {
+        EmojiTitle(emoji: "🏋️‍♂️", title: Strings.getStarted)
+            .padding(.bottom, Layout.size(10))
+            .padding(.horizontal, horizontalPadding)
     }
     
     @ViewBuilder
@@ -145,4 +153,10 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                 createPlanAction: { navigationRouter.navigate(.createPlan) },
                 createWorkoutAction: { navigationRouter.navigate(.createWorkout) })
     }
+}
+
+// MARK: - Strings
+
+fileprivate struct Strings {
+    static let getStarted = "Select the plus button below to get started!"
 }

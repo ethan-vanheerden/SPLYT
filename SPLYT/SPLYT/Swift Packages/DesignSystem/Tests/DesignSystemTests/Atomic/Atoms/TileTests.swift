@@ -15,9 +15,7 @@ final class TileTests: XCTestCase {
                     .fill(Color(splytColor: .red))
                     .frame(width: Layout.size(1))
             }
-        }.padding()
-        
-        .padding(.horizontal)
+        }.padding(Layout.size(2))
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .smallImage()))
     }

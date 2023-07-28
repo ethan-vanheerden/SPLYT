@@ -8,14 +8,14 @@
 import Foundation
 import Core
 import SwiftUI
+import ExerciseCore
 
 // MARK: - Navigation Events
 
 enum HomeNavigationEvent {
     case createPlan
     case createWorkout
-    // TODO: ID for a netowork call, filename for a cache call if needed
-    case seletectWorkout(id: String, historyFilename: String?)
+    case seletectWorkout(id: String)
     case editWorkout(id: String)
     case selectPlan(id: String)
     case editPlan(id: String)
@@ -29,11 +29,11 @@ final class HomeNavigationRouter: NavigationRouter {
     func navigate(_ event: HomeNavigationEvent) {
         switch event {
         case .createPlan:
-            handleCreate(buildType: .plan)
+            handleCreate(routineType: .plan)
         case .createWorkout:
-            handleCreate(buildType: .workout)
-        case let .seletectWorkout(id, historyFilename):
-            handleSelectWorkout(id: id, historyFilename: historyFilename)
+            handleCreate(routineType: .workout)
+        case let .seletectWorkout(id):
+            handleSelectWorkout(id: id)
         case .editWorkout(let id):
             handleEditWorkout(id: id)
         case .selectPlan(let id):
@@ -48,8 +48,8 @@ final class HomeNavigationRouter: NavigationRouter {
 
 private extension HomeNavigationRouter {
     
-    func handleCreate(buildType: BuildWorkoutType) {
-        let interactor = NameWorkoutInteractor(buildType: buildType)
+    func handleCreate(routineType: RoutineType) {
+        let interactor = NameWorkoutInteractor(routineType: routineType)
         let viewModel = NameWorkoutViewModel(interactor: interactor)
         var navRouter = NameWorkoutNavigationRouter() // var because used as inout parameter
         let view = NameWorkoutView(viewModel: viewModel,
@@ -59,9 +59,8 @@ private extension HomeNavigationRouter {
         presentNavController(view: view, navRouter: &navRouter)
     }
     
-    func handleSelectWorkout(id: String, historyFilename: String?) {
-        guard let historyFilename = historyFilename else { return }
-        let interactor = DoWorkoutInteractor(workoutId: id, historyFilename: historyFilename)
+    func handleSelectWorkout(id: String) {
+        let interactor = DoWorkoutInteractor(workoutId: id)
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
             self?.navigator?.dismiss(animated: true)

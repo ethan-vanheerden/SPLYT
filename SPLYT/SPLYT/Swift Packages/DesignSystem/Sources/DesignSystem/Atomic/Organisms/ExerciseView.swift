@@ -27,7 +27,6 @@ public struct ExerciseView: View {
     public var body: some View {
         VStack {
             SectionHeader(viewState: viewState.header)
-                
             ForEach(viewState.sets, id: \.setIndex) { set in
                 SetView(viewState: set,
                         exerciseType: type,

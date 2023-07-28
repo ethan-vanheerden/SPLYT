@@ -7,11 +7,12 @@
 
 import Foundation
 import DesignSystem
+import ExerciseCore
 
 struct NameWorkoutDisplay: Equatable {
     let navBar: NavigationBarViewState
     let workoutName: String
     let textEntry: TextEntryViewState
-    let buildType: BuildWorkoutType
+    let routineType: RoutineType
     let nextButtonEnabled: Bool
 }

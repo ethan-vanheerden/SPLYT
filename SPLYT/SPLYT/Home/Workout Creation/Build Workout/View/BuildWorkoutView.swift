@@ -36,7 +36,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         switch viewModel.viewState {
         case .loading:
             ProgressView()
-                .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
+                .navigationBar(viewState: .init(title: Strings.addYourExercises)) {
                     viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                    taskPriority: .userInitiated)
                 }
@@ -45,7 +45,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .error:
             Text("Error!")
                 .foregroundColor(.red)
-                .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises)) {
+                .navigationBar(viewState: .init(title: Strings.addYourExercises)) {
                     navigationRouter.navigate(.exit)
                 }
         case .exit(let display):
@@ -71,7 +71,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                             .fill(Color(splytColor: .red))
                             .frame(width: Layout.size(1))
                             .offset(x: Layout.size(0.5), y: Layout.size(0.5))
-
+                        
                     }
                 }
                 TextEntry(text: $searchText, viewState: TextEntryBuilder.searchEntry)
@@ -83,7 +83,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
         }
-        .navigationBar(viewState: NavigationBarViewState(title: Strings.addYourExercises),
+        .navigationBar(viewState: .init(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                                     taskPriority: .userInitiated) },
                        content: { saveButton(canSave: display.canSave) })
@@ -138,16 +138,14 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func emptyExerciseView(isFiltering: Bool) -> some View {
-        VStack {
-            Spacer()
-            Text(Strings.noExercisesFound)
-                .body(style: .medium)
+        EmojiTitle(emoji: "😅", title: Strings.noExercisesFound) {
             if isFiltering {
                 SplytButton(text: Strings.removeFilters) {
                     viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
                 }
+            } else {
+                EmptyView()
             }
-            Spacer()
         }
         .padding(.horizontal, horizontalPadding)
     }
@@ -177,8 +175,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                     .frame(width: Layout.size(17))
                                     .foregroundColor(Color(splytColor: .black))
                             }
-                            .toggleStyle(.button)
-                            .tint(Color(splytColor: .lightBlue))
+                                                             .toggleStyle(.button)
+                                                             .tint(Color(splytColor: .lightBlue))
                         }
                     }
                 }
@@ -372,7 +370,7 @@ fileprivate struct Strings {
     static let addYourExercises = "ADD YOUR EXERCISES"
     static let addGroup = "Add group"
     static let editSetsReps = "Edit sets/reps"
-    static let noExercisesFound = "No exercises found 😅"
+    static let noExercisesFound = "No exercises found"
     static let removeFilters = "Remove filters"
     static let favorites = "Favorites"
     static let musclesWorked = "Muscles worked"

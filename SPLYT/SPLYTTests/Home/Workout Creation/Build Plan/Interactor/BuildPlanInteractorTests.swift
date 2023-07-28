@@ -40,7 +40,9 @@ final class BuildPlanInteractorTests: XCTestCase {
         let result = await sut.interact(with: .addWorkout(workout: WorkoutFixtures.legWorkout))
         
         var plan = WorkoutFixtures.myPlanEmpty
-        plan.workouts.append(WorkoutFixtures.legWorkout)
+        var workout = WorkoutFixtures.legWorkout
+        workout.planName = WorkoutFixtures.myPlanName
+        plan.workouts.append(workout)
         
         let expectedDomain = BuildPlanDomain(builtPlan: plan,
                                              canSave: true)
@@ -85,7 +87,9 @@ final class BuildPlanInteractorTests: XCTestCase {
         let result = await sut.interact(with: .savePlan)
         
         var plan = WorkoutFixtures.myPlanEmpty
-        plan.workouts.append(WorkoutFixtures.legWorkout)
+        var workout = WorkoutFixtures.legWorkout
+        workout.planName = WorkoutFixtures.myPlanName
+        plan.workouts.append(workout)
         
         let expectedDomain = BuildPlanDomain(builtPlan: plan,
                                              canSave: true)

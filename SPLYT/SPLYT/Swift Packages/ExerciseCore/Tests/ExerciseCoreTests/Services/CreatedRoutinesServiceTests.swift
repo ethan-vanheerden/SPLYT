@@ -6,7 +6,7 @@ final class CreatedRoutinesServiceTests: XCTestCase {
     typealias WorkoutFixtures = WorkoutModelFixtures
     private var cacheInteractor: MockCacheInteractor!
     private var sut: CreatedRoutinesService!
-    private let emptyRoutines = CreatedRoutines(workouts: [:], plans: [:])
+    private let emptyRoutines: CreatedRoutines = CreatedRoutines(workouts: [:], plans: [:])
     
     override func setUp() async throws {
         self.cacheInteractor = MockCacheInteractor()
@@ -130,7 +130,6 @@ final class CreatedRoutinesServiceTests: XCTestCase {
         let notFoundWorkout = Workout(id: "id",
                                       name: "Test",
                                       exerciseGroups: [],
-                                      historyFilename: "history",
                                       createdAt: WorkoutFixtures.dec_27_2022_1000)
         
         XCTAssertThrowsError(try sut.saveWorkout(workout: notFoundWorkout,

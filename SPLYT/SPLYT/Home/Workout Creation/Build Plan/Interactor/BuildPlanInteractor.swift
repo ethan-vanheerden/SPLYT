@@ -76,6 +76,8 @@ private extension BuildPlanInteractor {
     
     func handleAddWorkout(workout: Workout) -> BuildPlanDomainResult {
         guard let domain = savedDomain else { return .error }
+        var workout = workout
+        workout.planName = nameState.name
         domain.builtPlan.workouts.append(workout)
         
         return updateDomain(domain: domain)

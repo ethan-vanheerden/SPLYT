@@ -37,16 +37,10 @@ struct MainView<VM: MainViewModelType>: View {
         ZStack {
             HomeViewController_SwiftUI()
                 .isVisible(selectedTab == .home)
-            HistoryView()
+            HistoryViewController_SwiftUI()
                 .isVisible(selectedTab == .history)
             SettingsViewController_SwiftUI()
                 .isVisible(selectedTab == .settings)
         }
-    }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView(viewModel: MainViewModel())
     }
 }

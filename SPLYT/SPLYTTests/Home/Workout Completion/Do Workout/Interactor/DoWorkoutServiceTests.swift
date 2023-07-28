@@ -26,95 +26,148 @@ final class DoWorkoutServiceTests: XCTestCase {
     
     func testLoadWorkout_FileNoExist_ErrorLoading() {
         routineCacheInteractor.fileExistsThrow = true
-        XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
+        XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId))
     }
     
-    func testLoadWorkout_FileNoExist_LoadsFromCreatedWorkouts() throws {
+    func testLoadWorkout_WorkoutNoExist_Error() {
         routineCacheInteractor.stubFileExists = true
         routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         
-        let result = try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
-                                         historyFilename: WorkoutFixtures.legWorkoutFilename)
+        XCTAssertThrowsError(try sut.loadWorkout(workoutId: "not-a-workout"))
+    }
+    
+    func testLoadWorkout_Success() throws {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        let result = try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId)
         
         XCTAssertEqual(result, WorkoutFixtures.legWorkout)
     }
     
-    func testLoadWorkout_FileExists_ErrorLoading() {
-        cacheInteractor.stubFileExists = true
-        cacheInteractor.loadThrow = true
+    func testLoadWorkout_FromPlan_PlanNoExist_Error() {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
         XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
+                                                 planId: "not-a-plan"))
     }
     
-    func testLoadWorkout_FileExists_NoWorkoutsFound() {
+    func testLoadWorkout_FromPlan_WorkoutNoExist_Error() {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        XCTAssertThrowsError(try sut.loadWorkout(workoutId: "not-a-workout",
+                                                 planId: WorkoutFixtures.myPlanId))
+    }
+    
+    func testLoadWorkout_FromPlan_Success() throws {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        let result = try sut.loadWorkout(workoutId: WorkoutFixtures.fullBodyWorkoutId,
+                                         planId: WorkoutFixtures.myPlanId)
+        
+        XCTAssertEqual(result, WorkoutFixtures.fullBodyWorkout)
+    }
+    
+    func testSaveWorkout_HistoryCacheError() {
+        cacheInteractor.loadThrow = true
         cacheInteractor.stubFileExists = true
         cacheInteractor.stubData = [Workout]()
-        XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
-    }
-    
-    func testLoadWorkout_FileExists_Success() throws {
-        cacheInteractor.stubFileExists = true
-        cacheInteractor.stubData = [WorkoutFixtures.legWorkout]
         
-        let result = try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
-                                         historyFilename: WorkoutFixtures.legWorkoutFilename)
-        
-        XCTAssertEqual(result, WorkoutFixtures.legWorkout)
-    }
-    
-    func testSaveWorkout_FileNoExist_ErrorSaving() {
-        cacheInteractor.saveThrow = true
         XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
-        XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertFalse(routineCacheInteractor.saveCalled)
-    }
-    
-    func testSaveWorkout_FileExist_ErrorLoading() {
-        cacheInteractor.stubFileExists = true
-        cacheInteractor.loadThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
+                                                 completionDate: WorkoutFixtures.jan_1_2023_0800))
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertFalse(cacheInteractor.saveCalled)
-        XCTAssertFalse(routineCacheInteractor.saveCalled)
     }
     
-    func testSaveWorkout_FileExist_ErrorSaving() {
-        cacheInteractor.stubFileExists = true
-        cacheInteractor.stubData = [WorkoutFixtures.legWorkout]
-        cacheInteractor.saveThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
-        XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertFalse(routineCacheInteractor.saveCalled)
-    }
-    
-    func testSaveWorkout_ErrorLoadingCreatedWorkouts() {
-        routineCacheInteractor.loadThrow = true
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
-        XCTAssertTrue(cacheInteractor.saveCalled)
-        XCTAssertTrue(routineCacheInteractor.saveCalled)
-    }
-    
-    func testSaveWorkout_ErrorSavingCreatedWorkout() {
-        routineCacheInteractor.saveThrow = true
+    func testSaveWorkout_WorkoutNoExist_Error() {
+        routineCacheInteractor.stubFileExists = true
         routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
-        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                                                 historyFilename: WorkoutFixtures.legWorkoutFilename))
-        XCTAssertTrue(cacheInteractor.saveCalled)
+        
+        let notFoundWorkout = Workout(id: "id",
+                                      name: "Test",
+                                      exerciseGroups: [],
+                                      createdAt: WorkoutFixtures.dec_27_2022_1000)
+        
+        XCTAssertThrowsError(try sut.saveWorkout(workout: notFoundWorkout,
+                                                 completionDate: WorkoutFixtures.jan_1_2023_0800))
         XCTAssertTrue(routineCacheInteractor.saveCalled)
+        XCTAssertFalse(cacheInteractor.saveCalled)
     }
     
     func testSaveWorkout_Success() throws {
         routineCacheInteractor.stubFileExists = true
         routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        cacheInteractor.stubFileExists = true
+        cacheInteractor.stubData = WorkoutFixtures.workoutHistories
+        let completionDate = WorkoutFixtures.jan_1_2023_0800
+        
         try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
-                            historyFilename: WorkoutFixtures.legWorkoutFilename,
-                            planId: WorkoutFixtures.myPlanId)
-        XCTAssertTrue(cacheInteractor.saveCalled)
+                            completionDate: completionDate)
+        
+        let workoutHistory = cacheInteractor.stubData as? [WorkoutHistory]
+        var workout = WorkoutFixtures.legWorkout
+        workout.lastCompleted = completionDate
+        let newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
+                                     workout: workout)
+        var expectedHistories = WorkoutFixtures.workoutHistories
+        expectedHistories.insert(newHistory, at: 0)
+        
+        XCTAssertEqual(workoutHistory, expectedHistories)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
+        XCTAssertTrue(cacheInteractor.saveCalled)
+    }
+    
+    func testSaveWorkout_FromPlan_WorkoutNoExist_Error() {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        let notFoundWorkout = Workout(id: "id",
+                                      name: "Test",
+                                      exerciseGroups: [],
+                                      createdAt: WorkoutFixtures.dec_27_2022_1000)
+        
+        XCTAssertThrowsError(try sut.saveWorkout(workout: notFoundWorkout,
+                                                 planId: WorkoutFixtures.myPlanId,
+                                                 completionDate: WorkoutFixtures.jan_1_2023_0800))
+        XCTAssertTrue(routineCacheInteractor.loadCalled)
+        XCTAssertFalse(cacheInteractor.saveCalled)
+    }
+    
+    func testSaveWorkout_FromPlan_PlanNoExist_Error() {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        XCTAssertThrowsError(try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
+                                                 planId: "not-a-plan",
+                                                 completionDate: WorkoutFixtures.jan_1_2023_0800))
+        XCTAssertTrue(routineCacheInteractor.loadCalled)
+        XCTAssertFalse(cacheInteractor.saveCalled)
+    }
+    
+    func testSaveWorkout_FromPlan_Success() throws {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        cacheInteractor.stubFileExists = true
+        cacheInteractor.stubData = WorkoutFixtures.workoutHistories
+        let completionDate = WorkoutFixtures.jan_1_2023_0800
+        
+        try sut.saveWorkout(workout: WorkoutFixtures.legWorkout,
+                            planId: WorkoutFixtures.myPlanId,
+                            completionDate: completionDate)
+        
+        let workoutHistory = cacheInteractor.stubData as? [WorkoutHistory]
+        var workout = WorkoutFixtures.legWorkout
+        workout.lastCompleted = completionDate
+        let newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
+                                     workout: workout)
+        var expectedHistories = WorkoutFixtures.workoutHistories
+        expectedHistories.insert(newHistory, at: 0)
+        
+        XCTAssertEqual(workoutHistory, expectedHistories)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
+        XCTAssertTrue(cacheInteractor.saveCalled)
     }
 }

@@ -8,6 +8,8 @@ struct AtomFactory {
             ButtonGallery()
         case .collapseHeader:
             CollapseHeaderGallery()
+        case .emojiTitle:
+            EmojiTitleGallery()
         case .FABIcon:
             FABIconGallery()
         case .iconButtons:

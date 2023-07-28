@@ -13,7 +13,7 @@ import ExerciseCore
 // MARK: - Navigation Events
 
 enum NameWorkoutNavigationEvent {
-    case next(type: BuildWorkoutType, navState: NameWorkoutNavigationState)
+    case next(type: RoutineType, navState: NameWorkoutNavigationState)
 }
 
 // MARK: - Navigation State
@@ -45,7 +45,7 @@ final class NameWorkoutNavigationRouter: NavigationRouter {
 
 private extension NameWorkoutNavigationRouter {
     
-    func handleNext(type: BuildWorkoutType, navState: NameWorkoutNavigationState) {
+    func handleNext(type: RoutineType, navState: NameWorkoutNavigationState) {
         switch type {
         case .workout:
             startBuildWorkout(navState: navState)

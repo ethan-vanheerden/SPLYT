@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ExerciseCore
 
 // MARK: - Domain Actions
 
@@ -24,11 +25,11 @@ enum NameWorkoutDomainResult: Equatable {
 // MARK: - Interactor
 
 final class NameWorkoutInteractor {
-    private let buildType: BuildWorkoutType
+    private let routineType: RoutineType
     private var savedDomain: NameWorkoutDomain?
     
-    init(buildType: BuildWorkoutType) {
-        self.buildType = buildType
+    init(routineType: RoutineType) {
+        self.routineType = routineType
     }
     
     func interact(with action: NameWorkoutDomainAction) async -> NameWorkoutDomainResult {
@@ -46,7 +47,7 @@ final class NameWorkoutInteractor {
 private extension NameWorkoutInteractor {
     func handleLoad() -> NameWorkoutDomainResult {
         let domain = NameWorkoutDomain(workoutName: "",
-                                       buildType: buildType)
+                                       routineType: routineType)
         return updateDomain(domain: domain)
     }
     

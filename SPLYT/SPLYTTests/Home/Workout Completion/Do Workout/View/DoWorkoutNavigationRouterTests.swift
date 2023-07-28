@@ -21,7 +21,6 @@ final class DoWorkoutNavigationRouterTests: XCTestCase {
         mockNavigator = MockNavigator()
         let mockService = MockDoWorkoutService()
         let interactor = DoWorkoutInteractor(workoutId: WorkoutFixtures.legWorkoutId,
-                                             historyFilename: WorkoutFixtures.legWorkoutFilename,
                                              service: mockService)
         backExpectation = XCTestExpectation(description: "Navigated back")
         sut = DoWorkoutNavigationRouter(viewModel: DoWorkoutViewModel(interactor: interactor)) { [weak self] in

@@ -7,13 +7,14 @@
 
 import XCTest
 @testable import SPLYT
+import ExerciseCore
 
 final class NameWorkoutViewModelTests: XCTestCase {
     typealias Fixtures = NameWorkoutFixtures
     
     func testLoadingOnInit() {
-        for buildType in BuildWorkoutType.allCases {
-            let interactor = NameWorkoutInteractor(buildType: buildType)
+        for routineType in RoutineType.allCases {
+            let interactor = NameWorkoutInteractor(routineType: routineType)
             let sut = NameWorkoutViewModel(interactor: interactor)
             
             XCTAssertEqual(sut.viewState, .loading)
@@ -21,35 +22,35 @@ final class NameWorkoutViewModelTests: XCTestCase {
     }
     
     func testSend_Load_Workout() async {
-        let interactor = NameWorkoutInteractor(buildType: .workout)
+        let interactor = NameWorkoutInteractor(routineType: .workout)
         let sut = NameWorkoutViewModel(interactor: interactor)
         await sut.send(.load)
         
         let expectedDisplay = NameWorkoutDisplay(navBar: Fixtures.workoutNavBar,
                                                  workoutName: "",
                                                  textEntry: Fixtures.workoutTextEntry,
-                                                 buildType: .workout,
+                                                 routineType: .workout,
                                                  nextButtonEnabled: false)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }
     
     func testSend_Load_Plan() async {
-        let interactor = NameWorkoutInteractor(buildType: .plan)
+        let interactor = NameWorkoutInteractor(routineType: .plan)
         let sut = NameWorkoutViewModel(interactor: interactor)
         await sut.send(.load)
         
         let expectedDisplay = NameWorkoutDisplay(navBar: Fixtures.planNavBar,
                                                  workoutName: "",
                                                  textEntry: Fixtures.planTextEntry,
-                                                 buildType: .plan,
+                                                 routineType: .plan,
                                                  nextButtonEnabled: false)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }
     
     func testSend_NoSavedDomain_Error() async {
-        let interactor = NameWorkoutInteractor(buildType: .workout)
+        let interactor = NameWorkoutInteractor(routineType: .workout)
         let sut = NameWorkoutViewModel(interactor: interactor)
         await sut.send(.updateWorkoutName(name: "Legs"))
         
@@ -57,7 +58,7 @@ final class NameWorkoutViewModelTests: XCTestCase {
     }
     
     func testSend_UpdateWorkoutName_Workout() async {
-        let interactor = NameWorkoutInteractor(buildType: .workout)
+        let interactor = NameWorkoutInteractor(routineType: .workout)
         let sut = NameWorkoutViewModel(interactor: interactor)
         await sut.send(.load)
         await sut.send(.updateWorkoutName(name: "Legs"))
@@ -65,14 +66,14 @@ final class NameWorkoutViewModelTests: XCTestCase {
         let expectedDisplay = NameWorkoutDisplay(navBar: Fixtures.workoutNavBar,
                                                  workoutName: "Legs",
                                                  textEntry: Fixtures.workoutTextEntry,
-                                                 buildType: .workout,
+                                                 routineType: .workout,
                                                  nextButtonEnabled: true)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }
     
     func testSend_UpdatePlanName_Plan() async {
-        let interactor = NameWorkoutInteractor(buildType: .plan)
+        let interactor = NameWorkoutInteractor(routineType: .plan)
         let sut = NameWorkoutViewModel(interactor: interactor)
         await sut.send(.load)
         await sut.send(.updateWorkoutName(name: "Legs"))
@@ -80,7 +81,7 @@ final class NameWorkoutViewModelTests: XCTestCase {
         let expectedDisplay = NameWorkoutDisplay(navBar: Fixtures.planNavBar,
                                                  workoutName: "Legs",
                                                  textEntry: Fixtures.planTextEntry,
-                                                 buildType: .plan,
+                                                 routineType: .plan,
                                                  nextButtonEnabled: true)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))

@@ -18,6 +18,19 @@ public struct WorkoutReducer {
         return result
     }
     
+    public static func reduceCompletedExerciseGroups(groups: [ExerciseGroup],
+                                                     includeHeaderLine: Bool = true) -> [[CompletedExerciseViewState]] {
+        var result = [[CompletedExerciseViewState]]()
+        
+        for group in groups {
+            let exercises = getCompletedExerciseViewStates(exercises: group.exercises,
+                                                           includeHeaderLine: includeHeaderLine)
+            result.append(exercises)
+        }
+        
+        return result
+    }
+    
     /// Ex: ["Group 1", "Group 2", "Group 3"]
     public static func getGroupTitles(workout: Workout) -> [String] {
         var titles = [String]()
@@ -60,7 +73,6 @@ public struct WorkoutReducer {
             let numExercisesTitle = getNumExercisesTitle(workout: workout)
             
             return RoutineTileViewState(id: workout.id,
-                                        historyFilename: workout.historyFilename,
                                         title: workout.name,
                                         subtitle: numExercisesTitle,
                                         lastCompletedTitle: getLastCompletedTitle(date: workout.lastCompleted))
@@ -69,8 +81,9 @@ public struct WorkoutReducer {
     
     /// Creates a formatted date string to display for the routine's last completed date.
     /// - Parameter date: The date the routine was last completed
+    /// - Parameter isHistory: Indicates if this title will be used in the History view or not.
     /// - Returns: A formatted Date string in the form: "Last completed: Feb 3, 2023"
-    public static func getLastCompletedTitle(date: Date?) -> String? {
+    public static func getLastCompletedTitle(date: Date?, isHistory: Bool = false) -> String? {
         guard let date = date else { return nil }
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMMdY"
@@ -78,7 +91,20 @@ public struct WorkoutReducer {
         
         
         let dateString = formatter.string(from: date)
-        return Strings.lastCompleted + " \(dateString)"
+        let completedPrefix = isHistory ? Strings.completed : Strings.lastCompleted
+        return "\(completedPrefix): \(dateString)"
+    }
+    
+    /// Creates a string combining the given workout's name and plane name if it has one.
+    /// - Parameter workout: the workout to get the name of
+    /// - Returns: The workout name with ifs plan name if it has one
+    public static func getWorkoutAndPlanName(workout: Workout) -> String {
+        var planTitle = ""
+        if let planName = workout.planName {
+            planTitle = " | \(planName)"
+        }
+        
+        return workout.name + planTitle
     }
 }
 
@@ -96,12 +122,30 @@ private extension WorkoutReducer {
         }
     }
     
+    static func getCompletedExerciseViewStates(exercises: [Exercise],
+                                               includeHeaderLine: Bool) -> [CompletedExerciseViewState] {
+        return exercises.map { exercise in
+            let headerState = SectionHeaderViewState(title: exercise.name,
+                                                     includeLine: includeHeaderLine)
+            return CompletedExerciseViewState(header: headerState,
+                                              sets: getCompletedSetStates(exercise: exercise))
+        }
+    }
+    
     static func getSetStates(exercise: Exercise) -> [SetViewState] {
         return exercise.sets.enumerated().map { index, set in
             SetViewState(setIndex: index,
                          title: Strings.set + " \(index + 1)",
                          type: getSetViewType(set.input),
                          modifier: getSetModifierState(modifier: set.modifier))
+        }
+    }
+    
+    static func getCompletedSetStates(exercise: Exercise) -> [CompletedSetViewState] {
+        return exercise.sets.enumerated().map { index, set in
+            CompletedSetViewState(title: Strings.set + " \(index + 1)",
+                                  type: getSetViewType(set.input),
+                                  modifier: getSetModifierState(modifier: set.modifier))
         }
     }
     
@@ -144,5 +188,6 @@ fileprivate struct Strings {
     static let exercises = "exercises"
     static let workout = "workout"
     static let workouts = "workouts"
-    static let lastCompleted = "Last completed:"
+    static let lastCompleted = "Last completed"
+    static let completed = "Completed"
 }

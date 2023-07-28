@@ -59,7 +59,7 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NameWorkoutViewEve
             Spacer()
             SplytButton(text: Strings.next,
                         isEnabled: display.nextButtonEnabled) {
-                navigationRouter.navigate(.next(type: display.buildType,
+                navigationRouter.navigate(.next(type: display.routineType,
                                                 navState: navState(workoutName: display.workoutName)))
                 
             }

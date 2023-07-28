@@ -25,11 +25,4 @@ final class MockHomeService: HomeServiceType {
         saveRoutinesCalled = true
         if saveRoutinesThrow { throw MockError.someError }
     }
-    
-    var deleteWorkoutHistoryThrow = false
-    private(set) var numWorkoutHistoryDeleted = 0
-    func deleteWorkoutHistory(historyFilename: String) throws {
-        numWorkoutHistoryDeleted += 1
-        if deleteWorkoutHistoryThrow { throw MockError.someError }
-    }
 }

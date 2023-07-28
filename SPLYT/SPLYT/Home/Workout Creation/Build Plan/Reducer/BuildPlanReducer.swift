@@ -31,7 +31,7 @@ struct BuildPlanReducer {
 
 private extension BuildPlanReducer {
     func getDisplay(domain: BuildPlanDomain, dialog: BuildPlanDialog?) -> BuildPlanDisplay {
-        let workouts = getWorkoutTileStates(workouts: domain.builtPlan.workouts)
+        let workouts = WorkoutReducer.createWorkoutRoutineTiles(workouts: domain.builtPlan.workouts)
         
         let display = BuildPlanDisplay(workouts: workouts,
                                        canSave: domain.canSave,
@@ -39,18 +39,8 @@ private extension BuildPlanReducer {
                                        backDialog: backDialog,
                                        saveDialog: saveDialog,
                                        deleteDialog: deleteDialog)
+        
         return display
-    }
-    
-    private func getWorkoutTileStates(workouts: [Workout]) -> [RoutineTileViewState] {
-        return workouts.map { workout in
-            let numExercisesTitle = WorkoutReducer.getNumExercisesTitle(workout: workout)
-            
-            return RoutineTileViewState(id: workout.id,
-                                        title: workout.name,
-                                        subtitle: numExercisesTitle)
-            
-        }
     }
     
     var backDialog: DialogViewState {
