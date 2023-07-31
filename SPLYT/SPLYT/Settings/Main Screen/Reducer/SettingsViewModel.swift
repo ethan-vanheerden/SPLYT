@@ -7,15 +7,28 @@
 
 import Foundation
 import Core
-import DesignSystem
+
+// MARK: - Events
+
+enum SettingsViewEvent {
+    case load
+}
+
+// MARK: - View Model
 
 final class SettingsViewModel: ViewModel {
     @Published private(set) var viewState: SettingsViewState = .loading
+    private let interactor: SettingsInteractor
+    private let reducer = SettingsReducer()
+    
+    init(interactor: SettingsInteractor) {
+        self.interactor = interactor
+    }
     
     func send(_ event: SettingsViewEvent) async {
         switch event {
         case .load:
-            await updateViewState(.main(items: getMenuItems()))
+            await react(domainAction: .load)
         }
     }
 }
@@ -23,22 +36,15 @@ final class SettingsViewModel: ViewModel {
 // MARK: - Private
 
 private extension SettingsViewModel {
-    func getMenuItems() -> [MenuItemViewState] {
-        return SettingsItem.allCases.map {
-            /// The `id` field is the enum value so we know which view to navigate to when it is tapped
-            MenuItemViewState(id: $0, title: $0.title, subtitle: $0.subtitle)
-        }
-    }
-    
     func updateViewState(_ viewState: SettingsViewState) async {
         await MainActor.run {
             self.viewState = viewState
         }
     }
-}
-
-// MARK: - Events
-
-enum SettingsViewEvent {
-    case load
+    
+    func react(domainAction: SettingsDomainAction) async {
+        let domain = await interactor.interact(with: domainAction)
+        let newViewState = reducer.reduce(domain)
+        await updateViewState(newViewState)
+    }
 }

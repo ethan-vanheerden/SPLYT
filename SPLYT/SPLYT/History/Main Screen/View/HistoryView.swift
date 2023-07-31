@@ -32,7 +32,7 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent,
     }
     
     @ViewBuilder
-    var viewStateView: some View {
+    private var viewStateView: some View {
         switch viewModel.viewState {
         case .loading:
             ProgressView()

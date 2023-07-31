@@ -9,15 +9,22 @@ import Foundation
 
 enum SettingsItem: Equatable, CaseIterable {
     case designShowcase
+    case restPresets
     
     var title: String {
         switch self {
         case .designShowcase:
             return "Design Showcase"
+        case .restPresets:
+            return "Rest Presets"
         }
     }
     
     var subtitle: String? {
         return nil
+    }
+    
+    var isEnabled: Bool {
+        return true
     }
 }

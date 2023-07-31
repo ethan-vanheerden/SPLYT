@@ -11,12 +11,14 @@ import Core
 /// The base view controller for Settings
 final class SettingsNavigationController: UINavigationController {
     init() {
-        let viewModel = SettingsViewModel()
+        let interactor = SettingsInteractor()
+        let viewModel = SettingsViewModel(interactor: interactor)
         let navigationRouter = SettingsNavigationRouter()
         let view = SettingsView(viewModel: viewModel,
                                 navigationRouter: navigationRouter)
         let rootVC = UIHostingController(rootView: view)
         super.init(rootViewController: rootVC)
+        self.setNavigationBarHidden(true, animated: false)
         navigationRouter.navigator = self
     }
     

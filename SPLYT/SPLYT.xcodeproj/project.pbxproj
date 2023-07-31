@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA116FDA2A77FE7800E68852 /* UserSettings in Frameworks */ = {isa = PBXBuildFile; productRef = AA116FD92A77FE7800E68852 /* UserSettings */; };
+		AA116FE02A78492500E68852 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FDF2A78492500E68852 /* SettingsService.swift */; };
+		AA116FE22A78493F00E68852 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE12A78493F00E68852 /* SettingsInteractor.swift */; };
+		AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE32A78495C00E68852 /* SettingsDomain.swift */; };
+		AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE52A7849CD00E68852 /* SettingsReducer.swift */; };
+		AA116FE82A7849DE00E68852 /* SettingsDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */; };
+		AA116FEA2A784E2500E68852 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE92A784E2500E68852 /* SettingsSection.swift */; };
+		AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FEC2A784E3E00E68852 /* SettingsSection.swift */; };
 		AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A33FD2882DF0300BCB792 /* SettingsView.swift */; };
 		AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */; };
 		AA1A34032882E14100BCB792 /* SettingsNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */; };
@@ -188,6 +196,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA116FD82A77FE5D00E68852 /* UserSettings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserSettings; sourceTree = "<group>"; };
+		AA116FDF2A78492500E68852 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		AA116FE12A78493F00E68852 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		AA116FE32A78495C00E68852 /* SettingsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDomain.swift; sourceTree = "<group>"; };
+		AA116FE52A7849CD00E68852 /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
+		AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDisplay.swift; sourceTree = "<group>"; };
+		AA116FE92A784E2500E68852 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		AA116FEC2A784E3E00E68852 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		AA1A33FD2882DF0300BCB792 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationRouter.swift; sourceTree = "<group>"; };
@@ -372,6 +388,7 @@
 				AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */,
 				AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */,
 				AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */,
+				AA116FDA2A77FE7800E68852 /* UserSettings in Frameworks */,
 				AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */,
 				AA2A22D428A069C4002357E4 /* Networking in Frameworks */,
 				AA1A34082882E24D00BCB792 /* Core in Frameworks */,
@@ -389,15 +406,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA116FDB2A7848DB00E68852 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				AA116FDE2A7848EE00E68852 /* Reducer */,
+				AA116FDD2A7848EA00E68852 /* Interactor */,
+				AA116FDC2A7848E400E68852 /* View */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		AA116FDC2A7848E400E68852 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */,
+				AA1A33FD2882DF0300BCB792 /* SettingsView.swift */,
+				AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */,
+				AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */,
+				AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA116FDD2A7848EA00E68852 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA116FEB2A784E2B00E68852 /* Models */,
+				AA116FDF2A78492500E68852 /* SettingsService.swift */,
+				AA116FE12A78493F00E68852 /* SettingsInteractor.swift */,
+				AA116FE32A78495C00E68852 /* SettingsDomain.swift */,
+				AA116FE92A784E2500E68852 /* SettingsSection.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA116FDE2A7848EE00E68852 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */,
+				AA116FE52A7849CD00E68852 /* SettingsReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA116FEB2A784E2B00E68852 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */,
+				AA116FEC2A784E3E00E68852 /* SettingsSection.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		AA1A33FF2882E0B300BCB792 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				AA1A33FD2882DF0300BCB792 /* SettingsView.swift */,
-				AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */,
-				AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */,
-				AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */,
-				AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */,
-				AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */,
+				AA116FDB2A7848DB00E68852 /* Main Screen */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -483,6 +547,7 @@
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AA116FD82A77FE5D00E68852 /* UserSettings */,
 				AAD8704729C3C99A00540608 /* ExerciseCore */,
 				AA893139294A4FA600D7B4B1 /* Caching */,
 				AA2A22D228A05C61002357E4 /* Networking */,
@@ -1392,6 +1457,7 @@
 				AA2A22D328A069C4002357E4 /* Networking */,
 				AA60DA00294B7FA0008C7615 /* Caching */,
 				AAD8704829C3C9D500540608 /* ExerciseCore */,
+				AA116FD92A77FE7800E68852 /* UserSettings */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -1519,6 +1585,7 @@
 				AA60DA112956B84E008C7615 /* HomeService.swift in Sources */,
 				AA672A652A69B8890009919E /* WorkoutDetailsReducer.swift in Sources */,
 				AA2C245E2A3F7517004FC939 /* BuildPlanView.swift in Sources */,
+				AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */,
 				AA2C24582A3F747B004FC939 /* BuildPlanViewModel.swift in Sources */,
 				AA2C24482A3CBE77004FC939 /* NameWorkoutViewState.swift in Sources */,
 				AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */,
@@ -1533,12 +1600,16 @@
 				AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */,
 				AA60DA07295217CF008C7615 /* HomeViewModel.swift in Sources */,
 				AA672A4F2A6495650009919E /* HistoryViewState.swift in Sources */,
+				AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */,
 				AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */,
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
+				AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
 				AA672A532A6495830009919E /* HistoryReducer.swift in Sources */,
+				AA116FEA2A784E2500E68852 /* SettingsSection.swift in Sources */,
 				AA672A492A6495360009919E /* HistoryInteractor.swift in Sources */,
+				AA116FE22A78493F00E68852 /* SettingsInteractor.swift in Sources */,
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
@@ -1546,6 +1617,7 @@
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
 				AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */,
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
+				AA116FE02A78492500E68852 /* SettingsService.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
@@ -1562,6 +1634,7 @@
 				AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */,
 				AA672A4D2A64955C0009919E /* HistoryDisplay.swift in Sources */,
 				AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */,
+				AA116FE82A7849DE00E68852 /* SettingsDisplay.swift in Sources */,
 				AACB297F2A15580E00AACB6B /* DoWorkoutViewState.swift in Sources */,
 				AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */,
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
@@ -1929,6 +2002,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AA116FD92A77FE7800E68852 /* UserSettings */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UserSettings;
+		};
 		AA1A34052882E24900BCB792 /* DesignShowcase */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignShowcase;
