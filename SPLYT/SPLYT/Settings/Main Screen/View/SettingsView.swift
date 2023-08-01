@@ -12,12 +12,9 @@ import DesignSystem
 struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
                                                 VM.ViewState == SettingsViewState {
     @ObservedObject private var viewModel: VM
-    private let navigationRouter: SettingsNavigationRouter
     
-    init(viewModel: VM,
-         navigationRouter: SettingsNavigationRouter) {
+    init(viewModel: VM) {
         self.viewModel = viewModel
-        self.navigationRouter = navigationRouter
         viewModel.send(.load)
     }
     
@@ -42,41 +39,43 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     
     @ViewBuilder
     private func mainView(display: SettingsDisplay) -> some View {
-//        List(display.sections, id: \.title) { section in
-//            Text(section.title)
-//        }
-        Text("")
+        List(display.sections, id: \.title) { section in
+            if section.isEnabled {
+                Section {
+                    detail(items: section.items)
+                } header: {
+                    Text(section.title)
+                        .subhead()
+                }
+            }
+        }
     }
     
-//    var body: some View {
-//        switch viewModel.viewState {
-//        case .loading:
-//            ProgressView()
-//        case .main(let items):
-//            mainView(items: items)
-//        }
-//    }
-//
-//    @ViewBuilder
-//    private func mainView(items: [MenuItemViewState]) -> some View {
-//        VStack {
-//            HStack {
-//                Text("Settings 🔨")
-//                    .largeTitle()
-//                Spacer()
-//            }
-//            .padding(.leading)
-//
-//            VStack {
-//                ForEach(items, id: \.id) {
-//                    MenuItem(viewState: $0) { viewState in
-//                        navigationRouter.navigate(.menuItem(viewState))
-//                    }
-//                }
-//            }
-//            Spacer()
-//        }
-//    }
+    @ViewBuilder
+    private func detail(items: [SettingsItem]) -> some View {
+        ForEach(items, id: \.self) { item in
+            if item.isEnabled {
+                NavigationLink {
+                    SettingsViewFactory().makeView(item)
+                        .navigationBar(viewState: .init(title: item.title))
+                } label: {
+                    detailTitle(item: item)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func detailTitle(item: SettingsItem) -> some View {
+        HStack {
+            Image(systemName: item.imageName)
+                .foregroundColor(Color(splytColor: .white))
+                .background(Color(splytColor: .green))
+            Text(item.title)
+                .subhead(style: .semiBold)
+            Spacer()
+        }
+    }
 }
 
 

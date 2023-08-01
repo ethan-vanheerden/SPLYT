@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SettingsSection: Equatable {
+struct SettingsSection: Hashable {
     let title: String
     let items: [SettingsItem]
     let isEnabled: Bool

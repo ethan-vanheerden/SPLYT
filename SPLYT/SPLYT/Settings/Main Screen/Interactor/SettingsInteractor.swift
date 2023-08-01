@@ -77,11 +77,15 @@ private extension SettingsInteractor {
     }
     
     var developerSection: SettingsSection {
+        var isEnabled = false
+        #if DEBUG
+            isEnabled = true
+        #endif
         return .init(title: Strings.developer,
                      items: [
                         .designShowcase
                      ],
-                     isEnabled: true) // TODO:
+                     isEnabled: isEnabled)
     }
 }
 

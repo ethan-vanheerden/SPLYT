@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DesignSystem
 
 enum SettingsItem: Equatable, CaseIterable {
     case designShowcase
@@ -26,5 +27,23 @@ enum SettingsItem: Equatable, CaseIterable {
     
     var isEnabled: Bool {
         return true
+    }
+    
+    var imageName: String {
+        switch self {
+        case .designShowcase:
+            return "theatermask.and.paintbrush.fill"
+        case .restPresets:
+            return "stopwatch.fill"
+        }
+    }
+    
+    var backgroundColor: SplytColor {
+        switch self {
+        case .designShowcase:
+            return .purple
+        case .restPresets:
+            return .lightBlue
+        }
     }
 }

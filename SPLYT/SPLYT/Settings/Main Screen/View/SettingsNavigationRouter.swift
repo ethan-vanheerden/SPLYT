@@ -25,23 +25,26 @@ final class SettingsNavigationRouter: NavigationRouter {
     func navigate(_ event: SettingsNavigationEvent) {
         switch event {
         case .menuItem(let viewState):
-            handleNavigateMenuItem(viewState: viewState)
+//            handleNavigateMenuItem(viewState: viewState)
+            return
         }
     }
 }
 
 
 // MARK: - Private
-
-private extension SettingsNavigationRouter {
-    func handleNavigateMenuItem(viewState: MenuItemViewState) {
-        guard let item = viewState.id as? SettingsItem else {
-            return
-        }
-        switch item {
-        case .designShowcase:
-            let vc = DesignShowcaseProvider.designShowcaseHostingController()
-            navigator?.push(vc, animated: true)
-        }
-    }
-}
+//
+//private extension SettingsNavigationRouter {
+//    func handleNavigateMenuItem(viewState: MenuItemViewState) {
+//        guard let item = viewState.id as? SettingsItem else {
+//            return
+//        }
+//        switch item {
+//        case .designShowcase:
+//            let vc = DesignShowcaseProvider.designShowcaseHostingController()
+//            navigator?.push(vc, animated: true)
+//        case .restPresets:
+//            return
+//        }
+//    }
+//}
