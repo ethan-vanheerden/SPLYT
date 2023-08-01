@@ -23,12 +23,7 @@ enum SettingsDomainResult: Equatable {
 // MARK: - Interactor
 
 final class SettingsInteractor {
-    private let service: SettingsServiceType
     private var savedDomain: SettingsDomain?
-    
-    init(service: SettingsServiceType = SettingsService()) {
-        self.service = service
-    }
     
     func interact(with action: SettingsDomainAction) async -> SettingsDomainResult {
         switch action {

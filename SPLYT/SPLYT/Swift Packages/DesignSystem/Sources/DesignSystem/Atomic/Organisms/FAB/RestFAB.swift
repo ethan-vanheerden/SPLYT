@@ -40,7 +40,7 @@ public struct RestFAB: View {
             HStack {
                 Spacer()
                 HStack {
-                    Image(systemName: "stopwatch") // TODO: icon images
+                    Image(systemName: "stopwatch")
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(Color(splytColor: .lightBlue))

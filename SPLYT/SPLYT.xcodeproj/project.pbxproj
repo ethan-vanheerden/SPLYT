@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AA116FDA2A77FE7800E68852 /* UserSettings in Frameworks */ = {isa = PBXBuildFile; productRef = AA116FD92A77FE7800E68852 /* UserSettings */; };
-		AA116FE02A78492500E68852 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FDF2A78492500E68852 /* SettingsService.swift */; };
 		AA116FE22A78493F00E68852 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE12A78493F00E68852 /* SettingsInteractor.swift */; };
 		AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE32A78495C00E68852 /* SettingsDomain.swift */; };
 		AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE52A7849CD00E68852 /* SettingsReducer.swift */; };
@@ -16,7 +15,6 @@
 		AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FEC2A784E3E00E68852 /* SettingsSection.swift */; };
 		AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A33FD2882DF0300BCB792 /* SettingsView.swift */; };
 		AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */; };
-		AA1A34032882E14100BCB792 /* SettingsNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */; };
 		AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34052882E24900BCB792 /* DesignShowcase */; };
 		AA1A34082882E24D00BCB792 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34072882E24D00BCB792 /* Core */; };
 		AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewHostingController.swift */; };
@@ -152,7 +150,6 @@
 		AADCABDC2888944100FF09B9 /* SettingsNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABDB2888944100FF09B9 /* SettingsNavigationRouterTests.swift */; };
 		AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */ = {isa = PBXBuildFile; productRef = AADCABDE288895AC00FF09B9 /* Mocking */; };
 		AADCABE1288898A100FF09B9 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */; };
-		AADCABE328889A0C00FF09B9 /* SettingsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */; };
 		AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */; };
 		AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */; };
 		AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */; };
@@ -197,7 +194,6 @@
 
 /* Begin PBXFileReference section */
 		AA116FD82A77FE5D00E68852 /* UserSettings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserSettings; sourceTree = "<group>"; };
-		AA116FDF2A78492500E68852 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		AA116FE12A78493F00E68852 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
 		AA116FE32A78495C00E68852 /* SettingsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDomain.swift; sourceTree = "<group>"; };
 		AA116FE52A7849CD00E68852 /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
@@ -205,7 +201,6 @@
 		AA116FEC2A784E3E00E68852 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		AA1A33FD2882DF0300BCB792 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
-		AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationRouter.swift; sourceTree = "<group>"; };
 		AA1A34042882E18400BCB792 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
 		AA1A34092884841B00BCB792 /* MainViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewHostingController.swift; sourceTree = "<group>"; };
 		AA1A340D2884893800BCB792 /* Architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Architecture.md; sourceTree = "<group>"; };
@@ -347,7 +342,6 @@
 		AADCABDB2888944100FF09B9 /* SettingsNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationRouterTests.swift; sourceTree = "<group>"; };
 		AADCABDD2888946F00FF09B9 /* Mocking */ = {isa = PBXFileReference; lastKnownFileType = text; name = Mocking; path = SPLYTTests/Settings/Mocking; sourceTree = SOURCE_ROOT; };
 		AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
-		AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewTests.swift; sourceTree = "<group>"; };
 		AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsViewModel.swift; sourceTree = "<group>"; };
 		AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutServiceTests.swift; sourceTree = "<group>"; };
 		AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequest.swift; sourceTree = "<group>"; };
@@ -421,7 +415,6 @@
 			children = (
 				AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */,
 				AA1A33FD2882DF0300BCB792 /* SettingsView.swift */,
-				AA1A34022882E14100BCB792 /* SettingsNavigationRouter.swift */,
 				AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */,
 				AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */,
 				AAB42B262A795777002A1ED2 /* SettingsViewFactory.swift */,
@@ -433,7 +426,6 @@
 			isa = PBXGroup;
 			children = (
 				AA116FEB2A784E2B00E68852 /* Models */,
-				AA116FDF2A78492500E68852 /* SettingsService.swift */,
 				AA116FE12A78493F00E68852 /* SettingsInteractor.swift */,
 				AA116FE32A78495C00E68852 /* SettingsDomain.swift */,
 			);
@@ -1086,7 +1078,6 @@
 				AADCABE428889A4700FF09B9 /* Mocks */,
 				AADCABDB2888944100FF09B9 /* SettingsNavigationRouterTests.swift */,
 				AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */,
-				AADCABE228889A0C00FF09B9 /* SettingsViewTests.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1617,7 +1608,6 @@
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
 				AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */,
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
-				AA116FE02A78492500E68852 /* SettingsService.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
@@ -1629,7 +1619,6 @@
 				AACB297D2A1557E400AACB6B /* DoWorkoutView.swift in Sources */,
 				AAE79AEA296C610B0010848E /* NameWorkoutNavigationRouter.swift in Sources */,
 				AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */,
-				AA1A34032882E14100BCB792 /* SettingsNavigationRouter.swift in Sources */,
 				AA60DA05295215DF008C7615 /* HomeNavigationController.swift in Sources */,
 				AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */,
 				AA672A4D2A64955C0009919E /* HistoryDisplay.swift in Sources */,
@@ -1672,7 +1661,6 @@
 				AA672A8F2A743C140009919E /* HomeNavigationControllerTests.swift in Sources */,
 				AA5073B62A6392CA00F0BAD2 /* DoPlanNavigationRouterTests.swift in Sources */,
 				AAD074EA2A74450400451C64 /* WorkoutDetailsReducerTests.swift in Sources */,
-				AADCABE328889A0C00FF09B9 /* SettingsViewTests.swift in Sources */,
 				AA50738F2A62FA4200F0BAD2 /* NameWorkoutFixtures.swift in Sources */,
 				AAEBFCF6295E3D0700D284F0 /* HomeFixtures.swift in Sources */,
 				AA672A892A6DE4390009919E /* HistoryViewModelTests.swift in Sources */,

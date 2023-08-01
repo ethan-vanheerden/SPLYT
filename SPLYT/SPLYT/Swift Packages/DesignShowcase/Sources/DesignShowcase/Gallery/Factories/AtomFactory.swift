@@ -14,6 +14,8 @@ struct AtomFactory {
             FABIconGallery()
         case .iconButtons:
             IconButtonGallery()
+        case .iconImage:
+            IconImageGallery()
         case .progressBar:
             ProgressBarGallery()
         case .scrim:

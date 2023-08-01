@@ -43,7 +43,7 @@ enum SettingsItem: Equatable, CaseIterable {
         case .designShowcase:
             return .purple
         case .restPresets:
-            return .lightBlue
+            return .blue
         }
     }
 }
