@@ -156,8 +156,6 @@
 		AAD074F02A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD074EF2A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift */; };
 		AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */ = {isa = PBXBuildFile; productRef = AAD8704829C3C9D500540608 /* ExerciseCore */; };
 		AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */ = {isa = PBXBuildFile; productRef = AADCABDE288895AC00FF09B9 /* Mocking */; };
-		AADCABE1288898A100FF09B9 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */; };
-		AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */; };
 		AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */; };
 		AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */; };
 		AADEC4B928A8428900A5463B /* GetAvailableExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */; };
@@ -355,8 +353,6 @@
 		AAD074EF2A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsNavigationRouterTests.swift; sourceTree = "<group>"; };
 		AAD8704729C3C99A00540608 /* ExerciseCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ExerciseCore; sourceTree = "<group>"; };
 		AADCABDD2888946F00FF09B9 /* Mocking */ = {isa = PBXFileReference; lastKnownFileType = text; name = Mocking; path = SPLYTTests/Settings/Mocking; sourceTree = SOURCE_ROOT; };
-		AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
-		AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsViewModel.swift; sourceTree = "<group>"; };
 		AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutServiceTests.swift; sourceTree = "<group>"; };
 		AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequest.swift; sourceTree = "<group>"; };
 		AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequestTests.swift; sourceTree = "<group>"; };
@@ -1090,8 +1086,7 @@
 		AA93404E28888B5800309E83 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				AADCABE428889A4700FF09B9 /* Mocks */,
-				AADCABE0288898A100FF09B9 /* SettingsViewModelTests.swift */,
+				AAB42B3C2A7AE983002A1ED2 /* Main Screen */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1135,6 +1130,45 @@
 			path = Reducer;
 			sourceTree = "<group>";
 		};
+		AAB42B3C2A7AE983002A1ED2 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				AAB42B412A7AE9B6002A1ED2 /* Reducer */,
+				AAB42B402A7AE9AF002A1ED2 /* Interactor */,
+				AAB42B3F2A7AE9AA002A1ED2 /* View */,
+				AAB42B3D2A7AE98B002A1ED2 /* Mocks */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		AAB42B3D2A7AE98B002A1ED2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AAB42B3F2A7AE9AA002A1ED2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AAB42B402A7AE9AF002A1ED2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AAB42B412A7AE9B6002A1ED2 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
 		AACB29702A1556F200AACB6B /* Do Workout */ = {
 			isa = PBXGroup;
 			children = (
@@ -1174,14 +1208,6 @@
 				AACB29762A15576700AACB6B /* DoWorkoutReducer.swift */,
 			);
 			path = Reducer;
-			sourceTree = "<group>";
-		};
-		AADCABE428889A4700FF09B9 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				AADCABE528889A5C00FF09B9 /* MockSettingsViewModel.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		AADCC9B12A36319400B45827 /* Workout Completion */ = {
@@ -1739,7 +1765,6 @@
 				AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */,
 				AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */,
 				AAE79AF6296E13100010848E /* NameWorkoutNavigationRouterTests.swift in Sources */,
-				AADCABE628889A5C00FF09B9 /* MockSettingsViewModel.swift in Sources */,
 				AA5073A32A6350B000F0BAD2 /* BuildPlanViewModelTests.swift in Sources */,
 				AA2C243D2A37A45F004FC939 /* DoWorkoutViewModelTests.swift in Sources */,
 				AA5073B22A638C0600F0BAD2 /* DoPlanReducerTests.swift in Sources */,
@@ -1759,7 +1784,6 @@
 				AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */,
 				AA52BBB229B78802009CDBDA /* MockHomeService.swift in Sources */,
 				AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */,
-				AADCABE1288898A100FF09B9 /* SettingsViewModelTests.swift in Sources */,
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,
 				AAF0FB3F298AC0BB00167B02 /* BuildWorkoutInteractorTests.swift in Sources */,
 				AA2C243F2A37B2D8004FC939 /* DoWorkoutNavigationRouterTests.swift in Sources */,
