@@ -33,11 +33,13 @@ private extension DoWorkoutReducer {
         let progressBar = getProgressBar(fractionCompleted: domain.fractionCompleted)
         let groupTitles = WorkoutReducer.getGroupTitles(workout: domain.workout)
         let groups = getExerciseGroupStates(domain: domain, groupTitles: groupTitles)
+        let restFAB = getRestFABViewState(isResting: domain.isResting, restPresets: domain.restPresets)
         
         let display = DoWorkoutDisplay(workoutName: domain.workout.name,
                                        progressBar: progressBar,
                                        groupTitles: groupTitles,
                                        groups: groups,
+                                       restFAB: restFAB,
                                        expandedGroups: domain.expandedGroups,
                                        inCountdown: domain.inCountdown,
                                        isResting: domain.isResting,
@@ -71,6 +73,11 @@ private extension DoWorkoutReducer {
         }
         
         return result
+    }
+    
+    func getRestFABViewState(isResting: Bool, restPresets: [Int]) -> RestFABViewState {
+        return .init(isResting: isResting,
+                     restPresets: restPresets)
     }
     
     func getSlider(isComplete: Bool) -> ActionSliderViewState? {

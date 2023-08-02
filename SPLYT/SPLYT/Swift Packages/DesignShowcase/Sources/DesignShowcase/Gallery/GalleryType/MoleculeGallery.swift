@@ -12,7 +12,6 @@ enum Molecule: String, CaseIterable, GalleryItem {
     case counter = "Counter"
     case dialog = "Dialog"
     case homeFABRow = "Home FAB Row"
-    case menuItem = "Menu Item"
     case navigationBar = "Navigation Bar"
     case restFABRow = "Rest FAB Row"
     case routineTile = "Routine Tile"

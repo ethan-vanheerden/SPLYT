@@ -52,7 +52,6 @@ struct SetEntry: View {
             // Dismiss keyboard if we tap again
             if fieldFocused {
                 fieldFocused = false
-                
             }
         }
     }

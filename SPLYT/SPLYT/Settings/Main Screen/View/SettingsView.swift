@@ -10,7 +10,7 @@ import Core
 import DesignSystem
 
 struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
-                                                VM.ViewState == SettingsViewState {
+                                               VM.ViewState == SettingsViewState {
     @ObservedObject private var viewModel: VM
     
     init(viewModel: VM) {
@@ -39,13 +39,15 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     
     @ViewBuilder
     private func mainView(display: SettingsDisplay) -> some View {
-        List(display.sections, id: \.title) { section in
-            if section.isEnabled {
-                Section {
-                    detail(items: section.items)
-                } header: {
-                    Text(section.title)
-                        .subhead()
+        Form {
+            ForEach(display.sections, id: \.self) { section in
+                if section.isEnabled {
+                    Section {
+                        detail(items: section.items)
+                    } header: {
+                        Text(section.title)
+                            .subhead()
+                    }
                 }
             }
         }

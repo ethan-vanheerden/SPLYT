@@ -16,7 +16,9 @@ struct SettingsViewFactory {
         case .designShowcase:
             DesignShowcaseProvider.designShowcaseView()
         case .restPresets:
-            Text("rest presets")
+            let interactor = RestPresetsInteractor()
+            let viewModel = RestPresetsViewModel(interactor: interactor)
+            RestPresetsView(viewModel: viewModel)
         }
     }
 }

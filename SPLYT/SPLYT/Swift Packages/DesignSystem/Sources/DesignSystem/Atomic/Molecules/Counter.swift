@@ -3,6 +3,7 @@ import SwiftUI
 public struct Counter: View {
     @Binding private var selectedNumber: Int
     @State private var selectedNumberText: String = ""
+    @FocusState private var fieldFocused
     private let viewState: CounterViewState
     private let sideLength: CGFloat = Layout.size(5)
     
@@ -22,6 +23,11 @@ public struct Counter: View {
             }
             Text(viewState.label)
                 .footnote()
+        }
+        .onTapGesture {
+            if fieldFocused {
+                fieldFocused = false
+            }
         }
     }
     
@@ -50,6 +56,7 @@ public struct Counter: View {
         TextField("", text: textFieldBinding)
             .keyboardType(.numberPad)
             .textFieldStyle(.plain)
+            .focused($fieldFocused)
             .multilineTextAlignment(.center)
             .font(Font.custom("Montserrat-SemiBold", size: 13))
             .foregroundColor(Color(splytColor: viewState.textColor))

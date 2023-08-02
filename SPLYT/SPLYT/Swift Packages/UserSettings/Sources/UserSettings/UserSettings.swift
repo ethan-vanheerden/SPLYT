@@ -28,7 +28,3 @@ public extension UserSettings {
         set(object, forKey: key.rawValue)
     }
 }
-
-public enum UserSettingsKey: String {
-    case restPresets
-}
