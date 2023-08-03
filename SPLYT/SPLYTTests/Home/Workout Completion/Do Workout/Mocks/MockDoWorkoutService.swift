@@ -29,6 +29,6 @@ final class MockDoWorkoutService: DoWorkoutServiceType {
     }
     
     func loadRestPresets() -> [Int] {
-        return Fixtures.restPresets
+        return RestPresetsFixtures.presets
     }
 }

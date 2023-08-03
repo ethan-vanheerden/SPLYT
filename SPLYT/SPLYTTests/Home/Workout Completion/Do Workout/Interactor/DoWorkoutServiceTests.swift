@@ -14,14 +14,17 @@ final class DoWorkoutServiceTests: XCTestCase {
     typealias WorkoutFixtures = WorkoutModelFixtures
     private var cacheInteractor: MockCacheInteractor!
     private var routineCacheInteractor: MockCacheInteractor!
+    private var mockUserSettings: MockUserSettings!
     private var sut: DoWorkoutService!
     
     override func setUpWithError() throws {
-        cacheInteractor = MockCacheInteractor()
-        routineCacheInteractor = MockCacheInteractor()
+        self.cacheInteractor = MockCacheInteractor()
+        self.routineCacheInteractor = MockCacheInteractor()
+        self.mockUserSettings = MockUserSettings()
         let routineService = CreatedRoutinesService(cacheInteractor: routineCacheInteractor)
         self.sut = DoWorkoutService(cacheInteractor: cacheInteractor,
-                                    routineService: routineService)
+                                    routineService: routineService,
+                                    userSettings: mockUserSettings)
     }
     
     func testLoadWorkout_FileNoExist_ErrorLoading() {
@@ -169,5 +172,10 @@ final class DoWorkoutServiceTests: XCTestCase {
         XCTAssertEqual(workoutHistory, expectedHistories)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertTrue(cacheInteractor.saveCalled)
+    }
+    
+    func testLoadRestPresets() {
+        let result = sut.loadRestPresets()
+        XCTAssertEqual(result, RestPresetsFixtures.presets)
     }
 }

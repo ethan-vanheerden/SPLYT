@@ -1,5 +1,5 @@
 //
-//  SettingsRecucerTests.swift
+//  SettingsReducerTests.swift
 //  SPLYTTests
 //
 //  Created by Ethan Van Heerden on 8/2/23.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import SPLYT
 
-final class SettingsRecucerTests: XCTestCase {
+final class SettingsReducerTests: XCTestCase {
     typealias Fixtures = SettingsFixtures
     private var interactor: SettingsInteractor!
     private var sut: SettingsReducer!

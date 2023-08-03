@@ -36,7 +36,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -56,7 +56,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -77,7 +77,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
         
@@ -90,7 +90,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                  expandedGroups: [true, false],
                                  completedGroups: [false, false],
                                  fractionCompleted: 0,
-                                 restPresets: Fixtures.restPresets)
+                                 restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -111,7 +111,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, true],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
         
@@ -124,7 +124,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                  expandedGroups: [true, false],
                                  completedGroups: [false, false],
                                  fractionCompleted: 0,
-                                 restPresets: Fixtures.restPresets)
+                                 restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -144,7 +144,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [false, true],
                                      completedGroups: [true, false],
                                      fractionCompleted: 0.5,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -160,7 +160,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, true],
                                      fractionCompleted: 0.5,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -191,7 +191,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -223,7 +223,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -261,7 +261,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true],
                                      completedGroups: [false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -285,7 +285,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -314,7 +314,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -352,7 +352,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -381,7 +381,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -421,7 +421,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -453,7 +453,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -473,7 +473,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .dialog(dialog: .finishWorkout, domain: domain))
     }
@@ -489,7 +489,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .loaded(domain))
     }
@@ -518,7 +518,7 @@ final class DoWorkoutInteractorTests: XCTestCase {
                                      expandedGroups: [true, false],
                                      completedGroups: [false, false],
                                      fractionCompleted: 0,
-                                     restPresets: Fixtures.restPresets)
+                                     restPresets: RestPresetsFixtures.presets)
         
         XCTAssertEqual(result, .exit(domain))
         XCTAssertTrue(mockService.saveWorkoutCalled)

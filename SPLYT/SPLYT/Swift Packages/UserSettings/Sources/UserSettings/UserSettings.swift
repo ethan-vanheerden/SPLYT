@@ -19,6 +19,7 @@ public protocol UserSettings {
 
 extension UserDefaults: UserSettings { }
 
+/// Extension to allow for calling the functions with the `UserSettingsKey` enum
 public extension UserSettings {
     func object(forKey key: UserSettingsKey) -> Any? {
         return object(forKey: key.rawValue)
