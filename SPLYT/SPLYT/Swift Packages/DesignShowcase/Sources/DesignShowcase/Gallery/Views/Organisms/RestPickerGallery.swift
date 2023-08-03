@@ -6,9 +6,13 @@ struct RestPickerGallery: View {
     @State private var seconds: Int = 30
     
     var body: some View {
-        RestPicker(minutes: $minutes,
-                   seconds: $seconds,
-                   confirmAction: { print("Confirm action") },
-                   cancelAction: { print("Cancel action") })
+        VStack {
+            Spacer()
+            RestPicker(minutes: $minutes,
+                       seconds: $seconds,
+                       confirmAction: { print("Confirm action - Min: \(minutes), Sec: \(seconds)") },
+                       cancelAction: { print("Cancel action") })
+            Spacer()
+        }
     }
 }

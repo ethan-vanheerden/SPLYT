@@ -10,6 +10,10 @@ import Foundation
 
 struct DoWorkoutFixtures {
     typealias StateFixtures = WorkoutViewStateFixtures
+    // MARK: - Domain
+    
+    static let restPresets: [Int] = [60, 90, 120]
+    
     // MARK: - View States
     
     static let markAsComplete = "Mark as complete"
@@ -51,5 +55,9 @@ struct DoWorkoutFixtures {
                                      exercises: groupsExercises[1],
                                      slider: actionSlider),
         ]
+    }
+    
+    static func restFAB(isResting: Bool) -> RestFABViewState {
+        return .init(isResting: isResting, restPresets: restPresets)
     }
 }

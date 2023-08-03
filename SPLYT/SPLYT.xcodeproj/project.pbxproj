@@ -135,6 +135,11 @@
 		AAB42B372A79A5B5002A1ED2 /* RestPresetsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B362A79A5B5002A1ED2 /* RestPresetsService.swift */; };
 		AAB42B392A79A5BF002A1ED2 /* RestPresetsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B382A79A5BF002A1ED2 /* RestPresetsDomain.swift */; };
 		AAB42B3B2A79A5C9002A1ED2 /* RestPresetsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B3A2A79A5C9002A1ED2 /* RestPresetsReducer.swift */; };
+		AAB42B432A7AEE09002A1ED2 /* SettingsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B422A7AEE09002A1ED2 /* SettingsInteractorTests.swift */; };
+		AAB42B452A7AEE46002A1ED2 /* SettingsFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B442A7AEE46002A1ED2 /* SettingsFixtures.swift */; };
+		AAB42B472A7AEF6B002A1ED2 /* SettingsRecucerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B462A7AEF6B002A1ED2 /* SettingsRecucerTests.swift */; };
+		AAB42B492A7AF01F002A1ED2 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B482A7AF01F002A1ED2 /* SettingsViewModelTests.swift */; };
+		AAB42B4B2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B4A2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift */; };
 		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
 		AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */; };
 		AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */; };
@@ -332,6 +337,11 @@
 		AAB42B362A79A5B5002A1ED2 /* RestPresetsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsService.swift; sourceTree = "<group>"; };
 		AAB42B382A79A5BF002A1ED2 /* RestPresetsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsDomain.swift; sourceTree = "<group>"; };
 		AAB42B3A2A79A5C9002A1ED2 /* RestPresetsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsReducer.swift; sourceTree = "<group>"; };
+		AAB42B422A7AEE09002A1ED2 /* SettingsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractorTests.swift; sourceTree = "<group>"; };
+		AAB42B442A7AEE46002A1ED2 /* SettingsFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFixtures.swift; sourceTree = "<group>"; };
+		AAB42B462A7AEF6B002A1ED2 /* SettingsRecucerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRecucerTests.swift; sourceTree = "<group>"; };
+		AAB42B482A7AF01F002A1ED2 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		AAB42B4A2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationControllerTests.swift; sourceTree = "<group>"; };
 		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
 		AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformerTests.swift; sourceTree = "<group>"; };
 		AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -1144,6 +1154,7 @@
 		AAB42B3D2A7AE98B002A1ED2 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				AAB42B442A7AEE46002A1ED2 /* SettingsFixtures.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1151,6 +1162,7 @@
 		AAB42B3F2A7AE9AA002A1ED2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AAB42B4A2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1158,6 +1170,7 @@
 		AAB42B402A7AE9AF002A1ED2 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				AAB42B422A7AEE09002A1ED2 /* SettingsInteractorTests.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1165,6 +1178,8 @@
 		AAB42B412A7AE9B6002A1ED2 /* Reducer */ = {
 			isa = PBXGroup;
 			children = (
+				AAB42B462A7AEF6B002A1ED2 /* SettingsRecucerTests.swift */,
+				AAB42B482A7AF01F002A1ED2 /* SettingsViewModelTests.swift */,
 			);
 			path = Reducer;
 			sourceTree = "<group>";
@@ -1743,6 +1758,7 @@
 				AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */,
 				AA5073AE2A638A7100F0BAD2 /* MockDoPlanService.swift in Sources */,
 				AAF0FB41298AD30300167B02 /* MockBuildWorkoutService.swift in Sources */,
+				AAB42B4B2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift in Sources */,
 				AAE79AF4296E12350010848E /* NameWorkoutViewModelTests.swift in Sources */,
 				AAD074EC2A74481900451C64 /* WorkoutDetailsFixtures.swift in Sources */,
 				AA672A8F2A743C140009919E /* HomeNavigationControllerTests.swift in Sources */,
@@ -1762,6 +1778,8 @@
 				AAEBFCF9295E3EC400D284F0 /* HomeViewModelTests.swift in Sources */,
 				AA672A852A6B583B0009919E /* HistoryReducerTests.swift in Sources */,
 				AA934048288888EF00309E83 /* MainViewTests.swift in Sources */,
+				AAB42B452A7AEE46002A1ED2 /* SettingsFixtures.swift in Sources */,
+				AAB42B432A7AEE09002A1ED2 /* SettingsInteractorTests.swift in Sources */,
 				AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */,
 				AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */,
 				AAE79AF6296E13100010848E /* NameWorkoutNavigationRouterTests.swift in Sources */,
@@ -1775,6 +1793,7 @@
 				AAF0FB46299815E700167B02 /* BuildWorkoutReducerTests.swift in Sources */,
 				AAD074F02A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift in Sources */,
 				AA672A932A743F340009919E /* MockWorkoutDetailsService.swift in Sources */,
+				AAB42B492A7AF01F002A1ED2 /* SettingsViewModelTests.swift in Sources */,
 				AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */,
 				AA50739D2A6303FD00F0BAD2 /* BuildPlanInteractorTests.swift in Sources */,
 				AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */,
@@ -1782,6 +1801,7 @@
 				AAF0FB48299962CF00167B02 /* BuildWorkoutViewModelTests.swift in Sources */,
 				AA5073B42A6391D000F0BAD2 /* DoPlanViewModelTests.swift in Sources */,
 				AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */,
+				AAB42B472A7AEF6B002A1ED2 /* SettingsRecucerTests.swift in Sources */,
 				AA52BBB229B78802009CDBDA /* MockHomeService.swift in Sources */,
 				AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */,
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,

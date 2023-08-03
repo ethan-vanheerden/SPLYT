@@ -11,6 +11,7 @@ import Foundation
 import Mocking
 
 final class MockDoWorkoutService: DoWorkoutServiceType {
+    typealias Fixtures = DoWorkoutFixtures
     typealias WorkoutFixtures = WorkoutModelFixtures
     
     var loadWorkoutThrow = false
@@ -25,5 +26,9 @@ final class MockDoWorkoutService: DoWorkoutServiceType {
     func saveWorkout(workout: Workout, planId: String?, completionDate: Date) throws {
         saveWorkoutCalled = true
         guard !saveWorkoutThrow else { throw MockError.someError }
+    }
+    
+    func loadRestPresets() -> [Int] {
+        return Fixtures.restPresets
     }
 }
