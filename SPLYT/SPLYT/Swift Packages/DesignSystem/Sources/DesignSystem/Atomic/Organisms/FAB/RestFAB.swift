@@ -157,7 +157,7 @@ public struct RestFAB: View {
             showTimePicker = false
             isPresenting = false
             selectRestAction()
-            secondsLeft = TimeUtils.getSeconds(minutes: pickerMinutes, seconds: pickerSeconds)
+            secondsLeft = TimeUtils.getTotalSeconds(minutes: pickerMinutes, seconds: pickerSeconds)
         },
                    cancelAction: {
             showTimePicker = false

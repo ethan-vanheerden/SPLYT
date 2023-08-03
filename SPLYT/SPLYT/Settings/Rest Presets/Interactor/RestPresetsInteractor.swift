@@ -59,8 +59,6 @@ private extension RestPresetsInteractor {
         guard var domain = savedDomain else { return .error }
         
         return updatePresets(domain: &domain, newPresets: newPresets)
-        
-        service.updatePresets(newPresets: newPresets)
     }
     
     func handleUpdatePreset(index: Int, minutes: Int, seconds: Int) -> RestPresetsDomainResult {
@@ -68,7 +66,7 @@ private extension RestPresetsInteractor {
               domain.presets.count > index else { return .error }
         
         var newPresets = domain.presets
-        newPresets[index] = TimeUtils.getSeconds(minutes: minutes, seconds: seconds)
+        newPresets[index] = TimeUtils.getTotalSeconds(minutes: minutes, seconds: seconds)
         
         return updatePresets(domain: &domain, newPresets: newPresets)
     }

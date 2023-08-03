@@ -63,7 +63,7 @@ struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEve
             Text(preset.title)
                 .subhead(style: .semiBold)
                 .onTapGesture {
-                    editPresetIndex = preset.index
+                    editPresetIndex = preset.index // Stores this info for the sheet
                     pickerMinutes = preset.minutes
                     pickerSeconds = preset.seconds
                     showRestPicker = true

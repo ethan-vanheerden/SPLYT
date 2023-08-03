@@ -29,20 +29,20 @@ public struct TimeUtils {
     ///   - minutes: The number of minutes
     ///   - seconds: The number of seconds
     /// - Returns: The total number of seconds in the given time
-    public static func getSeconds(minutes: Int, seconds: Int) -> Int {
+    public static func getTotalSeconds(minutes: Int, seconds: Int) -> Int {
         return (minutes * 60) + seconds
     }
     
-    /// Gets the number of whole minutes that have elapsed in the current hour
-    /// with the given number of total seconds.
+    /// Gets the number of leftover whole minutes that have elapsed in the current hour
+    /// with the given number of total seconds. This is the remainder number of minutes after we count the hour.
     /// - Parameter seconds: The number of total seconds that have elapsed
     /// - Returns: The whole number of minutes which have elapsed in the current hour
     public static func minutesElapsed(seconds: Int) -> Int {
         return (seconds % 3600) / 60
     }
     
-    /// Gets the number of whole seconds that have elapsed in the current minute
-    /// with the given number of total seconds.
+    /// Gets the number of leftover whole seconds that have elapsed in the current minute
+    /// with the given number of total seconds. This is the remainer number of seconds after we count the hours and minutes.
     /// - Parameter seconds: The number of total seconds that have elapsed
     /// - Returns: The whole number of seconds which have elapsed in the current minute
     public static func secondsElapsed(seconds: Int) -> Int {

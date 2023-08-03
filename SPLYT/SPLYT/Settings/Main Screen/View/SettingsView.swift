@@ -79,7 +79,6 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     }
 }
 
-
 // MARK: - Strings
 
 fileprivate struct Strings {

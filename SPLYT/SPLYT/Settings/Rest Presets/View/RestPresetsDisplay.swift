@@ -17,6 +17,6 @@ struct PresetDisplay: Hashable {
     let index: Int
     let title: String
     let preset: Int // The total number of seconds in the preset
-    let minutes: Int // The totoal number of minutes in the preset
+    let minutes: Int // The total number of minutes in the preset
     let seconds: Int // The total number of seconds left over outside of the minutes
 }

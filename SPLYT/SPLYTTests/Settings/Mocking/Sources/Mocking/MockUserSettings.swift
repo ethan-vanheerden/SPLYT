@@ -1,8 +1,11 @@
 import UserSettings
 
 public final class MockUserSettings: UserSettings {
+    
+    public init() { }
+    
     // Put mock objects for keys here
-    private var mockDefaults: [UserSettingsKey: Any] = [
+    public var mockDefaults: [UserSettingsKey: Any] = [
         .restPresets: [60, 90, 120]
     ]
     

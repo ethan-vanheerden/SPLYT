@@ -32,10 +32,10 @@ private extension RestPresetsReducer {
         var index = 0
         return presets.map { preset in
             let viewState = PresetDisplay(index: index,
-                                                title: TimeUtils.minSec(seconds: preset),
-                                                preset: preset,
-                                                minutes: TimeUtils.minutesElapsed(seconds: preset),
-                                                seconds: TimeUtils.secondsElapsed(seconds: preset))
+                                          title: TimeUtils.minSec(seconds: preset),
+                                          preset: preset,
+                                          minutes: TimeUtils.minutesElapsed(seconds: preset),
+                                          seconds: TimeUtils.secondsElapsed(seconds: preset))
             index += 1
             return viewState
         }

@@ -140,6 +140,12 @@
 		AAB42B472A7AEF6B002A1ED2 /* SettingsRecucerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B462A7AEF6B002A1ED2 /* SettingsRecucerTests.swift */; };
 		AAB42B492A7AF01F002A1ED2 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B482A7AF01F002A1ED2 /* SettingsViewModelTests.swift */; };
 		AAB42B4B2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B4A2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift */; };
+		AAB42B542A7BF390002A1ED2 /* RestPresetsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B532A7BF390002A1ED2 /* RestPresetsServiceTests.swift */; };
+		AAB42B562A7BF583002A1ED2 /* RestPresetsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B552A7BF582002A1ED2 /* RestPresetsInteractorTests.swift */; };
+		AAB42B582A7BF5AA002A1ED2 /* MockRestPresetsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B572A7BF5AA002A1ED2 /* MockRestPresetsService.swift */; };
+		AAB42B5A2A7BF69C002A1ED2 /* RestPresetsFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B592A7BF69C002A1ED2 /* RestPresetsFixtures.swift */; };
+		AAB42B5C2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */; };
+		AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */; };
 		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
 		AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */; };
 		AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */; };
@@ -342,6 +348,12 @@
 		AAB42B462A7AEF6B002A1ED2 /* SettingsRecucerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRecucerTests.swift; sourceTree = "<group>"; };
 		AAB42B482A7AF01F002A1ED2 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		AAB42B4A2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationControllerTests.swift; sourceTree = "<group>"; };
+		AAB42B532A7BF390002A1ED2 /* RestPresetsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsServiceTests.swift; sourceTree = "<group>"; };
+		AAB42B552A7BF582002A1ED2 /* RestPresetsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsInteractorTests.swift; sourceTree = "<group>"; };
+		AAB42B572A7BF5AA002A1ED2 /* MockRestPresetsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRestPresetsService.swift; sourceTree = "<group>"; };
+		AAB42B592A7BF69C002A1ED2 /* RestPresetsFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsFixtures.swift; sourceTree = "<group>"; };
+		AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsReducerTests.swift; sourceTree = "<group>"; };
+		AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsViewModelTests.swift; sourceTree = "<group>"; };
 		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
 		AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformerTests.swift; sourceTree = "<group>"; };
 		AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -1096,6 +1108,7 @@
 		AA93404E28888B5800309E83 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AAB42B4E2A7BF361002A1ED2 /* Rest Presets */,
 				AAB42B3C2A7AE983002A1ED2 /* Main Screen */,
 			);
 			path = Settings;
@@ -1180,6 +1193,51 @@
 			children = (
 				AAB42B462A7AEF6B002A1ED2 /* SettingsRecucerTests.swift */,
 				AAB42B482A7AF01F002A1ED2 /* SettingsViewModelTests.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AAB42B4E2A7BF361002A1ED2 /* Rest Presets */ = {
+			isa = PBXGroup;
+			children = (
+				AAB42B522A7BF37A002A1ED2 /* Reducer */,
+				AAB42B512A7BF375002A1ED2 /* Interactor */,
+				AAB42B502A7BF36F002A1ED2 /* View */,
+				AAB42B4F2A7BF36B002A1ED2 /* Mocks */,
+			);
+			path = "Rest Presets";
+			sourceTree = "<group>";
+		};
+		AAB42B4F2A7BF36B002A1ED2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AAB42B572A7BF5AA002A1ED2 /* MockRestPresetsService.swift */,
+				AAB42B592A7BF69C002A1ED2 /* RestPresetsFixtures.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AAB42B502A7BF36F002A1ED2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AAB42B512A7BF375002A1ED2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AAB42B532A7BF390002A1ED2 /* RestPresetsServiceTests.swift */,
+				AAB42B552A7BF582002A1ED2 /* RestPresetsInteractorTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AAB42B522A7BF37A002A1ED2 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */,
+				AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */,
 			);
 			path = Reducer;
 			sourceTree = "<group>";
@@ -1746,6 +1804,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA50738B2A62F70800F0BAD2 /* NameWorkoutInteractorTests.swift in Sources */,
+				AAB42B5C2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift in Sources */,
 				AA50739B2A63035B00F0BAD2 /* MockBuildPlanService.swift in Sources */,
 				AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */,
 				AA50739F2A63066F00F0BAD2 /* BuildPlanFixtures.swift in Sources */,
@@ -1792,9 +1851,11 @@
 				AA5073B02A638B0000F0BAD2 /* DoPlanInteractorTests.swift in Sources */,
 				AAF0FB46299815E700167B02 /* BuildWorkoutReducerTests.swift in Sources */,
 				AAD074F02A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift in Sources */,
+				AAB42B562A7BF583002A1ED2 /* RestPresetsInteractorTests.swift in Sources */,
 				AA672A932A743F340009919E /* MockWorkoutDetailsService.swift in Sources */,
 				AAB42B492A7AF01F002A1ED2 /* SettingsViewModelTests.swift in Sources */,
 				AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */,
+				AAB42B542A7BF390002A1ED2 /* RestPresetsServiceTests.swift in Sources */,
 				AA50739D2A6303FD00F0BAD2 /* BuildPlanInteractorTests.swift in Sources */,
 				AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */,
 				AA672A8D2A6DE6620009919E /* HistoryNavigationControllerTests.swift in Sources */,
@@ -1804,9 +1865,12 @@
 				AAB42B472A7AEF6B002A1ED2 /* SettingsRecucerTests.swift in Sources */,
 				AA52BBB229B78802009CDBDA /* MockHomeService.swift in Sources */,
 				AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */,
+				AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */,
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,
+				AAB42B582A7BF5AA002A1ED2 /* MockRestPresetsService.swift in Sources */,
 				AAF0FB3F298AC0BB00167B02 /* BuildWorkoutInteractorTests.swift in Sources */,
 				AA2C243F2A37B2D8004FC939 /* DoWorkoutNavigationRouterTests.swift in Sources */,
+				AAB42B5A2A7BF69C002A1ED2 /* RestPresetsFixtures.swift in Sources */,
 				AA5073972A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift in Sources */,
 				AA672A812A6B51830009919E /* MockHistoryService.swift in Sources */,
 				AA672A872A6DE0A90009919E /* HistoryFixtures.swift in Sources */,
