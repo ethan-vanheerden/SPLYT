@@ -11,7 +11,6 @@ import Foundation
 import Mocking
 
 final class MockDoWorkoutService: DoWorkoutServiceType {
-    typealias Fixtures = DoWorkoutFixtures
     typealias WorkoutFixtures = WorkoutModelFixtures
     
     var loadWorkoutThrow = false
