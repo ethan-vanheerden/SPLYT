@@ -18,8 +18,6 @@ struct MoleculeFactory {
             DialogGallery()
         case .homeFABRow:
             HomeFABRowGallery()
-        case .menuItem:
-            MenuItemGallery()
         case .navigationBar:
             NavigationBarGallery()
         case .restFABRow:

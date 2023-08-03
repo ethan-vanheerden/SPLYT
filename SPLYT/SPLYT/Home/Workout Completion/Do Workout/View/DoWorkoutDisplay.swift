@@ -14,6 +14,7 @@ struct DoWorkoutDisplay: Equatable {
     let progressBar: ProgressBarViewState
     let groupTitles: [String]
     let groups: [DoExerciseGroupViewState]
+    let restFAB: RestFABViewState
     let expandedGroups: [Bool]
     let inCountdown: Bool
     let isResting: Bool

@@ -26,4 +26,8 @@ final class MockDoWorkoutService: DoWorkoutServiceType {
         saveWorkoutCalled = true
         guard !saveWorkoutThrow else { throw MockError.someError }
     }
+    
+    func loadRestPresets() -> [Int] {
+        return RestPresetsFixtures.presets
+    }
 }

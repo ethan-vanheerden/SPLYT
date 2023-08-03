@@ -8,7 +8,6 @@ struct DesignShowcaseView: View {
                 detail(items: type.items)
                     .navigationTitle(type.title)
             }
-            
         }
     }
     

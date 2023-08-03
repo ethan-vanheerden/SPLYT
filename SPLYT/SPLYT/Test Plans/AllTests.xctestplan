@@ -68,6 +68,13 @@
         "identifier" : "ExerciseCoreTests",
         "name" : "ExerciseCoreTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SPLYT\/Swift Packages\/UserSettings",
+        "identifier" : "UserSettingsTests",
+        "name" : "UserSettingsTests"
+      }
     }
   ],
   "version" : 1

@@ -1,7 +1,7 @@
-import UIKit
+import SwiftUI
 
 public struct DesignShowcaseProvider {
-    public static func designShowcaseHostingController() -> UIViewController {
-        return DesignShowcaseHostingController()
+    public static func designShowcaseView() -> some View {
+        return DesignShowcaseView()
     }
 }

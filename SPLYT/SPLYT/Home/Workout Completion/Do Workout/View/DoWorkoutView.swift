@@ -68,7 +68,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             }
             RestFAB(isPresenting: $restFABPresenting,
                     workoutSeconds: .constant(viewModel.secondsElapsed),
-                    viewState: .init(isResting: display.isResting, restPresets: [60, 100, 120]), // TODO: configureable
+                    viewState: display.restFAB,
                     selectRestAction: { viewModel.send(.toggleRest(isResting: true), taskPriority: .userInitiated) },
                     stopRestAction: { viewModel.send(.toggleRest(isResting: false), taskPriority: .userInitiated) })
         }

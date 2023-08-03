@@ -12,14 +12,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Core"),
-        .package(path: "../Caching")
+        .package(path: "../Caching"),
+        .package(path: "../UserSettings")
     ],
     targets: [
         .target(
             name: "Mocking",
             dependencies: [
                 "Core",
-                "Caching"
+                "Caching",
+                "UserSettings"
             ]),
         .testTarget(
             name: "MockingTests",

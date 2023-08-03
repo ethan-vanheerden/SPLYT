@@ -23,7 +23,7 @@ public struct CollapseHeader<Content: View>: View {
     
     private var header: some View {
         HStack {
-            Image(systemName: "chevron.forward.circle") // TODO: 43: icon images
+            Image(systemName: "chevron.forward.circle")
                 .rotationEffect(isExpanded ? Angle(degrees: 90) : Angle(degrees: 0))
             Text(viewState.title)
                 .title2()

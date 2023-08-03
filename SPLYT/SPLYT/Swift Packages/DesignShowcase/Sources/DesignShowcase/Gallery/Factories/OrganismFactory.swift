@@ -12,6 +12,8 @@ struct OrganismFactory {
             HomeFABGallery()
         case .restFAB:
             RestFABGallery()
+        case .restPicker:
+            RestPickerGallery()
         }
     }
 }

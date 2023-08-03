@@ -40,7 +40,7 @@ public struct RestFAB: View {
             HStack {
                 Spacer()
                 HStack {
-                    Image(systemName: "stopwatch") // TODO: icon images
+                    Image(systemName: "stopwatch")
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(Color(splytColor: .lightBlue))
@@ -151,41 +151,17 @@ public struct RestFAB: View {
     }
     
     private var restPicker: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Counter(selectedNumber: $pickerMinutes,
-                        viewState: CounterViewState(maxNumber: 10,
-                                                    label: Strings.min,
-                                                    backGroundColor: .lightBlue,
-                                                    textColor: .black))
-                Counter(selectedNumber: $pickerSeconds,
-                        viewState: CounterViewState(maxNumber: 60,
-                                                    label: Strings.sec,
-                                                    backGroundColor: .lightBlue,
-                                                    textColor: .black))
-            }
-            Spacer()
-            pickerButtons
-        }
-    }
-    
-    private var pickerButtons: some View {
-        HStack(spacing: Layout.size(2)) {
-            SplytButton(text: "Cancel",
-                        type: .primary(color: .white),
-                        textColor: .gray) {
-                showTimePicker = false
-            }
-            SplytButton(text: "Confirm",
-                        isEnabled: !(pickerSeconds == 0 && pickerMinutes == 0)) {
-                showTimePicker = false
-                isPresenting = false
-                selectRestAction()
-                secondsLeft = TimeUtils.getSeconds(minutes: pickerMinutes, seconds: pickerSeconds)
-            }
-        }
-        .padding(.horizontal, Layout.size(2))
+        RestPicker(minutes: $pickerMinutes,
+                   seconds: $pickerSeconds,
+                   confirmAction: {
+            showTimePicker = false
+            isPresenting = false
+            selectRestAction()
+            secondsLeft = TimeUtils.getTotalSeconds(minutes: pickerMinutes, seconds: pickerSeconds)
+        },
+                   cancelAction: {
+            showTimePicker = false
+        })
     }
 }
 

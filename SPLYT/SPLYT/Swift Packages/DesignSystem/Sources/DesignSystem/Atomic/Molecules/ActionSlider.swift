@@ -77,7 +77,7 @@ public struct ActionSlider: View {
     }
     
     private var sliderImage: some View {
-        let imageName = slideComplete ? "checkmark" : "chevron.right" // TODO: Icon images
+        let imageName = slideComplete ? "checkmark" : "chevron.right"
         return RoundedRectangle(cornerRadius: cornerRadius)
             .fill(Color(splytColor: .white).shadow(.drop(radius: Layout.size(0.5))))
             .frame(width: sliderHeadSize, height: sliderHeadSize)

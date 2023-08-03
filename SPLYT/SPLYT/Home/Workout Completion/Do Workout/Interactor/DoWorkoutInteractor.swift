@@ -82,7 +82,7 @@ final class DoWorkoutInteractor {
         case .saveWorkout:
             return handleSaveWorkout()
         }
-      }
+    }
 }
 
 // MARK: - Private Handlers
@@ -93,6 +93,7 @@ private extension DoWorkoutInteractor {
             // TODO: use the workout ID to make a network call first instead of a cache lookup
             let loadedWorkout = try service.loadWorkout(workoutId: workoutId,
                                                         planId: planId)
+            let restPresets = service.loadRestPresets()
             let workout = createPlaceholders(previousWorkout: loadedWorkout)
             let expandedGroups = getStartingExpandedGroups(groups: workout.exerciseGroups)
             let completedGroups = workout.exerciseGroups.map { _ in return false }
@@ -102,7 +103,8 @@ private extension DoWorkoutInteractor {
                                          isResting: false,
                                          expandedGroups: expandedGroups,
                                          completedGroups: completedGroups,
-                                         fractionCompleted: 0)
+                                         fractionCompleted: 0,
+                                         restPresets: restPresets)
             return updateDomain(domain: domain)
         } catch {
             return .error
@@ -110,25 +112,25 @@ private extension DoWorkoutInteractor {
     }
     
     func handleStopCountdown() -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         domain.inCountdown = false
         return updateDomain(domain: domain)
     }
     
     func handleToggleRest(isResting: Bool) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         domain.isResting = isResting
         return updateDomain(domain: domain)
     }
     
     func handleToggleGroupExpand(group: Int, isExpanded: Bool) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         domain.expandedGroups[group] = isExpanded
         return updateDomain(domain: domain)
     }
     
     func handleCompleteGroup(group: Int) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         domain.completedGroups[group] = true
         domain.expandedGroups[group] = false // Close the completed group
         
@@ -155,7 +157,7 @@ private extension DoWorkoutInteractor {
     }
     
     func handleAddSet(group: Int) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         let updatedGroups = WorkoutInteractor.addSet(group: group,
                                                      groups: domain.workout.exerciseGroups)
         domain.workout.exerciseGroups = updatedGroups
@@ -164,7 +166,7 @@ private extension DoWorkoutInteractor {
     }
     
     func handleRemoveSet(group: Int) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         let updatedGroups = WorkoutInteractor.removeSet(group: group,
                                                         groups: domain.workout.exerciseGroups)
         domain.workout.exerciseGroups = updatedGroups
@@ -177,7 +179,7 @@ private extension DoWorkoutInteractor {
                          setIndex: Int,
                          with newInput: SetInput,
                          forModifier: Bool) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         let updatedGroups = WorkoutInteractor.updateSet(groupIndex: group,
                                                         groups: domain.workout.exerciseGroups,
                                                         exerciseIndex: exercieIndex,
@@ -193,7 +195,7 @@ private extension DoWorkoutInteractor {
                                 exerciseIndex: Int,
                                 setIndex: Int,
                                 forModifier: Bool) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         let targetSet = domain.workout.exerciseGroups[group].exercises[exerciseIndex].sets[setIndex]
         let oldInput: SetInput? = forModifier ? targetSet.modifier?.input : targetSet.input
         let newInput = oldInput?.placeholderInput

@@ -26,10 +26,21 @@ final class TimeUtilsTests: XCTestCase {
         XCTAssertEqual(sut.minSec(seconds: twoHoursTenMinOneSec), "10:01")
     }
     
-    func testGetSeconds() {
-        
-        XCTAssertEqual(sut.getSeconds(minutes: 1, seconds: tenSec), 70)
-        XCTAssertEqual(sut.getSeconds(minutes: 2, seconds: fourMinThritySec), 390)
-        XCTAssertEqual(sut.getSeconds(minutes: 0, seconds: twoHoursTenMinOneSec), twoHoursTenMinOneSec)
+    func testGetTotalSeconds() {
+        XCTAssertEqual(sut.getTotalSeconds(minutes: 1, seconds: tenSec), 70)
+        XCTAssertEqual(sut.getTotalSeconds(minutes: 2, seconds: fourMinThritySec), 390)
+        XCTAssertEqual(sut.getTotalSeconds(minutes: 0, seconds: twoHoursTenMinOneSec), twoHoursTenMinOneSec)
+    }
+    
+    func testMinutesElapsed() {
+        XCTAssertEqual(sut.minutesElapsed(seconds: tenSec), 0)
+        XCTAssertEqual(sut.minutesElapsed(seconds: fourMinThritySec), 4)
+        XCTAssertEqual(sut.minutesElapsed(seconds: twoHoursTenMinOneSec), 10)
+    }
+    
+    func testSecondsElapsed() {
+        XCTAssertEqual(sut.secondsElapsed(seconds: tenSec), 10)
+        XCTAssertEqual(sut.secondsElapsed(seconds: fourMinThritySec), 30)
+        XCTAssertEqual(sut.secondsElapsed(seconds: twoHoursTenMinOneSec), 1)
     }
 }

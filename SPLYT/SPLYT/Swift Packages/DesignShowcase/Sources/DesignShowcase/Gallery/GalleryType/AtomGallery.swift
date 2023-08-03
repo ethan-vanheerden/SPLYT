@@ -10,6 +10,7 @@ enum Atom: String, CaseIterable, GalleryItem {
     case emojiTitle = "Emoji Title"
     case FABIcon = "FAB Icon"
     case iconButtons = "Icon Buttons"
+    case iconImage = "Icon Images"
     case progressBar = "Progress Bar"
     case scrim = "Scrim"
     case sectionHeader = "Section Header"
