@@ -38,4 +38,8 @@ struct RestPresetsFixtures {
         presetDisplay_90,
         presetDisplay_120
     ]
+    
+    static let footerMessage: String = """
+These are your quick-access rest shortcuts you can select while you are doing your workout.
+"""
 }

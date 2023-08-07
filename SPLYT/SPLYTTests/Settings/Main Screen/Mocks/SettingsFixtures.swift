@@ -24,8 +24,15 @@ struct SettingsFixtures {
                                                          ],
                                                          isEnabled: true)
     
+    static let supportSection: SettingsSection = .init(title: "SUPPORT",
+                                                       items: [
+                                                        .submitFeedback
+                                                       ],
+                                                       isEnabled: true)
+    
     static let sections: [SettingsSection] = [
         workoutSection,
-        developerSection
+        developerSection,
+        supportSection
     ]
 }

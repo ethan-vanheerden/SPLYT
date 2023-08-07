@@ -52,28 +52,48 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
             }
         }
     }
-    
+
     @ViewBuilder
     private func detail(items: [SettingsItem]) -> some View {
         ForEach(items, id: \.self) { item in
             if item.isEnabled {
-                NavigationLink {
-                    SettingsViewFactory().makeView(item)
-                        .navigationBar(viewState: .init(title: item.title))
-                } label: {
-                    detailTitle(item: item)
+                switch item.detail {
+                case .navigation:
+                    navigationDetail(item: item)
+                case .link(let url):
+                    linkDetail(item: item, url: url)
                 }
             }
         }
     }
     
     @ViewBuilder
-    private func detailTitle(item: SettingsItem) -> some View {
+    private func navigationDetail(item: SettingsItem) -> some View {
+        NavigationLink {
+            SettingsViewFactory().makeView(item)
+                .navigationBar(viewState: .init(title: item.title))
+        } label: {
+            detailLabel(item: item)
+        }
+    }
+    
+    @ViewBuilder
+    private func linkDetail(item: SettingsItem, url: String) -> some View {
+        if let url = URL(string: url) {
+            Link(destination: url) {
+                detailLabel(item: item)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func detailLabel(item: SettingsItem) -> some View {
         HStack {
             IconImage(imageName: item.imageName,
                       backgroundColor: item.backgroundColor)
             Text(item.title)
                 .subhead(style: .semiBold)
+                .foregroundColor(Color(splytColor: .black))
             Spacer()
         }
     }

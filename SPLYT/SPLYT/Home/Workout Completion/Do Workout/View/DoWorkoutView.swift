@@ -83,7 +83,9 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                     .foregroundColor(display.isResting ? Color(splytColor: .lightBlue) : Color(splytColor: .black))
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
+                    .isVisible(false) // TODO: 51: Workout notes
                 IconButton(iconName: "book.closed", action: { })
+                    .isVisible(false) // TODO: 54: Workout logs
                 SplytButton(text: Strings.finish) {
                     viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: true),
                                    taskPriority: .userInitiated)

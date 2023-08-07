@@ -47,9 +47,10 @@ public struct RoutineTile: View {
         }
         .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
             // These just have to be normal buttons
-            if let editAction = editAction {
-                Button(Strings.edit) { editAction() }
-            }
+            // TODO: 55: Edit workouts and plans
+//            if let editAction = editAction {
+//                Button(Strings.edit) { editAction() }
+//            }
             if let deleteAction = deleteAction {
                 Button(Strings.delete, role: .destructive) { deleteAction() }
             }

@@ -50,6 +50,7 @@ public struct ExerciseView: View {
                 SplytButton(text: Strings.addNote,
                             action: addNoteAction)
                 .frame(width: Layout.size(20))
+                .isVisible(false) // TODO: 51: Workout notes
             }
         }
         .padding(.horizontal, horizontalPadding)

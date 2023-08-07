@@ -27,7 +27,8 @@ final class RestPresetsReducerTests: XCTestCase {
         let domain = await interactor.interact(with: .load)
         let result = sut.reduce(domain)
         
-        let expectedDisplay = RestPresetsDisplay(presets: Fixtures.presetDisplays)
+        let expectedDisplay = RestPresetsDisplay(presets: Fixtures.presetDisplays,
+                                                 footerMessage: Fixtures.footerMessage)
         
         XCTAssertEqual(result, .loaded(expectedDisplay))
     }
