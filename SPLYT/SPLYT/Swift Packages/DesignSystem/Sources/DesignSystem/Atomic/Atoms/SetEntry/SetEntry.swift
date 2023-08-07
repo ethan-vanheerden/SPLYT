@@ -1,25 +1,24 @@
-
 import SwiftUI
 import ExerciseCore
 
-struct SetEntry: View {
+public struct SetEntry: View {
     @FocusState private var fieldFocused: Bool
     @Binding private var input: String // Binding so that the text can be updated via a view model
     private let title: String
     private let keyboardType: KeyboardInputType
     private let placeholder: String?
     
-    init(input: Binding<String>,
-         title: String,
-         keyboardType: KeyboardInputType,
-         placeholder: String? = nil) {
+    public init(input: Binding<String>,
+                title: String,
+                keyboardType: KeyboardInputType,
+                placeholder: String? = nil) {
         self._input = input
         self.title = title
         self.keyboardType = keyboardType
         self.placeholder = placeholder
     }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Spacer()
             HStack {

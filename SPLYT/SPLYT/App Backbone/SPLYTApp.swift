@@ -9,13 +9,13 @@ import SwiftUI
 
 @main
 struct SPLYTApp: App {
-    // @StateObject private var userSettings = UserSettings()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+    
     var body: some Scene {
         WindowGroup {
             MainViewHostingController_SwiftUI()
                 .ignoresSafeArea(.keyboard)
                 .preferredColorScheme(.light)
-//                .environmentObject(UserSettings()) -> This would allow us to access the all of the user info we need throughout the app
         }
     }
 }

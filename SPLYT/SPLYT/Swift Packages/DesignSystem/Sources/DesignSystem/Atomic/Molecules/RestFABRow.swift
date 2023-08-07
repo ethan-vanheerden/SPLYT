@@ -1,18 +1,18 @@
 import SwiftUI
 import Core
 
-struct RestFABRow: View {
+public struct RestFABRow: View {
     @State private var isPressed = false
     private let seconds: Int
     private let tapAction: () -> Void
     
-    init(seconds: Int,
-         tapAction: @escaping () -> Void) {
+    public init(seconds: Int,
+                tapAction: @escaping () -> Void) {
         self.seconds = seconds
         self.tapAction = tapAction
     }
     
-    var body: some View {
+    public var body: some View {
         Text(TimeUtils.minSec(seconds: seconds))
             .subhead()
             .padding(Layout.size(1))
