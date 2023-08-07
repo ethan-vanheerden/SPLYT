@@ -15,7 +15,7 @@ public struct FABIcon: View {
         ZStack {
             Circle()
                 .fill(Color(splytColor: viewState.size.backgroundColor)
-                    .shadow(.drop(radius: Layout.size(2))))
+                    .shadow(.drop(radius: Layout.size(1))))
                 .frame(width: circleSize)
             Image(systemName: viewState.imageName)
                 .resizable()
