@@ -1,5 +1,5 @@
 import SwiftUI
-@testable import DesignSystem
+import DesignSystem
 
 struct DoExerciseGroupViewGallery: View {
     typealias StateFixtures = WorkoutViewStateFixtures

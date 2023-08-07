@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-enum KeyboardInputType {
+public enum KeyboardInputType {
     case reps
     case weight
     case time

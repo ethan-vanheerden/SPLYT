@@ -1,5 +1,5 @@
 import SwiftUI
-@testable import DesignSystem
+import DesignSystem
 
 struct RestFABRowGallery: View {
     var body: some View {

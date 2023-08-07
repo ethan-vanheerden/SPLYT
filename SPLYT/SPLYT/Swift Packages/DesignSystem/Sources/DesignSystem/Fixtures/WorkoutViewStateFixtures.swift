@@ -1,17 +1,17 @@
-@testable import ExerciseCore
+import ExerciseCore
 
 // TODO: this needs to be moved to the test target but xcode is broken
 /// Contains test view states for things related to workouts.
-struct WorkoutViewStateFixtures {
-    typealias ModelFixtures = WorkoutModelFixtures
+public struct WorkoutViewStateFixtures {
+    public typealias ModelFixtures = WorkoutModelFixtures
     
-    static let reps = "reps"
+    public static let reps = "reps"
     
-    static let lbs = "lbs"
+    public static let lbs = "lbs"
     
-    static let sec = "sec"
+    public static let sec = "sec"
     
-    static func createSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [SetViewState] {
+    public static func createSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [SetViewState] {
         var sets = [SetViewState]()
         
         for (index, (input, modifier)) in inputs.enumerated() {
@@ -24,7 +24,7 @@ struct WorkoutViewStateFixtures {
         return sets
     }
     
-    static func createCompletedSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [CompletedSetViewState] {
+    public static func createCompletedSetViewStates(inputs: [(SetInputViewState, SetModifierViewState?)]) -> [CompletedSetViewState] {
         var sets = [CompletedSetViewState]()
         
         for (index, (input, modifier)) in inputs.enumerated() {
@@ -36,8 +36,8 @@ struct WorkoutViewStateFixtures {
         return sets
     }
     
-    static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                   includeHeaderLine: Bool = true) -> ExerciseViewState {
+    public static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                          includeHeaderLine: Bool = true) -> ExerciseViewState {
         let header = SectionHeaderViewState(title: "Back Squat",
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
@@ -45,8 +45,8 @@ struct WorkoutViewStateFixtures {
                                  canRemoveSet: inputs.count > 1)
     }
     
-    static func barLungesViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                   includeHeaderLine: Bool = true) -> ExerciseViewState {
+    public static func barLungesViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                          includeHeaderLine: Bool = true) -> ExerciseViewState {
         let header = SectionHeaderViewState(title: "Bar Lunges",
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
@@ -54,8 +54,8 @@ struct WorkoutViewStateFixtures {
                                  canRemoveSet: inputs.count > 1)
     }
     
-    static func benchPressViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                    includeHeaderLine: Bool = true) -> ExerciseViewState {
+    public static func benchPressViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                           includeHeaderLine: Bool = true) -> ExerciseViewState {
         let header = SectionHeaderViewState(title: "Bench Press",
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
@@ -63,8 +63,8 @@ struct WorkoutViewStateFixtures {
                                  canRemoveSet: inputs.count > 1)
     }
     
-    static func inclineDBRowViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                      includeHeaderLine: Bool = true) -> ExerciseViewState {
+    public static func inclineDBRowViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                             includeHeaderLine: Bool = true) -> ExerciseViewState {
         let header = SectionHeaderViewState(title: "Incline Dumbbell Row",
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
@@ -72,39 +72,39 @@ struct WorkoutViewStateFixtures {
                                  canRemoveSet: inputs.count > 1)
     }
     
-    static func backSquatViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                            includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+    public static func backSquatViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                                   includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
         let header = SectionHeaderViewState(title: "Back Squat",
                                             includeLine: includeHeaderLine)
         return CompletedExerciseViewState(header: header,
                                           sets: createCompletedSetViewStates(inputs: inputs))
     }
     
-    static func barLungesViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                            includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+    public static func barLungesViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                                   includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
         let header = SectionHeaderViewState(title: "Bar Lunges",
                                             includeLine: includeHeaderLine)
         return CompletedExerciseViewState(header: header,
                                           sets: createCompletedSetViewStates(inputs: inputs))
     }
     
-    static func benchPressViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                             includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+    public static func benchPressViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                                    includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
         let header = SectionHeaderViewState(title: "Bench Press",
                                             includeLine: includeHeaderLine)
         return CompletedExerciseViewState(header: header,
                                           sets: createCompletedSetViewStates(inputs: inputs))
     }
     
-    static func inclineDBRowViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
-                                               includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
+    public static func inclineDBRowViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],
+                                                      includeHeaderLine: Bool = true) -> CompletedExerciseViewState {
         let header = SectionHeaderViewState(title: "Incline Dumbbell Row",
                                             includeLine: includeHeaderLine)
         return CompletedExerciseViewState(header: header,
                                           sets: createCompletedSetViewStates(inputs: inputs))
     }
     
-    static let repsWeight3Sets: [(SetInputViewState, SetModifierViewState?)] = [
+    public static let repsWeight3Sets: [(SetInputViewState, SetModifierViewState?)] = [
         (.repsWeight(weightTitle: lbs,
                      repsTitle: reps,
                      input: .init(weight: 135, weightPlaceholder: 100, reps: 12)),
@@ -122,7 +122,7 @@ struct WorkoutViewStateFixtures {
                                                 repsPlaceholder: 5))))
     ]
     
-    static let repsWeight3SetsPlaceholders: [(SetInputViewState, SetModifierViewState?)] = [
+    public static let repsWeight3SetsPlaceholders: [(SetInputViewState, SetModifierViewState?)] = [
         (.repsWeight(weightTitle: lbs,
                      repsTitle: reps,
                      input: .init(weightPlaceholder: 135, repsPlaceholder: 12)),
@@ -140,7 +140,7 @@ struct WorkoutViewStateFixtures {
                                                 repsPlaceholder: 5))))
     ]
     
-    static let repsWeight4Sets: [(SetInputViewState, SetModifierViewState?)] = [
+    public static let repsWeight4Sets: [(SetInputViewState, SetModifierViewState?)] = [
         (.repsWeight(weightTitle: lbs,
                      repsTitle: reps,
                      input: .init(weight: 135, weightPlaceholder: 100, reps: 12)),
@@ -159,7 +159,7 @@ struct WorkoutViewStateFixtures {
          nil)
     ]
     
-    static let repsWeight4SetsPlaceholders: [(SetInputViewState, SetModifierViewState?)] = [
+    public static let repsWeight4SetsPlaceholders: [(SetInputViewState, SetModifierViewState?)] = [
         (.repsWeight(weightTitle: lbs,
                      repsTitle: reps,
                      input: .init(weightPlaceholder: 135, repsPlaceholder: 12)),
@@ -178,21 +178,21 @@ struct WorkoutViewStateFixtures {
          nil)
     ]
     
-    static func legWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+    public static func legWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
         [
             [backSquatViewState(inputs: repsWeight4Sets, includeHeaderLine: includeHeaderLine)],
             [barLungesViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine)]
         ]
     }
     
-    static func legWorkoutExercisesPlaceholders(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+    public static func legWorkoutExercisesPlaceholders(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
         [
             [backSquatViewState(inputs: repsWeight4SetsPlaceholders, includeHeaderLine: includeHeaderLine)],
             [barLungesViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine)]
         ]
     }
     
-    static func legWorkoutExercisesCompleted(includeHeaderLine: Bool) -> [[CompletedExerciseViewState]] {
+    public static func legWorkoutExercisesCompleted(includeHeaderLine: Bool) -> [[CompletedExerciseViewState]] {
         [
             [backSquatViewStateCompleted(inputs: repsWeight4Sets,
                                          includeHeaderLine: includeHeaderLine)],
@@ -201,7 +201,7 @@ struct WorkoutViewStateFixtures {
         ]
     }
     
-    static func fullBodyWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+    public static func fullBodyWorkoutExercises(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
         [
             [
                 backSquatViewState(inputs: repsWeight3Sets, includeHeaderLine: includeHeaderLine),
@@ -214,7 +214,7 @@ struct WorkoutViewStateFixtures {
         ]
     }
     
-    static func fullBodyWorkoutExercisesPlaceholders(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
+    public static func fullBodyWorkoutExercisesPlaceholders(includeHeaderLine: Bool) -> [[ExerciseViewState]] {
         [
             [
                 backSquatViewState(inputs: repsWeight3SetsPlaceholders, includeHeaderLine: includeHeaderLine),
@@ -227,7 +227,7 @@ struct WorkoutViewStateFixtures {
         ]
     }
     
-    static func fullBodyWorkoutExercisesCompleted(includeHeaderLine: Bool) -> [[CompletedExerciseViewState]] {
+    public static func fullBodyWorkoutExercisesCompleted(includeHeaderLine: Bool) -> [[CompletedExerciseViewState]] {
         [
             [
                 backSquatViewStateCompleted(inputs: repsWeight3Sets,
@@ -244,40 +244,40 @@ struct WorkoutViewStateFixtures {
         ]
     }
     
-    static let emptyRepsWeightSet: SetInputViewState = .repsWeight(weightTitle: lbs, repsTitle: reps)
+    public static let emptyRepsWeightSet: SetInputViewState = .repsWeight(weightTitle: lbs, repsTitle: reps)
     
-    static let buildLegWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutId,
-                                                                        title: ModelFixtures.legWorkoutName,
-                                                                        subtitle: "2 exercises")
+    public static let buildLegWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutId,
+                                                                               title: ModelFixtures.legWorkoutName,
+                                                                               subtitle: "2 exercises")
     
-    static let buildFullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutId,
-                                                                             title: ModelFixtures.fullBodyWorkoutName,
-                                                                             subtitle: "4 exercises")
+    public static let buildFullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutId,
+                                                                                    title: ModelFixtures.fullBodyWorkoutName,
+                                                                                    subtitle: "4 exercises")
     
-    static let doLegWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutId,
-                                                                     title: ModelFixtures.legWorkoutName,
-                                                                     subtitle: "2 exercises")
+    public static let doLegWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutId,
+                                                                            title: ModelFixtures.legWorkoutName,
+                                                                            subtitle: "2 exercises")
     
-    static let legWorkoutHistoryRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutHistoryId,
-                                                                          title: ModelFixtures.legWorkoutName,
-                                                                          subtitle: "2 exercises")
+    public static let legWorkoutHistoryRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.legWorkoutHistoryId,
+                                                                                 title: ModelFixtures.legWorkoutName,
+                                                                                 subtitle: "2 exercises")
     
-    static let doFullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutId,
-                                                                          title: ModelFixtures.fullBodyWorkoutName,
-                                                                          subtitle: "4 exercises",
-                                                                          lastCompletedTitle: "Last completed: Feb 3, 2023")
-    
-    static let fullBodyWorkoutHistoryName = "\(ModelFixtures.fullBodyWorkoutName) | \(ModelFixtures.myPlanName)"
-    
-    static let fullBodyWorkoutHistoryCompletedTitle = "Completed: Feb 3, 2023"
-    
-    static let fullBodyWorkoutHistoryRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutHistoryId,
-                                                                                 title: fullBodyWorkoutHistoryName,
+    public static let doFullBodyWorkoutRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutId,
+                                                                                 title: ModelFixtures.fullBodyWorkoutName,
                                                                                  subtitle: "4 exercises",
-                                                                                 lastCompletedTitle: fullBodyWorkoutHistoryCompletedTitle)
+                                                                                 lastCompletedTitle: "Last completed: Feb 3, 2023")
     
-    static let myPlanRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.myPlanId,
-                                                               title: ModelFixtures.myPlanName,
-                                                               subtitle: "2 workouts",
-                                                               lastCompletedTitle: "Last completed: Feb 3, 2023")
+    public static let fullBodyWorkoutHistoryName = "\(ModelFixtures.fullBodyWorkoutName) | \(ModelFixtures.myPlanName)"
+    
+    public static let fullBodyWorkoutHistoryCompletedTitle = "Completed: Feb 3, 2023"
+    
+    public static let fullBodyWorkoutHistoryRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.fullBodyWorkoutHistoryId,
+                                                                                      title: fullBodyWorkoutHistoryName,
+                                                                                      subtitle: "4 exercises",
+                                                                                      lastCompletedTitle: fullBodyWorkoutHistoryCompletedTitle)
+    
+    public static let myPlanRoutineTile: RoutineTileViewState = .init(id: ModelFixtures.myPlanId,
+                                                                      title: ModelFixtures.myPlanName,
+                                                                      subtitle: "2 workouts",
+                                                                      lastCompletedTitle: "Last completed: Feb 3, 2023")
 }

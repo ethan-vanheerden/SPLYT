@@ -1,5 +1,5 @@
 import SwiftUI
-@testable import DesignSystem
+import DesignSystem
 
 struct SetEntryGallery: View {
     @State private var textOne = ""
