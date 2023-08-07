@@ -36,8 +36,15 @@ struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEve
     
     @ViewBuilder
     private func mainView(display: RestPresetsDisplay) -> some View {
-        List(presetsBinding(presets: display.presets), id: \.self, editActions: .move) { $preset in
-            presetRow(preset: preset)
+        List {
+            Section {
+                ForEach(presetsBinding(presets: display.presets), id: \.self, editActions: .move) { $preset in
+                    presetRow(preset: preset)
+                }
+            } footer: {
+                Text(display.footerMessage)
+                    .footnote()
+            }
         }
         .sheet(isPresented: $showRestPicker) {
             restPicker

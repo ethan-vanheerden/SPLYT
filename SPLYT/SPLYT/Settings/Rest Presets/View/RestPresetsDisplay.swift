@@ -9,6 +9,7 @@ import Foundation
 
 struct RestPresetsDisplay: Equatable {
     let presets: [PresetDisplay]
+    let footerMessage: String
 }
 
 // MARK: - Other Displays

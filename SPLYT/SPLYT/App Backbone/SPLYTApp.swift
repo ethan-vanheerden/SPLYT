@@ -14,7 +14,7 @@ struct SPLYTApp: App {
     var body: some Scene {
         WindowGroup {
             MainViewHostingController_SwiftUI()
-                .ignoresSafeArea(.keyboard)
+                .ignoresSafeArea(.all)
                 .preferredColorScheme(.light)
         }
     }

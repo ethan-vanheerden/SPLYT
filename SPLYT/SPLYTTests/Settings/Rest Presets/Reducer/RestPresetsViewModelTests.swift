@@ -24,7 +24,8 @@ final class RestPresetsViewModelTests: XCTestCase {
     func testSend_Load() async {
         await sut.send(.load)
         
-        let expectedDisplay = RestPresetsDisplay(presets: Fixtures.presetDisplays)
+        let expectedDisplay = RestPresetsDisplay(presets: Fixtures.presetDisplays,
+                                                 footerMessage: Fixtures.footerMessage)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }
@@ -44,7 +45,8 @@ final class RestPresetsViewModelTests: XCTestCase {
             .init(index: 2, title: "00:30", preset: 30, minutes: 0, seconds: 30)
         ]
         
-        let expectedDisplay = RestPresetsDisplay(presets: newPresets)
+        let expectedDisplay = RestPresetsDisplay(presets: newPresets,
+                                                 footerMessage: Fixtures.footerMessage)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }
@@ -56,7 +58,8 @@ final class RestPresetsViewModelTests: XCTestCase {
         var newPresets = Fixtures.presetDisplays
         newPresets[0] = .init(index: 0, title: "03:10", preset: 190, minutes: 3, seconds: 10)
         
-        let expectedDisplay = RestPresetsDisplay(presets: newPresets)
+        let expectedDisplay = RestPresetsDisplay(presets: newPresets,
+                                                 footerMessage: Fixtures.footerMessage)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }

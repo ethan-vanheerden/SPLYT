@@ -25,7 +25,9 @@ struct RestPresetsReducer {
 private extension RestPresetsReducer {
     func getDisplay(domain: RestPresetsDomain) -> RestPresetsDisplay {
         let presetsDisplay = getPresets(presets: domain.presets)
-        return .init(presets: presetsDisplay)
+        
+        return .init(presets: presetsDisplay,
+                     footerMessage: Strings.footerMessge)
     }
     
     func getPresets(presets: [Int]) -> [PresetDisplay] {
@@ -40,4 +42,12 @@ private extension RestPresetsReducer {
             return viewState
         }
     }
+}
+
+// MARK: - Strings
+
+fileprivate struct Strings {
+    static let footerMessge = """
+These are your quick-access rest shortcuts you can select while you are doing your workout.
+"""
 }

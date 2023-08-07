@@ -11,6 +11,7 @@ import DesignSystem
 enum SettingsItem: Equatable, CaseIterable {
     case designShowcase
     case restPresets
+    case submitFeedback
     
     var title: String {
         switch self {
@@ -18,6 +19,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "Design Showcase"
         case .restPresets:
             return "Rest Presets"
+        case .submitFeedback:
+            return "Submit Feedback"
         }
     }
     
@@ -35,6 +38,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "theatermask.and.paintbrush.fill"
         case .restPresets:
             return "stopwatch.fill"
+        case .submitFeedback:
+            return "envelope.fill"
         }
     }
     
@@ -44,6 +49,24 @@ enum SettingsItem: Equatable, CaseIterable {
             return .purple
         case .restPresets:
             return .blue
+        case .submitFeedback:
+            return .green
         }
     }
+    
+    var detail: SettingsItemDetail {
+        switch self {
+        case .submitFeedback:
+            let formURL = "https://forms.gle/bk1b87QBP2ZogKH4A"
+            return .link(url: formURL)
+        default:
+            return .navigation
+        }
+    }
+}
+
+
+enum SettingsItemDetail: Equatable {
+    case navigation
+    case link(url: String)
 }

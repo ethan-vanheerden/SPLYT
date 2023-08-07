@@ -27,9 +27,11 @@ struct MainView<VM: MainViewModelType>: View {
         VStack {
             tabView
             TabBar(selectedTab: $selectedTab)
+                .padding(.bottom, Layout.size(4))
         }
+        .ignoresSafeArea()
     }
-
+    
     @ViewBuilder
     /// The view to show for the selected tab.
     /// We have these visibility modifiers so the view doesn't refresh every time we choose a tab.

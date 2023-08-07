@@ -19,6 +19,10 @@ struct SettingsViewFactory {
             let interactor = RestPresetsInteractor()
             let viewModel = RestPresetsViewModel(interactor: interactor)
             RestPresetsView(viewModel: viewModel)
+        case .submitFeedback:
+            Link(destination: URL(string:"www.google.com")!) {
+                Text("link")
+            }
         }
     }
 }
