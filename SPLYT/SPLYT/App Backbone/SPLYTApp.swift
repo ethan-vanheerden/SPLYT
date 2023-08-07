@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@main // unrecognixed selector sent to instance
+@main
 struct SPLYTApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     
