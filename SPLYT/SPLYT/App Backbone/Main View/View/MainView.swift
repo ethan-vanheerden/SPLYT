@@ -7,13 +7,16 @@
 
 import SwiftUI
 import DesignSystem
+import Core
 
-struct MainView<VM: MainViewModelType>: View {
+struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
+                                           VM.Event == MainViewEvent {
     @ObservedObject private var viewModel: VM
     @State private var selectedTab: TabType = .home
     
     init(viewModel: VM) {
         self.viewModel = viewModel
+        self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
     /// Convenience init for testing different tab selections
@@ -21,15 +24,32 @@ struct MainView<VM: MainViewModelType>: View {
          selectedTab: TabType) {
         self.init(viewModel: viewModel)
         self.selectedTab = selectedTab
+        self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
     var body: some View {
+        Group {
+            switch viewModel.viewState {
+            case .loading:
+                ProgressView()
+            case .notSignedin:
+                Text("You are not signed in")
+            case .signedIn:
+                mainView
+            }
+        }
+        .ignoresSafeArea()
+        .preferredColorScheme(.light)
+        .colorScheme(.light)
+    }
+    
+    @ViewBuilder
+    private var mainView: some View {
         VStack {
             tabView
             TabBar(selectedTab: $selectedTab)
                 .padding(.bottom, Layout.size(4))
         }
-        .ignoresSafeArea()
     }
     
     @ViewBuilder

@@ -30,24 +30,31 @@ struct DoWorkoutService: DoWorkoutServiceType {
     private let cacheInteractor: CacheInteractorType
     private let routineService: CreatedRoutinesServiceType
     private let userSettings: UserSettings
+    private let screenLocker: ScreenLockerType
     private let fallbackRestPresets: [Int] = [60, 90, 120]
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
          routineService: CreatedRoutinesServiceType = CreatedRoutinesService(),
-         userSettings: UserSettings = UserDefaults.standard) {
+         userSettings: UserSettings = UserDefaults.standard,
+         screenLocker: ScreenLockerType = ScreenLocker()) {
         self.cacheInteractor = cacheInteractor
         self.routineService = routineService
         self.userSettings = userSettings
+        self.screenLocker = screenLocker
     }
     
     func loadWorkout(workoutId: String, planId: String? = nil) throws -> Workout {
-        return try routineService.loadWorkout(workoutId: workoutId, planId: planId)
+        let workout = try routineService.loadWorkout(workoutId: workoutId, planId: planId)
+        screenLocker.disableAutoLock()
+        return workout
     }
     
     func saveWorkout(workout: Workout, planId: String? = nil, completionDate: Date) throws {
         let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
         var workout = workout
         workout.lastCompleted = completionDate
+        
+        screenLocker.enableAutoLock()
         
         // Save this version of the workout to the created routines
         try routineService.saveWorkout(workout: workout,

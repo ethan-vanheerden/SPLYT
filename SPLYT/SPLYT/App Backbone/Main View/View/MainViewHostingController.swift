@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-final class MainViewHostingController<VM: MainViewModelType>: UIHostingController<MainView<VM>> {
+final class MainViewHostingController: UIHostingController<MainView<MainViewModel>> {
 
-    init(viewModel: VM) {
+    init(viewModel: MainViewModel) {
         let view = MainView(viewModel: viewModel)
         super.init(rootView: view)
     }
@@ -25,7 +25,9 @@ final class MainViewHostingController<VM: MainViewModelType>: UIHostingControlle
 struct MainViewHostingController_SwiftUI: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> some UIViewController {
-        return MainViewHostingController(viewModel: MainViewModel())
+        let interactor = MainViewInteractor()
+        let viewModel = MainViewModel(interactor: interactor)
+        return MainViewHostingController(viewModel: viewModel)
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {

@@ -13,6 +13,19 @@
 		AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE52A7849CD00E68852 /* SettingsReducer.swift */; };
 		AA116FE82A7849DE00E68852 /* SettingsDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */; };
 		AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FEC2A784E3E00E68852 /* SettingsSection.swift */; };
+		AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786D72A910E2600563B04 /* MainViewState.swift */; };
+		AA1786DA2A910E5800563B04 /* MainViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786D92A910E5800563B04 /* MainViewService.swift */; };
+		AA1786DC2A910E7500563B04 /* MainViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786DB2A910E7500563B04 /* MainViewInteractor.swift */; };
+		AA1786DE2A910EFB00563B04 /* MainViewReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786DD2A910EFB00563B04 /* MainViewReducer.swift */; };
+		AA1786E02A91143A00563B04 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786DF2A91143A00563B04 /* LoginView.swift */; };
+		AA1786E22A91144B00563B04 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E12A91144B00563B04 /* LoginViewModel.swift */; };
+		AA1786E42A91145400563B04 /* LoginReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E32A91145400563B04 /* LoginReducer.swift */; };
+		AA1786E62A91145E00563B04 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E52A91145E00563B04 /* LoginInteractor.swift */; };
+		AA1786E82A91146600563B04 /* LoginDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E72A91146600563B04 /* LoginDomain.swift */; };
+		AA1786EA2A91146E00563B04 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E92A91146E00563B04 /* LoginService.swift */; };
+		AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786EB2A91147800563B04 /* LoginViewState.swift */; };
+		AA1786EE2A91148100563B04 /* LoginDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786ED2A91148100563B04 /* LoginDisplay.swift */; };
+		AA1786F02A91149400563B04 /* LoginNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786EF2A91149400563B04 /* LoginNavigationRouter.swift */; };
 		AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A33FD2882DF0300BCB792 /* SettingsView.swift */; };
 		AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */; };
 		AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34052882E24900BCB792 /* DesignShowcase */; };
@@ -26,6 +39,8 @@
 		AA2B26042A7F2F430001E79A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = AA2B26032A7F2F430001E79A /* FirebaseFunctions */; };
 		AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
 		AA2B26072A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
+		AA2B26142A8D0DD30001E79A /* ScreenLocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */; };
+		AA2B26182A8D166E0001E79A /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26172A8D166E0001E79A /* Auth.swift */; };
 		AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */; };
 		AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */; };
 		AA2C243D2A37A45F004FC939 /* DoWorkoutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C243C2A37A45F004FC939 /* DoWorkoutViewModelTests.swift */; };
@@ -223,6 +238,19 @@
 		AA116FE52A7849CD00E68852 /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
 		AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDisplay.swift; sourceTree = "<group>"; };
 		AA116FEC2A784E3E00E68852 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		AA1786D72A910E2600563B04 /* MainViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewState.swift; sourceTree = "<group>"; };
+		AA1786D92A910E5800563B04 /* MainViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewService.swift; sourceTree = "<group>"; };
+		AA1786DB2A910E7500563B04 /* MainViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewInteractor.swift; sourceTree = "<group>"; };
+		AA1786DD2A910EFB00563B04 /* MainViewReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewReducer.swift; sourceTree = "<group>"; };
+		AA1786DF2A91143A00563B04 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		AA1786E12A91144B00563B04 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		AA1786E32A91145400563B04 /* LoginReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReducer.swift; sourceTree = "<group>"; };
+		AA1786E52A91145E00563B04 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		AA1786E72A91146600563B04 /* LoginDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDomain.swift; sourceTree = "<group>"; };
+		AA1786E92A91146E00563B04 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		AA1786EB2A91147800563B04 /* LoginViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewState.swift; sourceTree = "<group>"; };
+		AA1786ED2A91148100563B04 /* LoginDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDisplay.swift; sourceTree = "<group>"; };
+		AA1786EF2A91149400563B04 /* LoginNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationRouter.swift; sourceTree = "<group>"; };
 		AA1A33FD2882DF0300BCB792 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		AA1A34042882E18400BCB792 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
@@ -232,6 +260,8 @@
 		AA2A22D728A2E7FD002357E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLocker.swift; sourceTree = "<group>"; };
+		AA2B26172A8D166E0001E79A /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutReducerTests.swift; sourceTree = "<group>"; };
 		AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutFixtures.swift; sourceTree = "<group>"; };
 		AA2C243C2A37A45F004FC939 /* DoWorkoutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModelTests.swift; sourceTree = "<group>"; };
@@ -512,6 +542,92 @@
 				AADEC4B128A8398F00A5463B /* Networking */,
 			);
 			path = Exercises;
+			sourceTree = "<group>";
+		};
+		AA2B260B2A828F130001E79A /* Main View */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B260E2A828FCB0001E79A /* Reducer */,
+				AA2B260D2A828FC30001E79A /* Interactor */,
+				AA2B260C2A828F1A0001E79A /* View */,
+			);
+			path = "Main View";
+			sourceTree = "<group>";
+		};
+		AA2B260C2A828F1A0001E79A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA825D3C287238BF0041D94A /* MainView.swift */,
+				AA1A34092884841B00BCB792 /* MainViewHostingController.swift */,
+				AA1786D72A910E2600563B04 /* MainViewState.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA2B260D2A828FC30001E79A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786D92A910E5800563B04 /* MainViewService.swift */,
+				AA1786DB2A910E7500563B04 /* MainViewInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA2B260E2A828FCB0001E79A /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AACF8880287366DC003A50E8 /* MainViewModel.swift */,
+				AA1786DD2A910EFB00563B04 /* MainViewReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA2B260F2A8290060001E79A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B26122A82901E0001E79A /* Reducer */,
+				AA2B26112A8290170001E79A /* Interactor */,
+				AA2B26102A8290100001E79A /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AA2B26102A8290100001E79A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786DF2A91143A00563B04 /* LoginView.swift */,
+				AA1786EB2A91147800563B04 /* LoginViewState.swift */,
+				AA1786ED2A91148100563B04 /* LoginDisplay.swift */,
+				AA1786EF2A91149400563B04 /* LoginNavigationRouter.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA2B26112A8290170001E79A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786E52A91145E00563B04 /* LoginInteractor.swift */,
+				AA1786E72A91146600563B04 /* LoginDomain.swift */,
+				AA1786E92A91146E00563B04 /* LoginService.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA2B26122A82901E0001E79A /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786E12A91144B00563B04 /* LoginViewModel.swift */,
+				AA1786E32A91145400563B04 /* LoginReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA2B26162A8D13850001E79A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B26172A8D166E0001E79A /* Auth.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		AA2C24402A3CBC47004FC939 /* Build Plan */ = {
@@ -975,15 +1091,6 @@
 			path = Reducer;
 			sourceTree = "<group>";
 		};
-		AA7AA65B28848F6200CB0A6B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				AA1A34092884841B00BCB792 /* MainViewHostingController.swift */,
-				AA825D3C287238BF0041D94A /* MainView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		AA825D2E287238BF0041D94A = {
 			isa = PBXGroup;
 			children = (
@@ -1015,6 +1122,7 @@
 				AA825D3E287238C90041D94A /* Assets.xcassets */,
 				AA4A31482882D089003E7C64 /* Swift Packages */,
 				AA825D6428723CDD0041D94A /* App Backbone */,
+				AA2B26162A8D13850001E79A /* Auth */,
 				AA2A22D828A5BE88002357E4 /* Exercises */,
 				AA93404B28888B2400309E83 /* History */,
 				AA1A33FF2882E0B300BCB792 /* Settings */,
@@ -1049,9 +1157,9 @@
 		AA825D6428723CDD0041D94A /* App Backbone */ = {
 			isa = PBXGroup;
 			children = (
-				AA7AA65B28848F6200CB0A6B /* Views */,
+				AA2B260F2A8290060001E79A /* Login */,
+				AA2B260B2A828F130001E79A /* Main View */,
 				AA825D3A287238BF0041D94A /* SPLYTApp.swift */,
-				AACF8880287366DC003A50E8 /* MainViewModel.swift */,
 				AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */,
 			);
 			path = "App Backbone";
@@ -1287,6 +1395,7 @@
 				AACB29782A1557A300AACB6B /* DoWorkoutInteractor.swift */,
 				AACB297A2A1557C400AACB6B /* DoWorkoutDomain.swift */,
 				AACB29822A1558ED00AACB6B /* DoWorkoutService.swift */,
+				AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1718,7 +1827,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA1786E42A91145400563B04 /* LoginReducer.swift in Sources */,
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
+				AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */,
 				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
@@ -1735,6 +1846,7 @@
 				AAF06EF729AE9B6300E48918 /* HomeDomain.swift in Sources */,
 				AACB29872A16902800AACB6B /* DoWorkoutDisplay.swift in Sources */,
 				AA672A472A6495080009919E /* HistoryService.swift in Sources */,
+				AA1786EA2A91146E00563B04 /* LoginService.swift in Sources */,
 				AAE79AFB296EFA1E0010848E /* BuildWorkoutViewModel.swift in Sources */,
 				AA2C24502A3CC16A004FC939 /* NameWorkoutReducer.swift in Sources */,
 				AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */,
@@ -1747,16 +1859,20 @@
 				AA2C245A2A3F74C4004FC939 /* BuildPlanViewState.swift in Sources */,
 				AAE79AEF296E0DC20010848E /* BuildWorkoutView.swift in Sources */,
 				AAB42B372A79A5B5002A1ED2 /* RestPresetsService.swift in Sources */,
+				AA1786EE2A91148100563B04 /* LoginDisplay.swift in Sources */,
+				AA1786DE2A910EFB00563B04 /* MainViewReducer.swift in Sources */,
 				AA5073802A546B2400F0BAD2 /* DoPlanViewState.swift in Sources */,
 				AA672A512A6495720009919E /* HistoryNavigationRouter.swift in Sources */,
 				AA672A452A6494440009919E /* HistoryNavigationController.swift in Sources */,
 				AAB42B2F2A79A584002A1ED2 /* RestPresetsDisplay.swift in Sources */,
 				AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */,
+				AA1786F02A91149400563B04 /* LoginNavigationRouter.swift in Sources */,
 				AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */,
 				AACB29772A15576700AACB6B /* DoWorkoutReducer.swift in Sources */,
 				AA60DA112956B84E008C7615 /* HomeService.swift in Sources */,
 				AAB42B3B2A79A5C9002A1ED2 /* RestPresetsReducer.swift in Sources */,
 				AA672A652A69B8890009919E /* WorkoutDetailsReducer.swift in Sources */,
+				AA2B26182A8D166E0001E79A /* Auth.swift in Sources */,
 				AA2C245E2A3F7517004FC939 /* BuildPlanView.swift in Sources */,
 				AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */,
 				AAB42B272A795777002A1ED2 /* SettingsViewFactory.swift in Sources */,
@@ -1777,13 +1893,16 @@
 				AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */,
 				AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */,
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
+				AA2B26142A8D0DD30001E79A /* ScreenLocker.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
 				AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
 				AA672A532A6495830009919E /* HistoryReducer.swift in Sources */,
 				AA672A492A6495360009919E /* HistoryInteractor.swift in Sources */,
+				AA1786E22A91144B00563B04 /* LoginViewModel.swift in Sources */,
 				AA116FE22A78493F00E68852 /* SettingsInteractor.swift in Sources */,
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
+				AA1786DA2A910E5800563B04 /* MainViewService.swift in Sources */,
 				AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
@@ -1793,6 +1912,9 @@
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
+				AA1786DC2A910E7500563B04 /* MainViewInteractor.swift in Sources */,
+				AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */,
+				AA1786E82A91146600563B04 /* LoginDomain.swift in Sources */,
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
 				AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */,
@@ -1810,6 +1932,7 @@
 				AA116FE82A7849DE00E68852 /* SettingsDisplay.swift in Sources */,
 				AACB297F2A15580E00AACB6B /* DoWorkoutViewState.swift in Sources */,
 				AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */,
+				AA1786E62A91145E00563B04 /* LoginInteractor.swift in Sources */,
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
 				AA672A552A64958D0009919E /* HistoryViewModel.swift in Sources */,
 				AA672A632A69B87F0009919E /* WorkoutDetailsViewModel.swift in Sources */,
@@ -1817,6 +1940,7 @@
 				AA50737A2A546A6700F0BAD2 /* DoPlanService.swift in Sources */,
 				AA5073762A546A4600F0BAD2 /* DoPlanInteractor.swift in Sources */,
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,
+				AA1786E02A91143A00563B04 /* LoginView.swift in Sources */,
 				AA672A6D2A69BA620009919E /* WorkoutDetailsViewState.swift in Sources */,
 				AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,
