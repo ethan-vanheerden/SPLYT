@@ -9,7 +9,7 @@ import Foundation
 import Core
 import SwiftUI
 
-/// The base view controller for History
+/// The base navigation controller for History
 final class HistoryNavigationController: UINavigationController {
     init() {
         let interactor = HistoryInteractor()

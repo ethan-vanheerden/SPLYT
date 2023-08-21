@@ -26,11 +26,12 @@
 		AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786EB2A91147800563B04 /* LoginViewState.swift */; };
 		AA1786EE2A91148100563B04 /* LoginDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786ED2A91148100563B04 /* LoginDisplay.swift */; };
 		AA1786F02A91149400563B04 /* LoginNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786EF2A91149400563B04 /* LoginNavigationRouter.swift */; };
+		AA1786F22A93C6E400563B04 /* MainViewNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786F12A93C6E400563B04 /* MainViewNavigationRouter.swift */; };
 		AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A33FD2882DF0300BCB792 /* SettingsView.swift */; };
 		AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */; };
 		AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34052882E24900BCB792 /* DesignShowcase */; };
 		AA1A34082882E24D00BCB792 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34072882E24D00BCB792 /* Core */; };
-		AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewHostingController.swift */; };
+		AA1A340A2884841B00BCB792 /* MainViewNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewNavigationController.swift */; };
 		AA2A22D428A069C4002357E4 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = AA2A22D328A069C4002357E4 /* Networking */; };
 		AA2B25FC2A7F2E180001E79A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */; };
 		AA2B25FD2A7F2E180001E79A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */; };
@@ -40,7 +41,7 @@
 		AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
 		AA2B26072A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
 		AA2B26142A8D0DD30001E79A /* ScreenLocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */; };
-		AA2B26182A8D166E0001E79A /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26172A8D166E0001E79A /* Auth.swift */; };
+		AA2B26182A8D166E0001E79A /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26172A8D166E0001E79A /* UserAuth.swift */; };
 		AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */; };
 		AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */; };
 		AA2C243D2A37A45F004FC939 /* DoWorkoutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C243C2A37A45F004FC939 /* DoWorkoutViewModelTests.swift */; };
@@ -251,17 +252,18 @@
 		AA1786EB2A91147800563B04 /* LoginViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewState.swift; sourceTree = "<group>"; };
 		AA1786ED2A91148100563B04 /* LoginDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDisplay.swift; sourceTree = "<group>"; };
 		AA1786EF2A91149400563B04 /* LoginNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigationRouter.swift; sourceTree = "<group>"; };
+		AA1786F12A93C6E400563B04 /* MainViewNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNavigationRouter.swift; sourceTree = "<group>"; };
 		AA1A33FD2882DF0300BCB792 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		AA1A34042882E18400BCB792 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
-		AA1A34092884841B00BCB792 /* MainViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewHostingController.swift; sourceTree = "<group>"; };
+		AA1A34092884841B00BCB792 /* MainViewNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNavigationController.swift; sourceTree = "<group>"; };
 		AA1A340D2884893800BCB792 /* Architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Architecture.md; sourceTree = "<group>"; };
 		AA2A22D228A05C61002357E4 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
 		AA2A22D728A2E7FD002357E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLocker.swift; sourceTree = "<group>"; };
-		AA2B26172A8D166E0001E79A /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		AA2B26172A8D166E0001E79A /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutReducerTests.swift; sourceTree = "<group>"; };
 		AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutFixtures.swift; sourceTree = "<group>"; };
 		AA2C243C2A37A45F004FC939 /* DoWorkoutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModelTests.swift; sourceTree = "<group>"; };
@@ -558,8 +560,9 @@
 			isa = PBXGroup;
 			children = (
 				AA825D3C287238BF0041D94A /* MainView.swift */,
-				AA1A34092884841B00BCB792 /* MainViewHostingController.swift */,
+				AA1A34092884841B00BCB792 /* MainViewNavigationController.swift */,
 				AA1786D72A910E2600563B04 /* MainViewState.swift */,
+				AA1786F12A93C6E400563B04 /* MainViewNavigationRouter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -625,7 +628,7 @@
 		AA2B26162A8D13850001E79A /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				AA2B26172A8D166E0001E79A /* Auth.swift */,
+				AA2B26172A8D166E0001E79A /* UserAuth.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1872,7 +1875,7 @@
 				AA60DA112956B84E008C7615 /* HomeService.swift in Sources */,
 				AAB42B3B2A79A5C9002A1ED2 /* RestPresetsReducer.swift in Sources */,
 				AA672A652A69B8890009919E /* WorkoutDetailsReducer.swift in Sources */,
-				AA2B26182A8D166E0001E79A /* Auth.swift in Sources */,
+				AA2B26182A8D166E0001E79A /* UserAuth.swift in Sources */,
 				AA2C245E2A3F7517004FC939 /* BuildPlanView.swift in Sources */,
 				AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */,
 				AAB42B272A795777002A1ED2 /* SettingsViewFactory.swift in Sources */,
@@ -1907,6 +1910,7 @@
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
 				AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */,
+				AA1786F22A93C6E400563B04 /* MainViewNavigationRouter.swift in Sources */,
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
 				AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */,
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
@@ -1936,7 +1940,7 @@
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
 				AA672A552A64958D0009919E /* HistoryViewModel.swift in Sources */,
 				AA672A632A69B87F0009919E /* WorkoutDetailsViewModel.swift in Sources */,
-				AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */,
+				AA1A340A2884841B00BCB792 /* MainViewNavigationController.swift in Sources */,
 				AA50737A2A546A6700F0BAD2 /* DoPlanService.swift in Sources */,
 				AA5073762A546A4600F0BAD2 /* DoPlanInteractor.swift in Sources */,
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,

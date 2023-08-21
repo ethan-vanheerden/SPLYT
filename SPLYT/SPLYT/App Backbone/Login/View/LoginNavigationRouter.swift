@@ -11,7 +11,7 @@ import Core
 // MARK: - Navigation Events
 
 enum LoginNavigationEvent {
-    
+    case goToHome
 }
 
 // MARK: - Router
@@ -21,7 +21,8 @@ final class LoginNavigationRouter: NavigationRouter {
     
     func navigate(_ event: LoginNavigationEvent) {
         switch event {
-            
+        case .goToHome:
+            handleGoToHome()
         }
     }
 }
@@ -29,5 +30,7 @@ final class LoginNavigationRouter: NavigationRouter {
 // MARK: - Private
 
 private extension LoginNavigationRouter {
-    
+    func handleGoToHome() {
+        return
+    }
 }

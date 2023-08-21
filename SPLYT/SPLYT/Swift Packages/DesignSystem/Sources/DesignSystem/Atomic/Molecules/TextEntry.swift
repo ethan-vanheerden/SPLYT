@@ -83,7 +83,7 @@ public struct TextEntryViewState: Equatable {
     let includeCancelButton: Bool
     
     public init(title: String? = nil,
-                placeholder: String,
+                placeholder: String = "",
                 iconName: String? = nil,
                 includeCancelButton: Bool = true) {
         self.title = title

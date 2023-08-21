@@ -11,7 +11,7 @@ import Core
 import DesignSystem
 
 struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
-                                                VM.ViewState == LoginViewState {
+                                            VM.ViewState == LoginViewState {
     @ObservedObject private var viewModel: VM
     private let navigationRouter: LoginNavigationRouter
     private let horizontalPadding = Layout.size(2)
@@ -24,6 +24,20 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        switch viewModel.viewState {
+        case .loading:
+            ProgressView()
+        case .error:
+            Text("Error!")
+        case .loaded(let display):
+            mainView(display: display)
+        case .loggedIn:
+            Text("Logged in!")
+        }
+    }
+    
+    @ViewBuilder
+    private func mainView(display: LoginDisplay) -> some View {
+        Text("Main View")
     }
 }

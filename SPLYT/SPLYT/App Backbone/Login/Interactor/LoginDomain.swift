@@ -8,5 +8,13 @@
 import Foundation
 
 struct LoginDomain: Equatable {
-    
+    var email: String
+    var password: String
+    var emailMessage: String?
+    var passwordMessage: String
+    var passwordError: Bool
+    var createAccount: Bool
+    var passwordVisible: Bool
+    var errorMessage: String?
+    var canSubmit: Bool
 }

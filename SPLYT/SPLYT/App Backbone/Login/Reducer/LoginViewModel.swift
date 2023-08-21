@@ -12,6 +12,11 @@ import Core
 
 enum LoginViewEvent {
     case load
+    case toggleCreateAccount(isCreateAccount: Bool)
+    case togglePasswordVisible(isVisible: Bool)
+    case updateEmail(newEmail: String)
+    case updatePassword(newPassword: String)
+    case submit(isCreateAccout: Bool)
 }
 
 // MARK: - View Model
@@ -29,6 +34,16 @@ final class LoginViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .load)
+        case .toggleCreateAccount(let isCreateAccount):
+            await react(domainAction: .toggleCreateAccount(isCreateAccount: isCreateAccount))
+        case .togglePasswordVisible(let isVisible):
+            await react(domainAction: .togglePasswordVisible(isVisible: isVisible))
+        case .updateEmail(let newEmail):
+            await react(domainAction: .updateEmail(newEmail: newEmail))
+        case .updatePassword(let newPassword):
+            await react(domainAction: .updatePassword(newPassword: newPassword))
+        case .submit(let isCreateAccout):
+            await react(domainAction: .submit(isCreateAccout: isCreateAccout))
         }
     }
 }

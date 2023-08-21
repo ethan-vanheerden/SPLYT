@@ -13,16 +13,21 @@ struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
                                            VM.Event == MainViewEvent {
     @ObservedObject private var viewModel: VM
     @State private var selectedTab: TabType = .home
+    private let navigationRouter: MainViewNavigationRouter
     
-    init(viewModel: VM) {
+    init(viewModel: VM,
+         navigationRouter: MainViewNavigationRouter) {
         self.viewModel = viewModel
+        self.navigationRouter = navigationRouter
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
     /// Convenience init for testing different tab selections
     init(viewModel: VM,
+         navigationRouter: MainViewNavigationRouter,
          selectedTab: TabType) {
-        self.init(viewModel: viewModel)
+        self.init(viewModel: viewModel,
+                  navigationRouter: navigationRouter)
         self.selectedTab = selectedTab
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
@@ -33,7 +38,10 @@ struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
             case .loading:
                 ProgressView()
             case .notSignedin:
-                Text("You are not signed in")
+                ProgressView()
+                    .onAppear {
+                        navigationRouter.navigate(.goToLogin)
+                    }
             case .signedIn:
                 mainView
             }
