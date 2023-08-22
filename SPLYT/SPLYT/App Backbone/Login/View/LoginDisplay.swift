@@ -12,11 +12,12 @@ struct LoginDisplay: Equatable {
     let email: String
     let password: String
     let emailTextEntry: TextEntryViewState
-    let emailMessage: String?
+    let emailMessage: String
+    let emailMessageColor: SplytColor
     let passwordTextEntry: TextEntryViewState
     let passwordMessage: String
     let passwordMessageColor: SplytColor
-    let createAccount: Bool
+    let isCreateAccount: Bool
     let passwordVisible: Bool
     let errorMessage: String?
     let submitButtonEnabled: Bool

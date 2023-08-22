@@ -26,16 +26,18 @@ struct LoginReducer {
 
 private extension LoginReducer {
     func getDisplay(domain: LoginDomain) -> LoginDisplay {
-        let passwordMessageColor = getPasswordMessageColor(isError: domain.passwordError)
+        let passwordMessageColor = getMessageColor(isError: domain.passwordError)
+        let emailMessageColor = getMessageColor(isError: domain.emailError)
         
         let display = LoginDisplay(email: domain.email,
                                    password: domain.password,
                                    emailTextEntry: emailTextEntry,
                                    emailMessage: domain.emailMessage,
+                                   emailMessageColor: emailMessageColor,
                                    passwordTextEntry: passwordtextEntry,
                                    passwordMessage: domain.passwordMessage,
                                    passwordMessageColor: passwordMessageColor,
-                                   createAccount: domain.createAccount,
+                                   isCreateAccount: domain.isCreateAccount,
                                    passwordVisible: domain.passwordVisible,
                                    errorMessage: domain.errorMessage,
                                    submitButtonEnabled: domain.canSubmit)
@@ -44,14 +46,16 @@ private extension LoginReducer {
     }
     
     var emailTextEntry: TextEntryViewState {
-        return .init(title: Strings.email)
+        return .init(title: Strings.email,
+                     includeCancelButton: false)
     }
     
     var passwordtextEntry: TextEntryViewState {
-        return .init(title: Strings.password)
+        return .init(title: Strings.password,
+                     includeCancelButton: false)
     }
     
-    func getPasswordMessageColor(isError: Bool) -> SplytColor {
+    func getMessageColor(isError: Bool) -> SplytColor {
         return isError ? .red : .gray
     }
 }

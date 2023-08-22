@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 // MARK: - Domain Actions
 
@@ -41,6 +42,12 @@ final class MainViewInteractor {
 
 private extension MainViewInteractor {
     func handleLoad() -> MainViewDomainResult {
+        // TODO: remove
+        do {
+           try Auth.auth().signOut()
+        } catch {
+            
+        }
         let signedIn = service.isUserSignedIn()
         
         return signedIn ? .signedIn : .notSignedIn

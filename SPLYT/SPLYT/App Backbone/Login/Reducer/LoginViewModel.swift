@@ -16,7 +16,7 @@ enum LoginViewEvent {
     case togglePasswordVisible(isVisible: Bool)
     case updateEmail(newEmail: String)
     case updatePassword(newPassword: String)
-    case submit(isCreateAccout: Bool)
+    case submit
 }
 
 // MARK: - View Model
@@ -42,8 +42,8 @@ final class LoginViewModel: ViewModel {
             await react(domainAction: .updateEmail(newEmail: newEmail))
         case .updatePassword(let newPassword):
             await react(domainAction: .updatePassword(newPassword: newPassword))
-        case .submit(let isCreateAccout):
-            await react(domainAction: .submit(isCreateAccout: isCreateAccout))
+        case .submit:
+            await react(domainAction: .submit)
         }
     }
 }

@@ -10,10 +10,11 @@ import Foundation
 struct LoginDomain: Equatable {
     var email: String
     var password: String
-    var emailMessage: String?
+    var emailMessage: String
+    var emailError: Bool
     var passwordMessage: String
     var passwordError: Bool
-    var createAccount: Bool
+    var isCreateAccount: Bool
     var passwordVisible: Bool
     var errorMessage: String?
     var canSubmit: Bool

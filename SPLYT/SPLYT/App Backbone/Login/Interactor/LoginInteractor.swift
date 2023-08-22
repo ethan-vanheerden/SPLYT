@@ -15,7 +15,7 @@ enum LoginDomainAction {
     case togglePasswordVisible(isVisible: Bool)
     case updateEmail(newEmail: String)
     case updatePassword(newPassword: String)
-    case submit(isCreateAccout: Bool)
+    case submit
 }
 
 // MARK: - Domain Results
@@ -48,8 +48,8 @@ final class LoginInteractor {
             return handleUpdateEmail(newEmail: newEmail)
         case .updatePassword(let newPassword):
             return handleUpdatePassword(newPassword: newPassword)
-        case .submit(let isCreateAccout):
-            return await handleSubmit(isCreateAccout: isCreateAccout)
+        case .submit:
+            return await handleSubmit()
         }
     }
 }
@@ -60,10 +60,11 @@ private extension LoginInteractor {
     func handleLoad() -> LoginDomainResult {
         let domain = LoginDomain(email: "",
                                  password: "",
-                                 emailMessage: nil,
-                                 passwordMessage: Strings.passwordLengthMessage,
+                                 emailMessage: Strings.validEmailMessage,
+                                 emailError: false,
+                                 passwordMessage: Strings.validPasswordMessage,
                                  passwordError: false,
-                                 createAccount: false,
+                                 isCreateAccount: false,
                                  passwordVisible: false,
                                  errorMessage: nil,
                                  canSubmit: false)
@@ -74,7 +75,8 @@ private extension LoginInteractor {
     func handleToggleCreateAccount(isCreateAccount: Bool) -> LoginDomainResult {
         guard var domain = savedDomain else { return .error }
         
-        domain.createAccount = isCreateAccount
+        domain.isCreateAccount = isCreateAccount
+        domain.errorMessage = nil // Reset the error message if there was one
         return updateDomain(domain: domain)
     }
     
@@ -90,7 +92,8 @@ private extension LoginInteractor {
         
         let emailValid = isEmailValid(email: newEmail)
         domain.email = newEmail
-        domain.emailMessage = emailValid ? nil : Strings.invalidEmail
+        domain.emailMessage = emailValid || newEmail.isEmpty ? Strings.validEmailMessage : Strings.invalidEmail
+        domain.emailError = !emailValid && !newEmail.isEmpty
         domain.canSubmit = canSubmit(email: domain.email, password: domain.password)
         
         return updateDomain(domain: domain)
@@ -101,14 +104,14 @@ private extension LoginInteractor {
         
         let passwordValid = isPasswordValid(password: newPassword)
         domain.password = newPassword
-        domain.passwordMessage = passwordValid ? Strings.passwordLengthMessage : Strings.invalidPassword
-        domain.passwordError = !passwordValid
+        domain.passwordMessage = passwordValid || newPassword.isEmpty ? Strings.validPasswordMessage : Strings.invalidPassword
+        domain.passwordError = !passwordValid && !newPassword.isEmpty
         domain.canSubmit = canSubmit(email: domain.email, password: domain.password)
         
         return updateDomain(domain: domain)
     }
     
-    func handleSubmit(isCreateAccout: Bool) async -> LoginDomainResult {
+    func handleSubmit() async -> LoginDomainResult {
         guard var domain = savedDomain,
               domain.canSubmit else { return .error }
         
@@ -116,7 +119,7 @@ private extension LoginInteractor {
         let password = domain.password
         let success: Bool
         
-        if isCreateAccout {
+        if domain.isCreateAccount {
             success = await service.createUser(email: email, password: password)
         } else {
             success = await service.login(email: email, password: password)
@@ -124,10 +127,10 @@ private extension LoginInteractor {
         
         if success {
             return .loggedIn
-        } else if isCreateAccout {
-            domain.errorMessage = Strings.errorCreateAccount
-        } else {
+        } else if domain.isCreateAccount {
             domain.errorMessage = Strings.errorOther
+        } else {
+            domain.errorMessage = Strings.errorCreateAccount
         }
         
         return updateDomain(domain: domain)
@@ -166,7 +169,8 @@ private extension LoginInteractor {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let passwordLengthMessage = "Password must be at least 8 characters"
+    static let validEmailMessage = "Must be a valid email"
+    static let validPasswordMessage = "Password must be at least 8 characters"
     static let invalidEmail = "Invalid email"
     static let invalidPassword = "Invalid password"
     static let errorCreateAccount = "Something went wrong. If you don't yet have an account, create one below."
