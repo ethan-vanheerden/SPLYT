@@ -32,28 +32,31 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
         case .loaded(let display):
             mainView(display: display)
         case .loggedIn:
-            Text("Logged in!")
+            ProgressView()
+                .onAppear {
+                    navigationRouter.navigate(.goToHome)
+                }
         }
     }
     
     @ViewBuilder
     private func mainView(display: LoginDisplay) -> some View {
         VStack {
-            Text("SPLYT")
+            Text(Strings.SPLYT)
                 .largeTitle()
-                .foregroundStyle(LinearGradient(colors: [Color(splytColor: .lightBlue), Color(splytColor: .purple)], startPoint: .bottomLeading, endPoint: .topTrailing))
+                .foregroundStyle(SplytGradient.classic.gradient())
                 .padding(.top, Layout.size(4))
             Spacer()
-            Text("Welcome back!")
+            Text(Strings.welcomeBack)
                 .title1()
-                .foregroundStyle(LinearGradient(colors: [Color(splytColor: .lightBlue), Color(splytColor: .purple)], startPoint: .bottomLeading, endPoint: .topTrailing))
+                .foregroundStyle(SplytGradient.classic.gradient())
                 .padding(.bottom, Layout.size(2))
             textEntries(display: display, createAccount: false)
             submitButton(isCreateAccount: false,
                          isEnabled: display.submitButtonEnabled,
                          errorMessage: display.errorMessage)
             HStack {
-                Text("Don't have an account yet? Create one!")
+                Text(Strings.dontHaveAccount)
                     .footnote()
                     .foregroundColor(Color(splytColor: .gray))
                 Spacer()
@@ -107,7 +110,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     
     @ViewBuilder
     private func submitButton(isCreateAccount: Bool, isEnabled: Bool, errorMessage: String?) -> some View {
-        let buttonText = isCreateAccount ? "Create Account" : "Login"
+        let buttonText = isCreateAccount ? Strings.createAccount : Strings.login
         VStack {
             if let errorMessage = errorMessage {
                 Text(errorMessage)
@@ -125,9 +128,9 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func createAccountView(display: LoginDisplay) -> some View {
         VStack {
             HStack {
-                Text("Welcome!")
+                Text(Strings.welcome)
                     .title1()
-                    .foregroundStyle(LinearGradient(colors: [Color(splytColor: .lightBlue), Color(splytColor: .purple)], startPoint: .bottomLeading, endPoint: .topTrailing))
+                    .foregroundStyle(SplytGradient.classic.gradient())
                 Spacer()
             }
             .padding(.bottom, Layout.size(1))
@@ -139,9 +142,18 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
         }
         .padding(.top, Layout.size(2))
         .padding(.horizontal, Layout.size(2))
-        .navigationBar(viewState: .init(title: "Create Account",
-                                       backIconName: "xmark"),
+        .navigationBar(viewState: .init(title: Strings.createAccount,
+                                        backIconName: "xmark"),
                        backAction: { viewModel.send(.toggleCreateAccount(isCreateAccount: false),
                                                     taskPriority: .userInitiated) })
     }
+}
+
+fileprivate struct Strings {
+    static let SPLYT = "SPLYT"
+    static let welcomeBack = "Welcome back!"
+    static let dontHaveAccount = "Don't have an account yet? Create one!"
+    static let login = "Login"
+    static let createAccount = "Create Account"
+    static let welcome = "Welcome!"
 }

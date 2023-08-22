@@ -18,11 +18,15 @@ protocol ScreenLockerType {
 
 struct ScreenLocker: ScreenLockerType {
     func disableAutoLock() {
-        UIApplication.shared.isIdleTimerDisabled = false
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
     }
     
     func enableAutoLock() {
-        UIApplication.shared.isIdleTimerDisabled = true
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
     }
 }
 

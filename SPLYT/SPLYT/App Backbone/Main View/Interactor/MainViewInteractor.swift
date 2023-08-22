@@ -46,8 +46,9 @@ private extension MainViewInteractor {
         do {
            try Auth.auth().signOut()
         } catch {
-            
+
         }
+        
         let signedIn = service.isUserSignedIn()
         
         return signedIn ? .signedIn : .notSignedIn

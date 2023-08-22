@@ -31,6 +31,8 @@ final class LoginNavigationRouter: NavigationRouter {
 
 private extension LoginNavigationRouter {
     func handleGoToHome() {
-        return
+        // Login view is just presented on top so we dismiss it
+        navigator?.dismiss(animated: false)
+        print("go home")
     }
 }
