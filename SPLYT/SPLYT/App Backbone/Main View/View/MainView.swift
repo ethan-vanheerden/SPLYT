@@ -38,7 +38,7 @@ struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
             case .loading:
                 ProgressView()
             case .notSignedin:
-                ProgressView()
+                Text("Not signed in")
                     .onAppear {
                         navigationRouter.navigate(.goToLogin)
                     }

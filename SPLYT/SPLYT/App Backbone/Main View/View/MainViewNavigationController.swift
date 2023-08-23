@@ -13,7 +13,7 @@ final class MainViewNavigationController: UINavigationController {
     init() {
         let interactor = MainViewInteractor()
         let viewModel = MainViewModel(interactor: interactor)
-        let navRouter = MainViewNavigationRouter()
+        let navRouter = MainViewNavigationRouter(viewModel: viewModel)
         let view = MainView(viewModel: viewModel, navigationRouter: navRouter)
         
         let rootVC = UIHostingController(rootView: view)

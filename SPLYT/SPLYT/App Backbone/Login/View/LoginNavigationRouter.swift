@@ -18,6 +18,13 @@ enum LoginNavigationEvent {
 
 final class LoginNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
+    private let mainViewModel: MainViewModel
+    
+    init(mainViewModel: MainViewModel) {
+        self.mainViewModel = mainViewModel
+    }
+    
+    
     
     func navigate(_ event: LoginNavigationEvent) {
         switch event {
@@ -31,8 +38,7 @@ final class LoginNavigationRouter: NavigationRouter {
 
 private extension LoginNavigationRouter {
     func handleGoToHome() {
-        // Login view is just presented on top so we dismiss it
+        mainViewModel.send(.load, taskPriority: .userInitiated)
         navigator?.dismiss(animated: false)
-        print("go home")
     }
 }

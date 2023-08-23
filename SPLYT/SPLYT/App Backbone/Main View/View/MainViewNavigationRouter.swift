@@ -19,6 +19,11 @@ enum MainViewNavigationEvent {
 
 final class MainViewNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
+    private let viewModel: MainViewModel
+    
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+    }
     
     func navigate(_ event: MainViewNavigationEvent) {
         switch event {
@@ -34,7 +39,7 @@ private extension MainViewNavigationRouter {
     func handleGoToLogin() {
         let interactor = LoginInteractor()
         let viewModel = LoginViewModel(interactor: interactor)
-        let navRouter = LoginNavigationRouter()
+        let navRouter = LoginNavigationRouter(mainViewModel: self.viewModel)
         navRouter.navigator = navigator
         let view = LoginView(viewModel: viewModel, navigationRouter: navRouter)
         let vc = UIHostingController(rootView: view)

@@ -23,7 +23,8 @@ struct MainViewService: MainViewServiceType {
     }
     
     func isUserSignedIn() -> Bool {
-        return userAuth.isUserSignedIn()
+//        return userAuth.isUserSignedIn()
+        return UserAuth().isUserSignedIn()
     }
 }
 
