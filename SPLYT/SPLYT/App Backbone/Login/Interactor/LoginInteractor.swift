@@ -23,7 +23,7 @@ enum LoginDomainAction {
 enum LoginDomainResult: Equatable {
     case error
     case loaded(LoginDomain)
-    case loggedIn
+//    case loggedIn
 }
 
 // MARK: - Interactor
@@ -126,7 +126,7 @@ private extension LoginInteractor {
         }
         
         if success {
-            return .loggedIn
+            domain.errorMessage = nil
         } else if domain.isCreateAccount {
             domain.errorMessage = Strings.errorOther
         } else {

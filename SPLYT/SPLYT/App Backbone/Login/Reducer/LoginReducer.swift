@@ -16,8 +16,8 @@ struct LoginReducer {
         case .loaded(let domain):
             let display = getDisplay(domain: domain)
             return .loaded(display)
-        case .loggedIn:
-            return .loggedIn
+//        case .loggedIn:
+//            return .loggedIn
         }
     }
 }

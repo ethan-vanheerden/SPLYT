@@ -47,10 +47,6 @@ private extension MainViewInteractor {
 //        } catch {
 //
 //        }
-        
-//        let signedIn = service.isUserSignedIn()
-//
-//        return signedIn ? .signedIn : .notSignedIn
         return .loaded
     }
 }

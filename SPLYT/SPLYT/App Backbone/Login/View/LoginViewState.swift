@@ -11,5 +11,5 @@ enum LoginViewState: Equatable {
     case loading
     case error
     case loaded(LoginDisplay)
-    case loggedIn
+//    case loggedIn
 }

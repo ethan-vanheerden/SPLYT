@@ -4,11 +4,14 @@ public struct TextEntry: View {
     @FocusState private var isFocused: Bool
     @Binding private var text: String
     private let viewState: TextEntryViewState
+    private let passwordVisibleAction: ((Bool) -> Void)? // Bool represents if it is visible or not
     
     public init(text: Binding<String>,
-                viewState: TextEntryViewState) {
+                viewState: TextEntryViewState,
+                passwordVisibleAction: ((Bool) -> Void)? = nil) {
         self._text = text
         self.viewState = viewState
+        self.passwordVisibleAction = passwordVisibleAction
     }
     
     public var body: some View {
@@ -42,7 +45,8 @@ public struct TextEntry: View {
                     .foregroundColor(Color(splytColor: .gray).opacity(0.5))
                     .padding(.leading, Layout.size(1))
             }
-            TextField(viewState.placeholder, text: $text)
+            textEntry
+                .frame(height: Layout.size(3))
                 .font(.subhead(style: .medium))
                 .padding(.vertical, Layout.size(1))
                 .padding(.leading, Layout.size(1))
@@ -52,6 +56,29 @@ public struct TextEntry: View {
         .roundedBackground(cornerRadius: Layout.size(1), fill: Color(splytColor: .gray).opacity(0.10))
         .onTapGesture {
             isFocused.toggle()
+        }
+    }
+    
+    @ViewBuilder
+    private var textEntry: some View {
+        switch viewState.entryType {
+        case .normal:
+            TextField(viewState.placeholder, text: $text)
+        case .password(let isVisible):
+            ZStack(alignment: .trailing) {
+                if isVisible {
+                    TextField(viewState.placeholder, text: $text)
+                } else {
+                    SecureField(viewState.placeholder, text: $text)
+                }
+                IconButton(iconName: isVisible ? "eye.slash.fill" : "eye.fill",
+                           style: .secondary,
+                           iconColor: .lightBlue) {
+                    passwordVisibleAction?(!isVisible)
+                    isFocused = true
+                }
+                           .padding(.trailing, Layout.size(1))
+            }
         }
     }
     
@@ -79,18 +106,28 @@ public struct TextEntry: View {
 public struct TextEntryViewState: Equatable {
     let title: String?
     let placeholder: String
+    let entryType: TextEntryType
     let iconName: String?
     let includeCancelButton: Bool
     
     public init(title: String? = nil,
                 placeholder: String = "",
+                entryType: TextEntryType = .normal,
                 iconName: String? = nil,
                 includeCancelButton: Bool = true) {
         self.title = title
         self.placeholder = placeholder
+        self.entryType = entryType
         self.iconName = iconName
         self.includeCancelButton = includeCancelButton
     }
+}
+
+// MARK: - Entry Type
+
+public enum TextEntryType: Equatable {
+    case normal
+    case password(isVisible: Bool)
 }
 
 // MARK: - Common View States

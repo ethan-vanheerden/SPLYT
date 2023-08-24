@@ -9,25 +9,36 @@ import SwiftUI
 import DesignSystem
 import Core
 
-struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
-                                           VM.Event == MainViewEvent {
+struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where VM.ViewState == MainViewState,
+                                                                               VM.Event == MainViewEvent,
+                                                                               LVM.ViewState == LoginViewState,
+                                                                               LVM.Event == LoginViewEvent {
     @ObservedObject private var viewModel: VM
-    @StateObject private var authManager = AuthManager()
+    @ObservedObject private var authManager: A
+    private let loginViewModel: LVM
     @State private var selectedTab: TabType = .home
     private let navigationRouter: MainViewNavigationRouter
     
     init(viewModel: VM,
+         authManager: A,
+         loginViewModel: LVM,
          navigationRouter: MainViewNavigationRouter) {
         self.viewModel = viewModel
+        self.authManager = authManager
+        self.loginViewModel = loginViewModel
         self.navigationRouter = navigationRouter
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
     /// Convenience init for testing different tab selections
     init(viewModel: VM,
+         authManager: A,
+         loginViewModel: LVM,
          navigationRouter: MainViewNavigationRouter,
          selectedTab: TabType) {
         self.init(viewModel: viewModel,
+                  authManager: authManager,
+                  loginViewModel: loginViewModel,
                   navigationRouter: navigationRouter)
         self.selectedTab = selectedTab
         self.viewModel.send(.load, taskPriority: .userInitiated)
@@ -37,13 +48,7 @@ struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
         if authManager.isAuthenticated {
             viewStateView
         } else {
-            ProgressView()
-                .onAppear {
-                    navigationRouter.navigate(.goToLogin)
-                }
-                .onDisappear {
-                    navigationRouter.navigator?.dismiss(animated: false)
-                }
+            LoginView(viewModel: loginViewModel)
         }
     }
     

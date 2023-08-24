@@ -8,7 +8,15 @@
 import Foundation
 import FirebaseAuth
 
-final class AuthManager: ObservableObject {
+// MARK: - Protocol
+
+protocol AuthManagerType: ObservableObject {
+    var isAuthenticated: Bool { get }
+}
+
+// MARK: - Implementation
+
+final class AuthManager: AuthManagerType {
     @Published private(set) var isAuthenticated = true
     
     init() {

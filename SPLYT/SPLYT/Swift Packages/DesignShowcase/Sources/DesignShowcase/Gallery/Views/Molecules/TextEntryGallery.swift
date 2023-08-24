@@ -5,12 +5,15 @@ struct TextEntryGallery: View {
     @State private var textOne = ""
     @State private var textTwo = ""
     @State private var textThree = ""
+    @State private var textPassword = ""
+    @State private var passwordVisible = false
     private let viewStateOne = TextEntryViewState(title: "Title",
                                                   placeholder: "Placeholder text")
     private let viewStateTwo = TextEntryViewState(placeholder: "No cancel button",
                                                   includeCancelButton: false)
     private let viewStateThree = TextEntryViewState(placeholder: "Search...",
                                                     iconName: "magnifyingglass")
+    
     
     var body: some View {
         VStack(spacing: Layout.size(4)) {
@@ -23,8 +26,17 @@ struct TextEntryGallery: View {
             
             TextEntry(text: $textThree, viewState: viewStateThree)
             Text("Entered text: \(textThree)")
+            TextEntry(text: $textPassword, viewState: viewStatePassword) { isVisible in
+                passwordVisible = isVisible
+            }
             Spacer()
         }
         .padding(.horizontal, Layout.size(2))
+    }
+    
+    private var viewStatePassword: TextEntryViewState {
+        return .init(title: "Password",
+                     placeholder: "Password",
+                     entryType: .password(isVisible: passwordVisible))
     }
 }

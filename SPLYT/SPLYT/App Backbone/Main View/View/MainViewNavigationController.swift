@@ -14,8 +14,15 @@ final class MainViewNavigationController: UINavigationController {
         let interactor = MainViewInteractor()
         let viewModel = MainViewModel(interactor: interactor)
         let navRouter = MainViewNavigationRouter(viewModel: viewModel)
-//        let authManager = AuthManager()
-        let view = MainView(viewModel: viewModel, navigationRouter: navRouter)
+        let authManager = AuthManager()
+        
+        let loginInteractor = LoginInteractor()
+        let loginViewModel = LoginViewModel(interactor: loginInteractor)
+        
+        let view = MainView(viewModel: viewModel,
+                            authManager: authManager,
+                            loginViewModel: loginViewModel,
+                            navigationRouter: navRouter)
         
         let rootVC = UIHostingController(rootView: view)
         super.init(rootViewController: rootVC)
