@@ -27,7 +27,7 @@ protocol UserAuthType {
     /// - Returns: Whehter or not the operation was successful
     func logout() -> Bool
     
-    func isUserSignedIn() -> Bool
+    func isUserSignedIn(completion: @escaping (Bool) -> Void)
     
     /// Gets the current logged in user ID.
     /// - Returns: The ID if the user is currently logged in
@@ -62,8 +62,11 @@ struct UserAuth: UserAuthType {
         }
     }
     
-    func isUserSignedIn() -> Bool {
-        return Auth.auth().currentUser != nil
+    func isUserSignedIn(completion: @escaping (Bool) -> Void) {
+//        return Auth.auth().currentUser != nil
+        Auth.auth().addStateDidChangeListener { auth, user in
+            completion(user != nil)
+        }
     }
     
     func getAuthToken() async -> String? {

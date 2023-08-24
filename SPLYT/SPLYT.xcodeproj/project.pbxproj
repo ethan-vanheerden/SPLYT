@@ -190,6 +190,7 @@
 		AAD074EE2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD074ED2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift */; };
 		AAD074F02A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD074EF2A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift */; };
 		AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */ = {isa = PBXBuildFile; productRef = AAD8704829C3C9D500540608 /* ExerciseCore */; };
+		AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADC84292A97B97300FA334C /* AuthManager.swift */; };
 		AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */ = {isa = PBXBuildFile; productRef = AADCABDE288895AC00FF09B9 /* Mocking */; };
 		AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */; };
 		AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */; };
@@ -417,6 +418,7 @@
 		AAD074ED2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		AAD074EF2A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsNavigationRouterTests.swift; sourceTree = "<group>"; };
 		AAD8704729C3C99A00540608 /* ExerciseCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ExerciseCore; sourceTree = "<group>"; };
+		AADC84292A97B97300FA334C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AADCABDD2888946F00FF09B9 /* Mocking */ = {isa = PBXFileReference; lastKnownFileType = text; name = Mocking; path = SPLYTTests/Settings/Mocking; sourceTree = SOURCE_ROOT; };
 		AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutServiceTests.swift; sourceTree = "<group>"; };
 		AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequest.swift; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2B26172A8D166E0001E79A /* UserAuth.swift */,
+				AADC84292A97B97300FA334C /* AuthManager.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1922,6 +1925,7 @@
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
 				AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */,
+				AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */,
 				AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */,
 				AA672A672A69B8940009919E /* WorkoutDetailsDisplay.swift in Sources */,
 				AA672A6B2A69B8BE0009919E /* WorkoutDetailsView.swift in Sources */,

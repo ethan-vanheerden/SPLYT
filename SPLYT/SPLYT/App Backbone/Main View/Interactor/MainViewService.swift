@@ -24,7 +24,18 @@ struct MainViewService: MainViewServiceType {
     
     func isUserSignedIn() -> Bool {
 //        return userAuth.isUserSignedIn()
-        return UserAuth().isUserSignedIn()
+//        return UserAuth().isUserSignedIn()
+        return false
     }
 }
 
+/*
+ 
+ TODO:
+ 
+ make an auth observed object with the authstatedidchange listener to update a state isSignedIn property
+ once the user is signed in.
+ 
+ Either the view or the view model can have this observed/published property so that the view can show the login view
+ if the user is not logged in
+ */

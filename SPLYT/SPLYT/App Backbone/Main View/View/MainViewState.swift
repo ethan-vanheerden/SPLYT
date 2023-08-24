@@ -9,6 +9,5 @@ import Foundation
 
 enum MainViewState: Equatable {
     case loading
-    case notSignedin
-    case signedIn
+    case loaded
 }

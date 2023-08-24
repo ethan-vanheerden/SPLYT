@@ -17,8 +17,7 @@ enum MainViewDomainAction {
 // MARK: - Domain Results
 
 enum MainViewDomainResult: Equatable {
-    case notSignedIn
-    case signedIn
+    case loaded
 }
 
 // MARK: - Interactor
@@ -43,14 +42,15 @@ final class MainViewInteractor {
 private extension MainViewInteractor {
     func handleLoad() -> MainViewDomainResult {
         // TODO: remove
-        do {
-           try Auth.auth().signOut()
-        } catch {
-
-        }
+//        do {
+//           try Auth.auth().signOut()
+//        } catch {
+//
+//        }
         
-        let signedIn = service.isUserSignedIn()
-        
-        return signedIn ? .signedIn : .notSignedIn
+//        let signedIn = service.isUserSignedIn()
+//
+//        return signedIn ? .signedIn : .notSignedIn
+        return .loaded
     }
 }

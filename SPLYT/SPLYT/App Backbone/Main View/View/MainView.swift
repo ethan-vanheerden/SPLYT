@@ -12,6 +12,7 @@ import Core
 struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
                                            VM.Event == MainViewEvent {
     @ObservedObject private var viewModel: VM
+    @StateObject private var authManager = AuthManager()
     @State private var selectedTab: TabType = .home
     private let navigationRouter: MainViewNavigationRouter
     
@@ -33,16 +34,26 @@ struct MainView<VM: ViewModel>: View where VM.ViewState == MainViewState,
     }
     
     var body: some View {
+        if authManager.isAuthenticated {
+            viewStateView
+        } else {
+            ProgressView()
+                .onAppear {
+                    navigationRouter.navigate(.goToLogin)
+                }
+                .onDisappear {
+                    navigationRouter.navigator?.dismiss(animated: false)
+                }
+        }
+    }
+    
+    @ViewBuilder
+    private var viewStateView: some View {
         Group {
             switch viewModel.viewState {
             case .loading:
                 ProgressView()
-            case .notSignedin:
-                Text("Not signed in")
-                    .onAppear {
-                        navigationRouter.navigate(.goToLogin)
-                    }
-            case .signedIn:
+            case .loaded:
                 mainView
             }
         }
