@@ -4,14 +4,11 @@ public struct TextEntry: View {
     @FocusState private var isFocused: Bool
     @Binding private var text: String
     private let viewState: TextEntryViewState
-    private let passwordVisibleAction: ((Bool) -> Void)? // Bool represents if it is visible or not
     
     public init(text: Binding<String>,
-                viewState: TextEntryViewState,
-                passwordVisibleAction: ((Bool) -> Void)? = nil) {
+                viewState: TextEntryViewState) {
         self._text = text
         self.viewState = viewState
-        self.passwordVisibleAction = passwordVisibleAction
     }
     
     public var body: some View {
@@ -61,28 +58,19 @@ public struct TextEntry: View {
     
     @ViewBuilder
     private var textEntry: some View {
-        switch viewState.entryType {
-        case .normal:
-            TextField(viewState.placeholder, text: $text)
-        case .password(let isVisible):
-            ZStack(alignment: .trailing) {
-                if isVisible {
-                    TextField(viewState.placeholder, text: $text)
-                } else {
+        Group {
+            switch viewState.entryType {
+            case .normal:
+                TextField(viewState.placeholder, text: $text)
+            case .password:
+                ZStack(alignment: .trailing) {
                     SecureField(viewState.placeholder, text: $text)
+                        .padding(.trailing, Layout.size(1))
                 }
-                IconButton(iconName: isVisible ? "eye.slash.fill" : "eye.fill",
-                           style: .secondary,
-                           iconColor: .lightBlue) {
-                    passwordVisibleAction?(!isVisible)
-                    isFocused = true
-                }
-                           .padding(.trailing, Layout.size(1))
             }
         }
+        .textInputAutocapitalization(viewState.autoCapitalize ? nil : .never)
     }
-    
-    // TODO: maybe keep everything as TextField and just manually do • if its an invisible password?
     
     @ViewBuilder
     private var clearButton: some View {
@@ -111,17 +99,20 @@ public struct TextEntryViewState: Equatable {
     let entryType: TextEntryType
     let iconName: String?
     let includeCancelButton: Bool
+    let autoCapitalize: Bool
     
     public init(title: String? = nil,
                 placeholder: String = "",
                 entryType: TextEntryType = .normal,
                 iconName: String? = nil,
-                includeCancelButton: Bool = true) {
+                includeCancelButton: Bool = true,
+                autoCapitalize: Bool = true) {
         self.title = title
         self.placeholder = placeholder
         self.entryType = entryType
         self.iconName = iconName
         self.includeCancelButton = includeCancelButton
+        self.autoCapitalize = autoCapitalize
     }
 }
 
@@ -129,7 +120,7 @@ public struct TextEntryViewState: Equatable {
 
 public enum TextEntryType: Equatable {
     case normal
-    case password(isVisible: Bool)
+    case password
 }
 
 // MARK: - Common View States

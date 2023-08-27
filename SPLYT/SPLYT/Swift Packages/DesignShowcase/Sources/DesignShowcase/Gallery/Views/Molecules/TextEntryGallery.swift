@@ -13,6 +13,9 @@ struct TextEntryGallery: View {
                                                   includeCancelButton: false)
     private let viewStateThree = TextEntryViewState(placeholder: "Search...",
                                                     iconName: "magnifyingglass")
+    private let viewStatePassword = TextEntryViewState(title: "Password",
+                                                       placeholder: "Password",
+                                                       entryType: .password)
     
     
     var body: some View {
@@ -26,17 +29,9 @@ struct TextEntryGallery: View {
             
             TextEntry(text: $textThree, viewState: viewStateThree)
             Text("Entered text: \(textThree)")
-            TextEntry(text: $textPassword, viewState: viewStatePassword) { isVisible in
-                passwordVisible = isVisible
-            }
+            TextEntry(text: $textPassword, viewState: viewStatePassword)
             Spacer()
         }
         .padding(.horizontal, Layout.size(2))
-    }
-    
-    private var viewStatePassword: TextEntryViewState {
-        return .init(title: "Password",
-                     placeholder: "Password",
-                     entryType: .password(isVisible: passwordVisible))
     }
 }

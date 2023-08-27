@@ -16,8 +16,6 @@ struct LoginReducer {
         case .loaded(let domain):
             let display = getDisplay(domain: domain)
             return .loaded(display)
-//        case .loggedIn:
-//            return .loggedIn
         }
     }
 }
@@ -47,12 +45,15 @@ private extension LoginReducer {
     
     var emailTextEntry: TextEntryViewState {
         return .init(title: Strings.email,
-                     includeCancelButton: false)
+                     includeCancelButton: false,
+                     autoCapitalize: false)
     }
     
     var passwordtextEntry: TextEntryViewState {
         return .init(title: Strings.password,
-                     includeCancelButton: false)
+                     entryType: .password,
+                     includeCancelButton: false,
+                     autoCapitalize: false)
     }
     
     func getMessageColor(isError: Bool) -> SplytColor {

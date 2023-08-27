@@ -18,11 +18,12 @@ protocol AuthManagerType: ObservableObject {
 
 final class AuthManager: AuthManagerType {
     @Published private(set) var isAuthenticated = true
+    private let userAuth: UserAuthType
     
-    init() {
-        Auth.auth().addStateDidChangeListener { [weak self] auth, user in
-            self?.isAuthenticated = user != nil
-            print("Signed in: \(user != nil)")
+    init(userAuth: UserAuthType) {
+        self.userAuth = userAuth
+        userAuth.isUserSignedIn { [weak self] isSignedIn in
+            self?.isAuthenticated = isSignedIn
         }
     }
 }

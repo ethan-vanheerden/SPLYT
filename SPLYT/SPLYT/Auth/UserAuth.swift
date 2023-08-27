@@ -63,7 +63,6 @@ struct UserAuth: UserAuthType {
     }
     
     func isUserSignedIn(completion: @escaping (Bool) -> Void) {
-//        return Auth.auth().currentUser != nil
         Auth.auth().addStateDidChangeListener { auth, user in
             completion(user != nil)
         }

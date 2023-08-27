@@ -9,6 +9,9 @@ final class TextEntryTests: XCTestCase {
                                                   includeCancelButton: false)
     private let viewStateThree = TextEntryViewState(placeholder: "Search...",
                                                     iconName: "magnifyingglass")
+    private let viewStatePassword = TextEntryViewState(title: "Password",
+                                                       placeholder: "Password",
+                                                       entryType: .password)
     
     func testTextEntry() throws {
         let view = VStack {
@@ -17,11 +20,12 @@ final class TextEntryTests: XCTestCase {
             TextEntry(text: .constant("Text"), viewState: viewStateTwo)
             TextEntry(text: .constant(""), viewState: viewStateThree)
             TextEntry(text: .constant("Squat"), viewState: viewStateThree)
+            TextEntry(text: .constant("password"), viewState: viewStatePassword)
             Spacer()
         }
             .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
+        assertSnapshot(matching: vc, as: .image(on: .smallImage()), record: true)
     }
     
     func testBuilder() {

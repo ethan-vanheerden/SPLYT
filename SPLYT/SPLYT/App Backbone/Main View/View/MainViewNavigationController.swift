@@ -14,7 +14,7 @@ final class MainViewNavigationController: UINavigationController {
         let interactor = MainViewInteractor()
         let viewModel = MainViewModel(interactor: interactor)
         let navRouter = MainViewNavigationRouter(viewModel: viewModel)
-        let authManager = AuthManager()
+        let authManager = AuthManager(userAuth: UserAuth())
         
         let loginInteractor = LoginInteractor()
         let loginViewModel = LoginViewModel(interactor: loginInteractor)
