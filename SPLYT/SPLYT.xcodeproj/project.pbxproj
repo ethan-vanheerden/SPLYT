@@ -149,6 +149,7 @@
 		AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */; };
 		AA934048288888EF00309E83 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA934047288888EF00309E83 /* MainViewTests.swift */; };
 		AA93405028888B9B00309E83 /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93404F28888B9B00309E83 /* HomeViewTests.swift */; };
+		AA9FADEB2A9BB9E200F08064 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9FADEA2A9BB9E200F08064 /* SettingsService.swift */; };
 		AAB42B272A795777002A1ED2 /* SettingsViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B262A795777002A1ED2 /* SettingsViewFactory.swift */; };
 		AAB42B2D2A79A573002A1ED2 /* RestPresetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B2C2A79A573002A1ED2 /* RestPresetsView.swift */; };
 		AAB42B2F2A79A584002A1ED2 /* RestPresetsDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B2E2A79A584002A1ED2 /* RestPresetsDisplay.swift */; };
@@ -377,6 +378,7 @@
 		AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SnapshotTesting+Extensions.swift"; sourceTree = "<group>"; };
 		AA934047288888EF00309E83 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
 		AA93404F28888B9B00309E83 /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
+		AA9FADEA2A9BB9E200F08064 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		AAB42B262A795777002A1ED2 /* SettingsViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewFactory.swift; sourceTree = "<group>"; };
 		AAB42B2C2A79A573002A1ED2 /* RestPresetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsView.swift; sourceTree = "<group>"; };
 		AAB42B2E2A79A584002A1ED2 /* RestPresetsDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsDisplay.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				AA116FEB2A784E2B00E68852 /* Models */,
 				AA116FE12A78493F00E68852 /* SettingsInteractor.swift */,
 				AA116FE32A78495C00E68852 /* SettingsDomain.swift */,
+				AA9FADEA2A9BB9E200F08064 /* SettingsService.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1923,6 +1926,7 @@
 				AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */,
 				AA1786E82A91146600563B04 /* LoginDomain.swift in Sources */,
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
+				AA9FADEB2A9BB9E200F08064 /* SettingsService.swift in Sources */,
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
 				AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */,
 				AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */,

@@ -12,6 +12,7 @@ import Core
 
 enum SettingsViewEvent {
     case load
+    case signOut
 }
 
 // MARK: - View Model
@@ -29,6 +30,8 @@ final class SettingsViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .load)
+        case .signOut:
+            await react(domainAction: .signOut)
         }
     }
 }

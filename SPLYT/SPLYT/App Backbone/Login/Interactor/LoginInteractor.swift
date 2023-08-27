@@ -173,6 +173,8 @@ fileprivate struct Strings {
     static let validPasswordMessage = "Password must be at least 8 characters"
     static let invalidEmail = "Invalid email"
     static let invalidPassword = "Invalid password"
-    static let errorCreateAccount = "Something went wrong. If you don't yet have an account, create one below."
+    static let errorCreateAccount = """
+Something went wrong. Double check your password or create an account if you don't have one.
+"""
     static let errorOther = "Something went wrong. Please try again later."
 }

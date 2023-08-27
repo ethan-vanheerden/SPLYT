@@ -45,10 +45,16 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
     }
     
     var body: some View {
-        if authManager.isAuthenticated {
-            viewStateView
-        } else {
-            LoginView(viewModel: loginViewModel)
+        Group {
+            if authManager.isAuthenticated {
+                viewStateView
+            } else {
+                LoginView(viewModel: loginViewModel)
+            }
+        }
+        .onChange(of: authManager.isAuthenticated) { _ in
+            // Ensure we go back to home if the user signs back in
+            selectedTab = .home
         }
     }
     
