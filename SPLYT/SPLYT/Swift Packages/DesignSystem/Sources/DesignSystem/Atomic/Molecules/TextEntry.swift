@@ -82,6 +82,8 @@ public struct TextEntry: View {
         }
     }
     
+    // TODO: maybe keep everything as TextField and just manually do • if its an invisible password?
+    
     @ViewBuilder
     private var clearButton: some View {
         if !text.isEmpty {
