@@ -23,11 +23,7 @@ enum MainViewDomainResult: Equatable {
 // MARK: - Interactor
 
 final class MainViewInteractor {
-    private let service: MainViewServiceType
-    
-    init(service: MainViewServiceType = MainViewService()) {
-        self.service = service
-    }
+    init() { }
     
     func interact(with action: MainViewDomainAction) async -> MainViewDomainResult {
         switch action {

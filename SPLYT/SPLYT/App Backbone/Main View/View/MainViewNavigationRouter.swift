@@ -39,8 +39,6 @@ private extension MainViewNavigationRouter {
     func handleGoToLogin() {
         let interactor = LoginInteractor()
         let viewModel = LoginViewModel(interactor: interactor)
-//        let navRouter = LoginNavigationRouter(mainViewModel: self.viewModel)
-//        navRouter.navigator = navigator
         let view = LoginView(viewModel: viewModel)
         let vc = UIHostingController(rootView: view)
         

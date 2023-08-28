@@ -20,7 +20,7 @@ final class AuthManager: AuthManagerType {
     @Published private(set) var isAuthenticated = true
     private let userAuth: UserAuthType
     
-    init(userAuth: UserAuthType) {
+    init(userAuth: UserAuthType = UserAuth()) {
         self.userAuth = userAuth
         userAuth.isUserSignedIn { [weak self] isSignedIn in
             self?.isAuthenticated = isSignedIn

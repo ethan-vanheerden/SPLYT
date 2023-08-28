@@ -9,12 +9,11 @@ import Foundation
 import SwiftUI
 
 /// The base navigation controller for the app
-final class MainViewNavigationController: UINavigationController {
-    init() {
+final class MainViewNavigationController<A: AuthManagerType>: UINavigationController {
+    init(authManager: A = AuthManager()) {
         let interactor = MainViewInteractor()
         let viewModel = MainViewModel(interactor: interactor)
         let navRouter = MainViewNavigationRouter(viewModel: viewModel)
-        let authManager = AuthManager(userAuth: UserAuth())
         
         let loginInteractor = LoginInteractor()
         let loginViewModel = LoginViewModel(interactor: loginInteractor)

@@ -9,8 +9,19 @@ import XCTest
 @testable import SPLYT
 
 final class MainViewModelTests: XCTestCase {
-//    func testInit() {
-//        let sut = MainViewModel()
-//        XCTAssertNotNil(sut)
-//    }
+    private var sut: MainViewModel!
+    
+    override func setUpWithError() throws {
+        let interactor = MainViewInteractor()
+        self.sut = MainViewModel(interactor: interactor)
+    }
+    
+    func testLoadingOnInit() {
+        XCTAssertEqual(sut.viewState, .loading)
+    }
+    
+    func testSend_Load() async {
+        await sut.send(.load)
+        XCTAssertEqual(sut.viewState, .loaded)
+    }
 }
