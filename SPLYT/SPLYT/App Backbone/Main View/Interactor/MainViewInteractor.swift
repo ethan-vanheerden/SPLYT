@@ -37,8 +37,6 @@ final class MainViewInteractor {
 
 private extension MainViewInteractor {
     func handleLoad() -> MainViewDomainResult {
-        // Uncomment this code if you would like to log out the user
-//        _ = UserAuth().logout()
         return .loaded
     }
 }

@@ -37,7 +37,6 @@
 		AA2B26042A7F2F430001E79A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = AA2B26032A7F2F430001E79A /* FirebaseFunctions */; };
 		AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
 		AA2B26072A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
-		AA2B26142A8D0DD30001E79A /* ScreenLocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */; };
 		AA2B26182A8D166E0001E79A /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26172A8D166E0001E79A /* UserAuth.swift */; };
 		AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */; };
 		AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */; };
@@ -271,7 +270,6 @@
 		AA2A22D728A2E7FD002357E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLocker.swift; sourceTree = "<group>"; };
 		AA2B26172A8D166E0001E79A /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutReducerTests.swift; sourceTree = "<group>"; };
 		AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutFixtures.swift; sourceTree = "<group>"; };
@@ -1522,7 +1520,6 @@
 				AACB29782A1557A300AACB6B /* DoWorkoutInteractor.swift */,
 				AACB297A2A1557C400AACB6B /* DoWorkoutDomain.swift */,
 				AACB29822A1558ED00AACB6B /* DoWorkoutService.swift */,
-				AA2B26132A8D0DD20001E79A /* ScreenLocker.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -2019,7 +2016,6 @@
 				AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */,
 				AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */,
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
-				AA2B26142A8D0DD30001E79A /* ScreenLocker.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
 				AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,

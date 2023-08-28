@@ -9,6 +9,7 @@ import Foundation
 import Caching
 import ExerciseCore
 import UserSettings
+import Core
 
 // MARK: - Protocol
 
@@ -54,6 +55,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
         var workout = workout
         workout.lastCompleted = completionDate
         
+        // Re-enable auto lock even if we get some sort of error
         screenLocker.enableAutoLock()
         
         // Save this version of the workout to the created routines

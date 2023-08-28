@@ -9,24 +9,25 @@ import Foundation
 import UIKit
 
 /// Protocol to abstract the behavior for turning on/off screen auto-lock
-protocol ScreenLockerType {
+public protocol ScreenLockerType {
     func disableAutoLock()
     func enableAutoLock()
 }
 
 // MARK: - Implementation
 
-struct ScreenLocker: ScreenLockerType {
-    func disableAutoLock() {
+public struct ScreenLocker: ScreenLockerType {
+    public init() { }
+    
+    public func disableAutoLock() {
         DispatchQueue.main.async {
             UIApplication.shared.isIdleTimerDisabled = false
         }
     }
     
-    func enableAutoLock() {
+    public func enableAutoLock() {
         DispatchQueue.main.async {
             UIApplication.shared.isIdleTimerDisabled = true
         }
     }
 }
-
