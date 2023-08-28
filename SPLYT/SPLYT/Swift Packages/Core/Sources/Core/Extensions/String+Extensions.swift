@@ -32,4 +32,12 @@ public extension String {
             self.init("\(double)")
         }
     }
+    
+    /// Determines if this string matches the given regex.
+    /// https://stackoverflow.com/questions/29784447/swift-regex-does-a-string-match-a-pattern
+    /// - Parameter regex: The regular expression to check the match of
+    /// - Returns: Whether or not this string contains the regex
+    func matches(_ regex: String) -> Bool {
+            return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+        }
 }

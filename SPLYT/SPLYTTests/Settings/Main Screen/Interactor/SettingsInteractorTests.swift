@@ -10,10 +10,12 @@ import XCTest
 
 final class SettingsInteractorTests: XCTestCase {
     typealias Fixtures = SettingsFixtures
+    private var mockService: MockSettingsService!
     private var sut: SettingsInteractor!
 
     override func setUpWithError() throws {
-        self.sut = SettingsInteractor()
+        self.mockService = MockSettingsService()
+        self.sut = SettingsInteractor(service: mockService)
     }
     
     func testInteract_Load() async {
@@ -22,5 +24,35 @@ final class SettingsInteractorTests: XCTestCase {
         let expectedDomain = SettingsDomain(sections: Fixtures.sections)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
+    }
+    
+    func testInteract_SignOut_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .signOut)
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testInteract_SignOut_ServiceError() async {
+        mockService.signOutSuccess = false
+        await load()
+        let result = await sut.interact(with: .signOut)
+        
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testInteract_SignOut_Success() async {
+        await load()
+        let result = await sut.interact(with: .signOut)
+        
+        let expectedDomain = SettingsDomain(sections: Fixtures.sections)
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+    }
+}
+
+// MARK: - Private
+
+private extension SettingsInteractorTests {
+    func load() async {
+        _ = await sut.interact(with: .load)
     }
 }

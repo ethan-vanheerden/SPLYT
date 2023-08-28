@@ -113,9 +113,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             .foregroundColor(Color(splytColor: .white))
             Spacer()
         }
-        .background(LinearGradient(colors: [Color(splytColor: .purple),
-                                            Color(splytColor: .lightBlue)], // TODO: 45: gradients
-                                   startPoint: .bottom, endPoint: .top))
+        .background(SplytGradient.classic.gradient(startPoint: .top, endPoint: .bottom))
         .onReceive(countdownTimer) { _ in
             if countdownSeconds <= 0 {
                 countdownTimer.upstream.connect().cancel() // Can only have one timer running at a time idk

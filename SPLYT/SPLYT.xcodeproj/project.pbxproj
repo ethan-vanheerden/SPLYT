@@ -13,11 +13,22 @@
 		AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE52A7849CD00E68852 /* SettingsReducer.swift */; };
 		AA116FE82A7849DE00E68852 /* SettingsDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */; };
 		AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FEC2A784E3E00E68852 /* SettingsSection.swift */; };
+		AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786D72A910E2600563B04 /* MainViewState.swift */; };
+		AA1786DC2A910E7500563B04 /* MainViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786DB2A910E7500563B04 /* MainViewInteractor.swift */; };
+		AA1786DE2A910EFB00563B04 /* MainViewReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786DD2A910EFB00563B04 /* MainViewReducer.swift */; };
+		AA1786E02A91143A00563B04 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786DF2A91143A00563B04 /* LoginView.swift */; };
+		AA1786E22A91144B00563B04 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E12A91144B00563B04 /* LoginViewModel.swift */; };
+		AA1786E42A91145400563B04 /* LoginReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E32A91145400563B04 /* LoginReducer.swift */; };
+		AA1786E62A91145E00563B04 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E52A91145E00563B04 /* LoginInteractor.swift */; };
+		AA1786E82A91146600563B04 /* LoginDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E72A91146600563B04 /* LoginDomain.swift */; };
+		AA1786EA2A91146E00563B04 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E92A91146E00563B04 /* LoginService.swift */; };
+		AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786EB2A91147800563B04 /* LoginViewState.swift */; };
+		AA1786EE2A91148100563B04 /* LoginDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786ED2A91148100563B04 /* LoginDisplay.swift */; };
 		AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A33FD2882DF0300BCB792 /* SettingsView.swift */; };
 		AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */; };
 		AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34052882E24900BCB792 /* DesignShowcase */; };
 		AA1A34082882E24D00BCB792 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34072882E24D00BCB792 /* Core */; };
-		AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewHostingController.swift */; };
+		AA1A340A2884841B00BCB792 /* MainViewNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34092884841B00BCB792 /* MainViewNavigationController.swift */; };
 		AA2A22D428A069C4002357E4 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = AA2A22D328A069C4002357E4 /* Networking */; };
 		AA2B25FC2A7F2E180001E79A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */; };
 		AA2B25FD2A7F2E180001E79A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */; };
@@ -26,6 +37,7 @@
 		AA2B26042A7F2F430001E79A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = AA2B26032A7F2F430001E79A /* FirebaseFunctions */; };
 		AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
 		AA2B26072A7F2F9C0001E79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */; };
+		AA2B26182A8D166E0001E79A /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B26172A8D166E0001E79A /* UserAuth.swift */; };
 		AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */; };
 		AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */; };
 		AA2C243D2A37A45F004FC939 /* DoWorkoutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C243C2A37A45F004FC939 /* DoWorkoutViewModelTests.swift */; };
@@ -119,6 +131,12 @@
 		AA672A912A743CF00009919E /* WorkoutDetailsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A902A743CF00009919E /* WorkoutDetailsServiceTests.swift */; };
 		AA672A932A743F340009919E /* MockWorkoutDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A922A743F340009919E /* MockWorkoutDetailsService.swift */; };
 		AA672A952A7440380009919E /* WorkoutDetailsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A942A7440380009919E /* WorkoutDetailsInteractorTests.swift */; };
+		AA76AABD2A9D028500FEF8D6 /* MockUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AABC2A9D028500FEF8D6 /* MockUserAuth.swift */; };
+		AA76AABF2A9D044300FEF8D6 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AABE2A9D044300FEF8D6 /* AuthManagerTests.swift */; };
+		AA76AAC12A9D094200FEF8D6 /* LoginServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC02A9D094200FEF8D6 /* LoginServiceTests.swift */; };
+		AA76AAC42A9D09B800FEF8D6 /* LoginFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC32A9D09B800FEF8D6 /* LoginFixtures.swift */; };
+		AA76AAC62A9D0AC800FEF8D6 /* LoginInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC52A9D0AC800FEF8D6 /* LoginInteractorTests.swift */; };
+		AA76AAC82A9D0ADD00FEF8D6 /* MockLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC72A9D0ADD00FEF8D6 /* MockLoginService.swift */; };
 		AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */; };
 		AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */; };
 		AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */; };
@@ -126,13 +144,21 @@
 		AA825D3D287238BF0041D94A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA825D3C287238BF0041D94A /* MainView.swift */; };
 		AA825D3F287238C90041D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA825D3E287238C90041D94A /* Assets.xcassets */; };
 		AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA825D41287238C90041D94A /* Preview Assets.xcassets */; };
+		AA8511BE2A9D13DF002D1EED /* LoginReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511BD2A9D13DF002D1EED /* LoginReducerTests.swift */; };
+		AA8511C02A9D1C01002D1EED /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511BF2A9D1C01002D1EED /* LoginViewModelTests.swift */; };
+		AA8511C32A9D3BD7002D1EED /* MainViewNavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511C22A9D3BD7002D1EED /* MainViewNavigationControllerTests.swift */; };
+		AA8511C52A9D3D71002D1EED /* MockAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511C42A9D3D71002D1EED /* MockAuthManager.swift */; };
+		AA8511C72A9D3E64002D1EED /* MainViewInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511C62A9D3E64002D1EED /* MainViewInteractorTests.swift */; };
+		AA8511C92A9D3EF2002D1EED /* MainViewReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511C82A9D3EF2002D1EED /* MainViewReducerTests.swift */; };
+		AA8511CB2A9D4710002D1EED /* SettingsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511CA2A9D4710002D1EED /* SettingsServiceTests.swift */; };
+		AA8511CD2A9D4831002D1EED /* MockSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511CC2A9D4831002D1EED /* MockSettingsService.swift */; };
 		AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */; };
 		AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */; };
 		AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */; };
 		AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93403D288882AB00309E83 /* MainViewModelTests.swift */; };
 		AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */; };
-		AA934048288888EF00309E83 /* MainViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA934047288888EF00309E83 /* MainViewTests.swift */; };
 		AA93405028888B9B00309E83 /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93404F28888B9B00309E83 /* HomeViewTests.swift */; };
+		AA9FADEB2A9BB9E200F08064 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9FADEA2A9BB9E200F08064 /* SettingsService.swift */; };
 		AAB42B272A795777002A1ED2 /* SettingsViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B262A795777002A1ED2 /* SettingsViewFactory.swift */; };
 		AAB42B2D2A79A573002A1ED2 /* RestPresetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B2C2A79A573002A1ED2 /* RestPresetsView.swift */; };
 		AAB42B2F2A79A584002A1ED2 /* RestPresetsDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B2E2A79A584002A1ED2 /* RestPresetsDisplay.swift */; };
@@ -174,6 +200,7 @@
 		AAD074EE2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD074ED2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift */; };
 		AAD074F02A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD074EF2A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift */; };
 		AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */ = {isa = PBXBuildFile; productRef = AAD8704829C3C9D500540608 /* ExerciseCore */; };
+		AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADC84292A97B97300FA334C /* AuthManager.swift */; };
 		AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */ = {isa = PBXBuildFile; productRef = AADCABDE288895AC00FF09B9 /* Mocking */; };
 		AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */; };
 		AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */; };
@@ -223,15 +250,27 @@
 		AA116FE52A7849CD00E68852 /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
 		AA116FE72A7849DE00E68852 /* SettingsDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDisplay.swift; sourceTree = "<group>"; };
 		AA116FEC2A784E3E00E68852 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		AA1786D72A910E2600563B04 /* MainViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewState.swift; sourceTree = "<group>"; };
+		AA1786DB2A910E7500563B04 /* MainViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewInteractor.swift; sourceTree = "<group>"; };
+		AA1786DD2A910EFB00563B04 /* MainViewReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewReducer.swift; sourceTree = "<group>"; };
+		AA1786DF2A91143A00563B04 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		AA1786E12A91144B00563B04 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		AA1786E32A91145400563B04 /* LoginReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReducer.swift; sourceTree = "<group>"; };
+		AA1786E52A91145E00563B04 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		AA1786E72A91146600563B04 /* LoginDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDomain.swift; sourceTree = "<group>"; };
+		AA1786E92A91146E00563B04 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		AA1786EB2A91147800563B04 /* LoginViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewState.swift; sourceTree = "<group>"; };
+		AA1786ED2A91148100563B04 /* LoginDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDisplay.swift; sourceTree = "<group>"; };
 		AA1A33FD2882DF0300BCB792 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		AA1A34042882E18400BCB792 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
-		AA1A34092884841B00BCB792 /* MainViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewHostingController.swift; sourceTree = "<group>"; };
+		AA1A34092884841B00BCB792 /* MainViewNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNavigationController.swift; sourceTree = "<group>"; };
 		AA1A340D2884893800BCB792 /* Architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Architecture.md; sourceTree = "<group>"; };
 		AA2A22D228A05C61002357E4 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
 		AA2A22D728A2E7FD002357E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA2B25FB2A7F2E180001E79A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA2B26172A8D166E0001E79A /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		AA2C24382A37817F004FC939 /* DoWorkoutReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutReducerTests.swift; sourceTree = "<group>"; };
 		AA2C243A2A379BA0004FC939 /* DoWorkoutFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutFixtures.swift; sourceTree = "<group>"; };
 		AA2C243C2A37A45F004FC939 /* DoWorkoutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModelTests.swift; sourceTree = "<group>"; };
@@ -327,6 +366,12 @@
 		AA672A902A743CF00009919E /* WorkoutDetailsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsServiceTests.swift; sourceTree = "<group>"; };
 		AA672A922A743F340009919E /* MockWorkoutDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWorkoutDetailsService.swift; sourceTree = "<group>"; };
 		AA672A942A7440380009919E /* WorkoutDetailsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsInteractorTests.swift; sourceTree = "<group>"; };
+		AA76AABC2A9D028500FEF8D6 /* MockUserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserAuth.swift; sourceTree = "<group>"; };
+		AA76AABE2A9D044300FEF8D6 /* AuthManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
+		AA76AAC02A9D094200FEF8D6 /* LoginServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceTests.swift; sourceTree = "<group>"; };
+		AA76AAC32A9D09B800FEF8D6 /* LoginFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFixtures.swift; sourceTree = "<group>"; };
+		AA76AAC52A9D0AC800FEF8D6 /* LoginInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTests.swift; sourceTree = "<group>"; };
+		AA76AAC72A9D0ADD00FEF8D6 /* MockLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginService.swift; sourceTree = "<group>"; };
 		AA7CEA6F288506E8005FCBE8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		AA7CEA712885075D005FCBE8 /* SettingsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewState.swift; sourceTree = "<group>"; };
 		AA7CEA7328850B95005FCBE8 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
@@ -336,14 +381,22 @@
 		AA825D3E287238C90041D94A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA825D41287238C90041D94A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA825D47287238CB0041D94A /* SPLYTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPLYTTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA8511BD2A9D13DF002D1EED /* LoginReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReducerTests.swift; sourceTree = "<group>"; };
+		AA8511BF2A9D1C01002D1EED /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		AA8511C22A9D3BD7002D1EED /* MainViewNavigationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNavigationControllerTests.swift; sourceTree = "<group>"; };
+		AA8511C42A9D3D71002D1EED /* MockAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthManager.swift; sourceTree = "<group>"; };
+		AA8511C62A9D3E64002D1EED /* MainViewInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewInteractorTests.swift; sourceTree = "<group>"; };
+		AA8511C82A9D3EF2002D1EED /* MainViewReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewReducerTests.swift; sourceTree = "<group>"; };
+		AA8511CA2A9D4710002D1EED /* SettingsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceTests.swift; sourceTree = "<group>"; };
+		AA8511CC2A9D4831002D1EED /* MockSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsService.swift; sourceTree = "<group>"; };
 		AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutInteractorTests.swift; sourceTree = "<group>"; };
 		AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDoWorkoutService.swift; sourceTree = "<group>"; };
 		AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercisesCacheRequest.swift; sourceTree = "<group>"; };
 		AA893139294A4FA600D7B4B1 /* Caching */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Caching; sourceTree = "<group>"; };
 		AA93403D288882AB00309E83 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SnapshotTesting+Extensions.swift"; sourceTree = "<group>"; };
-		AA934047288888EF00309E83 /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
 		AA93404F28888B9B00309E83 /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
+		AA9FADEA2A9BB9E200F08064 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		AAB42B262A795777002A1ED2 /* SettingsViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewFactory.swift; sourceTree = "<group>"; };
 		AAB42B2C2A79A573002A1ED2 /* RestPresetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsView.swift; sourceTree = "<group>"; };
 		AAB42B2E2A79A584002A1ED2 /* RestPresetsDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsDisplay.swift; sourceTree = "<group>"; };
@@ -385,6 +438,7 @@
 		AAD074ED2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		AAD074EF2A744D6100451C64 /* WorkoutDetailsNavigationRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsNavigationRouterTests.swift; sourceTree = "<group>"; };
 		AAD8704729C3C99A00540608 /* ExerciseCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ExerciseCore; sourceTree = "<group>"; };
+		AADC84292A97B97300FA334C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AADCABDD2888946F00FF09B9 /* Mocking */ = {isa = PBXFileReference; lastKnownFileType = text; name = Mocking; path = SPLYTTests/Settings/Mocking; sourceTree = SOURCE_ROOT; };
 		AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutServiceTests.swift; sourceTree = "<group>"; };
 		AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequest.swift; sourceTree = "<group>"; };
@@ -474,6 +528,7 @@
 				AA116FEB2A784E2B00E68852 /* Models */,
 				AA116FE12A78493F00E68852 /* SettingsInteractor.swift */,
 				AA116FE32A78495C00E68852 /* SettingsDomain.swift */,
+				AA9FADEA2A9BB9E200F08064 /* SettingsService.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -512,6 +567,91 @@
 				AADEC4B128A8398F00A5463B /* Networking */,
 			);
 			path = Exercises;
+			sourceTree = "<group>";
+		};
+		AA2B260B2A828F130001E79A /* Main View */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B260E2A828FCB0001E79A /* Reducer */,
+				AA2B260D2A828FC30001E79A /* Interactor */,
+				AA2B260C2A828F1A0001E79A /* View */,
+			);
+			path = "Main View";
+			sourceTree = "<group>";
+		};
+		AA2B260C2A828F1A0001E79A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA825D3C287238BF0041D94A /* MainView.swift */,
+				AA1A34092884841B00BCB792 /* MainViewNavigationController.swift */,
+				AA1786D72A910E2600563B04 /* MainViewState.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA2B260D2A828FC30001E79A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786DB2A910E7500563B04 /* MainViewInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA2B260E2A828FCB0001E79A /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AACF8880287366DC003A50E8 /* MainViewModel.swift */,
+				AA1786DD2A910EFB00563B04 /* MainViewReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA2B260F2A8290060001E79A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B26122A82901E0001E79A /* Reducer */,
+				AA2B26112A8290170001E79A /* Interactor */,
+				AA2B26102A8290100001E79A /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AA2B26102A8290100001E79A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786DF2A91143A00563B04 /* LoginView.swift */,
+				AA1786EB2A91147800563B04 /* LoginViewState.swift */,
+				AA1786ED2A91148100563B04 /* LoginDisplay.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA2B26112A8290170001E79A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786E52A91145E00563B04 /* LoginInteractor.swift */,
+				AA1786E72A91146600563B04 /* LoginDomain.swift */,
+				AA1786E92A91146E00563B04 /* LoginService.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA2B26122A82901E0001E79A /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA1786E12A91144B00563B04 /* LoginViewModel.swift */,
+				AA1786E32A91145400563B04 /* LoginReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA2B26162A8D13850001E79A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B26172A8D166E0001E79A /* UserAuth.swift */,
+				AADC84292A97B97300FA334C /* AuthManager.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		AA2C24402A3CBC47004FC939 /* Build Plan */ = {
@@ -975,13 +1115,103 @@
 			path = Reducer;
 			sourceTree = "<group>";
 		};
-		AA7AA65B28848F6200CB0A6B /* Views */ = {
+		AA76AAB02A9D01D500FEF8D6 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				AA1A34092884841B00BCB792 /* MainViewHostingController.swift */,
-				AA825D3C287238BF0041D94A /* MainView.swift */,
+				AA76AAB92A9D021E00FEF8D6 /* Reducer */,
+				AA76AAB82A9D021900FEF8D6 /* Interactor */,
+				AA76AAB72A9D021600FEF8D6 /* View */,
+				AA76AAB62A9D021000FEF8D6 /* Mocks */,
 			);
-			path = Views;
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		AA76AAB12A9D01DC00FEF8D6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AA76AAB52A9D01FC00FEF8D6 /* Reducer */,
+				AA76AAB42A9D01F700FEF8D6 /* Interactor */,
+				AA8511C12A9D1FC5002D1EED /* View */,
+				AA76AAB22A9D01E600FEF8D6 /* Mocks */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AA76AAB22A9D01E600FEF8D6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AA76AAC32A9D09B800FEF8D6 /* LoginFixtures.swift */,
+				AA76AAC72A9D0ADD00FEF8D6 /* MockLoginService.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AA76AAB42A9D01F700FEF8D6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA76AAC02A9D094200FEF8D6 /* LoginServiceTests.swift */,
+				AA76AAC52A9D0AC800FEF8D6 /* LoginInteractorTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA76AAB52A9D01FC00FEF8D6 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA8511BD2A9D13DF002D1EED /* LoginReducerTests.swift */,
+				AA8511BF2A9D1C01002D1EED /* LoginViewModelTests.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA76AAB62A9D021000FEF8D6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AA76AAB72A9D021600FEF8D6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA8511C22A9D3BD7002D1EED /* MainViewNavigationControllerTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA76AAB82A9D021900FEF8D6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA8511C62A9D3E64002D1EED /* MainViewInteractorTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA76AAB92A9D021E00FEF8D6 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA93403D288882AB00309E83 /* MainViewModelTests.swift */,
+				AA8511C82A9D3EF2002D1EED /* MainViewReducerTests.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA76AABA2A9D024F00FEF8D6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AA76AABE2A9D044300FEF8D6 /* AuthManagerTests.swift */,
+				AA76AABB2A9D026600FEF8D6 /* Mocks */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		AA76AABB2A9D026600FEF8D6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AA76AABC2A9D028500FEF8D6 /* MockUserAuth.swift */,
+				AA8511C42A9D3D71002D1EED /* MockAuthManager.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		AA825D2E287238BF0041D94A = {
@@ -1015,6 +1245,7 @@
 				AA825D3E287238C90041D94A /* Assets.xcassets */,
 				AA4A31482882D089003E7C64 /* Swift Packages */,
 				AA825D6428723CDD0041D94A /* App Backbone */,
+				AA2B26162A8D13850001E79A /* Auth */,
 				AA2A22D828A5BE88002357E4 /* Exercises */,
 				AA93404B28888B2400309E83 /* History */,
 				AA1A33FF2882E0B300BCB792 /* Settings */,
@@ -1038,6 +1269,7 @@
 			children = (
 				AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */,
 				AA93403C2888826400309E83 /* App Backbone */,
+				AA76AABA2A9D024F00FEF8D6 /* Auth */,
 				AADEC4B628A8420B00A5463B /* Exercises */,
 				AA93404D28888B5000309E83 /* History */,
 				AA93404E28888B5800309E83 /* Settings */,
@@ -1049,12 +1281,19 @@
 		AA825D6428723CDD0041D94A /* App Backbone */ = {
 			isa = PBXGroup;
 			children = (
-				AA7AA65B28848F6200CB0A6B /* Views */,
+				AA2B260F2A8290060001E79A /* Login */,
+				AA2B260B2A828F130001E79A /* Main View */,
 				AA825D3A287238BF0041D94A /* SPLYTApp.swift */,
-				AACF8880287366DC003A50E8 /* MainViewModel.swift */,
 				AA2B26052A7F2F9C0001E79A /* AppDelegate.swift */,
 			);
 			path = "App Backbone";
+			sourceTree = "<group>";
+		};
+		AA8511C12A9D1FC5002D1EED /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AA893136294A4A2900D7B4B1 /* Caching */ = {
@@ -1069,18 +1308,10 @@
 		AA93403C2888826400309E83 /* App Backbone */ = {
 			isa = PBXGroup;
 			children = (
-				AA934046288888AF00309E83 /* Views */,
-				AA93403D288882AB00309E83 /* MainViewModelTests.swift */,
+				AA76AAB12A9D01DC00FEF8D6 /* Login */,
+				AA76AAB02A9D01D500FEF8D6 /* MainView */,
 			);
 			path = "App Backbone";
-			sourceTree = "<group>";
-		};
-		AA934046288888AF00309E83 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				AA934047288888EF00309E83 /* MainViewTests.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		AA93404A28888B0400309E83 /* Home */ = {
@@ -1184,6 +1415,7 @@
 			isa = PBXGroup;
 			children = (
 				AAB42B442A7AEE46002A1ED2 /* SettingsFixtures.swift */,
+				AA8511CC2A9D4831002D1EED /* MockSettingsService.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1201,6 +1433,7 @@
 			children = (
 				AAB42B422A7AEE09002A1ED2 /* SettingsInteractorTests.swift */,
 				AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */,
+				AA8511CA2A9D4710002D1EED /* SettingsServiceTests.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1718,7 +1951,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA1786E42A91145400563B04 /* LoginReducer.swift in Sources */,
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
+				AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */,
 				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
@@ -1735,6 +1970,7 @@
 				AAF06EF729AE9B6300E48918 /* HomeDomain.swift in Sources */,
 				AACB29872A16902800AACB6B /* DoWorkoutDisplay.swift in Sources */,
 				AA672A472A6495080009919E /* HistoryService.swift in Sources */,
+				AA1786EA2A91146E00563B04 /* LoginService.swift in Sources */,
 				AAE79AFB296EFA1E0010848E /* BuildWorkoutViewModel.swift in Sources */,
 				AA2C24502A3CC16A004FC939 /* NameWorkoutReducer.swift in Sources */,
 				AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */,
@@ -1747,6 +1983,8 @@
 				AA2C245A2A3F74C4004FC939 /* BuildPlanViewState.swift in Sources */,
 				AAE79AEF296E0DC20010848E /* BuildWorkoutView.swift in Sources */,
 				AAB42B372A79A5B5002A1ED2 /* RestPresetsService.swift in Sources */,
+				AA1786EE2A91148100563B04 /* LoginDisplay.swift in Sources */,
+				AA1786DE2A910EFB00563B04 /* MainViewReducer.swift in Sources */,
 				AA5073802A546B2400F0BAD2 /* DoPlanViewState.swift in Sources */,
 				AA672A512A6495720009919E /* HistoryNavigationRouter.swift in Sources */,
 				AA672A452A6494440009919E /* HistoryNavigationController.swift in Sources */,
@@ -1757,6 +1995,7 @@
 				AA60DA112956B84E008C7615 /* HomeService.swift in Sources */,
 				AAB42B3B2A79A5C9002A1ED2 /* RestPresetsReducer.swift in Sources */,
 				AA672A652A69B8890009919E /* WorkoutDetailsReducer.swift in Sources */,
+				AA2B26182A8D166E0001E79A /* UserAuth.swift in Sources */,
 				AA2C245E2A3F7517004FC939 /* BuildPlanView.swift in Sources */,
 				AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */,
 				AAB42B272A795777002A1ED2 /* SettingsViewFactory.swift in Sources */,
@@ -1782,6 +2021,7 @@
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
 				AA672A532A6495830009919E /* HistoryReducer.swift in Sources */,
 				AA672A492A6495360009919E /* HistoryInteractor.swift in Sources */,
+				AA1786E22A91144B00563B04 /* LoginViewModel.swift in Sources */,
 				AA116FE22A78493F00E68852 /* SettingsInteractor.swift in Sources */,
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
 				AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
@@ -1793,9 +2033,14 @@
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
+				AA1786DC2A910E7500563B04 /* MainViewInteractor.swift in Sources */,
+				AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */,
+				AA1786E82A91146600563B04 /* LoginDomain.swift in Sources */,
 				AAE79B05296F09C50010848E /* BuildWorkoutViewState.swift in Sources */,
+				AA9FADEB2A9BB9E200F08064 /* SettingsService.swift in Sources */,
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
 				AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */,
+				AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */,
 				AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */,
 				AA672A672A69B8940009919E /* WorkoutDetailsDisplay.swift in Sources */,
 				AA672A6B2A69B8BE0009919E /* WorkoutDetailsView.swift in Sources */,
@@ -1810,13 +2055,15 @@
 				AA116FE82A7849DE00E68852 /* SettingsDisplay.swift in Sources */,
 				AACB297F2A15580E00AACB6B /* DoWorkoutViewState.swift in Sources */,
 				AACCAA7F297C5FA700932085 /* BuildWorkoutDisplay.swift in Sources */,
+				AA1786E62A91145E00563B04 /* LoginInteractor.swift in Sources */,
 				AA58D7F5296876FE009B9ECC /* NameWorkoutViewModel.swift in Sources */,
 				AA672A552A64958D0009919E /* HistoryViewModel.swift in Sources */,
 				AA672A632A69B87F0009919E /* WorkoutDetailsViewModel.swift in Sources */,
-				AA1A340A2884841B00BCB792 /* MainViewHostingController.swift in Sources */,
+				AA1A340A2884841B00BCB792 /* MainViewNavigationController.swift in Sources */,
 				AA50737A2A546A6700F0BAD2 /* DoPlanService.swift in Sources */,
 				AA5073762A546A4600F0BAD2 /* DoPlanInteractor.swift in Sources */,
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,
+				AA1786E02A91143A00563B04 /* LoginView.swift in Sources */,
 				AA672A6D2A69BA620009919E /* WorkoutDetailsViewState.swift in Sources */,
 				AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,
@@ -1829,6 +2076,7 @@
 			files = (
 				AA50738B2A62F70800F0BAD2 /* NameWorkoutInteractorTests.swift in Sources */,
 				AAB42B5C2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift in Sources */,
+				AA8511C92A9D3EF2002D1EED /* MainViewReducerTests.swift in Sources */,
 				AA50739B2A63035B00F0BAD2 /* MockBuildPlanService.swift in Sources */,
 				AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */,
 				AA50739F2A63066F00F0BAD2 /* BuildPlanFixtures.swift in Sources */,
@@ -1848,10 +2096,14 @@
 				AA672A8F2A743C140009919E /* HomeNavigationControllerTests.swift in Sources */,
 				AA5073B62A6392CA00F0BAD2 /* DoPlanNavigationRouterTests.swift in Sources */,
 				AAD074EA2A74450400451C64 /* WorkoutDetailsReducerTests.swift in Sources */,
+				AA8511CB2A9D4710002D1EED /* SettingsServiceTests.swift in Sources */,
+				AA8511C72A9D3E64002D1EED /* MainViewInteractorTests.swift in Sources */,
 				AA50738F2A62FA4200F0BAD2 /* NameWorkoutFixtures.swift in Sources */,
 				AAEBFCF6295E3D0700D284F0 /* HomeFixtures.swift in Sources */,
+				AA76AAC82A9D0ADD00FEF8D6 /* MockLoginService.swift in Sources */,
 				AA672A892A6DE4390009919E /* HistoryViewModelTests.swift in Sources */,
 				AA672A912A743CF00009919E /* WorkoutDetailsServiceTests.swift in Sources */,
+				AA8511C32A9D3BD7002D1EED /* MainViewNavigationControllerTests.swift in Sources */,
 				AA672A952A7440380009919E /* WorkoutDetailsInteractorTests.swift in Sources */,
 				AA50738D2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift in Sources */,
 				AA672A7F2A6B34350009919E /* MockCompletedWorkoutsService.swift in Sources */,
@@ -1861,11 +2113,12 @@
 				AAEBFCFF295E427E00D284F0 /* HomeReducerTests.swift in Sources */,
 				AAEBFCF9295E3EC400D284F0 /* HomeViewModelTests.swift in Sources */,
 				AA672A852A6B583B0009919E /* HistoryReducerTests.swift in Sources */,
-				AA934048288888EF00309E83 /* MainViewTests.swift in Sources */,
 				AAB42B452A7AEE46002A1ED2 /* SettingsFixtures.swift in Sources */,
+				AA76AABD2A9D028500FEF8D6 /* MockUserAuth.swift in Sources */,
 				AAB42B432A7AEE09002A1ED2 /* SettingsInteractorTests.swift in Sources */,
 				AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */,
 				AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */,
+				AA76AABF2A9D044300FEF8D6 /* AuthManagerTests.swift in Sources */,
 				AAE79AF6296E13100010848E /* NameWorkoutNavigationRouterTests.swift in Sources */,
 				AA5073A32A6350B000F0BAD2 /* BuildPlanViewModelTests.swift in Sources */,
 				AA2C243D2A37A45F004FC939 /* DoWorkoutViewModelTests.swift in Sources */,
@@ -1888,20 +2141,27 @@
 				AAF0FB48299962CF00167B02 /* BuildWorkoutViewModelTests.swift in Sources */,
 				AA5073B42A6391D000F0BAD2 /* DoPlanViewModelTests.swift in Sources */,
 				AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */,
+				AA76AAC12A9D094200FEF8D6 /* LoginServiceTests.swift in Sources */,
+				AA8511C02A9D1C01002D1EED /* LoginViewModelTests.swift in Sources */,
+				AA76AAC62A9D0AC800FEF8D6 /* LoginInteractorTests.swift in Sources */,
 				AAB42B472A7AEF6B002A1ED2 /* SettingsReducerTests.swift in Sources */,
 				AA52BBB229B78802009CDBDA /* MockHomeService.swift in Sources */,
 				AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */,
 				AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */,
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,
 				AAB42B582A7BF5AA002A1ED2 /* MockRestPresetsService.swift in Sources */,
+				AA8511BE2A9D13DF002D1EED /* LoginReducerTests.swift in Sources */,
 				AAF0FB3F298AC0BB00167B02 /* BuildWorkoutInteractorTests.swift in Sources */,
+				AA8511CD2A9D4831002D1EED /* MockSettingsService.swift in Sources */,
 				AA2C243F2A37B2D8004FC939 /* DoWorkoutNavigationRouterTests.swift in Sources */,
 				AAB42B5A2A7BF69C002A1ED2 /* RestPresetsFixtures.swift in Sources */,
+				AA8511C52A9D3D71002D1EED /* MockAuthManager.swift in Sources */,
 				AA5073972A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift in Sources */,
 				AA672A812A6B51830009919E /* MockHistoryService.swift in Sources */,
 				AA672A872A6DE0A90009919E /* HistoryFixtures.swift in Sources */,
 				AAD074EE2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift in Sources */,
 				AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */,
+				AA76AAC42A9D09B800FEF8D6 /* LoginFixtures.swift in Sources */,
 				AA5073992A63007900F0BAD2 /* BuildPlanServiceTests.swift in Sources */,
 				AA672A832A6B54160009919E /* HistoryInteractorTests.swift in Sources */,
 			);

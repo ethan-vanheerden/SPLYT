@@ -15,21 +15,25 @@ final class DoWorkoutServiceTests: XCTestCase {
     private var cacheInteractor: MockCacheInteractor!
     private var routineCacheInteractor: MockCacheInteractor!
     private var mockUserSettings: MockUserSettings!
+    private var mockScreenLocker: MockScreenLocker!
     private var sut: DoWorkoutService!
     
     override func setUpWithError() throws {
         self.cacheInteractor = MockCacheInteractor()
         self.routineCacheInteractor = MockCacheInteractor()
         self.mockUserSettings = MockUserSettings()
+        self.mockScreenLocker = MockScreenLocker()
         let routineService = CreatedRoutinesService(cacheInteractor: routineCacheInteractor)
         self.sut = DoWorkoutService(cacheInteractor: cacheInteractor,
                                     routineService: routineService,
-                                    userSettings: mockUserSettings)
+                                    userSettings: mockUserSettings,
+                                    screenLocker: mockScreenLocker)
     }
     
     func testLoadWorkout_FileNoExist_ErrorLoading() {
         routineCacheInteractor.fileExistsThrow = true
         XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId))
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testLoadWorkout_WorkoutNoExist_Error() {
@@ -37,6 +41,7 @@ final class DoWorkoutServiceTests: XCTestCase {
         routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
         
         XCTAssertThrowsError(try sut.loadWorkout(workoutId: "not-a-workout"))
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testLoadWorkout_Success() throws {
@@ -46,6 +51,7 @@ final class DoWorkoutServiceTests: XCTestCase {
         let result = try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId)
         
         XCTAssertEqual(result, WorkoutFixtures.legWorkout)
+        XCTAssertFalse(mockScreenLocker.autoLockOn)
     }
     
     func testLoadWorkout_FromPlan_PlanNoExist_Error() {
@@ -54,6 +60,7 @@ final class DoWorkoutServiceTests: XCTestCase {
         
         XCTAssertThrowsError(try sut.loadWorkout(workoutId: WorkoutFixtures.legWorkoutId,
                                                  planId: "not-a-plan"))
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testLoadWorkout_FromPlan_WorkoutNoExist_Error() {
@@ -62,6 +69,7 @@ final class DoWorkoutServiceTests: XCTestCase {
         
         XCTAssertThrowsError(try sut.loadWorkout(workoutId: "not-a-workout",
                                                  planId: WorkoutFixtures.myPlanId))
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testLoadWorkout_FromPlan_Success() throws {
@@ -72,6 +80,7 @@ final class DoWorkoutServiceTests: XCTestCase {
                                          planId: WorkoutFixtures.myPlanId)
         
         XCTAssertEqual(result, WorkoutFixtures.fullBodyWorkout)
+        XCTAssertFalse(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_HistoryCacheError() {
@@ -83,6 +92,7 @@ final class DoWorkoutServiceTests: XCTestCase {
                                                  completionDate: WorkoutFixtures.jan_1_2023_0800))
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertFalse(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_WorkoutNoExist_Error() {
@@ -98,6 +108,7 @@ final class DoWorkoutServiceTests: XCTestCase {
                                                  completionDate: WorkoutFixtures.jan_1_2023_0800))
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertFalse(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_Success() throws {
@@ -114,13 +125,14 @@ final class DoWorkoutServiceTests: XCTestCase {
         var workout = WorkoutFixtures.legWorkout
         workout.lastCompleted = completionDate
         let newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
-                                     workout: workout)
+                                        workout: workout)
         var expectedHistories = WorkoutFixtures.workoutHistories
         expectedHistories.insert(newHistory, at: 0)
         
         XCTAssertEqual(workoutHistory, expectedHistories)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertTrue(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_FromPlan_WorkoutNoExist_Error() {
@@ -137,6 +149,7 @@ final class DoWorkoutServiceTests: XCTestCase {
                                                  completionDate: WorkoutFixtures.jan_1_2023_0800))
         XCTAssertTrue(routineCacheInteractor.loadCalled)
         XCTAssertFalse(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_FromPlan_PlanNoExist_Error() {
@@ -148,6 +161,7 @@ final class DoWorkoutServiceTests: XCTestCase {
                                                  completionDate: WorkoutFixtures.jan_1_2023_0800))
         XCTAssertTrue(routineCacheInteractor.loadCalled)
         XCTAssertFalse(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_FromPlan_Success() throws {
@@ -165,17 +179,19 @@ final class DoWorkoutServiceTests: XCTestCase {
         var workout = WorkoutFixtures.legWorkout
         workout.lastCompleted = completionDate
         let newHistory = WorkoutHistory(id: "\(WorkoutFixtures.legWorkoutId)-2023-01-01T08:00:00Z",
-                                     workout: workout)
+                                        workout: workout)
         var expectedHistories = WorkoutFixtures.workoutHistories
         expectedHistories.insert(newHistory, at: 0)
         
         XCTAssertEqual(workoutHistory, expectedHistories)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertTrue(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testLoadRestPresets() {
         let result = sut.loadRestPresets()
         XCTAssertEqual(result, RestPresetsFixtures.presets)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
 }

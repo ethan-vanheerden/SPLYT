@@ -29,4 +29,14 @@ final class String_ExtensionsTests: XCTestCase {
         XCTAssertEqual(String(double), "4.8")
         XCTAssertEqual(String(double, defaultDash: true), "4.8")
     }
+    
+    func testMatches() {
+        XCTAssertTrue("Hello, World!".matches("[A-Za-z]+"))
+        XCTAssertTrue("12345".matches("\\d+"))
+        XCTAssertFalse("12345".matches("[A-Za-z]+"))
+        XCTAssertFalse("Hello, World!".matches("\\d+"))
+        XCTAssertFalse("Hello".matches("[A-Za-z+"))
+        XCTAssertFalse("Hello".matches(""))
+        XCTAssertTrue("Hello, World!".matches("^[A-Za-z,! ]+$"))
+    }
 }

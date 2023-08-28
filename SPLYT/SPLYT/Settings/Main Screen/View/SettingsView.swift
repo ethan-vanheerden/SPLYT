@@ -62,6 +62,8 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
                     navigationDetail(item: item)
                 case .link(let url):
                     linkDetail(item: item, url: url)
+                case .button:
+                    buttonDetail(item: item)
                 }
             }
         }
@@ -84,6 +86,21 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
                 detailLabel(item: item)
             }
         }
+    }
+    
+    @ViewBuilder
+    private func buttonDetail(item: SettingsItem) -> some View {
+        Button {
+            switch item {
+            case .signOut:
+                viewModel.send(.signOut, taskPriority: .userInitiated)
+            default:
+                return
+            }
+        } label: {
+            detailLabel(item: item)
+        }
+
     }
     
     @ViewBuilder

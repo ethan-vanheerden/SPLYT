@@ -42,7 +42,8 @@ public struct TextEntry: View {
                     .foregroundColor(Color(splytColor: .gray).opacity(0.5))
                     .padding(.leading, Layout.size(1))
             }
-            TextField(viewState.placeholder, text: $text)
+            textEntry
+                .frame(height: Layout.size(3))
                 .font(.subhead(style: .medium))
                 .padding(.vertical, Layout.size(1))
                 .padding(.leading, Layout.size(1))
@@ -53,6 +54,22 @@ public struct TextEntry: View {
         .onTapGesture {
             isFocused.toggle()
         }
+    }
+    
+    @ViewBuilder
+    private var textEntry: some View {
+        Group {
+            switch viewState.entryType {
+            case .normal:
+                TextField(viewState.placeholder, text: $text)
+            case .password:
+                ZStack(alignment: .trailing) {
+                    SecureField(viewState.placeholder, text: $text)
+                        .padding(.trailing, Layout.size(1))
+                }
+            }
+        }
+        .textInputAutocapitalization(viewState.autoCapitalize ? nil : .never)
     }
     
     @ViewBuilder
@@ -79,18 +96,31 @@ public struct TextEntry: View {
 public struct TextEntryViewState: Equatable {
     let title: String?
     let placeholder: String
+    let entryType: TextEntryType
     let iconName: String?
     let includeCancelButton: Bool
+    let autoCapitalize: Bool
     
     public init(title: String? = nil,
-                placeholder: String,
+                placeholder: String = "",
+                entryType: TextEntryType = .normal,
                 iconName: String? = nil,
-                includeCancelButton: Bool = true) {
+                includeCancelButton: Bool = true,
+                autoCapitalize: Bool = true) {
         self.title = title
         self.placeholder = placeholder
+        self.entryType = entryType
         self.iconName = iconName
         self.includeCancelButton = includeCancelButton
+        self.autoCapitalize = autoCapitalize
     }
+}
+
+// MARK: - Entry Type
+
+public enum TextEntryType: Equatable {
+    case normal
+    case password
 }
 
 // MARK: - Common View States

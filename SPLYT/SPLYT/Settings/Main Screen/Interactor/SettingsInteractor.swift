@@ -11,6 +11,7 @@ import Foundation
 
 enum SettingsDomainAction {
     case load
+    case signOut
 }
 
 // MARK: - Domain Results
@@ -24,11 +25,18 @@ enum SettingsDomainResult: Equatable {
 
 final class SettingsInteractor {
     private var savedDomain: SettingsDomain?
+    private let service: SettingsServiceType
+    
+    init(service: SettingsServiceType = SettingsService()) {
+        self.service = service
+    }
     
     func interact(with action: SettingsDomainAction) async -> SettingsDomainResult {
         switch action {
         case .load:
             return handleLoad()
+        case .signOut:
+            return handleSignOut()
         }
     }
 }
@@ -40,6 +48,14 @@ private extension SettingsInteractor {
         let domain = SettingsDomain(sections: sections)
         
         return updateDomain(domain: domain)
+    }
+    
+    func handleSignOut() -> SettingsDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        let success = service.signOut()
+        
+        return success ? updateDomain(domain: domain) : .error
     }
 }
 
@@ -87,7 +103,8 @@ private extension SettingsInteractor {
     var supportSection: SettingsSection {
         return .init(title: Strings.support,
                      items: [
-                        .submitFeedback
+                        .submitFeedback,
+                        .signOut
                      ],
                      isEnabled: true)
     }

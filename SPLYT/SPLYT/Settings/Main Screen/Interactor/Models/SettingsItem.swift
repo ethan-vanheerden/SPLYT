@@ -12,6 +12,7 @@ enum SettingsItem: Equatable, CaseIterable {
     case designShowcase
     case restPresets
     case submitFeedback
+    case signOut
     
     var title: String {
         switch self {
@@ -21,6 +22,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "Rest Presets"
         case .submitFeedback:
             return "Submit Feedback"
+        case .signOut:
+            return "Sign Out"
         }
     }
     
@@ -40,6 +43,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "stopwatch.fill"
         case .submitFeedback:
             return "envelope.fill"
+        case .signOut:
+            return "person.fill"
         }
     }
     
@@ -51,6 +56,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return .blue
         case .submitFeedback:
             return .green
+        case .signOut:
+            return .gray
         }
     }
     
@@ -59,6 +66,8 @@ enum SettingsItem: Equatable, CaseIterable {
         case .submitFeedback:
             let formURL = "https://forms.gle/bk1b87QBP2ZogKH4A"
             return .link(url: formURL)
+        case .signOut:
+            return .button
         default:
             return .navigation
         }
@@ -69,4 +78,5 @@ enum SettingsItem: Equatable, CaseIterable {
 enum SettingsItemDetail: Equatable {
     case navigation
     case link(url: String)
+    case button
 }

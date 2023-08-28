@@ -23,6 +23,8 @@ struct SettingsViewFactory {
             Link(destination: URL(string:"www.google.com")!) {
                 Text("link")
             }
+        default:
+            EmptyView()
         }
     }
 }

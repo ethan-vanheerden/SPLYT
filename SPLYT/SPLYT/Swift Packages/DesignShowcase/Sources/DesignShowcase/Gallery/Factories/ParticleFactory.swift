@@ -6,6 +6,8 @@ struct ParticleFactory {
         switch particle {
         case .colors:
             ColorGallery()
+        case .gradients:
+            GradientGallery()
         case .text:
             TextGallery()
         }
