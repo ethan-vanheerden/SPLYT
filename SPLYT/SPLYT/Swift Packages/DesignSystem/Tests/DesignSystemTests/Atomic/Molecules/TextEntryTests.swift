@@ -25,7 +25,7 @@ final class TextEntryTests: XCTestCase {
         }
             .padding(.horizontal)
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(matching: vc, as: .image(on: .smallImage()))
+        assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
     }
     
     func testBuilder() {

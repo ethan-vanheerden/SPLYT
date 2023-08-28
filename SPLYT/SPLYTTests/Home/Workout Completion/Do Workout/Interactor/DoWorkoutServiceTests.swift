@@ -149,6 +149,7 @@ final class DoWorkoutServiceTests: XCTestCase {
                                                  completionDate: WorkoutFixtures.jan_1_2023_0800))
         XCTAssertTrue(routineCacheInteractor.loadCalled)
         XCTAssertFalse(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_FromPlan_PlanNoExist_Error() {
@@ -160,6 +161,7 @@ final class DoWorkoutServiceTests: XCTestCase {
                                                  completionDate: WorkoutFixtures.jan_1_2023_0800))
         XCTAssertTrue(routineCacheInteractor.loadCalled)
         XCTAssertFalse(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testSaveWorkout_FromPlan_Success() throws {
@@ -184,10 +186,12 @@ final class DoWorkoutServiceTests: XCTestCase {
         XCTAssertEqual(workoutHistory, expectedHistories)
         XCTAssertTrue(routineCacheInteractor.saveCalled)
         XCTAssertTrue(cacheInteractor.saveCalled)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
     
     func testLoadRestPresets() {
         let result = sut.loadRestPresets()
         XCTAssertEqual(result, RestPresetsFixtures.presets)
+        XCTAssertTrue(mockScreenLocker.autoLockOn)
     }
 }
