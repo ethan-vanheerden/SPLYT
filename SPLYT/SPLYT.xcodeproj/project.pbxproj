@@ -24,7 +24,6 @@
 		AA1786EA2A91146E00563B04 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786E92A91146E00563B04 /* LoginService.swift */; };
 		AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786EB2A91147800563B04 /* LoginViewState.swift */; };
 		AA1786EE2A91148100563B04 /* LoginDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786ED2A91148100563B04 /* LoginDisplay.swift */; };
-		AA1786F22A93C6E400563B04 /* MainViewNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1786F12A93C6E400563B04 /* MainViewNavigationRouter.swift */; };
 		AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A33FD2882DF0300BCB792 /* SettingsView.swift */; };
 		AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */; };
 		AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */ = {isa = PBXBuildFile; productRef = AA1A34052882E24900BCB792 /* DesignShowcase */; };
@@ -261,7 +260,6 @@
 		AA1786E92A91146E00563B04 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		AA1786EB2A91147800563B04 /* LoginViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewState.swift; sourceTree = "<group>"; };
 		AA1786ED2A91148100563B04 /* LoginDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDisplay.swift; sourceTree = "<group>"; };
-		AA1786F12A93C6E400563B04 /* MainViewNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNavigationRouter.swift; sourceTree = "<group>"; };
 		AA1A33FD2882DF0300BCB792 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1A34002882E0E000BCB792 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		AA1A34042882E18400BCB792 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
@@ -585,7 +583,6 @@
 				AA825D3C287238BF0041D94A /* MainView.swift */,
 				AA1A34092884841B00BCB792 /* MainViewNavigationController.swift */,
 				AA1786D72A910E2600563B04 /* MainViewState.swift */,
-				AA1786F12A93C6E400563B04 /* MainViewNavigationRouter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2029,7 +2026,6 @@
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
 				AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */,
-				AA1786F22A93C6E400563B04 /* MainViewNavigationRouter.swift in Sources */,
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
 				AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */,
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,

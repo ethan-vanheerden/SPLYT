@@ -13,20 +13,17 @@ final class MainViewNavigationController<A: AuthManagerType>: UINavigationContro
     init(authManager: A = AuthManager()) {
         let interactor = MainViewInteractor()
         let viewModel = MainViewModel(interactor: interactor)
-        let navRouter = MainViewNavigationRouter(viewModel: viewModel)
         
         let loginInteractor = LoginInteractor()
         let loginViewModel = LoginViewModel(interactor: loginInteractor)
         
         let view = MainView(viewModel: viewModel,
                             authManager: authManager,
-                            loginViewModel: loginViewModel,
-                            navigationRouter: navRouter)
+                            loginViewModel: loginViewModel)
         
         let rootVC = UIHostingController(rootView: view)
         super.init(rootViewController: rootVC)
         self.setNavigationBarHidden(true, animated: false)
-        navRouter.navigator = self
     }
     
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {

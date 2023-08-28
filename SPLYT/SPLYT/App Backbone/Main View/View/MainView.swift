@@ -17,30 +17,13 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
     @ObservedObject private var authManager: A
     private let loginViewModel: LVM
     @State private var selectedTab: TabType = .home
-    private let navigationRouter: MainViewNavigationRouter
     
     init(viewModel: VM,
          authManager: A,
-         loginViewModel: LVM,
-         navigationRouter: MainViewNavigationRouter) {
+         loginViewModel: LVM) {
         self.viewModel = viewModel
         self.authManager = authManager
         self.loginViewModel = loginViewModel
-        self.navigationRouter = navigationRouter
-        self.viewModel.send(.load, taskPriority: .userInitiated)
-    }
-    
-    /// Convenience init for testing different tab selections
-    init(viewModel: VM,
-         authManager: A,
-         loginViewModel: LVM,
-         navigationRouter: MainViewNavigationRouter,
-         selectedTab: TabType) {
-        self.init(viewModel: viewModel,
-                  authManager: authManager,
-                  loginViewModel: loginViewModel,
-                  navigationRouter: navigationRouter)
-        self.selectedTab = selectedTab
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
