@@ -22,11 +22,33 @@ final class SettingsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.viewState, .loading)
     }
     
+    func testSend_Error() async {
+        await sut.send(.signOut) // No saved domain
+        XCTAssertEqual(sut.viewState, .error)
+    }
+    
     func testSend_Load() async {
         await sut.send(.load)
         
         let expectedDisplay = SettingsDisplay(sections: Fixtures.sections)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
+    }
+    
+    func testSend_SignOut() async {
+        await load()
+        await sut.send(.signOut)
+        
+        let expectedDisplay = SettingsDisplay(sections: Fixtures.sections)
+        
+        XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
+    }
+}
+
+// MARK: - Private
+
+private extension SettingsViewModelTests {
+    func load() async {
+        await sut.send(.load)
     }
 }

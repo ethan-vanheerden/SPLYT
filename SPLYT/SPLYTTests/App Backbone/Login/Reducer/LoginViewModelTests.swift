@@ -48,7 +48,8 @@ final class LoginViewModelTests: XCTestCase {
                                            passwordMessageColor: .gray,
                                            isCreateAccount: true,
                                            errorMessage: nil,
-                                           submitButtonEnabled: false)
+                                           submitButtonEnabled: false,
+                                           createAccountNavBar: Fixtures.createAccountNavBar)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }
@@ -67,7 +68,8 @@ final class LoginViewModelTests: XCTestCase {
                                            passwordMessageColor: .gray,
                                            isCreateAccount: false,
                                            errorMessage: nil,
-                                           submitButtonEnabled: false)
+                                           submitButtonEnabled: false,
+                                           createAccountNavBar: Fixtures.createAccountNavBar)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }
@@ -86,7 +88,8 @@ final class LoginViewModelTests: XCTestCase {
                                            passwordMessageColor: .red,
                                            isCreateAccount: false,
                                            errorMessage: nil,
-                                           submitButtonEnabled: false)
+                                           submitButtonEnabled: false,
+                                           createAccountNavBar: Fixtures.createAccountNavBar)
         
         XCTAssertEqual(sut.viewState, .loaded(expectedDisplay))
     }

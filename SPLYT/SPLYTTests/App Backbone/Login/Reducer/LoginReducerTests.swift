@@ -52,7 +52,8 @@ final class LoginReducerTests: XCTestCase {
                                            passwordMessageColor: .red,
                                            isCreateAccount: false,
                                            errorMessage: nil,
-                                           submitButtonEnabled: false)
+                                           submitButtonEnabled: false,
+                                           createAccountNavBar: Fixtures.createAccountNavBar)
         
         XCTAssertEqual(result, .loaded(expectedDisplay))
     }
@@ -74,7 +75,8 @@ final class LoginReducerTests: XCTestCase {
                                            passwordMessageColor: .gray,
                                            isCreateAccount: true,
                                            errorMessage: Fixtures.errorOther,
-                                           submitButtonEnabled: true)
+                                           submitButtonEnabled: true,
+                                           createAccountNavBar: Fixtures.createAccountNavBar)
         
         XCTAssertEqual(result, .loaded(expectedDisplay))
     }

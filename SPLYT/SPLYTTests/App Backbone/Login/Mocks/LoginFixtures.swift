@@ -53,6 +53,8 @@ Something went wrong. Double check your password or create an account if you don
     
     static let passwordTitle = "Password"
     
+    static let createAccount = "Create Account"
+    
     static let emailTextEntry: TextEntryViewState = .init(title: emailTitle,
                                                           includeCancelButton: false,
                                                           autoCapitalize: false)
@@ -61,6 +63,9 @@ Something went wrong. Double check your password or create an account if you don
                                                              entryType: .password,
                                                              includeCancelButton: false,
                                                              autoCapitalize: false)
+    
+    static let createAccountNavBar: NavigationBarViewState = .init(title: createAccount,
+                                                                   backIconName: "xmark")
     
     static let display: LoginDisplay = .init(email: "",
                                              password: "",
@@ -72,7 +77,8 @@ Something went wrong. Double check your password or create an account if you don
                                              passwordMessageColor: .gray,
                                              isCreateAccount: false,
                                              errorMessage: nil,
-                                             submitButtonEnabled: false)
+                                             submitButtonEnabled: false,
+                                             createAccountNavBar: createAccountNavBar)
     
     static let displayFilled: LoginDisplay = .init(email: email,
                                                    password: password,
@@ -84,5 +90,6 @@ Something went wrong. Double check your password or create an account if you don
                                                    passwordMessageColor: .gray,
                                                    isCreateAccount: false,
                                                    errorMessage: nil,
-                                                   submitButtonEnabled: true)
+                                                   submitButtonEnabled: true,
+                                                   createAccountNavBar: createAccountNavBar)
 }

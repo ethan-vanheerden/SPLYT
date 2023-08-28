@@ -20,4 +20,5 @@ struct LoginDisplay: Equatable {
     let isCreateAccount: Bool
     let errorMessage: String?
     let submitButtonEnabled: Bool
+    let createAccountNavBar: NavigationBarViewState
 }

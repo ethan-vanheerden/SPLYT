@@ -37,7 +37,8 @@ private extension LoginReducer {
                                    passwordMessageColor: passwordMessageColor,
                                    isCreateAccount: domain.isCreateAccount,
                                    errorMessage: domain.errorMessage,
-                                   submitButtonEnabled: domain.canSubmit)
+                                   submitButtonEnabled: domain.canSubmit,
+                                   createAccountNavBar: createAccountNavBar)
         
         return display
     }
@@ -58,6 +59,11 @@ private extension LoginReducer {
     func getMessageColor(isError: Bool) -> SplytColor {
         return isError ? .red : .gray
     }
+    
+    var createAccountNavBar: NavigationBarViewState {
+        return .init(title: Strings.createAccount,
+                     backIconName: "xmark")
+    }
 }
 
 // MARK: - Strings
@@ -65,4 +71,5 @@ private extension LoginReducer {
 fileprivate struct Strings {
     static let email = "Email"
     static let password = "Password"
+    static let createAccount = "Create Account"
 }

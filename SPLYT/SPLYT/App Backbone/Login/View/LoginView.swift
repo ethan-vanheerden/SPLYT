@@ -89,14 +89,16 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func emailTextBinding(email: String) -> Binding<String> {
         return Binding(
             get: { return email },
-            set: { viewModel.send(.updateEmail(newEmail: $0), taskPriority: .userInitiated)}
+            set: { viewModel.send(.updateEmail(newEmail: $0),
+                                  taskPriority: .userInitiated) }
         )
     }
     
     private func passwordTextBinding(password: String) -> Binding<String> {
         return Binding(
             get: { return password },
-            set: { viewModel.send(.updatePassword(newPassword: $0), taskPriority: .userInitiated)}
+            set: { viewModel.send(.updatePassword(newPassword: $0),
+                                  taskPriority: .userInitiated) }
         )
     }
     
@@ -134,8 +136,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
         }
         .padding(.top, Layout.size(2))
         .padding(.horizontal, Layout.size(2))
-        .navigationBar(viewState: .init(title: Strings.createAccount,
-                                        backIconName: "xmark"),
+        .navigationBar(viewState: display.createAccountNavBar,
                        backAction: { viewModel.send(.toggleCreateAccount(isCreateAccount: false),
                                                     taskPriority: .userInitiated) })
     }
