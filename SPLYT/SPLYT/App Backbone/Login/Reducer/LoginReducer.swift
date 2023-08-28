@@ -36,7 +36,6 @@ private extension LoginReducer {
                                    passwordMessage: domain.passwordMessage,
                                    passwordMessageColor: passwordMessageColor,
                                    isCreateAccount: domain.isCreateAccount,
-                                   passwordVisible: domain.passwordVisible,
                                    errorMessage: domain.errorMessage,
                                    submitButtonEnabled: domain.canSubmit)
         

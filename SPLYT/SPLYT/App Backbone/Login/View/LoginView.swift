@@ -13,7 +13,6 @@ import DesignSystem
 struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                                             VM.ViewState == LoginViewState {
     @ObservedObject private var viewModel: VM
-//    private let navigationRouter: LoginNavigationRouter
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM) {
@@ -29,11 +28,6 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             Text("Error!")
         case .loaded(let display):
             mainView(display: display)
-//        case .loggedIn:
-//            ProgressView()
-//                .onAppear {
-//                    navigationRouter.navigate(.goToHome)
-//                }
         }
     }
     

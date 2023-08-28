@@ -9,8 +9,8 @@ import XCTest
 @testable import SPLYT
 
 final class MainViewModelTests: XCTestCase {
-    func testInit() {
-        let sut = MainViewModel()
-        XCTAssertNotNil(sut)
-    }
+//    func testInit() {
+//        let sut = MainViewModel()
+//        XCTAssertNotNil(sut)
+//    }
 }

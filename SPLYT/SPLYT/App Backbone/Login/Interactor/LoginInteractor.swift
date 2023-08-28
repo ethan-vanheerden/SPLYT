@@ -12,7 +12,6 @@ import Foundation
 enum LoginDomainAction {
     case load
     case toggleCreateAccount(isCreateAccount: Bool)
-    case togglePasswordVisible(isVisible: Bool)
     case updateEmail(newEmail: String)
     case updatePassword(newPassword: String)
     case submit
@@ -23,7 +22,6 @@ enum LoginDomainAction {
 enum LoginDomainResult: Equatable {
     case error
     case loaded(LoginDomain)
-//    case loggedIn
 }
 
 // MARK: - Interactor
@@ -42,8 +40,6 @@ final class LoginInteractor {
             return handleLoad()
         case .toggleCreateAccount(let isCreateAccount):
             return handleToggleCreateAccount(isCreateAccount: isCreateAccount)
-        case .togglePasswordVisible(let isVisible):
-            return handleTogglePasswordVisible(isVisible: isVisible)
         case .updateEmail(let newEmail):
             return handleUpdateEmail(newEmail: newEmail)
         case .updatePassword(let newPassword):
@@ -65,7 +61,6 @@ private extension LoginInteractor {
                                  passwordMessage: Strings.validPasswordMessage,
                                  passwordError: false,
                                  isCreateAccount: false,
-                                 passwordVisible: false,
                                  errorMessage: nil,
                                  canSubmit: false)
         
@@ -77,13 +72,6 @@ private extension LoginInteractor {
         
         domain.isCreateAccount = isCreateAccount
         domain.errorMessage = nil // Reset the error message if there was one
-        return updateDomain(domain: domain)
-    }
-    
-    func handleTogglePasswordVisible(isVisible: Bool) -> LoginDomainResult {
-        guard var domain = savedDomain else { return .error }
-        
-        domain.passwordVisible = isVisible
         return updateDomain(domain: domain)
     }
     

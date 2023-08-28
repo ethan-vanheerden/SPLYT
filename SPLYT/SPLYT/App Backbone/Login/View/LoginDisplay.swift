@@ -18,7 +18,6 @@ struct LoginDisplay: Equatable {
     let passwordMessage: String
     let passwordMessageColor: SplytColor
     let isCreateAccount: Bool
-    let passwordVisible: Bool
     let errorMessage: String?
     let submitButtonEnabled: Bool
 }

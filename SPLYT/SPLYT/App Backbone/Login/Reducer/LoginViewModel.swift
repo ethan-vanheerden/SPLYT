@@ -13,7 +13,6 @@ import Core
 enum LoginViewEvent {
     case load
     case toggleCreateAccount(isCreateAccount: Bool)
-    case togglePasswordVisible(isVisible: Bool)
     case updateEmail(newEmail: String)
     case updatePassword(newPassword: String)
     case submit
@@ -36,8 +35,6 @@ final class LoginViewModel: ViewModel {
             await react(domainAction: .load)
         case .toggleCreateAccount(let isCreateAccount):
             await react(domainAction: .toggleCreateAccount(isCreateAccount: isCreateAccount))
-        case .togglePasswordVisible(let isVisible):
-            await react(domainAction: .togglePasswordVisible(isVisible: isVisible))
         case .updateEmail(let newEmail):
             await react(domainAction: .updateEmail(newEmail: newEmail))
         case .updatePassword(let newPassword):
