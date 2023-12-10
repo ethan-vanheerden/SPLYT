@@ -1,11 +1,14 @@
 import Foundation
+import UserAuth
 
 /// Utility class to build Apple's `URLRequest` in a more convenient way.
 public final class URLRequestBuilder {
-    public var request: URLRequest
+    private var request: URLRequest
+    private let userAuth: UserAuthType
     
-    public init(url: URL) {
+    public init(url: URL, userAuth: UserAuthType) {
         self.request = URLRequest(url: url)
+        self.userAuth = userAuth
     }
     
     /// Returns the built request.
@@ -26,6 +29,14 @@ public final class URLRequestBuilder {
     /// - Returns: The same class instance to make method chaining possible
     public func setJSONContent() -> Self {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        return self
+    }
+    
+    public func setBearerAuth() async -> Self {
+        let token = await userAuth.getAuthToken()
+        if let token = token {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
         return self
     }
 }

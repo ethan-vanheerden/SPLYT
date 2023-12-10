@@ -1,28 +1,21 @@
-//
-//  MockUserAuth.swift
-//  SPLYTTests
-//
-//  Created by Ethan Van Heerden on 8/28/23.
-//
-
-@testable import SPLYT
+import UserAuth
 
 final class MockUserAuth: UserAuthType {
     private(set) var signedIn = true
     
-    var createUserSuccess = true
-    func createUser(email: String, password: String) async -> Bool {
+    public private(set) var createUserSuccess = true
+    public func createUser(email: String, password: String) async -> Bool {
         signedIn = createUserSuccess
         return createUserSuccess
     }
     
-    var loginSuccess = true
-    func login(email: String, password: String) async -> Bool {
+    public private(set) var loginSuccess = true
+    public func login(email: String, password: String) async -> Bool {
         signedIn = loginSuccess
         return loginSuccess
     }
     
-    var logoutSuccess = true
+    public private(set) var logoutSuccess = true
     @discardableResult
     func logout() -> Bool {
         signedIn = logoutSuccess ? false : signedIn
@@ -33,7 +26,7 @@ final class MockUserAuth: UserAuthType {
         completion(signedIn)
     }
     
-    var stubAuthToken = "token"
+    public var stubAuthToken = "token"
     func getAuthToken() async -> String? {
         return stubAuthToken
     }

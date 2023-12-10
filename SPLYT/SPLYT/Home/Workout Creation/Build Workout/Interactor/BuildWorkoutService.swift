@@ -9,11 +9,13 @@ import Foundation
 import Caching
 import ExerciseCore
 import UserSettings
+import Networking
+import UserAuth
 
 // MARK: - Protocol
 
 protocol BuildWorkoutServiceType {
-    func loadAvailableExercises() throws -> [String: AvailableExercise]
+    func loadAvailableExercises() async throws -> [String: AvailableExercise]
     func saveAvailableExercises(_: [AvailableExercise]) throws
     func saveWorkout(_: Workout) throws
 }
@@ -29,21 +31,27 @@ enum BuildWorkoutError: Error {
 struct BuildWorkoutService: BuildWorkoutServiceType  {
     private let cacheInteractor: CacheInteractorType
     private let routineService: CreatedRoutinesServiceType
+    private let apiInteractor: APIInteractorType.Type
     private let userSettings: UserSettings
+    private let userAuth: UserAuthType
     private let currentDate: Date
     private let DAYS_FOR_RESYNC = 1
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
          routineService: CreatedRoutinesServiceType = CreatedRoutinesService(),
+         apiInteractor: APIInteractorType.Type = APIInteractor.self,
          userSettings: UserSettings = UserDefaults.standard,
+         userAuth: UserAuthType = UserAuth(),
          currentDate: Date = Date.now) {
         self.cacheInteractor = cacheInteractor
         self.routineService = routineService
+        self.apiInteractor = apiInteractor
         self.userSettings = userSettings
+        self.userAuth = userAuth
         self.currentDate = currentDate
     }
     
-    func loadAvailableExercises() throws -> [String: AvailableExercise] {
+    func loadAvailableExercises() async throws -> [String: AvailableExercise] {
         // Load from the API if it has been a while
         // If API fails or it has not been a while, load from cache
         // If API call succeeds, update cached copy
@@ -54,8 +62,12 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
               Int(currentDate.timeIntervalSince(lastSynced) / 60 * 60 * 24) < DAYS_FOR_RESYNC else {
             
             do {
+                let request = GetAvailableExercisesRequest(userAuth: userAuth)
+                let exercises = (try await apiInteractor.performRequest(with: request)).responseObject
+                
                 
                 // API call and update sync and cache here
+                // TODO: favorite cascading
                 
             } catch {
                 // If API call failed, just try loading from cache

@@ -131,7 +131,6 @@
 		AA672A912A743CF00009919E /* WorkoutDetailsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A902A743CF00009919E /* WorkoutDetailsServiceTests.swift */; };
 		AA672A932A743F340009919E /* MockWorkoutDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A922A743F340009919E /* MockWorkoutDetailsService.swift */; };
 		AA672A952A7440380009919E /* WorkoutDetailsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A942A7440380009919E /* WorkoutDetailsInteractorTests.swift */; };
-		AA76AABD2A9D028500FEF8D6 /* MockUserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AABC2A9D028500FEF8D6 /* MockUserAuth.swift */; };
 		AA76AABF2A9D044300FEF8D6 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AABE2A9D044300FEF8D6 /* AuthManagerTests.swift */; };
 		AA76AAC12A9D094200FEF8D6 /* LoginServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC02A9D094200FEF8D6 /* LoginServiceTests.swift */; };
 		AA76AAC42A9D09B800FEF8D6 /* LoginFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC32A9D09B800FEF8D6 /* LoginFixtures.swift */; };
@@ -180,7 +179,7 @@
 		AAB42B5C2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */; };
 		AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */; };
 		AAB42B602A7C055F002A1ED2 /* SettingsItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */; };
-		AABE9EBF2B2643CE00B1135A /* URLRequestBuilder+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EBE2B2643CE00B1135A /* URLRequestBuilder+Auth.swift */; };
+		AABE9EC32B264ABA00B1135A /* UserAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AABE9EC22B264ABA00B1135A /* UserAuth */; };
 		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
 		AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */; };
 		AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */; };
@@ -367,7 +366,6 @@
 		AA672A902A743CF00009919E /* WorkoutDetailsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsServiceTests.swift; sourceTree = "<group>"; };
 		AA672A922A743F340009919E /* MockWorkoutDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWorkoutDetailsService.swift; sourceTree = "<group>"; };
 		AA672A942A7440380009919E /* WorkoutDetailsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsInteractorTests.swift; sourceTree = "<group>"; };
-		AA76AABC2A9D028500FEF8D6 /* MockUserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserAuth.swift; sourceTree = "<group>"; };
 		AA76AABE2A9D044300FEF8D6 /* AuthManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		AA76AAC02A9D094200FEF8D6 /* LoginServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceTests.swift; sourceTree = "<group>"; };
 		AA76AAC32A9D09B800FEF8D6 /* LoginFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFixtures.swift; sourceTree = "<group>"; };
@@ -419,7 +417,7 @@
 		AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsReducerTests.swift; sourceTree = "<group>"; };
 		AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsViewModelTests.swift; sourceTree = "<group>"; };
 		AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemTests.swift; sourceTree = "<group>"; };
-		AABE9EBE2B2643CE00B1135A /* URLRequestBuilder+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilder+Auth.swift"; sourceTree = "<group>"; };
+		AABE9EC12B2645CC00B1135A /* UserAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UserAuth; path = ../../../UserAuth; sourceTree = "<group>"; };
 		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
 		AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformerTests.swift; sourceTree = "<group>"; };
 		AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -478,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA60DA01294B7FA0008C7615 /* Caching in Frameworks */,
+				AABE9EC32B264ABA00B1135A /* UserAuth in Frameworks */,
 				AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */,
 				AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */,
 				AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */,
@@ -652,7 +651,6 @@
 			children = (
 				AA2B26172A8D166E0001E79A /* UserAuth.swift */,
 				AADC84292A97B97300FA334C /* AuthManager.swift */,
-				AABE9EBE2B2643CE00B1135A /* URLRequestBuilder+Auth.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -729,6 +727,7 @@
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AABE9EC12B2645CC00B1135A /* UserAuth */,
 				AA116FD82A77FE5D00E68852 /* UserSettings */,
 				AAD8704729C3C99A00540608 /* ExerciseCore */,
 				AA893139294A4FA600D7B4B1 /* Caching */,
@@ -1211,7 +1210,6 @@
 		AA76AABB2A9D026600FEF8D6 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				AA76AABC2A9D028500FEF8D6 /* MockUserAuth.swift */,
 				AA8511C42A9D3D71002D1EED /* MockAuthManager.swift */,
 			);
 			path = Mocks;
@@ -1857,6 +1855,7 @@
 				AA2B25FF2A7F2F430001E79A /* FirebaseAuth */,
 				AA2B26012A7F2F430001E79A /* FirebaseCrashlytics */,
 				AA2B26032A7F2F430001E79A /* FirebaseFunctions */,
+				AABE9EC22B264ABA00B1135A /* UserAuth */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -2004,7 +2003,6 @@
 				AAB42B272A795777002A1ED2 /* SettingsViewFactory.swift in Sources */,
 				AA2C24582A3F747B004FC939 /* BuildPlanViewModel.swift in Sources */,
 				AA2C24482A3CBE77004FC939 /* NameWorkoutViewState.swift in Sources */,
-				AABE9EBF2B2643CE00B1135A /* URLRequestBuilder+Auth.swift in Sources */,
 				AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */,
 				AAEBFCF02957FB5F00D284F0 /* HomeReducer.swift in Sources */,
 				AA60DA0D2956AFC1008C7615 /* HomeDisplay.swift in Sources */,
@@ -2118,7 +2116,6 @@
 				AAEBFCF9295E3EC400D284F0 /* HomeViewModelTests.swift in Sources */,
 				AA672A852A6B583B0009919E /* HistoryReducerTests.swift in Sources */,
 				AAB42B452A7AEE46002A1ED2 /* SettingsFixtures.swift in Sources */,
-				AA76AABD2A9D028500FEF8D6 /* MockUserAuth.swift in Sources */,
 				AAB42B432A7AEE09002A1ED2 /* SettingsInteractorTests.swift in Sources */,
 				AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */,
 				AAF0FB382989B9C100167B02 /* BuildWorkoutServiceTests.swift in Sources */,
@@ -2494,6 +2491,10 @@
 		AA60DA00294B7FA0008C7615 /* Caching */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Caching;
+		};
+		AABE9EC22B264ABA00B1135A /* UserAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UserAuth;
 		};
 		AAD8704829C3C9D500540608 /* ExerciseCore */ = {
 			isa = XCSwiftPackageProductDependency;

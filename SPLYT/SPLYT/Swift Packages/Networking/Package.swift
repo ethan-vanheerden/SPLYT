@@ -11,11 +11,13 @@ let package = Package(
             targets: ["Networking"]),
     ],
     dependencies: [
+        .package(path: "../UserAuth")
     ],
     targets: [
         .target(
             name: "Networking",
             dependencies: [
+                "UserAuth"
             ]),
         .testTarget(
             name: "NetworkingTests",
