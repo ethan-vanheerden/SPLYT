@@ -38,7 +38,6 @@ struct RestPresetsService: RestPresetsServiceType {
         guard let presets = presets as? [Int] else {
             // If not found, save the starting presets
             updatePresets(newPresets: fallbackPresets)
-            
             return fallbackPresets
         }
         

@@ -2,7 +2,7 @@ import Foundation
 
 /// Utility class to build Apple's `URLRequest` in a more convenient way.
 public final class URLRequestBuilder {
-    private var request: URLRequest
+    public var request: URLRequest
     
     public init(url: URL) {
         self.request = URLRequest(url: url)
