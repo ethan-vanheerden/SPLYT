@@ -180,6 +180,8 @@
 		AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */; };
 		AAB42B602A7C055F002A1ED2 /* SettingsItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */; };
 		AABE9EC32B264ABA00B1135A /* UserAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AABE9EC22B264ABA00B1135A /* UserAuth */; };
+		AABE9EC52B27999700B1135A /* GetFavoriteExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */; };
+		AABE9EC82B27A0A600B1135A /* PostFavoriteExerciseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC72B27A0A600B1135A /* PostFavoriteExerciseRequest.swift */; };
 		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
 		AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */; };
 		AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */; };
@@ -418,6 +420,8 @@
 		AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsViewModelTests.swift; sourceTree = "<group>"; };
 		AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemTests.swift; sourceTree = "<group>"; };
 		AABE9EC12B2645CC00B1135A /* UserAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UserAuth; path = ../../../UserAuth; sourceTree = "<group>"; };
+		AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteExercisesRequest.swift; sourceTree = "<group>"; };
+		AABE9EC72B27A0A600B1135A /* PostFavoriteExerciseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoriteExerciseRequest.swift; sourceTree = "<group>"; };
 		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
 		AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformerTests.swift; sourceTree = "<group>"; };
 		AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -1493,6 +1497,15 @@
 			path = Reducer;
 			sourceTree = "<group>";
 		};
+		AABE9EC62B27A09100B1135A /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */,
+				AABE9EC72B27A0A600B1135A /* PostFavoriteExerciseRequest.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		AACB29702A1556F200AACB6B /* Do Workout */ = {
 			isa = PBXGroup;
 			children = (
@@ -1592,6 +1605,7 @@
 		AADEC4B128A8398F00A5463B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AABE9EC62B27A09100B1135A /* Favorites */,
 				AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */,
 			);
 			path = Networking;
@@ -1954,6 +1968,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA1786E42A91145400563B04 /* LoginReducer.swift in Sources */,
+				AABE9EC82B27A0A600B1135A /* PostFavoriteExerciseRequest.swift in Sources */,
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
 				AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */,
 				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
@@ -1977,6 +1992,7 @@
 				AA2C24502A3CC16A004FC939 /* NameWorkoutReducer.swift in Sources */,
 				AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */,
 				AACB297B2A1557C400AACB6B /* DoWorkoutDomain.swift in Sources */,
+				AABE9EC52B27999700B1135A /* GetFavoriteExercisesRequest.swift in Sources */,
 				AAB42B332A79A59E002A1ED2 /* RestPresetsViewModel.swift in Sources */,
 				AA60DA092952183F008C7615 /* HomeViewState.swift in Sources */,
 				AA2C24562A3F72FB004FC939 /* BuildPlanService.swift in Sources */,

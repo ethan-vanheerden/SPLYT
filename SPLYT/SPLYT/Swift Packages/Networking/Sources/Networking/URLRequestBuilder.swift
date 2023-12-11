@@ -39,4 +39,14 @@ public final class URLRequestBuilder {
         }
         return self
     }
+    
+    public func setBody(_ body: Encodable) -> Self {
+        do {
+            let jsonData = try JSONEncoder().encode(body)
+            request.httpBody = jsonData
+            return self
+        } catch {
+            return self
+        }
+    }
 }
