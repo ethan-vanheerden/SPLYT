@@ -12,7 +12,7 @@ import UserAuth
 
 /// Gets a list of all of the exercises that the user is able to do.
 struct GetAvailableExercisesRequest: NetworkRequest {
-    typealias Response = [AvailableExercise]
+    typealias Response = GetAvailableExercisesResponse
     private let userAuth: UserAuthType
     
     init(userAuth: UserAuthType = UserAuth()) {
@@ -27,4 +27,8 @@ struct GetAvailableExercisesRequest: NetworkRequest {
             .setBearerAuth()
             .build()
     }
+}
+
+struct GetAvailableExercisesResponse: Codable {
+    let exercises: [AvailableExercise]
 }

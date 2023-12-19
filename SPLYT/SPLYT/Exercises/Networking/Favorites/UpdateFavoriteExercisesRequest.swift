@@ -1,5 +1,5 @@
 //
-//  PostFavoriteExerciseRequest.swift
+//  UpdateFavoriteExerciseRequest.swift
 //  SPLYT
 //
 //  Created by Ethan Van Heerden on 12/11/23.
@@ -9,20 +9,20 @@ import Foundation
 import Networking
 import UserAuth
 
-/// Toggles favorite for an exercise for the user
-struct PostFavoriteExerciseRequest: NetworkRequest {
-    typealias Response = PostFavoriteExerciseResponse
-    private let requestBody: PostFavoriteExerciseRequestBody
+/// Toggles favorite for an exercise for the user.
+struct UpdateFavoriteExerciseRequest: NetworkRequest {
+    typealias Response = FavoriteExercisesResponse
+    private let requestBody: UpdateFavoriteExerciseRequestBody
     private let userAuth: UserAuthType
     
-    init(requestBody: PostFavoriteExerciseRequestBody,
+    init(requestBody: UpdateFavoriteExerciseRequestBody,
          userAuth: UserAuthType = UserAuth()) {
         self.requestBody = requestBody
         self.userAuth = userAuth
     }
     
     func createRequest() async -> URLRequest {
-        let url = URL(string: "TODO")!
+        let url = URL(string: "https://favorites-2iropnvq6q-uc.a.run.app")!
         return await URLRequestBuilder(url: url, userAuth: userAuth)
             .setHTTPMethod(.post)
             .setJSONContent()
@@ -32,16 +32,7 @@ struct PostFavoriteExerciseRequest: NetworkRequest {
     }
 }
 
-struct PostFavoriteExerciseRequestBody: Codable {
+struct UpdateFavoriteExerciseRequestBody: Codable {
     let exerciseId: String
     let isFavorite: Bool
-    
-    private enum CodingKeys: String, CodingKey {
-        case exerciseId = "exercise_id"
-        case isFavorite = "is_favorite"
-    }
-}
-
-struct PostFavoriteExerciseResponse: Codable {
-    let success: Bool
 }
