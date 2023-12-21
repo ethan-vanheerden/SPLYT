@@ -1,22 +1,22 @@
 //
-//  GetAvailableExercisesRequestTests.swift
+//  GetFavoriteExercisesRequestTests.swift
 //  SPLYTTests
 //
-//  Created by Ethan Van Heerden on 8/13/22.
+//  Created by Ethan Van Heerden on 12/21/23.
 //
 
 import XCTest
 @testable import SPLYT
-import Networking
 import Mocking
+import Networking
 
-final class GetAvailableExercisesRequestsTests: XCTestCase {
+final class GetFavoriteExercisesRequestTests: XCTestCase {
     private var mockUserAuth: MockUserAuth!
-    private var sut: GetAvailableExercisesRequest!
-    
-    override func setUp() async throws {
+    private var sut: GetFavoriteExercisesRequest!
+
+    override func setUpWithError() throws {
         self.mockUserAuth = MockUserAuth()
-        self.sut = GetAvailableExercisesRequest(userAuth: mockUserAuth)
+        self.sut = GetFavoriteExercisesRequest(userAuth: mockUserAuth)
     }
     
     func testCreateRequest() async throws {
@@ -25,7 +25,7 @@ final class GetAvailableExercisesRequestsTests: XCTestCase {
             "Authorization": "Bearer \(mockUserAuth.stubAuthToken)"
         ]
         
-        let url = try XCTUnwrap(URL(string: "https://exercises-2iropnvq6q-uc.a.run.app"))
+        let url = try XCTUnwrap(URL(string: "https://favorites-2iropnvq6q-uc.a.run.app"))
         var expected = URLRequest(url: url)
         expected.httpMethod = HTTPMethod.get.rawValue
         expected.allHTTPHeaderFields = expectedHeaders

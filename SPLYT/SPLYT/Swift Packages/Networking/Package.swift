@@ -11,7 +11,8 @@ let package = Package(
             targets: ["Networking"]),
     ],
     dependencies: [
-        .package(path: "../UserAuth")
+        .package(path: "../UserAuth"),
+        .package(path: "../Mocking")
     ],
     targets: [
         .target(
@@ -22,7 +23,8 @@ let package = Package(
         .testTarget(
             name: "NetworkingTests",
             dependencies: [
-                "Networking"
+                "Networking",
+                "Mocking"
             ]),
     ]
 )

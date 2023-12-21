@@ -576,11 +576,11 @@ final class BuildWorkoutInteractorTests: XCTestCase {
     
     func testInteract_ToggleFavorite_ServiceError_Error() async {
         await loadExercises()
-        mockService.saveExercisesThrow = true
+        mockService.toggleFavoriteThrow = true
         let result = await sut.interact(with: .toggleFavorite(exerciseId: WorkoutFixtures.backSquatId))
         
         XCTAssertEqual(result, .error)
-        XCTAssertTrue(mockService.saveExercisesCalled)
+        XCTAssertTrue(mockService.toggleFavoriteCalled)
     }
     
     func testInteract_ToggleFavorite_SelectFavorite_Success() async {
@@ -604,6 +604,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                 canSave: false)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
+        XCTAssertTrue(mockService.toggleFavoriteCalled)
     }
     
     func testInteract_ToggleFavorite_DeselectFavorite_Success() async {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA0F8EB12B32212600B88C02 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB02B32212600B88C02 /* TestUtils.swift */; };
+		AA0F8EB42B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB32B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift */; };
+		AA0F8EB62B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB52B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift */; };
 		AA116FDA2A77FE7800E68852 /* UserSettings in Frameworks */ = {isa = PBXBuildFile; productRef = AA116FD92A77FE7800E68852 /* UserSettings */; };
 		AA116FE22A78493F00E68852 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE12A78493F00E68852 /* SettingsInteractor.swift */; };
 		AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA116FE32A78495C00E68852 /* SettingsDomain.swift */; };
@@ -246,6 +249,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA0F8EB02B32212600B88C02 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		AA0F8EB32B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteExercisesRequestTests.swift; sourceTree = "<group>"; };
+		AA0F8EB52B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFavoriteExercisesRequestTests.swift; sourceTree = "<group>"; };
 		AA116FD82A77FE5D00E68852 /* UserSettings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserSettings; sourceTree = "<group>"; };
 		AA116FE12A78493F00E68852 /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
 		AA116FE32A78495C00E68852 /* SettingsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDomain.swift; sourceTree = "<group>"; };
@@ -505,6 +511,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA0F8EB22B349D4C00B88C02 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				AA0F8EB32B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift */,
+				AA0F8EB52B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		AA116FDB2A7848DB00E68852 /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1272,6 +1287,7 @@
 		AA825D4A287238CB0041D94A /* SPLYTTests */ = {
 			isa = PBXGroup;
 			children = (
+				AA0F8EB02B32212600B88C02 /* TestUtils.swift */,
 				AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */,
 				AA93403C2888826400309E83 /* App Backbone */,
 				AA76AABA2A9D024F00FEF8D6 /* Auth */,
@@ -1622,6 +1638,7 @@
 		AADEC4B728A8426600A5463B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AA0F8EB22B349D4C00B88C02 /* Favorites */,
 				AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */,
 			);
 			path = Networking;
@@ -2105,6 +2122,8 @@
 				AAF0FB3D298ABBA900167B02 /* BuildWorkoutFixtures.swift in Sources */,
 				AA5073AC2A6387F400F0BAD2 /* DoPlanServiceTests.swift in Sources */,
 				AA2B26072A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
+				AA0F8EB42B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift in Sources */,
+				AA0F8EB12B32212600B88C02 /* TestUtils.swift in Sources */,
 				AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */,
 				AA5073AE2A638A7100F0BAD2 /* MockDoPlanService.swift in Sources */,
 				AAF0FB41298AD30300167B02 /* MockBuildWorkoutService.swift in Sources */,
@@ -2168,6 +2187,7 @@
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,
 				AAB42B582A7BF5AA002A1ED2 /* MockRestPresetsService.swift in Sources */,
 				AA8511BE2A9D13DF002D1EED /* LoginReducerTests.swift in Sources */,
+				AA0F8EB62B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift in Sources */,
 				AAF0FB3F298AC0BB00167B02 /* BuildWorkoutInteractorTests.swift in Sources */,
 				AA8511CD2A9D4831002D1EED /* MockSettingsService.swift in Sources */,
 				AA2C243F2A37B2D8004FC939 /* DoWorkoutNavigationRouterTests.swift in Sources */,

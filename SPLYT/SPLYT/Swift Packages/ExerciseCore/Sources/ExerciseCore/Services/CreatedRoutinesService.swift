@@ -5,12 +5,12 @@ import Caching
 
 /// Operations needed with a user's created routines.
 public protocol CreatedRoutinesServiceType {
-    /// Routine actions
+    /// Actions for all routines
     func loadRoutines() throws -> CreatedRoutines
     
     func saveRoutines(_: CreatedRoutines) throws
     
-    /// Workout actions
+    /// Workout-specific actions
     
     /// Loads the workout with the given id.
     /// - Parameters:

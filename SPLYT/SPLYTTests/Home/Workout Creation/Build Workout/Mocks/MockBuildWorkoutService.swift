@@ -14,16 +14,16 @@ final class MockBuildWorkoutService: BuildWorkoutServiceType {
     typealias Fixtures = BuildWorkoutFixtures
     
     var loadExercisesThrow = false
-    func loadAvailableExercises() throws -> [String: AvailableExercise] {
+    func loadAvailableExercises() async throws -> [String: AvailableExercise] {
         if loadExercisesThrow { throw MockError.someError }
         return Fixtures.loadedExercisesNoneSelectedMap
     }
     
-    private(set) var saveExercisesCalled = false
-    var saveExercisesThrow = false
-    func saveAvailableExercises(_: [AvailableExercise]) throws {
-        saveExercisesCalled = true
-        if saveExercisesThrow { throw MockError.someError }
+    private(set) var toggleFavoriteCalled = false
+    var toggleFavoriteThrow = false
+    func toggleFavorite(exerciseId: String, isFavorite: Bool) async throws {
+        toggleFavoriteCalled = true
+        if toggleFavoriteThrow { throw MockError.someError }
     }
     
     private(set) var saveWorkoutCalled = false
