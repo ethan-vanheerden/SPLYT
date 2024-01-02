@@ -27,7 +27,7 @@ protocol BuildWorkoutServiceType {
     
     /// Saves the given workout.
     /// - Parameter workout: The workout to save
-    func saveWorkout(_ workoiut: Workout) throws
+    func saveWorkout(_ workout: Workout) throws
 }
 
 // MARK: - Errors
@@ -75,9 +75,7 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
                 let exercisesRequest = GetAvailableExercisesRequest(userAuth: userAuth)
                 let favoritesRequest = GetFavoriteExercisesRequest(userAuth: userAuth)
                 
-                print("Fetching exercises...")
                 let exercisesResponse = try await apiInteractor.performRequest(with: exercisesRequest)
-                print("Fetching favorites...")
                 let favoritesResponse = try await apiInteractor.performRequest(with: favoritesRequest)
                 
                 var exerciseMap = mapExercises(exercisesResponse.exercises)
@@ -127,7 +125,6 @@ private extension BuildWorkoutService {
         // First check if the user has the cached AvailableExercise file yet
         if !(try cacheInteractor.fileExists(request: request)) {
             
-            print("Loading fallback file")
             // Save the fallback file
             guard let url = Bundle.main.url(forResource: "fallback_exercises", withExtension: "json") else {
                 throw BuildWorkoutError.fallbackFileNotFound

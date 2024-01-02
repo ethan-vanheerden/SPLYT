@@ -93,7 +93,6 @@ final class BuildWorkoutServiceTests: XCTestCase {
         XCTAssertTrue(mockAPIInteractor.called)
         XCTAssertTrue(cacheInteractor.saveCalled)
         XCTAssertNotNil(mockUserSettings.mockDefaults[.lastSyncedExercises])
-    
     }
     
     func testLoadExercises_SyncDateExpired_NetworkCall() async throws {
@@ -133,7 +132,6 @@ final class BuildWorkoutServiceTests: XCTestCase {
         XCTAssertFalse(mockAPIInteractor.called)
         XCTAssertFalse(cacheInteractor.saveCalled)
         XCTAssertEqual(mockUserSettings.mockDefaults[.lastSyncedExercises] as! Date, WorkoutFixtures.dec_27_2022_1000)
-    
     }
     
     func testLoadExercises_NoSync_FileNoExist_LoadsAndSavesFallback_ErrorSaving() async throws {
@@ -189,10 +187,6 @@ final class BuildWorkoutServiceTests: XCTestCase {
         ]
 
         try await sut.toggleFavorite(exerciseId: "id", isFavorite: true)
-        let exerciseMap = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: true)
-        ]
-        
         
         XCTAssertTrue(mockAPIInteractor.called)
         XCTAssertTrue(cacheInteractor.saveCalled)
