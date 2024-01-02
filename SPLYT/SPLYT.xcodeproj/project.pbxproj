@@ -207,6 +207,7 @@
 		AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */ = {isa = PBXBuildFile; productRef = AAD8704829C3C9D500540608 /* ExerciseCore */; };
 		AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADC84292A97B97300FA334C /* AuthManager.swift */; };
 		AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */ = {isa = PBXBuildFile; productRef = AADCABDE288895AC00FF09B9 /* Mocking */; };
+		AADCB7572B3F496D008C4012 /* MockAPIInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCB7562B3F496D008C4012 /* MockAPIInteractor.swift */; };
 		AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */; };
 		AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */; };
 		AADEC4B928A8428900A5463B /* GetAvailableExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */; };
@@ -450,6 +451,7 @@
 		AAD8704729C3C99A00540608 /* ExerciseCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ExerciseCore; sourceTree = "<group>"; };
 		AADC84292A97B97300FA334C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AADCABDD2888946F00FF09B9 /* Mocking */ = {isa = PBXFileReference; lastKnownFileType = text; name = Mocking; path = SPLYTTests/Settings/Mocking; sourceTree = SOURCE_ROOT; };
+		AADCB7562B3F496D008C4012 /* MockAPIInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIInteractor.swift; sourceTree = "<group>"; };
 		AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutServiceTests.swift; sourceTree = "<group>"; };
 		AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequest.swift; sourceTree = "<group>"; };
 		AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequestTests.swift; sourceTree = "<group>"; };
@@ -1287,6 +1289,7 @@
 		AA825D4A287238CB0041D94A /* SPLYTTests */ = {
 			isa = PBXGroup;
 			children = (
+				AADCB7552B3F494A008C4012 /* Mocks */,
 				AA0F8EB02B32212600B88C02 /* TestUtils.swift */,
 				AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */,
 				AA93403C2888826400309E83 /* App Backbone */,
@@ -1561,6 +1564,14 @@
 				AACB29762A15576700AACB6B /* DoWorkoutReducer.swift */,
 			);
 			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AADCB7552B3F494A008C4012 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AADCB7562B3F496D008C4012 /* MockAPIInteractor.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		AADCC9B12A36319400B45827 /* Workout Completion */ = {
@@ -2128,6 +2139,7 @@
 				AA5073AE2A638A7100F0BAD2 /* MockDoPlanService.swift in Sources */,
 				AAF0FB41298AD30300167B02 /* MockBuildWorkoutService.swift in Sources */,
 				AAB42B4B2A7AF0DF002A1ED2 /* SettingsNavigationControllerTests.swift in Sources */,
+				AADCB7572B3F496D008C4012 /* MockAPIInteractor.swift in Sources */,
 				AAE79AF4296E12350010848E /* NameWorkoutViewModelTests.swift in Sources */,
 				AAD074EC2A74481900451C64 /* WorkoutDetailsFixtures.swift in Sources */,
 				AA672A8F2A743C140009919E /* HomeNavigationControllerTests.swift in Sources */,

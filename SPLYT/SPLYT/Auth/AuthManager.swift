@@ -25,9 +25,9 @@ final class AuthManager: AuthManagerType {
         self.userAuth = userAuth
         userAuth.isUserSignedIn { [weak self] isSignedIn in
             self?.isAuthenticated = isSignedIn
-            Task {
-                print("Bearer token", await userAuth.getAuthToken())
-            }
+//            Task {
+//                print("Bearer token", await userAuth.getAuthToken())
+//            }
         }
     }
 }

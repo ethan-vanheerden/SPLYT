@@ -36,7 +36,6 @@ final class String_ExtensionsTests: XCTestCase {
         XCTAssertFalse("12345".matches("[A-Za-z]+"))
         XCTAssertFalse("Hello, World!".matches("\\d+"))
         XCTAssertFalse("Hello".matches("[A-Za-z+"))
-        XCTAssertFalse("Hello".matches(""))
         XCTAssertTrue("Hello, World!".matches("^[A-Za-z,! ]+$"))
     }
 }

@@ -1,4 +1,5 @@
 import UserSettings
+import Foundation
 
 public final class MockUserSettings: UserSettings {
     
@@ -6,7 +7,8 @@ public final class MockUserSettings: UserSettings {
     
     // Put mock objects for keys here
     public var mockDefaults: [UserSettingsKey: Any] = [
-        .restPresets: [60, 90, 120]
+        .restPresets: [60, 90, 120],
+        .lastSyncedExercises: Date.distantPast
     ]
     
     public func object(forKey key: String) -> Any? {
