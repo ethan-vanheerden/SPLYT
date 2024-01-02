@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import UserAuth
 
 // MARK: - Protocol
 
@@ -24,6 +25,9 @@ final class AuthManager: AuthManagerType {
         self.userAuth = userAuth
         userAuth.isUserSignedIn { [weak self] isSignedIn in
             self?.isAuthenticated = isSignedIn
+//            Task {
+//                print("Bearer token", await userAuth.getAuthToken())
+//            }
         }
     }
 }

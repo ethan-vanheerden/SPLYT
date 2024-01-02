@@ -5,8 +5,8 @@ public protocol APIInteractorType {
     
     /// Performs an API request.
     /// - Parameter with: The request to perform
-    /// - Returns: A `NetworkReponse` for the request, or throws
-    static func performRequest<R: NetworkRequest>(with: R) async throws -> NetworkResponse<R>
+    /// - Returns: The response object for the request, or throws
+    static func performRequest<R: NetworkRequest>(with: R) async throws -> R.Response
 }
 
 
@@ -14,10 +14,11 @@ public protocol APIInteractorType {
 // MARK: - Implementation
 
 public struct APIInteractor: APIInteractorType {
-    public static func performRequest<R: NetworkRequest>(with request: R) async throws -> NetworkResponse<R> {
+    public init() {}
+
+    public static func performRequest<R: NetworkRequest>(with request: R) async throws -> R.Response {
         /// Can do better error handling here if needed
-        let response = try await URLSession.shared.data(for: request.createRequest())
-        let object = try JSONDecoder().decode(R.Response.self, from: response.0)
-        return NetworkResponse(responseObject: object, statusCode: response.1)
+        let responseJson = try await URLSession.shared.data(for: request.createRequest())
+        return try JSONDecoder().decode(R.Response.self, from: responseJson.0)
     }
 }

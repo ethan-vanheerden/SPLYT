@@ -13,7 +13,8 @@ let package = Package(
     dependencies: [
         .package(path: "../Core"),
         .package(path: "../Caching"),
-        .package(path: "../UserSettings")
+        .package(path: "../UserSettings"),
+        .package(path: "../UserAuth")
     ],
     targets: [
         .target(
@@ -21,7 +22,8 @@ let package = Package(
             dependencies: [
                 "Core",
                 "Caching",
-                "UserSettings"
+                "UserSettings",
+                "UserAuth"
             ]),
         .testTarget(
             name: "MockingTests",

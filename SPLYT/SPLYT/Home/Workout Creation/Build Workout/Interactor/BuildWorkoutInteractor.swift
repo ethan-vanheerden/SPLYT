@@ -61,7 +61,7 @@ final class BuildWorkoutInteractor {
     func interact(with action: BuildWorkoutDomainAction) async -> BuildWorkoutDomainResult {
         switch action {
         case .loadExercises:
-            return handleLoadExercises()
+            return await handleLoadExercises()
         case .addGroup:
             return handleAddGroup()
         case .removeGroup(let index):
@@ -75,7 +75,7 @@ final class BuildWorkoutInteractor {
         case let .updateSet(group, exerciseIndex, setIndex, newInput):
             return handleUpdateSet(group: group, exerciseIndex: exerciseIndex, setIndex: setIndex, with: newInput)
         case .toggleFavorite(let exerciseId):
-            return handleToggleFavorite(exerciseId: exerciseId)
+            return await handleToggleFavorite(exerciseId: exerciseId)
         case .switchGroup(let group):
             return handleSwitchGroup(to: group)
         case .save:
@@ -100,9 +100,9 @@ final class BuildWorkoutInteractor {
 
 private extension BuildWorkoutInteractor {
     
-    func handleLoadExercises() -> BuildWorkoutDomainResult {
+    func handleLoadExercises() async -> BuildWorkoutDomainResult {
         do {
-            let exercises = try service.loadAvailableExercises()
+            let exercises = try await service.loadAvailableExercises()
             allExercises = exercises
             let startingGroup = [ExerciseGroup(exercises: [])]
             let workoutId = WorkoutInteractor.getId(name: nameState.name,
@@ -273,7 +273,7 @@ private extension BuildWorkoutInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleToggleFavorite(exerciseId: String) -> BuildWorkoutDomainResult {
+    func handleToggleFavorite(exerciseId: String) async -> BuildWorkoutDomainResult {
         guard let domain = savedDomain,
               var exercises = allExercises,
               var exercise = exercises[exerciseId] else { return .error }
@@ -286,7 +286,7 @@ private extension BuildWorkoutInteractor {
         // Save the changes
         do {
             allExercises = exercises
-            try service.saveAvailableExercises(Array(exercises.values))
+            try await service.toggleFavorite(exerciseId: exerciseId, isFavorite: isFavorite)
         } catch {
             return .error
         }

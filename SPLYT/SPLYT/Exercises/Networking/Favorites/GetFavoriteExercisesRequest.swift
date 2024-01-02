@@ -1,18 +1,18 @@
 //
-//  GetAvailableExercisesRequest.swift
+//  GetFavoriteExercisesRequest.swift
 //  SPLYT
 //
-//  Created by Ethan Van Heerden on 8/13/22.
+//  Created by Ethan Van Heerden on 12/11/23.
 //
 
 import Foundation
-import Networking
 import ExerciseCore
+import Networking
 import UserAuth
 
-/// Gets a list of all of the exercises that the user is able to do.
-struct GetAvailableExercisesRequest: NetworkRequest {
-    typealias Response = GetAvailableExercisesResponse
+/// Gets the exercise IDs that the user has favorited.
+struct GetFavoriteExercisesRequest: NetworkRequest {
+    typealias Response = FavoriteExercisesResponse
     private let userAuth: UserAuthType
     
     init(userAuth: UserAuthType = UserAuth()) {
@@ -20,7 +20,7 @@ struct GetAvailableExercisesRequest: NetworkRequest {
     }
     
     func createRequest() async -> URLRequest {
-        let url = URL(string: "https://exercises-2iropnvq6q-uc.a.run.app")!
+        let url = URL(string: "https://favorites-2iropnvq6q-uc.a.run.app")!
         return await URLRequestBuilder(url: url, userAuth: userAuth)
             .setHTTPMethod(.get)
             .setJSONContent()
@@ -29,6 +29,6 @@ struct GetAvailableExercisesRequest: NetworkRequest {
     }
 }
 
-struct GetAvailableExercisesResponse: Codable {
-    let exercises: [AvailableExercise]
+struct FavoriteExercisesResponse: Codable {
+    let userFavorites: [String]
 }

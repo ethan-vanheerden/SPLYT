@@ -13,6 +13,12 @@ import DesignSystem
 struct BuildWorkoutFixtures {
     typealias WorkoutFixtures = WorkoutModelFixtures
     
+    // MARK: - Network Responses
+    
+    static let availableExerciseResponse: GetAvailableExercisesResponse = .init(exercises: loadedExercisesNoneSelected)
+    
+    static let favoritesResponse: FavoriteExercisesResponse = .init(userFavorites: [WorkoutFixtures.backSquatId])
+    
     // MARK: - Domain
     
     static func backSquatAvailable(isSelected: Bool, isFavorite: Bool) -> AvailableExercise {
@@ -52,6 +58,10 @@ struct BuildWorkoutFixtures {
         WorkoutFixtures.backSquatId: backSquatAvailable(isSelected: false, isFavorite: false),
         WorkoutFixtures.benchPressId: benchPressAvailable(isSelected: false, isFavorite: false),
         WorkoutFixtures.inclineRowId: inclineDBRowAvailable(isSelected: false, isFavorite: false)
+    ]
+    
+    static let backSquatNoneSelectedMap: [String: AvailableExercise] = [
+        WorkoutFixtures.backSquatId: backSquatAvailable(isSelected: false, isFavorite: false)
     ]
     
     static let workoutName = "Test Workout"

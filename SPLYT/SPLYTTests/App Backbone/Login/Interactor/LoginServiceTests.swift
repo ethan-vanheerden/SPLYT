@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import SPLYT
+import Mocking
 
 final class LoginServiceTests: XCTestCase {
     typealias Fixtures = LoginFixtures

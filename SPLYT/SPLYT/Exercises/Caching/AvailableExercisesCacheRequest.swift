@@ -9,6 +9,6 @@ import Caching
 import ExerciseCore
 
 struct AvailableExercisesCacheRequest: CacheRequest {
-    typealias CacheData = [AvailableExercise]
+    typealias CacheData = [String: AvailableExercise]
     let filename: String = "available_exercises"
 }

@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import SPLYT
+import Mocking
 
 final class SettingsServiceTests: XCTestCase {
     private var mockUserAuth: MockUserAuth!

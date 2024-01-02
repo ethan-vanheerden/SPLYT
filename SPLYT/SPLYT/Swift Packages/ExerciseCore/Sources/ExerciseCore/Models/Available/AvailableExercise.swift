@@ -12,14 +12,14 @@ public struct AvailableExercise: Codable, Equatable {
     public let id: String
     public let name: String
     public let musclesWorked: [MusclesWorked]
-    public var isFavorite: Bool
+    public var isFavorite: Bool = false
     public let defaultInputType: SetInput
     public var isSelected = false
     
     public init(id: String,
                 name: String,
                 musclesWorked: [MusclesWorked],
-                isFavorite: Bool,
+                isFavorite: Bool = false,
                 defaultInputType: SetInput,
                 isSelected: Bool = false) {
         self.id = id
@@ -29,7 +29,19 @@ public struct AvailableExercise: Codable, Equatable {
         self.defaultInputType = defaultInputType
         self.isSelected = isSelected
     }
-
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.id = try container.decode(String.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.musclesWorked = try container.decode([MusclesWorked].self, forKey: .musclesWorked)
+        self.defaultInputType = try container.decode(SetInput.self, forKey: .defaultInputType)
+        
+        // Cache request has the is_favorite field, the network request doesn't
+        self.isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case name
