@@ -40,61 +40,38 @@ public struct AddExerciseTile: View {
     
     @ViewBuilder
     private var selection: some View {
-        Image(systemName: "checkmark.circle.fill")
-            .foregroundColor(Color(splytColor: .lightBlue))
+        HStack {
+            ForEach(viewState.selectedGroups, id: \.hashValue) { groupNumber in
+                ZStack {
+                    Circle()
+                        .fill(Color(splytColor: .lightBlue))
+                        .frame(width: Layout.size(1), height: Layout.size(1))
+                    Text("\(groupNumber + 1)")
+                        .footnote()
+                        .foregroundStyle(Color(splytColor: .white))
+                }
+            }
             .padding(.trailing, Layout.size(2))
-            .isVisible(viewState.isSelected)
+        }
     }
 }
 
 // MARK: - View State
 
-public struct AddExerciseTileViewState: Equatable, Hashable {
+public struct AddExerciseTileViewState: Equatable, Hashable
+{
     public let id: String
     public let exerciseName: String
-    let isSelected: Bool
+    let selectedGroups: [Int]
     let isFavorite: Bool
     
     public init(id: String,
                 exerciseName: String,
-                isSelected: Bool,
+                selectedGroups: [Int],
                 isFavorite: Bool) {
         self.id = id
         self.exerciseName = exerciseName
-        self.isSelected = isSelected
+        self.selectedGroups = selectedGroups
         self.isFavorite = isFavorite
-    }
-}
-
-struct AddExerciseTile_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id1",
-                                                                exerciseName: "BACK SQUAT",
-                                                                isSelected: false,
-                                                                isFavorite: false),
-                            tapAction: { },
-                            favoriteAction: { })
-            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id2",
-                                                                exerciseName: "BENCH PRESS",
-                                                                isSelected: true,
-                                                                isFavorite: false),
-                            tapAction: { },
-                            favoriteAction: { })
-            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id3",
-                                                                exerciseName: "POWER CLEAN",
-                                                                isSelected: false,
-                                                                isFavorite: true),
-                            tapAction: { },
-                            favoriteAction: { })
-            AddExerciseTile(viewState: AddExerciseTileViewState(id: "id4",
-                                                                exerciseName: "LAT PULLDOWN",
-                                                                isSelected: true,
-                                                                isFavorite: true),
-                            tapAction: { },
-                            favoriteAction: { })
-            Spacer()
-        }
-        .padding(.horizontal)
     }
 }

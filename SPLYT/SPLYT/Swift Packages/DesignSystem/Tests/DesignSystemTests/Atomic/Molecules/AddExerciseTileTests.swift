@@ -9,13 +9,13 @@ final class AddExerciseTileTests: XCTestCase {
         let view = VStack {
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "back-squat",
                                                                 exerciseName: "BACK SQUAT",
-                                                                isSelected: false,
+                                                                selectedGroups: [],
                                                                 isFavorite: false),
                             tapAction: { },
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "bench-press",
                                                                 exerciseName: "BENCH PRESS",
-                                                                isSelected: true,
+                                                                selectedGroups: [0],
                                                                 isFavorite: false),
                             tapAction: { },
                             favoriteAction: { })
