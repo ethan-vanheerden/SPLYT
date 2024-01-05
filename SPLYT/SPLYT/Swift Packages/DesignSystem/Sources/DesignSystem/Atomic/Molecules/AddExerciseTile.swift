@@ -42,17 +42,20 @@ public struct AddExerciseTile: View {
     private var selection: some View {
         HStack {
             ForEach(viewState.selectedGroups, id: \.hashValue) { groupNumber in
-                ZStack {
-                    Circle()
-                        .fill(Color(splytColor: .lightBlue))
-                        .frame(width: Layout.size(1), height: Layout.size(1))
+                Group {
                     Text("\(groupNumber + 1)")
                         .footnote()
                         .foregroundStyle(Color(splytColor: .white))
+                        .background {
+                            Circle()
+                                .fill(Color(splytColor: .lightBlue))
+                                .frame(width: Layout.size(2.5), height: Layout.size(2.5))
+                        }
                 }
+                .padding(.trailing, Layout.size(1))
             }
-            .padding(.trailing, Layout.size(2))
         }
+        .padding(.trailing, Layout.size(1))
     }
 }
 

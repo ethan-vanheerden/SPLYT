@@ -46,12 +46,12 @@ struct AddExerciseTileSectionViewState: Equatable, Hashable {
 }
 
 /*
- - When viewing the list of exercises, we only select the exercises we want in eahc group
- - Instead of just a checkmark, there will be a number next to that exercise for the group it is selected in
-    - Multiple numbers allowed if the exercise is in multiple groups
+ - When viewing the list of exercises, we only select the exercises we want in each group
+ - x Instead of just a checkmark, there will be a number next to that exercise for the group it is selected in
+    - x Multiple numbers allowed if the exercise is in multiple groups
  - Still show the number of exercises in the current group, and a button to add a new group
- - Can only add a group if the previous one is not empty
- - *Only remove a group if there are no exercises in it and it is not the currently selected group
+ - x Can only add a group if the previous one is not empty
+ - x *Only remove a group if there are no exercises in it and it is not the currently selected group
  - Then clicking on next will let you edit the sets + reps of all exercises
     - Navigation link of a new view with a reference to the same view model (I think I've done this somewhere before)
  

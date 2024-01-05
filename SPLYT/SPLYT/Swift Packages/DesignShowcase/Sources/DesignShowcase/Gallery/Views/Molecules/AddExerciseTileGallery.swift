@@ -12,14 +12,13 @@ struct AddExerciseTileGallery: View {
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "id2",
                                                                 exerciseName: "BENCH PRESS",
-                                                                isSelected: true,
                                                                 selectedGroups: [0],
                                                                 isFavorite: false),
                             tapAction: { },
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "id3",
                                                                 exerciseName: "POWER CLEAN",
-                                                                isSelected: false,
+                                                                selectedGroups: [],
                                                                 isFavorite: true),
                             tapAction: { },
                             favoriteAction: { })
