@@ -13,7 +13,7 @@ import ExerciseCore
 struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent, VM.ViewState == BuildWorkoutViewState {
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
-    @State private var setSheetPresented: Bool = false
+//    @State private var setSheetPresented: Bool = false
     @State private var filterSheetPresented: Bool = false
     @State private var showSetModifiers: Bool = false
     @State private var editExerciseIndex: Int = 0
@@ -78,7 +78,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             .padding(.horizontal, horizontalPadding)
             exerciseList(display: display)
-            sheetView(display: display)
+            groupSummary(display: display)
         }
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
@@ -220,34 +220,42 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     }
     
     @ViewBuilder
-    private func sheetView(display: BuildWorkoutDisplay) -> some View {
+    private func groupSummary(display: BuildWorkoutDisplay) -> some View {
         Tile {
             VStack {
                 Text(display.currentGroupTitle)
                     .body()
-                sheetButtons(display: display)
+                groupButtons(display: display)
             }
             .padding(.horizontal, horizontalPadding)
         }
         .padding(.horizontal, horizontalPadding)
-        .sheet(isPresented: $setSheetPresented) {
-            expandedSheetView(display: display)
-                .presentationDetents([.fraction(0.75)])
-        }
-        .onChange(of: setSheetPresented) { baseSheetOpen in
-            // Make sure to close the modifier view if we are closing the sheet
-            if !baseSheetOpen {
-                showSetModifiers = false
-            }
-        }
-        .ignoresSafeArea(.keyboard)
+//        .sheet(isPresented: $setSheetPresented) {
+//            expandedSheetView(display: display)
+//                .presentationDetents([.fraction(0.75)])
+//        }
+//        .onChange(of: setSheetPresented) { baseSheetOpen in
+//            // Make sure to close the modifier view if we are closing the sheet
+//            if !baseSheetOpen {
+//                showSetModifiers = false
+//            }
+//        }
+//        .ignoresSafeArea(.keyboard)
     }
     
     @ViewBuilder
-    private func sheetButtons(display: BuildWorkoutDisplay) -> some View {
+    private func groupButtons(display: BuildWorkoutDisplay) -> some View {
         HStack(spacing: Layout.size(2)) {
             Spacer()
-            SplytButton(text: Strings.editSetsReps) { setSheetPresented = true }
+            Picker(selection: currentGroupBinding(value: display.currentGroup),
+                   label: Circle()) {
+                
+                ForEach(display.groupTitles, id: \.self) { title in
+                    Text(title)
+                        .subhead()
+                }
+                
+            }
             SplytButton(text: Strings.addGroup,
                         isEnabled: !display.lastGroupEmpty) {
                 viewModel.send(.addGroup, taskPriority: .userInitiated)
@@ -256,6 +264,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         }
     }
     
+    /*
     @ViewBuilder
     private func expandedSheetView(display: BuildWorkoutDisplay) -> some View {
         ZStack(alignment: .bottom) {
@@ -323,6 +332,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
+     */
     
     private func currentGroupBinding(value: Int) -> Binding<Int> {
         return Binding(
@@ -331,6 +341,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         )
     }
     
+    /*
     @ViewBuilder
     private func setModifiers(currentGroup: Int) -> some View {
         ZStack(alignment: .bottom) {
@@ -362,6 +373,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             .scaleEffect(showSetModifiers ? 1 : 0.25)
         }
     }
+     */
 }
 
 // MARK: - Strings
@@ -369,7 +381,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
 fileprivate struct Strings {
     static let addYourExercises = "ADD YOUR EXERCISES"
     static let addGroup = "Add group"
-    static let editSetsReps = "Edit sets/reps"
+    static let changeGroup = "Change group"
     static let noExercisesFound = "No exercises found"
     static let removeFilters = "Remove filters"
     static let favorites = "Favorites"
