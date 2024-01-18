@@ -55,9 +55,10 @@ private extension NameWorkoutNavigationRouter {
     }
     
     func startBuildWorkout(navState: NameWorkoutNavigationState) {
+        // TODO: need to use a mock interactor here
         let interactor = BuildWorkoutInteractor(nameState: navState, saveAction: saveAction)
         let viewModel = BuildWorkoutViewModel(interactor: interactor)
-        let navRouter = BuildWorkoutNavigationRouter()
+        let navRouter = BuildWorkoutNavigationRouter(viewModel: viewModel)
         navRouter.navigator = navigator
         let view = BuildWorkoutView(viewModel: viewModel,
                                     navigationRouter: navRouter,

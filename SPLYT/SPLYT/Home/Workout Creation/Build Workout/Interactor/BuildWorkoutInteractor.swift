@@ -485,11 +485,8 @@ private extension BuildWorkoutInteractor {
         let groupCount = groups.count
         let isEmpty = groups[index].exercises.isEmpty
         let currentGroup = domain.currentGroup
-        print("Checking to remove group: \(index), current group: \(currentGroup)")
-        print("is empty: \(isEmpty), is current group: \(currentGroup != index), group count: \(groupCount)")
         
         guard isEmpty, currentGroup != index, groupCount > 1 else {
-            print("Got here")
             return updateDomain(domain: domain)
         }
         

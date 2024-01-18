@@ -10,10 +10,10 @@ import DesignSystem
 import Core
 import ExerciseCore
 
-struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent, VM.ViewState == BuildWorkoutViewState {
+struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent, 
+                                                    VM.ViewState == BuildWorkoutViewState {
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
-//    @State private var setSheetPresented: Bool = false
     @State private var filterSheetPresented: Bool = false
     @State private var showSetModifiers: Bool = false
     @State private var editExerciseIndex: Int = 0
@@ -86,7 +86,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .navigationBar(viewState: .init(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                                     taskPriority: .userInitiated) },
-                       content: { saveButton(canSave: display.canSave) })
+                       content: { continueButton(canContinue: display.canSave) })
         .dialog(isOpen: display.showDialog == .leave,
                 viewState: display.backDialog,
                 primaryAction: { dismiss() },
@@ -210,12 +210,12 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     }
     
     @ViewBuilder
-    private func saveButton(canSave: Bool) -> some View {
-        IconButton(iconName: "checkmark",
+    private func continueButton(canContinue: Bool) -> some View {
+        IconButton(iconName: "pencil",
                    style: .secondary,
                    iconColor: .lightBlue,
-                   isEnabled: canSave) {
-            viewModel.send(.save, taskPriority: .userInitiated)
+                   isEnabled: canContinue) {
+            navigationRouter.navigate(.editSetsReps)
         }
     }
     
@@ -247,14 +247,25 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     private func groupButtons(display: BuildWorkoutDisplay) -> some View {
         HStack(spacing: Layout.size(2)) {
             Spacer()
-            Picker(selection: currentGroupBinding(value: display.currentGroup),
-                   label: Circle()) {
-                
-                ForEach(display.groupTitles, id: \.self) { title in
-                    Text(title)
-                        .subhead()
+            Menu {
+                ForEach(Array(display.groupTitles.enumerated()), id: \.offset) { groupIndex, groupTitle in
+                    if display.currentGroup == groupIndex {
+                        Button {
+                            viewModel.send(.switchGroup(to: groupIndex),
+                                           taskPriority: .userInitiated)
+                        } label: {
+                            Text(groupTitle)
+                            Image(systemName: "checkmark")
+                        }
+                    } else {
+                        Button(groupTitle) {
+                            viewModel.send(.switchGroup(to: groupIndex),
+                                           taskPriority: .userInitiated)
+                        }
+                    }
                 }
-                
+            } label: {
+                SplytButton(text: display.groupTitles[display.currentGroup]) { }
             }
             SplytButton(text: Strings.addGroup,
                         isEnabled: !display.lastGroupEmpty) {
@@ -334,12 +345,12 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     }
      */
     
-    private func currentGroupBinding(value: Int) -> Binding<Int> {
-        return Binding(
-            get: { return value },
-            set: { viewModel.send(.switchGroup(to: $0), taskPriority: .userInitiated) }
-        )
-    }
+//    private func currentGroupBinding(value: Int) -> Binding<Int> {
+//        return Binding(
+//            get: { return value },
+//            set: { viewModel.send(.switchGroup(to: $0), taskPriority: .userInitiated) }
+//        )
+//    }
     
     /*
     @ViewBuilder
