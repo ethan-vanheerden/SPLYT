@@ -77,7 +77,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
                 ForEach(group.exercises, id: \.self) { exercise in
                     HStack {
                         SectionHeader(viewState: exercise.header)
-                        Text("\(exercise.sets.count) \(Strings.sets)")
+                        Text("\(exercise.sets.count) \(Strings.sets)") // TODO: pluralize
                             .body(style: .medium)
                     }
                     .padding(.bottom, Layout.size(0.5))

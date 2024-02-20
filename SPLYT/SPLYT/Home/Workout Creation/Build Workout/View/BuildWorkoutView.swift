@@ -10,25 +10,19 @@ import DesignSystem
 import Core
 import ExerciseCore
 
-struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent, 
+struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent,
                                                     VM.ViewState == BuildWorkoutViewState {
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
     @State private var filterSheetPresented: Bool = false
-    @State private var showSetModifiers: Bool = false
-    @State private var editExerciseIndex: Int = 0
-    @State private var editSetIndex: Int = 0
     @State private var searchText = ""
     private let navigationRouter: BuildWorkoutNavigationRouter
-    private let transformer: BuildWorkoutTransformer
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
-         navigationRouter: BuildWorkoutNavigationRouter,
-         transformer: BuildWorkoutTransformer) {
+         navigationRouter: BuildWorkoutNavigationRouter) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
-        self.transformer = transformer
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     

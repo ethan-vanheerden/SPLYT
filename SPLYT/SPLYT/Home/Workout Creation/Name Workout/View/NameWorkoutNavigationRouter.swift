@@ -61,8 +61,7 @@ private extension NameWorkoutNavigationRouter {
         let navRouter = BuildWorkoutNavigationRouter(viewModel: viewModel)
         navRouter.navigator = navigator
         let view = BuildWorkoutView(viewModel: viewModel,
-                                    navigationRouter: navRouter,
-                                    transformer: BuildWorkoutTransformer())
+                                    navigationRouter: navRouter)
         let vc = UIHostingController(rootView: view)
         
         navigator?.push(vc, animated: true)
