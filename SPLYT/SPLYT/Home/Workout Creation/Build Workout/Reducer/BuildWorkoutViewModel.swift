@@ -31,9 +31,7 @@ enum BuildWorkoutViewEvent {
 
 // MARK: - View Model
 
-protocol BuildWorkoutViewModelType: ViewModel { }
-
-final class BuildWorkoutViewModel: BuildWorkoutViewModelType {
+final class BuildWorkoutViewModel: ViewModel {
     @Published private(set) var viewState: BuildWorkoutViewState = .loading
     private let interactor: BuildWorkoutInteractor
     private let reducer = BuildWorkoutReducer()
