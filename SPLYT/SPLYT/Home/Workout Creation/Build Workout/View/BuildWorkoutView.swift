@@ -10,25 +10,19 @@ import DesignSystem
 import Core
 import ExerciseCore
 
-struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent, VM.ViewState == BuildWorkoutViewState {
+struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent,
+                                                    VM.ViewState == BuildWorkoutViewState {
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
-    @State private var setSheetPresented: Bool = false
     @State private var filterSheetPresented: Bool = false
-    @State private var showSetModifiers: Bool = false
-    @State private var editExerciseIndex: Int = 0
-    @State private var editSetIndex: Int = 0
     @State private var searchText = ""
     private let navigationRouter: BuildWorkoutNavigationRouter
-    private let transformer: BuildWorkoutTransformer
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
-         navigationRouter: BuildWorkoutNavigationRouter,
-         transformer: BuildWorkoutTransformer) {
+         navigationRouter: BuildWorkoutNavigationRouter) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
-        self.transformer = transformer
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
@@ -78,7 +72,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             .padding(.horizontal, horizontalPadding)
             exerciseList(display: display)
-            sheetView(display: display)
+            groupSummary(display: display)
         }
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
@@ -86,7 +80,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .navigationBar(viewState: .init(title: Strings.addYourExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                                     taskPriority: .userInitiated) },
-                       content: { saveButton(canSave: display.canSave) })
+                       content: { continueButton(canContinue: display.canSave) })
         .dialog(isOpen: display.showDialog == .leave,
                 viewState: display.backDialog,
                 primaryAction: { dismiss() },
@@ -210,156 +204,57 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     }
     
     @ViewBuilder
-    private func saveButton(canSave: Bool) -> some View {
-        IconButton(iconName: "checkmark",
+    private func continueButton(canContinue: Bool) -> some View {
+        IconButton(iconName: "pencil",
                    style: .secondary,
                    iconColor: .lightBlue,
-                   isEnabled: canSave) {
-            viewModel.send(.save, taskPriority: .userInitiated)
+                   isEnabled: canContinue) {
+            navigationRouter.navigate(.editSetsReps)
         }
     }
     
     @ViewBuilder
-    private func sheetView(display: BuildWorkoutDisplay) -> some View {
+    private func groupSummary(display: BuildWorkoutDisplay) -> some View {
         Tile {
             VStack {
                 Text(display.currentGroupTitle)
                     .body()
-                sheetButtons(display: display)
+                groupButtons(display: display)
             }
             .padding(.horizontal, horizontalPadding)
         }
         .padding(.horizontal, horizontalPadding)
-        .sheet(isPresented: $setSheetPresented) {
-            expandedSheetView(display: display)
-                .presentationDetents([.fraction(0.75)])
-        }
-        .onChange(of: setSheetPresented) { baseSheetOpen in
-            // Make sure to close the modifier view if we are closing the sheet
-            if !baseSheetOpen {
-                showSetModifiers = false
-            }
-        }
-        .ignoresSafeArea(.keyboard)
     }
     
     @ViewBuilder
-    private func sheetButtons(display: BuildWorkoutDisplay) -> some View {
+    private func groupButtons(display: BuildWorkoutDisplay) -> some View {
         HStack(spacing: Layout.size(2)) {
             Spacer()
-            SplytButton(text: Strings.editSetsReps) { setSheetPresented = true }
+            Menu {
+                ForEach(Array(display.groupTitles.enumerated()), id: \.offset) { groupIndex, groupTitle in
+                    if display.currentGroup == groupIndex {
+                        Button {
+                            viewModel.send(.switchGroup(to: groupIndex),
+                                           taskPriority: .userInitiated)
+                        } label: {
+                            Text(groupTitle)
+                            Image(systemName: "checkmark")
+                        }
+                    } else {
+                        Button(groupTitle) {
+                            viewModel.send(.switchGroup(to: groupIndex),
+                                           taskPriority: .userInitiated)
+                        }
+                    }
+                }
+            } label: {
+                SplytButton(text: display.groupTitles[display.currentGroup]) { }
+            }
             SplytButton(text: Strings.addGroup,
                         isEnabled: !display.lastGroupEmpty) {
                 viewModel.send(.addGroup, taskPriority: .userInitiated)
             }
             Spacer()
-        }
-    }
-    
-    @ViewBuilder
-    private func expandedSheetView(display: BuildWorkoutDisplay) -> some View {
-        ZStack(alignment: .bottom) {
-            VStack {
-                SegmentedControl(selectedIndex: currentGroupBinding(value: display.currentGroup).animation(),
-                                 titles: display.groupTitles)
-                currentSetView(display: display)
-            }
-            setModifiers(currentGroup: display.currentGroup)
-                .isVisible(showSetModifiers)
-        }
-    }
-    
-    @ViewBuilder
-    private func currentSetView(display: BuildWorkoutDisplay) -> some View {
-        TabView(selection: currentGroupBinding(value: display.currentGroup).animation()) {
-            ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, exercises in
-                ScrollView {
-                    VStack(spacing: Layout.size(2)) {
-                        // Use enumerated here so we can get the exercise index in the group to make updating faster
-                        ForEach(Array(exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseState in
-                            ExerciseView(
-                                viewState: exerciseState,
-                                type: .build(
-                                    addModifierAction: { setIndex in
-                                        // Stores the selected set and exercise for when the modifier is actually added
-                                        editSetIndex = setIndex
-                                        editExerciseIndex = exerciseIndex
-                                        withAnimation {
-                                            showSetModifiers = true
-                                        }
-                                    },
-                                    removeModifierAction: { setIndex in
-                                        viewModel.send(.removeModifier(group: groupIndex,
-                                                                       exerciseIndex: exerciseIndex,
-                                                                       setIndex: setIndex),
-                                                       taskPriority: .userInitiated)
-                                    }),
-                                addSetAction: { viewModel.send(.addSet(group: groupIndex),
-                                                               taskPriority: .userInitiated) },
-                                removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
-                                                                  taskPriority: .userInitiated) },
-                                updateSetAction: { setIndex, setInput in
-                                    viewModel.send(.updateSet(group: groupIndex,
-                                                              exerciseIndex: exerciseIndex,
-                                                              setIndex: setIndex,
-                                                              with: setInput),
-                                                   taskPriority: .userInitiated)
-                                },
-                                updateModifierAction: { setIndex, setInput in
-                                    viewModel.send(.updateModifier(group: groupIndex,
-                                                                   exerciseIndex: exerciseIndex,
-                                                                   setIndex: setIndex,
-                                                                   with: setInput),
-                                                   taskPriority: .userInitiated)
-                                }
-                            )
-                        }
-                    }
-                    .padding(.horizontal, Layout.size(2))
-                }
-                .tag(groupIndex)
-            }
-            
-        }
-        .tabViewStyle(.page(indexDisplayMode: .never))
-    }
-    
-    private func currentGroupBinding(value: Int) -> Binding<Int> {
-        return Binding(
-            get: { return value },
-            set: { viewModel.send(.switchGroup(to: $0), taskPriority: .userInitiated) }
-        )
-    }
-    
-    @ViewBuilder
-    private func setModifiers(currentGroup: Int) -> some View {
-        ZStack(alignment: .bottom) {
-            Scrim()
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation {
-                        showSetModifiers = false
-                    }
-                }
-            Tile {
-                HStack(spacing: Layout.size(2.5)) {
-                    Spacer()
-                    ForEach(SetModifierViewState.allCases, id: \.title) { modifier in
-                        Tag(viewState: TagFactory.tagFromModifier(modifier: modifier))
-                            .onTapGesture {
-                                viewModel.send(.addModifier(group: currentGroup,
-                                                            exerciseIndex: editExerciseIndex,
-                                                            setIndex: editSetIndex,
-                                                            modifier: transformer.transformModifier(modifier)),
-                                               taskPriority: .userInitiated)
-                                showSetModifiers = false
-                            }
-                    }
-                    Spacer()
-                }
-            }
-            .padding(.horizontal, horizontalPadding)
-            .scaleEffect(showSetModifiers ? 1 : 0.25)
         }
     }
 }
@@ -369,7 +264,6 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
 fileprivate struct Strings {
     static let addYourExercises = "ADD YOUR EXERCISES"
     static let addGroup = "Add group"
-    static let editSetsReps = "Edit sets/reps"
     static let noExercisesFound = "No exercises found"
     static let removeFilters = "Remove filters"
     static let favorites = "Favorites"

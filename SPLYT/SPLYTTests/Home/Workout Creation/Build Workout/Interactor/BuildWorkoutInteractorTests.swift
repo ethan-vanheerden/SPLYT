@@ -68,95 +68,6 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         XCTAssertEqual(result, .loaded(expectedDomain))
     }
     
-    func testInteract_RemoveGroup_NoSavedDomain_Error() async {
-        let result = await sut.interact(with: .removeGroup(group: 0))
-        XCTAssertEqual(result, .error)
-    }
-    
-    func testInteract_RemoveGroup_OnlyOneGroup_DoesNothing() async {
-        await loadExercises()
-        let result = await sut.interact(with: .removeGroup(group: 0))
-        var groupMap = [Int: [Exercise]]()
-        groupMap[0] = []
-        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
-        let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
-                                                builtWorkout: workout,
-                                                currentGroup: 0,
-                                                filterDomain: Fixtures.emptyFilterDomain,
-                                                canSave: false)
-        
-        XCTAssertEqual(result, .loaded(expectedDomain))
-    }
-    
-    func testInteract_RemoveGroup_InvalidGroup_DoesNothing() async {
-        await loadExercises()
-        let result = await sut.interact(with: .removeGroup(group: 1)) // Not a group
-        var groupMap = [Int: [Exercise]]()
-        groupMap[0] = []
-        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
-        let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
-                                                builtWorkout: workout,
-                                                currentGroup: 0,
-                                                filterDomain: Fixtures.emptyFilterDomain,
-                                                canSave: false)
-        
-        XCTAssertEqual(result, .loaded(expectedDomain))
-    }
-    
-    func testInteract_RemoveGroup_NotFirst_Success() async {
-        await loadExercises()
-        _ = await sut.interact(with: .addGroup) // Add a group to remove
-        let result = await sut.interact(with: .removeGroup(group: 1)) // Remove the added group
-        var groupMap = [Int: [Exercise]]()
-        groupMap[0] = []
-        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
-        let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
-                                                builtWorkout: workout,
-                                                currentGroup: 0,
-                                                filterDomain: Fixtures.emptyFilterDomain,
-                                                canSave: false)
-        
-        XCTAssertEqual(result, .loaded(expectedDomain))
-    }
-    
-    func testInteract_RemoveGroup_First_Success() async {
-        await loadExercises()
-        _ = await sut.interact(with: .addGroup) // Add a group to remove
-        let result = await sut.interact(with: .removeGroup(group: 0)) // Remove the first group
-        var groupMap = [Int: [Exercise]]()
-        groupMap[0] = []
-        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
-        let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
-                                                builtWorkout: workout,
-                                                currentGroup: 0,
-                                                filterDomain: Fixtures.emptyFilterDomain,
-                                                canSave: false)
-        
-        XCTAssertEqual(result, .loaded(expectedDomain))
-    }
-    
-    func testInteract_RemoveGroup_OnCurrentGroup_Success() async {
-        await loadExercises()
-        _ = await sut.interact(with: .addGroup)
-        _ = await sut.interact(with: .switchGroup(to: 0)) // Go back to first group
-        let result = await sut.interact(with: .removeGroup(group: 0)) // Remove our current group
-        var groupMap = [Int: [Exercise]]()
-        groupMap[0] = []
-        let groups = WorkoutFixtures.exerciseGroups(numGroups: 1, groupExercises: groupMap)
-        let workout = Fixtures.builtWorkout(exerciseGroups: groups)
-        let expectedDomain = BuildWorkoutDomain(exercises: Fixtures.loadedExercisesNoneSelectedMap,
-                                                builtWorkout: workout,
-                                                currentGroup: 0,
-                                                filterDomain: Fixtures.emptyFilterDomain,
-                                                canSave: false)
-        
-        XCTAssertEqual(result, .loaded(expectedDomain))
-    }
-    
     func testInteract_ToggleExercise_NoSavedDomain_Error() async {
         let result = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         XCTAssertEqual(result, .error)
@@ -174,9 +85,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = [
@@ -202,9 +113,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.benchPressId))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = Array(
@@ -245,30 +156,40 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         XCTAssertEqual(result, .loaded(expectedDomain))
     }
     
-    func testInteract_ToggleExercise_RemoveExercise_LastExerciseInGroup_RemovesGroup_Success() async {
+    func testInteract_ToggleExercise_AddExercise_ExerciseInMultipleGroups_Success() async {
         await loadExercises()
-        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId)) // First add the exercise
+        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
+        _ = await sut.interact(with: .addSet(group: 0))
+        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.benchPressId))
         _ = await sut.interact(with: .addGroup)
-        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.benchPressId)) // Add to new group
-        let result = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId)) // Now removes it
+        let result = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0, 1], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
-        let sets: [(SetInput, SetModifier?)] = [
+        let setsOne: [(SetInput, SetModifier?)] = Array(
+            repeating: (.repsWeight(input: .init()), nil),
+            count: 2
+        )
+        let setsTwo: [(SetInput, SetModifier?)] = [
             (.repsWeight(input: .init()), nil)
         ]
         groupMap[0] = [
-            WorkoutFixtures.benchPress(inputs: sets) // Now in group 0
+            WorkoutFixtures.backSquat(inputs: setsOne),
+            WorkoutFixtures.benchPress(inputs: setsOne)
         ]
-        let workout = Fixtures.builtWorkout(exerciseGroups: WorkoutFixtures.exerciseGroups(numGroups: 1,
-                                                                                           groupExercises: groupMap))
+        groupMap[1] = [
+            WorkoutFixtures.backSquat(inputs: setsTwo),
+        ]
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
+        let workout = Fixtures.builtWorkout(exerciseGroups: groups)
+        
         let expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                                 builtWorkout: workout,
-                                                currentGroup: 0,
+                                                currentGroup: 1,
                                                 filterDomain: Fixtures.emptyFilterDomain,
                                                 canSave: true)
         
@@ -286,9 +207,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .addSet(group: 0))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = Array(
@@ -316,9 +237,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .addSet(group: 0)) // Add multiple sets
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = Array(
@@ -370,9 +291,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeSet(group: 0))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = [WorkoutFixtures.backSquat(inputs: [
@@ -397,9 +318,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeSet(group: 0))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = [
@@ -427,9 +348,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeSet(group: 0))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = Array(
@@ -469,9 +390,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                          with: .repsWeight(input: .init(weight: 135, reps: 12))))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = [
@@ -504,9 +425,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                          with: .repsWeight(input: .init(weight: 135, reps: 12))))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: true),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: true, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [1], isFavorite: true),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [1], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let group1Sets: [(SetInput, SetModifier?)] = [
@@ -547,9 +468,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .addSet(group: 0)) // Added set should have updated input as well
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = Array(
@@ -588,9 +509,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .toggleFavorite(exerciseId: WorkoutFixtures.backSquatId))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: true),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: true),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
@@ -655,6 +576,39 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                 currentGroup: 1,
                                                 filterDomain: Fixtures.emptyFilterDomain,
                                                 canSave: false)
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+    }
+    
+    func testInteract_SwitchGroup_RemoveEmptyGroup_Success() async {
+        await loadExercises()
+        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
+        _ = await sut.interact(with: .addGroup)
+        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.benchPressId))
+        _ = await sut.interact(with: .addGroup)
+        // This should be marked as group 1 once the empty group is removed
+        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.inclineRowId))
+        _ = await sut.interact(with: .switchGroup(to: 1))
+        _ = await sut.interact(with: .toggleExercise(exerciseId: WorkoutFixtures.benchPressId))
+        let result = await sut.interact(with: .switchGroup(to: 2))
+        
+        let exercises = [
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [1], isFavorite: false)
+        ]
+        var groupMap = [Int: [Exercise]]()
+        let sets: [(SetInput, SetModifier?)] = [(.repsWeight(input: .init()), nil)]
+        groupMap[0] = [WorkoutFixtures.backSquat(inputs: sets)]
+        groupMap[1] = [WorkoutFixtures.inclineDBRow(inputs: sets)]
+        let groups = WorkoutFixtures.exerciseGroups(numGroups: 2, groupExercises: groupMap)
+        let workout = Fixtures.builtWorkout(exerciseGroups: groups)
+        
+        let expectedDomain = BuildWorkoutDomain(exercises: exercises,
+                                                builtWorkout: workout,
+                                                currentGroup: 1,
+                                                filterDomain: Fixtures.emptyFilterDomain,
+                                                canSave: true)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
     }
@@ -797,9 +751,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                            modifier: .eccentric))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = [(.repsWeight(input: .init()), .eccentric)]
@@ -834,9 +788,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                                 .repsWeight(input: .init(weight: 100)))))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [1], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let squatSets: [(SetInput, SetModifier?)] = [
@@ -876,9 +830,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeModifier(group: 0, exerciseIndex: 0, setIndex: 0))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = [
@@ -916,9 +870,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeModifier(group: 1, exerciseIndex: 0, setIndex: 1))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [1], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let squatSets: [(SetInput, SetModifier?)] = [
@@ -963,9 +917,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
                                                               with: .repsOnly(input: .init(reps: 8))))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let sets: [(SetInput, SetModifier?)] = [
@@ -1009,9 +963,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: true, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [0], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [1], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         let squatSets: [(SetInput, SetModifier?)] = [
@@ -1063,7 +1017,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .filter(by: .search(searchText: "back")))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
@@ -1107,7 +1061,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var result = await sut.interact(with: .toggleFavorite(exerciseId: WorkoutFixtures.benchPressId))
         
         var exercises = [
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: true)
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: true)
         ]
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
@@ -1127,9 +1081,9 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         result = await sut.interact(with: .filter(by: .favorite(isFavorite: false))) // Cancel filter
         
         exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: true),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: true),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         filterDomain.isFavorite = false
         expectedDomain = BuildWorkoutDomain(exercises: exercises,
@@ -1166,7 +1120,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         var result = await sut.interact(with: .filter(by: .muscleWorked(muscle: .glutes, isSelected: true)))
         
         var exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []
@@ -1188,8 +1142,8 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         result = await sut.interact(with: .filter(by: .muscleWorked(muscle: .back, isSelected: true)))
         
         exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         musclesWorkoutMap[.back] = true
         filterDomain.musclesWorked = musclesWorkoutMap
@@ -1204,7 +1158,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         result = await sut.interact(with: .filter(by: .muscleWorked(muscle: .glutes, isSelected: false)))
         
         exercises = [
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         musclesWorkoutMap[.glutes] = false
         filterDomain.musclesWorked = musclesWorkoutMap
@@ -1265,7 +1219,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         result = await sut.interact(with: .toggleFavorite(exerciseId: WorkoutFixtures.backSquatId))
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: true)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: true)
         ]
         expectedDomain = BuildWorkoutDomain(exercises: exercises,
                                             builtWorkout: workout,
@@ -1289,7 +1243,7 @@ final class BuildWorkoutInteractorTests: XCTestCase {
         let result = await sut.interact(with: .removeAllFilters)
         
         let exercises = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: false)
         ]
         var groupMap = [Int: [Exercise]]()
         groupMap[0] = []

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA02ECE32B5974A40035F7C8 /* EditSetsRepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02ECE22B5974A40035F7C8 /* EditSetsRepsView.swift */; };
 		AA0F8EB12B32212600B88C02 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB02B32212600B88C02 /* TestUtils.swift */; };
 		AA0F8EB42B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB32B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift */; };
 		AA0F8EB62B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB52B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift */; };
@@ -250,6 +251,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA02ECE22B5974A40035F7C8 /* EditSetsRepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSetsRepsView.swift; sourceTree = "<group>"; };
 		AA0F8EB02B32212600B88C02 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		AA0F8EB32B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteExercisesRequestTests.swift; sourceTree = "<group>"; };
 		AA0F8EB52B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFavoriteExercisesRequestTests.swift; sourceTree = "<group>"; };
@@ -1715,6 +1717,7 @@
 				AACCAA7E297C5FA700932085 /* BuildWorkoutDisplay.swift */,
 				AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */,
 				AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */,
+				AA02ECE22B5974A40035F7C8 /* EditSetsRepsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2035,6 +2038,7 @@
 				AA672A512A6495720009919E /* HistoryNavigationRouter.swift in Sources */,
 				AA672A452A6494440009919E /* HistoryNavigationController.swift in Sources */,
 				AAB42B2F2A79A584002A1ED2 /* RestPresetsDisplay.swift in Sources */,
+				AA02ECE32B5974A40035F7C8 /* EditSetsRepsView.swift in Sources */,
 				AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */,
 				AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */,
 				AACB29772A15576700AACB6B /* DoWorkoutReducer.swift in Sources */,

@@ -16,7 +16,8 @@ final class NameWorkoutNavigationRouterTests: XCTestCase {
     private let navState = NameWorkoutNavigationState(name: "Test")
 
     override func setUp() {
-        sut = NameWorkoutNavigationRouter()
+        let mockService = MockBuildWorkoutService()
+        sut = NameWorkoutNavigationRouter(buildWorkoutService: mockService)
         mockNavigator = MockNavigator()
         sut.navigator = mockNavigator
     }

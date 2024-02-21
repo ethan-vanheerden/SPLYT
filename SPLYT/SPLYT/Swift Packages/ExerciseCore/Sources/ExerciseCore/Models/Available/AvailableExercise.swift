@@ -14,20 +14,20 @@ public struct AvailableExercise: Codable, Equatable {
     public let musclesWorked: [MusclesWorked]
     public var isFavorite: Bool = false
     public let defaultInputType: SetInput
-    public var isSelected = false
+    public var selectedGroups: [Int] = [] // The groups in the workout which have this exercise
     
     public init(id: String,
                 name: String,
                 musclesWorked: [MusclesWorked],
                 isFavorite: Bool = false,
                 defaultInputType: SetInput,
-                isSelected: Bool = false) {
+                selectedGroups: [Int] = []) {
         self.id = id
         self.name = name
         self.musclesWorked = musclesWorked
         self.isFavorite = isFavorite
         self.defaultInputType = defaultInputType
-        self.isSelected = isSelected
+        self.selectedGroups = selectedGroups
     }
     
     public init(from decoder: Decoder) throws {

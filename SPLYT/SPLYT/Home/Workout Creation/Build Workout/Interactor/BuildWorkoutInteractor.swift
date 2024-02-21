@@ -13,7 +13,6 @@ import ExerciseCore
 enum BuildWorkoutDomainAction {
     case loadExercises
     case addGroup
-    case removeGroup(group: Int)
     case toggleExercise(exerciseId: String)
     case addSet(group: Int)
     case removeSet(group: Int)
@@ -47,6 +46,7 @@ final class BuildWorkoutInteractor {
     private let saveAction: ((Workout) -> Void)? // Custom override save action
     private var savedDomain: BuildWorkoutDomain?
     private var allExercises: [String: AvailableExercise]? // Used when we cancel a search
+    private var selectedExerciseIds: [String] = []
     
     init(service: BuildWorkoutServiceType = BuildWorkoutService(),
          nameState: NameWorkoutNavigationState,
@@ -64,8 +64,6 @@ final class BuildWorkoutInteractor {
             return await handleLoadExercises()
         case .addGroup:
             return handleAddGroup()
-        case .removeGroup(let index):
-            return handleRemoveGroup(index: index)
         case let .toggleExercise(exerciseId):
             return handleToggleExercise(exerciseId: exerciseId)
         case .addSet(let group):
@@ -141,31 +139,14 @@ private extension BuildWorkoutInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleRemoveGroup(index: Int) -> BuildWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
-        // We only remove the group if we have at least 2 groups
-        var groups = domain.builtWorkout.exerciseGroups
-        let count = groups.count
-        if count >= 2 && count > index {
-            groups.remove(at: index)
-        }
-        
-        // Update current group index if needed
-        let currentGroup = domain.currentGroup
-        let newGroup = currentGroup >= index && currentGroup != 0 ? currentGroup - 1 : currentGroup
-        
-        domain.builtWorkout.exerciseGroups = groups
-        domain.currentGroup = newGroup
-        
-        return updateDomain(domain: domain)
-    }
-    
     func handleToggleExercise(exerciseId: String) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain,
               var exercise = domain.exercises[exerciseId],
               domain.builtWorkout.exerciseGroups.count > domain.currentGroup else { return .error }
         
-        if exercise.isSelected {
+        let currentGroup = domain.currentGroup
+        
+        if exercise.selectedGroups.contains(currentGroup) {
             return handleRemoveExercise(domain: domain,
                                         availableExercise: &exercise)
         } else {
@@ -187,10 +168,13 @@ private extension BuildWorkoutInteractor {
         exercisesInGroup.append(exercise)
         groups[group].exercises = exercisesInGroup
         
-        // Mark as selected
+        // Mark as selected for that group
         let exerciseId = availableExercise.id
-        availableExercise.isSelected = true
-        allExercises?[exerciseId]?.isSelected = true
+        availableExercise.selectedGroups.append(group)
+        availableExercise.selectedGroups.sort()
+        
+        allExercises?[exerciseId]?.selectedGroups = availableExercise.selectedGroups
+        selectedExerciseIds.append(exerciseId)
         
         domain.exercises[exerciseId] = availableExercise
         domain.builtWorkout.exerciseGroups = groups
@@ -201,40 +185,26 @@ private extension BuildWorkoutInteractor {
     func handleRemoveExercise(domain: BuildWorkoutDomain,
                               availableExercise: inout AvailableExercise) ->  BuildWorkoutDomainResult {
         var groups = domain.builtWorkout.exerciseGroups
-        var fromGroup: ExerciseGroup?
-        var fromGroupIndex: Int?
-        let id = availableExercise.id
-        
-        // Find the group which this exercise belongs to
-        for (index, group) in groups.enumerated() {
-            if group.exercises.map({ $0.id }).contains(id) {
-                fromGroup = group
-                fromGroupIndex = index
-                break
-            }
-        }
-        
-        guard let fromGroup = fromGroup,
-              let fromGroupIndex = fromGroupIndex else { return .loaded(domain) }
+        let currentGroup = domain.currentGroup
+        let fromGroup = groups[currentGroup]
+        let exerciseId = availableExercise.id
         
         var exercises = fromGroup.exercises
-        exercises.removeAll { $0.id == id }
+        exercises.removeAll { $0.id == exerciseId }
         
-        groups[fromGroupIndex].exercises = exercises
+        groups[currentGroup].exercises = exercises
         
         // Mark as not selected
-        let exerciseId = availableExercise.id
-        availableExercise.isSelected = false
-        domain.exercises[id] = availableExercise // Update map
-        allExercises?[exerciseId]?.isSelected = false
+        availableExercise.selectedGroups.removeAll { $0 == currentGroup }
+        domain.exercises[exerciseId] = availableExercise
+        
+        allExercises?[exerciseId]?.selectedGroups = availableExercise.selectedGroups
+        
+        if let indexToRemove = selectedExerciseIds.firstIndex(of: exerciseId) {
+            selectedExerciseIds.remove(at: indexToRemove)
+        }
         
         domain.builtWorkout.exerciseGroups = groups
-        
-        // If the group is now empty and is not the only group, remove it
-        if groups[fromGroupIndex].exercises.isEmpty {
-            _ = updateDomain(domain: domain)
-            return handleRemoveGroup(index: fromGroupIndex)
-        }
         
         return updateDomain(domain: domain)
     }
@@ -298,9 +268,10 @@ private extension BuildWorkoutInteractor {
         guard let domain = savedDomain,
               group >= 0,
               group < domain.builtWorkout.exerciseGroups.count else { return .error }
-        domain.currentGroup = group
         
-        return updateDomain(domain: domain)
+        let oldGroup = domain.currentGroup
+        domain.currentGroup = group
+        return removeGroupIfNeeded(index: oldGroup, domain: domain)
     }
     
     func handleSave() -> BuildWorkoutDomainResult {
@@ -500,6 +471,45 @@ private extension BuildWorkoutInteractor {
         }
         
         domain.exercises = filteredExercises
+        return updateDomain(domain: domain)
+    }
+    
+    /// Removes the exercise group at the specified index if we can. The group is only removed if it is empty,
+    /// it is not the current group, and it is not the only group in the workout.
+    /// - Parameters
+    ///     index: The index of the group to possibly remove.
+    ///     domain: The domain to remove the group from
+    /// - Returns: The updated domain result
+    func removeGroupIfNeeded(index: Int, domain: BuildWorkoutDomain) -> BuildWorkoutDomainResult {
+        var groups = domain.builtWorkout.exerciseGroups
+        let groupCount = groups.count
+        let isEmpty = groups[index].exercises.isEmpty
+        let currentGroup = domain.currentGroup
+        
+        guard isEmpty, currentGroup != index, groupCount > 1 else {
+            return updateDomain(domain: domain)
+        }
+        
+        groups.remove(at: index)
+        domain.currentGroup = currentGroup >= index && currentGroup != 0 ? currentGroup - 1 : currentGroup
+        domain.builtWorkout.exerciseGroups = groups
+        
+        // Update the selected group numbers for each of the selected exercises
+        var domainExercises = domain.exercises
+        let selectedExercises = Swift.Set(selectedExerciseIds)
+        
+        for selectedExercise in selectedExercises {
+            guard var exercise = domainExercises[selectedExercise] else { continue }
+
+            exercise.selectedGroups = exercise.selectedGroups.map { groupIndex in
+                return groupIndex > index ? groupIndex - 1 : groupIndex
+            }
+            domainExercises[selectedExercise] = exercise
+            allExercises?[selectedExercise] = exercise
+        }
+        
+        domain.exercises = domainExercises
+        
         return updateDomain(domain: domain)
     }
 }

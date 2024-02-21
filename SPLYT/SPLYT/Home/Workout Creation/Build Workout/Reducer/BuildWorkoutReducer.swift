@@ -56,7 +56,7 @@ private extension BuildWorkoutReducer {
         let exercises = exerciseMap.values.map {
             AddExerciseTileViewState(id: $0.id,
                                      exerciseName: $0.name,
-                                     isSelected: $0.isSelected,
+                                     selectedGroups: $0.selectedGroups,
                                      isFavorite: $0.isFavorite)
         }
         return partitionTileStates(exercises: exercises)

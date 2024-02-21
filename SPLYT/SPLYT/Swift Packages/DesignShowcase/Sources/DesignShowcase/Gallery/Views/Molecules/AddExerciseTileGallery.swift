@@ -6,25 +6,25 @@ struct AddExerciseTileGallery: View {
         VStack {
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "id1",
                                                                 exerciseName: "BACK SQUAT",
-                                                                isSelected: false,
+                                                                selectedGroups: [],
                                                                 isFavorite: false),
                             tapAction: { },
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "id2",
                                                                 exerciseName: "BENCH PRESS",
-                                                                isSelected: true,
+                                                                selectedGroups: [0],
                                                                 isFavorite: false),
                             tapAction: { },
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "id3",
                                                                 exerciseName: "POWER CLEAN",
-                                                                isSelected: false,
+                                                                selectedGroups: [],
                                                                 isFavorite: true),
                             tapAction: { },
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "id4",
                                                                 exerciseName: "LAT PULLDOWN",
-                                                                isSelected: true,
+                                                                selectedGroups: [1, 2, 3],
                                                                 isFavorite: true),
                             tapAction: { },
                             favoriteAction: { })

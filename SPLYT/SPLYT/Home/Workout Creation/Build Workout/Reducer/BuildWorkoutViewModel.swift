@@ -14,7 +14,6 @@ import ExerciseCore
 enum BuildWorkoutViewEvent {
     case load
     case addGroup
-    case removeGroup(group: Int)
     case toggleExercise(exerciseId: String) // Adds to the current group
     case addSet(group: Int)
     case removeSet(group: Int)
@@ -47,8 +46,6 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .loadExercises)
         case .addGroup:
             await react(domainAction: .addGroup)
-        case .removeGroup(let group):
-            await react(domainAction: .removeGroup(group: group))
         case let .toggleExercise(exerciseId):
             await react(domainAction: .toggleExercise(exerciseId: exerciseId))
         case .addSet(let group):
