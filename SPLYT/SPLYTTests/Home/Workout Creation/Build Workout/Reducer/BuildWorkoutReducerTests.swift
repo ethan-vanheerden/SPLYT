@@ -59,6 +59,7 @@ final class BuildWorkoutReducerTests: XCTestCase {
         _ = await interactor.interact(with: .addSet(group: 0))
         _ = await interactor.interact(with: .addGroup)
         _ = await interactor.interact(with: .toggleExercise(exerciseId: ModelFixtures.inclineRowId))
+        _ = await interactor.interact(with: .toggleExercise(exerciseId: ModelFixtures.backSquatId))
         _ = await interactor.interact(with: .updateSet(group: 0,
                                                        exerciseIndex: 0,
                                                        setIndex: 0,
@@ -74,14 +75,16 @@ final class BuildWorkoutReducerTests: XCTestCase {
         var exerciseTileViewStates: [AddExerciseTileSectionViewState] = [
             AddExerciseTileSectionViewState(header: .init(title: "B"),
                                             exercises: [
-                                                Fixtures.backSquatTileViewState(isSelected: true, isFavorite: false),
-                                                Fixtures.benchPressTileViewState(isSelected: true, isFavorite: false)
+                                                Fixtures.backSquatTileViewState(selectedGroups: [0, 1], isFavorite: false),
+                                                Fixtures.benchPressTileViewState(selectedGroups: [0], isFavorite: false)
                                             ]),
             AddExerciseTileSectionViewState(header: .init(title: "I"),
                                             exercises: [
-                                                Fixtures.inclineDBRowTileViewState(isSelected: true, isFavorite: true)
+                                                Fixtures.inclineDBRowTileViewState(selectedGroups: [1], 
+                                                                                   isFavorite: true)
                                             ])
         ]
+        
         let squatSets: [(SetInputViewState, SetModifierViewState?)] = [
             (.repsWeight(weightTitle: StateFixtures.lbs,
                          repsTitle: StateFixtures.reps,
@@ -100,11 +103,14 @@ final class BuildWorkoutReducerTests: XCTestCase {
         let rowSets: [(SetInputViewState, SetModifierViewState?)] = [
             (StateFixtures.emptyRepsWeightSet, nil)
         ]
+        let squatSetsTwo: [(SetInputViewState, SetModifierViewState?)] = [
+            (StateFixtures.emptyRepsWeightSet, nil)
+        ]
         let groups: [[ExerciseViewState]] = [
             [StateFixtures.backSquatViewState(inputs: squatSets), StateFixtures.benchPressViewState(inputs: benchSets)],
-            [StateFixtures.inclineDBRowViewState(inputs: rowSets)]
+            [StateFixtures.inclineDBRowViewState(inputs: rowSets), StateFixtures.backSquatViewState(inputs: squatSetsTwo)]
         ]
-        let currentGroupTitle = "Current group: 1 exercise"
+        let currentGroupTitle = "Current group: 2 exercises"
         let groupTitles = ["Group 1", "Group 2"]
         var expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,
                                                   groups: groups,
@@ -128,7 +134,8 @@ final class BuildWorkoutReducerTests: XCTestCase {
         exerciseTileViewStates = [
             AddExerciseTileSectionViewState(header: .init(title: "I"),
                                             exercises: [
-                                                Fixtures.inclineDBRowTileViewState(isSelected: true, isFavorite: true)
+                                                Fixtures.inclineDBRowTileViewState(selectedGroups: [1],
+                                                                                   isFavorite: true)
                                             ])
         ]
         expectedDisplay = BuildWorkoutDisplay(allExercises: exerciseTileViewStates,

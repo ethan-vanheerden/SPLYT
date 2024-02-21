@@ -11,11 +11,16 @@ import Mocking
 import SwiftUI
 
 final class BuildWorkoutNavigationRouterTests: XCTestCase {
+    typealias Fixtures = BuildWorkoutFixtures
     private var mockNavigator: MockNavigator!
     private var sut: BuildWorkoutNavigationRouter!
     
     override func setUpWithError() throws {
-        sut = BuildWorkoutNavigationRouter()
+        let nameState = NameWorkoutNavigationState(name: Fixtures.workoutName)
+        let interactor = BuildWorkoutInteractor(service: MockBuildWorkoutService(),
+                                                nameState: nameState)
+        let viewModel = BuildWorkoutViewModel(interactor: interactor)
+        sut = BuildWorkoutNavigationRouter(viewModel: viewModel)
         mockNavigator = MockNavigator()
         sut.navigator = mockNavigator
     }
@@ -23,5 +28,17 @@ final class BuildWorkoutNavigationRouterTests: XCTestCase {
     func testNavigate_Exit() {
         sut.navigate(.exit)
         XCTAssertTrue(mockNavigator.calledDismissSelf)
+    }
+    
+    func testNavigate_EditSetsReps() {
+        sut.navigate(.editSetsReps)
+        
+        let expectedVC = UIHostingController<EditSetsRepsView<BuildWorkoutViewModel>>.self
+        XCTAssertTrue(mockNavigator.stubPushedVC?.isKind(of: expectedVC) ?? false)
+    }
+    
+    func testNavigate_GoBack() {
+        sut.navigate(.goBack)
+        XCTAssertTrue(mockNavigator.calledPop)
     }
 }

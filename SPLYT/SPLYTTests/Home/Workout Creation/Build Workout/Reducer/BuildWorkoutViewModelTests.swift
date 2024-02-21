@@ -73,29 +73,6 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         XCTAssertEqual(sut.viewState, .main(expectedDisplay))
     }
     
-    func testSend_RemoveGroup() async {
-        await load()
-        await sut.send(.addGroup) // Add a group to remove
-        await sut.send(.removeGroup(group: 1))
-        
-        let currentGroupTitle = "Current group: 0 exercises"
-        let groupTitles = ["Group 1"]
-        let expectedDisplay = BuildWorkoutDisplay(allExercises: Fixtures.exerciseTilesNoneSelected,
-                                                  groups: [[]],
-                                                  currentGroup: 0,
-                                                  currentGroupTitle: currentGroupTitle,
-                                                  groupTitles: groupTitles,
-                                                  lastGroupEmpty: true,
-                                                  showDialog: nil,
-                                                  backDialog: Fixtures.backDialog,
-                                                  saveDialog: Fixtures.saveDialog,
-                                                  canSave: false,
-                                                  filterDisplay: Fixtures.emptyFilterDisplay,
-                                                  isFiltering: false)
-        
-        XCTAssertEqual(sut.viewState, .main(expectedDisplay))
-    }
-    
     func testSend_ToggleExercise_AddExercise() async {
         await load()
         await sut.send(.toggleExercise(exerciseId: WorkoutFixtures.backSquatId))
@@ -248,12 +225,13 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let exerciseTileViewStates: [AddExerciseTileSectionViewState] = [
             AddExerciseTileSectionViewState(header: .init(title: "B"),
                                             exercises: [
-                                                Fixtures.backSquatTileViewState(isSelected: false, isFavorite: true),
-                                                Fixtures.benchPressTileViewState(isSelected: false, isFavorite: false)
+                                                Fixtures.backSquatTileViewState(selectedGroups: [], isFavorite: true),
+                                                Fixtures.benchPressTileViewState(selectedGroups: [], isFavorite: false)
                                             ]),
             AddExerciseTileSectionViewState(header: .init(title: "I"),
                                             exercises: [
-                                                Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)
+                                                Fixtures.inclineDBRowTileViewState(selectedGroups: [],
+                                                                                   isFavorite: false)
                                             ])
         ]
         let currentGroupTitle = "Current group: 0 exercises"
@@ -580,7 +558,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let groupTitles = ["Group 1"]
         let exercises: [AddExerciseTileSectionViewState] = [
             .init(header: .init(title: "B"),
-                  exercises: [Fixtures.backSquatTileViewState(isSelected: false, isFavorite: true)])
+                  exercises: [Fixtures.backSquatTileViewState(selectedGroups: [], isFavorite: true)])
         ]
         var musclesWorkedMap = Fixtures.musclesWorkedMap
         musclesWorkedMap[.quads] = true
@@ -614,7 +592,7 @@ final class BuildWorkoutViewModelTests: XCTestCase {
         let groupTitles = ["Group 1"]
         let exercises: [AddExerciseTileSectionViewState] = [
             .init(header: .init(title: "I"),
-                  exercises: [Fixtures.inclineDBRowTileViewState(isSelected: false, isFavorite: false)])
+                  exercises: [Fixtures.inclineDBRowTileViewState(selectedGroups: [], isFavorite: false)])
         ]
         let filterDisplay = BuildWorkoutFilterDisplay(isFavorite: false,
                                                       musclesWorked: Fixtures.musclesWorkedMap)

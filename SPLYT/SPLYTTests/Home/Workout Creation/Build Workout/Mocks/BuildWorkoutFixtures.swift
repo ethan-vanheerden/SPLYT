@@ -21,47 +21,47 @@ struct BuildWorkoutFixtures {
     
     // MARK: - Domain
     
-    static func backSquatAvailable(isSelected: Bool, isFavorite: Bool) -> AvailableExercise {
+    static func backSquatAvailable(selectedGroups: [Int], isFavorite: Bool) -> AvailableExercise {
         return AvailableExercise(id: WorkoutFixtures.backSquatId,
                                  name: "Back Squat",
                                  musclesWorked: [.quads, .glutes],
                                  isFavorite: isFavorite,
                                  defaultInputType: .repsWeight(input: .init()),
-                                 isSelected: isSelected)
+                                 selectedGroups: selectedGroups)
     }
     
-    static func benchPressAvailable(isSelected: Bool, isFavorite: Bool) -> AvailableExercise {
+    static func benchPressAvailable(selectedGroups: [Int], isFavorite: Bool) -> AvailableExercise {
         return AvailableExercise(id: WorkoutFixtures.benchPressId,
                                  name: "Bench Press",
                                  musclesWorked: [.chest],
                                  isFavorite: isFavorite,
                                  defaultInputType: .repsWeight(input: .init()),
-                                 isSelected: isSelected)
+                                 selectedGroups: selectedGroups)
     }
     
-    static func inclineDBRowAvailable(isSelected: Bool, isFavorite: Bool) -> AvailableExercise {
+    static func inclineDBRowAvailable(selectedGroups: [Int], isFavorite: Bool) -> AvailableExercise {
         return AvailableExercise(id: WorkoutFixtures.inclineRowId,
                                  name: "Incline Dumbbell Row",
                                  musclesWorked: [.back],
                                  isFavorite: isFavorite,
                                  defaultInputType: .repsWeight(input: .init()),
-                                 isSelected: isSelected)
+                                 selectedGroups: selectedGroups)
     }
     
     static let loadedExercisesNoneSelected: [AvailableExercise] = [
-        backSquatAvailable(isSelected: false, isFavorite: false),
-        benchPressAvailable(isSelected: false, isFavorite: false),
-        inclineDBRowAvailable(isSelected: false, isFavorite: false)
+        backSquatAvailable(selectedGroups: [], isFavorite: false),
+        benchPressAvailable(selectedGroups: [], isFavorite: false),
+        inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
     ]
     
     static let loadedExercisesNoneSelectedMap: [String: AvailableExercise] = [
-        WorkoutFixtures.backSquatId: backSquatAvailable(isSelected: false, isFavorite: false),
-        WorkoutFixtures.benchPressId: benchPressAvailable(isSelected: false, isFavorite: false),
-        WorkoutFixtures.inclineRowId: inclineDBRowAvailable(isSelected: false, isFavorite: false)
+        WorkoutFixtures.backSquatId: backSquatAvailable(selectedGroups: [], isFavorite: false),
+        WorkoutFixtures.benchPressId: benchPressAvailable(selectedGroups: [], isFavorite: false),
+        WorkoutFixtures.inclineRowId: inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
     ]
     
     static let backSquatNoneSelectedMap: [String: AvailableExercise] = [
-        WorkoutFixtures.backSquatId: backSquatAvailable(isSelected: false, isFavorite: false)
+        WorkoutFixtures.backSquatId: backSquatAvailable(selectedGroups: [], isFavorite: false)
     ]
     
     static let workoutName = "Test Workout"
@@ -90,48 +90,48 @@ struct BuildWorkoutFixtures {
     
     // MARK: - View States
     
-    static func backSquatTileViewState(isSelected: Bool, isFavorite: Bool) -> AddExerciseTileViewState {
+    static func backSquatTileViewState(selectedGroups: [Int], isFavorite: Bool) -> AddExerciseTileViewState {
         return AddExerciseTileViewState(id: WorkoutFixtures.backSquatId,
                                         exerciseName: "Back Squat",
-                                        isSelected: isSelected,
+                                        selectedGroups: selectedGroups,
                                         isFavorite: isFavorite)
     }
     
-    static func benchPressTileViewState(isSelected: Bool, isFavorite: Bool) -> AddExerciseTileViewState {
+    static func benchPressTileViewState(selectedGroups: [Int], isFavorite: Bool) -> AddExerciseTileViewState {
         return AddExerciseTileViewState(id: WorkoutFixtures.benchPressId,
                                         exerciseName: "Bench Press",
-                                        isSelected: isSelected,
+                                        selectedGroups: selectedGroups,
                                         isFavorite: isFavorite)
     }
     
-    static func inclineDBRowTileViewState(isSelected: Bool, isFavorite: Bool) -> AddExerciseTileViewState {
+    static func inclineDBRowTileViewState(selectedGroups: [Int], isFavorite: Bool) -> AddExerciseTileViewState {
         return AddExerciseTileViewState(id: WorkoutFixtures.inclineRowId,
                                         exerciseName: "Incline Dumbbell Row",
-                                        isSelected: isSelected,
+                                        selectedGroups: selectedGroups,
                                         isFavorite: isFavorite)
     }
     
     static let exerciseTilesNoneSelected: [AddExerciseTileSectionViewState] = [
         AddExerciseTileSectionViewState(header: .init(title: "B"),
                                         exercises: [
-                                            backSquatTileViewState(isSelected: false, isFavorite: false),
-                                            benchPressTileViewState(isSelected: false, isFavorite: false)
+                                            backSquatTileViewState(selectedGroups: [], isFavorite: false),
+                                            benchPressTileViewState(selectedGroups: [], isFavorite: false)
                                         ]),
         AddExerciseTileSectionViewState(header: .init(title: "I"),
                                         exercises: [
-                                            inclineDBRowTileViewState(isSelected: false, isFavorite: false)
+                                            inclineDBRowTileViewState(selectedGroups: [], isFavorite: false)
                                         ])
     ]
     
     static let exerciseTilesBackSquatSelected: [AddExerciseTileSectionViewState] = [
         AddExerciseTileSectionViewState(header: .init(title: "B"),
                                         exercises: [
-                                            backSquatTileViewState(isSelected: true, isFavorite: false),
-                                            benchPressTileViewState(isSelected: false, isFavorite: false)
+                                            backSquatTileViewState(selectedGroups: [0], isFavorite: false),
+                                            benchPressTileViewState(selectedGroups: [], isFavorite: false)
                                         ]),
         AddExerciseTileSectionViewState(header: .init(title: "I"),
                                         exercises: [
-                                            inclineDBRowTileViewState(isSelected: false, isFavorite: false)
+                                            inclineDBRowTileViewState(selectedGroups: [], isFavorite: false)
                                         ])
     ]
     

@@ -83,9 +83,9 @@ final class BuildWorkoutServiceTests: XCTestCase {
         
         let result = try await sut.loadAvailableExercises()
         let exerciseMap = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: true),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: true),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         
         // Updated with the network data (including favorites)
@@ -106,9 +106,9 @@ final class BuildWorkoutServiceTests: XCTestCase {
         
         let result = try await sut.loadAvailableExercises()
         let exerciseMap = [
-            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(isSelected: false, isFavorite: true),
-            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(isSelected: false, isFavorite: false),
-            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(isSelected: false, isFavorite: false)
+            WorkoutFixtures.backSquatId: Fixtures.backSquatAvailable(selectedGroups: [], isFavorite: true),
+            WorkoutFixtures.benchPressId: Fixtures.benchPressAvailable(selectedGroups: [], isFavorite: false),
+            WorkoutFixtures.inclineRowId: Fixtures.inclineDBRowAvailable(selectedGroups: [], isFavorite: false)
         ]
         
         XCTAssertEqual(result, exerciseMap)

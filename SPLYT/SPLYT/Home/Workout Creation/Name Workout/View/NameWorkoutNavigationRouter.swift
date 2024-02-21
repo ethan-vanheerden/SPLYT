@@ -27,9 +27,12 @@ struct NameWorkoutNavigationState {
 
 final class NameWorkoutNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
+    private let buildWorkoutService: BuildWorkoutServiceType
     private let saveAction: ((Workout) -> Void)? // Custom override save workout action
     
-    init(saveAction: ((Workout) -> Void)? = nil) {
+    init(buildWorkoutService: BuildWorkoutServiceType = BuildWorkoutService(),
+         saveAction: ((Workout) -> Void)? = nil) {
+        self.buildWorkoutService = buildWorkoutService
         self.saveAction = saveAction
     }
     
@@ -55,8 +58,8 @@ private extension NameWorkoutNavigationRouter {
     }
     
     func startBuildWorkout(navState: NameWorkoutNavigationState) {
-        // TODO: need to use a mock interactor here
-        let interactor = BuildWorkoutInteractor(nameState: navState, saveAction: saveAction)
+        let interactor = BuildWorkoutInteractor(service: buildWorkoutService,
+                                                nameState: navState, saveAction: saveAction)
         let viewModel = BuildWorkoutViewModel(interactor: interactor)
         let navRouter = BuildWorkoutNavigationRouter(viewModel: viewModel)
         navRouter.navigator = navigator
