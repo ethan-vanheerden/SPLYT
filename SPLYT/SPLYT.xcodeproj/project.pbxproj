@@ -135,6 +135,7 @@
 		AA672A912A743CF00009919E /* WorkoutDetailsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A902A743CF00009919E /* WorkoutDetailsServiceTests.swift */; };
 		AA672A932A743F340009919E /* MockWorkoutDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A922A743F340009919E /* MockWorkoutDetailsService.swift */; };
 		AA672A952A7440380009919E /* WorkoutDetailsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672A942A7440380009919E /* WorkoutDetailsInteractorTests.swift */; };
+		AA72C60C2B891E0200E36B9C /* UserAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AA72C60B2B891E0200E36B9C /* UserAuth */; };
 		AA76AABF2A9D044300FEF8D6 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AABE2A9D044300FEF8D6 /* AuthManagerTests.swift */; };
 		AA76AAC12A9D094200FEF8D6 /* LoginServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC02A9D094200FEF8D6 /* LoginServiceTests.swift */; };
 		AA76AAC42A9D09B800FEF8D6 /* LoginFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA76AAC32A9D09B800FEF8D6 /* LoginFixtures.swift */; };
@@ -183,7 +184,6 @@
 		AAB42B5C2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */; };
 		AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */; };
 		AAB42B602A7C055F002A1ED2 /* SettingsItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */; };
-		AABE9EC32B264ABA00B1135A /* UserAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AABE9EC22B264ABA00B1135A /* UserAuth */; };
 		AABE9EC52B27999700B1135A /* GetFavoriteExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */; };
 		AABE9EC82B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC72B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift */; };
 		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
@@ -428,7 +428,7 @@
 		AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsReducerTests.swift; sourceTree = "<group>"; };
 		AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsViewModelTests.swift; sourceTree = "<group>"; };
 		AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemTests.swift; sourceTree = "<group>"; };
-		AABE9EC12B2645CC00B1135A /* UserAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UserAuth; path = ../../../UserAuth; sourceTree = "<group>"; };
+		AABE9EC12B2645CC00B1135A /* UserAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserAuth; sourceTree = "<group>"; };
 		AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteExercisesRequest.swift; sourceTree = "<group>"; };
 		AABE9EC72B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFavoriteExercisesRequest.swift; sourceTree = "<group>"; };
 		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
@@ -490,7 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA60DA01294B7FA0008C7615 /* Caching in Frameworks */,
-				AABE9EC32B264ABA00B1135A /* UserAuth in Frameworks */,
+				AA72C60C2B891E0200E36B9C /* UserAuth in Frameworks */,
 				AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */,
 				AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */,
 				AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */,
@@ -1900,7 +1900,7 @@
 				AA2B25FF2A7F2F430001E79A /* FirebaseAuth */,
 				AA2B26012A7F2F430001E79A /* FirebaseCrashlytics */,
 				AA2B26032A7F2F430001E79A /* FirebaseFunctions */,
-				AABE9EC22B264ABA00B1135A /* UserAuth */,
+				AA72C60B2B891E0200E36B9C /* UserAuth */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -2544,7 +2544,7 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Caching;
 		};
-		AABE9EC22B264ABA00B1135A /* UserAuth */ = {
+		AA72C60B2B891E0200E36B9C /* UserAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UserAuth;
 		};
