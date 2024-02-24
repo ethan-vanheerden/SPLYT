@@ -21,13 +21,13 @@ final class AddExerciseTileTests: XCTestCase {
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "power-clean",
                                                                 exerciseName: "POWER CLEAN",
-                                                                isSelected: false,
+                                                                selectedGroups: [0, 1],
                                                                 isFavorite: true),
                             tapAction: { },
                             favoriteAction: { })
             AddExerciseTile(viewState: AddExerciseTileViewState(id: "lat-pulldown",
                                                                 exerciseName: "LAT PULLDOWN",
-                                                                isSelected: true,
+                                                                selectedGroups: [],
                                                                 isFavorite: true),
                             tapAction: { },
                             favoriteAction: { })

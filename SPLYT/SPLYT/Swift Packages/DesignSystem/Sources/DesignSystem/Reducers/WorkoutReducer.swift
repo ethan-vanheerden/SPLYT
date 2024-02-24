@@ -116,9 +116,13 @@ private extension WorkoutReducer {
         return exercises.map { exercise in
             let headerState = SectionHeaderViewState(title: exercise.name,
                                                      includeLine: includeHeaderLine)
+            let numSetsTitle = getNumSetsTitle(numSets: exercise.sets.count)
+            
             return ExerciseViewState(header: headerState,
                                      sets: getSetStates(exercise: exercise),
-                                     canRemoveSet: exercise.sets.count > 1)
+                                     canRemoveSet: exercise.sets.count > 1,
+                                     numSetsTitle: numSetsTitle
+            )
         }
     }
     
@@ -174,12 +178,18 @@ private extension WorkoutReducer {
             return .eccentric
         }
     }
+    
+    static func getNumSetsTitle(numSets: Int) -> String {
+        let setsPlural = numSets == 1 ? Strings.set : Strings.sets
+        return "\(numSets) \(setsPlural)"
+    }
 }
 
 // MARK: - Strings
 
 fileprivate struct Strings {
     static let set = "Set"
+    static let sets = "Sets"
     static let lbs = "lbs"
     static let reps = "reps"
     static let sec = "sec"

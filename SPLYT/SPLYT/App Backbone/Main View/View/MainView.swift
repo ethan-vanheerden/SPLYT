@@ -52,8 +52,6 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
             }
         }
         .ignoresSafeArea()
-        .preferredColorScheme(.light)
-        .colorScheme(.light)
     }
     
     @ViewBuilder

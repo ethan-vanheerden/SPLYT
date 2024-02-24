@@ -34,23 +34,6 @@ public struct IconButton: View {
     }
 }
 
-struct IconButton_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            IconButton(iconName: "plus") { }
-            IconButton(iconName: "minus",
-                       style: .primary(backgroundColor: .red),
-                       iconColor: .white) { }
-            IconButton(iconName: "gamecontroller",
-                       style: .primary(backgroundColor: .red, outlineColor: .yellow),
-                       iconColor: .green) { }
-            IconButton(iconName: "circle.square",
-                       style: .secondary,
-                       iconColor: .green) { }
-        }
-    }
-}
-
 // MARK: - Button Style
 
 public enum IconButtonConfiguration {

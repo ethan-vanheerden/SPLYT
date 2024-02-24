@@ -18,4 +18,11 @@ final class MockDoPlanService: DoPlanServiceType {
         if loadPlanThrow { throw MockError.someError }
         return WorkoutFixtures.myPlan
     }
+    
+    private(set) var deleteWorkoutCalled = false
+    var deleteWorkoutThrow = false
+    func deleteWorkout(planId: String, workoutId: String) throws {
+        deleteWorkoutCalled = true
+        if deleteWorkoutThrow { throw MockError.someError }
+    }
 }

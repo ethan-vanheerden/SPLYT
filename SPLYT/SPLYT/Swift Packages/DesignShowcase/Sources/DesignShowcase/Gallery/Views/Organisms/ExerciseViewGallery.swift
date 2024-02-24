@@ -46,7 +46,9 @@ struct ExerciseViewGallery: View {
                     .padding(.horizontal)
                 ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "BACK SQUAT"),
                                                           sets: setsOne,
-                                                          canRemoveSet: true),
+                                                          canRemoveSet: true,
+                                                          numSetsTitle: "3 sets"
+                                                         ),
                              type: .build(addModifierAction: { _ in },
                                           removeModifierAction: { _ in }),
                              addSetAction: { },
@@ -58,7 +60,9 @@ struct ExerciseViewGallery: View {
                     .padding(.horizontal)
                 ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "PUSHUPS"),
                                                           sets: setsTwo,
-                                                          canRemoveSet: false),
+                                                          canRemoveSet: false,
+                                                          numSetsTitle: "3 sets"
+                                                         ),
                              type: .inProgress(usePreviousInputAction: { _, _ in },
                                                addNoteAction: { }),
                              addSetAction: { },

@@ -41,7 +41,7 @@ struct DoPlanView<VM: ViewModel>: View where VM.Event == DoPlanViewEvent, VM.Vie
                     RoutineTile(viewState: viewState,
                                 tapAction: { navigationRouter.navigate(.doWorkout(workoutId: viewState.id)) },
                                 editAction: { },
-                                deleteAction: { })
+                                deleteAction: { viewModel.send(.deleteWorkout(workoutId: viewState.id)) })
                     
                 }
             }

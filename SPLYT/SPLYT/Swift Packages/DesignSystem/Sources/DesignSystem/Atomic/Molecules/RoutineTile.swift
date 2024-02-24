@@ -34,9 +34,10 @@ public struct RoutineTile: View {
                 }
                 Spacer()
                 if viewState.includeIcon {
-                    IconButton(iconName: "ellipsis",
+                    IconButton(iconName: "ellipsis.circle",
+//                               style: .primary(backgroundColor: .white, outlineColor: .lightBlue),
                                style: .secondary,
-                               iconColor: .black) { showActionSheet = true }
+                               iconColor: .lightBlue) { showActionSheet = true }
                 }
             }
             .frame(height: Layout.size(6)) // Fixed height even if there is no last completed

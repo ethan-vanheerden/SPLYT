@@ -224,6 +224,38 @@ final class CreatedRoutinesServiceTests: XCTestCase {
         XCTAssertEqual(savedData?.plans, expectedPlans)
         XCTAssertTrue(cacheInteractor.saveCalled)
     }
+    
+    func testDeleteWorkout_CacheError() {
+        cacheInteractor.stubFileExists = true
+        cacheInteractor.loadThrow = true
+        cacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        
+        XCTAssertThrowsError(try sut.deleteWorkout(fromPlanId: WorkoutFixtures.myPlanId,
+                                                   workoutId: WorkoutFixtures.legWorkoutId))
+        XCTAssertTrue(cacheInteractor.loadCalled)
+        XCTAssertFalse(cacheInteractor.saveCalled)
+    }
+    
+    func testDeleteWorkout_Success() throws {
+        cacheInteractor.stubFileExists = true
+        cacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        try sut.deleteWorkout(fromPlanId: WorkoutFixtures.myPlanId,
+                              workoutId: WorkoutFixtures.legWorkoutId)
+        
+        var updatedPlan = WorkoutFixtures.myPlan
+        updatedPlan.workouts.remove(at: 0)
+        
+        let updatedRoutines: CreatedRoutines = .init(workouts: WorkoutFixtures.loadedWorkouts,
+                                                     plans: [WorkoutFixtures.myPlanId: updatedPlan])
+        let savedData = try XCTUnwrap(cacheInteractor.stubData as? CreatedRoutines)
+        
+        XCTAssertTrue(cacheInteractor.loadCalled)
+        XCTAssertTrue(cacheInteractor.saveCalled)
+        XCTAssertEqual(savedData, updatedRoutines)
+        
+    }
 }
 
 // MARK: - Private

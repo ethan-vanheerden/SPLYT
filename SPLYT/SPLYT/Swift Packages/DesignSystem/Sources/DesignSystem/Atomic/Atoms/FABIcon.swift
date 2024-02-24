@@ -18,9 +18,7 @@ public struct FABIcon: View {
                     .shadow(.drop(radius: Layout.size(1))))
                 .frame(width: circleSize)
             Image(systemName: viewState.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: iconSize)
+                .imageScale(iconSize)
                 .foregroundColor(Color(splytColor: viewState.size.iconColor))
         }
         .gesture(press)
@@ -61,12 +59,12 @@ public struct FABIcon: View {
         }
     }
     
-    private var iconSize: CGFloat {
+    private var iconSize: Image.Scale {
         switch viewState.size {
         case .primary:
-            return isPressed ? Layout.size(2.2) : Layout.size(2.5)
+            return isPressed ? .medium : .large
         case .secondary:
-            return isPressed ? Layout.size(1.75) : Layout.size(2)
+            return isPressed ? .small : .medium
         }
     }
 }

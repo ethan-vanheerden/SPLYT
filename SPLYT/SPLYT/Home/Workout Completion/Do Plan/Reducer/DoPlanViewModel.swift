@@ -12,6 +12,7 @@ import Core
 
 enum DoPlanViewEvent {
     case load
+    case deleteWorkout(workoutId: String)
 }
 
 // MARK: - View Model
@@ -29,6 +30,8 @@ final class DoPlanViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .load)
+        case .deleteWorkout(let workoutId):
+            await react(domainAction: .deleteWorkout(workoutId: workoutId))
         }
     }
 }
