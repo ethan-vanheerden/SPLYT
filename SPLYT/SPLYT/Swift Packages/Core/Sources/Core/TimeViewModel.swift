@@ -29,7 +29,7 @@ open class TimeViewModel<T, U>: ViewModel {
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self,
-                      let timeStarted = timeStarted else { return }
+                      let timeStarted = self.timeStarted else { return }
                 let currentTime = Date()
                 self.secondsElapsed = Int(currentTime.timeIntervalSince(timeStarted))
             }

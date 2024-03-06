@@ -35,7 +35,6 @@ public struct RoutineTile: View {
                 Spacer()
                 if viewState.includeIcon {
                     IconButton(iconName: "ellipsis.circle",
-//                               style: .primary(backgroundColor: .white, outlineColor: .lightBlue),
                                style: .secondary,
                                iconColor: .lightBlue) { showActionSheet = true }
                 }
