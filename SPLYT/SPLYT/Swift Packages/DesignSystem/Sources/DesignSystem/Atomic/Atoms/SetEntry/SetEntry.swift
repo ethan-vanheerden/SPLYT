@@ -3,21 +3,19 @@ import ExerciseCore
 
 public struct SetEntry: View {
     @Binding private var input: String // Binding so that the text can be updated via a view model
+    private let tagCounter = TagCounter.shared
     private let title: String
     private let keyboardType: KeyboardInputType
     private let placeholder: String?
-    private let tag: Int
     
     public init(input: Binding<String>,
                 title: String,
                 keyboardType: KeyboardInputType,
-                placeholder: String? = nil,
-                tag: Int) {
+                placeholder: String? = nil) {
         self._input = input
         self.title = title
         self.keyboardType = keyboardType
         self.placeholder = placeholder
-        self.tag = tag
     }
     
     public var body: some View {
@@ -27,7 +25,7 @@ public struct SetEntry: View {
                 SetEntryTextField(text: $input,
                                   placeholder: placeholder,
                                   keyboardType: keyboardType,
-                                  tag: tag)
+                                  tag: tagCounter.getTag())
                 .shadow(radius: Layout.size(0.125))
                 .frame(width: Layout.size(8))
                 .fixedSize()

@@ -10,12 +10,10 @@ struct SetEntryGallery: View {
             SetEntry(input: $textOne,
                      title: "lbs",
                      keyboardType: .weight,
-                     placeholder: "12",
-                     tag: 1)
+                     placeholder: "12")
             SetEntry(input: $textTwo,
                      title: "reps",
-                     keyboardType: .reps,
-                     tag: 2)
+                     keyboardType: .reps)
             Spacer()
         }
     }
