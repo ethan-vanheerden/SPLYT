@@ -12,7 +12,7 @@ public struct SetEntry: View {
                 title: String,
                 keyboardType: KeyboardInputType,
                 placeholder: String? = nil,
-                tag: Int = 0) {
+                tag: Int) {
         self._input = input
         self.title = title
         self.keyboardType = keyboardType

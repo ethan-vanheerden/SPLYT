@@ -1,10 +1,10 @@
-
 import SwiftUI
 import ExerciseCore
 import Core
 
 public struct SetView: View {
     @State private var showBaseActionSheet: Bool = false
+    private let tagCounter = TagCounter.shared
     private let viewState: SetViewState
     private let exerciseType: ExerciseViewType
     private let updateSetAction: (Int, SetInput) -> Void // Set index, the new input
@@ -96,7 +96,8 @@ public struct SetView: View {
                 SetEntry(input: repsBinding,
                          title: repsTitle,
                          keyboardType: .reps,
-                         placeholder: String(input.repsPlaceholder))
+                         placeholder: String(input.repsPlaceholder),
+                         tag: tagCounter.getTag())
                 
                 // Weight Entry
                 let weightBinding = entryBinding(value: String(input.weight),
@@ -105,7 +106,8 @@ public struct SetView: View {
                 SetEntry(input: weightBinding,
                          title: weightTitle,
                          keyboardType: .weight,
-                         placeholder: String(input.weightPlaceholder))
+                         placeholder: String(input.weightPlaceholder),
+                         tag: tagCounter.getTag())
             }
         case let .repsOnly(title, input):
             let repsBinding = entryBinding(value: String(input.reps),
@@ -114,7 +116,8 @@ public struct SetView: View {
             SetEntry(input: repsBinding,
                      title: title,
                      keyboardType: .reps,
-                     placeholder: String(input.placeholder))
+                     placeholder: String(input.placeholder),
+                     tag: tagCounter.getTag())
         case let .time(title, input):
             let secondsBinding = entryBinding(value: String(input.seconds),
                                               input: setInput,
@@ -122,7 +125,8 @@ public struct SetView: View {
             SetEntry(input: secondsBinding,
                      title: title,
                      keyboardType: .time,
-                     placeholder: String(input.placeholder))
+                     placeholder: String(input.placeholder),
+                     tag: tagCounter.getTag())
         }
     }
     
