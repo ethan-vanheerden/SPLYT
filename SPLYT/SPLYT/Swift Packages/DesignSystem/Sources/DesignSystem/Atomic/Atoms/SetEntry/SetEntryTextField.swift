@@ -5,21 +5,25 @@ struct SetEntryTextField: UIViewRepresentable {
     @State private var isFocused: Bool = false
     @Binding private var text: String
     private let placeholder: String?
+    private let tag: Int
     private let keyboardType: KeyboardInputType
-    private let maxCharacters = 6
+    private let MAX_CHARACTERS = 6
     
     init(text: Binding<String>,
          placeholder: String?,
-         keyboardType: KeyboardInputType) {
+         keyboardType: KeyboardInputType,
+         tag: Int) {
         self._text = text
         self.placeholder = placeholder
         self.keyboardType = keyboardType
+        self.tag = tag
     }
     
     func makeUIView(context: Context) -> UITextField {
         let textField = UITextField()
         
         textField.delegate = context.coordinator
+        textField.tag = tag
         textField.placeholder = placeholder
         textField.borderStyle = .roundedRect
         textField.keyboardType = keyboardType.keyboardType
@@ -39,17 +43,8 @@ struct SetEntryTextField: UIViewRepresentable {
         textField.addTarget(context.coordinator, action: #selector(Coordinator.textFieldDidBeginEditing(_:)), for: .editingDidBegin)
         textField.addTarget(context.coordinator, action: #selector(Coordinator.textFieldDidEndEditing(_:)), for: .editingDidEnd)
         
-        let toolbar = UIToolbar()
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                        target: nil, action: nil)
-        let done = UIBarButtonItem(title: "Done",
-                                   style: .done,
-                                   target: context.coordinator,
-                                   action: #selector(Coordinator.dismissKeyboard))
-        
-        toolbar.setItems([flexSpace, done], animated: true)
-        toolbar.sizeToFit()
-        textField.inputAccessoryView = toolbar
+        textField.inputAccessoryView = createToolbar(textField: textField,
+                                                     context: context)
         
         return textField
     }
@@ -61,6 +56,34 @@ struct SetEntryTextField: UIViewRepresentable {
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
+    }
+    
+    private func createToolbar(textField: UITextField, context: Context) -> UIToolbar {
+        let toolbar = UIToolbar()
+        
+        // Toolbar buttons
+        let backArrow = UIBarButtonItem(image: .init(systemName: "chevron.left"),
+                                        style: .plain,
+                                        target: context.coordinator,
+                                        action: #selector(Coordinator.backArrowTapped))
+        let forwardArrow = UIBarButtonItem(image: .init(systemName: "chevron.right"),
+                                           style: .plain,
+                                           target: context.coordinator,
+                                           action: #selector(Coordinator.forwardArrowTapped))
+        let done = UIBarButtonItem(title: "Done",
+                                   style: .done,
+                                   target: context.coordinator,
+                                   action: #selector(Coordinator.dismissKeyboard))
+        
+        toolbar.setItems([backArrow,
+                          .fixedSpace(Layout.size(2)),
+                          forwardArrow,
+                          .flexibleSpace(),
+                          done],
+                         animated: true)
+        toolbar.sizeToFit()
+        
+        return toolbar
     }
     
     // MARK: - Coordinator
@@ -82,19 +105,41 @@ struct SetEntryTextField: UIViewRepresentable {
             let validInput: Bool
             switch parent.keyboardType {
             case .reps, .time:
-                validInput =  isValidNumericInput(string)
+                validInput = isValidNumericInput(string)
             case .weight:
                 validInput = isValidDecimalInput(currentText, string)
             }
             
             let newLength = currentText.count + string.count - range.length
             
-            return (newLength <= parent.maxCharacters) && validInput
+            return (newLength <= parent.MAX_CHARACTERS) && validInput
         }
         
         @objc func dismissKeyboard() {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
+        
+        @objc func backArrowTapped() {
+            focusTextField(nextTag: parent.tag - 1)
+        }
+        
+        @objc func forwardArrowTapped() {
+            focusTextField(nextTag: parent.tag + 1)
+        }
+        
+        private func focusTextField(nextTag: Int) {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first,
+               let currentTextField = window.viewWithTag(parent.tag) as? UITextField {
+                
+                if let nextTextField = window.viewWithTag(nextTag) as? UITextField {
+                    nextTextField.becomeFirstResponder()
+                } else {
+                    currentTextField.resignFirstResponder()
+                }
+            }
+        }
+        
         
         @objc func textFieldDidBeginEditing(_ textField: UITextField) {
             parent.isFocused = true
