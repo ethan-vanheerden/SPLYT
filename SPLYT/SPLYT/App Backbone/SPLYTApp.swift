@@ -15,7 +15,6 @@ struct SPLYTApp: App {
         WindowGroup {
             MainViewController_SwiftUI()
                 .ignoresSafeArea(.all)
-                .preferredColorScheme(.light)
         }
     }
 }

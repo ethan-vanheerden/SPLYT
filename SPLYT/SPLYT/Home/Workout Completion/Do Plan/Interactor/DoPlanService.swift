@@ -13,6 +13,7 @@ import Caching
 
 protocol DoPlanServiceType {
     func loadPlan(planId: String) throws -> Plan
+    func deleteWorkout(planId: String, workoutId: String) throws
 }
 
 // MARK: - Implementation
@@ -26,6 +27,11 @@ struct DoPlanService: DoPlanServiceType {
     
     func loadPlan(planId: String) throws -> Plan {
         return try routineService.loadPlan(id: planId)
+    }
+    
+    func deleteWorkout(planId: String, workoutId: String) throws {
+        try routineService.deleteWorkout(fromPlanId: planId,
+                                         workoutId: workoutId)
     }
 }
 

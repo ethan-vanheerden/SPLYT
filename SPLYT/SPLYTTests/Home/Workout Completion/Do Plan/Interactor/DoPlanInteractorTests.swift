@@ -12,6 +12,8 @@ import XCTest
 final class DoPlanInteractorTests: XCTestCase {
     typealias WorkoutFixtures = WorkoutModelFixtures
     private var mockService: MockDoPlanService!
+    private let legWorkoutId = WorkoutFixtures.legWorkoutId
+    
     private var sut: DoPlanInteractor!
 
     override func setUpWithError() throws {
@@ -28,9 +30,46 @@ final class DoPlanInteractorTests: XCTestCase {
     }
     
     func testInteract_Load_Success() async {
-        let result = await sut.interact(with: .load)
+        let result = await load()
         let expectedDomain = DoPlanDomain(plan: WorkoutFixtures.myPlan)
         
         XCTAssertEqual(result, .loaded(expectedDomain))
+    }
+    
+    func testInteract_DeleteWorkout_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .deleteWorkout(workoutId: legWorkoutId))
+        
+        XCTAssertEqual(result, .error)
+        XCTAssertFalse(mockService.deleteWorkoutCalled)
+    }
+    
+    func testInteract_DeleteWorkout_ServiceError() async {
+        mockService.deleteWorkoutThrow = true
+        await load()
+        let result = await sut.interact(with: .deleteWorkout(workoutId: legWorkoutId))
+        
+        XCTAssertEqual(result, .error)
+        XCTAssertTrue(mockService.deleteWorkoutCalled)
+    }
+    
+    func testInteract_DeleteWorkout_Success() async {
+        await load()
+        let result = await sut.interact(with: .deleteWorkout(workoutId: legWorkoutId))
+        
+        var expectedPlan = WorkoutFixtures.myPlan
+        expectedPlan.workouts.remove(at: 0)
+        let expectedDomain = DoPlanDomain(plan: expectedPlan)
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+        XCTAssertTrue(mockService.deleteWorkoutCalled)
+    }
+}
+
+// MARK: - Private
+
+private extension DoPlanInteractorTests {
+    @discardableResult
+    func load() async -> DoPlanDomainResult {
+        return await sut.interact(with: .load)
     }
 }

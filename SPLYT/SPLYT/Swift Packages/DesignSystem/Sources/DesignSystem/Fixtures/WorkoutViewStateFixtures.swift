@@ -1,6 +1,6 @@
 import ExerciseCore
 
-// TODO: this needs to be moved to the test target but xcode is broken
+// TODO: this needs to be moved to the test target but XCode is broken
 /// Contains test view states for things related to workouts.
 public struct WorkoutViewStateFixtures {
     public typealias ModelFixtures = WorkoutModelFixtures
@@ -36,13 +36,18 @@ public struct WorkoutViewStateFixtures {
         return sets
     }
     
+    public static func numSetsTitle(numSets: Int) -> String {
+        return "\(numSets) \(numSets == 1 ? "Set" : "Sets")"
+    }
+    
     public static func backSquatViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
                                           includeHeaderLine: Bool = true) -> ExerciseViewState {
         let header = SectionHeaderViewState(title: "Back Squat",
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
-                                 canRemoveSet: inputs.count > 1)
+                                 canRemoveSet: inputs.count > 1,
+                                 numSetsTitle: numSetsTitle(numSets: inputs.count))
     }
     
     public static func barLungesViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
@@ -51,7 +56,8 @@ public struct WorkoutViewStateFixtures {
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
-                                 canRemoveSet: inputs.count > 1)
+                                 canRemoveSet: inputs.count > 1,
+                                 numSetsTitle: numSetsTitle(numSets: inputs.count))
     }
     
     public static func benchPressViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
@@ -60,7 +66,8 @@ public struct WorkoutViewStateFixtures {
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
-                                 canRemoveSet: inputs.count > 1)
+                                 canRemoveSet: inputs.count > 1,
+                                 numSetsTitle: numSetsTitle(numSets: inputs.count))
     }
     
     public static func inclineDBRowViewState(inputs: [(SetInputViewState, SetModifierViewState?)],
@@ -69,7 +76,8 @@ public struct WorkoutViewStateFixtures {
                                             includeLine: includeHeaderLine)
         return ExerciseViewState(header: header,
                                  sets: createSetViewStates(inputs: inputs),
-                                 canRemoveSet: inputs.count > 1)
+                                 canRemoveSet: inputs.count > 1,
+                                 numSetsTitle: numSetsTitle(numSets: inputs.count))
     }
     
     public static func backSquatViewStateCompleted(inputs: [(SetInputViewState, SetModifierViewState?)],

@@ -9,5 +9,5 @@ import Foundation
 import ExerciseCore
 
 struct DoPlanDomain: Equatable {
-    let plan: Plan
+    var plan: Plan
 }

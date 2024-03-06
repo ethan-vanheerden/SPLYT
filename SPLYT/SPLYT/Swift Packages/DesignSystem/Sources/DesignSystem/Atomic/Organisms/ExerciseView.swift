@@ -83,13 +83,16 @@ public struct ExerciseViewState: Equatable, Hashable {
     public let header: SectionHeaderViewState
     public let sets: [SetViewState]
     let canRemoveSet: Bool
+    public let numSetsTitle: String
     
     public init(header: SectionHeaderViewState,
                 sets: [SetViewState],
-                canRemoveSet: Bool) {
+                canRemoveSet: Bool,
+                numSetsTitle: String) {
         self.header = header
         self.sets = sets
         self.canRemoveSet = canRemoveSet
+        self.numSetsTitle = numSetsTitle
     }
 }
 

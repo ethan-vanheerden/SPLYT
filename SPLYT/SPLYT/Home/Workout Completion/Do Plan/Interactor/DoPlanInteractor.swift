@@ -11,6 +11,7 @@ import Foundation
 
 enum DoPlanDomainAction {
     case load
+    case deleteWorkout(workoutId: String)
 }
 
 // MARK: - Domain Results
@@ -37,6 +38,8 @@ final class DoPlanInteractor {
         switch action {
         case .load:
             return handleLoad()
+        case .deleteWorkout(let workoutId):
+            return handleDeleteWorkout(workoutId: workoutId)
         }
     }
 }
@@ -44,7 +47,6 @@ final class DoPlanInteractor {
 // MARK: - Private Handlers
 
 private extension DoPlanInteractor {
-    
     func handleLoad() -> DoPlanDomainResult {
         do {
             let plan = try service.loadPlan(planId: planId)
@@ -54,6 +56,23 @@ private extension DoPlanInteractor {
         } catch {
             return .error
         }
+    }
+    
+    func handleDeleteWorkout(workoutId: String) -> DoPlanDomainResult {
+        guard var domain = savedDomain else { return .error }
+        var plan = domain.plan
+        
+        do {
+            try service.deleteWorkout(planId: plan.id, workoutId: workoutId)
+        } catch {
+            return .error
+        }
+        
+        // Remove from local state copy too before update
+        plan.workouts.removeAll { $0.id == workoutId }
+        domain.plan = plan
+        
+        return updateDomain(domain: domain)
     }
 }
 

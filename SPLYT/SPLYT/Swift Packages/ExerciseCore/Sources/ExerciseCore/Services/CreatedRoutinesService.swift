@@ -31,6 +31,8 @@ public protocol CreatedRoutinesServiceType {
     func loadPlan(id: String) throws -> Plan
     
     func savePlan(_: Plan) throws
+    
+    func deleteWorkout(fromPlanId: String, workoutId: String) throws
 }
 
 // MARK: - Implementation
@@ -104,6 +106,16 @@ public struct CreatedRoutinesService: CreatedRoutinesServiceType {
     public func savePlan(_ plan: Plan) throws {
         var routines = try loadRoutines()
         routines.plans[plan.id] = plan
+        try saveRoutines(routines)
+    }
+    
+    public func deleteWorkout(fromPlanId: String, workoutId: String) throws {
+        var routines = try loadRoutines()
+        var plan = routines.plans[fromPlanId]
+        
+        plan?.workouts.removeAll { $0.id == workoutId }
+        routines.plans[fromPlanId] = plan
+        
         try saveRoutines(routines)
     }
 }

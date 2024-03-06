@@ -21,13 +21,13 @@ public struct ScreenLocker: ScreenLockerType {
     
     public func disableAutoLock() {
         DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = false
+            UIApplication.shared.isIdleTimerDisabled = true
         }
     }
     
     public func enableAutoLock() {
         DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = true
+            UIApplication.shared.isIdleTimerDisabled = false
         }
     }
 }

@@ -44,4 +44,24 @@ final class DoPlanServiceTests: XCTestCase {
         
         XCTAssertEqual(result, WorkoutFixtures.myPlan)
     }
+    
+    func testDeleteWorkout_RoutineServiceError() {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.loadThrow = true
+        XCTAssertThrowsError(try sut.deleteWorkout(planId: WorkoutFixtures.myPlanId,
+                                                   workoutId: WorkoutFixtures.legWorkoutId))
+        XCTAssertTrue(routineCacheInteractor.loadCalled)
+        XCTAssertFalse(routineCacheInteractor.saveCalled)
+    }
+    
+    func testDeleteWorkout_Success() throws {
+        routineCacheInteractor.stubFileExists = true
+        routineCacheInteractor.stubData = WorkoutFixtures.loadedRoutines
+        
+        try sut.deleteWorkout(planId: WorkoutFixtures.myPlanId,
+                          workoutId: WorkoutFixtures.legWorkoutId)
+        
+        XCTAssertTrue(routineCacheInteractor.loadCalled)
+        XCTAssertTrue(routineCacheInteractor.saveCalled)
+    }
 }

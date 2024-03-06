@@ -24,6 +24,7 @@ final class DoWorkoutServiceTests: XCTestCase {
         self.mockUserSettings = MockUserSettings()
         self.mockScreenLocker = MockScreenLocker()
         let routineService = CreatedRoutinesService(cacheInteractor: routineCacheInteractor)
+
         self.sut = DoWorkoutService(cacheInteractor: cacheInteractor,
                                     routineService: routineService,
                                     userSettings: mockUserSettings,
