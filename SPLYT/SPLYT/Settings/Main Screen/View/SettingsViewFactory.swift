@@ -10,6 +10,8 @@ import DesignShowcase
 
 struct SettingsViewFactory {
     
+    /// Handles instantiating the views when a Settings item should navigate to a new screen.
+    /// Note: Not needed for non-navigation items.
     @ViewBuilder
     func makeView(_ item: SettingsItem) -> some View {
         switch item {
@@ -19,10 +21,8 @@ struct SettingsViewFactory {
             let interactor = RestPresetsInteractor()
             let viewModel = RestPresetsViewModel(interactor: interactor)
             RestPresetsView(viewModel: viewModel)
-        case .submitFeedback:
-            Link(destination: URL(string:"www.google.com")!) {
-                Text("link")
-            }
+        case .about:
+            AboutView()
         default:
             EmptyView()
         }

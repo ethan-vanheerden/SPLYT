@@ -11,14 +11,18 @@ import DesignSystem
 struct LoginDisplay: Equatable {
     let email: String
     let password: String
+    let birthday: Date
     let emailTextEntry: TextEntryViewState
     let emailMessage: String
     let emailMessageColor: SplytColor
     let passwordTextEntry: TextEntryViewState
     let passwordMessage: String
     let passwordMessageColor: SplytColor
+    let birthdayMessage: String
+    let birthdayMessageColor: SplytColor
     let isCreateAccount: Bool
     let errorMessage: String?
     let submitButtonEnabled: Bool
     let createAccountNavBar: NavigationBarViewState
+    let termsURL: URL
 }

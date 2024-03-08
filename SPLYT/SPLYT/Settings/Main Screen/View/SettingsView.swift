@@ -105,14 +105,9 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     
     @ViewBuilder
     private func detailLabel(item: SettingsItem) -> some View {
-        HStack {
-            IconImage(imageName: item.imageName,
-                      backgroundColor: item.backgroundColor)
-            Text(item.title)
-                .subhead(style: .semiBold)
-                .foregroundColor(Color(splytColor: .black))
-            Spacer()
-        }
+        SettingsListItem(title: item.title,
+                         iconName: item.imageName,
+                         iconBackgroundColor: item.backgroundColor)
     }
 }
 

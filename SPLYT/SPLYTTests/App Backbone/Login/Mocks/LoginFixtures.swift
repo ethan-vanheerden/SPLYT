@@ -8,8 +8,11 @@
 import Foundation
 @testable import SPLYT
 import DesignSystem
+import ExerciseCore
+
 
 struct LoginFixtures {
+    typealias WorkoutFixtures = WorkoutModelFixtures
     // MARK: - Domain
     
     static let email = "test@example.com"
@@ -20,6 +23,8 @@ struct LoginFixtures {
     
     static let validPasswordMessage = "Password must be at least 8 characters"
     
+    static let birthdayMessage = "You must be at least 16 years old to use SPLYT"
+    
     static let invalidEmail = "Invalid email"
     
     static let invalidPassword = "Invalid password"
@@ -29,14 +34,20 @@ Something went wrong. Double check your password or create an account if you don
 """
     static let errorOther = "Something went wrong. Please try again later."
     
+    static let termsURL = URL(string: "https://ethan-vanheerden.github.io/splyt-terms/terms-conditions") ?? URL.applicationDirectory
+    
     static let domain: LoginDomain = .init(email: "",
                                            password: "",
+                                           birthday: WorkoutFixtures.dec_27_2022_1000,
                                            emailMessage: validEmailMessage,
                                            emailError: false,
                                            passwordMessage: validPasswordMessage,
                                            passwordError: false,
+                                           birthdayMessage: birthdayMessage,
+                                           birthdayError: false,
                                            isCreateAccount: false,
-                                           canSubmit: false)
+                                           canSubmit: false,
+                                           termsURL: termsURL)
     
     static let domainFilled: LoginDomain = .init(email: email,
                                                  password: password,
