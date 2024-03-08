@@ -241,6 +241,7 @@
 		AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */; };
 		AAF0FB54299B0B5700167B02 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = AAF0FB53299B0B5700167B02 /* Font */; };
 		AAF8648C2B9BBEF00042BFD7 /* LicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicensesView.swift */; };
+		AAF8648F2B9BC6C30042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF8648E2B9BC6C30042BFD7 /* Package.resolved */; };
 		AAFC58F428871CE2001B69B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AAFC58F328871CE2001B69B3 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
@@ -490,6 +491,7 @@
 		AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewTests.swift; sourceTree = "<group>"; };
 		AAF0FB53299B0B5700167B02 /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
 		AAF8648B2B9BBEF00042BFD7 /* LicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesView.swift; sourceTree = "<group>"; };
+		AAF8648E2B9BC6C30042BFD7 /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1253,6 +1255,7 @@
 			children = (
 				AA63176029C13E8100F8CDBE /* AllTests.xctestplan */,
 				AA63175F29C13E1D00F8CDBE /* NonPackageTests.xctestplan */,
+				AAF8648E2B9BC6C30042BFD7 /* Package.resolved */,
 				AA825D39287238BF0041D94A /* SPLYT */,
 				AA825D4A287238CB0041D94A /* SPLYTTests */,
 				AA825D38287238BF0041D94A /* Products */,
@@ -1907,6 +1910,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA825D5B287238CB0041D94A /* Build configuration list for PBXNativeTarget "SPLYT" */;
 			buildPhases = (
+				AAF8648D2B9BC56C0042BFD7 /* Copy Package.resolved */,
 				AA825D33287238BF0041D94A /* Sources */,
 				AA825D34287238BF0041D94A /* Frameworks */,
 				AA825D35287238BF0041D94A /* Resources */,
@@ -2007,6 +2011,7 @@
 				AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */,
 				AA2B25FC2A7F2E180001E79A /* GoogleService-Info.plist in Resources */,
 				AA825D3F287238C90041D94A /* Assets.xcassets in Resources */,
+				AAF8648F2B9BC6C30042BFD7 /* Package.resolved in Resources */,
 				AAF0FB54299B0B5700167B02 /* Font in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2020,6 +2025,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AAF8648D2B9BC56C0042BFD7 /* Copy Package.resolved */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Package.resolved";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(PROJECT_DIR)/Package.resolved",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp ${PROJECT_FILE_PATH}/project.xcworkspace/xcshareddata/swiftpm/Package.resolved ${PROJECT_DIR}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA825D33287238BF0041D94A /* Sources */ = {
