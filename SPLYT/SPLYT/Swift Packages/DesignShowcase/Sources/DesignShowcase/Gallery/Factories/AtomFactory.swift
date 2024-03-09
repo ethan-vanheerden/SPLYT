@@ -24,6 +24,8 @@ struct AtomFactory {
             SectionHeaderGallery()
         case .setEntry:
             SetEntryGallery()
+        case .settingsListItem:
+            SettingsListItemGallery()
         case .tag:
             TagGallery()
         case .tile:

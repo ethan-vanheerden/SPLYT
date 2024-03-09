@@ -159,7 +159,6 @@
 		AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */; };
 		AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */; };
 		AA8744B12B9A693500030D3E /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8744B02B9A693500030D3E /* Policy.swift */; };
-		AA8744B92B9A957300030D3E /* SettingsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8744B82B9A957300030D3E /* SettingsListItem.swift */; };
 		AA8744BB2B9A968A00030D3E /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8744BA2B9A968A00030D3E /* AboutView.swift */; };
 		AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */; };
 		AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93403D288882AB00309E83 /* MainViewModelTests.swift */; };
@@ -240,8 +239,17 @@
 		AAF0FB48299962CF00167B02 /* BuildWorkoutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB47299962CF00167B02 /* BuildWorkoutViewModelTests.swift */; };
 		AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */; };
 		AAF0FB54299B0B5700167B02 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = AAF0FB53299B0B5700167B02 /* Font */; };
-		AAF8648C2B9BBEF00042BFD7 /* LicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicensesView.swift */; };
-		AAF8648F2B9BC6C30042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF8648E2B9BC6C30042BFD7 /* Package.resolved */; };
+		AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */; };
+		AAF864922B9BC8A00042BFD7 /* SPM-Acknowledgments in Frameworks */ = {isa = PBXBuildFile; productRef = AAF864912B9BC8A00042BFD7 /* SPM-Acknowledgments */; };
+		AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF864952B9CBD3A0042BFD7 /* Package.resolved */; };
+		AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */; };
+		AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */; };
+		AAF8649D2B9CBDC80042BFD7 /* LicenseReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */; };
+		AAF8649F2B9CBDD00042BFD7 /* LicenseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649E2B9CBDD00042BFD7 /* LicenseService.swift */; };
+		AAF864A12B9CBDDB0042BFD7 /* LicenseDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */; };
+		AAF864A32B9CBDE40042BFD7 /* LicenseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */; };
+		AAF864A82B9CBE420042BFD7 /* ThirdPartyPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A72B9CBE420042BFD7 /* ThirdPartyPackages.swift */; };
+		AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */; };
 		AAFC58F428871CE2001B69B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AAFC58F328871CE2001B69B3 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
@@ -407,7 +415,6 @@
 		AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutInteractorTests.swift; sourceTree = "<group>"; };
 		AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDoWorkoutService.swift; sourceTree = "<group>"; };
 		AA8744B02B9A693500030D3E /* Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Policy.swift; sourceTree = "<group>"; };
-		AA8744B82B9A957300030D3E /* SettingsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItem.swift; sourceTree = "<group>"; };
 		AA8744BA2B9A968A00030D3E /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercisesCacheRequest.swift; sourceTree = "<group>"; };
 		AA893139294A4FA600D7B4B1 /* Caching */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Caching; sourceTree = "<group>"; };
@@ -490,8 +497,16 @@
 		AAF0FB47299962CF00167B02 /* BuildWorkoutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewModelTests.swift; sourceTree = "<group>"; };
 		AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewTests.swift; sourceTree = "<group>"; };
 		AAF0FB53299B0B5700167B02 /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
-		AAF8648B2B9BBEF00042BFD7 /* LicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesView.swift; sourceTree = "<group>"; };
-		AAF8648E2B9BC6C30042BFD7 /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
+		AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		AAF864952B9CBD3A0042BFD7 /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
+		AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
+		AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInteractor.swift; sourceTree = "<group>"; };
+		AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseReducer.swift; sourceTree = "<group>"; };
+		AAF8649E2B9CBDD00042BFD7 /* LicenseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseService.swift; sourceTree = "<group>"; };
+		AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDisplay.swift; sourceTree = "<group>"; };
+		AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDomain.swift; sourceTree = "<group>"; };
+		AAF864A72B9CBE420042BFD7 /* ThirdPartyPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyPackages.swift; sourceTree = "<group>"; };
+		AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +524,7 @@
 				AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */,
 				AA2B26022A7F2F430001E79A /* FirebaseCrashlytics in Frameworks */,
 				AA2A22D428A069C4002357E4 /* Networking in Frameworks */,
+				AAF864922B9BC8A00042BFD7 /* SPM-Acknowledgments in Frameworks */,
 				AA2B26042A7F2F430001E79A /* FirebaseFunctions in Frameworks */,
 				AA1A34082882E24D00BCB792 /* Core in Frameworks */,
 			);
@@ -588,7 +604,6 @@
 		AA1A33FF2882E0B300BCB792 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				AA8744B72B9A955C00030D3E /* View */,
 				AA8744B22B9A91A600030D3E /* About */,
 				AAB42B282A79A397002A1ED2 /* Rest Presets */,
 				AA116FDB2A7848DB00E68852 /* Main Screen */,
@@ -1253,9 +1268,9 @@
 		AA825D2E287238BF0041D94A = {
 			isa = PBXGroup;
 			children = (
+				AAF864952B9CBD3A0042BFD7 /* Package.resolved */,
 				AA63176029C13E8100F8CDBE /* AllTests.xctestplan */,
 				AA63175F29C13E1D00F8CDBE /* NonPackageTests.xctestplan */,
-				AAF8648E2B9BC6C30042BFD7 /* Package.resolved */,
 				AA825D39287238BF0041D94A /* SPLYT */,
 				AA825D4A287238CB0041D94A /* SPLYTTests */,
 				AA825D38287238BF0041D94A /* Products */,
@@ -1338,19 +1353,11 @@
 		AA8744B22B9A91A600030D3E /* About */ = {
 			isa = PBXGroup;
 			children = (
+				AAF864972B9CBD5E0042BFD7 /* Liceneses */,
 				AA8744B02B9A693500030D3E /* Policy.swift */,
 				AA8744BA2B9A968A00030D3E /* AboutView.swift */,
-				AAF8648B2B9BBEF00042BFD7 /* LicensesView.swift */,
 			);
 			path = About;
-			sourceTree = "<group>";
-		};
-		AA8744B72B9A955C00030D3E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				AA8744B82B9A957300030D3E /* SettingsListItem.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		AA893136294A4A2900D7B4B1 /* Caching */ = {
@@ -1903,6 +1910,46 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		AAF864972B9CBD5E0042BFD7 /* Liceneses */ = {
+			isa = PBXGroup;
+			children = (
+				AAF864A62B9CBE000042BFD7 /* Reducer */,
+				AAF864A52B9CBDF80042BFD7 /* Interactor */,
+				AAF864A42B9CBDF30042BFD7 /* View */,
+			);
+			path = Liceneses;
+			sourceTree = "<group>";
+		};
+		AAF864A42B9CBDF30042BFD7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */,
+				AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */,
+				AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AAF864A52B9CBDF80042BFD7 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */,
+				AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */,
+				AAF8649E2B9CBDD00042BFD7 /* LicenseService.swift */,
+				AAF864A72B9CBE420042BFD7 /* ThirdPartyPackages.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AAF864A62B9CBE000042BFD7 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */,
+				AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1933,6 +1980,7 @@
 				AA2B26012A7F2F430001E79A /* FirebaseCrashlytics */,
 				AA2B26032A7F2F430001E79A /* FirebaseFunctions */,
 				AA72C60B2B891E0200E36B9C /* UserAuth */,
+				AAF864912B9BC8A00042BFD7 /* SPM-Acknowledgments */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -1968,7 +2016,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					AA825D36287238BF0041D94A = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -1991,6 +2039,7 @@
 			packageReferences = (
 				AAFC58F228871CE2001B69B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				AA2B25FE2A7F2F430001E79A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AAF864902B9BC8A00042BFD7 /* XCRemoteSwiftPackageReference "SPM-Acknowledgments" */,
 			);
 			productRefGroup = AA825D38287238BF0041D94A /* Products */;
 			projectDirPath = "";
@@ -2011,7 +2060,7 @@
 				AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */,
 				AA2B25FC2A7F2E180001E79A /* GoogleService-Info.plist in Resources */,
 				AA825D3F287238C90041D94A /* Assets.xcassets in Resources */,
-				AAF8648F2B9BC6C30042BFD7 /* Package.resolved in Resources */,
+				AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */,
 				AAF0FB54299B0B5700167B02 /* Font in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2058,8 +2107,10 @@
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
 				AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */,
 				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
+				AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */,
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
+				AAF864A12B9CBDDB0042BFD7 /* LicenseDisplay.swift in Sources */,
 				AA672A4B2A64954D0009919E /* HistoryDomain.swift in Sources */,
 				AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */,
 				AAB42B392A79A5BF002A1ED2 /* RestPresetsDomain.swift in Sources */,
@@ -2125,7 +2176,7 @@
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
 				AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */,
-				AA8744B92B9A957300030D3E /* SettingsListItem.swift in Sources */,
+				AAF864A32B9CBDE40042BFD7 /* LicenseDomain.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
 				AA672A532A6495830009919E /* HistoryReducer.swift in Sources */,
 				AA672A492A6495360009919E /* HistoryInteractor.swift in Sources */,
@@ -2134,13 +2185,16 @@
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
 				AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
+				AAF8649F2B9CBDD00042BFD7 /* LicenseService.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
 				AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */,
+				AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */,
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
 				AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */,
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
+				AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */,
 				AA1786DC2A910E7500563B04 /* MainViewInteractor.swift in Sources */,
 				AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */,
 				AA1786E82A91146600563B04 /* LoginDomain.swift in Sources */,
@@ -2149,12 +2203,13 @@
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
 				AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */,
 				AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */,
-				AAF8648C2B9BBEF00042BFD7 /* LicensesView.swift in Sources */,
+				AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */,
 				AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */,
 				AA672A672A69B8940009919E /* WorkoutDetailsDisplay.swift in Sources */,
 				AA672A6B2A69B8BE0009919E /* WorkoutDetailsView.swift in Sources */,
 				AACB297D2A1557E400AACB6B /* DoWorkoutView.swift in Sources */,
 				AAE79AEA296C610B0010848E /* NameWorkoutNavigationRouter.swift in Sources */,
+				AAF864A82B9CBE420042BFD7 /* ThirdPartyPackages.swift in Sources */,
 				AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */,
 				AA60DA05295215DF008C7615 /* HomeNavigationController.swift in Sources */,
 				AAB42B2D2A79A573002A1ED2 /* RestPresetsView.swift in Sources */,
@@ -2175,6 +2230,7 @@
 				AA1786E02A91143A00563B04 /* LoginView.swift in Sources */,
 				AA672A6D2A69BA620009919E /* WorkoutDetailsViewState.swift in Sources */,
 				AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */,
+				AAF8649D2B9CBDC80042BFD7 /* LicenseReducer.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2553,6 +2609,14 @@
 				minimumVersion = 10.13.0;
 			};
 		};
+		AAF864902B9BC8A00042BFD7 /* XCRemoteSwiftPackageReference "SPM-Acknowledgments" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/timroesner/SPM-Acknowledgments";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		AAFC58F228871CE2001B69B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
@@ -2619,6 +2683,11 @@
 		AADCABDE288895AC00FF09B9 /* Mocking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Mocking;
+		};
+		AAF864912B9BC8A00042BFD7 /* SPM-Acknowledgments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAF864902B9BC8A00042BFD7 /* XCRemoteSwiftPackageReference "SPM-Acknowledgments" */;
+			productName = "SPM-Acknowledgments";
 		};
 		AAFC58F328871CE2001B69B3 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;

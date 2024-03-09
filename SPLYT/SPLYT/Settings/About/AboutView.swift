@@ -13,21 +13,18 @@ struct AboutView: View {
     var body: some View {
         List {
             ForEach(Policy.allCases, id: \.self) { policy in
-                if let url = policy.url {
-                    Link(destination: url) {
-                        SettingsListItem(title: policy.title,
-                                         iconName: "link",
-                                         iconBackgroundColor: .gray)
-                    }
-                }
+                SettingsListItem(viewState: .init(title: policy.title,
+                                                  iconName: "link",
+                                                  iconBackgroundColor: .gray,
+                                                  link: policy.url))
             }
             NavigationLink {
-                LicensesView()
+                LicenseView(viewModel: LicenseViewModel(interactor: .init()))
                     .navigationBar(viewState: .init(title: Strings.licenses))
             } label: {
-                SettingsListItem(title: Strings.licenses,
-                                 iconName: "doc.fill",
-                                 iconBackgroundColor: .lightBlue)
+                SettingsListItem(viewState: .init(title: Strings.licenses,
+                                                  iconName: "doc.fill",
+                                                  iconBackgroundColor: .lightBlue))
             }
         }
     }

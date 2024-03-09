@@ -81,11 +81,7 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     
     @ViewBuilder
     private func linkDetail(item: SettingsItem, url: String) -> some View {
-        if let url = URL(string: url) {
-            Link(destination: url) {
-                detailLabel(item: item)
-            }
-        }
+        detailLabel(item: item, link: URL(string: url))
     }
     
     @ViewBuilder
@@ -104,10 +100,11 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     }
     
     @ViewBuilder
-    private func detailLabel(item: SettingsItem) -> some View {
-        SettingsListItem(title: item.title,
-                         iconName: item.imageName,
-                         iconBackgroundColor: item.backgroundColor)
+    private func detailLabel(item: SettingsItem, link: URL? = nil) -> some View {
+        SettingsListItem(viewState: .init(title: item.title,
+                                          iconName: item.imageName,
+                                          iconBackgroundColor: item.backgroundColor,
+                                          link: link))
     }
 }
 
