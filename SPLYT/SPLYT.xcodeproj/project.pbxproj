@@ -240,7 +240,6 @@
 		AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */; };
 		AAF0FB54299B0B5700167B02 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = AAF0FB53299B0B5700167B02 /* Font */; };
 		AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */; };
-		AAF864922B9BC8A00042BFD7 /* SPM-Acknowledgments in Frameworks */ = {isa = PBXBuildFile; productRef = AAF864912B9BC8A00042BFD7 /* SPM-Acknowledgments */; };
 		AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF864952B9CBD3A0042BFD7 /* Package.resolved */; };
 		AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */; };
 		AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */; };
@@ -524,7 +523,6 @@
 				AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */,
 				AA2B26022A7F2F430001E79A /* FirebaseCrashlytics in Frameworks */,
 				AA2A22D428A069C4002357E4 /* Networking in Frameworks */,
-				AAF864922B9BC8A00042BFD7 /* SPM-Acknowledgments in Frameworks */,
 				AA2B26042A7F2F430001E79A /* FirebaseFunctions in Frameworks */,
 				AA1A34082882E24D00BCB792 /* Core in Frameworks */,
 			);
@@ -1980,7 +1978,6 @@
 				AA2B26012A7F2F430001E79A /* FirebaseCrashlytics */,
 				AA2B26032A7F2F430001E79A /* FirebaseFunctions */,
 				AA72C60B2B891E0200E36B9C /* UserAuth */,
-				AAF864912B9BC8A00042BFD7 /* SPM-Acknowledgments */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -2039,7 +2036,6 @@
 			packageReferences = (
 				AAFC58F228871CE2001B69B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 				AA2B25FE2A7F2F430001E79A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				AAF864902B9BC8A00042BFD7 /* XCRemoteSwiftPackageReference "SPM-Acknowledgments" */,
 			);
 			productRefGroup = AA825D38287238BF0041D94A /* Products */;
 			projectDirPath = "";
@@ -2609,14 +2605,6 @@
 				minimumVersion = 10.13.0;
 			};
 		};
-		AAF864902B9BC8A00042BFD7 /* XCRemoteSwiftPackageReference "SPM-Acknowledgments" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/timroesner/SPM-Acknowledgments";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		AAFC58F228871CE2001B69B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
@@ -2683,11 +2671,6 @@
 		AADCABDE288895AC00FF09B9 /* Mocking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Mocking;
-		};
-		AAF864912B9BC8A00042BFD7 /* SPM-Acknowledgments */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AAF864902B9BC8A00042BFD7 /* XCRemoteSwiftPackageReference "SPM-Acknowledgments" */;
-			productName = "SPM-Acknowledgments";
 		};
 		AAFC58F328871CE2001B69B3 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
