@@ -24,10 +24,8 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
     var body: some View {
         switch viewModel.viewState {
         case .error:
-            Text("Error!")
-                .navigationBar(viewState: .init(title: Strings.addWorkouts)) { // TODO: get rid of nav bar on error?
-                    navigationRouter.navigate(.exit)
-                }
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
+                      backAction: { navigationRouter.navigate(.exit) })
         case .loading:
             ProgressView()
         case .loaded(let display):

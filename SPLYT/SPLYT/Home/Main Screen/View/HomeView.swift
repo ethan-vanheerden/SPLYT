@@ -34,7 +34,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     private var viewStateView: some View {
         switch viewModel.viewState {
         case .error:
-            Text("Error!")
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) })
         case .loading:
             ProgressView()
         case .main(let display):

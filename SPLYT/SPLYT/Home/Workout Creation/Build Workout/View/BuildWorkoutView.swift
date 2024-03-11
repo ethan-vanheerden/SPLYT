@@ -37,11 +37,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .main(let display):
             mainView(display: display)
         case .error:
-            Text("Error!")
-                .foregroundColor(.red)
-                .navigationBar(viewState: .init(title: Strings.addYourExercises)) {
-                    navigationRouter.navigate(.exit)
-                }
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
+                      backAction: { navigationRouter.navigate(.exit) })
         case .exit(let display):
             mainView(display: display)
                 .onAppear {

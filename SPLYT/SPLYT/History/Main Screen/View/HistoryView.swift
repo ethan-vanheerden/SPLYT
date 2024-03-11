@@ -37,7 +37,7 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent,
         case .loading:
             ProgressView()
         case .error:
-            Text("Error")
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) })
         case .loaded(let display):
             mainView(display: display)
         }

@@ -36,7 +36,8 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
         case .loading:
             ProgressView()
         case .error, .exit: // Should never get the .exit state in this view
-            Text("Error!")
+            ErrorView(retryAction: { viewModel.send(.loadWorkout, taskPriority: .userInitiated) },
+                      backAction: { navigationRouter.navigate(.exit)} )
         case .loaded(let display):
             mainView(display: display)
                 .onAppear {

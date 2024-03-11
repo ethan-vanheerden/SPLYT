@@ -30,9 +30,9 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     var body: some View {
         switch viewModel.viewState {
-        case .loading, .error:
-            // Should never get here
-            Text("Error!")
+        case .loading, .error: // Should never get here
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
+                      backAction: { navigationRouter.navigate(.exit) })
         case .main(let display):
             mainView(display: display)
                 .navigationBar(viewState: .init(title: Strings.editSetsReps),

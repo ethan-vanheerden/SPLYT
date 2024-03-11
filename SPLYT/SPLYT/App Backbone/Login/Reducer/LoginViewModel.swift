@@ -10,7 +10,7 @@ import Core
 
 // MARK: - Events
 
-enum LoginViewEvent {
+enum LoginViewEvent: Equatable {
     case load
     case toggleCreateAccount(isCreateAccount: Bool)
     case updateEmail(newEmail: String)

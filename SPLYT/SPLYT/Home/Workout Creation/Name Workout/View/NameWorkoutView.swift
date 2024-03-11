@@ -28,9 +28,8 @@ struct NameWorkoutView<VM: ViewModel>: View where VM.Event == NameWorkoutViewEve
     var body: some View {
         switch viewModel.viewState {
         case .error:
-            Text("Error!")
-                .navigationBar(viewState: .init(title: ""),
-                               backAction: { dismissAction() } )
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
+                      backAction: dismissAction)
         case .loading:
             ProgressView()
                 .navigationBar(viewState: .init(title: ""),

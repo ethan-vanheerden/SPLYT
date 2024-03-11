@@ -25,7 +25,8 @@ struct DoPlanView<VM: ViewModel>: View where VM.Event == DoPlanViewEvent, VM.Vie
     var body: some View {
         switch viewModel.viewState {
         case .error:
-            Text("Error!")
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
+                      backAction: { navigationRouter.navigate(.exit)} )
         case .loading:
             ProgressView()
         case .loaded(let display):
