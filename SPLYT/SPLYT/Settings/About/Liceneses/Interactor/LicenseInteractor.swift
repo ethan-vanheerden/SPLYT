@@ -23,12 +23,9 @@ enum LicenseDomainResult: Equatable {
 // MARK: - Interactor
 
 final class LicenseInteractor {
-    private let service: LicenseServiceType
     private var savedDomain: LicenseDomain?
     
-    init(service: LicenseServiceType = LicenseService()) {
-        self.service = service
-    }
+    init() { }
     
     func interact(with action: LicenseDomainAction) async -> LicenseDomainResult {
         switch action {
@@ -42,21 +39,15 @@ final class LicenseInteractor {
 
 private extension LicenseInteractor {
     func handleLoad() -> LicenseDomainResult {
-        do {
-            let packages = try service.loadPackages()
-            let licenses: [License] = packages.licenses.compactMap { packageLicense in
-                guard let licenseURL = getLicenseURL(basePath: packageLicense.location) else {
-                    return nil
-                }
-                return License(title: packageLicense.title,
-                               licenseURL: licenseURL)
-            }
+        let licenses: [License] = ThirdPartyPackage.allCases.compactMap { package in
+            guard let url = URL(string: package.path) else { return nil }
             
-            let domain = LicenseDomain(licenses: licenses)
-            return updateDomain(domain: domain)
-        } catch {
-            return .error
+            return License(name: package.rawValue,
+                           licenseURL: url)
         }
+        
+        let domain = LicenseDomain(licenses: licenses)
+        return updateDomain(domain: domain)
     }
 }
 

@@ -25,7 +25,7 @@ struct LicenseReducer {
 private extension LicenseReducer {
     func getDisplay(domain: LicenseDomain) -> LicenseDisplay {
         let listItems: [SettingsListItemViewState] = domain.licenses.map { license in
-            return .init(title: license.title,
+            return .init(title: license.name,
                          iconName: "link",
                          iconBackgroundColor: .gray,
                          link: license.licenseURL)

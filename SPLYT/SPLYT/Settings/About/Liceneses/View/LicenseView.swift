@@ -12,6 +12,7 @@ import Core
 struct LicenseView<VM: ViewModel>: View where VM.Event == LicenseViewEvent,
                                               VM.ViewState == LicenseViewState {
     @ObservedObject private var viewModel: VM
+    @Environment(\.dismiss) private var dismiss
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM) {
@@ -24,7 +25,8 @@ struct LicenseView<VM: ViewModel>: View where VM.Event == LicenseViewEvent,
         case .loading:
             ProgressView()
         case .error:
-            Text("Error")
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
+                      backAction: { dismiss() })
         case .loaded(let display):
             mainView(display: display)
         }

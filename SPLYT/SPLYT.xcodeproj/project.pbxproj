@@ -244,10 +244,8 @@
 		AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */; };
 		AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */; };
 		AAF8649D2B9CBDC80042BFD7 /* LicenseReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */; };
-		AAF8649F2B9CBDD00042BFD7 /* LicenseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649E2B9CBDD00042BFD7 /* LicenseService.swift */; };
 		AAF864A12B9CBDDB0042BFD7 /* LicenseDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */; };
 		AAF864A32B9CBDE40042BFD7 /* LicenseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */; };
-		AAF864A82B9CBE420042BFD7 /* ThirdPartyPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A72B9CBE420042BFD7 /* ThirdPartyPackages.swift */; };
 		AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */; };
 		AAFC58F428871CE2001B69B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AAFC58F328871CE2001B69B3 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
@@ -501,10 +499,8 @@
 		AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
 		AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInteractor.swift; sourceTree = "<group>"; };
 		AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseReducer.swift; sourceTree = "<group>"; };
-		AAF8649E2B9CBDD00042BFD7 /* LicenseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseService.swift; sourceTree = "<group>"; };
 		AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDisplay.swift; sourceTree = "<group>"; };
 		AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDomain.swift; sourceTree = "<group>"; };
-		AAF864A72B9CBE420042BFD7 /* ThirdPartyPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyPackages.swift; sourceTree = "<group>"; };
 		AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1933,8 +1929,6 @@
 			children = (
 				AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */,
 				AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */,
-				AAF8649E2B9CBDD00042BFD7 /* LicenseService.swift */,
-				AAF864A72B9CBE420042BFD7 /* ThirdPartyPackages.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -2181,7 +2175,6 @@
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
 				AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
-				AAF8649F2B9CBDD00042BFD7 /* LicenseService.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
 				AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */,
 				AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */,
@@ -2205,7 +2198,6 @@
 				AA672A6B2A69B8BE0009919E /* WorkoutDetailsView.swift in Sources */,
 				AACB297D2A1557E400AACB6B /* DoWorkoutView.swift in Sources */,
 				AAE79AEA296C610B0010848E /* NameWorkoutNavigationRouter.swift in Sources */,
-				AAF864A82B9CBE420042BFD7 /* ThirdPartyPackages.swift in Sources */,
 				AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */,
 				AA60DA05295215DF008C7615 /* HomeNavigationController.swift in Sources */,
 				AAB42B2D2A79A573002A1ED2 /* RestPresetsView.swift in Sources */,
