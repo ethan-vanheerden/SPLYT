@@ -12,12 +12,12 @@ final class SettingsListItemTests: XCTestCase {
                                                          iconBackgroundColor: .green,
                                                          link: URL(string: "www.google.com"))
     
-    func testScrim() throws {
+    func testSettingsListItem() throws {
         let view = VStack(spacing: Layout.size(1)) {
             SettingsListItem(viewState: viewStateOne)
             SettingsListItem(viewState: viewStateTwo)
             Spacer()
-        }.padding(.horizontal)
+        }.padding()
         
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .smallImage()))

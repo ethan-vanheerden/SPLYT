@@ -58,5 +58,4 @@ enum ThirdPartyPackage: String, Equatable, CaseIterable {
             return "https://github.com/pointfreeco/swift-snapshot-testing/blob/main/LICENSE"
         }
     }
-    
 }

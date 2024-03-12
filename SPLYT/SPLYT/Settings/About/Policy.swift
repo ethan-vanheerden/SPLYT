@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Holds URLs to the app's policies.
+/// Holds the URLs for the app's policies.
 enum Policy: Hashable, CaseIterable {
     case termsConditions
     case privacyPolicy

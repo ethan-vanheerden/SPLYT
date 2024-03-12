@@ -36,7 +36,7 @@ public struct SettingsListItemViewState: Equatable, Hashable {
     fileprivate let title: String
     fileprivate let iconName: String
     fileprivate let iconBackgroundColor: SplytColor
-    fileprivate let link: URL? // If we want it to navigate to a URL somewhere
+    fileprivate let link: URL? // If we want it to navigate to a link somewhere
     
     public init(title: String,
                 iconName: String,
