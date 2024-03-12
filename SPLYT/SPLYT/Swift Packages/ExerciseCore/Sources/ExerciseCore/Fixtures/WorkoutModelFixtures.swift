@@ -11,6 +11,8 @@ public struct WorkoutModelFixtures {
     
     public static let mar_8_2002_1200: Date = Date(timeIntervalSince1970: 1015606800)
     
+    public static let oct_16_2000_0000: Date = Date(timeIntervalSince1970: 971668800)
+    
     public static func createSets(inputs: [(SetInput, SetModifier?)]) -> [Set] {
         var sets = [Set]()
         

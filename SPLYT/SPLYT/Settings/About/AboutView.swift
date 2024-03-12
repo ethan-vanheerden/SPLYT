@@ -24,7 +24,7 @@ struct AboutView: View {
             } label: {
                 SettingsListItem(viewState: .init(title: Strings.licenses,
                                                   iconName: "doc.fill",
-                                                  iconBackgroundColor: .lightBlue))
+                                                  iconBackgroundColor: .gray))
             }
         }
     }

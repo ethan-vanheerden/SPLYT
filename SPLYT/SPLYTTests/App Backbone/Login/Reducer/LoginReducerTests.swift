@@ -7,16 +7,19 @@
 
 import XCTest
 @testable import SPLYT
+@testable import ExerciseCore
 
 final class LoginReducerTests: XCTestCase {
     typealias Fixtures = LoginFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
     private var mockService: MockLoginService!
     private var interactor: LoginInteractor!
     private var sut: LoginReducer!
     
     override func setUpWithError() throws {
         self.mockService = MockLoginService()
-        self.interactor = LoginInteractor(service: mockService)
+        self.interactor = LoginInteractor(service: mockService,
+                                          startingValidBirthdate: WorkoutFixtures.oct_16_2000_0000)
         self.sut = LoginReducer()
     }
     
@@ -38,22 +41,28 @@ final class LoginReducerTests: XCTestCase {
         await load()
         let invalidEmail = "bad@email"
         let invalidPassword = "bad"
+        let invalidBirthday = Date.now
         _ = await interactor.interact(with: .updateEmail(newEmail: invalidEmail))
-        let domain = await interactor.interact(with: .updatePassword(newPassword: invalidPassword))
+        _ = await interactor.interact(with: .updatePassword(newPassword: invalidPassword))
+        let domain = await interactor.interact(with: .updateBirthday(newBirthday: invalidBirthday))
         let result = sut.reduce(domain)
         
         let expectedDisplay = LoginDisplay(email: invalidEmail,
                                            password: invalidPassword,
+                                           birthday: invalidBirthday,
                                            emailTextEntry: Fixtures.emailTextEntry,
                                            emailMessage: Fixtures.invalidEmail,
                                            emailMessageColor: .red,
                                            passwordTextEntry: Fixtures.passwordTextEntry,
                                            passwordMessage: Fixtures.invalidPassword,
                                            passwordMessageColor: .red,
+                                           birthdayMessage: Fixtures.birthdayMessage,
+                                           birthdayMessageColor: .red,
                                            isCreateAccount: false,
                                            errorMessage: nil,
                                            submitButtonEnabled: false,
-                                           createAccountNavBar: Fixtures.createAccountNavBar)
+                                           createAccountNavBar: Fixtures.createAccountNavBar,
+                                           termsURL: Fixtures.termsURL)
         
         XCTAssertEqual(result, .loaded(expectedDisplay))
     }
@@ -67,16 +76,20 @@ final class LoginReducerTests: XCTestCase {
         
         let expectedDisplay = LoginDisplay(email: Fixtures.email,
                                            password: Fixtures.password,
+                                           birthday: WorkoutFixtures.mar_8_2002_1200,
                                            emailTextEntry: Fixtures.emailTextEntry,
                                            emailMessage: Fixtures.validEmailMessage,
                                            emailMessageColor: .gray,
                                            passwordTextEntry: Fixtures.passwordTextEntry,
                                            passwordMessage: Fixtures.validPasswordMessage,
                                            passwordMessageColor: .gray,
+                                           birthdayMessage: Fixtures.birthdayMessage,
+                                           birthdayMessageColor: .gray,
                                            isCreateAccount: true,
                                            errorMessage: Fixtures.errorOther,
                                            submitButtonEnabled: true,
-                                           createAccountNavBar: Fixtures.createAccountNavBar)
+                                           createAccountNavBar: Fixtures.createAccountNavBar,
+                                           termsURL: Fixtures.termsURL)
         
         XCTAssertEqual(result, .loaded(expectedDisplay))
     }
@@ -103,6 +116,7 @@ private extension LoginReducerTests {
     func loadAndFill() async -> LoginDomainResult {
         await load()
         _ = await interactor.interact(with: .updateEmail(newEmail: Fixtures.email))
-        return await interactor.interact(with: .updatePassword(newPassword: Fixtures.password))
+        _ = await interactor.interact(with: .updatePassword(newPassword: Fixtures.password))
+        return await interactor.interact(with: .updateBirthday(newBirthday: WorkoutFixtures.mar_8_2002_1200))
     }
 }

@@ -29,11 +29,11 @@ enum Policy: Hashable, CaseIterable {
         
         switch self {
         case .termsConditions:
-            return URL(string: basePath + "/terms-conditions")
+            return URL(string: basePath + "terms-conditions")
         case .privacyPolicy:
-            return URL(string: basePath + "/privacy-policy")
+            return URL(string: basePath + "privacy-policy")
         case .endUserLicenseAgreement:
-            return URL(string: basePath + "/eula")
+            return URL(string: basePath + "eula")
         }
     }
 }

@@ -38,7 +38,7 @@ Something went wrong. Double check your password or create an account if you don
     
     static let domain: LoginDomain = .init(email: "",
                                            password: "",
-                                           birthday: WorkoutFixtures.dec_27_2022_1000,
+                                           birthday: WorkoutFixtures.oct_16_2000_0000,
                                            emailMessage: validEmailMessage,
                                            emailError: false,
                                            passwordMessage: validPasswordMessage,
@@ -51,12 +51,16 @@ Something went wrong. Double check your password or create an account if you don
     
     static let domainFilled: LoginDomain = .init(email: email,
                                                  password: password,
+                                                 birthday: WorkoutFixtures.mar_8_2002_1200,
                                                  emailMessage: validEmailMessage,
                                                  emailError: false,
                                                  passwordMessage: validPasswordMessage,
                                                  passwordError: false,
+                                                 birthdayMessage: birthdayMessage,
+                                                 birthdayError: false,
                                                  isCreateAccount: false,
-                                                 canSubmit: true)
+                                                 canSubmit: true,
+                                                 termsURL: termsURL)
     
     // MARK: - View State
     
@@ -80,27 +84,35 @@ Something went wrong. Double check your password or create an account if you don
     
     static let display: LoginDisplay = .init(email: "",
                                              password: "",
+                                             birthday: WorkoutFixtures.oct_16_2000_0000,
                                              emailTextEntry: emailTextEntry,
                                              emailMessage: validEmailMessage,
                                              emailMessageColor: .gray,
                                              passwordTextEntry: passwordTextEntry,
                                              passwordMessage: validPasswordMessage,
                                              passwordMessageColor: .gray,
+                                             birthdayMessage: birthdayMessage,
+                                             birthdayMessageColor: .gray,
                                              isCreateAccount: false,
                                              errorMessage: nil,
                                              submitButtonEnabled: false,
-                                             createAccountNavBar: createAccountNavBar)
+                                             createAccountNavBar: createAccountNavBar, 
+                                             termsURL: termsURL)
     
     static let displayFilled: LoginDisplay = .init(email: email,
                                                    password: password,
+                                                   birthday: WorkoutFixtures.mar_8_2002_1200,
                                                    emailTextEntry: emailTextEntry,
                                                    emailMessage: validEmailMessage,
                                                    emailMessageColor: .gray,
                                                    passwordTextEntry: passwordTextEntry,
                                                    passwordMessage: validPasswordMessage,
                                                    passwordMessageColor: .gray,
+                                                   birthdayMessage: birthdayMessage,
+                                                   birthdayMessageColor: .gray,
                                                    isCreateAccount: false,
                                                    errorMessage: nil,
                                                    submitButtonEnabled: true,
-                                                   createAccountNavBar: createAccountNavBar)
+                                                   createAccountNavBar: createAccountNavBar,
+                                                   termsURL: termsURL)
 }

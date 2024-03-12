@@ -248,6 +248,12 @@
 		AAF864A32B9CBDE40042BFD7 /* LicenseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */; };
 		AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */; };
 		AAFC58F428871CE2001B69B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AAFC58F328871CE2001B69B3 /* SnapshotTesting */; };
+		AAFCE47B2B9FC567002E21C8 /* PolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE47A2B9FC567002E21C8 /* PolicyTests.swift */; };
+		AAFCE4812B9FC819002E21C8 /* LicenseInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4802B9FC819002E21C8 /* LicenseInteractorTests.swift */; };
+		AAFCE4842B9FCB3F002E21C8 /* LicenseFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4832B9FCB3F002E21C8 /* LicenseFixtures.swift */; };
+		AAFCE4862B9FCEB1002E21C8 /* LicenseReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4852B9FCEB1002E21C8 /* LicenseReducerTests.swift */; };
+		AAFCE4882B9FD34D002E21C8 /* LicenseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4872B9FD34D002E21C8 /* LicenseViewModelTests.swift */; };
+		AAFCE48A2B9FD41C002E21C8 /* ThirdPartyPackageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4892B9FD41C002E21C8 /* ThirdPartyPackageTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -502,6 +508,12 @@
 		AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDisplay.swift; sourceTree = "<group>"; };
 		AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDomain.swift; sourceTree = "<group>"; };
 		AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewState.swift; sourceTree = "<group>"; };
+		AAFCE47A2B9FC567002E21C8 /* PolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyTests.swift; sourceTree = "<group>"; };
+		AAFCE4802B9FC819002E21C8 /* LicenseInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInteractorTests.swift; sourceTree = "<group>"; };
+		AAFCE4832B9FCB3F002E21C8 /* LicenseFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseFixtures.swift; sourceTree = "<group>"; };
+		AAFCE4852B9FCEB1002E21C8 /* LicenseReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseReducerTests.swift; sourceTree = "<group>"; };
+		AAFCE4872B9FD34D002E21C8 /* LicenseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModelTests.swift; sourceTree = "<group>"; };
+		AAFCE4892B9FD41C002E21C8 /* ThirdPartyPackageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyPackageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1347,7 +1359,7 @@
 		AA8744B22B9A91A600030D3E /* About */ = {
 			isa = PBXGroup;
 			children = (
-				AAF864972B9CBD5E0042BFD7 /* Liceneses */,
+				AAF864972B9CBD5E0042BFD7 /* Licenses */,
 				AA8744B02B9A693500030D3E /* Policy.swift */,
 				AA8744BA2B9A968A00030D3E /* AboutView.swift */,
 			);
@@ -1413,6 +1425,7 @@
 		AA93404E28888B5800309E83 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AAFCE4792B9FC54D002E21C8 /* About */,
 				AAB42B4E2A7BF361002A1ED2 /* Rest Presets */,
 				AAB42B3C2A7AE983002A1ED2 /* Main Screen */,
 			);
@@ -1904,14 +1917,14 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		AAF864972B9CBD5E0042BFD7 /* Liceneses */ = {
+		AAF864972B9CBD5E0042BFD7 /* Licenses */ = {
 			isa = PBXGroup;
 			children = (
 				AAF864A62B9CBE000042BFD7 /* Reducer */,
 				AAF864A52B9CBDF80042BFD7 /* Interactor */,
 				AAF864A42B9CBDF30042BFD7 /* View */,
 			);
-			path = Liceneses;
+			path = Licenses;
 			sourceTree = "<group>";
 		};
 		AAF864A42B9CBDF30042BFD7 /* View */ = {
@@ -1940,6 +1953,51 @@
 				AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */,
 			);
 			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AAFCE4792B9FC54D002E21C8 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE47C2B9FC67E002E21C8 /* Licenses */,
+				AAFCE47A2B9FC567002E21C8 /* PolicyTests.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		AAFCE47C2B9FC67E002E21C8 /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4822B9FCB2A002E21C8 /* Mocks */,
+				AAFCE47F2B9FC6AC002E21C8 /* Reducer */,
+				AAFCE47E2B9FC6A0002E21C8 /* Interactor */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
+		AAFCE47E2B9FC6A0002E21C8 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4802B9FC819002E21C8 /* LicenseInteractorTests.swift */,
+				AAFCE4892B9FD41C002E21C8 /* ThirdPartyPackageTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AAFCE47F2B9FC6AC002E21C8 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4852B9FCEB1002E21C8 /* LicenseReducerTests.swift */,
+				AAFCE4872B9FD34D002E21C8 /* LicenseViewModelTests.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AAFCE4822B9FCB2A002E21C8 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4832B9FCB3F002E21C8 /* LicenseFixtures.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2234,12 +2292,14 @@
 				AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */,
 				AA50739F2A63066F00F0BAD2 /* BuildPlanFixtures.swift in Sources */,
 				AA93405028888B9B00309E83 /* HomeViewTests.swift in Sources */,
+				AAFCE4862B9FCEB1002E21C8 /* LicenseReducerTests.swift in Sources */,
 				AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */,
 				AAE79AF9296E15550010848E /* NameWorkoutViewTests.swift in Sources */,
 				AA5073A12A630DD900F0BAD2 /* BuildPlanReducerTests.swift in Sources */,
 				AAF0FB3D298ABBA900167B02 /* BuildWorkoutFixtures.swift in Sources */,
 				AA5073AC2A6387F400F0BAD2 /* DoPlanServiceTests.swift in Sources */,
 				AA2B26072A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
+				AAFCE4842B9FCB3F002E21C8 /* LicenseFixtures.swift in Sources */,
 				AA0F8EB42B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift in Sources */,
 				AA0F8EB12B32212600B88C02 /* TestUtils.swift in Sources */,
 				AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */,
@@ -2263,6 +2323,7 @@
 				AA672A952A7440380009919E /* WorkoutDetailsInteractorTests.swift in Sources */,
 				AA50738D2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift in Sources */,
 				AA672A7F2A6B34350009919E /* MockCompletedWorkoutsService.swift in Sources */,
+				AAFCE4812B9FC819002E21C8 /* LicenseInteractorTests.swift in Sources */,
 				AAEBFCFB295E406D00D284F0 /* HomeInteractorTests.swift in Sources */,
 				AAEBFCFD295E412400D284F0 /* HomeNavigationRouterTests.swift in Sources */,
 				AADEC4B928A8428900A5463B /* GetAvailableExercisesRequestTests.swift in Sources */,
@@ -2298,6 +2359,7 @@
 				AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */,
 				AA76AAC12A9D094200FEF8D6 /* LoginServiceTests.swift in Sources */,
 				AA8511C02A9D1C01002D1EED /* LoginViewModelTests.swift in Sources */,
+				AAFCE47B2B9FC567002E21C8 /* PolicyTests.swift in Sources */,
 				AA76AAC62A9D0AC800FEF8D6 /* LoginInteractorTests.swift in Sources */,
 				AAB42B472A7AEF6B002A1ED2 /* SettingsReducerTests.swift in Sources */,
 				AA52BBB229B78802009CDBDA /* MockHomeService.swift in Sources */,
@@ -2305,6 +2367,7 @@
 				AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */,
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,
 				AAB42B582A7BF5AA002A1ED2 /* MockRestPresetsService.swift in Sources */,
+				AAFCE4882B9FD34D002E21C8 /* LicenseViewModelTests.swift in Sources */,
 				AA8511BE2A9D13DF002D1EED /* LoginReducerTests.swift in Sources */,
 				AA0F8EB62B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift in Sources */,
 				AAF0FB3F298AC0BB00167B02 /* BuildWorkoutInteractorTests.swift in Sources */,
@@ -2315,6 +2378,7 @@
 				AA5073972A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift in Sources */,
 				AA672A812A6B51830009919E /* MockHistoryService.swift in Sources */,
 				AA672A872A6DE0A90009919E /* HistoryFixtures.swift in Sources */,
+				AAFCE48A2B9FD41C002E21C8 /* ThirdPartyPackageTests.swift in Sources */,
 				AAD074EE2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift in Sources */,
 				AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */,
 				AA76AAC42A9D09B800FEF8D6 /* LoginFixtures.swift in Sources */,

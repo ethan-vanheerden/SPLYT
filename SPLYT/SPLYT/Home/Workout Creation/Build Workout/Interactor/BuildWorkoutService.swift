@@ -80,7 +80,8 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
                 
                 var exerciseMap = mapExercises(exercisesResponse.exercises)
                 let result = try updateExerciseCache(exerciseMap: &exerciseMap,
-                                                     favorites: favoritesResponse.userFavorites)
+                                                     favorites: favoritesResponse.userFavorites,
+                                                     unfavoritedExerciseID: nil)
                 
                 userSettings.set(currentDate, forKey: .lastSyncedExercises)
                 return result
@@ -105,7 +106,8 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
         // Update the favorites in the cache
         var cachedExercises = try loadFromCache()
         try updateExerciseCache(exerciseMap: &cachedExercises,
-                                favorites: favoritesResponse.userFavorites)
+                                favorites: favoritesResponse.userFavorites,
+                                unfavoritedExerciseID: isFavorite ? nil : exerciseId)
     }
     
     func saveWorkout(_ workout: Workout) throws {
@@ -135,7 +137,9 @@ private extension BuildWorkoutService {
             
             // Now save the fallback data to the cache
             var exerciseMap = mapExercises(exercises)
-            return try updateExerciseCache(exerciseMap: &exerciseMap, favorites: [])
+            return try updateExerciseCache(exerciseMap: &exerciseMap,
+                                           favorites: [],
+                                           unfavoritedExerciseID: nil)
         }
         
         return try cacheInteractor.load(request: request)
@@ -144,12 +148,18 @@ private extension BuildWorkoutService {
     /// Saves the available exercise map to cache with the specified favorites.
     /// - Parameter exercises: The exercises map
     /// - Parameter favorites: The user's favorite exercise IDs
+    /// - Parameter unfavoritedExerciseID: The exercise ID which was unfavorited
     /// - Returns: The saved ID -> exercise map
     @discardableResult
     func updateExerciseCache(exerciseMap: inout [String: AvailableExercise],
-                             favorites: [String]) throws -> [String: AvailableExercise] {
+                             favorites: [String],
+                             unfavoritedExerciseID: String?) throws -> [String: AvailableExercise] {
         for favoriteId in favorites {
             exerciseMap[favoriteId]?.isFavorite = true
+        }
+        
+        if let unfavoritedExerciseID = unfavoritedExerciseID {
+            exerciseMap[unfavoritedExerciseID]?.isFavorite = false
         }
         
         let request = AvailableExercisesCacheRequest()

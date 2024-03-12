@@ -181,15 +181,36 @@ final class BuildWorkoutServiceTests: XCTestCase {
         XCTAssertFalse(cacheInteractor.saveCalled)
     }
     
-    func testToggleFavorite_Success() async throws {
+    func testToggleFavorite_IsFavorite_Success() async throws {
+        let id = "8c6b9dbe-e30b-47a7-872a-6b432639d58a"
         mockAPIInteractor.mockResponses = [
-            Fixtures.favoritesResponse
+            FavoriteExercisesResponse(userFavorites: [id])
         ]
 
-        try await sut.toggleFavorite(exerciseId: "id", isFavorite: true)
+        try await sut.toggleFavorite(exerciseId: id, isFavorite: true)
+        
+        let cachedExercises = try XCTUnwrap(cacheInteractor.stubData as? [String: AvailableExercise])
+        let isFavorite = try XCTUnwrap(cachedExercises[id]?.isFavorite)
         
         XCTAssertTrue(mockAPIInteractor.called)
         XCTAssertTrue(cacheInteractor.saveCalled)
+        XCTAssertTrue(isFavorite)
+    }
+    
+    func testToggleFavorite_Unfavorite_Success() async throws {
+        let id = "8c6b9dbe-e30b-47a7-872a-6b432639d58a"
+        mockAPIInteractor.mockResponses = [
+            FavoriteExercisesResponse(userFavorites: [id])
+        ]
+
+        try await sut.toggleFavorite(exerciseId: id, isFavorite: false)
+        
+        let cachedExercises = try XCTUnwrap(cacheInteractor.stubData as? [String: AvailableExercise])
+        let isFavorite = try XCTUnwrap(cachedExercises[id]?.isFavorite)
+        
+        XCTAssertTrue(mockAPIInteractor.called)
+        XCTAssertTrue(cacheInteractor.saveCalled)
+        XCTAssertFalse(isFavorite)
     }
     
     func testSaveWorkout_FileNoExist_ErrorSaving() {
