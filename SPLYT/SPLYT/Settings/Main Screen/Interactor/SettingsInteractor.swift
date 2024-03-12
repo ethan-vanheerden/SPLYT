@@ -104,6 +104,7 @@ private extension SettingsInteractor {
         return .init(title: Strings.support,
                      items: [
                         .submitFeedback,
+                        .about,
                         .signOut
                      ],
                      isEnabled: true)

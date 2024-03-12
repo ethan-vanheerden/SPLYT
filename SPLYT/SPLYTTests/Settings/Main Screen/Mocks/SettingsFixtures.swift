@@ -27,6 +27,7 @@ struct SettingsFixtures {
     static let supportSection: SettingsSection = .init(title: "SUPPORT",
                                                        items: [
                                                         .submitFeedback,
+                                                        .about,
                                                         .signOut
                                                        ],
                                                        isEnabled: true)

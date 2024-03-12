@@ -14,6 +14,7 @@ enum LoginDomainAction {
     case toggleCreateAccount(isCreateAccount: Bool)
     case updateEmail(newEmail: String)
     case updatePassword(newPassword: String)
+    case updateBirthday(newBirthday: Date)
     case submit
 }
 
@@ -28,10 +29,20 @@ enum LoginDomainResult: Equatable {
 
 final class LoginInteractor {
     private let service: LoginServiceType
+    private let startingValidBirthdate: Date
     private var savedDomain: LoginDomain?
     
-    init(service: LoginServiceType = LoginService()) {
+    init(service: LoginServiceType = LoginService(),
+         startingValidBirthdate: Date? = nil) {
         self.service = service
+        
+        if let startingValidBirthdate = startingValidBirthdate {
+            self.startingValidBirthdate = startingValidBirthdate
+        } else {
+            self.startingValidBirthdate = Calendar.current.date(byAdding: .year,
+                                                                value: -16,
+                                                                to: Date.now) ?? Date.now
+        }
     }
     
     func interact(with action: LoginDomainAction) async -> LoginDomainResult {
@@ -44,6 +55,8 @@ final class LoginInteractor {
             return handleUpdateEmail(newEmail: newEmail)
         case .updatePassword(let newPassword):
             return handleUpdatePassword(newPassword: newPassword)
+        case .updateBirthday(let newBirthday):
+            return handleUpdateBirthday(newBirthday: newBirthday)
         case .submit:
             return await handleSubmit()
         }
@@ -54,15 +67,21 @@ final class LoginInteractor {
 
 private extension LoginInteractor {
     func handleLoad() -> LoginDomainResult {
+        guard let termsURL = Policy.termsConditions.url else { return .error }
+        
         let domain = LoginDomain(email: "",
                                  password: "",
+                                 birthday: startingValidBirthdate,
                                  emailMessage: Strings.validEmailMessage,
                                  emailError: false,
                                  passwordMessage: Strings.validPasswordMessage,
                                  passwordError: false,
+                                 birthdayMessage: Strings.birthdayMessage,
+                                 birthdayError: false,
                                  isCreateAccount: false,
                                  errorMessage: nil,
-                                 canSubmit: false)
+                                 canSubmit: false,
+                                 termsURL: termsURL)
         
         return updateDomain(domain: domain)
     }
@@ -82,7 +101,9 @@ private extension LoginInteractor {
         domain.email = newEmail
         domain.emailMessage = emailValid || newEmail.isEmpty ? Strings.validEmailMessage : Strings.invalidEmail
         domain.emailError = !emailValid && !newEmail.isEmpty
-        domain.canSubmit = canSubmit(email: domain.email, password: domain.password)
+        domain.canSubmit = canSubmit(email: domain.email,
+                                     password: domain.password,
+                                     birthday: domain.birthday)
         
         return updateDomain(domain: domain)
     }
@@ -94,7 +115,22 @@ private extension LoginInteractor {
         domain.password = newPassword
         domain.passwordMessage = passwordValid || newPassword.isEmpty ? Strings.validPasswordMessage : Strings.invalidPassword
         domain.passwordError = !passwordValid && !newPassword.isEmpty
-        domain.canSubmit = canSubmit(email: domain.email, password: domain.password)
+        domain.canSubmit = canSubmit(email: domain.email,
+                                     password: domain.password,
+                                     birthday: domain.birthday)
+        
+        return updateDomain(domain: domain)
+    }
+    
+    func handleUpdateBirthday(newBirthday: Date) -> LoginDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        let birthdayValid = isBirthdayValid(birthday: newBirthday)
+        domain.birthday = newBirthday
+        domain.birthdayError = !birthdayValid
+        domain.canSubmit = canSubmit(email: domain.email,
+                                     password: domain.password,
+                                     birthday: domain.birthday)
         
         return updateDomain(domain: domain)
     }
@@ -148,8 +184,22 @@ private extension LoginInteractor {
         return password.count >= 8
     }
     
-    func canSubmit(email: String, password: String) -> Bool {
-        return isEmailValid(email: email) && isPasswordValid(password: password)
+    func isBirthdayValid(birthday: Date) -> Bool {
+        // Users need to be at least 16 years old
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: birthday, to: Date.now)
+        
+        if let yearsOld = ageComponents.year {
+            return yearsOld >= 16
+        } else {
+            return false
+        }
+    }
+    
+    func canSubmit(email: String, password: String, birthday: Date) -> Bool {
+        return isEmailValid(email: email)
+        && isPasswordValid(password: password)
+        && isBirthdayValid(birthday: birthday)
     }
 }
 
@@ -159,6 +209,7 @@ private extension LoginInteractor {
 fileprivate struct Strings {
     static let validEmailMessage = "Must be a valid email"
     static let validPasswordMessage = "Password must be at least 8 characters"
+    static let birthdayMessage = "You must be at least 16 years old to use SPLYT"
     static let invalidEmail = "Invalid email"
     static let invalidPassword = "Invalid password"
     static let errorCreateAccount = """

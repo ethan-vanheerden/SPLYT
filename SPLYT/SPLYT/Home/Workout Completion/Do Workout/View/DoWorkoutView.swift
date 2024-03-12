@@ -29,7 +29,8 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
         case .loading:
             ProgressView()
         case .error:
-            Text("Error")
+            ErrorView(retryAction: { viewModel.send(.loadWorkout, taskPriority: .userInitiated) },
+                      backAction: { navigationRouter.navigate(.exit)} )
         case .loaded(let display):
             mainView(display: display)
         case .exit(let display):

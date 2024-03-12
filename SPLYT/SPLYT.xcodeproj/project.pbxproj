@@ -158,6 +158,8 @@
 		AA8511CD2A9D4831002D1EED /* MockSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8511CC2A9D4831002D1EED /* MockSettingsService.swift */; };
 		AA8559FE2A3640430078DCD8 /* DoWorkoutInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */; };
 		AA855A002A3640730078DCD8 /* MockDoWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */; };
+		AA8744B12B9A693500030D3E /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8744B02B9A693500030D3E /* Policy.swift */; };
+		AA8744BB2B9A968A00030D3E /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8744BA2B9A968A00030D3E /* AboutView.swift */; };
 		AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */; };
 		AA93403E288882AB00309E83 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93403D288882AB00309E83 /* MainViewModelTests.swift */; };
 		AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9340442888881800309E83 /* SnapshotTesting+Extensions.swift */; };
@@ -237,7 +239,21 @@
 		AAF0FB48299962CF00167B02 /* BuildWorkoutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB47299962CF00167B02 /* BuildWorkoutViewModelTests.swift */; };
 		AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */; };
 		AAF0FB54299B0B5700167B02 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = AAF0FB53299B0B5700167B02 /* Font */; };
+		AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */; };
+		AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF864952B9CBD3A0042BFD7 /* Package.resolved */; };
+		AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */; };
+		AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */; };
+		AAF8649D2B9CBDC80042BFD7 /* LicenseReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */; };
+		AAF864A12B9CBDDB0042BFD7 /* LicenseDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */; };
+		AAF864A32B9CBDE40042BFD7 /* LicenseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */; };
+		AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */; };
 		AAFC58F428871CE2001B69B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AAFC58F328871CE2001B69B3 /* SnapshotTesting */; };
+		AAFCE47B2B9FC567002E21C8 /* PolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE47A2B9FC567002E21C8 /* PolicyTests.swift */; };
+		AAFCE4812B9FC819002E21C8 /* LicenseInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4802B9FC819002E21C8 /* LicenseInteractorTests.swift */; };
+		AAFCE4842B9FCB3F002E21C8 /* LicenseFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4832B9FCB3F002E21C8 /* LicenseFixtures.swift */; };
+		AAFCE4862B9FCEB1002E21C8 /* LicenseReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4852B9FCEB1002E21C8 /* LicenseReducerTests.swift */; };
+		AAFCE4882B9FD34D002E21C8 /* LicenseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4872B9FD34D002E21C8 /* LicenseViewModelTests.swift */; };
+		AAFCE48A2B9FD41C002E21C8 /* ThirdPartyPackageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFCE4892B9FD41C002E21C8 /* ThirdPartyPackageTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +417,8 @@
 		AA8511CC2A9D4831002D1EED /* MockSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSettingsService.swift; sourceTree = "<group>"; };
 		AA8559FD2A3640430078DCD8 /* DoWorkoutInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutInteractorTests.swift; sourceTree = "<group>"; };
 		AA8559FF2A3640730078DCD8 /* MockDoWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDoWorkoutService.swift; sourceTree = "<group>"; };
+		AA8744B02B9A693500030D3E /* Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Policy.swift; sourceTree = "<group>"; };
+		AA8744BA2B9A968A00030D3E /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		AA893137294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableExercisesCacheRequest.swift; sourceTree = "<group>"; };
 		AA893139294A4FA600D7B4B1 /* Caching */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Caching; sourceTree = "<group>"; };
 		AA93403D288882AB00309E83 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
@@ -482,6 +500,20 @@
 		AAF0FB47299962CF00167B02 /* BuildWorkoutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewModelTests.swift; sourceTree = "<group>"; };
 		AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewTests.swift; sourceTree = "<group>"; };
 		AAF0FB53299B0B5700167B02 /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
+		AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		AAF864952B9CBD3A0042BFD7 /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
+		AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
+		AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInteractor.swift; sourceTree = "<group>"; };
+		AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseReducer.swift; sourceTree = "<group>"; };
+		AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDisplay.swift; sourceTree = "<group>"; };
+		AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDomain.swift; sourceTree = "<group>"; };
+		AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewState.swift; sourceTree = "<group>"; };
+		AAFCE47A2B9FC567002E21C8 /* PolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyTests.swift; sourceTree = "<group>"; };
+		AAFCE4802B9FC819002E21C8 /* LicenseInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInteractorTests.swift; sourceTree = "<group>"; };
+		AAFCE4832B9FCB3F002E21C8 /* LicenseFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseFixtures.swift; sourceTree = "<group>"; };
+		AAFCE4852B9FCEB1002E21C8 /* LicenseReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseReducerTests.swift; sourceTree = "<group>"; };
+		AAFCE4872B9FD34D002E21C8 /* LicenseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModelTests.swift; sourceTree = "<group>"; };
+		AAFCE4892B9FD41C002E21C8 /* ThirdPartyPackageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyPackageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +610,7 @@
 		AA1A33FF2882E0B300BCB792 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AA8744B22B9A91A600030D3E /* About */,
 				AAB42B282A79A397002A1ED2 /* Rest Presets */,
 				AA116FDB2A7848DB00E68852 /* Main Screen */,
 			);
@@ -1241,6 +1274,7 @@
 		AA825D2E287238BF0041D94A = {
 			isa = PBXGroup;
 			children = (
+				AAF864952B9CBD3A0042BFD7 /* Package.resolved */,
 				AA63176029C13E8100F8CDBE /* AllTests.xctestplan */,
 				AA63175F29C13E1D00F8CDBE /* NonPackageTests.xctestplan */,
 				AA825D39287238BF0041D94A /* SPLYT */,
@@ -1322,6 +1356,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AA8744B22B9A91A600030D3E /* About */ = {
+			isa = PBXGroup;
+			children = (
+				AAF864972B9CBD5E0042BFD7 /* Licenses */,
+				AA8744B02B9A693500030D3E /* Policy.swift */,
+				AA8744BA2B9A968A00030D3E /* AboutView.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
 		AA893136294A4A2900D7B4B1 /* Caching */ = {
 			isa = PBXGroup;
 			children = (
@@ -1381,6 +1425,7 @@
 		AA93404E28888B5800309E83 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AAFCE4792B9FC54D002E21C8 /* About */,
 				AAB42B4E2A7BF361002A1ED2 /* Rest Presets */,
 				AAB42B3C2A7AE983002A1ED2 /* Main Screen */,
 			);
@@ -1872,6 +1917,89 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		AAF864972B9CBD5E0042BFD7 /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				AAF864A62B9CBE000042BFD7 /* Reducer */,
+				AAF864A52B9CBDF80042BFD7 /* Interactor */,
+				AAF864A42B9CBDF30042BFD7 /* View */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
+		AAF864A42B9CBDF30042BFD7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */,
+				AAF864A02B9CBDDB0042BFD7 /* LicenseDisplay.swift */,
+				AAF864A92B9CDCE00042BFD7 /* LicenseViewState.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AAF864A52B9CBDF80042BFD7 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8649A2B9CBDBB0042BFD7 /* LicenseInteractor.swift */,
+				AAF864A22B9CBDE40042BFD7 /* LicenseDomain.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AAF864A62B9CBE000042BFD7 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */,
+				AAF8649C2B9CBDC80042BFD7 /* LicenseReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AAFCE4792B9FC54D002E21C8 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE47C2B9FC67E002E21C8 /* Licenses */,
+				AAFCE47A2B9FC567002E21C8 /* PolicyTests.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		AAFCE47C2B9FC67E002E21C8 /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4822B9FCB2A002E21C8 /* Mocks */,
+				AAFCE47F2B9FC6AC002E21C8 /* Reducer */,
+				AAFCE47E2B9FC6A0002E21C8 /* Interactor */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
+		AAFCE47E2B9FC6A0002E21C8 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4802B9FC819002E21C8 /* LicenseInteractorTests.swift */,
+				AAFCE4892B9FD41C002E21C8 /* ThirdPartyPackageTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AAFCE47F2B9FC6AC002E21C8 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4852B9FCEB1002E21C8 /* LicenseReducerTests.swift */,
+				AAFCE4872B9FD34D002E21C8 /* LicenseViewModelTests.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AAFCE4822B9FCB2A002E21C8 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AAFCE4832B9FCB3F002E21C8 /* LicenseFixtures.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1879,6 +2007,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA825D5B287238CB0041D94A /* Build configuration list for PBXNativeTarget "SPLYT" */;
 			buildPhases = (
+				AAF8648D2B9BC56C0042BFD7 /* Copy Package.resolved */,
 				AA825D33287238BF0041D94A /* Sources */,
 				AA825D34287238BF0041D94A /* Frameworks */,
 				AA825D35287238BF0041D94A /* Resources */,
@@ -1936,7 +2065,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					AA825D36287238BF0041D94A = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -1979,6 +2108,7 @@
 				AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */,
 				AA2B25FC2A7F2E180001E79A /* GoogleService-Info.plist in Resources */,
 				AA825D3F287238C90041D94A /* Assets.xcassets in Resources */,
+				AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */,
 				AAF0FB54299B0B5700167B02 /* Font in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1993,6 +2123,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AAF8648D2B9BC56C0042BFD7 /* Copy Package.resolved */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Package.resolved";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(PROJECT_DIR)/Package.resolved",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp ${PROJECT_FILE_PATH}/project.xcworkspace/xcshareddata/swiftpm/Package.resolved ${PROJECT_DIR}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AA825D33287238BF0041D94A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2003,8 +2155,10 @@
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
 				AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */,
 				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
+				AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */,
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
+				AAF864A12B9CBDDB0042BFD7 /* LicenseDisplay.swift in Sources */,
 				AA672A4B2A64954D0009919E /* HistoryDomain.swift in Sources */,
 				AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */,
 				AAB42B392A79A5BF002A1ED2 /* RestPresetsDomain.swift in Sources */,
@@ -2050,6 +2204,7 @@
 				AA116FE42A78495C00E68852 /* SettingsDomain.swift in Sources */,
 				AAB42B272A795777002A1ED2 /* SettingsViewFactory.swift in Sources */,
 				AA2C24582A3F747B004FC939 /* BuildPlanViewModel.swift in Sources */,
+				AA8744BB2B9A968A00030D3E /* AboutView.swift in Sources */,
 				AA2C24482A3CBE77004FC939 /* NameWorkoutViewState.swift in Sources */,
 				AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */,
 				AAEBFCF02957FB5F00D284F0 /* HomeReducer.swift in Sources */,
@@ -2063,11 +2218,13 @@
 				AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */,
 				AA60DA07295217CF008C7615 /* HomeViewModel.swift in Sources */,
 				AA672A4F2A6495650009919E /* HistoryViewState.swift in Sources */,
+				AA8744B12B9A693500030D3E /* Policy.swift in Sources */,
 				AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */,
 				AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */,
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
 				AA116FE62A7849CD00E68852 /* SettingsReducer.swift in Sources */,
+				AAF864A32B9CBDE40042BFD7 /* LicenseDomain.swift in Sources */,
 				AACB29852A16659500AACB6B /* WorkoutPreviewView.swift in Sources */,
 				AA672A532A6495830009919E /* HistoryReducer.swift in Sources */,
 				AA672A492A6495360009919E /* HistoryInteractor.swift in Sources */,
@@ -2078,11 +2235,13 @@
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
 				AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */,
+				AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */,
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
 				AA5073822A546B8D00F0BAD2 /* DoPlanViewModel.swift in Sources */,
 				AA2C24542A3F72C6004FC939 /* BuildPlanDomain.swift in Sources */,
 				AA825D3B287238BF0041D94A /* SPLYTApp.swift in Sources */,
 				AAE79B02296EFDD90010848E /* BuildWorkoutDomain.swift in Sources */,
+				AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */,
 				AA1786DC2A910E7500563B04 /* MainViewInteractor.swift in Sources */,
 				AA1786EC2A91147800563B04 /* LoginViewState.swift in Sources */,
 				AA1786E82A91146600563B04 /* LoginDomain.swift in Sources */,
@@ -2091,6 +2250,7 @@
 				AA60DA0B29521AED008C7615 /* HomeNavigationRouter.swift in Sources */,
 				AA50737C2A546AEF00F0BAD2 /* DoPlanDisplay.swift in Sources */,
 				AADC842A2A97B97300FA334C /* AuthManager.swift in Sources */,
+				AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */,
 				AACF8881287366DC003A50E8 /* MainViewModel.swift in Sources */,
 				AA672A672A69B8940009919E /* WorkoutDetailsDisplay.swift in Sources */,
 				AA672A6B2A69B8BE0009919E /* WorkoutDetailsView.swift in Sources */,
@@ -2116,6 +2276,7 @@
 				AA1786E02A91143A00563B04 /* LoginView.swift in Sources */,
 				AA672A6D2A69BA620009919E /* WorkoutDetailsViewState.swift in Sources */,
 				AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */,
+				AAF8649D2B9CBDC80042BFD7 /* LicenseReducer.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2131,12 +2292,14 @@
 				AA2C243B2A379BA0004FC939 /* DoWorkoutFixtures.swift in Sources */,
 				AA50739F2A63066F00F0BAD2 /* BuildPlanFixtures.swift in Sources */,
 				AA93405028888B9B00309E83 /* HomeViewTests.swift in Sources */,
+				AAFCE4862B9FCEB1002E21C8 /* LicenseReducerTests.swift in Sources */,
 				AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */,
 				AAE79AF9296E15550010848E /* NameWorkoutViewTests.swift in Sources */,
 				AA5073A12A630DD900F0BAD2 /* BuildPlanReducerTests.swift in Sources */,
 				AAF0FB3D298ABBA900167B02 /* BuildWorkoutFixtures.swift in Sources */,
 				AA5073AC2A6387F400F0BAD2 /* DoPlanServiceTests.swift in Sources */,
 				AA2B26072A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
+				AAFCE4842B9FCB3F002E21C8 /* LicenseFixtures.swift in Sources */,
 				AA0F8EB42B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift in Sources */,
 				AA0F8EB12B32212600B88C02 /* TestUtils.swift in Sources */,
 				AA9340452888881800309E83 /* SnapshotTesting+Extensions.swift in Sources */,
@@ -2160,6 +2323,7 @@
 				AA672A952A7440380009919E /* WorkoutDetailsInteractorTests.swift in Sources */,
 				AA50738D2A62F8F300F0BAD2 /* NameWorkoutReducerTests.swift in Sources */,
 				AA672A7F2A6B34350009919E /* MockCompletedWorkoutsService.swift in Sources */,
+				AAFCE4812B9FC819002E21C8 /* LicenseInteractorTests.swift in Sources */,
 				AAEBFCFB295E406D00D284F0 /* HomeInteractorTests.swift in Sources */,
 				AAEBFCFD295E412400D284F0 /* HomeNavigationRouterTests.swift in Sources */,
 				AADEC4B928A8428900A5463B /* GetAvailableExercisesRequestTests.swift in Sources */,
@@ -2195,6 +2359,7 @@
 				AA2C24392A37817F004FC939 /* DoWorkoutReducerTests.swift in Sources */,
 				AA76AAC12A9D094200FEF8D6 /* LoginServiceTests.swift in Sources */,
 				AA8511C02A9D1C01002D1EED /* LoginViewModelTests.swift in Sources */,
+				AAFCE47B2B9FC567002E21C8 /* PolicyTests.swift in Sources */,
 				AA76AAC62A9D0AC800FEF8D6 /* LoginInteractorTests.swift in Sources */,
 				AAB42B472A7AEF6B002A1ED2 /* SettingsReducerTests.swift in Sources */,
 				AA52BBB229B78802009CDBDA /* MockHomeService.swift in Sources */,
@@ -2202,6 +2367,7 @@
 				AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */,
 				AA52BBAE29B6962E009CDBDA /* BuildWorkoutNavigationRouterTests.swift in Sources */,
 				AAB42B582A7BF5AA002A1ED2 /* MockRestPresetsService.swift in Sources */,
+				AAFCE4882B9FD34D002E21C8 /* LicenseViewModelTests.swift in Sources */,
 				AA8511BE2A9D13DF002D1EED /* LoginReducerTests.swift in Sources */,
 				AA0F8EB62B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift in Sources */,
 				AAF0FB3F298AC0BB00167B02 /* BuildWorkoutInteractorTests.swift in Sources */,
@@ -2212,6 +2378,7 @@
 				AA5073972A62FF6700F0BAD2 /* BuildPlanNavigationRouterTests.swift in Sources */,
 				AA672A812A6B51830009919E /* MockHistoryService.swift in Sources */,
 				AA672A872A6DE0A90009919E /* HistoryFixtures.swift in Sources */,
+				AAFCE48A2B9FD41C002E21C8 /* ThirdPartyPackageTests.swift in Sources */,
 				AAD074EE2A744B1300451C64 /* WorkoutDetailsViewModelTests.swift in Sources */,
 				AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */,
 				AA76AAC42A9D09B800FEF8D6 /* LoginFixtures.swift in Sources */,

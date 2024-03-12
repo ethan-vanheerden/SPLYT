@@ -24,21 +24,26 @@ struct LoginReducer {
 
 private extension LoginReducer {
     func getDisplay(domain: LoginDomain) -> LoginDisplay {
-        let passwordMessageColor = getMessageColor(isError: domain.passwordError)
         let emailMessageColor = getMessageColor(isError: domain.emailError)
+        let passwordMessageColor = getMessageColor(isError: domain.passwordError)
+        let birthdayMessageColor = getMessageColor(isError: domain.birthdayError)
         
         let display = LoginDisplay(email: domain.email,
                                    password: domain.password,
+                                   birthday: domain.birthday,
                                    emailTextEntry: emailTextEntry,
                                    emailMessage: domain.emailMessage,
                                    emailMessageColor: emailMessageColor,
                                    passwordTextEntry: passwordtextEntry,
                                    passwordMessage: domain.passwordMessage,
                                    passwordMessageColor: passwordMessageColor,
+                                   birthdayMessage: domain.birthdayMessage,
+                                   birthdayMessageColor: birthdayMessageColor,
                                    isCreateAccount: domain.isCreateAccount,
                                    errorMessage: domain.errorMessage,
                                    submitButtonEnabled: domain.canSubmit,
-                                   createAccountNavBar: createAccountNavBar)
+                                   createAccountNavBar: createAccountNavBar,
+                                   termsURL: domain.termsURL)
         
         return display
     }

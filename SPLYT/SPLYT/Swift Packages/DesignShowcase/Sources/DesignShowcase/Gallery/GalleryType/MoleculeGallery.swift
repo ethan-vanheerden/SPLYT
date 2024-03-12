@@ -11,6 +11,7 @@ enum Molecule: String, CaseIterable, GalleryItem {
     case completedSetView = "Completed Set View"
     case counter = "Counter"
     case dialog = "Dialog"
+    case errorView = "Error View"
     case homeFABRow = "Home FAB Row"
     case navigationBar = "Navigation Bar"
     case restFABRow = "Rest FAB Row"

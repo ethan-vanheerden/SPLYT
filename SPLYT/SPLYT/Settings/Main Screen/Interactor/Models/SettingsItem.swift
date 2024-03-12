@@ -12,6 +12,7 @@ enum SettingsItem: Equatable, CaseIterable {
     case designShowcase
     case restPresets
     case submitFeedback
+    case about
     case signOut
     
     var title: String {
@@ -22,6 +23,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "Rest Presets"
         case .submitFeedback:
             return "Submit Feedback"
+        case .about:
+            return "About"
         case .signOut:
             return "Sign Out"
         }
@@ -43,6 +46,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "stopwatch.fill"
         case .submitFeedback:
             return "envelope.fill"
+        case .about:
+            return "info.circle.fill"
         case .signOut:
             return "person.fill"
         }
@@ -56,6 +61,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return .blue
         case .submitFeedback:
             return .green
+        case .about:
+            return .gray
         case .signOut:
             return .gray
         }

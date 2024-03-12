@@ -7,15 +7,18 @@
 
 import XCTest
 @testable import SPLYT
+@testable import ExerciseCore
 
 final class LoginInteractorTests: XCTestCase {
     typealias Fixtures = LoginFixtures
+    typealias WorkoutFixtures = WorkoutModelFixtures
     private var mockService: MockLoginService!
     private var sut: LoginInteractor!
     
     override func setUpWithError() throws {
         self.mockService = MockLoginService()
-        self.sut = LoginInteractor(service: mockService)
+        self.sut = LoginInteractor(service: mockService,
+                                   startingValidBirthdate: WorkoutFixtures.oct_16_2000_0000)
     }
     
     func testInteract_Load_Success() async {
@@ -121,10 +124,40 @@ final class LoginInteractorTests: XCTestCase {
         XCTAssertEqual(result, .loaded(expectedDomain))
     }
     
-    func testInteract_UpdateEmailAndPassword_Success() async {
+    func testInteract_UpdateBirthday_NoSavedDomain_Error() async {
+        let result = await sut.interact(with: .updateBirthday(newBirthday: WorkoutFixtures.mar_8_2002_1200))
+        XCTAssertEqual(result, .error)
+    }
+    
+    func testInteract_UpdateBirthday_InvalidDate_Success() async throws {
+        await load()
+        let invalidDate = try XCTUnwrap(Calendar.current.date(byAdding: .year,
+                                                              value: -15,
+                                                              to: Date.now))
+        let result = await sut.interact(with: .updateBirthday(newBirthday: invalidDate))
+        
+        var expectedDomain = Fixtures.domain
+        expectedDomain.birthday = invalidDate
+        expectedDomain.birthdayError = true
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+    }
+    
+    func testInteract_UpdateBirthday_ValidDate_Success() async {
+        await load()
+        let result = await sut.interact(with: .updateBirthday(newBirthday: WorkoutFixtures.mar_8_2002_1200))
+        
+        var expectedDomain = Fixtures.domain
+        expectedDomain.birthday = WorkoutFixtures.mar_8_2002_1200
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+    }
+    
+    func testInteract_UpdateFields_Success() async {
         await load()
         _ = await sut.interact(with: .updateEmail(newEmail: Fixtures.email))
-        let result = await sut.interact(with: .updatePassword(newPassword: Fixtures.password))
+        _ = await sut.interact(with: .updatePassword(newPassword: Fixtures.password))
+        let result = await sut.interact(with: .updateBirthday(newBirthday: WorkoutFixtures.mar_8_2002_1200))
         
         let expectedDomain = Fixtures.domainFilled
         
@@ -198,5 +231,6 @@ private extension LoginInteractorTests {
         await load()
         _ = await sut.interact(with: .updateEmail(newEmail: Fixtures.email))
         _ = await sut.interact(with: .updatePassword(newPassword: Fixtures.password))
+        _ = await sut.interact(with: .updateBirthday(newBirthday: WorkoutFixtures.mar_8_2002_1200))
     }
 }

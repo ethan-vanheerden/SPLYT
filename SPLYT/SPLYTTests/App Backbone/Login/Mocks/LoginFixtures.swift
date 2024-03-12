@@ -8,8 +8,11 @@
 import Foundation
 @testable import SPLYT
 import DesignSystem
+import ExerciseCore
+
 
 struct LoginFixtures {
+    typealias WorkoutFixtures = WorkoutModelFixtures
     // MARK: - Domain
     
     static let email = "test@example.com"
@@ -20,6 +23,8 @@ struct LoginFixtures {
     
     static let validPasswordMessage = "Password must be at least 8 characters"
     
+    static let birthdayMessage = "You must be at least 16 years old to use SPLYT"
+    
     static let invalidEmail = "Invalid email"
     
     static let invalidPassword = "Invalid password"
@@ -29,23 +34,33 @@ Something went wrong. Double check your password or create an account if you don
 """
     static let errorOther = "Something went wrong. Please try again later."
     
+    static let termsURL = URL(string: "https://ethan-vanheerden.github.io/splyt-terms/terms-conditions") ?? URL.applicationDirectory
+    
     static let domain: LoginDomain = .init(email: "",
                                            password: "",
+                                           birthday: WorkoutFixtures.oct_16_2000_0000,
                                            emailMessage: validEmailMessage,
                                            emailError: false,
                                            passwordMessage: validPasswordMessage,
                                            passwordError: false,
+                                           birthdayMessage: birthdayMessage,
+                                           birthdayError: false,
                                            isCreateAccount: false,
-                                           canSubmit: false)
+                                           canSubmit: false,
+                                           termsURL: termsURL)
     
     static let domainFilled: LoginDomain = .init(email: email,
                                                  password: password,
+                                                 birthday: WorkoutFixtures.mar_8_2002_1200,
                                                  emailMessage: validEmailMessage,
                                                  emailError: false,
                                                  passwordMessage: validPasswordMessage,
                                                  passwordError: false,
+                                                 birthdayMessage: birthdayMessage,
+                                                 birthdayError: false,
                                                  isCreateAccount: false,
-                                                 canSubmit: true)
+                                                 canSubmit: true,
+                                                 termsURL: termsURL)
     
     // MARK: - View State
     
@@ -69,27 +84,35 @@ Something went wrong. Double check your password or create an account if you don
     
     static let display: LoginDisplay = .init(email: "",
                                              password: "",
+                                             birthday: WorkoutFixtures.oct_16_2000_0000,
                                              emailTextEntry: emailTextEntry,
                                              emailMessage: validEmailMessage,
                                              emailMessageColor: .gray,
                                              passwordTextEntry: passwordTextEntry,
                                              passwordMessage: validPasswordMessage,
                                              passwordMessageColor: .gray,
+                                             birthdayMessage: birthdayMessage,
+                                             birthdayMessageColor: .gray,
                                              isCreateAccount: false,
                                              errorMessage: nil,
                                              submitButtonEnabled: false,
-                                             createAccountNavBar: createAccountNavBar)
+                                             createAccountNavBar: createAccountNavBar, 
+                                             termsURL: termsURL)
     
     static let displayFilled: LoginDisplay = .init(email: email,
                                                    password: password,
+                                                   birthday: WorkoutFixtures.mar_8_2002_1200,
                                                    emailTextEntry: emailTextEntry,
                                                    emailMessage: validEmailMessage,
                                                    emailMessageColor: .gray,
                                                    passwordTextEntry: passwordTextEntry,
                                                    passwordMessage: validPasswordMessage,
                                                    passwordMessageColor: .gray,
+                                                   birthdayMessage: birthdayMessage,
+                                                   birthdayMessageColor: .gray,
                                                    isCreateAccount: false,
                                                    errorMessage: nil,
                                                    submitButtonEnabled: true,
-                                                   createAccountNavBar: createAccountNavBar)
+                                                   createAccountNavBar: createAccountNavBar,
+                                                   termsURL: termsURL)
 }

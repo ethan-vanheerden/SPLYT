@@ -1,6 +1,6 @@
 import Foundation
 
-// TODO: move to test target but xcode is broken
+// TODO: move to test target but XCode is broken
 /// Contains test models for things related to workouts.
 public struct WorkoutModelFixtures {
     public static let dec_27_2022_1000: Date = Date(timeIntervalSince1970: 1672135200)
@@ -8,6 +8,10 @@ public struct WorkoutModelFixtures {
     public static let jan_1_2023_0800: Date = Date(timeIntervalSince1970: 1672560000)
     
     public static let feb_3_2023_1630: Date = Date(timeIntervalSince1970: 1675441800)
+    
+    public static let mar_8_2002_1200: Date = Date(timeIntervalSince1970: 1015606800)
+    
+    public static let oct_16_2000_0000: Date = Date(timeIntervalSince1970: 971668800)
     
     public static func createSets(inputs: [(SetInput, SetModifier?)]) -> [Set] {
         var sets = [Set]()

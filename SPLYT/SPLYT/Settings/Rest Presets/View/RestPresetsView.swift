@@ -12,6 +12,7 @@ import DesignSystem
 struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEvent,
                                                   VM.ViewState == RestPresetsViewState {
     @ObservedObject private var viewModel: VM
+    @Environment(\.dismiss) private var dismiss
     @State private var showRestPicker: Bool = false
     @State private var editPresetIndex: Int = 0 // Keeps track of the preset we are currently updating
     @State private var pickerMinutes: Int = 0
@@ -28,7 +29,8 @@ struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEve
         case .loading:
             ProgressView()
         case .error:
-            Text("Error!")
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
+                      backAction: { dismiss() })
         case .loaded(let display):
             mainView(display: display)
         }

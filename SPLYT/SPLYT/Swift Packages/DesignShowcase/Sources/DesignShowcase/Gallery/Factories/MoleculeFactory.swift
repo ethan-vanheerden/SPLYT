@@ -16,6 +16,8 @@ struct MoleculeFactory {
             CounterGallery()
         case .dialog:
             DialogGallery()
+        case .errorView:
+            ErrorViewGallery()
         case .homeFABRow:
             HomeFABRowGallery()
         case .navigationBar:

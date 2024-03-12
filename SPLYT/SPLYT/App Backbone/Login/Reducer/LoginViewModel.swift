@@ -10,11 +10,12 @@ import Core
 
 // MARK: - Events
 
-enum LoginViewEvent {
+enum LoginViewEvent: Equatable {
     case load
     case toggleCreateAccount(isCreateAccount: Bool)
     case updateEmail(newEmail: String)
     case updatePassword(newPassword: String)
+    case updateBirthday(newBirthday: Date)
     case submit
 }
 
@@ -39,6 +40,8 @@ final class LoginViewModel: ViewModel {
             await react(domainAction: .updateEmail(newEmail: newEmail))
         case .updatePassword(let newPassword):
             await react(domainAction: .updatePassword(newPassword: newPassword))
+        case .updateBirthday(let newBirthday):
+            await react(domainAction: .updateBirthday(newBirthday: newBirthday))
         case .submit:
             await react(domainAction: .submit)
         }

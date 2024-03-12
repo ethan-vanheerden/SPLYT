@@ -31,7 +31,7 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
         case .loading:
             ProgressView()
         case .error:
-            Text("Error")
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) })
         case .loaded(let display):
             mainView(display: display)
         }
@@ -81,11 +81,7 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     
     @ViewBuilder
     private func linkDetail(item: SettingsItem, url: String) -> some View {
-        if let url = URL(string: url) {
-            Link(destination: url) {
-                detailLabel(item: item)
-            }
-        }
+        detailLabel(item: item, link: URL(string: url))
     }
     
     @ViewBuilder
@@ -104,15 +100,11 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     }
     
     @ViewBuilder
-    private func detailLabel(item: SettingsItem) -> some View {
-        HStack {
-            IconImage(imageName: item.imageName,
-                      backgroundColor: item.backgroundColor)
-            Text(item.title)
-                .subhead(style: .semiBold)
-                .foregroundColor(Color(splytColor: .black))
-            Spacer()
-        }
+    private func detailLabel(item: SettingsItem, link: URL? = nil) -> some View {
+        SettingsListItem(viewState: .init(title: item.title,
+                                          iconName: item.imageName,
+                                          iconBackgroundColor: item.backgroundColor,
+                                          link: link))
     }
 }
 

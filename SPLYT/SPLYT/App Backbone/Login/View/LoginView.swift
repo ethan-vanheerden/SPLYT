@@ -14,6 +14,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                                             VM.ViewState == LoginViewState {
     @ObservedObject private var viewModel: VM
     private let horizontalPadding = Layout.size(2)
+    @State private var date = Date.now
     
     init(viewModel: VM) {
         self.viewModel = viewModel
@@ -25,7 +26,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
         case .loading:
             ProgressView()
         case .error:
-            Text("Error!")
+            ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) })
         case .loaded(let display):
             mainView(display: display)
         }
@@ -82,6 +83,12 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                     .footnote()
                     .foregroundColor(Color(splytColor: display.passwordMessageColor))
             }
+            if createAccount {
+                birthdayPicker(birthday: display.birthday)
+                Text(display.birthdayMessage)
+                    .footnote()
+                    .foregroundColor(Color(splytColor: display.birthdayMessageColor))
+            }
         }
         .padding(.bottom, Layout.size(4))
     }
@@ -100,6 +107,27 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             set: { viewModel.send(.updatePassword(newPassword: $0),
                                   taskPriority: .userInitiated) }
         )
+    }
+    
+    private func birthdayBinding(birthday: Date) -> Binding<Date> {
+        return Binding(
+            get: { return birthday },
+            set: { viewModel.send(.updateBirthday(newBirthday: $0),
+                                  taskPriority: .userInitiated) }
+        )
+    }
+    
+    @ViewBuilder
+    private func birthdayPicker(birthday: Date) -> some View {
+        VStack {
+            DatePicker(selection: birthdayBinding(birthday: birthday),
+                       in: ...Date.now, displayedComponents: .date) {
+                Text(Strings.birthday)
+                    .body()
+            }
+            .tint(Color(splytColor: .lightBlue))
+        }
+        .padding(.top, Layout.size(1))
     }
     
     @ViewBuilder
@@ -130,6 +158,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             .padding(.bottom, Layout.size(1))
             textEntries(display: display, createAccount: true)
             Spacer()
+            termsLink(termsURL: display.termsURL)
             submitButton(isCreateAccount: true,
                          isEnabled: display.submitButtonEnabled,
                          errorMessage: display.errorMessage)
@@ -140,6 +169,19 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                        backAction: { viewModel.send(.toggleCreateAccount(isCreateAccount: false),
                                                     taskPriority: .userInitiated) })
     }
+    
+    @ViewBuilder private func termsLink(termsURL: URL) -> some View {
+        VStack {
+            Text(Strings.bySigningUp)
+                .footnote()
+                .foregroundColor(Color(splytColor: .gray))
+            Link(destination: termsURL) {
+                Text(Strings.termsConditions)
+                    .footnote()
+                    .foregroundColor(Color(splytColor: .lightBlue))
+            }
+        }
+    }
 }
 
 fileprivate struct Strings {
@@ -149,4 +191,7 @@ fileprivate struct Strings {
     static let login = "Login"
     static let createAccount = "Create Account"
     static let welcome = "Welcome!"
+    static let birthday = "Birthday"
+    static let bySigningUp = "By signing up, you agree to the"
+    static let termsConditions = "Terms and Conditions"
 }
