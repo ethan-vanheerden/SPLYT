@@ -29,6 +29,9 @@ public struct SetEntry: View {
                 .shadow(radius: Layout.size(0.125))
                 .frame(width: Layout.size(8))
                 .fixedSize()
+                .onChange(of: input) { newValue in
+                    print(newValue)
+                }
             }
             Text(title)
                 .footnote()
