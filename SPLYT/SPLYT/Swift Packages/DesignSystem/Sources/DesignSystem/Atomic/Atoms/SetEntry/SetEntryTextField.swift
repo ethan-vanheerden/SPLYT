@@ -20,9 +20,12 @@ struct SetEntryTextField: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, UITextFieldDelegate {
+        @Binding private var text: String
         private var parent: SetEntryTextField
         
-        init(_ parent: SetEntryTextField) {
+        init(text: Binding<String>,
+             parent: SetEntryTextField) {
+            self._text = text
             self.parent = parent
         }
         
@@ -44,7 +47,16 @@ struct SetEntryTextField: UIViewRepresentable {
             
             if isValid {
                 let proposedValue = currentText.replacingCharacters(in: range, with: string)
-                parent.text = proposedValue
+                
+                Task {
+                    await MainActor.run {
+                        text = proposedValue
+                    }
+                }
+                
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.parent.text = proposedValue
+//                }
             }
             
             return isValid
@@ -90,7 +102,7 @@ struct SetEntryTextField: UIViewRepresentable {
         let textField = UITextField()
         
         textField.delegate = context.coordinator
-        textField.tag = tag
+//        textField.tag = tag
         textField.placeholder = placeholder
         textField.borderStyle = .roundedRect
         textField.keyboardType = keyboardType.keyboardType
@@ -117,7 +129,7 @@ struct SetEntryTextField: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(text: $text, parent: self)
     }
     
     func updateUIView(_ uiView: UITextField, context: Context) {
