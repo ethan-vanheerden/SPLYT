@@ -69,14 +69,15 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
     func loadAvailableExercises() async throws -> [String: AvailableExercise] {
         let lastSynced = userSettings.object(forKey: .lastSyncedExercises)
         
+        let favoritesRequest = GetFavoriteExercisesRequest(userAuth: userAuth)
+        let favoritesResponse = try await apiInteractor.performRequest(with: favoritesRequest)
+        
         guard let lastSynced = lastSynced as? Date,
               Int(currentDate.timeIntervalSince(lastSynced) / (60 * 60 * 24)) < DAYS_FOR_RESYNC else {
             do {
                 let exercisesRequest = GetAvailableExercisesRequest(userAuth: userAuth)
-                let favoritesRequest = GetFavoriteExercisesRequest(userAuth: userAuth)
                 
                 let exercisesResponse = try await apiInteractor.performRequest(with: exercisesRequest)
-                let favoritesResponse = try await apiInteractor.performRequest(with: favoritesRequest)
                 
                 var exerciseMap = mapExercises(exercisesResponse.exercises)
                 let result = try updateExerciseCache(exerciseMap: &exerciseMap,
@@ -85,14 +86,17 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
                 
                 userSettings.set(currentDate, forKey: .lastSyncedExercises)
                 return result
-            } catch {
+            } catch let error {
                 // If API call failed, just try loading from cache
                 return try loadFromCache()
             }
         }
         
         // If we fetched the exercises recently, just load from the cache
-        return try loadFromCache()
+        var cachedExercises = try loadFromCache()
+        return try updateExerciseCache(exerciseMap: &cachedExercises,
+                                       favorites: favoritesResponse.userFavorites,
+                                       unfavoritedExerciseID: nil)
     }
     
     func toggleFavorite(exerciseId: String, isFavorite: Bool) async throws {
@@ -127,21 +131,26 @@ private extension BuildWorkoutService {
         // First check if the user has the cached AvailableExercise file yet
         if !(try cacheInteractor.fileExists(request: request)) {
             
+            print("1")
+            
             // Save the fallback file
             guard let url = Bundle.main.url(forResource: "fallback_exercises", withExtension: "json") else {
                 throw BuildWorkoutError.fallbackFileNotFound
             }
             
+            print("2")
+            
             let data = try Data(contentsOf: url)
             let exercises = try JSONDecoder().decode([AvailableExercise].self, from: data)
-            
+            print("3")
             // Now save the fallback data to the cache
             var exerciseMap = mapExercises(exercises)
             return try updateExerciseCache(exerciseMap: &exerciseMap,
                                            favorites: [],
                                            unfavoritedExerciseID: nil)
         }
-        
+
+        print("4")
         return try cacheInteractor.load(request: request)
     }
     

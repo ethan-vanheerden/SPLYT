@@ -49,14 +49,15 @@ public struct SetEntry: View {
                     .font(Font.system(size: 14, design: .default))
                     .strokeBorder(cornerRadius: Layout.size(1), color: borderColor, shadowRadius: shadowRadius)
                     .onChange(of: fieldFocused) { isFocused in
-                        // Ensures we only send an update event once the user finishes typing
-                        print("isFocused: \(isFocused)")
                         if !isFocused {
-                            let validText = SetEntryFormatter.validateText(text: input, inputType: keyboardType)
-                            input = validText
-                            updateAction(validText)
+                            sendUpdate(newInput: input)
                         }
-                        
+                    }
+                    .onChange(of: input) { newInput in
+                        // Formatter would otherwise remove a decimal right when it is added
+                        if !newInput.hasSuffix(".") {
+                            sendUpdate(newInput: input)
+                        }
                     }
             }
             Text(title)
@@ -72,6 +73,12 @@ public struct SetEntry: View {
                 fieldFocused = false
             }
         }
+    }
+    
+    private func sendUpdate(newInput: String) {
+        let validText = SetEntryFormatter.validateText(text: newInput, inputType: keyboardType)
+        input = validText
+        updateAction(validText)
     }
     
     private var borderColor: SplytColor {
