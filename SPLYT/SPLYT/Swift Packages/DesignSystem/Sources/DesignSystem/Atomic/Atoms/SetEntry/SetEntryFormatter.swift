@@ -46,8 +46,11 @@ private extension SetEntryFormatter {
         // Add a zero if there is nothing before the decimal
         var result = text
         if text.hasPrefix(".") {
-            print("got here")
             result = "0" + result
+        }
+        
+        if text.hasSuffix(".") {
+            result.removeLast()
         }
         
         return result.count <= MAX_CHARACTERS ? result : ""

@@ -4,20 +4,23 @@ import SwiftUIIntrospect
 
 public struct SetEntry: View {
     @FocusState private var fieldFocused: Bool
-    @Binding private var input: String // Binding so that the text can be updated via a view model
+    @State private var input: String // Binding so that the text can be updated via a view model
     private let tagCounter = TagCounter.shared
     private let title: String
     private let keyboardType: KeyboardInputType
     private let placeholder: String?
+    private let updateAction: (String) -> Void
     
-    public init(input: Binding<String>,
+    public init(input: String,
                 title: String,
                 keyboardType: KeyboardInputType,
-                placeholder: String? = nil) {
-        self._input = input
+                placeholder: String? = nil,
+                updateAction: @escaping (String) -> Void) {
+        self._input = State(initialValue: input)
         self.title = title
         self.keyboardType = keyboardType
         self.placeholder = placeholder
+        self.updateAction = updateAction
     }
     
     public var body: some View {
@@ -45,8 +48,15 @@ public struct SetEntry: View {
                     .minimumScaleFactor(0.8)
                     .font(Font.system(size: 14, design: .default))
                     .strokeBorder(cornerRadius: Layout.size(1), color: borderColor, shadowRadius: shadowRadius)
-                    .onChange(of: input) { newValue in
-                        input = SetEntryFormatter.validateText(text: newValue, inputType: keyboardType)
+                    .onChange(of: fieldFocused) { isFocused in
+                        // Ensures we only send an update event once the user finishes typing
+                        print("isFocused: \(isFocused)")
+                        if !isFocused {
+                            let validText = SetEntryFormatter.validateText(text: input, inputType: keyboardType)
+                            input = validText
+                            updateAction(validText)
+                        }
+                        
                     }
             }
             Text(title)

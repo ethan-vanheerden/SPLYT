@@ -88,40 +88,49 @@ public struct SetView: View {
         case let .repsWeight(weightTitle, repsTitle, input):
             HStack(spacing: Layout.size(4)) {
                 // Reps Entry
-                let repsBinding = entryBinding(value: String(input.reps),
-                                               input: setInput,
-                                               repsInRepsWeight: true,
-                                               updateAction: updateAction)
-                SetEntry(input: repsBinding,
+                //                let repsBinding = entryBinding(value: String(input.reps),
+                //                                               input: setInput,
+                //                                               repsInRepsWeight: true,
+                //                                               updateAction: updateAction)
+                SetEntry(input: String(input.reps),
                          title: repsTitle,
                          keyboardType: .reps,
-                         placeholder: String(input.repsPlaceholder))
+                         placeholder: String(input.repsPlaceholder),
+                         updateAction: setUpdateAction(input: setInput,
+                                                       repsInRepsWeight: true,
+                                                       updateAction: updateAction))
                 
                 // Weight Entry
-                let weightBinding = entryBinding(value: String(input.weight),
-                                                 input: setInput,
-                                                 updateAction: updateAction)
-                SetEntry(input: weightBinding,
+                //                let weightBinding = entryBinding(value: String(input.weight),
+                //                                                 input: setInput,
+                //                                                 updateAction: updateAction)
+                SetEntry(input: String(input.weight),
                          title: weightTitle,
                          keyboardType: .weight,
-                         placeholder: String(input.weightPlaceholder))
+                         placeholder: String(input.weightPlaceholder),
+                         updateAction: setUpdateAction(input: setInput,
+                                                       updateAction: updateAction))
             }
         case let .repsOnly(title, input):
-            let repsBinding = entryBinding(value: String(input.reps),
-                                           input: setInput,
-                                           updateAction: updateAction)
-            SetEntry(input: repsBinding,
+            //            let repsBinding = entryBinding(value: String(input.reps),
+            //                                           input: setInput,
+            //                                           updateAction: updateAction)
+            SetEntry(input: String(input.reps),
                      title: title,
                      keyboardType: .reps,
-                     placeholder: String(input.placeholder))
+                     placeholder: String(input.placeholder),
+                     updateAction: setUpdateAction(input: setInput,
+                                                   updateAction: updateAction))
         case let .time(title, input):
-            let secondsBinding = entryBinding(value: String(input.seconds),
-                                              input: setInput,
-                                              updateAction: updateAction)
-            SetEntry(input: secondsBinding,
+            //            let secondsBinding = entryBinding(value: String(input.seconds),
+            //                                              input: setInput,
+            //                                              updateAction: updateAction)
+            SetEntry(input: String(input.seconds),
                      title: title,
                      keyboardType: .time,
-                     placeholder: String(input.placeholder))
+                     placeholder: String(input.placeholder),
+                     updateAction: setUpdateAction(input: setInput,
+                                                   updateAction: updateAction))
         }
     }
     
@@ -188,35 +197,63 @@ public struct SetView: View {
     ///   - repsInRepsWeight: If this is a reps and weight set, indicates if this is for the rep text field
     ///   - updateAction: The update action to perform when the text value in the text field changes
     /// - Returns: A binding to use for getting/updating values for the set text fields.
-    private func entryBinding(value: String,
-                              input: SetInputViewState,
-                              repsInRepsWeight: Bool = false,
-                              updateAction: @escaping (Int, SetInput) -> Void) -> Binding<String> {
-        return Binding(
-            get: { return value },
-            set: { newValue in
-                // Note: with this logic, if an input is not valid, we set the input to an empty
-                let parsedInput = Double(newValue)
-                let newInput: SetInput
-                
-                switch input {
-                case .repsWeight(_, _, var input):
-                    if repsInRepsWeight {
-                        input.reps = Int(parsedInput)
-                    } else {
-                        input.weight = parsedInput
-                    }
-                    newInput = .repsWeight(input: input)
-                case .repsOnly(_, var input):
+    //    private func entryBinding(value: String,
+    //                              input: SetInputViewState,
+    //                              repsInRepsWeight: Bool = false,
+    //                              updateAction: @escaping (Int, SetInput) -> Void) -> Binding<String> {
+    //
+    //        let x : Binding<(String, Bool)> = .constant(("", false))
+    //        return Binding(
+    //            get: { return value },
+    //            set: { newValue in
+    //                // Note: with this logic, if an input is not valid, we set the input to an empty
+    //                let parsedInput = Double(newValue)
+    //                let newInput: SetInput
+    //
+    //                switch input {
+    //                case .repsWeight(_, _, var input):
+    //                    if repsInRepsWeight {
+    //                        input.reps = Int(parsedInput)
+    //                    } else {
+    //                        input.weight = parsedInput
+    //                    }
+    //                    newInput = .repsWeight(input: input)
+    //                case .repsOnly(_, var input):
+    //                    input.reps = Int(parsedInput)
+    //                    newInput = .repsOnly(input: input)
+    //                case .time(_, var input):
+    //                    input.seconds = Int(parsedInput)
+    //                    newInput = .time(input: input)
+    //                }
+    //                updateAction(viewState.setIndex, newInput)
+    //            }
+    //        )
+    //    }
+    
+    private func setUpdateAction(input: SetInputViewState,
+                                 repsInRepsWeight: Bool = false,
+                                 updateAction: @escaping (Int, SetInput) -> Void) -> ((String) -> Void) {
+        return { validText in
+            let parsedInput = Double(validText)
+            let newInput: SetInput
+            
+            switch input {
+            case .repsWeight(_, _, var input):
+                if repsInRepsWeight {
                     input.reps = Int(parsedInput)
-                    newInput = .repsOnly(input: input)
-                case .time(_, var input):
-                    input.seconds = Int(parsedInput)
-                    newInput = .time(input: input)
+                } else {
+                    input.weight = parsedInput
                 }
-                updateAction(viewState.setIndex, newInput)
+                newInput = .repsWeight(input: input)
+            case .repsOnly(_, var input):
+                input.reps = Int(parsedInput)
+                newInput = .repsOnly(input: input)
+            case .time(_, var input):
+                input.seconds = Int(parsedInput)
+                newInput = .time(input: input)
             }
-        )
+            updateAction(viewState.setIndex, newInput)
+        }
     }
     
     private func validateText(input: String) -> Double? {
