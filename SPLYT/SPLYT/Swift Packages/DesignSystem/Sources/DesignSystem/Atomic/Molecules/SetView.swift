@@ -196,7 +196,7 @@ public struct SetView: View {
             get: { return value },
             set: { newValue in
                 // Note: with this logic, if an input is not valid, we set the input to an empty
-                let parsedInput = validateText(input: newValue)
+                let parsedInput = Double(newValue)
                 let newInput: SetInput
                 
                 switch input {

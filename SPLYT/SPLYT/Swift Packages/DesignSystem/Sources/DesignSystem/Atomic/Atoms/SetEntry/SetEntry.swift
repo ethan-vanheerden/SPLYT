@@ -26,7 +26,6 @@ public struct SetEntry: View {
             HStack {
                 // First parameter is for a placeholder
                 TextField(placeholder ?? "", text: $input)
-
                     .introspect(.textField, on: .iOS(.v15, .v16, .v17)) { textField in
                         // Using this library to avoid duplicate done button issue
                         let toolbar = UIToolbar()
@@ -46,6 +45,9 @@ public struct SetEntry: View {
                     .minimumScaleFactor(0.8)
                     .font(Font.system(size: 14, design: .default))
                     .strokeBorder(cornerRadius: Layout.size(1), color: borderColor, shadowRadius: shadowRadius)
+                    .onChange(of: input) { newValue in
+                        input = SetEntryFormatter.validateText(text: newValue, inputType: keyboardType)
+                    }
             }
             Text(title)
                 .footnote()
