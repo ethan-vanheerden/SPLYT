@@ -86,7 +86,7 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
                 
                 userSettings.set(currentDate, forKey: .lastSyncedExercises)
                 return result
-            } catch let error {
+            } catch {
                 // If API call failed, just try loading from cache
                 return try loadFromCache()
             }

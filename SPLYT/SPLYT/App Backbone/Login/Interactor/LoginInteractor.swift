@@ -103,7 +103,8 @@ private extension LoginInteractor {
         domain.emailError = !emailValid && !newEmail.isEmpty
         domain.canSubmit = canSubmit(email: domain.email,
                                      password: domain.password,
-                                     birthday: domain.birthday)
+                                     birthday: domain.birthday,
+                                     isCreateAccount: domain.isCreateAccount)
         
         return updateDomain(domain: domain)
     }
@@ -117,7 +118,8 @@ private extension LoginInteractor {
         domain.passwordError = !passwordValid && !newPassword.isEmpty
         domain.canSubmit = canSubmit(email: domain.email,
                                      password: domain.password,
-                                     birthday: domain.birthday)
+                                     birthday: domain.birthday,
+                                     isCreateAccount: domain.isCreateAccount)
         
         return updateDomain(domain: domain)
     }
@@ -130,7 +132,8 @@ private extension LoginInteractor {
         domain.birthdayError = !birthdayValid
         domain.canSubmit = canSubmit(email: domain.email,
                                      password: domain.password,
-                                     birthday: domain.birthday)
+                                     birthday: domain.birthday,
+                                     isCreateAccount: domain.isCreateAccount)
         
         return updateDomain(domain: domain)
     }
@@ -196,10 +199,13 @@ private extension LoginInteractor {
         }
     }
     
-    func canSubmit(email: String, password: String, birthday: Date) -> Bool {
+    func canSubmit(email: String,
+                   password: String,
+                   birthday: Date,
+                   isCreateAccount: Bool) -> Bool {
         return isEmailValid(email: email)
         && isPasswordValid(password: password)
-        && isBirthdayValid(birthday: birthday)
+        && (isBirthdayValid(birthday: birthday) || !isCreateAccount)
     }
 }
 
