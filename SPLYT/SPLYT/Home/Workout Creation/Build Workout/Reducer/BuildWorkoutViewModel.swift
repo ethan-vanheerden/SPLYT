@@ -27,6 +27,9 @@ enum BuildWorkoutViewEvent {
     case updateModifier(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
     case filter(by: BuildWorkoutFilter)
     case removeAllFilters
+    case createSuperset
+    case cancelSuperset
+    case saveSuperset
 }
 
 // MARK: - View Model
@@ -83,6 +86,12 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .filter(by: filter))
         case .removeAllFilters:
             await react(domainAction: .removeAllFilters)
+        case .createSuperset:
+            await react(domainAction: .createSuperset)
+        case .cancelSuperset:
+            await react(domainAction: .cancelSuperset)
+        case .saveSuperset:
+            await react(domainAction: .saveSuperset)
         }
     }
 }

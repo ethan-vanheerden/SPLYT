@@ -51,14 +51,14 @@ private extension LoginReducer {
     var emailTextEntry: TextEntryViewState {
         return .init(title: Strings.email,
                      includeCancelButton: false,
-                     autoCapitalize: false)
+                     capitalization: .never)
     }
     
     var passwordtextEntry: TextEntryViewState {
         return .init(title: Strings.password,
                      entryType: .password,
                      includeCancelButton: false,
-                     autoCapitalize: false)
+                     capitalization: .never)
     }
     
     func getMessageColor(isError: Bool) -> SplytColor {

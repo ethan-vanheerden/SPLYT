@@ -26,6 +26,9 @@ enum BuildWorkoutDomainAction {
     case updateModifier(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
     case filter(by: BuildWorkoutFilter)
     case removeAllFilters
+    case createSuperset
+    case cancelSuperset
+    case saveSuperset
 }
 
 // MARK: - Domain Results
@@ -90,6 +93,12 @@ final class BuildWorkoutInteractor {
             return handleFilter(by: filter)
         case .removeAllFilters:
             return handleRemoveAllFilters()
+        case .createSuperset:
+            return .error
+        case .cancelSuperset:
+            return .error
+        case .saveSuperset:
+            return .error
         }
     }
 }
@@ -115,7 +124,8 @@ private extension BuildWorkoutInteractor {
                                             builtWorkout: newWorkout,
                                             currentGroup: 0,
                                             filterDomain: createEmptyFilters(),
-                                            canSave: false)
+                                            canSave: false,
+                                            isCreatingSuperset: false)
             // Save the domain object for future actions
             return updateDomain(domain: domain)
         } catch {

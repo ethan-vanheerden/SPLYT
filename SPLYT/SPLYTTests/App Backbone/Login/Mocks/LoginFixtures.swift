@@ -72,12 +72,12 @@ Something went wrong. Double check your password or create an account if you don
     
     static let emailTextEntry: TextEntryViewState = .init(title: emailTitle,
                                                           includeCancelButton: false,
-                                                          autoCapitalize: false)
+                                                          capitalization: .never)
     
     static let passwordTextEntry: TextEntryViewState = .init(title: passwordTitle,
                                                              entryType: .password,
                                                              includeCancelButton: false,
-                                                             autoCapitalize: false)
+                                                             capitalization: .never)
     
     static let createAccountNavBar: NavigationBarViewState = .init(title: createAccount,
                                                                    backIconName: "xmark")

@@ -69,7 +69,7 @@ public struct TextEntry: View {
                 }
             }
         }
-        .textInputAutocapitalization(viewState.autoCapitalize ? nil : .never)
+        .textInputAutocapitalization(viewState.capitalization.toSwiftUI)
     }
     
     @ViewBuilder
@@ -99,20 +99,20 @@ public struct TextEntryViewState: Equatable {
     let entryType: TextEntryType
     let iconName: String?
     let includeCancelButton: Bool
-    let autoCapitalize: Bool
+    let capitalization: Capitalization
     
     public init(title: String? = nil,
                 placeholder: String = "",
                 entryType: TextEntryType = .normal,
                 iconName: String? = nil,
                 includeCancelButton: Bool = true,
-                autoCapitalize: Bool = true) {
+                capitalization: Capitalization = .firstWord) {
         self.title = title
         self.placeholder = placeholder
         self.entryType = entryType
         self.iconName = iconName
         self.includeCancelButton = includeCancelButton
-        self.autoCapitalize = autoCapitalize
+        self.capitalization = capitalization
     }
 }
 

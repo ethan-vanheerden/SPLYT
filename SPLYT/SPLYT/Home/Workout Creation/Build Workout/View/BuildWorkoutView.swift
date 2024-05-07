@@ -30,7 +30,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         switch viewModel.viewState {
         case .loading:
             ProgressView()
-                .navigationBar(viewState: .init(title: Strings.addYourExercises)) {
+                .navigationBar(viewState: .init(title: Strings.addExercises)) {
                     viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                    taskPriority: .userInitiated)
                 }
@@ -74,7 +74,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
         }
-        .navigationBar(viewState: .init(title: Strings.addYourExercises),
+        .navigationBar(viewState: .init(title: Strings.addExercises),
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                                     taskPriority: .userInitiated) },
                        content: { continueButton(canContinue: display.canSave) })
@@ -202,25 +202,34 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func continueButton(canContinue: Bool) -> some View {
-        IconButton(iconName: "pencil",
-                   style: .secondary,
-                   iconColor: .lightBlue,
-                   isEnabled: canContinue) {
+        SplytButton(text: Strings.next,
+                    isEnabled: canContinue) {
             navigationRouter.navigate(.editSetsReps)
         }
     }
     
     @ViewBuilder
     private func groupSummary(display: BuildWorkoutDisplay) -> some View {
-        Tile {
-            VStack {
-                Text(display.currentGroupTitle)
-                    .body()
-                groupButtons(display: display)
-            }
-            .padding(.horizontal, horizontalPadding)
-        }
+//        Tile {
+//            VStack {
+//                superSetButtons(display: display)
+////                Text(display.currentGroupTitle)
+////                    .body()
+////                groupButtons(display: display)
+//            }
+//            .padding(.horizontal, horizontalPadding)
+//        }
+        superSetButtons(display: display)
         .padding(.horizontal, horizontalPadding)
+    }
+    
+    @ViewBuilder
+    private func superSetButtons(display: BuildWorkoutDisplay) -> some View {
+        HStack {
+            SplytButton(text: "Create Superset") {
+                
+            }
+        }
     }
     
     @ViewBuilder
@@ -259,11 +268,12 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let addYourExercises = "ADD YOUR EXERCISES"
+    static let addExercises = "ADD EXERCISES"
     static let addGroup = "Add group"
     static let noExercisesFound = "No exercises found"
     static let removeFilters = "Remove filters"
     static let favorites = "Favorites"
     static let musclesWorked = "Muscles worked"
     static let filter = "Filter"
+    static let next = "Next"
 }
