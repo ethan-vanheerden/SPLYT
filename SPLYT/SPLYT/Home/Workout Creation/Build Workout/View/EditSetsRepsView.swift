@@ -36,12 +36,23 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .main(let display):
             mainView(display: display)
                 .navigationBar(viewState: .init(title: Strings.editSetsReps),
-                               backAction: { navigationRouter.navigate(.goBack)},
+                               backAction: {
+                    viewModel.send(.backTapped(userInitiated: true),
+                                   taskPriority: .userInitiated)
+                    navigationRouter.navigate(.goBack)
+                },
                                content: { saveButton(canSave: display.canSave) })
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
                     navigationRouter.navigate(.exit)
+                }
+        case .exitEdit(let display):
+            mainView(display: display)
+                .onAppear {
+                    viewModel.send(.backTapped(userInitiated: false),
+                                   taskPriority: .userInitiated)
+                    navigationRouter.navigate(.goBack)
                 }
         }
     }
@@ -57,15 +68,15 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func exercises(display: BuildWorkoutDisplay) -> some View {
-        ScrollView {
-            ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, exercises in
+        List {
+            ForEach(groupsBinding(groups: display.groups), id: \.index, editActions: .move) { $groupTuple in
+                let groupIndex = groupTuple.index
+                let exercises = groupTuple.exercises
+                
                 VStack(spacing: Layout.size(2)) {
-                    HStack {
-                        Text(display.groupTitles[groupIndex])
-                            .title2()
-                            .foregroundStyle(Color(splytColor: .lightBlue))
-                        Spacer()
-                    }
+                    editGroupHeader(groupIndex: groupIndex,
+                                    group: exercises,
+                                    groupTitles: display.groupTitles)
                     // Use enumerated here so we can get the exercise index in the group to make updating faster
                     ForEach(Array(exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseState in
                         ExerciseView(
@@ -114,9 +125,51 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         .foregroundStyle(Color(splytColor: .lightBlue))
                         .padding(Layout.size(1))
                 )
+                .listRowSeparator(.hidden)
+                .listRowInsets(.init())
+                
             }
         }
+        .listStyle(.plain)
         .scrollIndicators(.hidden)
+    }
+    
+    @ViewBuilder
+    private func editGroupHeader(groupIndex: Int,
+                                 group: [ExerciseViewState],
+                                 groupTitles: [String]) -> some View {
+        HStack {
+            Text(groupTitles[groupIndex])
+                .title2()
+                .foregroundStyle(Color(splytColor: .lightBlue))
+            Spacer()
+            IconButton(iconName: "trash", style: .secondary, iconColor: .red50) {
+                viewModel.send(.deleteGroup(groupIndex: groupIndex),
+                               taskPriority: .userInitiated)
+            }
+            Image(systemName: "line.3.horizontal")
+                .imageScale(.large)
+                .foregroundColor(Color(splytColor: .lightBlue))
+            
+        }
+    }
+    
+    // Binding to a list of tuples of each group and its group index
+    private func groupsBinding(groups: [[ExerciseViewState]]) -> Binding<[(index: Int, exercises: [ExerciseViewState])]> {
+        return Binding(
+            get: {
+                var result = [(index: Int, exercises: [ExerciseViewState])]()
+                for (index, group) in groups.enumerated() {
+                    result.append((index: index, exercises: group))
+                }
+                return result
+            },
+            set: { newGroups in
+                let indexOrder = newGroups.map { $0.index }
+                viewModel.send(.rearrangeGroups(newOrder: indexOrder),
+                               taskPriority: .userInitiated)
+            }
+        )
     }
     
     @ViewBuilder
@@ -153,10 +206,8 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func saveButton(canSave: Bool) -> some View {
-        IconButton(iconName: "checkmark",
-                   style: .secondary,
-                   iconColor: .lightBlue,
-                   isEnabled: canSave) {
+        SplytButton(text: Strings.save,
+                    isEnabled: canSave) {
             viewModel.send(.save, taskPriority: .userInitiated)
         }
     }
@@ -166,4 +217,5 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
 
 fileprivate struct Strings {
     static let editSetsReps = "Edit Sets & Reps"
+    static let save = "Save"
 }

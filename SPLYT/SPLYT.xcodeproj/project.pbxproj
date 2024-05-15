@@ -186,6 +186,7 @@
 		AAB42B5C2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */; };
 		AAB42B5E2A7BFCCF002A1ED2 /* RestPresetsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */; };
 		AAB42B602A7C055F002A1ED2 /* SettingsItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */; };
+		AABE01BE2BF5085B0058F084 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE01BD2BF5085B0058F084 /* AppearanceView.swift */; };
 		AABE9EC52B27999700B1135A /* GetFavoriteExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */; };
 		AABE9EC82B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC72B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift */; };
 		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
@@ -446,6 +447,7 @@
 		AAB42B5B2A7BF9B1002A1ED2 /* RestPresetsReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsReducerTests.swift; sourceTree = "<group>"; };
 		AAB42B5D2A7BFCCE002A1ED2 /* RestPresetsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPresetsViewModelTests.swift; sourceTree = "<group>"; };
 		AAB42B5F2A7C055F002A1ED2 /* SettingsItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemTests.swift; sourceTree = "<group>"; };
+		AABE01BD2BF5085B0058F084 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
 		AABE9EC12B2645CC00B1135A /* UserAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserAuth; sourceTree = "<group>"; };
 		AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteExercisesRequest.swift; sourceTree = "<group>"; };
 		AABE9EC72B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFavoriteExercisesRequest.swift; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 		AA1A33FF2882E0B300BCB792 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AABE01BC2BF508440058F084 /* Appearance */,
 				AA8744B22B9A91A600030D3E /* About */,
 				AAB42B282A79A397002A1ED2 /* Rest Presets */,
 				AA116FDB2A7848DB00E68852 /* Main Screen */,
@@ -1563,6 +1566,14 @@
 			path = Reducer;
 			sourceTree = "<group>";
 		};
+		AABE01BC2BF508440058F084 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				AABE01BD2BF5085B0058F084 /* AppearanceView.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
 		AABE9EC62B27A09100B1135A /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -2217,6 +2228,7 @@
 				AA2C244A2A3CBED3004FC939 /* NameWorkoutDisplay.swift in Sources */,
 				AACCAA7D29784C9B00932085 /* BuildWorkoutReducer.swift in Sources */,
 				AA60DA07295217CF008C7615 /* HomeViewModel.swift in Sources */,
+				AABE01BE2BF5085B0058F084 /* AppearanceView.swift in Sources */,
 				AA672A4F2A6495650009919E /* HistoryViewState.swift in Sources */,
 				AA8744B12B9A693500030D3E /* Policy.swift in Sources */,
 				AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */,

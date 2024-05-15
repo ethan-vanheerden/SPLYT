@@ -61,7 +61,6 @@ struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEve
             set: { newPresets in
                 let presets = newPresets.map { $0.preset }
                 viewModel.send(.updatePresets(newPresets: presets), taskPriority: .userInitiated)
-                
             }
         )
     }

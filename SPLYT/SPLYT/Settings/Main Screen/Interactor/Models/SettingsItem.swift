@@ -7,10 +7,12 @@
 
 import Foundation
 import DesignSystem
+import SwiftUI
 
 enum SettingsItem: Equatable, CaseIterable {
     case designShowcase
     case restPresets
+    case appearance
     case submitFeedback
     case about
     case signOut
@@ -21,6 +23,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "Design Showcase"
         case .restPresets:
             return "Rest Presets"
+        case .appearance:
+            return "Appearance"
         case .submitFeedback:
             return "Submit Feedback"
         case .about:
@@ -44,6 +48,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return "theatermask.and.paintbrush.fill"
         case .restPresets:
             return "stopwatch.fill"
+        case .appearance:
+            return "paintbrush.fill"
         case .submitFeedback:
             return "envelope.fill"
         case .about:
@@ -59,6 +65,8 @@ enum SettingsItem: Equatable, CaseIterable {
             return .purple
         case .restPresets:
             return .blue
+        case .appearance:
+            return SplytColorVM.userTheme
         case .submitFeedback:
             return .green
         case .about:

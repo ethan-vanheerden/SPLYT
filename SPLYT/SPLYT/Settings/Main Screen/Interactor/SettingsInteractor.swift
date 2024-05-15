@@ -75,8 +75,9 @@ private extension SettingsInteractor {
     var sections: [SettingsSection] {
         return [
             workoutSection,
-            developerSection,
-            supportSection
+            customizationSection,
+            supportSection,
+            developerSection
         ]
     }
     
@@ -84,6 +85,14 @@ private extension SettingsInteractor {
         return .init(title: Strings.workout,
                      items: [
                         .restPresets
+                     ],
+                     isEnabled: true)
+    }
+    
+    var customizationSection: SettingsSection {
+        return .init(title: Strings.customization,
+                     items: [
+                        .appearance
                      ],
                      isEnabled: true)
     }
@@ -116,5 +125,6 @@ private extension SettingsInteractor {
 fileprivate struct Strings {
     static let workout = "WORKOUT"
     static let developer = "DEVELOPER"
+    static let customization = "CUSTOMIZATION"
     static let support = "SUPPORT"
 }

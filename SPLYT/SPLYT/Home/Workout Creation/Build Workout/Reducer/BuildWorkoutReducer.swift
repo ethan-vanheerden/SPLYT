@@ -23,6 +23,9 @@ struct BuildWorkoutReducer {
         case .exit(let domain):
             let display = getDisplay(domain: domain)
             return .exit(display)
+        case .exitEdit(let domain):
+            let display = getDisplay(domain: domain)
+            return .exitEdit(display)
         }
     }
 }
@@ -37,10 +40,12 @@ private extension BuildWorkoutReducer {
         let numExercisesInCurrentGroup = groups[currentGroup].count
         let lastGroupEmpty = groups.last?.isEmpty ?? true
         
+        let supersetDisplay = SupersetDisplay(isCreatingSuperset: domain.isCreatingSuperset,
+                                              currentSupersetTitle: getCurrentSupersetTitle(numExercisesInCurrentGroup))
+        
         let display = BuildWorkoutDisplay(allExercises: getExerciseTileStates(exerciseMap: domain.exercises),
                                           groups: groups,
                                           currentGroup: currentGroup,
-                                          currentGroupTitle: getCurrentGroupTitle(numExercisesInCurrentGroup),
                                           groupTitles: groupTitles,
                                           lastGroupEmpty: lastGroupEmpty,
                                           showDialog: dialog,
@@ -48,7 +53,8 @@ private extension BuildWorkoutReducer {
                                           saveDialog: saveDialog,
                                           canSave: domain.canSave,
                                           filterDisplay: getFilterDisplay(filterDomain: domain.filterDomain),
-                                          isFiltering: getIsFiltering(filterDomain: domain.filterDomain))
+                                          isFiltering: getIsFiltering(filterDomain: domain.filterDomain),
+                                          supersetDisplay: supersetDisplay)
         return display
     }
     
@@ -60,11 +66,6 @@ private extension BuildWorkoutReducer {
                                      isFavorite: $0.isFavorite)
         }
         return partitionTileStates(exercises: exercises)
-    }
-    
-    func getCurrentGroupTitle(_ numExercises: Int) -> String {
-        let exercisePlural = numExercises == 1 ? Strings.exercise : Strings.exercises
-        return Strings.currentGroup + ": \(numExercises) \(exercisePlural)"
     }
     
     var backDialog: DialogViewState {
@@ -113,6 +114,11 @@ private extension BuildWorkoutReducer {
     func getIsFiltering(filterDomain: BuildWorkoutFilterDomain) -> Bool {
         return filterDomain.isFavorite || filterDomain.musclesWorked.values.contains(true)
     }
+    
+    func getCurrentSupersetTitle(_ numExercises: Int) -> String {
+        let exercisePlural = numExercises == 1 ? Strings.exercise : Strings.exercises
+        return "\(numExercises) \(exercisePlural) " + Strings.inSuperset
+    }
 }
 
 // MARK: - Strings
@@ -128,4 +134,5 @@ fileprivate struct Strings {
     static let errorSaving = "Error saving"
     static let tryAgain = "Please try again later."
     static let ok = "Ok"
+    static let inSuperset = "in Superset"
 }

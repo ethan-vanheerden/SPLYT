@@ -131,18 +131,14 @@ private extension BuildWorkoutService {
         // First check if the user has the cached AvailableExercise file yet
         if !(try cacheInteractor.fileExists(request: request)) {
             
-            print("1")
-            
             // Save the fallback file
             guard let url = Bundle.main.url(forResource: "fallback_exercises", withExtension: "json") else {
                 throw BuildWorkoutError.fallbackFileNotFound
             }
             
-            print("2")
-            
             let data = try Data(contentsOf: url)
             let exercises = try JSONDecoder().decode([AvailableExercise].self, from: data)
-            print("3")
+
             // Now save the fallback data to the cache
             var exerciseMap = mapExercises(exercises)
             return try updateExerciseCache(exerciseMap: &exerciseMap,
@@ -150,7 +146,6 @@ private extension BuildWorkoutService {
                                            unfavoritedExerciseID: nil)
         }
 
-        print("4")
         return try cacheInteractor.load(request: request)
     }
     

@@ -1,5 +1,11 @@
 import SwiftUI
 
+public final class SplytColorVM: ObservableObject {
+    @AppStorage("userTheme") public static var userTheme: SplytColor = .lightBlue
+    
+//    public static var theme: SplytColor = userTheme
+}
+
 public enum SplytColor: String, CaseIterable {
     case black = "Black"
     case gray = "Gray"
@@ -7,6 +13,7 @@ public enum SplytColor: String, CaseIterable {
     case green = "Green"
     case lightBlue = "Light Blue"
     case red = "Red"
+    case red50 = "Red 50"
     case white = "White"
     case yellow = "Yellow"
     case clear = "Clear"
@@ -30,6 +37,8 @@ public enum SplytColor: String, CaseIterable {
                                           alpha: 1))
         case .red:
             return Color.red
+        case .red50:
+            return Color.red.opacity(0.5)
         case .white:
             return Color.white
         case .yellow:

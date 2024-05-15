@@ -13,13 +13,11 @@ import ExerciseCore
 
 enum BuildWorkoutViewEvent {
     case load
-    case addGroup
     case toggleExercise(exerciseId: String) // Adds to the current group
     case addSet(group: Int)
     case removeSet(group: Int)
     case updateSet(group: Int, exerciseIndex: Int, setIndex: Int, with: SetInput)
     case toggleFavorite(exerciseId: String)
-    case switchGroup(to: Int)
     case save
     case toggleDialog(type: BuildWorkoutDialog, isOpen: Bool)
     case addModifier(group: Int, exerciseIndex: Int, setIndex: Int, modifier: SetModifier)
@@ -30,6 +28,10 @@ enum BuildWorkoutViewEvent {
     case createSuperset
     case cancelSuperset
     case saveSuperset
+    case nextTapped
+    case backTapped(userInitiated: Bool)
+    case deleteGroup(groupIndex: Int)
+    case rearrangeGroups(newOrder: [Int]) // Order using old group indices
 }
 
 // MARK: - View Model
@@ -47,8 +49,6 @@ final class BuildWorkoutViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .loadExercises)
-        case .addGroup:
-            await react(domainAction: .addGroup)
         case let .toggleExercise(exerciseId):
             await react(domainAction: .toggleExercise(exerciseId: exerciseId))
         case .addSet(let group):
@@ -62,8 +62,6 @@ final class BuildWorkoutViewModel: ViewModel {
                                                  with: newInput))
         case .toggleFavorite(let exerciseId):
             await react(domainAction: .toggleFavorite(exerciseId: exerciseId))
-        case .switchGroup(let group):
-            await react(domainAction: .switchGroup(to: group))
         case .save:
             await react(domainAction: .save)
         case let .toggleDialog(type, isOpen):
@@ -92,6 +90,14 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .cancelSuperset)
         case .saveSuperset:
             await react(domainAction: .saveSuperset)
+        case .nextTapped:
+            await react(domainAction: .nextTapped)
+        case .backTapped(let userInitiated):
+            await react(domainAction: .backTapped(userInitiated: userInitiated))
+        case .deleteGroup(let groupIndex):
+            await react(domainAction: .deleteGroup(groupIndex: groupIndex))
+        case .rearrangeGroups(let newOrder):
+            await react(domainAction: .rearrangeGroups(newOrder: newOrder))
         }
     }
 }

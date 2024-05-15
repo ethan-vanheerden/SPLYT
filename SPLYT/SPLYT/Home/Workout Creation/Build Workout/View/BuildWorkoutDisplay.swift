@@ -13,7 +13,6 @@ struct BuildWorkoutDisplay: Equatable {
     let allExercises: [AddExerciseTileSectionViewState] // Exercises that can be selected
     let groups: [[ExerciseViewState]] // Each item in list represents the exercises in the group
     let currentGroup: Int // Zero-indexed
-    let currentGroupTitle: String
     let groupTitles: [String] // Ex: "Group 1", "Group 2", etc.
     let lastGroupEmpty: Bool
     let showDialog: BuildWorkoutDialog? // Determines which dialog is open, if any
@@ -22,6 +21,7 @@ struct BuildWorkoutDisplay: Equatable {
     let canSave: Bool
     let filterDisplay: BuildWorkoutFilterDisplay
     let isFiltering: Bool
+    let supersetDisplay: SupersetDisplay
 }
 
 
@@ -30,6 +30,13 @@ struct BuildWorkoutDisplay: Equatable {
 struct BuildWorkoutFilterDisplay: Equatable {
     let isFavorite: Bool
     let musclesWorked: [MusclesWorked: Bool]
+}
+
+// MARK: - Superset Display
+
+struct SupersetDisplay: Equatable {
+    let isCreatingSuperset: Bool
+    let currentSupersetTitle: String
 }
 
 // MARK: - View State

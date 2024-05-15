@@ -11,7 +11,7 @@ import Core
 import ExerciseCore
 
 struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewEvent,
-                                                    VM.ViewState == BuildWorkoutViewState {
+                                                   VM.ViewState == BuildWorkoutViewState {
     @ObservedObject private var viewModel: VM
     @Environment(\.dismiss) private var dismiss
     @State private var filterSheetPresented: Bool = false
@@ -34,7 +34,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                     viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                    taskPriority: .userInitiated)
                 }
-        case .main(let display):
+        case .main(let display), .exitEdit(let display):
             mainView(display: display)
         case .error:
             ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
@@ -69,7 +69,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             .padding(.horizontal, horizontalPadding)
             exerciseList(display: display)
-            groupSummary(display: display)
+            supersetMenu(supersetDisplay: display.supersetDisplay)
         }
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
@@ -204,64 +204,40 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     private func continueButton(canContinue: Bool) -> some View {
         SplytButton(text: Strings.next,
                     isEnabled: canContinue) {
+            viewModel.send(.nextTapped,
+                           taskPriority: .userInitiated)
             navigationRouter.navigate(.editSetsReps)
         }
     }
     
     @ViewBuilder
-    private func groupSummary(display: BuildWorkoutDisplay) -> some View {
-//        Tile {
-//            VStack {
-//                superSetButtons(display: display)
-////                Text(display.currentGroupTitle)
-////                    .body()
-////                groupButtons(display: display)
-//            }
-//            .padding(.horizontal, horizontalPadding)
-//        }
-        superSetButtons(display: display)
-        .padding(.horizontal, horizontalPadding)
-    }
-    
-    @ViewBuilder
-    private func superSetButtons(display: BuildWorkoutDisplay) -> some View {
-        HStack {
-            SplytButton(text: "Create Superset") {
-                
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func groupButtons(display: BuildWorkoutDisplay) -> some View {
-        HStack(spacing: Layout.size(2)) {
-            Spacer()
-            Menu {
-                ForEach(Array(display.groupTitles.enumerated()), id: \.offset) { groupIndex, groupTitle in
-                    if display.currentGroup == groupIndex {
-                        Button {
-                            viewModel.send(.switchGroup(to: groupIndex),
-                                           taskPriority: .userInitiated)
-                        } label: {
-                            Text(groupTitle)
-                            Image(systemName: "checkmark")
-                        }
-                    } else {
-                        Button(groupTitle) {
-                            viewModel.send(.switchGroup(to: groupIndex),
-                                           taskPriority: .userInitiated)
+    private func supersetMenu(supersetDisplay: SupersetDisplay) -> some View {
+        Group {
+            if supersetDisplay.isCreatingSuperset {
+                Tile {
+                    VStack {
+                        Text(supersetDisplay.currentSupersetTitle)
+                            .body()
+                        HStack(spacing: Layout.size(1)) {
+                            SplytButton(text: "Cancel") {
+                                viewModel.send(.cancelSuperset,
+                                               taskPriority: .userInitiated)
+                            }
+                            SplytButton(text: "Save") {
+                                viewModel.send(.saveSuperset,
+                                               taskPriority: .userInitiated)
+                            }
                         }
                     }
                 }
-            } label: {
-                SplytButton(text: display.groupTitles[display.currentGroup]) { }
+            } else {
+                SplytButton(text: "Create Superset") {
+                    viewModel.send(.createSuperset,
+                                   taskPriority: .userInitiated)
+                }
             }
-            SplytButton(text: Strings.addGroup,
-                        isEnabled: !display.lastGroupEmpty) {
-                viewModel.send(.addGroup, taskPriority: .userInitiated)
-            }
-            Spacer()
         }
+        .padding(.horizontal, horizontalPadding)
     }
 }
 
