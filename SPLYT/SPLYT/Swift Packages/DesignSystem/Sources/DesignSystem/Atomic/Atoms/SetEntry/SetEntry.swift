@@ -4,24 +4,21 @@ import SwiftUIIntrospect
 
 public struct SetEntry: View {
     @FocusState private var fieldFocused: Bool
-    @State private var input: String // Binding so that the text can be updated via a view model
+    @Binding private var input: String // Binding so that the text can be updated via a view model
     @EnvironmentObject private var userTheme: UserTheme
     private let tagCounter = TagCounter.shared
     private let title: String
     private let keyboardType: KeyboardInputType
     private let placeholder: String?
-    private let updateAction: (String) -> Void
     
-    public init(input: String,
+    public init(input: Binding<String>,
                 title: String,
                 keyboardType: KeyboardInputType,
-                placeholder: String? = nil,
-                updateAction: @escaping (String) -> Void) {
-        self._input = State(initialValue: input)
+                placeholder: String? = nil) {
+        self._input = input
         self.title = title
         self.keyboardType = keyboardType
         self.placeholder = placeholder
-        self.updateAction = updateAction
     }
     
     public var body: some View {
@@ -49,17 +46,6 @@ public struct SetEntry: View {
                     .minimumScaleFactor(0.8)
                     .font(Font.system(size: 14, design: .default))
                     .strokeBorder(cornerRadius: Layout.size(1), color: borderColor, shadowRadius: shadowRadius)
-                    .onChange(of: fieldFocused) { isFocused in
-                        if !isFocused {
-                            sendUpdate(newInput: input)
-                        }
-                    }
-                    .onChange(of: input) { newInput in
-                        // Formatter would otherwise remove a decimal right when it is added
-                        if !newInput.hasSuffix(".") {
-                            sendUpdate(newInput: input)
-                        }
-                    }
             }
             Text(title)
                 .footnote()
@@ -74,12 +60,6 @@ public struct SetEntry: View {
                 fieldFocused = false
             }
         }
-    }
-    
-    private func sendUpdate(newInput: String) {
-        let validText = SetEntryFormatter.validateText(text: newInput, inputType: keyboardType)
-        input = validText
-        updateAction(validText)
     }
     
     private var borderColor: SplytColor {

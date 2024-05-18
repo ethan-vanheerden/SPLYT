@@ -31,7 +31,6 @@ final class WorkoutDetailsNavigationRouter: NavigationRouter {
 
 private extension WorkoutDetailsNavigationRouter {
     func handleExit() {
-        print(navigator == nil)
         navigator?.dismiss(animated: true)
     }
 }

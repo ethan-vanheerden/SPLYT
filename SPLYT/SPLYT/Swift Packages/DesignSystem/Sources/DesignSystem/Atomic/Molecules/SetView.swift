@@ -89,37 +89,60 @@ public struct SetView: View {
         case let .repsWeight(weightTitle, repsTitle, input):
             HStack(spacing: Layout.size(4)) {
                 // Reps Entry
-                SetEntry(input: String(input.reps),
+                SetEntry(input: entryBinding(input: String(input.reps),
+                                          setInput: setInput,
+                                          keyboardType: .reps,
+                                          updateAction: setUpdateAction(input: setInput,
+                                                                        repsInRepsWeight: true,
+                                                                        updateAction: updateAction)),
                          title: repsTitle,
                          keyboardType: .reps,
-                         placeholder: String(input.repsPlaceholder),
-                         updateAction: setUpdateAction(input: setInput,
-                                                       repsInRepsWeight: true,
-                                                       updateAction: updateAction))
+                         placeholder: String(input.repsPlaceholder))
                 
                 // Weight Entry
-                SetEntry(input: String(input.weight),
+                SetEntry(input: entryBinding(input: String(input.weight),
+                                          setInput: setInput,
+                                          keyboardType: .weight,
+                                          updateAction: setUpdateAction(input: setInput,
+                                                                        updateAction: updateAction)),
                          title: weightTitle,
                          keyboardType: .weight,
-                         placeholder: String(input.weightPlaceholder),
-                         updateAction: setUpdateAction(input: setInput,
-                                                       updateAction: updateAction))
+                         placeholder: String(input.weightPlaceholder))
             }
         case let .repsOnly(title, input):
-            SetEntry(input: String(input.reps),
+            SetEntry(input: entryBinding(input: String(input.reps),
+                                      setInput: setInput,
+                                      keyboardType: .reps,
+                                      updateAction: setUpdateAction(input: setInput,
+                                                                    updateAction: updateAction)),
                      title: title,
                      keyboardType: .reps,
-                     placeholder: String(input.placeholder),
-                     updateAction: setUpdateAction(input: setInput,
-                                                   updateAction: updateAction))
+                     placeholder: String(input.placeholder))
         case let .time(title, input):
-            SetEntry(input: String(input.seconds),
+            SetEntry(input: entryBinding(input: String(input.seconds),
+                                      setInput: setInput,
+                                      keyboardType: .time,
+                                      updateAction: setUpdateAction(input: setInput,
+                                                                    updateAction: updateAction)),
                      title: title,
                      keyboardType: .time,
-                     placeholder: String(input.placeholder),
-                     updateAction: setUpdateAction(input: setInput,
-                                                   updateAction: updateAction))
+                     placeholder: String(input.placeholder))
         }
+    }
+    
+    private func entryBinding(input: String, 
+                              setInput: SetInputViewState,
+                              keyboardType: KeyboardInputType,
+                              updateAction: @escaping (String) -> Void) -> Binding<String> {
+        return Binding(
+            get: { input },
+            set: { newValue in
+                guard !newValue.hasSuffix(".") else { return }
+                
+                let validText = SetEntryFormatter.validateText(text: newValue, inputType: keyboardType)
+                updateAction(validText)
+            }
+        )
     }
     
     @ViewBuilder

@@ -31,16 +31,6 @@ public protocol Navigator: AnyObject {
     func pop(animated: Bool)
 }
 
-/// Default methods since not every `Navigator` will need to implement each one
-//public extension Navigator {
-//    func push(_ vc: UIViewController, animated: Bool) { }
-//    func present(_ vc: UIViewController, animated: Bool) { }
-//    func dismiss(animated: Bool) { print("what2") }
-//    func dismissSelf(animated: Bool) { }
-//    func dismissWithCompletion(animated: Bool, completion: () -> Void) { }
-//    func pop(animated: Bool) { }
-//}
-
 /// Default methods for base UINavigationControllers
 public extension Navigator where Self: UINavigationController {
     func push(_ vc: UIViewController, animated: Bool) {
@@ -53,9 +43,7 @@ public extension Navigator where Self: UINavigationController {
     }
     
     func dismiss(animated: Bool) {
-        print("what")
         self.dismiss(animated: animated)
-        print("got here")
     }
     
    func dismissSelf(animated: Bool) {

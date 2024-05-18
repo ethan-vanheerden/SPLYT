@@ -8,16 +8,14 @@ struct SetEntryGallery: View {
     var body: some View {
         VStack {
             Spacer()
-            SetEntry(input: textOne,
+            SetEntry(input: $textOne,
                      title: "lbs",
                      keyboardType: .weight,
-                     placeholder: "12",
-                     updateAction: { textOne = $0 })
+                     placeholder: "12")
             
-            SetEntry(input: textTwo,
+            SetEntry(input: $textTwo,
                      title: "reps",
-                     keyboardType: .reps,
-                     updateAction: { textTwo = $0 })
+                     keyboardType: .reps)
             Spacer()
         }
     }

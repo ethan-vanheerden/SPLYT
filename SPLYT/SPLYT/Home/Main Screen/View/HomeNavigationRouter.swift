@@ -92,14 +92,12 @@ private extension HomeNavigationRouter {
     func openWorkoutDetails(workoutDetailsId: String) {
         let interactor = WorkoutDetailsInteractor(historyId: workoutDetailsId)
         let viewModel = WorkoutDetailsViewModel(interactor: interactor)
-        var navRouter = WorkoutDetailsNavigationRouter()
+        let navRouter = WorkoutDetailsNavigationRouter()
         let view = WorkoutDetailsView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         
         let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         navigator?.present(vc, animated: true)
-        
-//        presentNavController(view: view, navRouter: &navRouter)
     }
     
     func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {
