@@ -14,6 +14,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     @ObservedObject private var viewModel: VM
     @State private var countdownSeconds: Int = 3
     @State private var restFABPresenting = false
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: DoWorkoutNavigationRouter
     private let countdownTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private let horizontalPadding: CGFloat = Layout.size(2)
@@ -30,13 +31,13 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             ProgressView()
         case .error:
             ErrorView(retryAction: { viewModel.send(.loadWorkout, taskPriority: .userInitiated) },
-                      backAction: { navigationRouter.navigate(.exit)} )
+                      backAction: { navigationRouter.navigate(.exit())} )
         case .loaded(let display):
             mainView(display: display)
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
-                    navigationRouter.navigate(.exit)
+                    navigationRouter.navigate(.exit(workoutDetailsId: display.workoutDetailsId))
                 }
         }
     }
@@ -81,7 +82,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             HStack(spacing: Layout.size(1)) {
                 Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
                     .title1()
-                    .foregroundColor(display.isResting ? Color(splytColor: .lightBlue) : Color(splytColor: .black))
+                    .foregroundColor(display.isResting ? Color(splytColor: userTheme.theme) : Color(splytColor: .black))
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                     .isVisible(false) // TODO: 51: Workout notes
@@ -114,7 +115,9 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             .foregroundColor(Color(splytColor: .white))
             Spacer()
         }
-        .background(SplytGradient.classic.gradient(startPoint: .top, endPoint: .bottom))
+        .background(LinearGradient(colors: [Color(splytColor: .white), userTheme.theme.color],
+                                   startPoint: .top,
+                                   endPoint: .bottom))
         .onReceive(countdownTimer) { _ in
             if countdownSeconds <= 0 {
                 countdownTimer.upstream.connect().cancel() // Can only have one timer running at a time idk

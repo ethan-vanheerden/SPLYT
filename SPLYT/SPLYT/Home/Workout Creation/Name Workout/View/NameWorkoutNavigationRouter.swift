@@ -9,6 +9,7 @@ import Foundation
 import Core
 import SwiftUI
 import ExerciseCore
+import DesignSystem
 
 // MARK: - Navigation Events
 
@@ -65,7 +66,7 @@ private extension NameWorkoutNavigationRouter {
         navRouter.navigator = navigator
         let view = BuildWorkoutView(viewModel: viewModel,
                                     navigationRouter: navRouter)
-        let vc = UIHostingController(rootView: view)
+        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         
         navigator?.push(vc, animated: true)
     }
@@ -77,7 +78,7 @@ private extension NameWorkoutNavigationRouter {
         navRouter.navigator = navigator
         let view = BuildPlanView(viewModel: viewModel,
                                  navigationRouter: navRouter)
-        let vc = UIHostingController(rootView: view)
+        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         
         navigator?.push(vc, animated: true)
     }

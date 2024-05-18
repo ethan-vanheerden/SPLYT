@@ -5,6 +5,7 @@ import SwiftUIIntrospect
 public struct SetEntry: View {
     @FocusState private var fieldFocused: Bool
     @State private var input: String // Binding so that the text can be updated via a view model
+    @EnvironmentObject private var userTheme: UserTheme
     private let tagCounter = TagCounter.shared
     private let title: String
     private let keyboardType: KeyboardInputType
@@ -82,7 +83,7 @@ public struct SetEntry: View {
     }
     
     private var borderColor: SplytColor {
-        return fieldFocused ? .lightBlue : .gray
+        return fieldFocused ? userTheme.theme : .gray
     }
     
     private var shadowRadius: CGFloat? {

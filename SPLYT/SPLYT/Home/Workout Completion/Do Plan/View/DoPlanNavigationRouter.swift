@@ -8,6 +8,7 @@
 import Foundation
 import Core
 import SwiftUI
+import DesignSystem
 
 // MARK: - Navigation Events
 
@@ -49,11 +50,11 @@ private extension DoPlanNavigationRouter {
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         let navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
             self?.navigator?.pop(animated: true) // Goes back to the workouts in the plan
-        }
+        } exitAction: { _ in }
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
         
         navRouter.navigator = navigator
-        let vc = UIHostingController(rootView: view)
+        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         navigator?.push(vc, animated: true)
     }
 }

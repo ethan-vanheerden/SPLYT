@@ -14,6 +14,7 @@ import DesignSystem
 struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEvent, VM.ViewState == DoWorkoutViewState {
     @ObservedObject private var viewModel: VM
     @State private var navTitle = ""
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: DoWorkoutNavigationRouter
     private let horizontalPadding: CGFloat = Layout.size(2)
     
@@ -37,7 +38,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
             ProgressView()
         case .error, .exit: // Should never get the .exit state in this view
             ErrorView(retryAction: { viewModel.send(.loadWorkout, taskPriority: .userInitiated) },
-                      backAction: { navigationRouter.navigate(.exit)} )
+                      backAction: { navigationRouter.navigate(.exit()) })
         case .loaded(let display):
             mainView(display: display)
                 .onAppear {
@@ -71,7 +72,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
                 HStack {
                     Text(title)
                         .title3()
-                        .foregroundColor(Color(splytColor: .lightBlue))
+                        .foregroundColor(Color(splytColor: userTheme.theme))
                     Spacer()
                 }
                 .padding(.bottom, Layout.size(0.5))

@@ -3,6 +3,7 @@ import SwiftUI
 public struct TabBar: View {
     @Binding private var selectedTab: TabType
     private let iconLength = Layout.size(3.25)
+    @EnvironmentObject private var userTheme: UserTheme
     
     public init(selectedTab: Binding<TabType>) {
         self._selectedTab = selectedTab
@@ -16,7 +17,7 @@ public struct TabBar: View {
                     .onTapGesture {
                         selectedTab = tab
                     }
-                    .foregroundColor(iconColor(tab: tab))
+                    .foregroundStyle(iconColor(tab: tab).gradient)
                 Spacer()
             }
             .padding(.top, Layout.size(0.5))
@@ -25,7 +26,7 @@ public struct TabBar: View {
     }
     
     private func iconColor(tab: TabType) -> Color {
-        return tab == selectedTab ? Color(splytColor: .lightBlue) : Color(splytColor: .gray)
+        return tab == selectedTab ? Color(splytColor: userTheme.theme) : Color(splytColor: .gray)
     }
     
     @ViewBuilder

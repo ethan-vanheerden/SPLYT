@@ -12,6 +12,7 @@ import DesignSystem
 struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
                                                VM.ViewState == SettingsViewState {
     @ObservedObject private var viewModel: VM
+    @EnvironmentObject private var userTheme: UserTheme
     
     init(viewModel: VM) {
         self.viewModel = viewModel

@@ -15,7 +15,8 @@ import Core
 
 protocol DoWorkoutServiceType {
     func loadWorkout(workoutId: String, planId: String?) throws -> Workout
-    func saveWorkout(workout: Workout, planId: String?, completionDate: Date) throws
+    // Returns the saved workout history ID
+    func saveWorkout(workout: Workout, planId: String?, completionDate: Date) throws -> String
     func loadRestPresets() -> [Int]
 }
 
@@ -50,7 +51,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
         return workout
     }
     
-    func saveWorkout(workout: Workout, planId: String? = nil, completionDate: Date) throws {
+    func saveWorkout(workout: Workout, planId: String? = nil, completionDate: Date) throws -> String {
         let completedWorkoutsRequest = CompletedWorkoutsCacheRequest()
         var workout = workout
         workout.lastCompleted = completionDate
@@ -73,6 +74,8 @@ struct DoWorkoutService: DoWorkoutServiceType {
         
         completedWorkouts.insert(workoutHistory, at: 0)
         try cacheInteractor.save(request: completedWorkoutsRequest, data: completedWorkouts)
+        
+        return historyId
     }
     
     func loadRestPresets() -> [Int] {

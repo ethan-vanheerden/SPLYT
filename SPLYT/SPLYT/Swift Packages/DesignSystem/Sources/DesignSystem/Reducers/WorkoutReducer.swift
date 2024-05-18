@@ -31,7 +31,7 @@ public struct WorkoutReducer {
         return result
     }
     
-    /// Ex: ["Group 1", "Group 2", "Group 3"]
+    /// Ex: ["Block 1", "Block 2", "Block 3"]
     public static func getGroupTitles(workout: Workout) -> [String] {
         var titles = [String]()
         
@@ -193,7 +193,7 @@ fileprivate struct Strings {
     static let lbs = "lbs"
     static let reps = "reps"
     static let sec = "sec"
-    static let group = "Group"
+    static let group = "Block"
     static let exercise = "exercise"
     static let exercises = "exercises"
     static let workout = "workout"

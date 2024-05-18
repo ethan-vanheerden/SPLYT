@@ -4,6 +4,7 @@ public struct Counter: View {
     @Binding private var selectedNumber: Int
     @State private var selectedNumberText: String = ""
     @FocusState private var fieldFocused
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: CounterViewState
     private let sideLength: CGFloat = Layout.size(5)
     
@@ -59,10 +60,10 @@ public struct Counter: View {
             .focused($fieldFocused)
             .multilineTextAlignment(.center)
             .font(Font.custom("Montserrat-SemiBold", size: 13))
-            .foregroundColor(Color(splytColor: viewState.textColor))
+            .foregroundColor(Color(splytColor: viewState.textColor ?? .white))
             .frame(width: sideLength, height: sideLength)
             .roundedBackground(cornerRadius: Layout.size(1),
-                               fill: Color(splytColor: viewState.backGroundColor)
+                               fill: Color(splytColor: viewState.backGroundColor ?? userTheme.theme)
                 .shadow(.drop(radius: Layout.size(0.5))))
     }
     
@@ -91,14 +92,14 @@ public struct CounterViewState: Equatable {
     fileprivate let maxNumber: Int
     fileprivate let minNumber: Int
     fileprivate let label: String
-    fileprivate let backGroundColor: SplytColor
-    fileprivate let textColor: SplytColor
+    fileprivate let backGroundColor: SplytColor?
+    fileprivate let textColor: SplytColor?
     
     public init(maxNumber: Int,
                 minNumber: Int = 0,
                 label: String,
-                backGroundColor: SplytColor,
-                textColor: SplytColor) {
+                backGroundColor: SplytColor? = nil,
+                textColor: SplytColor? = nil) {
         self.maxNumber = maxNumber
         self.minNumber = minNumber
         self.label = label

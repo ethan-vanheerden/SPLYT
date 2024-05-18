@@ -9,6 +9,7 @@ public struct RestFAB: View {
     @State private var pickerSeconds = 0
     @Binding private var isPresenting: Bool
     @Binding private var workoutSeconds: Int // Total number of seconds elapsed in the workout
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: RestFABViewState
     private let selectRestAction: () -> Void
     private let stopRestAction: () -> Void
@@ -43,12 +44,12 @@ public struct RestFAB: View {
                     Image(systemName: "stopwatch")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(Color(splytColor: .lightBlue))
+                        .foregroundColor(Color(splytColor: userTheme.theme))
                         .frame(width: Layout.size(2.5))
                     timeView
                     IconButton(iconName: isPaused ? "play.fill" : "pause",
                                style: .secondary,
-                               iconColor: .lightBlue) {
+                               iconColor: userTheme.theme) {
                         isPaused.toggle()
                     }
                     IconButton(iconName: "xmark",
@@ -110,11 +111,11 @@ public struct RestFAB: View {
     private var baseIcon: FABIconViewState {
         if isPresenting {
             return FABIconViewState(size: .primary(backgroundColor: .white,
-                                                   iconColor: .lightBlue),
+                                                   iconColor: userTheme.theme),
                                     imageName: "minus")
         } else {
             return FABIconViewState(size: .primary(backgroundColor: .white,
-                                                   iconColor: .lightBlue),
+                                                   iconColor: userTheme.theme),
                                     imageName: "stopwatch")
         }
     }
@@ -146,7 +147,7 @@ public struct RestFAB: View {
     
     private var moreIcon: FABIconViewState {
         return FABIconViewState(size: .secondary(backgroundColor: .white,
-                                                 iconColor: .lightBlue),
+                                                 iconColor: userTheme.theme),
                                 imageName: "ellipsis")
     }
     

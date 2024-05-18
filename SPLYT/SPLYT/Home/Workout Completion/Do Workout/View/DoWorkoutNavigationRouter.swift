@@ -8,12 +8,13 @@
 import Foundation
 import Core
 import SwiftUI
+import DesignSystem
 
 // MARK: - Navigation Events
 
 enum DoWorkoutNavigationEvent {
     case back
-    case exit
+    case exit(workoutDetailsId: String? = nil)
     case beginWorkout
 }
 
@@ -24,19 +25,22 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
     // Has reference since multiple screens will have this same view model
     private let viewModel: DoWorkoutViewModel
     private let backAction: () -> Void
+    private let exitAction: (String) -> Void // To open the workout details page after exiting
     
     init(viewModel: DoWorkoutViewModel,
-         backAction: @escaping () -> Void) {
+         backAction: @escaping () -> Void,
+         exitAction: @escaping (String) -> Void) {
         self.viewModel = viewModel
         self.backAction = backAction
+        self.exitAction = exitAction
     }
     
     func navigate(_ event: DoWorkoutNavigationEvent) {
         switch event {
         case .back:
             handleBack()
-        case .exit:
-            handleExit()
+        case .exit(let workoutDetailsId):
+            handleExit(workoutDetailsId: workoutDetailsId)
         case .beginWorkout:
             handleBeginWorkout()
         }
@@ -50,14 +54,20 @@ private extension DoWorkoutNavigationRouter {
         backAction()
     }
     
-    func handleExit() {
-        navigator?.dismiss(animated: true)
+    func handleExit(workoutDetailsId: String?) {
+        let exitAction = self.exitAction
+        
+        navigator?.dismissWithCompletion(animated: true) {
+            if let workoutDetailsId = workoutDetailsId {
+                exitAction(workoutDetailsId)
+            }
+        }
     }
     
     func handleBeginWorkout() {
         let view = DoWorkoutView(viewModel: viewModel,
                                  navigationRouter: self)
-        let vc = UIHostingController(rootView: view)
+        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         self.navigator?.push(vc, animated: false)
     }
 }

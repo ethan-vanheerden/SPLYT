@@ -13,6 +13,7 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
                                                      VM.ViewState == WorkoutDetailsViewState {
     @ObservedObject private var viewModel: VM
     @State private var optionsSheetPresented = false
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: WorkoutDetailsNavigationRouter
     private let horizontalPadding = Layout.size(2)
     
@@ -82,7 +83,7 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
                 .foregroundColor(Color(splytColor: .black))
             Text(display.numExercisesTitle)
                 .title2()
-                .foregroundColor(Color(splytColor: .lightBlue))
+                .foregroundColor(Color(splytColor: userTheme.theme))
             Text(display.completedTitle)
                 .title3()
                 .foregroundColor(Color(splytColor: .gray))

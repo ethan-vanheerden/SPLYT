@@ -17,7 +17,7 @@ struct AppearanceView: View {
         GeometryReader { proxy in
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(SplytColor.allCases, id: \.self) { color in
+                    ForEach(SplytColor.userThemes, id: \.self) { color in
                         Text(color.rawValue)
                             .footnote()
                             .frame(width: proxy.size.width / 2.2, height: Layout.size(6))

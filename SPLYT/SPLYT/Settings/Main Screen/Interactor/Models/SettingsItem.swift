@@ -66,7 +66,7 @@ enum SettingsItem: Equatable, CaseIterable {
         case .restPresets:
             return .blue
         case .appearance:
-            return SplytColorVM.userTheme
+            return UserTheme.shared.theme
         case .submitFeedback:
             return .green
         case .about:

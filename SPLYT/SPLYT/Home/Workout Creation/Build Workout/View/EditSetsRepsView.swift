@@ -18,6 +18,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @State private var editGroupIndex: Int = 0
     @State private var editExerciseIndex: Int = 0
     @State private var editSetIndex: Int = 0
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: BuildWorkoutNavigationRouter
     private let transformer: BuildWorkoutTransformer = .init()
     private let horizontalPadding = Layout.size(2)
@@ -122,7 +123,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(style: StrokeStyle(lineWidth: 2))
-                        .foregroundStyle(Color(splytColor: .lightBlue))
+                        .foregroundStyle(Color(splytColor: userTheme.theme))
                         .padding(Layout.size(1))
                 )
                 .listRowSeparator(.hidden)
@@ -141,7 +142,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         HStack {
             Text(groupTitles[groupIndex])
                 .title2()
-                .foregroundStyle(Color(splytColor: .lightBlue))
+                .foregroundStyle(Color(splytColor: userTheme.theme))
             Spacer()
             IconButton(iconName: "trash", style: .secondary, iconColor: .red50) {
                 viewModel.send(.deleteGroup(groupIndex: groupIndex),
@@ -149,7 +150,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             Image(systemName: "line.3.horizontal")
                 .imageScale(.large)
-                .foregroundColor(Color(splytColor: .lightBlue))
+                .foregroundColor(Color(splytColor: userTheme.theme))
             
         }
     }

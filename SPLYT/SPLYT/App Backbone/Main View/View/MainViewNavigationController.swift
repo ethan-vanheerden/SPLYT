@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import DesignSystem
 
 /// The base navigation controller for the app
 final class MainViewNavigationController<A: AuthManagerType>: UINavigationController {
@@ -20,6 +21,7 @@ final class MainViewNavigationController<A: AuthManagerType>: UINavigationContro
         let view = MainView(viewModel: viewModel,
                             authManager: authManager,
                             loginViewModel: loginViewModel)
+            .environmentObject(UserTheme.shared)
         
         let rootVC = UIHostingController(rootView: view)
         super.init(rootViewController: rootVC)

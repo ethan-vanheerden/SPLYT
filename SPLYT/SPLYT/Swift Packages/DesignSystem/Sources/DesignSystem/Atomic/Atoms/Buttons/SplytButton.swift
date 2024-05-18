@@ -1,6 +1,7 @@
 import SwiftUI
 
 public struct SplytButton: View {
+    @EnvironmentObject private var userTheme: UserTheme
     private let text: String
     private let type: SplytButtonType
     private let textColor: SplytColor
@@ -36,8 +37,8 @@ public struct SplytButton: View {
 // MARK: - Button Type
 
 public enum SplytButtonType {
-    case primary(color: SplytColor = .lightBlue)
-    case secondary(color: SplytColor = .lightBlue)
+    case primary(color: SplytColor? = nil)
+    case secondary(color: SplytColor? = nil)
     case textOnly
 }
 

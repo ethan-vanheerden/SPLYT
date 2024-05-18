@@ -2,6 +2,7 @@ import SwiftUI
 import ExerciseCore
 
 public struct ExerciseView: View {
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: ExerciseViewState
     private let type: ExerciseViewType
     private let addSetAction: () -> Void
@@ -59,11 +60,9 @@ public struct ExerciseView: View {
     @ViewBuilder
     private var addRemoveSetButtons: some View {
         IconButton(iconName: "minus",
-                   style: .primary(backgroundColor: .lightBlue),
                    iconColor: .white,
                    isEnabled: viewState.canRemoveSet) { removeSetAction() }
         IconButton(iconName: "plus",
-                   style: .primary(backgroundColor: .lightBlue),
                    iconColor: .white) { addSetAction() }
     }
 }

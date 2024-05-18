@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 /// Heavily borrowed from https://github.com/pBoelck/CustomSegmentedControl
@@ -136,13 +135,17 @@ private struct CustomSegmentButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration
             .label
-            .padding(EdgeInsets(top: Layout.size(1.5), leading: Layout.size(2), bottom: Layout.size(1.5), trailing: Layout.size(2)))
+            .padding(EdgeInsets(top: Layout.size(1.5), 
+                                leading: Layout.size(2),
+                                bottom: Layout.size(1.5),
+                                trailing: Layout.size(2)))
     }
 }
 
 
 /// This modifier provides an animated underscore for the SegmentedControl.
 private struct UnderlineModifier: ViewModifier {
+    @EnvironmentObject private var userTheme: UserTheme
     private var selectedIndex: Int
     private let frames: [CGRect]
     
@@ -155,7 +158,7 @@ private struct UnderlineModifier: ViewModifier {
         content
             .background(
                 Rectangle()
-                    .fill(Color(splytColor: .lightBlue))
+                    .fill(Color(splytColor: userTheme.theme).gradient)
                     .frame(width: frames[selectedIndex].width, height: Layout.size(0.4))
                     .offset(x: frames[selectedIndex].minX - frames[0].minX), alignment: .bottomLeading
             )

@@ -9,6 +9,7 @@ import Foundation
 import Core
 import SwiftUI
 import ExerciseCore
+import DesignSystem
 
 // MARK: - Navigation Events
 
@@ -64,6 +65,9 @@ private extension HomeNavigationRouter {
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
             self?.navigator?.dismiss(animated: true)
+        } exitAction: { 
+            [weak self] workoutDetailsId in
+            self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
         }
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
         presentNavController(view: view, navRouter: &navRouter)
@@ -85,10 +89,24 @@ private extension HomeNavigationRouter {
         // TODO
     }
     
+    func openWorkoutDetails(workoutDetailsId: String) {
+        let interactor = WorkoutDetailsInteractor(historyId: workoutDetailsId)
+        let viewModel = WorkoutDetailsViewModel(interactor: interactor)
+        var navRouter = WorkoutDetailsNavigationRouter()
+        let view = WorkoutDetailsView(viewModel: viewModel, navigationRouter: navRouter)
+        navRouter.navigator = navigator
+        
+        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
+        navigator?.present(vc, animated: true)
+        
+//        presentNavController(view: view, navRouter: &navRouter)
+    }
+    
     func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {
         // NOTE: this assigns the navigator for the given nav router
         // Use a navigation controller since we will be pushing views on top of a presented view
-        let navController = UINavigationController(rootViewController: UIHostingController(rootView: view))
+        let navController = UINavigationController(rootViewController: UIHostingController(
+            rootView: view.environmentObject(UserTheme.shared)))
         navController.setNavigationBarHidden(true, animated: false)
         navRouter.navigator = navController
         navigator?.present(navController, animated: true)

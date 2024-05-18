@@ -1,6 +1,7 @@
 import SwiftUI
 
 public struct AddExerciseTile: View {
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: AddExerciseTileViewState
     private let tapAction: () -> Void
     private let favoriteAction: () -> Void
@@ -48,7 +49,7 @@ public struct AddExerciseTile: View {
                         .foregroundStyle(Color(splytColor: .white))
                         .background {
                             Circle()
-                                .fill(Color(splytColor: .lightBlue))
+                                .fill(Color(splytColor: userTheme.theme))
                                 .frame(width: Layout.size(2.5), height: Layout.size(2.5))
                         }
                 }

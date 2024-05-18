@@ -16,6 +16,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @Environment(\.dismiss) private var dismiss
     @State private var filterSheetPresented: Bool = false
     @State private var searchText = ""
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: BuildWorkoutNavigationRouter
     private let horizontalPadding = Layout.size(2)
     
@@ -54,7 +55,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 ZStack(alignment: .topLeading) {
                     IconButton(iconName: "line.3.horizontal.decrease.circle",
                                style: .secondary,
-                               iconColor: .lightBlue) {
+                               iconColor: userTheme.theme) {
                         filterSheetPresented = true
                     }
                     if display.isFiltering {
@@ -150,7 +151,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         Text(Strings.favorites)
                             .body()
                     }
-                    .tint(Color(splytColor: .lightBlue))
+                    .tint(Color(splytColor: userTheme.theme))
                 }
             }
             Tile {
@@ -167,7 +168,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                     .foregroundColor(Color(splytColor: .black))
                             }
                                                              .toggleStyle(.button)
-                                                             .tint(Color(splytColor: .lightBlue))
+                                                             .tint(Color(splytColor: userTheme.theme))
                         }
                     }
                 }
@@ -180,7 +181,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                         size: .small),
                        content: { IconButton(iconName: "checkmark",
                                              style: .secondary,
-                                             iconColor: .lightBlue, action: { filterSheetPresented = false })})
+                                             iconColor: userTheme.theme, action: { filterSheetPresented = false })})
     }
     
     private func isFavoriteBinding(isFavorite: Bool) -> Binding<Bool> {

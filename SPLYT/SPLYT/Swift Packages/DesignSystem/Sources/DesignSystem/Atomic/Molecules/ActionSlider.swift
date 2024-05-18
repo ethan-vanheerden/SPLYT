@@ -5,6 +5,7 @@ import SwiftUI
 public struct ActionSlider: View {
     @State private var slideComplete = false
     @State private var slideWidth = Layout.size(6)
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: ActionSliderViewState
     private let finishSlideAction: () -> Void
     private let minWidth = Layout.size(6)
@@ -33,7 +34,7 @@ public struct ActionSlider: View {
         let textOpacity = 1 - (1.5 * Double(slideWidth / maxWidth)) // Opaqueness descreases with slider
         ZStack {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color(splytColor: viewState.sliderColor).opacity(0.3))
+                .fill(Color(splytColor: viewState.sliderColor ?? userTheme.theme).opacity(0.3))
             Text(viewState.backgroundText)
                 .subhead(style: .regular)
                 .opacity(textOpacity < 0 ? 0 : textOpacity)
@@ -44,7 +45,7 @@ public struct ActionSlider: View {
     private func slider(maxWidth: CGFloat) -> some View {
         ZStack(alignment: .trailing) {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color(splytColor: viewState.sliderColor))
+                .fill(Color(splytColor: viewState.sliderColor ?? userTheme.theme))
                 .frame(width: slideWidth)
             sliderImage
         }
@@ -92,10 +93,10 @@ public struct ActionSlider: View {
 // MARK: - View State
 
 public struct ActionSliderViewState: Equatable {
-    fileprivate let sliderColor: SplytColor
+    fileprivate let sliderColor: SplytColor?
     fileprivate let backgroundText: String
     
-    public init(sliderColor: SplytColor,
+    public init(sliderColor: SplytColor? = nil,
                 backgroundText: String) {
         self.sliderColor = sliderColor
         self.backgroundText = backgroundText

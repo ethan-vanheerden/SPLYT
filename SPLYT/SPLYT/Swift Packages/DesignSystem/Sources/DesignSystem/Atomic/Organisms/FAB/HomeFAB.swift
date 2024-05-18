@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct HomeFAB: View {
     @Binding private var isPresenting: Bool
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: HomeFABViewState
     private let createPlanAction: () -> Void
     private let createWorkoutAction: () -> Void
@@ -25,11 +26,11 @@ public struct HomeFAB: View {
     
     private var baseIcon: FABIconViewState {
         if isPresenting {
-            return FABIconViewState(size: .primary(backgroundColor: .lightBlue,
+            return FABIconViewState(size: .primary(backgroundColor: userTheme.theme,
                                                    iconColor: .white),
                                     imageName: "minus")
         } else {
-            return FABIconViewState(size: .primary(backgroundColor: .lightBlue,
+            return FABIconViewState(size: .primary(backgroundColor: userTheme.theme,
                                                    iconColor: .white),
                                     imageName: "plus")
         }

@@ -1,13 +1,11 @@
 import SwiftUI
 
 struct ProgressBarStyle: ProgressViewStyle {
-    private let color: SplytColor
-    private let outlineColor: SplytColor?
+    @EnvironmentObject private var userTheme: UserTheme
+    private let color: SplytColor?
     
-    init(color: SplytColor,
-         outlineColor: SplytColor?) {
+    init(color: SplytColor?) {
         self.color = color
-        self.outlineColor = outlineColor
     }
     
     func makeBody(configuration: Configuration) -> some View {
@@ -16,12 +14,12 @@ struct ProgressBarStyle: ProgressViewStyle {
         return GeometryReader { proxy in
             HStack {
                 RoundedRectangle(cornerRadius: Layout.size(1))
-                    .fill(Color(splytColor: color))
+                    .fill(Color(splytColor: color ?? userTheme.theme))
                     .frame(width: proxy.size.width * fractionCompleted)
                 Spacer()
             }
         }
         .frame(height: Layout.size(2))
-        .strokeBorder(cornerRadius: Layout.size(1), color: outlineColor ?? .clear)
+        .strokeBorder(cornerRadius: Layout.size(1), color: color ?? userTheme.theme)
     }
 }

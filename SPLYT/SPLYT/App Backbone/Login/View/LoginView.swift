@@ -13,8 +13,9 @@ import DesignSystem
 struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                                             VM.ViewState == LoginViewState {
     @ObservedObject private var viewModel: VM
-    private let horizontalPadding = Layout.size(2)
     @State private var date = Date.now
+    @EnvironmentObject private var userTheme: UserTheme
+    private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM) {
         self.viewModel = viewModel
@@ -125,7 +126,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                 Text(Strings.birthday)
                     .body()
             }
-            .tint(Color(splytColor: .lightBlue))
+                       .tint(Color(splytColor: userTheme.theme))
         }
         .padding(.top, Layout.size(1))
     }
@@ -178,7 +179,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             Link(destination: termsURL) {
                 Text(Strings.termsConditions)
                     .footnote()
-                    .foregroundColor(Color(splytColor: .lightBlue))
+                    .foregroundColor(Color(splytColor: userTheme.theme))
             }
         }
     }

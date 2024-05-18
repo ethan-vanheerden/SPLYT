@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SplytButtonStyle: ButtonStyle {
+    @EnvironmentObject private var userTheme: UserTheme
     private let text: String
     private let type: SplytButtonType
     private let textColor: SplytColor
@@ -34,16 +35,17 @@ struct SplytButtonStyle: ButtonStyle {
             baseButton
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
                                                             normalColor: Color(splytColor: textColor),
-                                                            pressedColor: Color(splytColor: color),
+                                                            pressedColor: Color(splytColor: color ?? userTheme.theme),
                                                             animationEnabled: animationEnabled))
-                .roundedBackground(cornerRadius: cornerRadius, fill: ButtonUtils.animationColor(configuration: configuration,
-                                                                                                normalColor: Color(splytColor: color),
-                                                                                                pressedColor: Color(splytColor: textColor),
-                                                                                                animationEnabled: animationEnabled))
+                .roundedBackground(cornerRadius: cornerRadius,
+                                   fill: ButtonUtils.animationColor(configuration: configuration,
+                                                                    normalColor: Color(splytColor: color ?? userTheme.theme),
+                                                                    pressedColor: Color(splytColor: textColor),
+                                                                    animationEnabled: animationEnabled))
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(lineWidth: Layout.size(0.25))
-                        .fill(Color(splytColor: color))
+                        .fill(Color(splytColor: color ?? userTheme.theme))
                 )
         case .textOnly:
             textView

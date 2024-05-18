@@ -44,15 +44,14 @@ private extension DoWorkoutReducer {
                                        inCountdown: domain.inCountdown,
                                        isResting: domain.isResting,
                                        presentedDialog: dialog,
-                                       finishDialog: finishDialog)
+                                       finishDialog: finishDialog,
+                                       workoutDetailsId: domain.workoutDetailsId)
 
         return display
     }
     
     func getProgressBar(fractionCompleted: Double) -> ProgressBarViewState {
-        return ProgressBarViewState(fractionCompleted: fractionCompleted,
-                                    color: .lightBlue,
-                                    outlineColor: .lightBlue)
+        return ProgressBarViewState(fractionCompleted: fractionCompleted)
     }
     
     func getExerciseGroupStates(domain: DoWorkoutDomain, groupTitles: [String]) -> [DoExerciseGroupViewState] {
@@ -62,7 +61,6 @@ private extension DoWorkoutReducer {
         
         for (index, exercises) in groups.enumerated() {
             let header = CollapseHeaderViewState(title: groupTitles[index],
-                                                 color: .lightBlue,
                                                  isComplete: domain.completedGroups[index])
             let slider = getSlider(isComplete: domain.completedGroups[index])
             
@@ -84,8 +82,7 @@ private extension DoWorkoutReducer {
         var slider: ActionSliderViewState?
         
         if !isComplete {
-            slider = ActionSliderViewState(sliderColor: .lightBlue,
-                                           backgroundText: Strings.markAsComplete)
+            slider = ActionSliderViewState(backgroundText: Strings.markAsComplete)
         }
         
         return slider

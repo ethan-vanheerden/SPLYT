@@ -1,16 +1,11 @@
 import SwiftUI
 
-public final class SplytColorVM: ObservableObject {
-    @AppStorage("userTheme") public static var userTheme: SplytColor = .lightBlue
-    
-//    public static var theme: SplytColor = userTheme
-}
-
 public enum SplytColor: String, CaseIterable {
     case black = "Black"
     case gray = "Gray"
     case gray50 = "Gray 50"
     case green = "Green"
+    case forestGreen = "Forest Green"
     case lightBlue = "Light Blue"
     case red = "Red"
     case red50 = "Red 50"
@@ -19,6 +14,9 @@ public enum SplytColor: String, CaseIterable {
     case clear = "Clear"
     case purple = "Purple"
     case blue = "Blue"
+    case pink = "Pink"
+    case orange = "Orange"
+    case mint = "Mint"
     
     public var color: Color {
         switch self {
@@ -30,6 +28,11 @@ public enum SplytColor: String, CaseIterable {
             return Color.gray.opacity(0.5)
         case .green:
             return Color.green
+        case .forestGreen:
+            return Color(uiColor: UIColor(red: 48/255,
+                                          green: 69/255,
+                                          blue: 41/255,
+                                          alpha: 1))
         case .lightBlue:
             return Color(uiColor: UIColor(red: 104/255,
                                           green: 172/255,
@@ -52,10 +55,34 @@ public enum SplytColor: String, CaseIterable {
                                           alpha: 1))
         case .blue:
             return Color.blue
+        case .pink:
+            return Color(uiColor: UIColor(red: 252/255,
+                                                 green: 142/255,
+                                                 blue: 172/255,
+                                                 alpha: 1))
+        case .orange:
+            return Color.orange
+        case .mint:
+            return Color.mint
         }
     }
     
     public func opacity(_ opacity: Double) -> Color {
         return self.color.opacity(opacity)
+    }
+    
+    public static var userThemes: [SplytColor] {
+        return [
+            .red,
+            .pink,
+            .orange,
+            .yellow,
+            .green,
+            .forestGreen,
+            .mint,
+            .lightBlue,
+            .blue,
+            .purple
+        ]
     }
 }

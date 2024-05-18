@@ -20,7 +20,7 @@ public struct IconImage: View {
             .frame(width: backgroundSize, height: backgroundSize)
             .foregroundColor(Color(splytColor: imageColor))
             .roundedBackground(cornerRadius: cornerRadius,
-                               fill: Color(splytColor: backgroundColor))
+                               fill: Color(splytColor: backgroundColor).gradient)
     }
     
     @ViewBuilder

@@ -104,7 +104,8 @@ private extension DoWorkoutInteractor {
                                          expandedGroups: expandedGroups,
                                          completedGroups: completedGroups,
                                          fractionCompleted: 0,
-                                         restPresets: restPresets)
+                                         restPresets: restPresets,
+                                         workoutDetailsId: nil)
             return updateDomain(domain: domain)
         } catch {
             return .error
@@ -218,11 +219,12 @@ private extension DoWorkoutInteractor {
     }
     
     func handleSaveWorkout() -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
         do {
-            try service.saveWorkout(workout: domain.workout,
-                                    planId: planId,
-                                    completionDate: Date.now)
+            let historyId = try service.saveWorkout(workout: domain.workout,
+                                                    planId: planId,
+                                                    completionDate: Date.now)
+            domain.workoutDetailsId = historyId
             return .exit(domain)
         } catch {
             return .error

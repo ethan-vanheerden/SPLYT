@@ -14,7 +14,7 @@ public struct FABIcon: View {
     public var body: some View {
         ZStack {
             Circle()
-                .fill(Color(splytColor: viewState.size.backgroundColor)
+                .fill(Color(splytColor: viewState.size.backgroundColor).gradient
                     .shadow(.drop(radius: Layout.size(1))))
                 .frame(width: circleSize)
             Image(systemName: viewState.imageName)

@@ -1,7 +1,7 @@
-
 import SwiftUI
 
 public struct HomeFABRow: View {
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: HomeFABRowViewState
     private let tapAction: () -> Void
     
@@ -22,7 +22,7 @@ public struct HomeFABRow: View {
     
     private var fabIconType: FABIconViewState {
         return FABIconViewState(size: .secondary(backgroundColor: .white,
-                                                 iconColor: .lightBlue),
+                                                 iconColor: userTheme.theme),
                                 imageName: viewState.imageName)
     }
 }

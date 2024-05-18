@@ -3,6 +3,7 @@ import SwiftUI
 public struct TextEntry: View {
     @FocusState private var isFocused: Bool
     @Binding private var text: String
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: TextEntryViewState
     
     public init(text: Binding<String>,
@@ -25,7 +26,7 @@ public struct TextEntry: View {
                 if viewState.includeCancelButton && showCancel {
                     SplytButton(text: Strings.cancel,
                                 type: .textOnly,
-                                textColor: .lightBlue) {
+                                textColor: userTheme.theme) {
                         text = ""
                         isFocused = false
                     }

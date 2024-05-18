@@ -8,6 +8,7 @@
 import Foundation
 import Core
 import SwiftUI
+import DesignSystem
 
 // MARK: - Navigation Events
 
@@ -49,7 +50,7 @@ private extension BuildWorkoutNavigationRouter {
     func handleEditSetsReps() {
         let view = EditSetsRepsView(viewModel: viewModel,
                                     navigationRouter: self)
-        let vc = UIHostingController(rootView: view)
+        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         self.navigator?.push(vc, animated: true)
     }
     

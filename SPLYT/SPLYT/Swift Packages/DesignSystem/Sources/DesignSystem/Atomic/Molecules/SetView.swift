@@ -4,6 +4,7 @@ import Core
 
 public struct SetView: View {
     @State private var showBaseActionSheet: Bool = false
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: SetViewState
     private let exerciseType: ExerciseViewType
     private let updateSetAction: (Int, SetInput) -> Void // Set index, the new input
@@ -88,10 +89,6 @@ public struct SetView: View {
         case let .repsWeight(weightTitle, repsTitle, input):
             HStack(spacing: Layout.size(4)) {
                 // Reps Entry
-                //                let repsBinding = entryBinding(value: String(input.reps),
-                //                                               input: setInput,
-                //                                               repsInRepsWeight: true,
-                //                                               updateAction: updateAction)
                 SetEntry(input: String(input.reps),
                          title: repsTitle,
                          keyboardType: .reps,
@@ -101,9 +98,6 @@ public struct SetView: View {
                                                        updateAction: updateAction))
                 
                 // Weight Entry
-                //                let weightBinding = entryBinding(value: String(input.weight),
-                //                                                 input: setInput,
-                //                                                 updateAction: updateAction)
                 SetEntry(input: String(input.weight),
                          title: weightTitle,
                          keyboardType: .weight,
@@ -112,9 +106,6 @@ public struct SetView: View {
                                                        updateAction: updateAction))
             }
         case let .repsOnly(title, input):
-            //            let repsBinding = entryBinding(value: String(input.reps),
-            //                                           input: setInput,
-            //                                           updateAction: updateAction)
             SetEntry(input: String(input.reps),
                      title: title,
                      keyboardType: .reps,
@@ -122,9 +113,6 @@ public struct SetView: View {
                      updateAction: setUpdateAction(input: setInput,
                                                    updateAction: updateAction))
         case let .time(title, input):
-            //            let secondsBinding = entryBinding(value: String(input.seconds),
-            //                                              input: setInput,
-            //                                              updateAction: updateAction)
             SetEntry(input: String(input.seconds),
                      title: title,
                      keyboardType: .time,
@@ -140,7 +128,7 @@ public struct SetView: View {
         case .build where forModifier == false:
             IconButton(iconName: "ellipsis",
                        style: .secondary,
-                       iconColor: .lightBlue) { showBaseActionSheet = true }
+                       iconColor: userTheme.theme) { showBaseActionSheet = true }
         case let .inProgress(usePreviousInputAction, _):
             IconButton(iconName: "arrow.counterclockwise") {
                 usePreviousInputAction(viewState.setIndex, forModifier)
@@ -149,7 +137,7 @@ public struct SetView: View {
         default:
             IconButton(iconName: "ellipsis",
                        style: .secondary,
-                       iconColor: .lightBlue) { }
+                       iconColor: userTheme.theme) { }
                 .isVisible(false) // Keeps spacing consistent even with no button
         }
     }
@@ -189,46 +177,6 @@ public struct SetView: View {
             EmptyView()
         }
     }
-    
-    /// Creates a binding to the textfield used for a set entry.
-    /// - Parameters:
-    ///   - value: The value to be present in the text field
-    ///   - input: The type of set input that this text field will represent
-    ///   - repsInRepsWeight: If this is a reps and weight set, indicates if this is for the rep text field
-    ///   - updateAction: The update action to perform when the text value in the text field changes
-    /// - Returns: A binding to use for getting/updating values for the set text fields.
-    //    private func entryBinding(value: String,
-    //                              input: SetInputViewState,
-    //                              repsInRepsWeight: Bool = false,
-    //                              updateAction: @escaping (Int, SetInput) -> Void) -> Binding<String> {
-    //
-    //        let x : Binding<(String, Bool)> = .constant(("", false))
-    //        return Binding(
-    //            get: { return value },
-    //            set: { newValue in
-    //                // Note: with this logic, if an input is not valid, we set the input to an empty
-    //                let parsedInput = Double(newValue)
-    //                let newInput: SetInput
-    //
-    //                switch input {
-    //                case .repsWeight(_, _, var input):
-    //                    if repsInRepsWeight {
-    //                        input.reps = Int(parsedInput)
-    //                    } else {
-    //                        input.weight = parsedInput
-    //                    }
-    //                    newInput = .repsWeight(input: input)
-    //                case .repsOnly(_, var input):
-    //                    input.reps = Int(parsedInput)
-    //                    newInput = .repsOnly(input: input)
-    //                case .time(_, var input):
-    //                    input.seconds = Int(parsedInput)
-    //                    newInput = .time(input: input)
-    //                }
-    //                updateAction(viewState.setIndex, newInput)
-    //            }
-    //        )
-    //    }
     
     private func setUpdateAction(input: SetInputViewState,
                                  repsInRepsWeight: Bool = false,
