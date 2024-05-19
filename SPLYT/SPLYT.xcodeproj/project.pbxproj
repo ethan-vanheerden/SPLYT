@@ -60,6 +60,7 @@
 		AA2C245E2A3F7517004FC939 /* BuildPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C245D2A3F7517004FC939 /* BuildPlanView.swift */; };
 		AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C245F2A3F7596004FC939 /* BuildPlanNavigationRouter.swift */; };
 		AA2C24622A3F75DC004FC939 /* BuildPlanReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C24612A3F75DC004FC939 /* BuildPlanReducer.swift */; };
+		AA4043CC2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4043CB2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift */; };
 		AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31442882CD1C003E7C64 /* HomeView.swift */; };
 		AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4A31462882CE63003E7C64 /* HistoryView.swift */; };
 		AA4A314C2882D0E8003E7C64 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = AA4A314B2882D0E8003E7C64 /* DesignSystem */; };
@@ -317,6 +318,7 @@
 		AA2C245D2A3F7517004FC939 /* BuildPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanView.swift; sourceTree = "<group>"; };
 		AA2C245F2A3F7596004FC939 /* BuildPlanNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanNavigationRouter.swift; sourceTree = "<group>"; };
 		AA2C24612A3F75DC004FC939 /* BuildPlanReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanReducer.swift; sourceTree = "<group>"; };
+		AA4043CB2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressWorkoutCacheRequest.swift; sourceTree = "<group>"; };
 		AA4A31442882CD1C003E7C64 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AA4A31462882CE63003E7C64 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		AA4A31492882D0CC003E7C64 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
@@ -1611,6 +1613,7 @@
 				AACB29782A1557A300AACB6B /* DoWorkoutInteractor.swift */,
 				AACB297A2A1557C400AACB6B /* DoWorkoutDomain.swift */,
 				AACB29822A1558ED00AACB6B /* DoWorkoutService.swift */,
+				AA4043CB2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -2287,6 +2290,7 @@
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,
 				AA1786E02A91143A00563B04 /* LoginView.swift in Sources */,
 				AA672A6D2A69BA620009919E /* WorkoutDetailsViewState.swift in Sources */,
+				AA4043CC2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift in Sources */,
 				AA5073842A546BEF00F0BAD2 /* DoPlanView.swift in Sources */,
 				AAF8649D2B9CBDC80042BFD7 /* LicenseReducer.swift in Sources */,
 				AACB29812A15583F00AACB6B /* DoWorkoutNavigationRouter.swift in Sources */,

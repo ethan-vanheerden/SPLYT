@@ -20,6 +20,8 @@ final class HomeReducer {
         case let .dialog(dialog, domain):
             let display = getDisplay(domain: domain, dialog: dialog)
             return .main(display)
+        case .workoutInProgress:
+            return .workoutInProgress
         }
     }
 }

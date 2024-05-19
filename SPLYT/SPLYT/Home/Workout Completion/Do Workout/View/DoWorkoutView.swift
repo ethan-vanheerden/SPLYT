@@ -20,9 +20,15 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     private let horizontalPadding: CGFloat = Layout.size(2)
     
     init(viewModel: VM,
-         navigationRouter: DoWorkoutNavigationRouter) {
+         navigationRouter: DoWorkoutNavigationRouter,
+         fromCache: Bool = false) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
+        
+        if fromCache {
+            countdownTimer.upstream.connect().cancel() // There won't be a countdown
+            viewModel.send(.loadWorkout, taskPriority: .userInitiated)
+        }
     }
     
     var body: some View {
@@ -46,15 +52,22 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     private func mainView(display: DoWorkoutDisplay) -> some View {
         ZStack {
             workoutView(display: display)
-            countdownView
+            countdownView(inCountdown: display.inCountdown)
                 .isVisible(display.inCountdown)
                 .animation(.default, value: display.inCountdown)
         }
         .dialog(isOpen: display.presentedDialog == .finishWorkout,
                 viewState: display.finishDialog,
-                primaryAction: { viewModel.send(.saveWorkout, taskPriority: .userInitiated) }, // TODO: progress indicator?
+                primaryAction: { viewModel.send(.saveWorkout, taskPriority: .userInitiated) },
                 secondaryAction: { viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: false),
                                                   taskPriority: .userInitiated) })
+        .onChange(of: viewModel.secondsElapsed) { newValue in
+            // We want to update the in progress cache once every 2 minutes
+            if newValue != 0 && newValue % 120 == 0 {
+                viewModel.send(.cacheWorkout(secondElapsed: newValue),
+                               taskPriority: .userInitiated)
+            }
+        }
     }
     
     @ViewBuilder
@@ -101,7 +114,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     }
     
     @ViewBuilder
-    private var countdownView: some View {
+    private func countdownView(inCountdown: Bool) -> some View {
         HStack {
             Spacer()
             VStack {
@@ -119,7 +132,8 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                    startPoint: .top,
                                    endPoint: .bottom))
         .onReceive(countdownTimer) { _ in
-            if countdownSeconds <= 0 {
+            if inCountdown && countdownSeconds <= 0 {
+                print("running this")
                 countdownTimer.upstream.connect().cancel() // Can only have one timer running at a time idk
                 viewModel.send(.stopCountdown, taskPriority: .userInitiated)
             } else {

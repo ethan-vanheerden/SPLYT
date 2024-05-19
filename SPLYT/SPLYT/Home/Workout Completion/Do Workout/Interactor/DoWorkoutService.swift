@@ -18,6 +18,9 @@ protocol DoWorkoutServiceType {
     // Returns the saved workout history ID
     func saveWorkout(workout: Workout, planId: String?, completionDate: Date) throws -> String
     func loadRestPresets() -> [Int]
+    func loadInProgressWorkout() throws -> InProgressWorkout
+    func saveInProgressWorkout(_: InProgressWorkout)
+    func deleteInProgressWorkoutCache() throws
 }
 
 // MARK: - Errors
@@ -34,6 +37,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
     private let userSettings: UserSettings
     private let screenLocker: ScreenLockerType
     private let fallbackRestPresets: [Int] = [60, 90, 120]
+    private let inProgressCacheRequest = InProgressWorkoutCacheRequest()
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
          routineService: CreatedRoutinesServiceType = CreatedRoutinesService(),
@@ -86,5 +90,21 @@ struct DoWorkoutService: DoWorkoutServiceType {
         }
         
         return presets
+    }
+    
+    func loadInProgressWorkout() throws -> InProgressWorkout {
+        try cacheInteractor.load(request: inProgressCacheRequest)
+    }
+    
+    func saveInProgressWorkout(_ inProgressWorkout: InProgressWorkout) {
+        // Fail gracefully so the user can still complete their workout
+        do {
+            try cacheInteractor.save(request: inProgressCacheRequest,
+                                     data: inProgressWorkout)
+        } catch { }
+    }
+    
+    func deleteInProgressWorkoutCache() throws {
+        try cacheInteractor.deleteFile(request: inProgressCacheRequest)
     }
 }

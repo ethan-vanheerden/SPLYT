@@ -17,6 +17,7 @@ struct DoWorkoutDomain: Equatable {
     var fractionCompleted: Double // Ex: 0.5 for 50% done
     let restPresets: [Int]
     var workoutDetailsId: String?
+    var cachedSecondsElapsed: Int? // Used the first time an cached in progress workout is loaded
 }
 
 // MARK: - Dialog Type

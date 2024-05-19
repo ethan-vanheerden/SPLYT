@@ -14,6 +14,7 @@ import ExerciseCore
 protocol HomeServiceType {
     func loadRoutines() throws -> CreatedRoutines
     func saveRoutines(_: CreatedRoutines) throws
+    func isWorkoutInProgress() -> Bool
 //    func deleteWorkoutHistory(workoutId: String) throws
 }
 
@@ -36,5 +37,15 @@ struct HomeService: HomeServiceType {
     
     func saveRoutines(_ routines: CreatedRoutines) throws {
         try routineService.saveRoutines(routines)
+    }
+    
+    func isWorkoutInProgress() -> Bool {
+        let cacheRequest = InProgressWorkoutCacheRequest()
+        
+        do {
+            return try cacheInteractor.fileExists(request: cacheRequest)
+        } catch {
+            return false
+        }
     }
 }

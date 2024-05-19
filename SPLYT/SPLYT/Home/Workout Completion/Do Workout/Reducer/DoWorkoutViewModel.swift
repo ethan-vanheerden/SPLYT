@@ -23,6 +23,7 @@ enum DoWorkoutViewEvent {
     case usePreviousInput(group: Int, exerciseIndex: Int, setIndex: Int, forModifier: Bool)
     case toggleDialog(dialog: DoWorkoutDialog, isOpen: Bool)
     case saveWorkout
+    case cacheWorkout(secondElapsed: Int)
 }
 
 // MARK: - View Model
@@ -39,7 +40,7 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
     override func send(_ event: DoWorkoutViewEvent) async {
         switch event {
         case .loadWorkout:
-            await react(domainAction: .loadWorkout)
+            await react(domainAction: .loadWorkout, updateTime: true)
         case .stopCountdown:
             await startTime() // Start the workout timer
             await react(domainAction: .stopCountdown)
@@ -68,6 +69,10 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
             await react(domainAction: .toggleDialog(dialog: dialog, isOpen: isOpen))
         case .saveWorkout:
             await react(domainAction: .saveWorkout)
+            await stopTime()
+        case .cacheWorkout(let secondsElapsed):
+            // Don't need to update view, just make the interactor call
+            _ = await interactor.interact(with: .cacheWorkout(secondsElapsed: secondsElapsed))
         }
     }
 }
@@ -81,9 +86,16 @@ private extension DoWorkoutViewModel {
         }
     }
     
-    func react(domainAction: DoWorkoutDomainAction) async {
-        let domain: DoWorkoutDomainResult = await interactor.interact(with: domainAction)
-        let newViewState = reducer.reduce(domain)
+    func react(domainAction: DoWorkoutDomainAction, updateTime: Bool = false) async {
+        let domainResult: DoWorkoutDomainResult = await interactor.interact(with: domainAction)
+        
+        if updateTime, 
+            case .loaded(let domain) = domainResult,
+            let secondsElapsed = domain.cachedSecondsElapsed {
+            await startTime(secondsElapsed: secondsElapsed)
+        }
+        
+        let newViewState = reducer.reduce(domainResult)
         await updateViewState(newViewState)
     }
 }

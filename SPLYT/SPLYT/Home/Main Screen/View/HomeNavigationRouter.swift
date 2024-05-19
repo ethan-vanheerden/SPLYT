@@ -20,6 +20,7 @@ enum HomeNavigationEvent {
     case editWorkout(id: String)
     case selectPlan(id: String)
     case editPlan(id: String)
+    case resumeWorkout
 }
 
 // MARK: - Router
@@ -41,6 +42,8 @@ final class HomeNavigationRouter: NavigationRouter {
             handleSelectPlan(id: id)
         case .editPlan(let id):
             handleEditPlan(id: id)
+        case .resumeWorkout:
+            handleResumeWorkout()
         }
     }
 }
@@ -98,6 +101,21 @@ private extension HomeNavigationRouter {
         
         let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         navigator?.present(vc, animated: true)
+    }
+    
+    func handleResumeWorkout() {
+        let interactor = DoWorkoutInteractor()
+        let viewModel = DoWorkoutViewModel(interactor: interactor)
+        var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
+            self?.navigator?.dismiss(animated: true)
+        } exitAction: {
+            [weak self] workoutDetailsId in
+            self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
+        }
+        let view = DoWorkoutView(viewModel: viewModel,
+                                 navigationRouter: navRouter,
+                                 fromCache: true)
+        presentNavController(view: view, navRouter: &navRouter)
     }
     
     func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {

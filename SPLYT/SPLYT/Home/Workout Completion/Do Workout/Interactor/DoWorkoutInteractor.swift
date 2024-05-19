@@ -7,6 +7,7 @@
 
 import Foundation
 import ExerciseCore
+import Caching
 
 // MARK: - Domain Actions
 
@@ -22,6 +23,7 @@ enum DoWorkoutDomainAction {
     case usePreviousInput(group: Int, exerciseIndex: Int, setIndex: Int, forModifier: Bool)
     case toggleDialog(dialog: DoWorkoutDialog, isOpen: Bool)
     case saveWorkout
+    case cacheWorkout(secondsElapsed: Int)
 }
 
 // MARK: - Domain Results
@@ -36,11 +38,10 @@ enum DoWorkoutDomainResult: Equatable {
 // MARK: - Interactor
 
 final class DoWorkoutInteractor {
-    private let workoutId: String
+    private var workoutId: String?
     private let service: DoWorkoutServiceType
-    private let planId: String?
+    private var planId: String?
     private var savedDomain: DoWorkoutDomain?
-    
     
     init(workoutId: String,
          service: DoWorkoutServiceType = DoWorkoutService(),
@@ -48,6 +49,13 @@ final class DoWorkoutInteractor {
         self.workoutId = workoutId
         self.service = service
         self.planId = planId
+    }
+    
+    // Initializer for loading from cache
+    init(service: DoWorkoutServiceType = DoWorkoutService()) {
+        self.service = service
+        self.workoutId = nil
+        self.planId = nil
     }
     
     func interact(with action: DoWorkoutDomainAction) async -> DoWorkoutDomainResult {
@@ -81,6 +89,8 @@ final class DoWorkoutInteractor {
             return handleToggleDialog(dialog: dialog, isOpen: isOpen)
         case .saveWorkout:
             return handleSaveWorkout()
+        case .cacheWorkout(let secondsElapsed):
+            return handleCacheWorkout(secondsElapsed: secondsElapsed)
         }
     }
 }
@@ -90,22 +100,37 @@ final class DoWorkoutInteractor {
 private extension DoWorkoutInteractor {
     func handleLoadWorkout() -> DoWorkoutDomainResult {
         do {
-            // TODO: use the workout ID to make a network call first instead of a cache lookup
+            let restPresets = service.loadRestPresets()
+            
+            guard let workoutId = workoutId else {
+                let inProgressDomain = try getInProgressWorkoutDomain(restPresets: restPresets)
+                return updateDomain(domain: inProgressDomain)
+            }
+            
             let loadedWorkout = try service.loadWorkout(workoutId: workoutId,
                                                         planId: planId)
-            let restPresets = service.loadRestPresets()
             let workout = createPlaceholders(previousWorkout: loadedWorkout)
             let expandedGroups = getStartingExpandedGroups(groups: workout.exerciseGroups)
             let completedGroups = workout.exerciseGroups.map { _ in return false }
+            let fractionCompleted: Double = 0
             
             let domain = DoWorkoutDomain(workout: workout,
                                          inCountdown: true,
                                          isResting: false,
                                          expandedGroups: expandedGroups,
                                          completedGroups: completedGroups,
-                                         fractionCompleted: 0,
-                                         restPresets: restPresets,
-                                         workoutDetailsId: nil)
+                                         fractionCompleted: fractionCompleted,
+                                         restPresets: restPresets)
+            
+            // Cache a copy of the created workout
+            let inProgressWorkout = InProgressWorkout(secondsElapsed: 0,
+                                                      workout: workout,
+                                                      planId: planId,
+                                                      expandedGroups: expandedGroups,
+                                                      completedGroups: completedGroups,
+                                                      fractionCompleted: fractionCompleted)
+            service.saveInProgressWorkout(inProgressWorkout)
+            
             return updateDomain(domain: domain)
         } catch {
             return .error
@@ -225,16 +250,55 @@ private extension DoWorkoutInteractor {
                                                     planId: planId,
                                                     completionDate: Date.now)
             domain.workoutDetailsId = historyId
+            
+            try service.deleteInProgressWorkoutCache()
+            
             return .exit(domain)
         } catch {
             return .error
         }
+    }
+    
+    func handleCacheWorkout(secondsElapsed: Int) -> DoWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        let inProgressWorkout = InProgressWorkout(secondsElapsed: secondsElapsed,
+                                                  workout: domain.workout,
+                                                  planId: planId,
+                                                  expandedGroups: domain.expandedGroups,
+                                                  completedGroups: domain.completedGroups,
+                                                  fractionCompleted: domain.fractionCompleted)
+        
+        service.saveInProgressWorkout(inProgressWorkout)
+        
+        return .loaded(domain)
     }
 }
 
 // MARK: - Other Private Helpers
 
 private extension DoWorkoutInteractor {
+    
+    /// Constructs the domain object from loading a workout from the in progress cache.
+    /// This happens when the user opens the app after the app crashed mid-workout.
+    /// - Parameter restPresets: The user's rest presets
+    /// - Returns: The domain object
+    func getInProgressWorkoutDomain(restPresets: [Int]) throws -> DoWorkoutDomain {
+        let inProgressWorkout = try service.loadInProgressWorkout()
+        let workout = inProgressWorkout.workout
+        
+        workoutId = workout.id
+        planId = inProgressWorkout.planId
+        
+        return DoWorkoutDomain(workout: inProgressWorkout.workout,
+                               inCountdown: false,
+                               isResting: false,
+                               expandedGroups: inProgressWorkout.expandedGroups,
+                               completedGroups: inProgressWorkout.completedGroups,
+                               fractionCompleted: inProgressWorkout.fractionCompleted,
+                               restPresets: restPresets,
+                               cachedSecondsElapsed: inProgressWorkout.secondsElapsed)
+    }
     
     /// Updates and saves the domain object.
     /// - Parameters:
@@ -243,6 +307,8 @@ private extension DoWorkoutInteractor {
     /// - Returns: The loaded domain state after updating the domain object
     func updateDomain(domain: DoWorkoutDomain) -> DoWorkoutDomainResult {
         savedDomain = domain
+        savedDomain?.cachedSecondsElapsed = nil // This should only be set once
+
         return .loaded(domain)
     }
     

@@ -26,7 +26,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
     var body: some View {
         viewStateView
             .onAppear {
-                viewModel.send(.load, taskPriority: .userInitiated) // Add so a created workout/plan appears after creation
+                viewModel.send(.load, taskPriority: .userInitiated) // So a created workout/plan appears after creation
             }
     }
     
@@ -42,6 +42,11 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                 .onAppear {
                     fabPresenting = false
                 }
+        case .workoutInProgress:
+            ProgressView()
+                .onAppear {
+                    navigationRouter.navigate(.resumeWorkout)
+                }
         }
     }
     
@@ -51,7 +56,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         
         return ZStack {
             VStack {
-                SegmentedControl(selectedIndex: $segmentedControlIndex.animation(), // Putting .animation() here is magic I guess
+                SegmentedControl(selectedIndex: $segmentedControlIndex.animation(),
                                  titles: display.segmentedControlTitles)
                 workoutPlanView(display: display)
                 Spacer()
