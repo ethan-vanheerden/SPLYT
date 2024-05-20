@@ -122,15 +122,6 @@ private extension DoWorkoutInteractor {
                                          fractionCompleted: fractionCompleted,
                                          restPresets: restPresets)
             
-            // Cache a copy of the created workout
-            let inProgressWorkout = InProgressWorkout(secondsElapsed: 0,
-                                                      workout: workout,
-                                                      planId: planId,
-                                                      expandedGroups: expandedGroups,
-                                                      completedGroups: completedGroups,
-                                                      fractionCompleted: fractionCompleted)
-            service.saveInProgressWorkout(inProgressWorkout)
-            
             return updateDomain(domain: domain)
         } catch {
             return .error
@@ -139,7 +130,17 @@ private extension DoWorkoutInteractor {
     
     func handleStopCountdown() -> DoWorkoutDomainResult {
         guard var domain = savedDomain else { return .error }
+        
         domain.inCountdown = false
+        
+        let inProgressWorkout = InProgressWorkout(secondsElapsed: 0,
+                                                  workout: domain.workout,
+                                                  planId: planId,
+                                                  expandedGroups: domain.expandedGroups,
+                                                  completedGroups: domain.completedGroups,
+                                                  fractionCompleted: domain.fractionCompleted)
+        service.saveInProgressWorkout(inProgressWorkout)
+        
         return updateDomain(domain: domain)
     }
     
@@ -261,7 +262,6 @@ private extension DoWorkoutInteractor {
     
     func handleCacheWorkout(secondsElapsed: Int) -> DoWorkoutDomainResult {
         guard let domain = savedDomain else { return .error }
-        
         let inProgressWorkout = InProgressWorkout(secondsElapsed: secondsElapsed,
                                                   workout: domain.workout,
                                                   planId: planId,

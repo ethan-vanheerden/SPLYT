@@ -8,7 +8,7 @@ final class IconImageTests: XCTestCase {
         let view = VStack {
             Spacer()
             IconImage(imageName: "theatermask.and.paintbrush.fill",
-                      backgroundColor: .purple)
+                      backgroundColor: .darkBlue)
             IconImage(imageName: "stopwatch.fill",
                       backgroundColor: .blue)
             IconImage(imageName: "pencil",

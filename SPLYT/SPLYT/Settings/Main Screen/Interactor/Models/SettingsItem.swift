@@ -62,7 +62,7 @@ enum SettingsItem: Equatable, CaseIterable {
     var backgroundColor: SplytColor {
         switch self {
         case .designShowcase:
-            return .purple
+            return .darkBlue
         case .restPresets:
             return .blue
         case .appearance:

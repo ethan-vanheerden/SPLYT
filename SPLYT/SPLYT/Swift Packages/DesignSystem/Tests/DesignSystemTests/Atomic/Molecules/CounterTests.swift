@@ -11,7 +11,7 @@ final class CounterTests: XCTestCase {
     private let viewStateTwo = CounterViewState(maxNumber: 10,
                                                 minNumber: -10,
                                                 label: "sec",
-                                                backGroundColor: .purple,
+                                                backGroundColor: .darkBlue,
                                                 textColor: .white)
     
     func testRepCounter() {

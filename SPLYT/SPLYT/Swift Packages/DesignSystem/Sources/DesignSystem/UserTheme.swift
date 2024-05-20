@@ -1,7 +1,7 @@
 import SwiftUI
 
 public final class UserTheme: ObservableObject {
-    @AppStorage("userTheme") private var userTheme: SplytColor = .lightBlue
+    @AppStorage("userTheme") private var userTheme: SplytColor = .blue
     
     private init() { }
     

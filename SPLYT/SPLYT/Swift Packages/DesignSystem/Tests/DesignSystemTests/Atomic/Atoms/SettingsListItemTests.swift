@@ -6,7 +6,7 @@ import SwiftUI
 final class SettingsListItemTests: XCTestCase {
     private let viewStateOne = SettingsListItemViewState(title: "Title",
                                                          iconName: "pencil.tip",
-                                                         iconBackgroundColor: .purple)
+                                                         iconBackgroundColor: .darkBlue)
     private let viewStateTwo = SettingsListItemViewState(title: "Another title",
                                                          iconName: "link",
                                                          iconBackgroundColor: .green,

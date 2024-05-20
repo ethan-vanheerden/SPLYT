@@ -4,7 +4,7 @@ import DesignSystem
 struct SettingsListItemGallery: View {
     private let viewStateOne = SettingsListItemViewState(title: "Title",
                                                          iconName: "pencil.tip",
-                                                         iconBackgroundColor: .purple)
+                                                         iconBackgroundColor: .darkBlue)
     private let viewStateTwo = SettingsListItemViewState(title: "Linked Title",
                                                          iconName: "link",
                                                          iconBackgroundColor: .green,

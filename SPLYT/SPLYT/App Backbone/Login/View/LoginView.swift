@@ -126,7 +126,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                 Text(Strings.birthday)
                     .body()
             }
-                       .tint(Color(splytColor: userTheme.theme))
+                       .tint(Color(splytColor: .blue))
         }
         .padding(.top, Layout.size(1))
     }
@@ -141,6 +141,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                     .foregroundColor(Color(splytColor: .red))
             }
             SplytButton(text: buttonText,
+                        type: .primary(color: .blue),
                         isEnabled: isEnabled) {
                 viewModel.send(.submit, taskPriority: .userInitiated)
             }
@@ -179,7 +180,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             Link(destination: termsURL) {
                 Text(Strings.termsConditions)
                     .footnote()
-                    .foregroundColor(Color(splytColor: userTheme.theme))
+                    .foregroundColor(Color(splytColor: .blue))
             }
         }
     }

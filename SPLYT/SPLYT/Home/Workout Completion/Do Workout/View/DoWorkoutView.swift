@@ -133,7 +133,6 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                    endPoint: .bottom))
         .onReceive(countdownTimer) { _ in
             if inCountdown && countdownSeconds <= 0 {
-                print("running this")
                 countdownTimer.upstream.connect().cancel() // Can only have one timer running at a time idk
                 viewModel.send(.stopCountdown, taskPriority: .userInitiated)
             } else {

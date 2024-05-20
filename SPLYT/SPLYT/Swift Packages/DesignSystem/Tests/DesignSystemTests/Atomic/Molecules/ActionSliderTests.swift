@@ -6,7 +6,7 @@ import SwiftUI
 final class ActionSliderTests: XCTestCase {
     private let viewStateOne = ActionSliderViewState(sliderColor: .green,
                                                      backgroundText: "Finish")
-    private let viewStateTwo = ActionSliderViewState(sliderColor: .purple,
+    private let viewStateTwo = ActionSliderViewState(sliderColor: .darkBlue,
                                                      backgroundText: "Slide to complete")
     func testActionSlider() {
         let view = VStack {

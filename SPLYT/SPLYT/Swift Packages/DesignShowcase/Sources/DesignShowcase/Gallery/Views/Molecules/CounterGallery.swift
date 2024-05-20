@@ -11,7 +11,7 @@ struct CounterGallery: View {
     private let viewStateTwo = CounterViewState(maxNumber: 10,
                                                 minNumber: -10,
                                                 label: "sec",
-                                                backGroundColor: .purple,
+                                                backGroundColor: .darkBlue,
                                                 textColor: .white)
     
     var body: some View {

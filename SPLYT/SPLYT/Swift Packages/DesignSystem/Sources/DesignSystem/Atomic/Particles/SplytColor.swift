@@ -12,8 +12,9 @@ public enum SplytColor: String, CaseIterable {
     case white = "White"
     case yellow = "Yellow"
     case clear = "Clear"
-    case purple = "Purple"
+    case darkBlue = "Dark Blue"
     case blue = "Blue"
+    case purple = "Purple"
     case pink = "Pink"
     case orange = "Orange"
     case mint = "Mint"
@@ -48,13 +49,15 @@ public enum SplytColor: String, CaseIterable {
             return Color.yellow
         case .clear:
             return Color.clear
-        case .purple:
+        case .darkBlue:
             return Color(uiColor: UIColor(red: 42/255,
                                           green: 0,
                                           blue: 254/255,
                                           alpha: 1))
         case .blue:
             return Color.blue
+        case .purple:
+            return Color.purple
         case .pink:
             return Color(uiColor: UIColor(red: 252/255,
                                                  green: 142/255,
@@ -80,8 +83,8 @@ public enum SplytColor: String, CaseIterable {
             .green,
             .forestGreen,
             .mint,
-            .lightBlue,
             .blue,
+            .darkBlue,
             .purple
         ]
     }
