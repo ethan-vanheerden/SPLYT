@@ -31,7 +31,7 @@ enum BuildWorkoutDomainAction {
     case backTapped(userInitiated: Bool)
     case deleteGroup(groupIndex: Int)
     case rearrangeGroups(newOrder: [Int])
-    case customExerciseAdded
+    case customExerciseAdded(exerciseName: String)
 }
 
 // MARK: - Domain Results
@@ -108,8 +108,8 @@ final class BuildWorkoutInteractor {
             return handleDeleteGroup(groupIndex: groupIndex)
         case .rearrangeGroups(let newOrder):
             return handleRearrangeGroups(newOrder: newOrder)
-        case .customExerciseAdded:
-            return handleCustomExerciseAdded()
+        case .customExerciseAdded(let exerciseName):
+            return handleCustomExerciseAdded(exerciseName: exerciseName)
         }
     }
 }
@@ -119,6 +119,7 @@ final class BuildWorkoutInteractor {
 private extension BuildWorkoutInteractor {
     
     func handleLoadExercises() async -> BuildWorkoutDomainResult {
+        print("loading")
         do {
             let exercises = try await service.loadAvailableExercises()
             allExercises = exercises
@@ -136,7 +137,8 @@ private extension BuildWorkoutInteractor {
                                             currentGroup: 0,
                                             filterDomain: createEmptyFilters(),
                                             canSave: false,
-                                            isCreatingSuperset: false)
+                                            isCreatingSuperset: false,
+                                            canSaveSuperset: false)
             // Save the domain object for future actions
             return updateDomain(domain: domain)
         } catch {
@@ -520,18 +522,22 @@ private extension BuildWorkoutInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleCustomExerciseAdded() -> BuildWorkoutDomainResult {
+    func handleCustomExerciseAdded(exerciseName: String) -> BuildWorkoutDomainResult {
         guard let domain = savedDomain else { return .error }
         
         // Just update the list of exercise to have the new custom exercise
         do {
-            let updatedExercises = try service.reloadCache()
+            var updatedExercises = try service.reloadCache()
             
-            domain.exercises = updatedExercises
+            // Mark the selected exercises in the updated list
+            for selectedExerciseId in self.selectedExerciseIds {
+                updatedExercises[selectedExerciseId] = allExercises?[selectedExerciseId]
+            }
+
             allExercises = updatedExercises
             
             // Ensures the new exercise pops up with the search text
-            return filterExercises(domain: domain)
+            return filterBySearch(domain: domain, searchText: exerciseName)
         } catch {
             return .error
         }
@@ -555,6 +561,9 @@ private extension BuildWorkoutInteractor {
         domain.canSave = !groups.isEmpty &&
         !groups[0].exercises.isEmpty &&
         !domain.isCreatingSuperset
+        
+        domain.canSaveSuperset = domain.isCreatingSuperset &&
+        groups[domain.currentGroup].exercises.count > 1
         
         savedDomain = domain
         

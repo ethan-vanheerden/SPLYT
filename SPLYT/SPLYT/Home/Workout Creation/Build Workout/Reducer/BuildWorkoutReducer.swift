@@ -41,7 +41,8 @@ private extension BuildWorkoutReducer {
         let lastGroupEmpty = groups.last?.isEmpty ?? true
         
         let supersetDisplay = SupersetDisplay(isCreatingSuperset: domain.isCreatingSuperset,
-                                              currentSupersetTitle: getCurrentSupersetTitle(numExercisesInCurrentGroup))
+                                              currentSupersetTitle: getCurrentSupersetTitle(numExercisesInCurrentGroup),
+                                              canSave: domain.canSaveSuperset)
         
         let display = BuildWorkoutDisplay(allExercises: getExerciseTileStates(exerciseMap: domain.exercises),
                                           groups: groups,

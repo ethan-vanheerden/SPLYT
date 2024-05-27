@@ -44,7 +44,7 @@ struct CustomExerciseView<VM: ViewModel>: View where VM.Event == CustomExerciseV
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
-                    navigationRouter.navigate(.save)
+                    navigationRouter.navigate(.save(exerciseName: display.exerciseName))
                 }
         }
     }

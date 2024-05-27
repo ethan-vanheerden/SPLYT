@@ -37,6 +37,7 @@ struct BuildWorkoutFilterDisplay: Equatable {
 struct SupersetDisplay: Equatable {
     let isCreatingSuperset: Bool
     let currentSupersetTitle: String
+    let canSave: Bool
 }
 
 // MARK: - View State

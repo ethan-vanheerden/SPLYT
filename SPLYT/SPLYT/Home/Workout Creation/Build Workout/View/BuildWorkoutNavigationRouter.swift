@@ -16,9 +16,11 @@ enum BuildWorkoutNavigationEvent {
     case exit
     case editSetsReps
     case goBack
+    // The save action uses the exercise name so that the search bar in the build
+    // workout page can be updated with it once the custom exercise is created
     case createCustomExercise(exerciseName: String,
                               service: CustomExerciseServiceType? = nil,
-                              saveAction: () -> Void)
+                              saveAction: (String) -> Void)
 }
 
 // MARK: - Router
@@ -67,7 +69,7 @@ private extension BuildWorkoutNavigationRouter {
     
     func handleCreateCustomExercise(exerciseName: String, 
                                     service: CustomExerciseServiceType?,
-                                    saveAction: @escaping () -> Void) {
+                                    saveAction: @escaping (String) -> Void) {
         let interactor = CustomExerciseInteractor(exerciseName: exerciseName,
                                                   service: service ?? CustomExerciseService())
         let viewModel = CustomExerciseViewModel(interactor: interactor)

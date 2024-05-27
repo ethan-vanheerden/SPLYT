@@ -12,16 +12,16 @@ import Core
 
 enum CustomExerciseNavigationEvent {
     case exit
-    case save
+    case save(exerciseName: String)
 }
 
 // MARK: - Router
 
 final class CustomExerciseNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
-    private let saveAction: () -> Void
+    private let saveAction: (String) -> Void
     
-    init(saveAction: @escaping () -> Void) {
+    init(saveAction: @escaping (String) -> Void) {
         self.saveAction = saveAction
     }
     
@@ -29,8 +29,8 @@ final class CustomExerciseNavigationRouter: NavigationRouter {
         switch event {
         case .exit:
             handleExit()
-        case .save:
-            handleSave()
+        case .save(let exerciseName):
+            handleSave(exerciseName: exerciseName)
         }
     }
 }
@@ -42,7 +42,9 @@ private extension CustomExerciseNavigationRouter {
         navigator?.dismiss(animated: true)
     }
     
-    func handleSave() {
-        navigator?.dismissWithCompletion(animated: true, completion: saveAction)
+    func handleSave(exerciseName: String) {
+        let saveAction = saveAction
+        navigator?.dismissWithCompletion(animated: true,
+                                         completion: { saveAction(exerciseName) })
     }
 }

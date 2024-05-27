@@ -141,9 +141,10 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 SplytButton(text: Strings.createCustomExercise) {
                     navigationRouter.navigate(
                         .createCustomExercise(exerciseName: searchText,
-                                              saveAction: {
-                                                  viewModel.send(.customExerciseAdded,
+                                              saveAction: { exerciseName in
+                                                  viewModel.send(.customExerciseAdded(exerciseName: exerciseName),
                                                                  taskPriority: .userInitiated)
+                                                  searchText = exerciseName
                                               })
                     )
                 }
@@ -234,7 +235,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                 viewModel.send(.cancelSuperset,
                                                taskPriority: .userInitiated)
                             }
-                            SplytButton(text: "Save") {
+                            SplytButton(text: "Save",
+                                        isEnabled: supersetDisplay.canSave) {
                                 viewModel.send(.saveSuperset,
                                                taskPriority: .userInitiated)
                             }
