@@ -19,8 +19,11 @@ struct GetAvailableExercisesRequest: NetworkRequest {
         self.userAuth = userAuth
     }
     
-    func createRequest() async -> URLRequest {
-        let url = URL(string: "https://exercises-2iropnvq6q-uc.a.run.app")!
+    func createRequest() async throws -> URLRequest {
+        guard let url = URL(string: "https://exercises-2iropnvq6q-uc.a.run.app") else {
+            throw NetworkError.invalidURL
+        }
+        
         return await URLRequestBuilder(url: url, userAuth: userAuth)
             .setHTTPMethod(.get)
             .setJSONContent()

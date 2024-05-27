@@ -29,7 +29,7 @@ final class TextEntryTests: XCTestCase {
     }
     
     func testBuilder() {
-        let resultSearch = TextEntryBuilder.searchEntry
+        let resultSearch = TextEntryBuilder.searchEntry()
         
         let expectedSearch = TextEntryViewState(placeholder: "Search...",
                                                 iconName: "magnifyingglass")

@@ -58,7 +58,8 @@ private extension NameWorkoutReducer {
         
         return TextEntryViewState(title: title,
                                   placeholder: placeholder,
-                                  capitalization: .everyWord)
+                                  capitalization: .everyWord,
+                                  autoFocus: true)
     }
 }
 

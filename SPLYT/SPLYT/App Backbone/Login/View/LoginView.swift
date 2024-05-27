@@ -188,7 +188,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
 
 fileprivate struct Strings {
     static let SPLYT = "SPLYT"
-    static let welcomeBack = "Welcome back!"
+    static let welcomeBack = "Welcome!"
     static let dontHaveAccount = "Don't have an account yet? Create one!"
     static let login = "Login"
     static let createAccount = "Create Account"

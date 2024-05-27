@@ -32,6 +32,7 @@ enum BuildWorkoutViewEvent {
     case backTapped(userInitiated: Bool)
     case deleteGroup(groupIndex: Int)
     case rearrangeGroups(newOrder: [Int]) // Order using old group indices
+    case customExerciseAdded
 }
 
 // MARK: - View Model
@@ -98,6 +99,8 @@ final class BuildWorkoutViewModel: ViewModel {
             await react(domainAction: .deleteGroup(groupIndex: groupIndex))
         case .rearrangeGroups(let newOrder):
             await react(domainAction: .rearrangeGroups(newOrder: newOrder))
+        case .customExerciseAdded:
+            await react(domainAction: .customExerciseAdded)
         }
     }
 }

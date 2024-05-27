@@ -1,3624 +1,1780 @@
 [
   {
-    "id": "29f7bb5e-b03f-4d8f-9e60-e498de5baba8",
-    "name": "6-Way Lateral Raise",
+    "id": "1ee65fff-c586-4fd7-9ade-e649d6f252d3",
+    "name": "Alt. DB Bench Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "d93e8958-8ff0-42f3-b624-9e83396dd5be",
+    "name": "Alt. DB Cross-Body Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "9f3e3c1a-9a9e-4adb-bf25-f9092b73a436",
+    "name": "Alt. DB Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "06d840df-4e8e-49ab-a773-158c528aebd2",
+    "name": "Alt. DB Decline Bench Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "d4208b30-d5cb-42a6-b7ff-bc0984471da6",
+    "name": "Alt. DB Front Raises",
     "muscles_worked": [
       "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "65483b98-ea6f-42b3-8c27-a64b63f4d497",
-    "name": "Alternating Bicep Curls",
+    "id": "925c449b-23d3-4a68-b121-ec5a84a3ca9e",
+    "name": "Alt. DB Hammer Curls",
     "muscles_worked": [
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "103628dd-9c0a-4591-904e-a5e30f5be8f3",
-    "name": "Alternating Dumbbell Snatches",
+    "id": "03c95603-b3ac-4e0e-8030-c814a6931642",
+    "name": "Alt. DB Incline Bench Press",
     "muscles_worked": [
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "CHEST"
+    ]
   },
   {
-    "id": "5bcede63-9c07-4c16-aff6-544038a384f0",
-    "name": "Alternating Hammer Curls",
+    "id": "2bd8f831-e411-4100-9f8b-467726b9325d",
+    "name": "Alt. DB Incline Curls",
     "muscles_worked": [
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "a471300e-1a58-42bd-8112-c5b04d8fc237",
-    "name": "Alternating Incline Curls",
+    "id": "3c5cc4b7-6755-4125-9f93-fd071375533a",
+    "name": "Alt. DB Incline Rows",
     "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "BACK"
+    ]
   },
   {
-    "id": "ebff8068-182f-4e68-b8f0-bcfb655d6293",
+    "id": "5cf77490-edb7-4cb5-b308-4eadf0de68d4",
+    "name": "Alt. DB Seated Shoulder Press",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "c49b0142-8a2b-4a94-8bea-6ea7662f81b9",
+    "name": "Alt. DB Shoulder Press",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "751da649-5427-4414-b8b3-d3a47aef25d2",
     "name": "Arnold Press",
     "muscles_worked": [
       "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "f240c84c-356b-4c92-9fa7-ea83969e9595",
-    "name": "Assisted Dips",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "99c66a78-e389-45fe-b61f-c2220d4e2c7a",
-    "name": "Assisted Pull-ups",
+    "id": "ff39e17a-c4e5-4089-a1b8-4917d4fa6c9c",
+    "name": "Assisted Chin Ups",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "ee8cf2f2-92e1-4268-bc49-23813814b7cb",
+    "id": "8fcd84ea-af0f-4da7-bef1-b2cc765f991e",
+    "name": "Assisted Pull Ups",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "6f3e74b2-5472-410e-b647-eba540522977",
     "name": "Back Squat",
     "muscles_worked": [
+      "GLUTES",
       "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "HAMSTRINGS"
+    ]
   },
   {
-    "id": "9faf189b-566b-4b7b-a0f8-93aa423af925",
-    "name": "Bar Bent Over Rows",
-    "muscles_worked": [
-      "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "64fa4637-1db9-4bf7-b1bd-e7de8a4f1682",
+    "id": "d27c3ef0-e444-4566-b95a-a8065c740144",
     "name": "Bar Bicep Curls",
     "muscles_worked": [
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "87c6984e-541c-4789-897d-07b00809da42",
+    "id": "951204c6-8675-41ec-9f32-d8bc3043e343",
     "name": "Bar Bulgarian Squats",
     "muscles_worked": [
       "QUADS",
       "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "19919c2d-f984-4bc4-bdbf-ace575568363",
+    "id": "be9f1965-6dcf-466f-881e-e077c283b5f7",
     "name": "Bar Calf Raises",
     "muscles_worked": [
       "CALVES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "975335f2-9d2b-4d04-a4ba-c58cfc1e0c08",
-    "name": "Bar Cossack Squats",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "911685f1-8548-4c41-a65b-8d1b6902132d",
+    "id": "7acd19a9-617c-4f04-9244-fe2e685e67e2",
     "name": "Bar Curtsy Lunges",
     "muscles_worked": [
       "QUADS",
       "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "034a4652-f9eb-492d-8101-587456472066",
+    "id": "9fe65e45-277b-49fd-89b6-94975624f208",
+    "name": "Bar Forward Lunges",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "7bb2259e-72aa-4e05-8579-689e53f60ac2",
+    "name": "Bar Front Raises",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "92b80acf-d027-4b19-819c-ad4d588d7a9a",
+    "name": "Bar Good Mornings",
+    "muscles_worked": [
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "689ebb68-a83f-4c48-91b1-fe7168f0d4bf",
     "name": "Bar Hip Thrusts",
     "muscles_worked": [
-      "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "21be4f3a-ab8e-4652-948f-ae390fa46797",
-    "name": "Bar Lunges",
-    "muscles_worked": [
-      "QUADS",
       "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "d7c9b8e0-24b8-400a-af8d-9f65655f4fc4",
-    "name": "Bar Overhead Squats",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES",
-      "CORE"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "f89ce34b-9e67-4727-8086-69adf7aa9fdb",
-    "name": "Bar Preacher Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "7e64eb49-1bd9-4314-93be-d87fd7cd7b8b",
-    "name": "Bar RDL",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "7fea899a-b7e6-4dd0-b481-9371173eb9f2",
-    "name": "Bar Reverse Lunges",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "3054eece-3839-40d7-88ac-11ab3f57fd16",
-    "name": "Bar Reverse Pushes",
-    "muscles_worked": [
-      "BACK",
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "2cd3c446-c1fe-4c10-a428-1aa8c544cf64",
-    "name": "Bar Shrugs",
+    "id": "c3360a34-4d80-4240-a10f-6191a41746c6",
+    "name": "Bar Incline Rows",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "c3625105-390b-43b2-b6e0-215cfbad9ef3",
-    "name": "Bar Skull Crushers",
+    "id": "4db845f6-4078-4ce7-b9e9-cfafe695a8a4",
+    "name": "Bar Incline Skull Crushers",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "9fac3fe3-017b-4e8d-8321-f60096a61091",
-    "name": "Bar Snatch",
+    "id": "43129b1f-ac72-4e97-9517-ba844dadfe0c",
+    "name": "Bar Overhead Extensions",
     "muscles_worked": [
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "TRICEPS"
+    ]
   },
   {
-    "id": "5925c457-292d-4334-a4b6-cf95b632bf12",
-    "name": "Bar Spider Curls",
+    "id": "09fef314-7094-4319-ae04-4680ddafbdf3",
+    "name": "Bar Overhead Press",
     "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "SHOULDERS"
+    ]
   },
   {
-    "id": "9c5b3341-03ff-44fb-97be-c9ebcf15ab30",
-    "name": "Bar Split Squats",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "e3d027dd-991e-4ea6-8ff6-268e5bce258d",
-    "name": "Bar Staggered RDL",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "1285e951-f027-473f-af7a-ece3f7f9cd55",
-    "name": "Bar Sumo Squats",
+    "id": "aca03e03-b8c9-4e2b-beca-b3b33570e142",
+    "name": "Bar Pistol Squat",
     "muscles_worked": [
       "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "33a74c57-bb8b-4192-b72c-2e7ac9d233e5",
-    "name": "Bar Upright Rows",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "cbe88f50-b931-4d0a-99f1-85439791b66f",
-    "name": "Bar Walking Lunges",
-    "muscles_worked": [
       "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "HAMSTRINGS"
+    ]
   },
   {
-    "id": "457ece26-91f6-4084-858e-1f6e56eec9cc",
-    "name": "Bench Dips",
+    "id": "f4fbfaba-d60a-49ca-b145-fad19c0dca52",
+    "name": "Bar Pullovers",
     "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "BACK"
+    ]
   },
   {
-    "id": "92499a39-8434-4dba-bc05-78589ecf879f",
-    "name": "Bench Press",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "546e2a2c-7d1b-48ae-9326-8d32a80260ce",
-    "name": "Bicep Curl Machine",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "30d2528f-5a7e-4fad-8deb-a19932db1780",
-    "name": "Box Jumps",
-    "muscles_worked": [
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "f22ef810-78d0-4ac3-8646-5433027d6926",
-    "name": "Box Squat",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "847f63d0-d0d7-4321-a984-f143ea295267",
-    "name": "Box Step-ups",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "137a96f7-ff9f-4792-a5f6-56fd5ceeb8e0",
-    "name": "Burpees",
-    "muscles_worked": [
-      "CHEST",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "e22db7c0-f506-47fd-b2fe-f2a0de9d4880",
-    "name": "Cable Bicep Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "2e843b21-e5f6-4791-a84b-94ef831afb5e",
-    "name": "Cable Cross Body Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "f50cbca2-2b28-4404-aec5-542d232976bb",
-    "name": "Cable Crunches",
-    "muscles_worked": [
-      "CORE"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "51cc5413-8890-477e-ab53-d1578356476f",
-    "name": "Cable Front Raises",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "51ea485f-9799-4ac4-93a7-59e8cafb139c",
-    "name": "Cable Hammer Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "0bb7f44d-aefb-4441-9c64-c79ee02ceefc",
-    "name": "Cable Lateral Raises",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "b550c0ab-71b3-4bab-99e2-7ee624bd99d6",
-    "name": "Cable Mid Chops",
-    "muscles_worked": [
-      "CORE"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "a3085005-c25f-4fd1-8297-32340f1fbba0",
-    "name": "Cable Rear Delt Flys",
-    "muscles_worked": [
-      "BACK",
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "17f45557-100f-4130-88c2-827d06cdeb1f",
-    "name": "Cable Tricep Kickbacks",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "94bc65f5-b649-40f4-a280-7c26b65ceabc",
-    "name": "Cable Upright Rows",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "50d02520-3df0-445e-a150-f0986465f4b6",
-    "name": "Calf Raise Machine",
-    "muscles_worked": [
-      "CALVES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "e53827b7-073c-45c8-9955-330eb5639824",
-    "name": "Chest Push Machine",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "7ebc9ffa-ea4d-4719-814e-8de27d5c707c",
-    "name": "Chin-ups",
-    "muscles_worked": [
-      "BACK",
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "bdfe2b62-b7a1-427f-9c50-fe4af95edce3",
-    "name": "Clean and Jerk",
+    "id": "23c1911d-516e-462c-b5e6-efd00464dee4",
+    "name": "Bar Push Press",
     "muscles_worked": [
       "POWER",
       "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "d80986b4-ff8d-45cc-8931-0a0478306f63",
+    "id": "ca586aba-dd1b-4f9e-9698-5a8052470592",
+    "name": "Bar Reverse Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "34f175bf-f7ff-4c67-9d8e-38ff449ecf6d",
+    "name": "Bar Reverse Lunges",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "86567edc-f061-479b-b811-c0dab42ee26b",
+    "name": "Bar Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "ace7d800-fa78-49a9-850b-3f1070050a8f",
+    "name": "Bar Seated Overhead Press",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "adcd247a-1d06-4801-8ac9-0b3bfe0bebdd",
+    "name": "Bar Shrugs",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "7eb365a6-93a7-464f-b933-9a8ef8b875ff",
+    "name": "Bar Single Leg Calf Raises",
+    "muscles_worked": [
+      "CALVES"
+    ]
+  },
+  {
+    "id": "bf995176-1ffe-4bd7-a910-4b5feba76201",
+    "name": "Bar Skull Crushers",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "a8cb482a-d5ff-46a6-9b7b-a535a016ff27",
+    "name": "Bar Split Squat",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "7e604c29-ec4e-41d0-8ce8-146d82db24c8",
+    "name": "Bar Squat Jumps",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "e6a4fb90-6f48-4a25-a2a6-21d70fe6dcf9",
+    "name": "Bar Step-ups",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "c91ab2c0-a6a2-4aca-b34f-5f753cddf7e6",
+    "name": "Bar Sumo Squat",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "e9111b6d-0d6b-40a0-8003-a202b09a46d2",
+    "name": "Bar Underhand Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "1d7fe0ab-61e8-4eb7-82e7-aa8edbb1d88e",
+    "name": "Bar Upright Rows",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "1a784daf-4dec-493e-bdb0-1263f32e7457",
+    "name": "Bar Walking Lunges",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "29f9a169-4833-442e-b9e1-0a6ed1dbeb38",
+    "name": "Belt Squat",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "c52a2f1a-2d31-4939-82c7-e64974432af3",
+    "name": "Bench Dips",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "cb806d64-9b4d-41a0-81d2-0f0df7c26828",
+    "name": "Bench Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "2e5fb409-f03d-4918-85d6-1de692b41b42",
+    "name": "Box Jumps",
+    "muscles_worked": [
+      "POWER",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "cd876db8-9970-47a2-9295-faae520116b1",
+    "name": "Box Squat",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "be960d27-05eb-4b48-a24b-69da8e5971a4",
+    "name": "Cable Alt. Front Raises",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "b1789a1d-c87e-44e3-b777-a9e032998dbf",
+    "name": "Cable Bent-Over Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "fa259189-b99d-41ac-8b97-5e31c8567a37",
+    "name": "Cable Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "b50f6944-4ca7-48fc-833d-78a4c1337f07",
+    "name": "Cable Front Raises",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "06498d7c-41d9-4284-8d85-828203ae0226",
+    "name": "Cable Glute Kickbacks",
+    "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "ae934388-cc12-417b-9d4e-86f7ab4a766e",
+    "name": "Cable Hip Abduction",
+    "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "6cfdde0d-e3bd-4bb4-b2a2-cd25ce9bc7cb",
+    "name": "Cable Hip Adductions",
+    "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "4ec9c771-1790-4643-98f1-7668788cac7d",
+    "name": "Cable Kneeling Crunches",
+    "muscles_worked": [
+      "CORE"
+    ]
+  },
+  {
+    "id": "616a124a-1661-4747-a71a-d7a5701e53dc",
+    "name": "Cable Lateral Raises",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "8e1f697d-6c0e-41c6-88e0-a633c8770b8f",
+    "name": "Cable Lower Chest Flys",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "34e3ea2a-6608-4d3e-9911-92603f063589",
+    "name": "Cable Mid Chest Flys",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "58966fff-7b49-4ff4-9910-33389b3a828f",
+    "name": "Cable Overhead Extensions",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "f81cb6f6-bd9f-4c62-95a2-2a1c928ac60a",
+    "name": "Cable Reverse Flys",
+    "muscles_worked": [
+      "SHOULDERS",
+      "BACK"
+    ]
+  },
+  {
+    "id": "f92a6aee-20e4-456a-8466-ca5c715564f3",
+    "name": "Cable Romanian Deadlift",
+    "muscles_worked": [
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "e7c26448-6a5c-4f02-a9ec-03602de8a255",
+    "name": "Cable Shoulder Press",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "dbb930b1-a8fd-43cd-99ce-22e4269e1708",
+    "name": "Cable Shrugs",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "8f5091cc-4794-4b76-900c-ad19af6b507c",
+    "name": "Cable Squats",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "6fb5bf86-7f0a-4a3e-b65c-33af82351dc3",
+    "name": "Cable Step-ups",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "539438cd-7e31-4e65-bddd-343392ce1b1c",
+    "name": "Cable Straight Arm Pulldowns",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "226e9f49-3dd1-4b45-8f6a-9fd468a91825",
+    "name": "Cable Straight Leg Kickbacks",
+    "muscles_worked": [
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "0a621d26-f45f-4f6f-a97a-51618e780c49",
+    "name": "Cable Tricep Kickbacks",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "c8468be1-a67f-44dc-a93f-d59999486a7b",
+    "name": "Cable Upper Chest Flys",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "9a8be860-2e03-48a2-9404-722ce051e0b8",
+    "name": "Cable Upright Rows",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "4165960d-77fa-46b7-bd8f-a385bccd58b1",
+    "name": "Chest Dips",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "d440b014-2234-4d8c-9322-abddfb307ad5",
+    "name": "Chinups",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "38e50ebf-bcf6-4f5c-aa01-29a069f26fe9",
+    "name": "Clean and Jerk",
+    "muscles_worked": [
+      "POWER",
+      "QUADS",
+      "GLUTES",
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "4a239e70-4da6-4c28-ba68-e884bf5c1b67",
     "name": "Close Grip Bench Press",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "56d9c17b-1ad8-4c34-8a4b-e4313e51fe5b",
+    "id": "6e1b2cad-7d64-4118-a4a4-f37f10437d87",
     "name": "Close Grip Lat Pulldowns",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "eace0be7-8bea-40f7-a4cb-ebff0ab865ea",
-    "name": "Concentration Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "951568b2-1790-4cc8-9838-6e08fad68897",
-    "name": "Corkscrew Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "4b9b2f6b-331a-46a9-803d-44148ba9886f",
-    "name": "Cross Body Hamer Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "b3ce6ef7-c5fe-4621-9217-125eef2a81ae",
-    "name": "Cross Body Tricep Extensions",
+    "id": "869c0a2f-f84e-4278-928b-d1047b1475fe",
+    "name": "Close Grip Pushups",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "2936b0af-a063-43ce-b74f-02ae39f3638c",
-    "name": "Deadlifts",
+    "id": "2406c663-3fd1-44b8-b3bf-6ff1d1faab0d",
+    "name": "DB Bench Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "24632085-8223-47e3-b381-d128713475c9",
+    "name": "DB Bent-Over Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "6a8b8a4f-788c-4b9d-86c4-9df3aff4012e",
+    "name": "DB Bicep Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "f063c7be-675e-4780-97c2-f214247bcf91",
+    "name": "DB Bulgarian Squats",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "9e40a0c1-fec4-4b9b-8d3f-7f2446baf868",
+    "name": "DB Calf Raises",
+    "muscles_worked": [
+      "CALVES"
+    ]
+  },
+  {
+    "id": "695c4b6e-9d3e-4592-8a68-8f84dd35589b",
+    "name": "DB Chest Flys",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "5b803f32-dd22-42f0-b179-0c1e17b85466",
+    "name": "DB Curtsy Lunges",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "b5a3be04-3908-4e39-9436-a1ae0b8f5b0a",
+    "name": "DB Deadlift",
     "muscles_worked": [
       "BACK",
       "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "QUADS"
+    ]
   },
   {
-    "id": "06cb6a95-52da-4411-b931-68f5fc370705",
-    "name": "Decline Bench Press",
+    "id": "a9797c6e-b850-4721-9fad-2e4b2c3b543d",
+    "name": "DB Decline Bench Press",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "bfe4c809-e9f5-43a7-ae12-6ac6c47f472f",
-    "name": "Decline Cable Flys",
+    "id": "1b831751-20af-4fff-8ce8-425cfe06306b",
+    "name": "DB Drag Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "70be3090-fc1c-4e8e-b498-0dde42817723",
+    "name": "DB Forward Lunges",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "280f4e5f-0e22-4fd5-be01-086ba844a0a5",
+    "name": "DB Front Raises",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "bcfcb557-cba0-450e-88ab-3aedc9d184aa",
+    "name": "DB Hammer Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "cac6bad3-6e91-464e-81dc-ba5947c89934",
+    "name": "DB Incline Bench Press",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "540bae76-2856-4ff2-96a0-c95fa0bed4d1",
-    "name": "Decline Dumbbell Bench Press",
+    "id": "1ecb6572-b9c0-4f90-83c9-8de49e0590e6",
+    "name": "DB Incline Chest Flys",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "f7013195-71e5-4c0a-acf1-d9844f2505ff",
-    "name": "Decline Pushups",
+    "id": "77d77b87-bc99-4594-9679-e98accca3744",
+    "name": "DB Incline Curls",
     "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "BICEPS"
+    ]
   },
   {
-    "id": "8c57985f-a800-45b3-bb11-0ec5b71827e9",
-    "name": "Diamond Pushups",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "95abefb3-a4ec-4d5e-9738-4c27031ddceb",
-    "name": "Dip Machine",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "1ed0f246-2eb7-4592-9d5f-207cfa95d04b",
-    "name": "Dumbbell Bench Press",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "0ac87ab0-4acf-49f6-a142-5b39466ebf31",
-    "name": "Dumbbell Bent Over Rows",
+    "id": "b1e350a2-554a-491d-a510-9d9105d2a3c2",
+    "name": "DB Incline Rows",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "c86c4edc-8827-4836-8822-2ea8bacbed8d",
-    "name": "Dumbbell Bicep Curls",
+    "id": "84fd3561-4b9b-48c6-b893-9949da2b4869",
+    "name": "DB Incline Skull Crushers",
     "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "TRICEPS"
+    ]
   },
   {
-    "id": "940a2c94-bb5f-4970-9c2a-16ca358cadf8",
-    "name": "Dumbbell Bulgarian Squats",
+    "id": "8d14748f-8f83-4977-a1e6-d25360e009b3",
+    "name": "DB Kickbacks",
     "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "TRICEPS"
+    ]
   },
   {
-    "id": "e9bd5f2d-98fd-472c-ba20-1e0d869f00aa",
-    "name": "Dumbbell Cossack Squat",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "ca947f73-0c8c-4e93-af14-342ea1d097f2",
-    "name": "Dumbbell Curtsy Lunges",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "b27aca6f-84a7-4203-afc7-0158a54cede5",
-    "name": "Dumbbell Flys",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "689cfb90-560d-4a80-8b5c-a14b96fd525e",
-    "name": "Dumbbell Front Lunges",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "8fd88d19-f756-4df2-922a-8312df63524a",
-    "name": "Dumbbell Front Raises",
+    "id": "0c13794a-4b9e-46f5-a66e-8c90ca929bc9",
+    "name": "DB Lateral Raises",
     "muscles_worked": [
       "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "f209b958-7e29-4a18-a747-d9be163e5c5d",
-    "name": "Dumbbell Hammer Curls",
+    "id": "62c69f8b-5a96-431e-8dea-51546778e288",
+    "name": "DB Overhead Extensions",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "e9949683-2409-4e69-b85c-5cbcfbe51953",
+    "name": "DB Pistol Squat",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "31ec5832-2dfd-4a1e-bd8e-3c7e45b60fe4",
+    "name": "DB Preacher Curls",
     "muscles_worked": [
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "51221b6b-f8cf-4cb9-a828-e1838216c1ff",
-    "name": "Dumbbell Lateral Raises",
+    "id": "348ddbfe-f6c8-4817-a731-79fd007a902c",
+    "name": "DB Preacher Hammer Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "35bdba47-e317-4134-85f0-5e0050f8eef1",
+    "name": "DB Pullovers",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "b87e16fc-1630-47b2-b787-7790b74b70d9",
+    "name": "DB Push Press",
+    "muscles_worked": [
+      "POWER",
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "adb9fdd3-167e-48ac-bc35-9c898771ac1b",
+    "name": "DB Reverse Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "bd8d0708-f4c5-4424-afa4-1703cfb3bac5",
+    "name": "DB Reverse Flys",
+    "muscles_worked": [
+      "SHOULDERS",
+      "BACK"
+    ]
+  },
+  {
+    "id": "80dbd258-8974-4eda-bd70-c303a95a99d1",
+    "name": "DB Reverse Lunges",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "48c29a4e-6a04-4418-96fc-f626fdd88746",
+    "name": "DB Romanian Deadlift",
+    "muscles_worked": [
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "fa5f629f-a329-4aa9-86dc-eb8879ad39a5",
+    "name": "DB Seated Shoulder Press",
     "muscles_worked": [
       "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "e1054bff-0c5a-49db-8aba-bde89def7a81",
-    "name": "Dumbbell Overhead Squats",
+    "id": "eca0d207-d181-4d2a-a390-6e8506029356",
+    "name": "DB Shoulder Press",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "2289f884-0b79-4a8d-9afe-36cab31878b9",
+    "name": "DB Shrugs",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "4c14bc52-9670-4868-9788-9585053638e8",
+    "name": "DB Single Arm Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "9b3b51f4-7628-4c93-92f8-6918e310614f",
+    "name": "DB Single Leg Calf Raises",
+    "muscles_worked": [
+      "CALVES"
+    ]
+  },
+  {
+    "id": "af73061d-c869-492d-b6a5-828aaf383a0d",
+    "name": "DB Single Leg Romanian Deadlift",
+    "muscles_worked": [
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "3ae2dc5b-5270-4f38-8871-ef9b70453d58",
+    "name": "DB Skull Crushers",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "23e9ddd0-4f67-45ae-ae05-ddd57dcba71b",
+    "name": "DB Snatch",
+    "muscles_worked": [
+      "POWER",
+      "QUADS",
+      "GLUTES",
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "a5b7b19c-e9fe-46e2-941c-01e2d9e0d80b",
+    "name": "DB Split Squat",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "74445a0e-ef3d-413c-b5fa-525d186237fc",
+    "name": "DB Squat Jumps",
     "muscles_worked": [
       "QUADS",
       "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "4393cff1-1c18-4789-bb61-b7029458cde7",
+    "name": "DB Step-ups",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "07176bc0-29e5-4da7-af71-9a6a8163497d",
+    "name": "DB Sumo Squat",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "dbfe3985-cb85-4716-92cd-c69c0504d22f",
+    "name": "DB Walking Lunges",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "a2bfeb43-1714-4415-87c2-12d28febef1b",
+    "name": "Deadlift",
+    "muscles_worked": [
+      "BACK",
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "b7e144d8-060a-4fe1-9309-bc7b7c9516ba",
+    "name": "Decline Bench Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "4d1afd9b-3493-4ae9-a83f-e1b718254aea",
+    "name": "Decline Pushups",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "6b317ce0-ce45-478e-946d-43c9372ca1f1",
+    "name": "Decline Sit Ups",
+    "muscles_worked": [
       "CORE"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "8aff6146-05b7-464f-9a3c-e8285f3beb65",
-    "name": "Dumbbell Preacher Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "d7c1e4da-5a9a-46c3-b8e4-3ea9cf7774dd",
-    "name": "Dumbbell Pullovers",
-    "muscles_worked": [
-      "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "ab8762d9-73c9-4b0e-91ce-a0e5416eeae6",
-    "name": "Dumbbell RDL",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "c835f928-e3ec-4dab-aac6-71f9c1178f0f",
-    "name": "Dumbbell Rear Delt Flys",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "85019192-bcb6-44dc-bbc1-4cd7fcba01be",
-    "name": "Dumbbell Reverse Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "3aaf29f2-7e31-4ebe-ae10-4fe9b6aa7d0a",
-    "name": "Dumbbell Reverse Lunges",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "06088fa8-1214-41a9-8991-3d9a3b05f23d",
-    "name": "Dumbbell Seated Calf Raises",
-    "muscles_worked": [
-      "CALVES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "646d61b4-ea29-4c30-86f9-7fa2d0e5ab11",
-    "name": "Dumbbell Shrugs",
-    "muscles_worked": [
-      "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "80af305a-ef94-47c0-af0b-4168c2f266f7",
-    "name": "Dumbbell Single Leg RDL",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "52053013-48a2-47f9-9b79-e66720867ba2",
-    "name": "Dumbbell Skull Crushers",
+    "id": "3535086b-fe55-466f-8c16-ce3f32e68446",
+    "name": "Diamond Pushups",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "0f8a7ca1-1923-43b2-a607-3154fa4f4b6f",
-    "name": "Dumbbell Split Squats",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "16f7289e-03e7-4189-a09d-9e326632b2de",
-    "name": "Dumbbell Standing Calf Raises",
-    "muscles_worked": [
-      "CALVES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "70c740e7-2c57-4c33-8b5a-70cb6db9e459",
-    "name": "Dumbbell Walking Lunges",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "c5230ee0-efb3-4f54-8dd5-c0c118e00f76",
-    "name": "EZ Bar Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "215c44b2-fab3-4861-afdc-afdb6dd07976",
-    "name": "EZ Bar Reverse Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "417e50b5-9f02-426f-a9b5-49e39ab91515",
-    "name": "EZ Bar Standing Tricep Extensions",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "77463a53-1725-4c27-8b47-636d14966dc8",
+    "id": "28b4749a-5049-4f62-b7a0-cca0e07b3489",
     "name": "Face Pulls",
     "muscles_worked": [
       "SHOULDERS",
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "898d9b33-2820-479a-8949-c7413db5a2f2",
+    "id": "2bdeb465-305a-4d8a-a9d9-5fd4dbe397bd",
     "name": "Farmer's Carry",
     "muscles_worked": [
       "BACK",
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "a0658fc9-85b5-4ce0-9d84-9ccc5d0c4ffa",
-    "name": "Floor Press",
+    "id": "aa5d60f1-885b-4b05-8b17-34aca2c79f32",
+    "name": "Front Squat",
     "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "360919ce-d79b-4ea4-816f-174c60c72bc0",
-    "name": "Front Squats",
-    "muscles_worked": [
+      "GLUTES",
       "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "HAMSTRINGS"
+    ]
   },
   {
-    "id": "35bb3bb1-798e-4867-86fd-0239a2820884",
-    "name": "Goblet Squats",
+    "id": "875c5adb-7af9-4102-ba4a-0013bb3cd722",
+    "name": "Glute Hyperextension",
     "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "32cb17d0-4a5f-4286-a3fd-6658fb63d2ba",
+    "name": "Glute Hyperextensions",
+    "muscles_worked": [
+      "GLUTES",
       "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "HAMSTRINGS"
+    ]
   },
   {
-    "id": "bfb3f2d5-4b04-4c3f-9e0b-c3ef6ff3922f",
-    "name": "Good Mornings",
+    "id": "1692536d-94c1-4cec-9100-45bd56ee6ac1",
+    "name": "Goblet Squat",
     "muscles_worked": [
-      "BACK",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "GLUTES",
+      "QUADS"
+    ]
   },
   {
-    "id": "ec3a687a-0f9d-479f-94c3-cbeb95c6bef4",
+    "id": "0da4dbf8-cf3b-45f4-a987-6f50ec7ae0c5",
     "name": "Hack Squat",
     "muscles_worked": [
       "QUADS",
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "df1a2113-e0d6-443b-948d-f23d4bc4ce0f",
+    "name": "Hammer Pull Ups",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "dd50d4a5-95c7-42f9-addf-421b79ab1655",
+    "name": "Hang Clean",
+    "muscles_worked": [
+      "POWER",
+      "QUADS",
       "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "40ebf9b8-b4b0-402c-9abb-92c804e7ff6a",
-    "name": "Hamstring Ball Curls",
+    "id": "6006f9e6-a702-4d21-8d14-520ce2997509",
+    "name": "Hang Snatch",
     "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "POWER",
+      "QUADS",
+      "GLUTES",
+      "SHOULDERS"
+    ]
   },
   {
-    "id": "8e89c7de-0846-4fd8-993f-9f48335fef21",
-    "name": "Hamstring Curls",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "f87c4214-5001-468f-9a53-8ec0740950a3",
-    "name": "Hand Release Push Ups",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "7e055228-b546-4205-8d0d-e042a75859b1",
-    "name": "Hang Power Cleans",
-    "muscles_worked": [
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "130c9fcd-44ce-408d-be77-6b42101a3e6b",
+    "id": "269b3388-e691-422a-aab3-12097b26c797",
     "name": "Hanging Knee Raises",
     "muscles_worked": [
       "CORE"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "f4f7fc22-8e40-48ba-8d88-8a0665a809a7",
+    "id": "2308bd1f-e19f-47e5-ad0a-7df2785770dc",
     "name": "Hanging Leg Raises",
     "muscles_worked": [
       "CORE"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "ef6b2216-8c71-4d10-b51f-babcadd79f21",
-    "name": "Heel Raised Back Squats",
+    "id": "b6d42b08-5896-4c17-bee2-50704000a7a1",
+    "name": "Heel-Elevated Back Squat",
     "muscles_worked": [
       "QUADS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "fd24f76c-39a3-404e-89ef-98a21acd7c56",
-    "name": "Heel Raised Goblet Squats",
+    "id": "ab2c9df1-cfda-4c4d-9352-544e2ae9ffd7",
+    "name": "Heel-Elevated Goblet Squat",
     "muscles_worked": [
-      "QUADS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "QUADS",
+      "GLUTES"
+    ]
   },
   {
-    "id": "f1bcf80c-49e0-43da-a627-851c6e7e90fe",
-    "name": "Hex Bar Deadlifts",
+    "id": "64988d1a-5bed-4907-b415-bcf3f4619a09",
+    "name": "Hex Bar Deadlift",
     "muscles_worked": [
       "BACK",
-      "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "QUADS",
+      "GLUTES"
+    ]
   },
   {
-    "id": "f282baad-f610-4d59-ae88-25ae15528550",
+    "id": "3f576c19-3445-4030-a345-86898269b805",
     "name": "Hex Bar Shrugs",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "0999651e-e599-40cb-833a-f0f9c3d45964",
+    "id": "29d95715-4f56-4edf-bce1-1e6089b51f44",
     "name": "Incline Bench Press",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "f1ba86a8-148d-4a75-9d53-fada4acfb920",
-    "name": "Incline Bicep Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "2bd09b2d-0142-4f3a-84f2-8cc2d0ceff95",
-    "name": "Incline Cable Flys",
+    "id": "3dc49679-6acc-4e94-8672-43f78b07d9cc",
+    "name": "Incline Cable Chest Flys",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "ce2db9cb-88a0-4ce1-816d-22ceb6c6c0cf",
-    "name": "Incline Chest Push Machine",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "70bf0af9-0e4d-4015-90c3-fafebfc9f964",
-    "name": "Incline Dumbbell Bench Press",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "7d6519df-d1ef-4813-b60d-c2523c3751d2",
-    "name": "Incline Dumbbell Chest Flys",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "280d4e07-3bdc-45a6-b890-a9b595ad556e",
-    "name": "Incline Dumbbell Row",
-    "muscles_worked": [
-      "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "f3eb8c71-25ec-4919-aab2-f328985471e9",
-    "name": "Incline Dumbbell Skull Crushers",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "4fb5b059-c5b6-4d2c-b355-d2b4642e8c5b",
-    "name": "Incline Plate Press",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "86d86d51-a7d1-4017-9543-67c08f2b515e",
+    "id": "fb6ca44b-4686-47b6-9a05-969fcb3b8907",
     "name": "Incline Pushups",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "244ed63a-1141-45ae-9df2-9971bbbc0746",
+    "id": "d4f4e166-1c24-4617-98f4-508e0fea33b5",
     "name": "Inverted Rows",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "341bd0a1-8e32-45ed-8e01-236d2124cd9b",
-    "name": "Jump Lunges",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "fba7d7a1-d894-44d7-b207-574c369b6f60",
-    "name": "Jump Squats",
-    "muscles_worked": [
-      "QUADS",
-      "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "3db57dac-7afe-48b9-aef0-578bee9d59cd",
+    "id": "29458834-4bd2-4dec-bb8c-3e1db8e4f464",
     "name": "Kettlebell Swings",
     "muscles_worked": [
-      "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "aa8d21a9-8434-4093-b676-3838a1231a63",
-    "name": "Landmine Lateral Raises",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "86a63ba4-def0-43b1-a5e5-3f20594aa1cd",
-    "name": "Landmine Press",
-    "muscles_worked": [
-      "CHEST",
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "594c5759-8a8b-4c52-91f8-44eeeccc2f77",
-    "name": "Landmine RDL",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "181556cd-9d2e-42e6-8af3-df24350b3f86",
-    "name": "Landmine Rows",
-    "muscles_worked": [
-      "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "71df0abb-4463-4fb7-afca-6837def10db0",
-    "name": "Landmine Single Leg RDL",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "32b9cf0f-f801-4b0e-b764-7566db012567",
-    "name": "Landmine Squats",
-    "muscles_worked": [
-      "QUADS",
+      "POWER",
       "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "7ab5e934-33d3-44d5-b5c0-ffa2e4685f25",
+    "id": "51afd781-52ab-49d9-bb37-4c47b8c89d26",
     "name": "Lat Pulldowns",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "9704be46-83a9-400c-b537-96f2750a1a30",
+    "id": "d41c9212-24a4-44c0-a0a8-3da5156553db",
+    "name": "Leg Curls",
+    "muscles_worked": [
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "22cdc3f3-a7a3-44b6-a76b-3e02b5f8fad7",
     "name": "Leg Extensions",
     "muscles_worked": [
       "QUADS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "0420bb21-2c18-4762-81d6-2671d25fc7ce",
+    "id": "3cf4387c-14ff-4345-9db4-17bfb1affae1",
     "name": "Leg Press",
     "muscles_worked": [
-      "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "GLUTES",
+      "QUADS"
+    ]
   },
   {
-    "id": "f458add8-530e-4d1f-a96b-ff3866d50c4c",
+    "id": "c3388f10-efe9-45af-9529-830d0fee8ffa",
     "name": "Leg Press Calf Raises",
     "muscles_worked": [
       "CALVES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "97dbc924-c029-4376-9a5b-493912a65c44",
-    "name": "Machine Row",
+    "id": "21170651-b0bc-46fd-87de-4cd524cc4e2d",
+    "name": "Lying Lateral Raises",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "76e44170-1965-4329-ba8d-3b306f99dd29",
+    "name": "Machine Calf Raises",
+    "muscles_worked": [
+      "CALVES"
+    ]
+  },
+  {
+    "id": "c9971560-e35f-45a6-a426-6b6b31238c90",
+    "name": "Machine Chest Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "1b96b668-5979-4892-a900-333051b05181",
+    "name": "Machine Hip Abductions",
+    "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "789018ec-b60b-4d26-bc82-84dec88f0421",
+    "name": "Machine Hip Adductions",
+    "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "e4946b62-78b6-437e-a8f0-f6c539a2fe18",
+    "name": "Machine Hip Thrusts",
+    "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "8d647c15-8da9-4f9f-841f-85a243b67baf",
+    "name": "Machine Lat Pulldowns",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "8c1d4827-bb1f-4490-9a83-4d7c74604d53",
+    "id": "7e70d81b-824a-45ee-ae23-2db238f35629",
+    "name": "Machine Lateral Raises",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "0f0bbcc7-c89b-4821-b654-b0e9a3534c31",
+    "name": "Machine Preacher Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "6e0fe187-9be5-4021-b24a-a446c157c5dd",
+    "name": "Machine Pullovers",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "36e6f924-2a45-47b0-bea9-5efcda39adb8",
+    "name": "Machine Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "812828fe-95e4-47eb-854c-39cf1ad7bcc3",
     "name": "Machine Shoulder Press",
     "muscles_worked": [
       "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "695c5a41-0576-4697-807a-7497267a7047",
-    "name": "Mid Cable Flys",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "b0ab151a-b93f-4a70-8725-7568209782db",
-    "name": "Negative Chin-ups",
-    "muscles_worked": [
-      "BACK",
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "2c6545f4-8fb6-4612-9732-b6bfc1c4909f",
-    "name": "Negative Glute Hams",
-    "muscles_worked": [
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "697937d4-f85c-4849-a5b8-1af591c1c319",
-    "name": "Negative Pull-ups",
-    "muscles_worked": [
-      "BACK",
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "f68c231b-2bad-4f15-b622-201775515722",
-    "name": "Overhead Press",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "7b2b791a-bdb1-4303-ac41-7732683ce7db",
-    "name": "Overhead Rope Extensions",
+    "id": "f9e249ad-55a5-4a92-83fc-64d58178ddc2",
+    "name": "Machine Tricep Dips",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "51b3be71-d96f-4c58-a76c-775e7f5c0fe4",
-    "name": "Pec Dec",
+    "id": "1f563317-8504-4d42-9b55-d03696364f6d",
+    "name": "Machine Tricep Extensions",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "4e7266fa-98f4-4240-a52e-d926539c37f2",
+    "name": "Overhead Squat",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "28307a95-e0dc-424e-b0d8-3607746134fe",
+    "name": "Pec Deck",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "c5dc88c3-4116-40ea-b0ab-7c52ac146456",
-    "name": "Pendlay Row",
+    "id": "610ba1a5-61c9-460b-9fd8-61c1a2266355",
+    "name": "Pendlay Rows",
     "muscles_worked": [
-      "BACK",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "BACK"
+    ]
   },
   {
-    "id": "49aaed0d-c786-4bae-9081-3b8d7c39b13b",
-    "name": "Pistol Squat",
+    "id": "5166323f-853e-4699-bdb6-75462bf11fb2",
+    "name": "Plank",
     "muscles_worked": [
-      "QUADS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "CORE"
+    ]
   },
   {
-    "id": "cb5f9784-93e3-4650-b501-5d33f57a112f",
+    "id": "0a367882-ff90-4479-9ebc-80809e0baaac",
     "name": "Power Clean",
     "muscles_worked": [
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "POWER",
+      "QUADS",
+      "GLUTES"
+    ]
   },
   {
-    "id": "4afe8a7d-9a9d-4aef-a604-e0fd670227e0",
-    "name": "Preacher Hammer Curls",
+    "id": "90256f4f-9e89-450f-a7fc-05253b0cd293",
+    "name": "Power Clean and Power Jerk",
+    "muscles_worked": [
+      "POWER",
+      "QUADS",
+      "GLUTES",
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "e46b0473-038b-4388-b847-b66923c9be99",
+    "name": "Power Snatch",
+    "muscles_worked": [
+      "POWER",
+      "QUADS",
+      "GLUTES",
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "d146b35c-ba2b-48cd-9f7e-015867d3b26d",
+    "name": "Preacher Curls",
     "muscles_worked": [
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "e4f90db7-4d32-4be2-b80b-6669015d9ea5",
-    "name": "Pull-ups",
+    "id": "33d13d81-2dcc-4b45-aacd-402a6d6e8d58",
+    "name": "Pullups",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "caded362-fb56-4bc1-9b08-331e4ad181df",
-    "name": "Push Press",
+    "id": "25556345-0807-4b42-9bd8-501a7ae8a17e",
+    "name": "Pushups",
     "muscles_worked": [
-      "SHOULDERS",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "CHEST"
+    ]
   },
   {
-    "id": "9593fbc3-e751-4a37-aaa3-72e3545e1252",
+    "id": "5bb8820d-b473-4cb6-91a2-02761da76d24",
     "name": "Renegade Rows",
     "muscles_worked": [
-      "BACK",
-      "CORE"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "b8d36a2a-dfd0-4a8c-826d-b69744c0cc64",
-    "name": "Reverse Cable Flys",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "1088b5e2-d8cf-4cf6-b83a-eb75fbefac59",
-    "name": "Reverse Grip Tricep Pressdown",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "2f2ede3d-7a32-4e53-9b0c-9d921acacb81",
-    "name": "Reverse Pec Dec",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "3d62c5a7-f1e4-4269-8177-025e4cbbb61e",
-    "name": "Rope Cross Body Curl",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "41f44dcf-4478-4d67-96cf-017a797f2dcd",
-    "name": "Rope Straight Arm Pulldowns",
-    "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "7701ae30-5a63-448b-b6b8-856c2a77aac6",
-    "name": "Rope Tricep Extensions",
+    "id": "aaecc064-37c0-4b56-8e1c-7d9c90f4bc1d",
+    "name": "Reverse Cable Curls",
+    "muscles_worked": [
+      "BICEPS"
+    ]
+  },
+  {
+    "id": "36ec42d0-8823-4fec-b45e-7119b10e4989",
+    "name": "Reverse Grip Tricep Pushdowns",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "74662107-9729-4aef-b690-9cd0ecea6c0a",
-    "name": "Seated Alternating Bicep Curls",
+    "id": "05ddc29d-0910-4fab-b872-b818ecce3ef4",
+    "name": "Reverse Pec Deck",
     "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "SHOULDERS",
+      "BACK"
+    ]
   },
   {
-    "id": "542fd965-2b14-4653-b280-f017b34a6741",
-    "name": "Seated Alternating Hammer Curls",
+    "id": "4ea63c99-d35e-4a14-93b3-717b9f6d1752",
+    "name": "Romanian Deadlift",
     "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
   },
   {
-    "id": "9f26f3ab-287b-438c-906d-d9982f3985c8",
-    "name": "Seated Arnold Press",
+    "id": "c7679b6b-f135-4a86-95ac-ecc5e29051e6",
+    "name": "Russian Twists",
     "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "CORE"
+    ]
   },
   {
-    "id": "06260534-17b6-4636-977f-74739bf19bb6",
-    "name": "Seated Bicep Curls",
+    "id": "62e094fa-b9d2-4d8c-b5c1-7be75383f550",
+    "name": "Seated Cable Chest Flys",
     "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "CHEST"
+    ]
   },
   {
-    "id": "7cd7e4a4-7b2f-451c-8edd-bfc94aaf07e4",
+    "id": "04830cf3-f300-46bd-84cf-c6fd586efbaf",
     "name": "Seated Cable Rows",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "964e5418-2384-4515-aba2-59aa59560454",
-    "name": "Seated Hammer Curls",
+    "id": "41f59f07-93ef-475b-b991-ff9616bdbd84",
+    "name": "Seated Wide Grip Cable Rows",
     "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "BACK"
+    ]
   },
   {
-    "id": "117082d9-187e-493e-bdd8-4f2326d15d64",
-    "name": "Seated Lateral Raises",
+    "id": "b6927355-76ce-41f8-bf6c-fef6b0909add",
+    "name": "Single Arm Cable Bent-Over Rows",
     "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "BACK"
+    ]
   },
   {
-    "id": "4bb511cd-b9bd-41fa-93b0-3bf99ac57124",
-    "name": "Seated Overhead Press",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "c45ac776-058c-4fd1-887d-8d26331b5c16",
-    "name": "Seated Overhead Tricep Extensions",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "b6adc71d-5309-49bf-a6af-8f40e38c93ac",
-    "name": "Seated Rear Delt Flys",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "f9e862e9-eb9e-4cf1-9393-6b16fe1134d2",
-    "name": "Seated Shoulder Press",
-    "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "225383f5-6b27-4be0-a266-9069f723a50e",
+    "id": "f4cc6b60-cd95-4c8b-b1cc-010800db8509",
     "name": "Single Arm Cable Curls",
     "muscles_worked": [
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "e1980e11-94af-4dfc-87cd-d3d064607a30",
-    "name": "Single Arm Cable Rows",
+    "id": "09e3d6ca-8c04-454b-ae67-d530fbcb41e9",
+    "name": "Single Arm Cable Lower Chest Flys",
     "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "eae199b8-8fed-4984-8c3d-1ff2520b423c",
+    "name": "Single Arm Cable Mid Chest Flys",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "32f7c42d-32fd-41a3-9890-92636a8577a0",
+    "name": "Single Arm Cable Reverse Flys",
+    "muscles_worked": [
+      "SHOULDERS",
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "2732345c-e11f-4fd8-9d1d-52e124aeadc3",
-    "name": "Single Arm Decline Cable Flys",
+    "id": "91a01ac7-eb5e-4f6f-883f-7812692bcf35",
+    "name": "Single Arm Cable Upper Chest Flys",
     "muscles_worked": [
       "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "92b3e5a9-61c1-4258-a595-c6329ad5960d",
-    "name": "Single Arm Dumbbell Incline Bench Press",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "db12c70e-c064-4e89-b78a-a944c9f82675",
-    "name": "Single Arm Dumbbell Rows",
-    "muscles_worked": [
-      "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "0d471dce-3849-4210-9c19-c2b564f7e5ed",
-    "name": "Single Arm Incline Cable Flys",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "0f66ed41-0dc7-4830-8a8b-aeef34ba55b3",
-    "name": "Single Arm Landmine Press",
-    "muscles_worked": [
-      "CHEST",
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "6cdbbd8b-5d70-41d9-b188-3faeffd2d76e",
+    "id": "68bd5c4c-5428-4c03-a782-86237b9a1707",
     "name": "Single Arm Landmine Rows",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "58ccc687-0305-4fac-a849-cb61e20c9dda",
+    "id": "b7b4e1c1-0c45-4350-a79a-1fb06955ce6d",
+    "name": "Single Arm Lat Pulldowns",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "ffbd4a7e-f709-4103-9633-7ff5be3bb523",
     "name": "Single Arm Machine Rows",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "8c6b9dbe-e30b-47a7-872a-6b432639d58a",
-    "name": "Single Arm Mid Cable Flys",
-    "muscles_worked": [
-      "CHEST"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "d326e0a3-cb3b-4183-b687-84f7691fd11f",
+    "id": "684953d3-6c8d-43e7-b5d1-300d1231fe4b",
     "name": "Single Arm Overhead Extensions",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "306f5bb9-0276-43f1-aecb-b4775f4abd1b",
-    "name": "Single Arm Shoulder Press",
+    "id": "02ca69c8-5f36-4eb0-b9bf-9eca9aac457c",
+    "name": "Single Arm Pec Deck",
     "muscles_worked": [
-      "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "CHEST"
+    ]
   },
   {
-    "id": "682d0d29-c0f1-4509-b3ed-887bc21c1bc9",
-    "name": "Single Arm Tricep Extensions",
+    "id": "f3a17ff3-f9a1-4b12-a185-ed4bf8c0d796",
+    "name": "Single Arm Seated Cable Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "c149abaf-789a-41a8-a707-be88483e1f85",
+    "name": "Single Arm Tricep Pushdowns",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "98d9439a-5e5f-4480-a828-1a442beaf6b9",
+    "id": "6f735312-4750-47ab-ab74-fce0a28a8e1c",
+    "name": "Single Leg Curls",
+    "muscles_worked": [
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "a65aa329-f04c-4eab-90b1-39ba5125bc7f",
     "name": "Single Leg Extensions",
     "muscles_worked": [
       "QUADS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "45791efe-ce21-474d-a762-9a9b0e109e92",
-    "name": "Single Leg Hamstring Curls",
-    "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "e1c2e34d-a084-4fc7-a060-f4c9727c280a",
+    "id": "36e1006c-fed7-4095-9943-1beb65a01fd7",
     "name": "Single Leg Press",
     "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "e36e9ba1-22b4-4833-89a1-d66818abb155",
+    "name": "Single Leg Romanian Deadlift",
+    "muscles_worked": [
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "e3c4462d-27ee-44ee-87e3-d7f1f22a1fc1",
+    "name": "Situps",
+    "muscles_worked": [
+      "CORE"
+    ]
+  },
+  {
+    "id": "6894c3c2-bf5f-4fcc-8caa-904fb9513a9b",
+    "name": "Smith Back Squat",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS",
+      "HAMSTRINGS"
+    ]
+  },
+  {
+    "id": "4085de08-c22a-4fde-913c-77f565074ed7",
+    "name": "Smith Bench Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "67bf1d68-b329-41af-bcfc-33f368cc8f97",
+    "name": "Smith Bulgarian Squats",
+    "muscles_worked": [
       "QUADS",
       "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "0e7e9264-392e-412c-afae-7d7777dd34e3",
-    "name": "Skull Crusher Machine",
+    "id": "ed9cd169-c0c5-4519-96c2-185ca0609d91",
+    "name": "Smith Calf Raises",
+    "muscles_worked": [
+      "CALVES"
+    ]
+  },
+  {
+    "id": "556c662e-325a-43ca-87ae-b881a0410f5d",
+    "name": "Smith Close Grip Bench Press",
     "muscles_worked": [
       "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "3643ac3d-9750-4e6f-af63-7e232bbbd8bf",
-    "name": "Spider Curls",
-    "muscles_worked": [
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "98f06164-74d9-4b85-ad0b-233acbbec09b",
-    "name": "Squat Clean",
+    "id": "4529fd04-0dd5-460f-8dc8-a36e413aef0e",
+    "name": "Smith Curtsy Lunges",
     "muscles_worked": [
       "QUADS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "9235443f-0018-4f8e-a611-1f42598cf93a",
+    "name": "Smith Forward Lunges",
+    "muscles_worked": [
       "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "QUADS"
+    ]
   },
   {
-    "id": "8ae66e39-d077-42fd-af34-9fb6b5bba884",
-    "name": "Staggered Dumbbell RDL",
+    "id": "0638ffaf-4992-4aec-b070-8631c925197e",
+    "name": "Smith Good Mornings",
     "muscles_worked": [
-      "HAMSTRINGS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
   },
   {
-    "id": "00694373-8cbe-4d33-8bfb-b1b475867461",
-    "name": "Standing Overhead Dumbbell Extensions",
+    "id": "c45564dd-5549-4d05-9837-80f40a7e943b",
+    "name": "Smith Heel-Elevated Back Squat",
     "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "QUADS"
+    ]
   },
   {
-    "id": "44541af4-2d21-47da-bc10-778917216340",
-    "name": "Standing Shoulder Press",
+    "id": "5ea15cdf-6299-4208-adff-58279d5cf824",
+    "name": "Smith Hip Thrust",
+    "muscles_worked": [
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "ca7ef1e0-82a1-4e18-bedb-fdf3ff8d5acc",
+    "name": "Smith Incline Bench Press",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "84a6df3b-ae9d-4ea0-a364-6b9296637720",
+    "name": "Smith Reverse Lunges",
+    "muscles_worked": [
+      "GLUTES",
+      "QUADS"
+    ]
+  },
+  {
+    "id": "84c9c610-7690-4c3d-9ddb-1d031c9fdf84",
+    "name": "Smith Romanian Deadlift",
+    "muscles_worked": [
+      "HAMSTRINGS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "62da1e79-488e-412e-9a42-52ef50361ab7",
+    "name": "Smith Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "abcce1b1-3e8f-47fa-9055-cae066614bd8",
+    "name": "Smith Shoulder Press",
     "muscles_worked": [
       "SHOULDERS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "ee40c272-8eb9-46a2-b63f-e9b2745f70e4",
-    "name": "Straight Arm Pulldowns",
+    "id": "4730305a-69ca-4ba0-b2de-7bec4a411258",
+    "name": "Smith Shrugs",
     "muscles_worked": [
       "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   },
   {
-    "id": "654ee687-3baa-41c5-9074-3479cf659140",
-    "name": "Sumo Deadlifts",
+    "id": "a9819650-4eb2-4613-b8e1-5cf70e4ef9ba",
+    "name": "Smith Single Leg Calf Raises",
+    "muscles_worked": [
+      "CALVES"
+    ]
+  },
+  {
+    "id": "2be75b77-3228-4c46-bf19-715b40382511",
+    "name": "Smith Split Squat",
     "muscles_worked": [
       "GLUTES",
-      "POWER"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "QUADS",
+      "HAMSTRINGS"
+    ]
   },
   {
-    "id": "fd9d5dab-1461-45be-b22d-67745d661145",
-    "name": "Trciep Pushdowns",
+    "id": "2ef698f8-39bf-4297-adc9-17e84fc03834",
+    "name": "Smith Step-ups",
     "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "GLUTES",
+      "QUADS"
+    ]
   },
   {
-    "id": "d2137ac9-750e-44c5-8141-4377b32d741c",
-    "name": "Tricep Kickbacks",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "db9826f4-5228-49b8-97e6-536bc12a5ed8",
-    "name": "Tricep Pushups",
-    "muscles_worked": [
-      "TRICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "85328020-474a-4af1-8e1d-bed41b9b5a02",
-    "name": "Underhand Bar Bent Over Row",
-    "muscles_worked": [
-      "BACK"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "54f2b719-0fa7-486f-a1f3-f09231fd7120",
-    "name": "Underhand Lat Pulldowns",
-    "muscles_worked": [
-      "BACK",
-      "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
-  },
-  {
-    "id": "26f27ed1-bba6-4196-bffa-1219f7dad466",
-    "name": "Wall Sits",
+    "id": "5bcd7872-e993-454e-961e-2758d09151c5",
+    "name": "Smith Sumo Squats",
     "muscles_worked": [
       "QUADS",
-      "GLUTES"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+      "GLUTES",
+      "HAMSTRINGS"
+    ]
   },
   {
-    "id": "af9e36ac-4f19-4606-850d-2350be3232fa",
-    "name": "Zottman Curls",
+    "id": "a8bfbe28-55cf-4b4f-baa6-77d45ae166e2",
+    "name": "Smith Underhand Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "062c6973-e758-40eb-ae03-534425f1be04",
+    "name": "Smith Upright Rows",
+    "muscles_worked": [
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "3d3adcfe-8ac9-43bc-9de7-370a6b7079ef",
+    "name": "Snatch",
+    "muscles_worked": [
+      "POWER",
+      "QUADS",
+      "GLUTES",
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "ec85a67e-cdcb-4edd-99d9-a1646379bf77",
+    "name": "Snatch Pull",
+    "muscles_worked": [
+      "POWER",
+      "QUADS",
+      "GLUTES"
+    ]
+  },
+  {
+    "id": "82e9ad33-2b22-4778-928a-a080601ca451",
+    "name": "T-Bar Rows",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "c6db1a2a-e4d8-4b79-a05a-b5167363ecb0",
+    "name": "Tricep Dips",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "eea8c1ca-9a69-4340-981c-ea654357d0f2",
+    "name": "Tricep Pushdowns",
+    "muscles_worked": [
+      "TRICEPS"
+    ]
+  },
+  {
+    "id": "806384ae-6495-4dda-9124-0014c13a9066",
+    "name": "Turkish Get-ups",
+    "muscles_worked": [
+      "QUADS",
+      "GLUTES",
+      "SHOULDERS"
+    ]
+  },
+  {
+    "id": "741cde0a-47fc-4193-95f3-ff0871d0a48d",
+    "name": "Underhand Lat Pulldowns",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "9eb50ceb-8f00-47f2-ba8a-c601657cf45d",
+    "name": "Wide Grip Lat Pulldowns",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "3cbb2e07-4c29-4f9a-a059-0ec08f3858be",
+    "name": "Wide Grip Pull Ups",
+    "muscles_worked": [
+      "BACK"
+    ]
+  },
+  {
+    "id": "969898ca-06c6-437e-bc7d-eb75740d95f7",
+    "name": "Wide Pushups",
+    "muscles_worked": [
+      "CHEST"
+    ]
+  },
+  {
+    "id": "fc16ef07-1f34-4e94-bfea-007b8eb03e52",
+    "name": "Wrist Curls",
+    "muscles_worked": [
+      "OTHER"
+    ]
+  },
+  {
+    "id": "19ffb085-bc0f-41c6-afa1-2729b5eac832",
+    "name": "Y-Raises",
+    "muscles_worked": [
+      "SHOULDERS",
+      "BACK"
+    ]
+  },
+  {
+    "id": "b5304041-83e0-43d8-9579-8e3581d5643a",
+    "name": "Zombie Curls",
     "muscles_worked": [
       "BICEPS"
-    ],
-    "is_favorite": false,
-    "default_input_type": {
-        "REPS_WEIGHT": {
-            "input": {
-                "weight": null,
-                "weight_placeholder": null,
-                "reps": null,
-                "reps_placeholder": null
-            }
-        }
-    }
+    ]
   }
 ]

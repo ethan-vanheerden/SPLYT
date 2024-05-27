@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		AA02ECE32B5974A40035F7C8 /* EditSetsRepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02ECE22B5974A40035F7C8 /* EditSetsRepsView.swift */; };
+		AA0EB1DD2BFE74CB007570AC /* CustomExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1DC2BFE74CB007570AC /* CustomExerciseViewModel.swift */; };
+		AA0EB1DF2BFE74D6007570AC /* CustomExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1DE2BFE74D6007570AC /* CustomExerciseView.swift */; };
+		AA0EB1E42BFE7513007570AC /* CustomExerciseReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1E32BFE7513007570AC /* CustomExerciseReducer.swift */; };
+		AA0EB1E62BFE7520007570AC /* CustomExerciseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1E52BFE7520007570AC /* CustomExerciseInteractor.swift */; };
+		AA0EB1E82BFE752B007570AC /* CustomExerciseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1E72BFE752B007570AC /* CustomExerciseService.swift */; };
+		AA0EB1EA2BFE7538007570AC /* CustomExerciseDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1E92BFE7538007570AC /* CustomExerciseDomain.swift */; };
+		AA0EB1EC2BFE757E007570AC /* CustomExerciseViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1EB2BFE757E007570AC /* CustomExerciseViewState.swift */; };
+		AA0EB1EE2BFE7589007570AC /* CustomExerciseDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1ED2BFE7589007570AC /* CustomExerciseDisplay.swift */; };
+		AA0EB1F02BFE7595007570AC /* CustomExerciseNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1EF2BFE7595007570AC /* CustomExerciseNavigationRouter.swift */; };
+		AA0EB1F42BFEC365007570AC /* CreateCustomExerciseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0EB1F32BFEC365007570AC /* CreateCustomExerciseRequest.swift */; };
 		AA0F8EB12B32212600B88C02 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB02B32212600B88C02 /* TestUtils.swift */; };
 		AA0F8EB42B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB32B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift */; };
 		AA0F8EB62B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F8EB52B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift */; };
@@ -272,6 +282,16 @@
 
 /* Begin PBXFileReference section */
 		AA02ECE22B5974A40035F7C8 /* EditSetsRepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSetsRepsView.swift; sourceTree = "<group>"; };
+		AA0EB1DC2BFE74CB007570AC /* CustomExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseViewModel.swift; sourceTree = "<group>"; };
+		AA0EB1DE2BFE74D6007570AC /* CustomExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseView.swift; sourceTree = "<group>"; };
+		AA0EB1E32BFE7513007570AC /* CustomExerciseReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseReducer.swift; sourceTree = "<group>"; };
+		AA0EB1E52BFE7520007570AC /* CustomExerciseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseInteractor.swift; sourceTree = "<group>"; };
+		AA0EB1E72BFE752B007570AC /* CustomExerciseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseService.swift; sourceTree = "<group>"; };
+		AA0EB1E92BFE7538007570AC /* CustomExerciseDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseDomain.swift; sourceTree = "<group>"; };
+		AA0EB1EB2BFE757E007570AC /* CustomExerciseViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseViewState.swift; sourceTree = "<group>"; };
+		AA0EB1ED2BFE7589007570AC /* CustomExerciseDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseDisplay.swift; sourceTree = "<group>"; };
+		AA0EB1EF2BFE7595007570AC /* CustomExerciseNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExerciseNavigationRouter.swift; sourceTree = "<group>"; };
+		AA0EB1F32BFEC365007570AC /* CreateCustomExerciseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCustomExerciseRequest.swift; sourceTree = "<group>"; };
 		AA0F8EB02B32212600B88C02 /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		AA0F8EB32B349D6F00B88C02 /* GetFavoriteExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteExercisesRequestTests.swift; sourceTree = "<group>"; };
 		AA0F8EB52B349E3200B88C02 /* UpdateFavoriteExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFavoriteExercisesRequestTests.swift; sourceTree = "<group>"; };
@@ -555,6 +575,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA0EB1DB2BFE74B3007570AC /* Custom Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				AA0EB1E22BFE74F7007570AC /* Reducer */,
+				AA0EB1E12BFE74F1007570AC /* Interactor */,
+				AA0EB1E02BFE74EC007570AC /* View */,
+			);
+			path = "Custom Exercises";
+			sourceTree = "<group>";
+		};
+		AA0EB1E02BFE74EC007570AC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA0EB1DE2BFE74D6007570AC /* CustomExerciseView.swift */,
+				AA0EB1EB2BFE757E007570AC /* CustomExerciseViewState.swift */,
+				AA0EB1ED2BFE7589007570AC /* CustomExerciseDisplay.swift */,
+				AA0EB1EF2BFE7595007570AC /* CustomExerciseNavigationRouter.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA0EB1E12BFE74F1007570AC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AA0EB1E52BFE7520007570AC /* CustomExerciseInteractor.swift */,
+				AA0EB1E72BFE752B007570AC /* CustomExerciseService.swift */,
+				AA0EB1E92BFE7538007570AC /* CustomExerciseDomain.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AA0EB1E22BFE74F7007570AC /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				AA0EB1DC2BFE74CB007570AC /* CustomExerciseViewModel.swift */,
+				AA0EB1E32BFE7513007570AC /* CustomExerciseReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
 		AA0F8EB22B349D4C00B88C02 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,6 +1049,7 @@
 		AA58D7F0296869E5009B9ECC /* Workout Creation */ = {
 			isa = PBXGroup;
 			children = (
+				AA0EB1DB2BFE74B3007570AC /* Custom Exercises */,
 				AA2C24402A3CBC47004FC939 /* Build Plan */,
 				AAE79AED296E0DA30010848E /* Build Workout */,
 				AA58D7F32968768A009B9ECC /* Name Workout */,
@@ -1701,6 +1762,7 @@
 			children = (
 				AABE9EC62B27A09100B1135A /* Favorites */,
 				AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */,
+				AA0EB1F32BFEC365007570AC /* CreateCustomExerciseRequest.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -2175,6 +2237,7 @@
 				AACB29832A1558ED00AACB6B /* DoWorkoutService.swift in Sources */,
 				AA1786D82A910E2600563B04 /* MainViewState.swift in Sources */,
 				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
+				AA0EB1DF2BFE74D6007570AC /* CustomExerciseView.swift in Sources */,
 				AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */,
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
@@ -2184,11 +2247,13 @@
 				AAB42B392A79A5BF002A1ED2 /* RestPresetsDomain.swift in Sources */,
 				AA5073782A546A5000F0BAD2 /* DoPlanDomain.swift in Sources */,
 				AA825D3D287238BF0041D94A /* MainView.swift in Sources */,
+				AA0EB1EC2BFE757E007570AC /* CustomExerciseViewState.swift in Sources */,
 				AA2C244C2A3CC035004FC939 /* NameWorkoutDomain.swift in Sources */,
 				AACB29792A1557A300AACB6B /* DoWorkoutInteractor.swift in Sources */,
 				AA672A5D2A69B8520009919E /* WorkoutDetailsService.swift in Sources */,
 				AAB42B352A79A5AA002A1ED2 /* RestPresetsInteractor.swift in Sources */,
 				AA2C24622A3F75DC004FC939 /* BuildPlanReducer.swift in Sources */,
+				AA0EB1EA2BFE7538007570AC /* CustomExerciseDomain.swift in Sources */,
 				AAF06EF729AE9B6300E48918 /* HomeDomain.swift in Sources */,
 				AACB29872A16902800AACB6B /* DoWorkoutDisplay.swift in Sources */,
 				AA672A472A6495080009919E /* HistoryService.swift in Sources */,
@@ -2206,6 +2271,7 @@
 				AA672A5F2A69B85E0009919E /* WorkoutDetailsInteractor.swift in Sources */,
 				AA2C245A2A3F74C4004FC939 /* BuildPlanViewState.swift in Sources */,
 				AAE79AEF296E0DC20010848E /* BuildWorkoutView.swift in Sources */,
+				AA0EB1EE2BFE7589007570AC /* CustomExerciseDisplay.swift in Sources */,
 				AAB42B372A79A5B5002A1ED2 /* RestPresetsService.swift in Sources */,
 				AA1786EE2A91148100563B04 /* LoginDisplay.swift in Sources */,
 				AA1786DE2A910EFB00563B04 /* MainViewReducer.swift in Sources */,
@@ -2227,10 +2293,12 @@
 				AA2C24582A3F747B004FC939 /* BuildPlanViewModel.swift in Sources */,
 				AA8744BB2B9A968A00030D3E /* AboutView.swift in Sources */,
 				AA2C24482A3CBE77004FC939 /* NameWorkoutViewState.swift in Sources */,
+				AA0EB1E82BFE752B007570AC /* CustomExerciseService.swift in Sources */,
 				AA1A34012882E0E000BCB792 /* SettingsNavigationController.swift in Sources */,
 				AAEBFCF02957FB5F00D284F0 /* HomeReducer.swift in Sources */,
 				AA60DA0D2956AFC1008C7615 /* HomeDisplay.swift in Sources */,
 				AA2C24522A3F72A1004FC939 /* BuildPlanInteractor.swift in Sources */,
+				AA0EB1E42BFE7513007570AC /* CustomExerciseReducer.swift in Sources */,
 				AA672A612A69B8700009919E /* WorkoutDetailsDomain.swift in Sources */,
 				AAE79AFD296EFB350010848E /* BuildWorkoutInteractor.swift in Sources */,
 				AA7CEA722885075D005FCBE8 /* SettingsViewState.swift in Sources */,
@@ -2242,6 +2310,7 @@
 				AA672A4F2A6495650009919E /* HistoryViewState.swift in Sources */,
 				AA8744B12B9A693500030D3E /* Policy.swift in Sources */,
 				AA116FED2A784E3E00E68852 /* SettingsSection.swift in Sources */,
+				AA0EB1F42BFEC365007570AC /* CreateCustomExerciseRequest.swift in Sources */,
 				AA5073862A546C2300F0BAD2 /* DoPlanNavigationRouter.swift in Sources */,
 				AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */,
 				AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */,
@@ -2255,7 +2324,9 @@
 				AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */,
 				AA2B26062A7F2F9C0001E79A /* AppDelegate.swift in Sources */,
 				AA2C245C2A3F74FF004FC939 /* BuildPlanDisplay.swift in Sources */,
+				AA0EB1E62BFE7520007570AC /* CustomExerciseInteractor.swift in Sources */,
 				AA58D7F729687AF9009B9ECC /* NameWorkoutView.swift in Sources */,
+				AA0EB1F02BFE7595007570AC /* CustomExerciseNavigationRouter.swift in Sources */,
 				AA52BBA229B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift in Sources */,
 				AAF864AA2B9CDCE00042BFD7 /* LicenseViewState.swift in Sources */,
 				AA60DA0F2956B453008C7615 /* HomeInteractor.swift in Sources */,
@@ -2281,6 +2352,7 @@
 				AA4A31472882CE63003E7C64 /* HistoryView.swift in Sources */,
 				AA60DA05295215DF008C7615 /* HomeNavigationController.swift in Sources */,
 				AAB42B2D2A79A573002A1ED2 /* RestPresetsView.swift in Sources */,
+				AA0EB1DD2BFE74CB007570AC /* CustomExerciseViewModel.swift in Sources */,
 				AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */,
 				AA672A4D2A64955C0009919E /* HistoryDisplay.swift in Sources */,
 				AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */,

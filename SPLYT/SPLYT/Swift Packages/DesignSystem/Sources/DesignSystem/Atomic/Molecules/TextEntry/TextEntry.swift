@@ -33,6 +33,11 @@ public struct TextEntry: View {
                 }
             }
         }
+        .onAppear {
+            if viewState.autoFocus {
+                isFocused = true
+            }
+        }
     }
     
     @ViewBuilder
@@ -101,19 +106,22 @@ public struct TextEntryViewState: Equatable {
     let iconName: String?
     let includeCancelButton: Bool
     let capitalization: Capitalization
+    let autoFocus: Bool
     
     public init(title: String? = nil,
                 placeholder: String = "",
                 entryType: TextEntryType = .normal,
                 iconName: String? = nil,
                 includeCancelButton: Bool = true,
-                capitalization: Capitalization = .firstWord) {
+                capitalization: Capitalization = .firstWord,
+                autoFocus: Bool = false) {
         self.title = title
         self.placeholder = placeholder
         self.entryType = entryType
         self.iconName = iconName
         self.includeCancelButton = includeCancelButton
         self.capitalization = capitalization
+        self.autoFocus = autoFocus
     }
 }
 
@@ -127,8 +135,11 @@ public enum TextEntryType: Equatable {
 // MARK: - Common View States
 
 public struct TextEntryBuilder {
-    public static var searchEntry: TextEntryViewState = .init(placeholder: Strings.search,
-                                                              iconName: "magnifyingglass")
+    public static func searchEntry(capitalization: Capitalization = .firstWord) -> TextEntryViewState {
+        return .init(placeholder: Strings.search,
+                     iconName: "magnifyingglass",
+                     capitalization: capitalization)
+    }
 }
 
 // MARK: - Strings

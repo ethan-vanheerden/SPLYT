@@ -31,6 +31,7 @@ enum BuildWorkoutDomainAction {
     case backTapped(userInitiated: Bool)
     case deleteGroup(groupIndex: Int)
     case rearrangeGroups(newOrder: [Int])
+    case customExerciseAdded
 }
 
 // MARK: - Domain Results
@@ -107,6 +108,8 @@ final class BuildWorkoutInteractor {
             return handleDeleteGroup(groupIndex: groupIndex)
         case .rearrangeGroups(let newOrder):
             return handleRearrangeGroups(newOrder: newOrder)
+        case .customExerciseAdded:
+            return handleCustomExerciseAdded()
         }
     }
 }
@@ -491,7 +494,7 @@ private extension BuildWorkoutInteractor {
         // New lists of indexes that we want the current groups to be in
         var groups = domain.builtWorkout.exerciseGroups
         var availableExercises = domain.exercises
-
+        
         groups = newOrder.map { groups[$0] }
         
         // Update the selected group numbers for each of the selected exercises
@@ -515,6 +518,23 @@ private extension BuildWorkoutInteractor {
         domain.exercises = availableExercises
         
         return updateDomain(domain: domain)
+    }
+    
+    func handleCustomExerciseAdded() -> BuildWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        // Just update the list of exercise to have the new custom exercise
+        do {
+            let updatedExercises = try service.reloadCache()
+            
+            domain.exercises = updatedExercises
+            allExercises = updatedExercises
+            
+            // Ensures the new exercise pops up with the search text
+            return filterExercises(domain: domain)
+        } catch {
+            return .error
+        }
     }
 }
 

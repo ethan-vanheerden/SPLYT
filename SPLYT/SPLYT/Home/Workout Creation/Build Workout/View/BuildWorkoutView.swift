@@ -66,7 +66,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         
                     }
                 }
-                TextEntry(text: $searchText, viewState: TextEntryBuilder.searchEntry)
+                TextEntry(text: $searchText,
+                          viewState: TextEntryBuilder.searchEntry(capitalization: .everyWord))
             }
             .padding(.horizontal, horizontalPadding)
             exerciseList(display: display)
@@ -131,12 +132,21 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ViewBuilder
     private func emptyExerciseView(isFiltering: Bool) -> some View {
         EmojiTitle(emoji: "😅", title: Strings.noExercisesFound) {
-            if isFiltering {
-                SplytButton(text: Strings.removeFilters) {
-                    viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
+            VStack {
+                if isFiltering {
+                    SplytButton(text: Strings.removeFilters) {
+                        viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
+                    }
                 }
-            } else {
-                EmptyView()
+                SplytButton(text: Strings.createCustomExercise) {
+                    navigationRouter.navigate(
+                        .createCustomExercise(exerciseName: searchText,
+                                              saveAction: {
+                                                  viewModel.send(.customExerciseAdded,
+                                                                 taskPriority: .userInitiated)
+                                              })
+                    )
+                }
             }
         }
         .padding(.horizontal, horizontalPadding)
@@ -248,9 +258,10 @@ fileprivate struct Strings {
     static let addExercises = "ADD EXERCISES"
     static let addGroup = "Add group"
     static let noExercisesFound = "No exercises found"
-    static let removeFilters = "Remove filters"
+    static let removeFilters = "Remove Filters"
     static let favorites = "Favorites"
     static let musclesWorked = "Muscles worked"
     static let filter = "Filter"
     static let next = "Next"
+    static let createCustomExercise = "Create Custom Exercise"
 }

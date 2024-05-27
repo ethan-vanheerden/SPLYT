@@ -6,5 +6,9 @@ public protocol NetworkRequest {
     associatedtype Response: Decodable
     
     /// Creates a `URLRequest` used for the networking call.
-    func createRequest() async -> URLRequest
+    func createRequest() async throws -> URLRequest
+}
+
+public enum NetworkError: Error {
+    case invalidURL
 }

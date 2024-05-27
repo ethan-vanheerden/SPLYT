@@ -28,6 +28,10 @@ protocol BuildWorkoutServiceType {
     /// Saves the given workout.
     /// - Parameter workout: The workout to save
     func saveWorkout(_ workout: Workout) throws
+    
+    /// Reloads the available exercises directly from the cache.
+    /// - Returns: A map of the exercise ID to each `AvailableExercise`
+    func reloadCache() throws -> [String: AvailableExercise]
 }
 
 // MARK: - Errors
@@ -50,7 +54,7 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
      workout (which can happen a lot when building a plan), we set a sync period so they only
      fetch once during a specified timeframe.
      */
-    private let DAYS_FOR_RESYNC = 1
+    private let DAYS_FOR_RESYNC = 2
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
          routineService: CreatedRoutinesServiceType = CreatedRoutinesService(),
@@ -118,6 +122,10 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
         try routineService.saveWorkout(workout: workout,
                                        planId: nil,
                                        lastCompletedDate: nil)
+    }
+    
+    func reloadCache() throws -> [String : AvailableExercise] {
+        return try loadFromCache()
     }
 }
 
