@@ -70,7 +70,10 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func textEntries(display: LoginDisplay, createAccount: Bool) -> some View {
         VStack(alignment: .leading) {
             TextEntry(text: emailTextBinding(email: display.email),
-                      viewState: display.emailTextEntry)
+                      viewState: display.emailTextEntry) { isFocused in
+                viewModel.send(.fieldChangedFocus(field: .email(""), isFocused: isFocused),
+                               taskPriority: .userInitiated)
+            }
             if createAccount {
                 Text(display.emailMessage)
                     .footnote()
@@ -78,7 +81,10 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                     .padding(.bottom, Layout.size(1))
             }
             TextEntry(text: passwordTextBinding(password: display.password),
-                      viewState: display.passwordTextEntry)
+                      viewState: display.passwordTextEntry) { isFocused in
+                viewModel.send(.fieldChangedFocus(field: .password(""), isFocused: isFocused),
+                               taskPriority: .userInitiated)
+            }
             if createAccount {
                 Text(display.passwordMessage)
                     .footnote()
@@ -97,7 +103,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func emailTextBinding(email: String) -> Binding<String> {
         return Binding(
             get: { return email },
-            set: { viewModel.send(.updateEmail(newEmail: $0),
+            set: { viewModel.send(.updateField(field: .email($0)),
                                   taskPriority: .userInitiated) }
         )
     }
@@ -105,7 +111,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func passwordTextBinding(password: String) -> Binding<String> {
         return Binding(
             get: { return password },
-            set: { viewModel.send(.updatePassword(newPassword: $0),
+            set: { viewModel.send(.updateField(field: .password($0)),
                                   taskPriority: .userInitiated) }
         )
     }
@@ -113,7 +119,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func birthdayBinding(birthday: Date) -> Binding<Date> {
         return Binding(
             get: { return birthday },
-            set: { viewModel.send(.updateBirthday(newBirthday: $0),
+            set: { viewModel.send(.updateField(field: .birthday($0)),
                                   taskPriority: .userInitiated) }
         )
     }

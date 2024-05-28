@@ -5,11 +5,14 @@ public struct TextEntry: View {
     @Binding private var text: String
     @EnvironmentObject private var userTheme: UserTheme
     private let viewState: TextEntryViewState
+    private let focusAction: ((Bool) -> Void)?
     
     public init(text: Binding<String>,
-                viewState: TextEntryViewState) {
+                viewState: TextEntryViewState,
+                focusAction: ((Bool) -> Void)? = nil) {
         self._text = text
         self.viewState = viewState
+        self.focusAction = focusAction
     }
     
     public var body: some View {
@@ -36,6 +39,11 @@ public struct TextEntry: View {
         .onAppear {
             if viewState.autoFocus {
                 isFocused = true
+            }
+        }
+        .onChange(of: isFocused) { newValue in
+            if let focusAction = focusAction {
+                focusAction(newValue)
             }
         }
     }
