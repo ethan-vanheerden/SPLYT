@@ -48,7 +48,7 @@ final class BuildWorkoutDomain: Equatable {
 
 // MARK: - Dialog Type
 
-enum BuildWorkoutDialog {
+enum BuildWorkoutDialog: Equatable {
     case leave
     case save
 }

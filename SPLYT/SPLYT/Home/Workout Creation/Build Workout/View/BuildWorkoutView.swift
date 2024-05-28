@@ -80,12 +80,12 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                        backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
                                                     taskPriority: .userInitiated) },
                        content: { continueButton(canContinue: display.canSave) })
-        .dialog(isOpen: display.showDialog == .leave,
+        .dialog(isOpen: display.shownDialog == .leave,
                 viewState: display.backDialog,
                 primaryAction: { dismiss() },
                 secondaryAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: false),
                                                   taskPriority: .userInitiated) })
-        .dialog(isOpen: display.showDialog == .save,
+        .dialog(isOpen: display.shownDialog == .save,
                 viewState: display.saveDialog,
                 primaryAction: { viewModel.send(.toggleDialog(type: .save, isOpen: false),
                                                 taskPriority: .userInitiated) })

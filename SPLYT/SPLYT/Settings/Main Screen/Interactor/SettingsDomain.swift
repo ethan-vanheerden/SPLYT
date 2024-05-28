@@ -9,4 +9,12 @@ import Foundation
 
 struct SettingsDomain: Equatable {
     let sections: [SettingsSection]
+    let versionString: String?
+    let buildNumberString: String?
+}
+
+// MARK: - Dialog Type
+
+enum SettingsDialog: Equatable {
+    case signOut
 }

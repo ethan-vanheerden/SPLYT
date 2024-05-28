@@ -49,7 +49,7 @@ private extension BuildWorkoutReducer {
                                           currentGroup: currentGroup,
                                           groupTitles: groupTitles,
                                           lastGroupEmpty: lastGroupEmpty,
-                                          showDialog: dialog,
+                                          shownDialog: dialog,
                                           backDialog: backDialog,
                                           saveDialog: saveDialog,
                                           canSave: domain.canSave,

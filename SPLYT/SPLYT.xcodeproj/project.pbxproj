@@ -226,6 +226,7 @@
 		AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */ = {isa = PBXBuildFile; productRef = AADCABDE288895AC00FF09B9 /* Mocking */; };
 		AADCB7572B3F496D008C4012 /* MockAPIInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCB7562B3F496D008C4012 /* MockAPIInteractor.swift */; };
 		AADCC9B82A36321A00B45827 /* DoWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */; };
+		AADE5F8B2C056AF400051E01 /* VersionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE5F8A2C056AF400051E01 /* VersionInteractor.swift */; };
 		AADEC4B328A839B800A5463B /* GetAvailableExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */; };
 		AADEC4B928A8428900A5463B /* GetAvailableExercisesRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */; };
 		AAE79AEA296C610B0010848E /* NameWorkoutNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE79AE9296C610B0010848E /* NameWorkoutNavigationRouter.swift */; };
@@ -503,6 +504,7 @@
 		AADCABDD2888946F00FF09B9 /* Mocking */ = {isa = PBXFileReference; lastKnownFileType = text; name = Mocking; path = SPLYTTests/Settings/Mocking; sourceTree = SOURCE_ROOT; };
 		AADCB7562B3F496D008C4012 /* MockAPIInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIInteractor.swift; sourceTree = "<group>"; };
 		AADCC9B72A36321A00B45827 /* DoWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutServiceTests.swift; sourceTree = "<group>"; };
+		AADE5F8A2C056AF400051E01 /* VersionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInteractor.swift; sourceTree = "<group>"; };
 		AADEC4B228A839B800A5463B /* GetAvailableExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequest.swift; sourceTree = "<group>"; };
 		AADEC4B828A8428900A5463B /* GetAvailableExercisesRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAvailableExercisesRequestTests.swift; sourceTree = "<group>"; };
 		AAE79AE9296C610B0010848E /* NameWorkoutNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameWorkoutNavigationRouter.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 		AA1A33FF2882E0B300BCB792 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AADE5F892C05699C00051E01 /* Version */,
 				AABE01BC2BF508440058F084 /* Appearance */,
 				AA8744B22B9A91A600030D3E /* About */,
 				AAB42B282A79A397002A1ED2 /* Rest Presets */,
@@ -1761,6 +1764,14 @@
 			path = Reducer;
 			sourceTree = "<group>";
 		};
+		AADE5F892C05699C00051E01 /* Version */ = {
+			isa = PBXGroup;
+			children = (
+				AADE5F8A2C056AF400051E01 /* VersionInteractor.swift */,
+			);
+			path = Version;
+			sourceTree = "<group>";
+		};
 		AADEC4B128A8398F00A5463B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -2094,8 +2105,8 @@
 			buildConfigurationList = AA825D5B287238CB0041D94A /* Build configuration list for PBXNativeTarget "SPLYT" */;
 			buildPhases = (
 				AAF8648D2B9BC56C0042BFD7 /* Copy Package.resolved */,
-				AA2548D82C05622E00C4737A /* Increment Build Number */,
 				AA825D33287238BF0041D94A /* Sources */,
+				AA2548D82C05622E00C4737A /* Increment Build Number */,
 				AA825D34287238BF0041D94A /* Frameworks */,
 				AA825D35287238BF0041D94A /* Resources */,
 			);
@@ -2263,6 +2274,7 @@
 				AA672A712A6A11280009919E /* HistoryDialogViewStates.swift in Sources */,
 				AA0EB1DF2BFE74D6007570AC /* CustomExerciseView.swift in Sources */,
 				AAF8649B2B9CBDBB0042BFD7 /* LicenseInteractor.swift in Sources */,
+				AADE5F8B2C056AF400051E01 /* VersionInteractor.swift in Sources */,
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
 				AAF864A12B9CBDDB0042BFD7 /* LicenseDisplay.swift in Sources */,

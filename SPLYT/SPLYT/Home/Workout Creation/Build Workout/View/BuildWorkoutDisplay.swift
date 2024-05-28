@@ -15,7 +15,7 @@ struct BuildWorkoutDisplay: Equatable {
     let currentGroup: Int // Zero-indexed
     let groupTitles: [String] // Ex: "Group 1", "Group 2", etc.
     let lastGroupEmpty: Bool
-    let showDialog: BuildWorkoutDialog? // Determines which dialog is open, if any
+    let shownDialog: BuildWorkoutDialog? // Determines which dialog is open, if any
     let backDialog: DialogViewState
     let saveDialog: DialogViewState
     let canSave: Bool

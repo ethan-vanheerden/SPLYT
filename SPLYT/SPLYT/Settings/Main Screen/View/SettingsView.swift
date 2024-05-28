@@ -51,9 +51,16 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
                     }
                 }
             }
+            versionView(versionString: display.versionString,
+                        buildNumberString: display.buildNumberString)
         }
+        .dialog(isOpen: display.shownDialog == .signOut,
+                viewState: display.signOutDialog,
+                primaryAction: { viewModel.send(.signOut, taskPriority: .userInitiated) },
+                secondaryAction: { viewModel.send(.toggleDialog(type: .signOut, isOpen: false),
+                                                  taskPriority: .userInitiated) })
     }
-
+    
     @ViewBuilder
     private func detail(items: [SettingsItem]) -> some View {
         ForEach(items, id: \.self) { item in
@@ -90,14 +97,15 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
         Button {
             switch item {
             case .signOut:
-                viewModel.send(.signOut, taskPriority: .userInitiated)
+                viewModel.send(.toggleDialog(type: .signOut, isOpen: true),
+                               taskPriority: .userInitiated)
             default:
                 return
             }
         } label: {
             detailLabel(item: item)
         }
-
+        
     }
     
     @ViewBuilder
@@ -107,10 +115,29 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
                                           iconBackgroundColor: item.backgroundColor,
                                           link: link))
     }
+    
+    @ViewBuilder
+    private func versionView(versionString: String?,
+                             buildNumberString: String?) -> some View {
+        Section {
+            EmptyView()
+        } footer: {
+            if let versionString = versionString,
+               let buildNumberString = buildNumberString {
+                HStack {
+                    Spacer()
+                    Text("\(Strings.splyt) \(versionString) (\(buildNumberString))")
+                        .footnote(style: .regular)
+                    Spacer()
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Strings
 
 fileprivate struct Strings {
     static let settings = "⚙️ Settings"
+    static let splyt = "SPLYT"
 }
