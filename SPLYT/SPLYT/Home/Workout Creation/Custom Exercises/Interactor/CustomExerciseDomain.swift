@@ -12,4 +12,5 @@ struct CustomExerciseDomain: Equatable {
     var exerciseName: String
     var musclesWorked: [MusclesWorked: Bool]
     var canSave: Bool
+    var isSaving: Bool
 }

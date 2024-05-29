@@ -40,11 +40,5 @@ public enum SplytButtonType {
     case primary(color: SplytColor? = nil)
     case secondary(color: SplytColor? = nil)
     case textOnly
-}
-
-// NOTE: Custom fonts are not rendered in previews
-struct SplytButton_Previews: PreviewProvider {
-    static var previews: some View {
-        SplytButton(text: "NEXT", action: { })
-    }
+    case loading(color: SplytColor? = nil)
 }

@@ -121,8 +121,9 @@ private extension HomeNavigationRouter {
     func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {
         // NOTE: this assigns the navigator for the given nav router
         // Use a navigation controller since we will be pushing views on top of a presented view
-        let navController = UINavigationController(rootViewController: UIHostingController(
-            rootView: view.environmentObject(UserTheme.shared)))
+        let navController = UINavigationController(
+            rootViewController: UIHostingController(rootView: view.environmentObject(UserTheme.shared))
+        )
         navController.setNavigationBarHidden(true, animated: false)
         navRouter.navigator = navController
         navigator?.present(navController, animated: true)

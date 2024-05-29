@@ -15,4 +15,5 @@ struct CustomExerciseDisplay: Equatable {
     let exerciseNameEntry: TextEntryViewState
     let musclesWorkedHeader: SectionHeaderViewState
     let canSave: Bool
+    let isSaving: Bool
 }

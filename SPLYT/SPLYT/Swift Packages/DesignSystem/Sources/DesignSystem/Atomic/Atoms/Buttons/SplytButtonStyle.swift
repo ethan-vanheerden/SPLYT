@@ -31,7 +31,8 @@ struct SplytButtonStyle: ButtonStyle {
     private func body(configuration: Configuration) -> some View {
         switch type {
         case .primary(let color),
-                .secondary(let color):
+                .secondary(let color),
+                .loading(let color):
             baseButton
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
                                                             normalColor: Color(splytColor: textColor),
@@ -48,7 +49,7 @@ struct SplytButtonStyle: ButtonStyle {
                         .fill(Color(splytColor: color ?? userTheme.theme))
                 )
         case .textOnly:
-            textView
+            buttonContent
                 .lineLimit(1)
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
                                                             normalColor: Color(splytColor: textColor),
@@ -61,7 +62,7 @@ struct SplytButtonStyle: ButtonStyle {
     private var baseButton: some View {
         HStack {
             Spacer()
-            textView
+            buttonContent
                 .lineLimit(1)
             Spacer()
         }
@@ -69,7 +70,7 @@ struct SplytButtonStyle: ButtonStyle {
     }
     
     @ViewBuilder
-    private var textView: some View {
+    private var buttonContent: some View {
         switch type {
         case .primary, .textOnly:
             Text(text)
@@ -77,6 +78,9 @@ struct SplytButtonStyle: ButtonStyle {
         case .secondary:
             Text(text)
                 .footnote()
+        case .loading:
+            ProgressView()
+                .tint(Color(splytColor: .white))
         }
     }
 }

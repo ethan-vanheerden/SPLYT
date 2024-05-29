@@ -15,6 +15,7 @@ enum CustomExerciseViewEvent {
     case load
     case updateExerciseName(to: String)
     case updateMuscleWorked(muscle: MusclesWorked, isSelected: Bool)
+    case submit
     case save
 }
 
@@ -38,6 +39,8 @@ final class CustomExerciseViewModel: ViewModel {
         case let .updateMuscleWorked(muscle, isSelected):
             await react(domainAction: .updateMuscleWorked(muscle: muscle, 
                                                           isSelected: isSelected))
+        case .submit:
+            await react(domainAction: .submit)
         case .save:
             await react(domainAction: .save)
         }

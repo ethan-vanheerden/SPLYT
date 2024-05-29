@@ -119,7 +119,6 @@ final class BuildWorkoutInteractor {
 private extension BuildWorkoutInteractor {
     
     func handleLoadExercises() async -> BuildWorkoutDomainResult {
-        print("loading")
         do {
             let exercises = try await service.loadAvailableExercises()
             allExercises = exercises

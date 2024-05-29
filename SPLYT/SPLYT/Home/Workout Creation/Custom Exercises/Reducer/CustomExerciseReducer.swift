@@ -27,12 +27,12 @@ struct CustomExerciseReducer {
 
 private extension CustomExerciseReducer {
     func getDisplay(domain: CustomExerciseDomain) -> CustomExerciseDisplay {
-        
         return .init(exerciseName: domain.exerciseName,
                      musclesWorked: domain.musclesWorked,
                      exerciseNameEntry: exerciseNameEntry,
                      musclesWorkedHeader: musclesWorkedHeader,
-                     canSave: domain.canSave)
+                     canSave: domain.canSave,
+                     isSaving: domain.isSaving)
     }
     
     var exerciseNameEntry: TextEntryViewState {

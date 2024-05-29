@@ -14,6 +14,7 @@ enum CustomExerciseDomainAction {
     case load
     case updateExerciseName(to: String)
     case updateMuscleWorked(muscle: MusclesWorked, isSelected: Bool)
+    case submit
     case save
 }
 
@@ -45,6 +46,8 @@ final class CustomExerciseInteractor {
             return handleUpdateExerciseName(to: newName)
         case let .updateMuscleWorked(muscle, isSelected):
             return handleUpdateMuscleWorked(muscle: muscle, isSelected: isSelected)
+        case .submit:
+            return handleSubmit()
         case .save:
             return await handleSave()
         }
@@ -57,7 +60,8 @@ private extension CustomExerciseInteractor {
     func handleLoad() -> CustomExerciseDomainResult {
         let domain = CustomExerciseDomain(exerciseName: exerciseName,
                                           musclesWorked: createEmptyMusclesWorked(),
-                                          canSave: false)
+                                          canSave: false,
+                                          isSaving: false)
         
         return updateDomain(domain: domain)
     }
@@ -78,6 +82,14 @@ private extension CustomExerciseInteractor {
         return updateDomain(domain: domain)
     }
     
+    func handleSubmit() -> CustomExerciseDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        domain.isSaving = true
+        
+        return updateDomain(domain: domain)
+    }
+    
     func handleSave() async -> CustomExerciseDomainResult {
         guard let domain = savedDomain else { return .error }
         
@@ -88,7 +100,6 @@ private extension CustomExerciseInteractor {
             
             return .exit(domain)
         } catch let error {
-            print(error)
             return .error
         }
     }

@@ -56,8 +56,15 @@ struct CustomExerciseView<VM: ViewModel>: View where VM.Event == CustomExerciseV
                 .padding(.bottom, Layout.size(2))
             musclesWorked(display: display)
             Spacer()
-            SplytButton(text: Strings.save) {
-                viewModel.send(.save, taskPriority: .userInitiated)
+            if display.isSaving {
+                SplytButton(text: "",
+                            type: .loading(),
+                            isEnabled: false) { }
+            } else {
+                SplytButton(text: Strings.save) {
+                    viewModel.send(.submit, taskPriority: .userInitiated)
+                    viewModel.send(.save, taskPriority: .userInitiated)
+                }
             }
         }
         .padding(.top, Layout.size(2))

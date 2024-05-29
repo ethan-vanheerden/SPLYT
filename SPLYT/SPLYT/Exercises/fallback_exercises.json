@@ -964,13 +964,6 @@
     ]
   },
   {
-    "id": "875c5adb-7af9-4102-ba4a-0013bb3cd722",
-    "name": "Glute Hyperextension",
-    "muscles_worked": [
-      "GLUTES"
-    ]
-  },
-  {
     "id": "32cb17d0-4a5f-4286-a3fd-6658fb63d2ba",
     "name": "Glute Hyperextensions",
     "muscles_worked": [
@@ -1582,7 +1575,7 @@
   },
   {
     "id": "5ea15cdf-6299-4208-adff-58279d5cf824",
-    "name": "Smith Hip Thrust",
+    "name": "Smith Hip Thrusts",
     "muscles_worked": [
       "GLUTES"
     ]

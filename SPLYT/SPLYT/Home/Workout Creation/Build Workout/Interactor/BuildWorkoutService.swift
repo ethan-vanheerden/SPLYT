@@ -79,6 +79,7 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
         guard let lastSynced = lastSynced as? Date,
               Int(currentDate.timeIntervalSince(lastSynced) / (60 * 60 * 24)) < DAYS_FOR_RESYNC else {
             do {
+                print("Fetching exercises...")
                 let exercisesRequest = GetAvailableExercisesRequest(userAuth: userAuth)
                 
                 let exercisesResponse = try await apiInteractor.performRequest(with: exercisesRequest)

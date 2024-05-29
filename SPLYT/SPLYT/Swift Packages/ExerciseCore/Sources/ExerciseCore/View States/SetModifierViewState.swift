@@ -18,7 +18,7 @@ public enum SetModifierViewState: Equatable, CaseIterable, Hashable {
         case .dropSet:
             return "Drop Set"
         case .restPause:
-            return "Rest/Pause"
+            return "Rest-Pause"
         case .eccentric:
             return "Eccentric"
         }

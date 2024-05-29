@@ -41,6 +41,9 @@ struct ButtonGallery: View {
                         type: .textOnly,
                         textColor: .lightBlue,
                         isEnabled: isEnabled) { print("Button tapped!") }
+            SplytButton(text: "",
+                        type: .loading(color: .blue),
+                        isEnabled: false) { print("Button tapped!") }
         }
     }
 }
