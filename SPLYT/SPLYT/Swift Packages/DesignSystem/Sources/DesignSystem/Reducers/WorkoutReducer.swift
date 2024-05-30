@@ -101,10 +101,10 @@ public struct WorkoutReducer {
     public static func getWorkoutAndPlanName(workout: Workout) -> String {
         var planTitle = ""
         if let planName = workout.planName {
-            planTitle = " | \(planName)"
+            planTitle = "\(planName) | "
         }
         
-        return workout.name + planTitle
+        return planTitle + workout.name
     }
 }
 

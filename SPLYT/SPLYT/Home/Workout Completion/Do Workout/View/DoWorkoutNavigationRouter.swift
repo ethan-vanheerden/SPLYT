@@ -25,7 +25,7 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
     // Has reference since multiple screens will have this same view model
     private let viewModel: DoWorkoutViewModel
     private let backAction: () -> Void
-    private let exitAction: (String) -> Void // To open the workout details page after exiting
+    private let exitAction: (String) -> Void // To open the workout details page after finishing a workout
     
     init(viewModel: DoWorkoutViewModel,
          backAction: @escaping () -> Void,

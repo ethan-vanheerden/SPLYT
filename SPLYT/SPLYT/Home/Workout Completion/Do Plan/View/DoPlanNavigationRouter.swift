@@ -21,10 +21,13 @@ enum DoPlanNavigationEvent {
 
 final class DoPlanNavigationRouter: NavigationRouter {
     private let planId: String
+    private let exitAction: (String) -> Void // To open the workout details page after finishing a workout
     weak var navigator: Navigator?
     
-    init(planId: String) {
+    init(planId: String,
+         exitAction: @escaping (String) -> Void) {
         self.planId = planId
+        self.exitAction = exitAction
     }
     
     func navigate(_ event: DoPlanNavigationEvent) {
@@ -45,12 +48,13 @@ private extension DoPlanNavigationRouter {
     }
     
     func handleDoWorkout(workoutId: String) {
+        let exitAction = exitAction
         let interactor = DoWorkoutInteractor(workoutId: workoutId,
                                              planId: planId)
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         let navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
             self?.navigator?.pop(animated: true) // Goes back to the workouts in the plan
-        } exitAction: { _ in }
+        } exitAction: { exitAction($0) }
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
         
         navRouter.navigator = navigator

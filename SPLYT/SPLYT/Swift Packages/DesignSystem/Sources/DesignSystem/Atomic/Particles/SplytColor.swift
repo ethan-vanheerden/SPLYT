@@ -22,51 +22,39 @@ public enum SplytColor: String, CaseIterable {
     public var color: Color {
         switch self {
         case .black:
-            return Color.black
+            return Color("Black")
         case .gray:
-            return Color.gray
+            return Color("Gray")
         case .gray50:
-            return Color.gray.opacity(0.5)
+            return Color("Gray50")
         case .green:
-            return Color.green
+            return Color("Green")
         case .forestGreen:
-            return Color(uiColor: UIColor(red: 48/255,
-                                          green: 69/255,
-                                          blue: 41/255,
-                                          alpha: 1))
+            return Color("ForestGreen")
         case .lightBlue:
-            return Color(uiColor: UIColor(red: 104/255,
-                                          green: 172/255,
-                                          blue: 252/255,
-                                          alpha: 1))
+            return Color("LightBlue")
         case .red:
-            return Color.red
+            return Color("Red")
         case .red50:
-            return Color.red.opacity(0.5)
+            return Color("Red50")
         case .white:
-            return Color.white
+            return Color("White")
         case .yellow:
-            return Color.yellow
+            return Color("Yellow")
         case .clear:
             return Color.clear
         case .darkBlue:
-            return Color(uiColor: UIColor(red: 42/255,
-                                          green: 0,
-                                          blue: 254/255,
-                                          alpha: 1))
+            return Color("DarkBlue")
         case .blue:
-            return Color.blue
+            return Color("Blue")
         case .purple:
-            return Color.purple
+            return Color("Purple")
         case .pink:
-            return Color(uiColor: UIColor(red: 252/255,
-                                                 green: 142/255,
-                                                 blue: 172/255,
-                                                 alpha: 1))
+            return Color("Pink")
         case .orange:
-            return Color.orange
+            return Color("Orange")
         case .mint:
-            return Color.mint
+            return Color("Mint")
         }
     }
     

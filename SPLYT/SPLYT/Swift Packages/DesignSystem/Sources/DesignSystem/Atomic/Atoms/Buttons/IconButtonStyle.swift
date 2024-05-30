@@ -53,11 +53,11 @@ struct IconButtonStyle: ButtonStyle {
                                                                 normalColor: Color(splytColor: backgroundColor
                                                                                    ?? userTheme.theme),
                                                                 pressedColor: Color(splytColor: iconColor),
-                                                                animationEnabled: animationEnabled))
+                                                                animationEnabled: animationEnabled).gradient)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(lineWidth: Layout.size(0.25))
-                    .fill(Color(splytColor: outlineColor ?? backgroundColor ?? userTheme.theme))
+                    .fill(Color(splytColor: outlineColor ?? backgroundColor ?? userTheme.theme).gradient)
             )
         case .secondary:
             baseImage

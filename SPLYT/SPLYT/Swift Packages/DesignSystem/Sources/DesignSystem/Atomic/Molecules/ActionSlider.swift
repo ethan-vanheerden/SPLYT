@@ -45,7 +45,7 @@ public struct ActionSlider: View {
     private func slider(maxWidth: CGFloat) -> some View {
         ZStack(alignment: .trailing) {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color(splytColor: viewState.sliderColor ?? userTheme.theme))
+                .fill(Color(splytColor: viewState.sliderColor ?? userTheme.theme).gradient)
                 .frame(width: slideWidth)
             sliderImage
         }

@@ -95,7 +95,8 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             HStack(spacing: Layout.size(1)) {
                 Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
                     .title1()
-                    .foregroundColor(display.isResting ? Color(splytColor: userTheme.theme) : Color(splytColor: .black))
+                    .foregroundStyle(display.isResting ? Color(splytColor: userTheme.theme).gradient
+                                     : Color(splytColor: .black).gradient)
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                     .isVisible(false) // TODO: 51: Workout notes

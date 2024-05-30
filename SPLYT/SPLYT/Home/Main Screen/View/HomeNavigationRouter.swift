@@ -68,8 +68,7 @@ private extension HomeNavigationRouter {
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
             self?.navigator?.dismiss(animated: true)
-        } exitAction: { 
-            [weak self] workoutDetailsId in
+        } exitAction: { [weak self] workoutDetailsId in
             self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
         }
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
@@ -83,7 +82,9 @@ private extension HomeNavigationRouter {
     func handleSelectPlan(id: String) {
         let interactor = DoPlanInteractor(planId: id)
         let viewModel = DoPlanViewModel(interactor: interactor)
-        var navRouter = DoPlanNavigationRouter(planId: id)
+        var navRouter = DoPlanNavigationRouter(planId: id) { [weak self] workoutDetailsId in
+            self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
+        }
         let view = DoPlanView(viewModel: viewModel, navigationRouter: navRouter)
         presentNavController(view: view, navRouter: &navRouter)
     }

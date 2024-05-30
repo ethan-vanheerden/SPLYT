@@ -14,12 +14,12 @@ struct ProgressBarStyle: ProgressViewStyle {
         return GeometryReader { proxy in
             HStack {
                 RoundedRectangle(cornerRadius: Layout.size(1))
-                    .fill(Color(splytColor: color ?? userTheme.theme))
+                    .fill(Color(splytColor: color ?? userTheme.theme).gradient)
                     .frame(width: proxy.size.width * fractionCompleted)
                 Spacer()
             }
         }
         .frame(height: Layout.size(2))
-        .strokeBorder(cornerRadius: Layout.size(1), color: color ?? userTheme.theme)
+        .gradientStrokeBorder(cornerRadius: Layout.size(1), color: color ?? userTheme.theme)
     }
 }

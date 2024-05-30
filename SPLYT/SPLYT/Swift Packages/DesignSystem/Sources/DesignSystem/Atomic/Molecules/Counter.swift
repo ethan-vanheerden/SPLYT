@@ -39,6 +39,7 @@ public struct Counter: View {
                    iconColor: .black,
                    isEnabled: selectedNumber > viewState.minNumber) {
             selectedNumber -= 1
+            selectedNumberText = "\(selectedNumber)"
         }
     }
     
@@ -49,12 +50,13 @@ public struct Counter: View {
                    iconColor: .black,
                    isEnabled: selectedNumber < viewState.maxNumber) {
             selectedNumber += 1
+            selectedNumberText = "\(selectedNumber)"
         }
     }
     
     @ViewBuilder
     private var selection: some View {
-        TextField("", text: textFieldBinding)
+        TextField("", text: $selectedNumberText)
             .keyboardType(.numberPad)
             .textFieldStyle(.plain)
             .focused($fieldFocused)
@@ -65,24 +67,23 @@ public struct Counter: View {
             .roundedBackground(cornerRadius: Layout.size(1),
                                fill: Color(splytColor: viewState.backGroundColor ?? userTheme.theme)
                 .shadow(.drop(radius: Layout.size(0.5))))
+            .onChange(of: selectedNumberText) { newValue in
+                guard let intValue = intValue(newValue: newValue),
+                      intValue <= viewState.maxNumber,
+                      intValue >= viewState.minNumber else {
+                    selectedNumber = viewState.minNumber
+                    selectedNumberText = "\(selectedNumber)"
+                    return
+                }
+                selectedNumber = intValue
+                selectedNumberText = "\(selectedNumber)"
+            }
     }
     
     private func intValue(newValue: String) -> Int? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         return formatter.number(from: newValue)?.intValue
-    }
-    
-    private var textFieldBinding: Binding<String> {
-        return Binding(
-            get: { return "\(selectedNumber)"},
-            set: { newValue in
-                guard let intValue = intValue(newValue: newValue),
-                      intValue <= viewState.maxNumber,
-                      intValue >= viewState.minNumber else { return }
-                selectedNumber = intValue
-            }
-        )
     }
 }
 
