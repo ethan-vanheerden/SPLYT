@@ -13,7 +13,7 @@ struct RestFABGallery: View {
                     workoutSeconds: .constant(0),
                     viewState: viewState(isResting: true),
                     selectRestAction: { print($0) },
-                    stopRestAction: { },
+                    stopRestAction: { print($0) },
                     pauseAction: { print("paused") },
                     resumeAction: { print("resumed with \($0) seconds") })
             SectionHeader(viewState: .init(title: "Not Resting"))
@@ -22,7 +22,7 @@ struct RestFABGallery: View {
                     workoutSeconds: .constant(0),
                     viewState: viewState(isResting: false),
                     selectRestAction: { print($0) },
-                    stopRestAction: { },
+                    stopRestAction: { print($0) },
                     pauseAction: { print("paused") },
                     resumeAction: { print("resumed with \($0) seconds") })
         }

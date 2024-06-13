@@ -255,6 +255,9 @@
 		AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */; };
 		AAF0FB54299B0B5700167B02 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = AAF0FB53299B0B5700167B02 /* Font */; };
 		AAF4667D2C1A2E0B003D7053 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = AAF4667C2C1A2E0B003D7053 /* Notifications */; };
+		AAF466802C1B4D41003D7053 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4667F2C1B4D40003D7053 /* AudioPlayer.swift */; };
+		AAF466822C1B4D54003D7053 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF466812C1B4D54003D7053 /* Sound.swift */; };
+		AAF466852C1B4F7F003D7053 /* restTimer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAF466842C1B4F7F003D7053 /* restTimer.mp3 */; };
 		AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */; };
 		AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF864952B9CBD3A0042BFD7 /* Package.resolved */; };
 		AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */; };
@@ -534,6 +537,9 @@
 		AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewTests.swift; sourceTree = "<group>"; };
 		AAF0FB53299B0B5700167B02 /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
 		AAF4667B2C1A2900003D7053 /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Notifications; sourceTree = "<group>"; };
+		AAF4667F2C1B4D40003D7053 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		AAF466812C1B4D54003D7053 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		AAF466842C1B4F7F003D7053 /* restTimer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = restTimer.mp3; sourceTree = "<group>"; };
 		AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		AAF864952B9CBD3A0042BFD7 /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
@@ -1386,6 +1392,7 @@
 				AA2A22D828A5BE88002357E4 /* Exercises */,
 				AA93404B28888B2400309E83 /* History */,
 				AA1A33FF2882E0B300BCB792 /* Settings */,
+				AAF4667E2C1B4D11003D7053 /* Audio */,
 				AA93404A28888B0400309E83 /* Home */,
 				AA825D40287238C90041D94A /* Preview Content */,
 				AAEB98A229C13D26005EC9E9 /* Test Plans */,
@@ -2018,6 +2025,24 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		AAF4667E2C1B4D11003D7053 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				AAF466832C1B4F20003D7053 /* mp3 */,
+				AAF4667F2C1B4D40003D7053 /* AudioPlayer.swift */,
+				AAF466812C1B4D54003D7053 /* Sound.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		AAF466832C1B4F20003D7053 /* mp3 */ = {
+			isa = PBXGroup;
+			children = (
+				AAF466842C1B4F7F003D7053 /* restTimer.mp3 */,
+			);
+			path = mp3;
+			sourceTree = "<group>";
+		};
 		AAF864972B9CBD5E0042BFD7 /* Licenses */ = {
 			isa = PBXGroup;
 			children = (
@@ -2209,6 +2234,7 @@
 			files = (
 				AA60DA03294D01EB008C7615 /* fallback_exercises.json in Resources */,
 				AA825D42287238C90041D94A /* Preview Assets.xcassets in Resources */,
+				AAF466852C1B4F7F003D7053 /* restTimer.mp3 in Resources */,
 				AA2B25FC2A7F2E180001E79A /* GoogleService-Info.plist in Resources */,
 				AA825D3F287238C90041D94A /* Assets.xcassets in Resources */,
 				AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */,
@@ -2283,6 +2309,7 @@
 				AA672A692A69B8AC0009919E /* WorkoutDetailsNavigationRouter.swift in Sources */,
 				AA2C244E2A3CC0C9004FC939 /* NameWorkoutInteractor.swift in Sources */,
 				AAF864A12B9CBDDB0042BFD7 /* LicenseDisplay.swift in Sources */,
+				AAF466802C1B4D41003D7053 /* AudioPlayer.swift in Sources */,
 				AA672A4B2A64954D0009919E /* HistoryDomain.swift in Sources */,
 				AA1A33FE2882DF0300BCB792 /* SettingsView.swift in Sources */,
 				AAB42B392A79A5BF002A1ED2 /* RestPresetsDomain.swift in Sources */,
@@ -2406,6 +2433,7 @@
 				AA672A632A69B87F0009919E /* WorkoutDetailsViewModel.swift in Sources */,
 				AA1A340A2884841B00BCB792 /* MainViewNavigationController.swift in Sources */,
 				AA50737A2A546A6700F0BAD2 /* DoPlanService.swift in Sources */,
+				AAF466822C1B4D54003D7053 /* Sound.swift in Sources */,
 				AA5073762A546A4600F0BAD2 /* DoPlanInteractor.swift in Sources */,
 				AA4043D12BFBEA73002FC041 /* AppearanceViewModel.swift in Sources */,
 				AAE79AFF296EFC620010848E /* BuildWorkoutService.swift in Sources */,

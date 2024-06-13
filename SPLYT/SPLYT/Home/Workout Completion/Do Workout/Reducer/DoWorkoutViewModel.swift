@@ -14,7 +14,8 @@ import ExerciseCore
 enum DoWorkoutViewEvent {
     case loadWorkout
     case stopCountdown
-    case toggleRest(isResting: Bool, restSeconds: Int?)
+    case startRest(restSeconds: Int)
+    case stopRest(manuallyStopped: Bool)
     case toggleGroupExpand(group: Int, isExpanded: Bool)
     case completeGroup(group: Int)
     case addSet(group: Int)
@@ -46,9 +47,10 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
         case .stopCountdown:
             await startTime() // Start the workout timer
             await react(domainAction: .stopCountdown)
-        case let .toggleRest(isResting, restSeconds):
-            await react(domainAction: .toggleRest(isResting: isResting,
-                                                  restSeconds: restSeconds))
+        case .startRest(let restSeconds):
+            await react(domainAction: .startRest(restSeconds: restSeconds))
+        case .stopRest(let manuallyStopped):
+            await react(domainAction: .stopRest(manuallyStopped: manuallyStopped))
         case let .toggleGroupExpand(group, isExpanded):
             await react(domainAction: .toggleGroupExpand(group: group, isExpanded: isExpanded))
         case .completeGroup(let group):

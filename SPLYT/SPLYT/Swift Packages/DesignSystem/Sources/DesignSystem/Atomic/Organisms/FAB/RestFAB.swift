@@ -12,7 +12,7 @@ public struct RestFAB: View {
     @EnvironmentObject private var userTheme: UserTheme
     private let viewState: RestFABViewState
     private let selectRestAction: (Int) -> Void
-    private let stopRestAction: () -> Void
+    private let stopRestAction: (Bool) -> Void // Bool for whether the user manually stopped it
     private let pauseAction: () -> Void
     private let resumeAction: (Int) -> Void
     
@@ -20,7 +20,7 @@ public struct RestFAB: View {
                 workoutSeconds: Binding<Int>,
                 viewState: RestFABViewState,
                 selectRestAction: @escaping (Int) -> Void,
-                stopRestAction: @escaping () -> Void,
+                stopRestAction: @escaping (Bool) -> Void,
                 pauseAction: @escaping () -> Void,
                 resumeAction: @escaping (Int) -> Void) {
         self._isPresenting = isPresenting
@@ -62,7 +62,7 @@ public struct RestFAB: View {
                     IconButton(iconName: "xmark",
                                style: .secondary,
                                iconColor: .red) {
-                        stopRest()
+                        stopRest(isManual: true)
                     }
                 }
                 .padding()
@@ -86,7 +86,7 @@ public struct RestFAB: View {
                 
                 // Update the countdown and switch back the FAB state if we need to
                 if secondsLeft - delta < 0 {
-                    stopRest()
+                    stopRest(isManual: false)
                 } else if !isPaused {
                     secondsLeft -= delta
                 }
@@ -94,11 +94,11 @@ public struct RestFAB: View {
     }
     
     /// All the actions to be done when the rest period should be stopped
-    private func stopRest() -> Void {
+    private func stopRest(isManual: Bool) -> Void {
         withAnimation {
             secondsLeft = 0
             isPaused = false
-            stopRestAction()
+            stopRestAction(isManual)
         }
     }
     

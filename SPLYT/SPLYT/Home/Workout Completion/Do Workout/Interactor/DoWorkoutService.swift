@@ -24,6 +24,7 @@ protocol DoWorkoutServiceType {
     func deleteInProgressWorkoutCache() throws
     func scheduleRestNotifcation(workoutId: String, after: Int) async throws
     func deleteRestNotification(workoutId: String)
+    func playRestTimerSound() throws
 }
 
 // MARK: - Errors
@@ -40,6 +41,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
     private let userSettings: UserSettings
     private let screenLocker: ScreenLockerType
     private let notificationInteractor: NotificationInteractorType
+    private let audioPlayer: AudioPlayerType
     private let fallbackRestPresets: [Int] = [60, 90, 120]
     private let inProgressCacheRequest = InProgressWorkoutCacheRequest()
     
@@ -47,12 +49,14 @@ struct DoWorkoutService: DoWorkoutServiceType {
          routineService: CreatedRoutinesServiceType = CreatedRoutinesService(),
          userSettings: UserSettings = UserDefaults.standard,
          screenLocker: ScreenLockerType = ScreenLocker(),
-         notificationInteractor: NotificationInteractorType = NotificationInteractor()) {
+         notificationInteractor: NotificationInteractorType = NotificationInteractor(),
+         audioPlayer: AudioPlayerType = AudioPlayer()) {
         self.cacheInteractor = cacheInteractor
         self.routineService = routineService
         self.userSettings = userSettings
         self.screenLocker = screenLocker
         self.notificationInteractor = notificationInteractor
+        self.audioPlayer = audioPlayer
     }
     
     func loadWorkout(workoutId: String, planId: String? = nil) throws -> Workout {
@@ -118,7 +122,8 @@ struct DoWorkoutService: DoWorkoutServiceType {
         let notification = Notification(id: workoutId,
                                         type: .restTimer,
                                         title: Strings.restPeriodComplete,
-                                        description: Strings.continueWorkout)
+                                        description: Strings.continueWorkout,
+                                        isTimeSensitive: true)
         
         try await notificationInteractor.scheduleNotification(notification: notification,
                                                               after: seconds)
@@ -126,6 +131,10 @@ struct DoWorkoutService: DoWorkoutServiceType {
     
     func deleteRestNotification(workoutId: String) {
         notificationInteractor.deleteNotification(id: workoutId)
+    }
+    
+    func playRestTimerSound() throws {
+        try audioPlayer.playSound(.restTimer)
     }
 }
 

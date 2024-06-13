@@ -85,13 +85,11 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                     workoutSeconds: .constant(viewModel.secondsElapsed),
                     viewState: display.restFAB,
                     selectRestAction: { restSeconds in
-                viewModel.send(.toggleRest(isResting: true,
-                                           restSeconds: restSeconds),
+                viewModel.send(.startRest(restSeconds: restSeconds),
                                taskPriority: .userInitiated)
             },
-                    stopRestAction: {
-                viewModel.send(.toggleRest(isResting: false,
-                                           restSeconds: nil),
+                    stopRestAction: { manuallyStopped in
+                viewModel.send(.stopRest(manuallyStopped: manuallyStopped),
                                taskPriority: .userInitiated)
             },
                     pauseAction: {

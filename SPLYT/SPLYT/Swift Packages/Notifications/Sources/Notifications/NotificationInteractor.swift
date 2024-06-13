@@ -27,7 +27,7 @@ public struct NotificationInteractor: NotificationInteractorType {
         let content = UNMutableNotificationContent()
         content.title = notification.title
         content.body = notification.description
-        content.sound = .default
+        content.interruptionLevel = notification.isTimeSensitive ? .timeSensitive : .active
         
         var userInfo = notification.additionalInfo ?? [:]
         userInfo["TYPE"] = notification.type.rawValue

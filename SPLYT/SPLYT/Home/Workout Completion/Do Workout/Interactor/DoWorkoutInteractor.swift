@@ -14,7 +14,8 @@ import Caching
 enum DoWorkoutDomainAction {
     case loadWorkout
     case stopCountdown
-    case toggleRest(isResting: Bool, restSeconds: Int?)
+    case startRest(restSeconds: Int)
+    case stopRest(manuallyStopped: Bool)
     case toggleGroupExpand(group: Int, isExpanded: Bool)
     case completeGroup(group: Int)
     case addSet(group: Int)
@@ -66,8 +67,10 @@ final class DoWorkoutInteractor {
             return handleLoadWorkout()
         case .stopCountdown:
             return handleStopCountdown()
-        case let .toggleRest(isResting, restSeconds):
-            return await handleToggleRest(isResting: isResting, restSeconds: restSeconds)
+        case .startRest(let restSeconds):
+            return await handleStartRest(restSeconds: restSeconds)
+        case .stopRest(let manuallyStopped):
+            return handleStopRest(manuallyStopped: manuallyStopped)
         case let .toggleGroupExpand(group, isExpanded):
             return handleToggleGroupExpand(group: group, isExpanded: isExpanded)
         case .completeGroup(let group):
@@ -150,24 +153,35 @@ private extension DoWorkoutInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleToggleRest(isResting: Bool, restSeconds: Int?) async -> DoWorkoutDomainResult {
+    func handleStartRest(restSeconds: Int) async -> DoWorkoutDomainResult {
         guard var domain = savedDomain else { return .error }
         
-        domain.isResting = isResting
+        domain.isResting = true
         
         if let workoutId = workoutId {
-            if isResting, 
-                let restSeconds = restSeconds {
-                do {
-                    try await service.scheduleRestNotifcation(workoutId: workoutId,
-                                                              after: restSeconds)
-                } catch {
-                    // Nothing for now
-                    print("Could not schedule notification")
-                }
-            } else {
-                service.deleteRestNotification(workoutId: workoutId)
-            }
+            do {
+                try await service.scheduleRestNotifcation(workoutId: workoutId,
+                                                          after: restSeconds)
+            } catch { }
+        }
+        
+        return updateDomain(domain: domain)
+    }
+    
+    func handleStopRest(manuallyStopped: Bool) -> DoWorkoutDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        domain.isResting = false
+        
+        if !manuallyStopped {
+            do {
+                try service.playRestTimerSound()
+            } catch { }
+        }
+        
+        if let workoutId = workoutId,
+           manuallyStopped {
+            service.deleteRestNotification(workoutId: workoutId)
         }
         
         return updateDomain(domain: domain)

@@ -99,7 +99,7 @@ private extension CustomExerciseInteractor {
                                                    musclesWorked: musclesWorked)
             
             return .exit(domain)
-        } catch let error {
+        } catch {
             return .error
         }
     }
