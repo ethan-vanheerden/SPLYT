@@ -14,7 +14,7 @@ import Caching
 enum DoWorkoutDomainAction {
     case loadWorkout
     case stopCountdown
-    case toggleRest(isResting: Bool)
+    case toggleRest(isResting: Bool, restSeconds: Int?)
     case toggleGroupExpand(group: Int, isExpanded: Bool)
     case completeGroup(group: Int)
     case addSet(group: Int)
@@ -24,6 +24,8 @@ enum DoWorkoutDomainAction {
     case toggleDialog(dialog: DoWorkoutDialog, isOpen: Bool)
     case saveWorkout
     case cacheWorkout(secondsElapsed: Int)
+    case pauseRest
+    case resumeRest(restSeconds: Int)
 }
 
 // MARK: - Domain Results
@@ -64,8 +66,8 @@ final class DoWorkoutInteractor {
             return handleLoadWorkout()
         case .stopCountdown:
             return handleStopCountdown()
-        case .toggleRest(let isResting):
-            return handleToggleRest(isResting: isResting)
+        case let .toggleRest(isResting, restSeconds):
+            return await handleToggleRest(isResting: isResting, restSeconds: restSeconds)
         case let .toggleGroupExpand(group, isExpanded):
             return handleToggleGroupExpand(group: group, isExpanded: isExpanded)
         case .completeGroup(let group):
@@ -91,6 +93,10 @@ final class DoWorkoutInteractor {
             return handleSaveWorkout()
         case .cacheWorkout(let secondsElapsed):
             return handleCacheWorkout(secondsElapsed: secondsElapsed)
+        case .pauseRest:
+            return await handleTogglePauseRest(isPaused: true, restSeconds: nil)
+        case .resumeRest(let restSeconds):
+            return await handleTogglePauseRest(isPaused: false, restSeconds: restSeconds)
         }
     }
 }
@@ -144,9 +150,26 @@ private extension DoWorkoutInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleToggleRest(isResting: Bool) -> DoWorkoutDomainResult {
+    func handleToggleRest(isResting: Bool, restSeconds: Int?) async -> DoWorkoutDomainResult {
         guard var domain = savedDomain else { return .error }
+        
         domain.isResting = isResting
+        
+        if let workoutId = workoutId {
+            if isResting, 
+                let restSeconds = restSeconds {
+                do {
+                    try await service.scheduleRestNotifcation(workoutId: workoutId,
+                                                              after: restSeconds)
+                } catch {
+                    // Nothing for now
+                    print("Could not schedule notification")
+                }
+            } else {
+                service.deleteRestNotification(workoutId: workoutId)
+            }
+        }
+        
         return updateDomain(domain: domain)
     }
     
@@ -254,6 +277,11 @@ private extension DoWorkoutInteractor {
             
             try service.deleteInProgressWorkoutCache()
             
+            if let workoutId = workoutId {
+                // Delete this in case there is one scheduled
+                service.deleteRestNotification(workoutId: workoutId)
+            }
+            
             return .exit(domain)
         } catch {
             return .error
@@ -270,6 +298,27 @@ private extension DoWorkoutInteractor {
                                                   fractionCompleted: domain.fractionCompleted)
         
         service.saveInProgressWorkout(inProgressWorkout)
+        
+        return .loaded(domain)
+    }
+    
+    func handleTogglePauseRest(isPaused: Bool, restSeconds: Int?) async -> DoWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        if let workoutId = workoutId {
+            if !isPaused,
+               let restSeconds = restSeconds {
+                do {
+                    try await service.scheduleRestNotifcation(workoutId: workoutId,
+                                                              after: restSeconds)
+                } catch {
+                    // Nothing for now
+                    print("Could not schedule notification")
+                }
+            } else {
+                service.deleteRestNotification(workoutId: workoutId)
+            }
+        }
         
         return .loaded(domain)
     }

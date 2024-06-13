@@ -14,7 +14,7 @@ import ExerciseCore
 enum DoWorkoutViewEvent {
     case loadWorkout
     case stopCountdown
-    case toggleRest(isResting: Bool)
+    case toggleRest(isResting: Bool, restSeconds: Int?)
     case toggleGroupExpand(group: Int, isExpanded: Bool)
     case completeGroup(group: Int)
     case addSet(group: Int)
@@ -24,6 +24,8 @@ enum DoWorkoutViewEvent {
     case toggleDialog(dialog: DoWorkoutDialog, isOpen: Bool)
     case saveWorkout
     case cacheWorkout(secondElapsed: Int)
+    case pauseRest
+    case resumeRest(restSeconds: Int)
 }
 
 // MARK: - View Model
@@ -44,8 +46,9 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
         case .stopCountdown:
             await startTime() // Start the workout timer
             await react(domainAction: .stopCountdown)
-        case .toggleRest(let isResting):
-            await react(domainAction: .toggleRest(isResting: isResting))
+        case let .toggleRest(isResting, restSeconds):
+            await react(domainAction: .toggleRest(isResting: isResting,
+                                                  restSeconds: restSeconds))
         case let .toggleGroupExpand(group, isExpanded):
             await react(domainAction: .toggleGroupExpand(group: group, isExpanded: isExpanded))
         case .completeGroup(let group):
@@ -73,6 +76,10 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
         case .cacheWorkout(let secondsElapsed):
             // Don't need to update view, just make the interactor call
             _ = await interactor.interact(with: .cacheWorkout(secondsElapsed: secondsElapsed))
+        case .pauseRest:
+            await react(domainAction: .pauseRest)
+        case .resumeRest(let restSeconds):
+            await react(domainAction: .resumeRest(restSeconds: restSeconds))
         }
     }
 }

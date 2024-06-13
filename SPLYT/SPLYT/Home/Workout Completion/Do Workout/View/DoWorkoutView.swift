@@ -62,8 +62,8 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 secondaryAction: { viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: false),
                                                   taskPriority: .userInitiated) })
         .onChange(of: viewModel.secondsElapsed) { newValue in
-            // We want to update the in progress cache once every 2 minutes
-            if newValue != 0 && newValue % 120 == 0 {
+            // We want to update the in progress cache once every 30 seconds
+            if newValue != 0 && newValue % 30 == 0 {
                 viewModel.send(.cacheWorkout(secondElapsed: newValue),
                                taskPriority: .userInitiated)
             }
@@ -84,8 +84,23 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             RestFAB(isPresenting: $restFABPresenting,
                     workoutSeconds: .constant(viewModel.secondsElapsed),
                     viewState: display.restFAB,
-                    selectRestAction: { viewModel.send(.toggleRest(isResting: true), taskPriority: .userInitiated) },
-                    stopRestAction: { viewModel.send(.toggleRest(isResting: false), taskPriority: .userInitiated) })
+                    selectRestAction: { restSeconds in
+                viewModel.send(.toggleRest(isResting: true,
+                                           restSeconds: restSeconds),
+                               taskPriority: .userInitiated)
+            },
+                    stopRestAction: {
+                viewModel.send(.toggleRest(isResting: false,
+                                           restSeconds: nil),
+                               taskPriority: .userInitiated)
+            },
+                    pauseAction: {
+                viewModel.send(.pauseRest,
+                               taskPriority: .userInitiated)
+            }, resumeAction: { restSeconds in
+                viewModel.send(.resumeRest(restSeconds: restSeconds),
+                               taskPriority: .userInitiated)
+            })
         }
     }
     

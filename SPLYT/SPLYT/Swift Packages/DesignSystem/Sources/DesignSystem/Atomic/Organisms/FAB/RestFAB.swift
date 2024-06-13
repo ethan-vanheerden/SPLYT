@@ -11,19 +11,25 @@ public struct RestFAB: View {
     @Binding private var workoutSeconds: Int // Total number of seconds elapsed in the workout
     @EnvironmentObject private var userTheme: UserTheme
     private let viewState: RestFABViewState
-    private let selectRestAction: () -> Void
+    private let selectRestAction: (Int) -> Void
     private let stopRestAction: () -> Void
+    private let pauseAction: () -> Void
+    private let resumeAction: (Int) -> Void
     
     public init(isPresenting: Binding<Bool>,
                 workoutSeconds: Binding<Int>,
                 viewState: RestFABViewState,
-                selectRestAction: @escaping () -> Void,
-                stopRestAction: @escaping () -> Void) {
+                selectRestAction: @escaping (Int) -> Void,
+                stopRestAction: @escaping () -> Void,
+                pauseAction: @escaping () -> Void,
+                resumeAction: @escaping (Int) -> Void) {
         self._isPresenting = isPresenting
         self._workoutSeconds = workoutSeconds
         self.viewState = viewState
         self.selectRestAction = selectRestAction
         self.stopRestAction = stopRestAction
+        self.pauseAction = pauseAction
+        self.resumeAction = resumeAction
     }
     
     public var body: some View {
@@ -51,6 +57,7 @@ public struct RestFAB: View {
                                style: .secondary,
                                iconColor: userTheme.theme) {
                         isPaused.toggle()
+                        isPaused ? pauseAction() : resumeAction(secondsLeft)
                     }
                     IconButton(iconName: "xmark",
                                style: .secondary,
@@ -133,7 +140,7 @@ public struct RestFAB: View {
                     RestFABRow(seconds: seconds) {
                         isPresenting = false
                         withAnimation {
-                            selectRestAction()
+                            selectRestAction(seconds)
                             secondsLeft = seconds
                         }
                     }
@@ -157,8 +164,8 @@ public struct RestFAB: View {
                    confirmAction: {
             showTimePicker = false
             isPresenting = false
-            selectRestAction()
             secondsLeft = TimeUtils.getTotalSeconds(minutes: pickerMinutes, seconds: pickerSeconds)
+            selectRestAction(secondsLeft)
         },
                    cancelAction: {
             showTimePicker = false

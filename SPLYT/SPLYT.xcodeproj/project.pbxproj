@@ -254,6 +254,7 @@
 		AAF0FB48299962CF00167B02 /* BuildWorkoutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB47299962CF00167B02 /* BuildWorkoutViewModelTests.swift */; };
 		AAF0FB4A299962EA00167B02 /* BuildWorkoutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */; };
 		AAF0FB54299B0B5700167B02 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = AAF0FB53299B0B5700167B02 /* Font */; };
+		AAF4667D2C1A2E0B003D7053 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = AAF4667C2C1A2E0B003D7053 /* Notifications */; };
 		AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */; };
 		AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF864952B9CBD3A0042BFD7 /* Package.resolved */; };
 		AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */; };
@@ -532,6 +533,7 @@
 		AAF0FB47299962CF00167B02 /* BuildWorkoutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewModelTests.swift; sourceTree = "<group>"; };
 		AAF0FB49299962EA00167B02 /* BuildWorkoutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutViewTests.swift; sourceTree = "<group>"; };
 		AAF0FB53299B0B5700167B02 /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
+		AAF4667B2C1A2900003D7053 /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Notifications; sourceTree = "<group>"; };
 		AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		AAF864952B9CBD3A0042BFD7 /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				AADCABDF288895AC00FF09B9 /* Mocking in Frameworks */,
 				AA1A34062882E24900BCB792 /* DesignShowcase in Frameworks */,
 				AA2B26002A7F2F430001E79A /* FirebaseAuth in Frameworks */,
+				AAF4667D2C1A2E0B003D7053 /* Notifications in Frameworks */,
 				AA116FDA2A77FE7800E68852 /* UserSettings in Frameworks */,
 				AAD8704929C3C9D500540608 /* ExerciseCore in Frameworks */,
 				AA2B26022A7F2F430001E79A /* FirebaseCrashlytics in Frameworks */,
@@ -857,6 +860,7 @@
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
 			isa = PBXGroup;
 			children = (
+				AAF4667B2C1A2900003D7053 /* Notifications */,
 				AABE9EC12B2645CC00B1135A /* UserAuth */,
 				AA116FD82A77FE5D00E68852 /* UserSettings */,
 				AAD8704729C3C99A00540608 /* ExerciseCore */,
@@ -2128,6 +2132,7 @@
 				AA2B26012A7F2F430001E79A /* FirebaseCrashlytics */,
 				AA2B26032A7F2F430001E79A /* FirebaseFunctions */,
 				AA72C60B2B891E0200E36B9C /* UserAuth */,
+				AAF4667C2C1A2E0B003D7053 /* Notifications */,
 			);
 			productName = SPLYT;
 			productReference = AA825D37287238BF0041D94A /* SPLYT.app */;
@@ -2869,6 +2874,10 @@
 		AADCABDE288895AC00FF09B9 /* Mocking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Mocking;
+		};
+		AAF4667C2C1A2E0B003D7053 /* Notifications */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Notifications;
 		};
 		AAFC58F328871CE2001B69B3 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;

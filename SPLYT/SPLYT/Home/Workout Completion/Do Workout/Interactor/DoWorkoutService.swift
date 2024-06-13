@@ -10,6 +10,7 @@ import Caching
 import ExerciseCore
 import UserSettings
 import Core
+import Notifications
 
 // MARK: - Protocol
 
@@ -21,6 +22,8 @@ protocol DoWorkoutServiceType {
     func loadInProgressWorkout() throws -> InProgressWorkout
     func saveInProgressWorkout(_: InProgressWorkout)
     func deleteInProgressWorkoutCache() throws
+    func scheduleRestNotifcation(workoutId: String, after: Int) async throws
+    func deleteRestNotification(workoutId: String)
 }
 
 // MARK: - Errors
@@ -36,17 +39,20 @@ struct DoWorkoutService: DoWorkoutServiceType {
     private let routineService: CreatedRoutinesServiceType
     private let userSettings: UserSettings
     private let screenLocker: ScreenLockerType
+    private let notificationInteractor: NotificationInteractorType
     private let fallbackRestPresets: [Int] = [60, 90, 120]
     private let inProgressCacheRequest = InProgressWorkoutCacheRequest()
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
          routineService: CreatedRoutinesServiceType = CreatedRoutinesService(),
          userSettings: UserSettings = UserDefaults.standard,
-         screenLocker: ScreenLockerType = ScreenLocker()) {
+         screenLocker: ScreenLockerType = ScreenLocker(),
+         notificationInteractor: NotificationInteractorType = NotificationInteractor()) {
         self.cacheInteractor = cacheInteractor
         self.routineService = routineService
         self.userSettings = userSettings
         self.screenLocker = screenLocker
+        self.notificationInteractor = notificationInteractor
     }
     
     func loadWorkout(workoutId: String, planId: String? = nil) throws -> Workout {
@@ -107,4 +113,25 @@ struct DoWorkoutService: DoWorkoutServiceType {
     func deleteInProgressWorkoutCache() throws {
         try cacheInteractor.deleteFile(request: inProgressCacheRequest)
     }
+    
+    func scheduleRestNotifcation(workoutId: String, after seconds: Int) async throws {
+        let notification = Notification(id: workoutId,
+                                        type: .restTimer,
+                                        title: Strings.restPeriodComplete,
+                                        description: Strings.continueWorkout)
+        
+        try await notificationInteractor.scheduleNotification(notification: notification,
+                                                              after: seconds)
+    }
+    
+    func deleteRestNotification(workoutId: String) {
+        notificationInteractor.deleteNotification(id: workoutId)
+    }
+}
+
+// MARK: - Strings
+
+fileprivate struct Strings {
+    static let restPeriodComplete = "Rest Period Complete!"
+    static let continueWorkout = "Continue your workout now 💪"
 }
