@@ -152,7 +152,7 @@ public struct SetView: View {
             IconButton(iconName: "ellipsis",
                        style: .secondary,
                        iconColor: userTheme.theme) { showBaseActionSheet = true }
-        case let .inProgress(usePreviousInputAction, _):
+        case let .inProgress(usePreviousInputAction, _, _, _):
             IconButton(iconName: "arrow.counterclockwise") {
                 usePreviousInputAction(viewState.setIndex, forModifier)
             }

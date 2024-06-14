@@ -27,6 +27,7 @@ enum DoWorkoutViewEvent {
     case cacheWorkout(secondElapsed: Int)
     case pauseRest
     case resumeRest(restSeconds: Int)
+    case deleteExercise(group: Int, exerciseIndex: Int)
 }
 
 // MARK: - View Model
@@ -82,6 +83,8 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
             await react(domainAction: .pauseRest)
         case .resumeRest(let restSeconds):
             await react(domainAction: .resumeRest(restSeconds: restSeconds))
+        case let .deleteExercise(group, exerciseIndex):
+            await react(domainAction: .deleteExercise(group: group, exerciseIndex: exerciseIndex))
         }
     }
 }

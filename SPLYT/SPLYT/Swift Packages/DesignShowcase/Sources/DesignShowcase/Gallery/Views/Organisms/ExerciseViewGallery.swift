@@ -64,7 +64,9 @@ struct ExerciseViewGallery: View {
                                                           numSetsTitle: "3 sets"
                                                          ),
                              type: .inProgress(usePreviousInputAction: { _, _ in },
-                                               addNoteAction: { }),
+                                               addNoteAction: { },
+                                               replaceExerciseAction: { },
+                                               deleteExerciseAction: { }),
                              addSetAction: { },
                              removeSetAction: { },
                              updateSetAction: { _, _ in },

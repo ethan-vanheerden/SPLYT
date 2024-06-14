@@ -57,12 +57,16 @@ struct SetViewGallery: View {
                     updateModifierAction: { _, _ in })
             SetView(viewState: viewStateFive,
                     exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
-                                              addNoteAction: { }),
+                                              addNoteAction: { },
+                                              replaceExerciseAction: { },
+                                              deleteExerciseAction: { }),
                     updateSetAction: { _, _ in },
                     updateModifierAction: { _, _ in })
             SetView(viewState: viewStateSix,
                     exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
-                                              addNoteAction: { }),
+                                              addNoteAction: { },
+                                              replaceExerciseAction: { },
+                                              deleteExerciseAction: { }),
                     updateSetAction: { _, _ in },
                     updateModifierAction: { _, _ in })
         }

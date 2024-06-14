@@ -27,6 +27,7 @@ enum DoWorkoutDomainAction {
     case cacheWorkout(secondsElapsed: Int)
     case pauseRest
     case resumeRest(restSeconds: Int)
+    case deleteExercise(group: Int, exerciseIndex: Int)
 }
 
 // MARK: - Domain Results
@@ -100,6 +101,8 @@ final class DoWorkoutInteractor {
             return await handleTogglePauseRest(isPaused: true, restSeconds: nil)
         case .resumeRest(let restSeconds):
             return await handleTogglePauseRest(isPaused: false, restSeconds: restSeconds)
+        case let .deleteExercise(group, exerciseIndex):
+            return handleDeleteExercise(group: group, exerciseIndex: exerciseIndex)
         }
     }
 }
@@ -335,6 +338,12 @@ private extension DoWorkoutInteractor {
         }
         
         return .loaded(domain)
+    }
+    
+    func handleDeleteExercise(group: Int, exerciseIndex: Int) -> DoWorkoutDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        return .error
     }
 }
 

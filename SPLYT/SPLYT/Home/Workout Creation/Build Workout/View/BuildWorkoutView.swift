@@ -18,12 +18,15 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @State private var searchText = ""
     @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: BuildWorkoutNavigationRouter
+    private let forReplaceExercise: Bool
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
-         navigationRouter: BuildWorkoutNavigationRouter) {
+         navigationRouter: BuildWorkoutNavigationRouter,
+         forReplaceExercise: Bool = false) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
+        self.forReplaceExercise = forReplaceExercise
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
@@ -106,10 +109,16 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         Section {
                             ForEach(viewState.exercises, id: \.self) { exerciseViewState in
                                 AddExerciseTile(viewState: exerciseViewState,
-                                                tapAction: { viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id),
-                                                                            taskPriority: .userInitiated) },
-                                                favoriteAction: { viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
-                                                                                 taskPriority: .userInitiated) })
+                                                tapAction: {
+                                    
+                                    // TODO: here
+                                    viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id),
+                                                   taskPriority: .userInitiated)
+                                },
+                                                favoriteAction: {
+                                    viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
+                                                   taskPriority: .userInitiated)
+                                })
                                 .padding(.bottom, Layout.size(1))
                             }
                             .padding(.horizontal, horizontalPadding)

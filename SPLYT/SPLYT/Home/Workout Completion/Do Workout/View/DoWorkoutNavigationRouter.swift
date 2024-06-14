@@ -16,6 +16,7 @@ enum DoWorkoutNavigationEvent {
     case back
     case exit(workoutDetailsId: String? = nil)
     case beginWorkout
+    case showExercises
 }
 
 // MARK: - Router
@@ -43,6 +44,8 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
             handleExit(workoutDetailsId: workoutDetailsId)
         case .beginWorkout:
             handleBeginWorkout()
+        case .showExercises:
+            handleShowExercises()
         }
     }
 }
@@ -69,5 +72,9 @@ private extension DoWorkoutNavigationRouter {
                                  navigationRouter: self)
         let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
         self.navigator?.push(vc, animated: false)
+    }
+    
+    func handleShowExercises() {
+        
     }
 }

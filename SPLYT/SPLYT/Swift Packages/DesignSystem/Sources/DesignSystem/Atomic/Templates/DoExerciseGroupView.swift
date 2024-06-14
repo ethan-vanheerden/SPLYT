@@ -11,6 +11,8 @@ public struct DoExerciseGroupView: View {
     private let usePreviousInputAction: (Int, Int, Bool) -> Void // Exercise index, set index, for a modifier
     private let addNoteAction: () -> Void
     private let finishSlideAction: () -> Void
+    private let replaceExerciseAction: (Int) -> Void // Exercise index
+    private let deleteExerciseAction: (Int) -> Void // Exercise index
     
     public init(isExpanded: Binding<Bool>,
                 viewState: DoExerciseGroupViewState,
@@ -20,7 +22,9 @@ public struct DoExerciseGroupView: View {
                 updateModifierAction: @escaping (Int, Int, SetInput) -> Void,
                 usePreviousInputAction: @escaping (Int, Int, Bool) -> Void,
                 addNoteAction: @escaping () -> Void,
-                finishSlideAction: @escaping () -> Void) {
+                finishSlideAction: @escaping () -> Void,
+                replaceExerciseAction: @escaping (Int) -> Void,
+                deleteExerciseAction: @escaping (Int) -> Void) {
         self._isExpanded = isExpanded
         self.viewState = viewState
         self.addSetAction = addSetAction
@@ -30,6 +34,8 @@ public struct DoExerciseGroupView: View {
         self.usePreviousInputAction = usePreviousInputAction
         self.addNoteAction = addNoteAction
         self.finishSlideAction = finishSlideAction
+        self.replaceExerciseAction = replaceExerciseAction
+        self.deleteExerciseAction = deleteExerciseAction
     }
     
     
@@ -40,9 +46,18 @@ public struct DoExerciseGroupView: View {
                 VStack {
                     ForEach(Array(viewState.exercises.enumerated()), id: \.offset) { exerciseIndex, exercise in
                         ExerciseView(viewState: exercise,
-                                     type: .inProgress(usePreviousInputAction: { setIndex, fromModifier in
-                            usePreviousInputAction(exerciseIndex, setIndex, fromModifier)
-                        }, addNoteAction: addNoteAction),
+                                     type: .inProgress(
+                                        usePreviousInputAction: { setIndex, fromModifier in
+                                            usePreviousInputAction(exerciseIndex, setIndex, fromModifier)
+                                        }, 
+                                        addNoteAction: addNoteAction,
+                                        replaceExerciseAction: {
+                                            replaceExerciseAction(exerciseIndex)
+                                        },
+                                        deleteExerciseAction: { 
+                                            deleteExerciseAction(exerciseIndex)
+                                        }
+                                     ),
                                      addSetAction: addSetAction,
                                      removeSetAction: removeSetAction,
                                      updateSetAction: { setIndex, newInput in

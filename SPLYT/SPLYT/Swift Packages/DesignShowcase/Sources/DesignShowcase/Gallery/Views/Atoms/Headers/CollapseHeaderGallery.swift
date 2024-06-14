@@ -23,7 +23,9 @@ struct CollapseHeaderGallery: View {
                                                                   input: .init()),
                                                 modifier: nil),
                         exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
-                                                  addNoteAction: { }),
+                                                  addNoteAction: { },
+                                                  replaceExerciseAction: { },
+                                                  deleteExerciseAction: { }),
                         updateSetAction: { _, _ in },
                         updateModifierAction: { _, _ in })
             }

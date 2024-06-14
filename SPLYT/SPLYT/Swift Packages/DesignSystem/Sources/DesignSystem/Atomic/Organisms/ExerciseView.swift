@@ -2,6 +2,7 @@ import SwiftUI
 import ExerciseCore
 
 public struct ExerciseView: View {
+    @State private var showActionSheet: Bool = false
     @EnvironmentObject private var userTheme: UserTheme
     private let viewState: ExerciseViewState
     private let type: ExerciseViewType
@@ -27,7 +28,7 @@ public struct ExerciseView: View {
     
     public var body: some View {
         VStack {
-            SectionHeader(viewState: viewState.header)
+            header
             ForEach(viewState.sets, id: \.setIndex) { set in
                 SetView(viewState: set,
                         exerciseType: type,
@@ -36,6 +37,35 @@ public struct ExerciseView: View {
             }
             .padding(.horizontal, horizontalPadding)
             setButtons
+        }
+        .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
+            switch type {
+            case .build:
+                EmptyView()
+            case let .inProgress(_, _, replaceExerciseAction, deleteExerciseAction):
+                Button(Strings.replaceExercise) { replaceExerciseAction() }
+                Button(Strings.deleteExercise, role: .destructive) { deleteExerciseAction() }
+            }
+            
+        }
+    }
+    
+    @ViewBuilder
+    private var header: some View {
+        HStack {
+            SectionHeader(viewState: viewState.header)
+            Spacer()
+            switch type {
+            case .build:
+                EmptyView()
+            case .inProgress:
+                IconButton(iconName: "ellipsis",
+                           style: .secondary,
+                           iconColor: userTheme.theme) {
+                    showActionSheet = true
+                }
+                           .padding(.trailing, horizontalPadding)
+            }
         }
     }
     
@@ -47,7 +77,7 @@ public struct ExerciseView: View {
             switch type {
             case .build:
                 EmptyView()
-            case let .inProgress(_, addNoteAction):
+            case let .inProgress(_, addNoteAction, _, _):
                 SplytButton(text: Strings.addNote,
                             action: addNoteAction)
                 .frame(width: Layout.size(20))
@@ -71,9 +101,12 @@ public struct ExerciseView: View {
 
 public enum ExerciseViewType {
     // Ints for the set index
-    case build(addModifierAction: (Int) -> Void, removeModifierAction: (Int) -> Void)
-    // Int for set index, Bool for whether it's for a modifier or not
-    case inProgress(usePreviousInputAction: (Int, Bool) -> Void, addNoteAction: () -> Void)
+    case build(addModifierAction: (Int) -> Void, 
+               removeModifierAction: (Int) -> Void)
+    case inProgress(usePreviousInputAction: (Int, Bool) -> Void, // (Set index, For Modifier)
+                    addNoteAction: () -> Void,
+                    replaceExerciseAction: () -> Void,
+                    deleteExerciseAction: () -> Void)
 }
 
 // MARK: View State
@@ -99,4 +132,6 @@ public struct ExerciseViewState: Equatable, Hashable {
 
 fileprivate struct Strings {
     static let addNote = "Add note"
+    static let replaceExercise = "Replace Exercise"
+    static let deleteExercise = "Delete Exercise"
 }

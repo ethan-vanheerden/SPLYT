@@ -161,10 +161,14 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             DoExerciseGroupView(isExpanded: groupExpandBinding(group: groupIndex,
                                                                expandedGroups: display.expandedGroups),
                                 viewState: group,
-                                addSetAction: { viewModel.send(.addSet(group: groupIndex),
-                                                               taskPriority: .userInitiated) },
-                                removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
-                                                                  taskPriority: .userInitiated) },
+                                addSetAction: {
+                viewModel.send(.addSet(group: groupIndex),
+                               taskPriority: .userInitiated)
+            },
+                                removeSetAction: {
+                viewModel.send(.removeSet(group: groupIndex),
+                               taskPriority: .userInitiated)
+            },
                                 updateSetAction: { exerciseIndex, setIndex, setInput in
                 viewModel.send(.updateSet(group: groupIndex,
                                           exerciseIndex: exerciseIndex,
@@ -189,8 +193,14 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                taskPriority: .userInitiated)
             },
                                 addNoteAction: { }, // TODO: add notes
-                                finishSlideAction: { viewModel.send(.completeGroup(group: groupIndex),
-                                                                    taskPriority: .userInitiated) })
+                                finishSlideAction: {
+                viewModel.send(.completeGroup(group: groupIndex),
+                               taskPriority: .userInitiated)
+            },
+                                replaceExerciseAction: { exerciseIndex in
+            },
+                                deleteExerciseAction: { exerciseIndex in
+            })
             .padding(.horizontal, horizontalPadding)
         }
         .animation(.default, value: display.expandedGroups) // Preserves collapse animation

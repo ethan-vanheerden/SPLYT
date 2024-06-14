@@ -24,7 +24,9 @@ struct DoExerciseGroupViewGallery: View {
                                     updateModifierAction: { _, _, _ in },
                                     usePreviousInputAction: { _, _, _ in },
                                     addNoteAction: { },
-                                    finishSlideAction: { })
+                                    finishSlideAction: { },
+                                    replaceExerciseAction: { _ in },
+                                    deleteExerciseAction: { _ in })
                 Spacer()
             }
             .padding(.horizontal, Layout.size(2))

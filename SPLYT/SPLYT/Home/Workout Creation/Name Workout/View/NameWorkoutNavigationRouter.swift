@@ -60,7 +60,8 @@ private extension NameWorkoutNavigationRouter {
     
     func startBuildWorkout(navState: NameWorkoutNavigationState) {
         let interactor = BuildWorkoutInteractor(service: buildWorkoutService,
-                                                nameState: navState, saveAction: saveAction)
+                                                nameState: navState, 
+                                                saveAction: saveAction)
         let viewModel = BuildWorkoutViewModel(interactor: interactor)
         let navRouter = BuildWorkoutNavigationRouter(viewModel: viewModel)
         navRouter.navigator = navigator
