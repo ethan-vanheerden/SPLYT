@@ -258,6 +258,7 @@
 		AAF466802C1B4D41003D7053 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4667F2C1B4D40003D7053 /* AudioPlayer.swift */; };
 		AAF466822C1B4D54003D7053 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF466812C1B4D54003D7053 /* Sound.swift */; };
 		AAF466852C1B4F7F003D7053 /* restTimer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AAF466842C1B4F7F003D7053 /* restTimer.mp3 */; };
+		AAF4668B2C1F4007003D7053 /* WorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4668A2C1F4007003D7053 /* WorkoutService.swift */; };
 		AAF8648C2B9BBEF00042BFD7 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */; };
 		AAF864962B9CBD3A0042BFD7 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = AAF864952B9CBD3A0042BFD7 /* Package.resolved */; };
 		AAF864992B9CBD930042BFD7 /* LicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */; };
@@ -540,6 +541,7 @@
 		AAF4667F2C1B4D40003D7053 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		AAF466812C1B4D54003D7053 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		AAF466842C1B4F7F003D7053 /* restTimer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = restTimer.mp3; sourceTree = "<group>"; };
+		AAF4668A2C1F4007003D7053 /* WorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutService.swift; sourceTree = "<group>"; };
 		AAF8648B2B9BBEF00042BFD7 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		AAF864952B9CBD3A0042BFD7 /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		AAF864982B9CBD930042BFD7 /* LicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewModel.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 		AA2A22D828A5BE88002357E4 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
+				AAF466872C1F3F9A003D7053 /* Service */,
 				AA893136294A4A2900D7B4B1 /* Caching */,
 				AADEC4B128A8398F00A5463B /* Networking */,
 			);
@@ -2043,6 +2046,14 @@
 			path = mp3;
 			sourceTree = "<group>";
 		};
+		AAF466872C1F3F9A003D7053 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				AAF4668A2C1F4007003D7053 /* WorkoutService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		AAF864972B9CBD5E0042BFD7 /* Licenses */ = {
 			isa = PBXGroup;
 			children = (
@@ -2138,6 +2149,7 @@
 				AA2548D82C05622E00C4737A /* Increment Build Number */,
 				AA825D34287238BF0041D94A /* Frameworks */,
 				AA825D35287238BF0041D94A /* Resources */,
+				AAF466862C1CA54E003D7053 /* Configure Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -2272,6 +2284,29 @@
 			shellPath = /bin/bash;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"$SRCROOT/$PRODUCT_NAME\"\n\nsource version.sh\n";
 		};
+		AAF466862C1CA54E003D7053 /* Configure Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = "Configure Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 		AAF8648D2B9BC56C0042BFD7 /* Copy Package.resolved */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2325,6 +2360,7 @@
 				AAF06EF729AE9B6300E48918 /* HomeDomain.swift in Sources */,
 				AACB29872A16902800AACB6B /* DoWorkoutDisplay.swift in Sources */,
 				AA672A472A6495080009919E /* HistoryService.swift in Sources */,
+				AAF4668B2C1F4007003D7053 /* WorkoutService.swift in Sources */,
 				AA1786EA2A91146E00563B04 /* LoginService.swift in Sources */,
 				AAE79AFB296EFA1E0010848E /* BuildWorkoutViewModel.swift in Sources */,
 				AA2C24502A3CC16A004FC939 /* NameWorkoutReducer.swift in Sources */,
@@ -2690,6 +2726,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD_NUMBER)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"SPLYT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM29ZMC7X2;
 				ENABLE_PREVIEWS = YES;
@@ -2727,6 +2764,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD_NUMBER)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"SPLYT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM29ZMC7X2;
 				ENABLE_PREVIEWS = YES;
@@ -2832,8 +2870,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 10.13.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.0;
 			};
 		};
 		AAFC58F228871CE2001B69B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {

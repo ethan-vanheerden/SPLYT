@@ -140,6 +140,26 @@ public struct WorkoutInteractor {
         
         return name + "-" + formatter.string(from: creationDate)
     }
+    
+    /// Creates a new exercise with the given number of sets.
+    /// - Parameters:
+    ///   - available: The `AvailableExercise` that this exercise is based on
+    ///   - numSets: The number of sets this exercise will have
+    /// - Returns: The exercise
+    public static func createExercise(from available: AvailableExercise, numSets: Int) -> Exercise {
+        let id = available.id
+        var sets: [Set] = []
+        
+        for _ in 1...numSets {
+            let newSet = Set(input: available.defaultInputType,
+                             modifier: nil)
+            sets.append(newSet)
+        }
+        
+        return Exercise(id: id,
+                        name: available.name,
+                        sets: sets)
+    }
 }
 
 // MARK: - Private

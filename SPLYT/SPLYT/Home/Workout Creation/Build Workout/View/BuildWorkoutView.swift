@@ -34,15 +34,27 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         switch viewModel.viewState {
         case .loading:
             ProgressView()
-                .navigationBar(viewState: .init(title: Strings.addExercises)) {
-                    viewModel.send(.toggleDialog(type: .leave, isOpen: true),
-                                   taskPriority: .userInitiated)
+                .navigationBar(viewState: .init(
+                    title: forReplaceExercise ? Strings.replaceExercise : Strings.addExercises)
+                ) {
+                    if forReplaceExercise {
+                        navigationRouter.navigate(.dismissReplace)
+                    } else {
+                        viewModel.send(.toggleDialog(type: .leave, isOpen: true),
+                                       taskPriority: .userInitiated)
+                    }
                 }
         case .main(let display), .exitEdit(let display):
             mainView(display: display)
         case .error:
             ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
-                      backAction: { navigationRouter.navigate(.exit) })
+                      backAction: {
+                if forReplaceExercise {
+                    navigationRouter.navigate(.dismissReplace)
+                } else {
+                    navigationRouter.navigate(.exit)
+                }
+            })
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
@@ -79,10 +91,20 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
         }
-        .navigationBar(viewState: .init(title: Strings.addExercises),
-                       backAction: { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
-                                                    taskPriority: .userInitiated) },
-                       content: { continueButton(canContinue: display.canSave) })
+        .navigationBar(viewState: .init(
+            title: forReplaceExercise ? Strings.replaceExercise : Strings.addExercises
+        ),
+                       backAction: {
+            if forReplaceExercise {
+                navigationRouter.navigate(.dismissReplace)
+            } else {
+                viewModel.send(.toggleDialog(type: .leave, isOpen: true),
+                               taskPriority: .userInitiated)
+            }
+        },
+                       content: {
+            continueButton(canContinue: display.canSave)
+        })
         .dialog(isOpen: display.shownDialog == .leave,
                 viewState: display.backDialog,
                 primaryAction: { dismiss() },
@@ -110,10 +132,12 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                             ForEach(viewState.exercises, id: \.self) { exerciseViewState in
                                 AddExerciseTile(viewState: exerciseViewState,
                                                 tapAction: {
-                                    
-                                    // TODO: here
-                                    viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id),
-                                                   taskPriority: .userInitiated)
+                                    if forReplaceExercise {
+                                        navigationRouter.navigate(.replace(exerciseId: exerciseViewState.id))
+                                    } else {
+                                        viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id),
+                                                       taskPriority: .userInitiated)
+                                    }
                                 },
                                                 favoriteAction: {
                                     viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
@@ -223,43 +247,51 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func continueButton(canContinue: Bool) -> some View {
-        SplytButton(text: Strings.next,
-                    isEnabled: canContinue) {
-            viewModel.send(.nextTapped,
-                           taskPriority: .userInitiated)
-            navigationRouter.navigate(.editSetsReps)
+        if forReplaceExercise {
+            EmptyView()
+        } else {
+            SplytButton(text: Strings.next,
+                        isEnabled: canContinue) {
+                viewModel.send(.nextTapped,
+                               taskPriority: .userInitiated)
+                navigationRouter.navigate(.editSetsReps)
+            }
         }
     }
     
     @ViewBuilder
     private func supersetMenu(supersetDisplay: SupersetDisplay) -> some View {
-        Group {
-            if supersetDisplay.isCreatingSuperset {
-                Tile {
-                    VStack {
-                        Text(supersetDisplay.currentSupersetTitle)
-                            .body()
-                        HStack(spacing: Layout.size(1)) {
-                            SplytButton(text: "Cancel") {
-                                viewModel.send(.cancelSuperset,
-                                               taskPriority: .userInitiated)
-                            }
-                            SplytButton(text: "Save",
-                                        isEnabled: supersetDisplay.canSave) {
-                                viewModel.send(.saveSuperset,
-                                               taskPriority: .userInitiated)
+        if forReplaceExercise {
+            EmptyView()
+        } else {
+            Group {
+                if supersetDisplay.isCreatingSuperset {
+                    Tile {
+                        VStack {
+                            Text(supersetDisplay.currentSupersetTitle)
+                                .body()
+                            HStack(spacing: Layout.size(1)) {
+                                SplytButton(text: "Cancel") {
+                                    viewModel.send(.cancelSuperset,
+                                                   taskPriority: .userInitiated)
+                                }
+                                SplytButton(text: "Save",
+                                            isEnabled: supersetDisplay.canSave) {
+                                    viewModel.send(.saveSuperset,
+                                                   taskPriority: .userInitiated)
+                                }
                             }
                         }
                     }
-                }
-            } else {
-                SplytButton(text: "Create Superset") {
-                    viewModel.send(.createSuperset,
-                                   taskPriority: .userInitiated)
+                } else {
+                    SplytButton(text: "Create Superset") {
+                        viewModel.send(.createSuperset,
+                                       taskPriority: .userInitiated)
+                    }
                 }
             }
+            .padding(.horizontal, horizontalPadding)
         }
-        .padding(.horizontal, horizontalPadding)
     }
 }
 
@@ -275,4 +307,5 @@ fileprivate struct Strings {
     static let filter = "Filter"
     static let next = "Next"
     static let createCustomExercise = "Create Custom Exercise"
+    static let replaceExercise = "Replace Exercise"
 }

@@ -13,6 +13,7 @@ public struct DoExerciseGroupView: View {
     private let finishSlideAction: () -> Void
     private let replaceExerciseAction: (Int) -> Void // Exercise index
     private let deleteExerciseAction: (Int) -> Void // Exercise index
+    private let canDeleteExercise: Bool
     
     public init(isExpanded: Binding<Bool>,
                 viewState: DoExerciseGroupViewState,
@@ -24,7 +25,8 @@ public struct DoExerciseGroupView: View {
                 addNoteAction: @escaping () -> Void,
                 finishSlideAction: @escaping () -> Void,
                 replaceExerciseAction: @escaping (Int) -> Void,
-                deleteExerciseAction: @escaping (Int) -> Void) {
+                deleteExerciseAction: @escaping (Int) -> Void,
+                canDeleteExercise: Bool) {
         self._isExpanded = isExpanded
         self.viewState = viewState
         self.addSetAction = addSetAction
@@ -36,6 +38,7 @@ public struct DoExerciseGroupView: View {
         self.finishSlideAction = finishSlideAction
         self.replaceExerciseAction = replaceExerciseAction
         self.deleteExerciseAction = deleteExerciseAction
+        self.canDeleteExercise = canDeleteExercise
     }
     
     
@@ -49,14 +52,15 @@ public struct DoExerciseGroupView: View {
                                      type: .inProgress(
                                         usePreviousInputAction: { setIndex, fromModifier in
                                             usePreviousInputAction(exerciseIndex, setIndex, fromModifier)
-                                        }, 
+                                        },
                                         addNoteAction: addNoteAction,
                                         replaceExerciseAction: {
                                             replaceExerciseAction(exerciseIndex)
                                         },
-                                        deleteExerciseAction: { 
+                                        deleteExerciseAction: {
                                             deleteExerciseAction(exerciseIndex)
-                                        }
+                                        },
+                                        canDeleteExercise: canDeleteExercise
                                      ),
                                      addSetAction: addSetAction,
                                      removeSetAction: removeSetAction,

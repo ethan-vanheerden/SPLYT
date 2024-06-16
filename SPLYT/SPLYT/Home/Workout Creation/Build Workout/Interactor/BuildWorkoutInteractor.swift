@@ -181,7 +181,8 @@ private extension BuildWorkoutInteractor {
         let group = domain.currentGroup
         var groups = domain.builtWorkout.exerciseGroups
         let numSets = groups[group].exercises.first?.sets.count ?? 1 // If first exercise in group, starts with 1 set
-        let exercise = createExercise(from: availableExercise, numSets: numSets)
+        let exercise = WorkoutInteractor.createExercise(from: availableExercise, 
+                                                        numSets: numSets)
         
         // Add to group
         var exercisesInGroup = groups[group].exercises
@@ -571,26 +572,6 @@ private extension BuildWorkoutInteractor {
         }
         
         return .loaded(domain)
-    }
-    
-    /// Creates a new exercise with the given number of sets.
-    /// - Parameters:
-    ///   - available: The `AvailableExercise` that this exercise is based on
-    ///   - numSets: The number of sets this exercise will have
-    /// - Returns: The exercise
-    func createExercise(from available: AvailableExercise, numSets: Int) -> Exercise {
-        let id = available.id
-        var sets: [Set] = []
-        
-        for _ in 1...numSets {
-            let newSet = Set(input: available.defaultInputType,
-                             modifier: nil)
-            sets.append(newSet)
-        }
-        
-        return Exercise(id: id,
-                        name: available.name,
-                        sets: sets)
     }
     
     /// Finds the `AvailableExercise` version from the id of an `Exercise`

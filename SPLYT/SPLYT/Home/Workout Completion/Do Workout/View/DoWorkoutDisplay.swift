@@ -21,4 +21,5 @@ struct DoWorkoutDisplay: Equatable {
     let presentedDialog: DoWorkoutDialog?
     let finishDialog: DialogViewState
     let workoutDetailsId: String?
+    let canDeleteExercise: Bool
 }

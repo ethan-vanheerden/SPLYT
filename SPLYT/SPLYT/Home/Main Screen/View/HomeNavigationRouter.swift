@@ -59,7 +59,7 @@ private extension HomeNavigationRouter {
         let view = NameWorkoutView(viewModel: viewModel,
                                    navigationRouter: navRouter) {
             navRouter.navigator?.dismissSelf(animated: true)
-        }
+        }.withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
     }
     
@@ -71,7 +71,8 @@ private extension HomeNavigationRouter {
         } exitAction: { [weak self] workoutDetailsId in
             self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
         }
-        let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
+        let view = WorkoutPreviewView(viewModel: viewModel, 
+                                      navigationRouter: navRouter).withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
     }
     
@@ -85,7 +86,8 @@ private extension HomeNavigationRouter {
         var navRouter = DoPlanNavigationRouter(planId: id) { [weak self] workoutDetailsId in
             self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
         }
-        let view = DoPlanView(viewModel: viewModel, navigationRouter: navRouter)
+        let view = DoPlanView(viewModel: viewModel, 
+                              navigationRouter: navRouter).withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
     }
     
@@ -100,7 +102,7 @@ private extension HomeNavigationRouter {
         let view = WorkoutDetailsView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         
-        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
+        let vc = UIHostingController(rootView: view.withUserTheme())
         navigator?.present(vc, animated: true)
     }
     
@@ -115,18 +117,7 @@ private extension HomeNavigationRouter {
         }
         let view = DoWorkoutView(viewModel: viewModel,
                                  navigationRouter: navRouter,
-                                 fromCache: true)
+                                 fromCache: true).withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
-    }
-    
-    func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {
-        // NOTE: this assigns the navigator for the given nav router
-        // Use a navigation controller since we will be pushing views on top of a presented view
-        let navController = UINavigationController(
-            rootViewController: UIHostingController(rootView: view.environmentObject(UserTheme.shared))
-        )
-        navController.setNavigationBarHidden(true, animated: false)
-        navRouter.navigator = navController
-        navigator?.present(navController, animated: true)
     }
 }

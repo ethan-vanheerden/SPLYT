@@ -45,7 +45,8 @@ private extension DoWorkoutReducer {
                                        isResting: domain.isResting,
                                        presentedDialog: dialog,
                                        finishDialog: finishDialog,
-                                       workoutDetailsId: domain.workoutDetailsId)
+                                       workoutDetailsId: domain.workoutDetailsId,
+                                       canDeleteExercise: domain.canDeleteExercise)
 
         return display
     }

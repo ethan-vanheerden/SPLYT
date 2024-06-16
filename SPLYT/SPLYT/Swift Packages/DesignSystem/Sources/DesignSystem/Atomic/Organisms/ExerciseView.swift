@@ -42,9 +42,11 @@ public struct ExerciseView: View {
             switch type {
             case .build:
                 EmptyView()
-            case let .inProgress(_, _, replaceExerciseAction, deleteExerciseAction):
+            case let .inProgress(_, _, replaceExerciseAction, deleteExerciseAction, canDeleteExercise):
                 Button(Strings.replaceExercise) { replaceExerciseAction() }
-                Button(Strings.deleteExercise, role: .destructive) { deleteExerciseAction() }
+                if canDeleteExercise {
+                    Button(Strings.deleteExercise, role: .destructive) { deleteExerciseAction() }
+                }
             }
             
         }
@@ -77,7 +79,7 @@ public struct ExerciseView: View {
             switch type {
             case .build:
                 EmptyView()
-            case let .inProgress(_, addNoteAction, _, _):
+            case let .inProgress(_, addNoteAction, _, _, _):
                 SplytButton(text: Strings.addNote,
                             action: addNoteAction)
                 .frame(width: Layout.size(20))
@@ -101,12 +103,13 @@ public struct ExerciseView: View {
 
 public enum ExerciseViewType {
     // Ints for the set index
-    case build(addModifierAction: (Int) -> Void, 
+    case build(addModifierAction: (Int) -> Void,
                removeModifierAction: (Int) -> Void)
     case inProgress(usePreviousInputAction: (Int, Bool) -> Void, // (Set index, For Modifier)
                     addNoteAction: () -> Void,
                     replaceExerciseAction: () -> Void,
-                    deleteExerciseAction: () -> Void)
+                    deleteExerciseAction: () -> Void,
+                    canDeleteExercise: Bool)
 }
 
 // MARK: View State

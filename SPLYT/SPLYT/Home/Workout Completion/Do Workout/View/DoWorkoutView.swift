@@ -198,9 +198,19 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                taskPriority: .userInitiated)
             },
                                 replaceExerciseAction: { exerciseIndex in
+                navigationRouter.navigate(.replaceExercise(replaceAction: { exerciseId in
+                    viewModel.send(.replaceExercise(group: groupIndex,
+                                                    exerciseIndex: exerciseIndex,
+                                                    newExerciseId: exerciseId),
+                                   taskPriority: .userInitiated)
+                }))
             },
                                 deleteExerciseAction: { exerciseIndex in
-            })
+                viewModel.send(.deleteExercise(group: groupIndex,
+                                               exerciseIndex: exerciseIndex),
+                               taskPriority: .userInitiated)
+            },
+                                canDeleteExercise: display.canDeleteExercise)
             .padding(.horizontal, horizontalPadding)
         }
         .animation(.default, value: display.expandedGroups) // Preserves collapse animation

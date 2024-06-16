@@ -16,7 +16,7 @@ enum DoWorkoutNavigationEvent {
     case back
     case exit(workoutDetailsId: String? = nil)
     case beginWorkout
-    case showExercises
+    case replaceExercise(replaceAction: (String) -> Void)
 }
 
 // MARK: - Router
@@ -25,13 +25,16 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
     // Has reference since multiple screens will have this same view model
     private let viewModel: DoWorkoutViewModel
+    private let buildWorkoutService: BuildWorkoutServiceType
     private let backAction: () -> Void
     private let exitAction: (String) -> Void // To open the workout details page after finishing a workout
     
     init(viewModel: DoWorkoutViewModel,
+         buildWorkoutService: BuildWorkoutServiceType = BuildWorkoutService(),
          backAction: @escaping () -> Void,
          exitAction: @escaping (String) -> Void) {
         self.viewModel = viewModel
+        self.buildWorkoutService = buildWorkoutService
         self.backAction = backAction
         self.exitAction = exitAction
     }
@@ -44,8 +47,8 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
             handleExit(workoutDetailsId: workoutDetailsId)
         case .beginWorkout:
             handleBeginWorkout()
-        case .showExercises:
-            handleShowExercises()
+        case .replaceExercise(let replaceAction):
+            handleReplaceExercise(replaceAction: replaceAction)
         }
     }
 }
@@ -70,11 +73,21 @@ private extension DoWorkoutNavigationRouter {
     func handleBeginWorkout() {
         let view = DoWorkoutView(viewModel: viewModel,
                                  navigationRouter: self)
-        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
+        let vc = UIHostingController(rootView: view.withUserTheme())
         self.navigator?.push(vc, animated: false)
     }
     
-    func handleShowExercises() {
-        
+    func handleReplaceExercise(replaceAction: @escaping (String) -> Void) {
+        let interactor = BuildWorkoutInteractor(service: buildWorkoutService,
+                                                nameState: .init(name: ""),
+                                                saveAction: { _ in })
+        let viewModel = BuildWorkoutViewModel(interactor: interactor)
+        var navRouter = BuildWorkoutNavigationRouter(viewModel: viewModel,
+                                                     replaceExerciseAction: replaceAction)
+        navRouter.navigator = navigator
+        let view = BuildWorkoutView(viewModel: viewModel, 
+                                    navigationRouter: navRouter,
+                                    forReplaceExercise: true).withUserTheme()
+        presentNavController(view: view, navRouter: &navRouter)
     }
 }

@@ -27,6 +27,7 @@ enum DoWorkoutDomainAction {
     case cacheWorkout(secondsElapsed: Int)
     case pauseRest
     case resumeRest(restSeconds: Int)
+    case replaceExercise(group: Int, exerciseIndex: Int, newExerciseId: String)
     case deleteExercise(group: Int, exerciseIndex: Int)
 }
 
@@ -101,6 +102,10 @@ final class DoWorkoutInteractor {
             return await handleTogglePauseRest(isPaused: true, restSeconds: nil)
         case .resumeRest(let restSeconds):
             return await handleTogglePauseRest(isPaused: false, restSeconds: restSeconds)
+        case let .replaceExercise(group, exerciseIndex, newExerciseId):
+            return await handleReplaceExercise(group: group,
+                                               exerciseIndex: exerciseIndex,
+                                               newExerciseId: newExerciseId)
         case let .deleteExercise(group, exerciseIndex):
             return handleDeleteExercise(group: group, exerciseIndex: exerciseIndex)
         }
@@ -132,7 +137,8 @@ private extension DoWorkoutInteractor {
                                          expandedGroups: expandedGroups,
                                          completedGroups: completedGroups,
                                          fractionCompleted: fractionCompleted,
-                                         restPresets: restPresets)
+                                         restPresets: restPresets,
+                                         canDeleteExercise: canDeleteExercise(workout: workout))
             
             return updateDomain(domain: domain)
         } catch {
@@ -201,17 +207,8 @@ private extension DoWorkoutInteractor {
         domain.completedGroups[group] = true
         domain.expandedGroups[group] = false // Close the completed group
         
-        // Look for the next group to expand after this group
-        var nextExpandedGroupIndex = getNextFalseIndex(completedGroups: domain.completedGroups,
-                                                       startIndex: group + 1,
-                                                       endIndex: domain.completedGroups.count)
-        
-        // If not found, wrap around and search from the start
-        if nextExpandedGroupIndex == nil {
-            nextExpandedGroupIndex = getNextFalseIndex(completedGroups: domain.completedGroups,
-                                                       startIndex: 0,
-                                                       endIndex: group)
-        }
+        let nextExpandedGroupIndex = getNextIncompleteGroup(completedGroups: domain.completedGroups,
+                                                            startingAfter: group)
         
         if let nextExpandedGroupIndex = nextExpandedGroupIndex {
             domain.expandedGroups[nextExpandedGroupIndex] = true
@@ -340,10 +337,73 @@ private extension DoWorkoutInteractor {
         return .loaded(domain)
     }
     
-    func handleDeleteExercise(group: Int, exerciseIndex: Int) -> DoWorkoutDomainResult {
-        guard let domain = savedDomain else { return .error }
+    func handleReplaceExercise(group: Int,
+                               exerciseIndex: Int,
+                               newExerciseId: String) async -> DoWorkoutDomainResult {
+        guard var domain = savedDomain else { return .error }
         
-        return .error
+        do {
+            let availableExercise = try await service.loadExercise(exerciseId: newExerciseId)
+            
+            // Replace the exercise with this one with the same number of sets
+            // as the replaced exercise
+            var groups = domain.workout.exerciseGroups
+            guard group < groups.count else { return .error }
+            var targetGroup = groups[group]
+            
+            var exercises = targetGroup.exercises
+            guard exerciseIndex < exercises.count else { return .error }
+            let targetExercise = exercises[exerciseIndex]
+            
+            let numSets = targetExercise.sets.count
+            let exercise = WorkoutInteractor.createExercise(from: availableExercise,
+                                                            numSets: numSets)
+            
+            exercises[exerciseIndex] = exercise
+            targetGroup.exercises = exercises
+            groups[group] = targetGroup
+            domain.workout.exerciseGroups = groups
+            
+            return updateDomain(domain: domain)
+        } catch {
+            return .error
+        }
+    }
+    
+    func handleDeleteExercise(group: Int, exerciseIndex: Int) -> DoWorkoutDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        var groups = domain.workout.exerciseGroups
+        guard group < groups.count  else { return .error }
+        
+        var targetGroup = groups[group]
+        var exercisesInGroup = targetGroup.exercises
+        guard exerciseIndex < exercisesInGroup.count else { return .error }
+        
+        exercisesInGroup.remove(at: exerciseIndex)
+        
+        // If the group is now empty, we can remove the group altogether
+        if exercisesInGroup.isEmpty {
+            groups.remove(at: group)
+            domain.completedGroups.remove(at: group)
+            domain.expandedGroups.remove(at: group)
+            domain.fractionCompleted = getFractionCompleted(completedGroups: domain.completedGroups)
+            
+            // Expand the next incomplete group
+            let nextExpandedGroupIndex = getNextIncompleteGroup(completedGroups: domain.completedGroups,
+                                                                startingAfter: group - 1)
+            
+            if let nextExpandedGroupIndex = nextExpandedGroupIndex {
+                domain.expandedGroups[nextExpandedGroupIndex] = true
+            }
+        } else {
+            targetGroup.exercises = exercisesInGroup
+            groups[group] = targetGroup
+        }
+        
+        domain.workout.exerciseGroups = groups
+        
+        return updateDomain(domain: domain)
     }
 }
 
@@ -362,14 +422,15 @@ private extension DoWorkoutInteractor {
         workoutId = workout.id
         planId = inProgressWorkout.planId
         
-        return DoWorkoutDomain(workout: inProgressWorkout.workout,
+        return DoWorkoutDomain(workout: workout,
                                inCountdown: false,
                                isResting: false,
                                expandedGroups: inProgressWorkout.expandedGroups,
                                completedGroups: inProgressWorkout.completedGroups,
                                fractionCompleted: inProgressWorkout.fractionCompleted,
                                restPresets: restPresets,
-                               cachedSecondsElapsed: inProgressWorkout.secondsElapsed)
+                               cachedSecondsElapsed: inProgressWorkout.secondsElapsed,
+                               canDeleteExercise: canDeleteExercise(workout: workout))
     }
     
     /// Updates and saves the domain object.
@@ -378,9 +439,12 @@ private extension DoWorkoutInteractor {
     ///   - workout: The workout to update
     /// - Returns: The loaded domain state after updating the domain object
     func updateDomain(domain: DoWorkoutDomain) -> DoWorkoutDomainResult {
+        var domain = domain
+        domain.canDeleteExercise = canDeleteExercise(workout: domain.workout)
+        
         savedDomain = domain
         savedDomain?.cachedSecondsElapsed = nil // This should only be set once
-
+        
         return .loaded(domain)
     }
     
@@ -480,5 +544,31 @@ private extension DoWorkoutInteractor {
             currentIndex += 1
         }
         return nil
+    }
+    
+    /// Finds the next incomplete group after the given group.
+    /// - Parameters:
+    ///   - completedGroups: The list of booleans for the completed group statuses
+    ///   - group: The group index to start the search from (exclusive)
+    /// - Returns: The group index of the next incomplete group if it exists
+    func getNextIncompleteGroup(completedGroups: [Bool], startingAfter group: Int) -> Int? {
+        // Look for the next group to expand after this group
+        var nextExpandedGroupIndex = getNextFalseIndex(completedGroups: completedGroups,
+                                                       startIndex: group + 1,
+                                                       endIndex: completedGroups.count)
+        
+        // If not found, wrap around and search from the start
+        if nextExpandedGroupIndex == nil {
+            nextExpandedGroupIndex = getNextFalseIndex(completedGroups: completedGroups,
+                                                       startIndex: 0,
+                                                       endIndex: group)
+        }
+        
+        return nextExpandedGroupIndex
+    }
+    
+    func canDeleteExercise(workout: Workout) -> Bool {
+        let groups = workout.exerciseGroups
+        return groups.count > 1 || (groups.count == 1 && groups[0].exercises.count > 1)
     }
 }

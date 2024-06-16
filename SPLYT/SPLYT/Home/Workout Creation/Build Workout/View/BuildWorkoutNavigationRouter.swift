@@ -21,6 +21,8 @@ enum BuildWorkoutNavigationEvent {
     case createCustomExercise(exerciseName: String,
                               service: CustomExerciseServiceType? = nil,
                               saveAction: (String) -> Void)
+    case dismissReplace
+    case replace(exerciseId: String)
 }
 
 // MARK: - Router
@@ -28,9 +30,12 @@ enum BuildWorkoutNavigationEvent {
 final class BuildWorkoutNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
     private let viewModel: BuildWorkoutViewModel
+    private let replaceExerciseAction: ((String) -> Void)?
     
-    init(viewModel: BuildWorkoutViewModel) {
+    init(viewModel: BuildWorkoutViewModel,
+         replaceExerciseAction: ((String) -> Void)? = nil) {
         self.viewModel = viewModel
+        self.replaceExerciseAction = replaceExerciseAction
     }
     
     func navigate(_ event: BuildWorkoutNavigationEvent) {
@@ -45,6 +50,10 @@ final class BuildWorkoutNavigationRouter: NavigationRouter {
             handleCreateCustomExercise(exerciseName: exerciseName,
                                        service: service,
                                        saveAction: saveAction)
+        case .dismissReplace:
+            handleDismissReplace()
+        case .replace(let exerciseId):
+            handleReplace(exerciseId: exerciseId)
         }
     }
 }
@@ -59,7 +68,7 @@ private extension BuildWorkoutNavigationRouter {
     func handleEditSetsReps() {
         let view = EditSetsRepsView(viewModel: viewModel,
                                     navigationRouter: self)
-        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
+        let vc = UIHostingController(rootView: view.withUserTheme())
         self.navigator?.push(vc, animated: true)
     }
     
@@ -77,7 +86,19 @@ private extension BuildWorkoutNavigationRouter {
         let view = CustomExerciseView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         
-        let vc = UIHostingController(rootView: view.environmentObject(UserTheme.shared))
+        let vc = UIHostingController(rootView: view.withUserTheme())
         navigator?.present(vc, animated: true)
+    }
+    
+    func handleDismissReplace() {
+        navigator?.dismiss(animated: true)
+    }
+    
+    func handleReplace(exerciseId: String) {
+        let replaceExerciseAction = replaceExerciseAction
+        navigator?.dismissWithCompletion(animated: true,
+                                         completion: {
+            replaceExerciseAction?(exerciseId)
+        })
     }
 }

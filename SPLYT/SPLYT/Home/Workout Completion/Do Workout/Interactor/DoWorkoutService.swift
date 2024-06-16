@@ -25,12 +25,14 @@ protocol DoWorkoutServiceType {
     func scheduleRestNotifcation(workoutId: String, after: Int) async throws
     func deleteRestNotification(workoutId: String)
     func playRestTimerSound() throws
+    func loadExercise(exerciseId: String) async throws -> AvailableExercise
 }
 
 // MARK: - Errors
 
 enum DoWorkoutError: Error {
     case workoutNoExist
+    case exerciseNotFound
 }
 
 // MARK: - Implementation
@@ -42,6 +44,7 @@ struct DoWorkoutService: DoWorkoutServiceType {
     private let screenLocker: ScreenLockerType
     private let notificationInteractor: NotificationInteractorType
     private let audioPlayer: AudioPlayerType
+    private let workoutService: WorkoutServiceType
     private let fallbackRestPresets: [Int] = [60, 90, 120]
     private let inProgressCacheRequest = InProgressWorkoutCacheRequest()
     
@@ -50,13 +53,16 @@ struct DoWorkoutService: DoWorkoutServiceType {
          userSettings: UserSettings = UserDefaults.standard,
          screenLocker: ScreenLockerType = ScreenLocker(),
          notificationInteractor: NotificationInteractorType = NotificationInteractor(),
-         audioPlayer: AudioPlayerType = AudioPlayer()) {
+         audioPlayer: AudioPlayerType = AudioPlayer(),
+         workoutService: WorkoutServiceType? = nil) {
         self.cacheInteractor = cacheInteractor
         self.routineService = routineService
         self.userSettings = userSettings
         self.screenLocker = screenLocker
         self.notificationInteractor = notificationInteractor
         self.audioPlayer = audioPlayer
+        self.workoutService = workoutService ?? WorkoutService(cacheInteractor: cacheInteractor,
+                                                               userSettings: userSettings)
     }
     
     func loadWorkout(workoutId: String, planId: String? = nil) throws -> Workout {
@@ -135,6 +141,16 @@ struct DoWorkoutService: DoWorkoutServiceType {
     
     func playRestTimerSound() throws {
         try audioPlayer.playSound(.restTimer)
+    }
+    
+    func loadExercise(exerciseId: String) async throws -> AvailableExercise {
+        let availableExercises = try await workoutService.loadAvailableExercises()
+        
+        guard let availableExercise = availableExercises[exerciseId] else {
+            throw DoWorkoutError.exerciseNotFound
+        }
+        
+        return availableExercise
     }
 }
 

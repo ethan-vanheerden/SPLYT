@@ -18,6 +18,7 @@ struct DoWorkoutDomain: Equatable {
     let restPresets: [Int]
     var workoutDetailsId: String?
     var cachedSecondsElapsed: Int? // Used the first time an cached in progress workout is loaded
+    var canDeleteExercise: Bool
 }
 
 // MARK: - Dialog Type
