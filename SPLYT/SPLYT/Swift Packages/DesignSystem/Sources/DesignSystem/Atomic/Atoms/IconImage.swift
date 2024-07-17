@@ -18,9 +18,9 @@ public struct IconImage: View {
     public var body: some View {
         image
             .frame(width: backgroundSize, height: backgroundSize)
-            .foregroundColor(Color(splytColor: imageColor))
+            .foregroundColor(Color( imageColor))
             .roundedBackground(cornerRadius: cornerRadius,
-                               fill: Color(splytColor: backgroundColor).gradient)
+                               fill: Color( backgroundColor).gradient)
     }
     
     @ViewBuilder

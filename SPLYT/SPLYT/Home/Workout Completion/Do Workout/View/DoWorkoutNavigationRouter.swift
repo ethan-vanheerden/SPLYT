@@ -17,6 +17,7 @@ enum DoWorkoutNavigationEvent {
     case exit(workoutDetailsId: String? = nil)
     case beginWorkout
     case replaceExercise(replaceAction: (String) -> Void)
+    case addExercises(addAction: ([String]) -> Void)
 }
 
 // MARK: - Router
@@ -49,6 +50,8 @@ final class DoWorkoutNavigationRouter: NavigationRouter {
             handleBeginWorkout()
         case .replaceExercise(let replaceAction):
             handleReplaceExercise(replaceAction: replaceAction)
+        case .addExercises(let addAction):
+            handleAddExercises(addAction: addAction)
         }
     }
 }
@@ -87,7 +90,21 @@ private extension DoWorkoutNavigationRouter {
         navRouter.navigator = navigator
         let view = BuildWorkoutView(viewModel: viewModel, 
                                     navigationRouter: navRouter,
-                                    forReplaceExercise: true).withUserTheme()
+                                    type: .replace).withUserTheme()
+        presentNavController(view: view, navRouter: &navRouter)
+    }
+    
+    func handleAddExercises(addAction: @escaping ([String]) -> Void) {
+        let interactor = BuildWorkoutInteractor(service: buildWorkoutService,
+                                                nameState: .init(name: ""),
+                                                saveAction: { _ in })
+        let viewModel = BuildWorkoutViewModel(interactor: interactor)
+        var navRouter = BuildWorkoutNavigationRouter(viewModel: viewModel,
+                                                     addExercisesAction: addAction)
+        navRouter.navigator = navigator
+        let view = BuildWorkoutView(viewModel: viewModel,
+                                    navigationRouter: navRouter,
+                                    type: .add).withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
     }
 }

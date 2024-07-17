@@ -3,6 +3,7 @@ import ExerciseCore
 
 public struct CompletedSetView: View {
     private let viewState: CompletedSetViewState
+    @EnvironmentObject private var userTheme: UserTheme
     
     public init(viewState: CompletedSetViewState) {
         self.viewState = viewState
@@ -86,7 +87,8 @@ public struct CompletedSetView: View {
     
     @ViewBuilder
     private func tagView(modifier: SetModifierViewState) -> some View {
-        let viewState = TagFactory.tagFromModifier(modifier: modifier)
+        let viewState = TagFactory.tagFromModifier(modifier: modifier,
+                                                   color: userTheme.theme)
         
         Tag(viewState: viewState)
     }

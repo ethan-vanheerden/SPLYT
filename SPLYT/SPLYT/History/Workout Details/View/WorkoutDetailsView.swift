@@ -80,13 +80,13 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
         VStack(alignment: .leading) {
             Text(display.workoutName)
                 .title1()
-                .foregroundColor(Color(splytColor: .black))
+                .foregroundColor(Color(SplytColor.black))
             Text(display.numExercisesTitle)
                 .title2()
-                .foregroundColor(Color(splytColor: userTheme.theme))
+                .foregroundColor(Color( userTheme.theme))
             Text(display.completedTitle)
                 .title3()
-                .foregroundColor(Color(splytColor: .gray))
+                .foregroundColor(Color(SplytColor.gray))
         }
     }
     

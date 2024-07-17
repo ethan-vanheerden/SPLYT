@@ -40,7 +40,7 @@ struct AppearanceView: View {
                     .overlay {
                         Image(systemName: "checkmark")
                             .imageScale(.large)
-                            .foregroundStyle(Color(splytColor: .white))
+                            .foregroundStyle(Color(SplytColor.white))
                             .isVisible(viewModel.userTheme == color)
                     }
                     .onTapGesture {
@@ -64,7 +64,7 @@ struct AppearanceView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .imageScale(.large)
                             .symbolRenderingMode(.palette)
-                            .foregroundStyle(Color(splytColor: .white), Color(splytColor: .green))
+                            .foregroundStyle(Color(SplytColor.white), Color(SplytColor.green))
                             .isVisible(viewModel.appIcon == appIcon)
                     }
                     .onTapGesture {

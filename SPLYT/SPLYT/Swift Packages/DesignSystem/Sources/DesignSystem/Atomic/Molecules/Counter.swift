@@ -62,10 +62,10 @@ public struct Counter: View {
             .focused($fieldFocused)
             .multilineTextAlignment(.center)
             .font(Font.custom("Montserrat-SemiBold", size: 13))
-            .foregroundColor(Color(splytColor: viewState.textColor ?? .white))
+            .foregroundColor(Color( viewState.textColor ?? .white))
             .frame(width: sideLength, height: sideLength)
             .roundedBackground(cornerRadius: Layout.size(1),
-                               fill: Color(splytColor: viewState.backGroundColor ?? userTheme.theme)
+                               fill: Color( viewState.backGroundColor ?? userTheme.theme)
                 .shadow(.drop(radius: Layout.size(0.5))))
             .onChange(of: selectedNumberText) { newValue in
                 guard let intValue = intValue(newValue: newValue),

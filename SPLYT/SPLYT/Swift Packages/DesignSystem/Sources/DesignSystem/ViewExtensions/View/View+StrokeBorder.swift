@@ -11,7 +11,7 @@ public extension View {
     func strokeBorder(cornerRadius: CGFloat,
                       color: SplytColor,
                       shadowRadius: CGFloat? = nil) -> some View {
-        let color = Color(splytColor: color)
+        let color = Color( color)
         return self
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(color)

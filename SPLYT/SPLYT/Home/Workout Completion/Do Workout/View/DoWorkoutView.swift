@@ -108,13 +108,20 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             HStack(spacing: Layout.size(1)) {
                 Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
                     .title1()
-                    .foregroundStyle(display.isResting ? Color(splytColor: userTheme.theme).gradient
-                                     : Color(splytColor: .black).gradient)
+                    .foregroundStyle(display.isResting ? Color( userTheme.theme).gradient
+                                     : Color(SplytColor.black).gradient)
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                     .isVisible(false) // TODO: 51: Workout notes
                 IconButton(iconName: "book.closed", action: { })
                     .isVisible(false) // TODO: 54: Workout logs
+                IconButton(iconName: "plus") { 
+                    navigationRouter.navigate(.addExercises(addAction: { addedExerciseIds in
+                        viewModel.send(.addExercises(exerciseIds: addedExerciseIds),
+                                       taskPriority: .userInitiated)
+                    }))
+                }
+                    .padding(.trailing, Layout.size(1))
                 SplytButton(text: Strings.finish) {
                     viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: true),
                                    taskPriority: .userInitiated)
@@ -139,10 +146,10 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                     .title1()
                 Spacer()
             }
-            .foregroundColor(Color(splytColor: .white))
+            .foregroundColor(Color(SplytColor.white))
             Spacer()
         }
-        .background(LinearGradient(colors: [Color(splytColor: .white), userTheme.theme.color],
+        .background(LinearGradient(colors: [Color(SplytColor.white), userTheme.theme.color],
                                    startPoint: .top,
                                    endPoint: .bottom))
         .onReceive(countdownTimer) { _ in
@@ -199,6 +206,8 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             },
                                 replaceExerciseAction: { exerciseIndex in
                 navigationRouter.navigate(.replaceExercise(replaceAction: { exerciseId in
+                    viewModel.send(.markExerciseLoading(group: groupIndex,
+                                                        exerciseIndex: exerciseIndex))
                     viewModel.send(.replaceExercise(group: groupIndex,
                                                     exerciseIndex: exerciseIndex,
                                                     newExerciseId: exerciseId),

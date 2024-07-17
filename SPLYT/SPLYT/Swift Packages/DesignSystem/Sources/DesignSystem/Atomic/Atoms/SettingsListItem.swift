@@ -24,7 +24,7 @@ public struct SettingsListItem: View {
                       backgroundColor: viewState.iconBackgroundColor)
             Text(viewState.title)
                 .subhead(style: .semiBold)
-                .foregroundColor(Color(splytColor: .black))
+                .foregroundColor(Color(SplytColor.black))
             Spacer()
         }
     }

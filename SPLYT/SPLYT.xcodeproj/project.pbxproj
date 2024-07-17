@@ -2286,6 +2286,7 @@
 		};
 		AAF466862C1CA54E003D7053 /* Configure Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

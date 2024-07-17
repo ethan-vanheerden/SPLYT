@@ -5,13 +5,7 @@ struct DoExerciseGroupViewGallery: View {
     typealias StateFixtures = WorkoutViewStateFixtures
     @State private var groupExpanded = true
     private let header: CollapseHeaderViewState = .init(title: "Block 1")
-    private let exercises: [ExerciseViewState] = StateFixtures.fullBodyWorkoutExercises(includeHeaderLine: false)[0]
     private let slider: ActionSliderViewState = .init(backgroundText: "Mark as complete")
-    private var viewState: DoExerciseGroupViewState {
-        return .init(header: header,
-                     exercises: exercises,
-                     slider: slider)
-    }
     
     var body: some View {
         ScrollView {
@@ -33,5 +27,19 @@ struct DoExerciseGroupViewGallery: View {
             .padding(.horizontal, Layout.size(2))
         }
     }
+    
+    private var viewState: DoExerciseGroupViewState {
+        return .init(header: header,
+                     exercises: exercises,
+                     slider: slider)
+    }
+    
+    private var exercises: [ExerciseViewStatus] {
+        var result: [ExerciseViewStatus] = StateFixtures.fullBodyWorkoutExercises(includeHeaderLine: false)[0].map {
+            .loaded($0)
+        }
+        
+        result.append(.loading)
+        return result
+    }
 }
-// Start here

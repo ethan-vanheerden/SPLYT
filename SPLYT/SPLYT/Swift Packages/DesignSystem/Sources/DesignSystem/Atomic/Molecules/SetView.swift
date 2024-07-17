@@ -182,7 +182,8 @@ public struct SetView: View {
     private func tagView(modifier: SetModifierViewState) -> some View {
         // If a tag has no associated SetInput, we can move it up
         let offset: CGFloat = modifier.hasAdditionalInput ? 0 : -Layout.size(3)
-        let viewState = TagFactory.tagFromModifier(modifier: modifier)
+        let viewState = TagFactory.tagFromModifier(modifier: modifier,
+                                                   color: userTheme.theme)
         
         return Tag(viewState: viewState)
             .fixedSize()

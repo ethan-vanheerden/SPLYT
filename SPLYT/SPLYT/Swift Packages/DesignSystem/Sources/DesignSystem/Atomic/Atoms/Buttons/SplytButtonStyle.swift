@@ -35,25 +35,25 @@ struct SplytButtonStyle: ButtonStyle {
                 .loading(let color):
             baseButton
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                            normalColor: Color(splytColor: textColor),
-                                                            pressedColor: Color(splytColor: color ?? userTheme.theme),
+                                                            normalColor: Color( textColor),
+                                                            pressedColor: Color( color ?? userTheme.theme),
                                                             animationEnabled: animationEnabled))
                 .roundedBackground(cornerRadius: cornerRadius,
                                    fill: ButtonUtils.animationColor(configuration: configuration,
-                                                                    normalColor: Color(splytColor: color ?? userTheme.theme),
-                                                                    pressedColor: Color(splytColor: textColor),
+                                                                    normalColor: Color( color ?? userTheme.theme),
+                                                                    pressedColor: Color( textColor),
                                                                     animationEnabled: animationEnabled))
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(lineWidth: Layout.size(0.25))
-                        .fill(Color(splytColor: color ?? userTheme.theme))
+                        .fill(Color( color ?? userTheme.theme))
                 )
         case .textOnly:
             buttonContent
                 .lineLimit(1)
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                            normalColor: Color(splytColor: textColor),
-                                                            pressedColor: Color(splytColor: textColor).opacity(0.5),
+                                                            normalColor: Color( textColor),
+                                                            pressedColor: Color( textColor).opacity(0.5),
                                                             animationEnabled: animationEnabled))
         }
     }
@@ -80,7 +80,7 @@ struct SplytButtonStyle: ButtonStyle {
                 .footnote()
         case .loading:
             ProgressView()
-                .tint(Color(splytColor: .white))
+                .tint(Color(SplytColor.white))
         }
     }
 }

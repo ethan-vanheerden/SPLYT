@@ -88,10 +88,10 @@ struct CustomExerciseView<VM: ViewModel>: View where VM.Event == CustomExerciseV
                         Text(muscle.rawValue)
                             .body(style: .medium)
                             .frame(width: Layout.size(17))
-                            .foregroundColor(Color(splytColor: .black))
+                            .foregroundColor(Color(SplytColor.black))
                     }
                                                      .toggleStyle(.button)
-                                                     .tint(Color(splytColor: userTheme.theme))
+                                                     .tint(Color( userTheme.theme))
                 }
             }
         }

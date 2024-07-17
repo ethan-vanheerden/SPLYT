@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ProgressBarStyle: ProgressViewStyle {
     @EnvironmentObject private var userTheme: UserTheme
+    @Namespace private var animation
     private let color: SplytColor?
     
     init(color: SplytColor?) {
@@ -14,10 +15,11 @@ struct ProgressBarStyle: ProgressViewStyle {
         return GeometryReader { proxy in
             HStack {
                 RoundedRectangle(cornerRadius: Layout.size(1))
-                    .fill(Color(splytColor: color ?? userTheme.theme).gradient)
+                    .fill(Color( color ?? userTheme.theme).gradient)
                     .frame(width: proxy.size.width * fractionCompleted)
+                    .matchedGeometryEffect(id: "PROGRESS_BAR", in: animation)
                 Spacer()
-            }
+            }.animation(.snappy, value: fractionCompleted)
         }
         .frame(height: Layout.size(2))
         .gradientStrokeBorder(cornerRadius: Layout.size(1), color: color ?? userTheme.theme)

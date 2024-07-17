@@ -53,7 +53,7 @@ public struct TextEntry: View {
         HStack {
             if let iconName = viewState.iconName {
                 Image(systemName: iconName)
-                    .foregroundColor(Color(splytColor: .gray).opacity(0.5))
+                    .foregroundColor(Color(SplytColor.gray).opacity(0.5))
                     .padding(.leading, Layout.size(1))
             }
             textEntry
@@ -64,7 +64,7 @@ public struct TextEntry: View {
                 .focused($isFocused)
             clearButton
         }
-        .roundedBackground(cornerRadius: Layout.size(1), fill: Color(splytColor: .gray).opacity(0.10))
+        .roundedBackground(cornerRadius: Layout.size(1), fill: Color(SplytColor.gray).opacity(0.10))
         .onTapGesture {
             isFocused.toggle()
         }

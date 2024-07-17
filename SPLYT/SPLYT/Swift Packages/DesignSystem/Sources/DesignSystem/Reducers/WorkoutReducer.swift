@@ -5,8 +5,8 @@ import ExerciseCore
 public struct WorkoutReducer {
     
     public static func reduceExerciseGroups(groups: [ExerciseGroup],
-                                            includeHeaderLine: Bool = true) -> [[ExerciseViewState]] {
-        var result = [[ExerciseViewState]]()
+                                            includeHeaderLine: Bool = true) -> [[ExerciseViewStatus]] {
+        var result = [[ExerciseViewStatus]]()
         
         for group in groups {
             // For each group, get the ExerciseViewStates of the exercises in it
@@ -112,17 +112,19 @@ public struct WorkoutReducer {
 
 private extension WorkoutReducer {
     
-    static func getExerciseViewStates(exercises: [Exercise], includeHeaderLine: Bool) -> [ExerciseViewState] {
+    static func getExerciseViewStates(exercises: [Exercise], includeHeaderLine: Bool) -> [ExerciseViewStatus] {
         return exercises.map { exercise in
+            guard exercise.id != Exercise.loadingExerciseId else { return .loading }
+            
             let headerState = SectionHeaderViewState(title: exercise.name,
                                                      includeLine: includeHeaderLine)
             let numSetsTitle = getNumSetsTitle(numSets: exercise.sets.count)
             
-            return ExerciseViewState(header: headerState,
+            let viewState = ExerciseViewState(header: headerState,
                                      sets: getSetStates(exercise: exercise),
                                      canRemoveSet: exercise.sets.count > 1,
-                                     numSetsTitle: numSetsTitle
-            )
+                                     numSetsTitle: numSetsTitle)
+            return .loaded(viewState)
         }
     }
     

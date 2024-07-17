@@ -50,7 +50,7 @@ public struct RestFAB: View {
                     Image(systemName: "stopwatch")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(Color(splytColor: userTheme.theme))
+                        .foregroundColor(Color( userTheme.theme))
                         .frame(width: Layout.size(2.5))
                     timeView
                     IconButton(iconName: isPaused ? "play.fill" : "pause",
@@ -68,7 +68,7 @@ public struct RestFAB: View {
                 .padding()
                 .background {
                     Capsule()
-                        .fill(Color(splytColor: .white).shadow(.drop(radius: Layout.size(2))))
+                        .fill(Color(SplytColor.white).shadow(.drop(radius: Layout.size(2))))
                 }
             }
             .padding()
@@ -133,7 +133,7 @@ public struct RestFAB: View {
             FABIcon(viewState: moreIcon) {
                 showTimePicker = true
             }
-            .offset(y: isPresenting ? 0 : Layout.size(16)) // TODO: find another way since picker gets messed up with timer
+            .offset(y: isPresenting ? 0 : Layout.size(16))
             VStack(spacing: Layout.size(1)) {
                 ForEach(Array(viewState.restPresets.enumerated()), id: \.offset) { index, seconds in
                     let verticalOffset = CGFloat((viewState.restPresets.count - index) * 6)

@@ -34,7 +34,7 @@ public struct ActionSlider: View {
         let textOpacity = 1 - (1.5 * Double(slideWidth / maxWidth)) // Opaqueness descreases with slider
         ZStack {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color(splytColor: viewState.sliderColor ?? userTheme.theme).opacity(0.3))
+                .fill(Color( viewState.sliderColor ?? userTheme.theme).opacity(0.3))
             Text(viewState.backgroundText)
                 .subhead(style: .regular)
                 .opacity(textOpacity < 0 ? 0 : textOpacity)
@@ -45,7 +45,7 @@ public struct ActionSlider: View {
     private func slider(maxWidth: CGFloat) -> some View {
         ZStack(alignment: .trailing) {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color(splytColor: viewState.sliderColor ?? userTheme.theme).gradient)
+                .fill(Color( viewState.sliderColor ?? userTheme.theme).gradient)
                 .frame(width: slideWidth)
             sliderImage
         }
@@ -80,12 +80,12 @@ public struct ActionSlider: View {
     private var sliderImage: some View {
         let imageName = slideComplete ? "checkmark" : "chevron.right"
         return RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(Color(splytColor: .white).shadow(.drop(radius: Layout.size(0.5))))
+            .fill(Color(SplytColor.white).shadow(.drop(radius: Layout.size(0.5))))
             .frame(width: sliderHeadSize, height: sliderHeadSize)
             .overlay(
                 Image(systemName: imageName)
                     .imageScale(.large)
-                    .foregroundColor(Color(splytColor: .gray))
+                    .foregroundColor(Color(SplytColor.gray))
             )
     }
 }

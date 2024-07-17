@@ -78,7 +78,7 @@ struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEve
                 }
             Spacer()
             Image(systemName: "line.3.horizontal")
-                .foregroundColor(Color(splytColor: .gray))
+                .foregroundColor(Color(SplytColor.gray))
         }
     }
     

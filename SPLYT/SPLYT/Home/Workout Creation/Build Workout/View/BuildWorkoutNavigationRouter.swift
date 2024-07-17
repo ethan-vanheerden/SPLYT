@@ -21,8 +21,9 @@ enum BuildWorkoutNavigationEvent {
     case createCustomExercise(exerciseName: String,
                               service: CustomExerciseServiceType? = nil,
                               saveAction: (String) -> Void)
-    case dismissReplace
+    case dismiss
     case replace(exerciseId: String)
+    case addExercises(exerciseIds: [String])
 }
 
 // MARK: - Router
@@ -31,11 +32,14 @@ final class BuildWorkoutNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
     private let viewModel: BuildWorkoutViewModel
     private let replaceExerciseAction: ((String) -> Void)?
+    private let addExercisesAction: (([String]) -> Void)?
     
     init(viewModel: BuildWorkoutViewModel,
-         replaceExerciseAction: ((String) -> Void)? = nil) {
+         replaceExerciseAction: ((String) -> Void)? = nil,
+         addExercisesAction: (([String]) -> Void)? = nil) {
         self.viewModel = viewModel
         self.replaceExerciseAction = replaceExerciseAction
+        self.addExercisesAction = addExercisesAction
     }
     
     func navigate(_ event: BuildWorkoutNavigationEvent) {
@@ -50,10 +54,12 @@ final class BuildWorkoutNavigationRouter: NavigationRouter {
             handleCreateCustomExercise(exerciseName: exerciseName,
                                        service: service,
                                        saveAction: saveAction)
-        case .dismissReplace:
-            handleDismissReplace()
+        case .dismiss:
+            handleDismiss()
         case .replace(let exerciseId):
             handleReplace(exerciseId: exerciseId)
+        case .addExercises(let exerciseIds):
+            handleAddExercises(newExerciseIds: exerciseIds)
         }
     }
 }
@@ -76,7 +82,7 @@ private extension BuildWorkoutNavigationRouter {
         navigator?.pop(animated: true)
     }
     
-    func handleCreateCustomExercise(exerciseName: String, 
+    func handleCreateCustomExercise(exerciseName: String,
                                     service: CustomExerciseServiceType?,
                                     saveAction: @escaping (String) -> Void) {
         let interactor = CustomExerciseInteractor(exerciseName: exerciseName,
@@ -90,15 +96,21 @@ private extension BuildWorkoutNavigationRouter {
         navigator?.present(vc, animated: true)
     }
     
-    func handleDismissReplace() {
+    func handleDismiss() {
         navigator?.dismiss(animated: true)
     }
     
     func handleReplace(exerciseId: String) {
         let replaceExerciseAction = replaceExerciseAction
-        navigator?.dismissWithCompletion(animated: true,
-                                         completion: {
+        navigator?.dismissWithCompletion(animated: true) {
             replaceExerciseAction?(exerciseId)
-        })
+        }
+    }
+    
+    func handleAddExercises(newExerciseIds: [String]) {
+        let addExercisesAction = addExercisesAction
+        navigator?.dismissWithCompletion(animated: true) {
+            addExercisesAction?(newExerciseIds)
+        }
     }
 }

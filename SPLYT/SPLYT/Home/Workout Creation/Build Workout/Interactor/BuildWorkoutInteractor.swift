@@ -137,7 +137,8 @@ private extension BuildWorkoutInteractor {
                                             filterDomain: createEmptyFilters(),
                                             canSave: false,
                                             isCreatingSuperset: false,
-                                            canSaveSuperset: false)
+                                            canSaveSuperset: false,
+                                            supersetExerciseIds: [])
             // Save the domain object for future actions
             return updateDomain(domain: domain)
         } catch {
@@ -202,6 +203,8 @@ private extension BuildWorkoutInteractor {
         
         if !domain.isCreatingSuperset {
             domain = addGroupToDomain(domain)
+        } else {
+            domain.supersetExerciseIds.append(exerciseId)
         }
         
         return updateDomain(domain: domain)
@@ -221,6 +224,7 @@ private extension BuildWorkoutInteractor {
         
         // Mark as not selected
         availableExercise.selectedGroups.removeAll { $0 == currentGroup }
+        domain.supersetExerciseIds.removeAll { $0 == exerciseId }
         domain.exercises[exerciseId] = availableExercise
         
         allExercises?[exerciseId]?.selectedGroups = availableExercise.selectedGroups
@@ -413,6 +417,7 @@ private extension BuildWorkoutInteractor {
         domain.builtWorkout.exerciseGroups = groups
         domain.exercises = availableExercises
         domain.isCreatingSuperset = false
+        domain.supersetExerciseIds = []
         
         return updateDomain(domain: domain)
     }
@@ -422,6 +427,7 @@ private extension BuildWorkoutInteractor {
         
         domain.isCreatingSuperset = false
         domain = addGroupToDomain(domain)
+        domain.supersetExerciseIds = []
         
         return updateDomain(domain: domain)
     }

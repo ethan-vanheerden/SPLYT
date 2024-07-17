@@ -44,27 +44,27 @@ struct IconButtonStyle: ButtonStyle {
             .frame(width: backgroundSize, height: backgroundSize)
             
             .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                        normalColor: Color(splytColor: iconColor),
-                                                        pressedColor: Color(splytColor: backgroundColor 
+                                                        normalColor: Color( iconColor),
+                                                        pressedColor: Color( backgroundColor 
                                                                             ?? userTheme.theme),
                                                         animationEnabled: animationEnabled))
             .roundedBackground(cornerRadius: cornerRadius,
                                fill: ButtonUtils.animationColor(configuration: configuration,
-                                                                normalColor: Color(splytColor: backgroundColor
+                                                                normalColor: Color( backgroundColor
                                                                                    ?? userTheme.theme),
-                                                                pressedColor: Color(splytColor: iconColor),
+                                                                pressedColor: Color( iconColor),
                                                                 animationEnabled: animationEnabled).gradient)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(lineWidth: Layout.size(0.25))
-                    .fill(Color(splytColor: outlineColor ?? backgroundColor ?? userTheme.theme).gradient)
+                    .fill(Color( outlineColor ?? backgroundColor ?? userTheme.theme).gradient)
             )
         case .secondary:
             baseImage
                 .frame(width: backgroundSize, height: backgroundSize)
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                            normalColor: Color(splytColor: iconColor),
-                                                            pressedColor: Color(splytColor: iconColor).opacity(0.5),
+                                                            normalColor: Color( iconColor),
+                                                            pressedColor: Color( iconColor).opacity(0.5),
                                                             animationEnabled: animationEnabled))
         }
     }

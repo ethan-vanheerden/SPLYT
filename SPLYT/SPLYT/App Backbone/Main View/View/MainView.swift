@@ -15,8 +15,9 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
                                                                                LVM.Event == LoginViewEvent {
     @ObservedObject private var viewModel: VM
     @ObservedObject private var authManager: A
+    @State private var selectedTab: TabSelection = .home
     private let loginViewModel: LVM
-    @State private var selectedTab: TabType = .home
+    private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
          authManager: A,
@@ -56,9 +57,10 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
     
     @ViewBuilder
     private var mainView: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             tabView
             TabBar(selectedTab: $selectedTab)
+                .padding(.horizontal, horizontalPadding)
                 .padding(.bottom, Layout.size(4))
         }
     }

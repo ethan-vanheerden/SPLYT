@@ -11,7 +11,7 @@ struct GradientGallery: View {
                     ForEach(SplytGradient.allCases, id: \.self) { gradient in
                         Text(gradient.rawValue)
                             .footnote()
-                            .foregroundColor(Color(splytColor: .white))
+                            .foregroundColor(Color(SplytColor.white))
                             .frame(width: proxy.size.width / 2.2, height: Layout.size(6))
                             .roundedBackground(cornerRadius: Layout.size(0.5),
                                                fill: gradient.gradient())

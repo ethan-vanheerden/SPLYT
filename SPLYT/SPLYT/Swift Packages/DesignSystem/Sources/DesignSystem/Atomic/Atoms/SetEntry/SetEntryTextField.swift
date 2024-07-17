@@ -134,7 +134,7 @@ struct SetEntryTextField: UIViewRepresentable {
     
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
-        uiView.layer.borderColor = isFocused ? Color(splytColor: .lightBlue).cgColor : Color(uiColor: .gray).cgColor
+        uiView.layer.borderColor = isFocused ? Color(SplytColor.lightBlue).cgColor : Color(uiColor: .gray).cgColor
     }
     
     private func createToolbar(textField: UITextField, context: Context) -> UIToolbar {

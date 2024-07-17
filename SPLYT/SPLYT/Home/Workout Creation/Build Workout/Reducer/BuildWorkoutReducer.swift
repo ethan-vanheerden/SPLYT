@@ -42,7 +42,8 @@ private extension BuildWorkoutReducer {
         
         let supersetDisplay = SupersetDisplay(isCreatingSuperset: domain.isCreatingSuperset,
                                               currentSupersetTitle: getCurrentSupersetTitle(numExercisesInCurrentGroup),
-                                              canSave: domain.canSaveSuperset)
+                                              canSave: domain.canSaveSuperset,
+                                              exerciseIds: domain.supersetExerciseIds)
         
         let display = BuildWorkoutDisplay(allExercises: getExerciseTileStates(exerciseMap: domain.exercises),
                                           groups: groups,

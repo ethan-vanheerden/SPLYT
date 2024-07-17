@@ -56,13 +56,18 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         
         return ZStack {
             VStack {
-                SegmentedControl(selectedIndex: $segmentedControlIndex.animation(),
-                                 titles: display.segmentedControlTitles)
+                HStack {
+                    PillSegmentedControl(selectedIndex: $segmentedControlIndex.animation(),
+                                         titles: display.segmentedControlTitles)
+                    Spacer()
+                }
+                .padding(.leading, Layout.size(2))
                 workoutPlanView(display: display)
                 Spacer()
             }
             .navigationBar(viewState: display.navBar)
             fabView(state: display.fab)
+                .padding(.bottom, Layout.size(4))
             // TODO: Maybe add some filters?
         }
         .dialog(isOpen: deletedWorkoutId != nil,

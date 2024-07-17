@@ -52,7 +52,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             HStack {
                 Text(Strings.dontHaveAccount)
                     .footnote()
-                    .foregroundColor(Color(splytColor: .gray))
+                    .foregroundColor(Color(SplytColor.gray))
                 Spacer()
             }
             .onTapGesture {
@@ -77,7 +77,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             if createAccount {
                 Text(display.emailMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: display.emailMessageColor))
+                    .foregroundColor(Color( display.emailMessageColor))
                     .padding(.bottom, Layout.size(1))
             }
             TextEntry(text: passwordTextBinding(password: display.password),
@@ -88,13 +88,13 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             if createAccount {
                 Text(display.passwordMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: display.passwordMessageColor))
+                    .foregroundColor(Color( display.passwordMessageColor))
             }
             if createAccount {
                 birthdayPicker(birthday: display.birthday)
                 Text(display.birthdayMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: display.birthdayMessageColor))
+                    .foregroundColor(Color( display.birthdayMessageColor))
             }
         }
         .padding(.bottom, Layout.size(4))
@@ -132,7 +132,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                 Text(Strings.birthday)
                     .body()
             }
-                       .tint(Color(splytColor: .blue))
+                       .tint(Color(SplytColor.blue))
         }
         .padding(.top, Layout.size(1))
     }
@@ -144,7 +144,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             if let errorMessage = errorMessage {
                 Text(errorMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: .red))
+                    .foregroundColor(Color(SplytColor.red))
             }
             SplytButton(text: buttonText,
                         type: .primary(color: .blue),
@@ -182,11 +182,11 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
         VStack {
             Text(Strings.bySigningUp)
                 .footnote()
-                .foregroundColor(Color(splytColor: .gray))
+                .foregroundColor(Color(SplytColor.gray))
             Link(destination: termsURL) {
                 Text(Strings.termsConditions)
                     .footnote()
-                    .foregroundColor(Color(splytColor: .blue))
+                    .foregroundColor(Color(SplytColor.blue))
             }
         }
     }

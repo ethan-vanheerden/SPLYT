@@ -12,7 +12,7 @@ final class TileTests: XCTestCase {
             
             Tile {
                 Circle()
-                    .fill(Color(splytColor: .red))
+                    .fill(Color(SplytColor.red))
                     .frame(width: Layout.size(1))
             }
         }.padding(Layout.size(2))

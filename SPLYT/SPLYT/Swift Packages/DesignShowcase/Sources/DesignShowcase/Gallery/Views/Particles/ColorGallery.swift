@@ -11,11 +11,11 @@ struct ColorGallery: View {
                     ForEach(SplytColor.allCases, id: \.self) { color in
                         Text(color.rawValue)
                             .foregroundColor(color == .white || color == .clear ?
-                                             Color(splytColor: .black) : Color(splytColor: .white))
+                                             Color(SplytColor.black) : Color(SplytColor.white))
                             .footnote()
                             .frame(width: proxy.size.width / 2.2, height: Layout.size(6))
                             .roundedBackground(cornerRadius: Layout.size(0.5),
-                                               fill: Color(splytColor: color))
+                                               fill: Color( color))
                     }
                 }
                 .padding(.horizontal)

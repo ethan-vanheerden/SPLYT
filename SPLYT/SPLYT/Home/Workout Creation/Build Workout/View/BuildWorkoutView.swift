@@ -18,15 +18,15 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @State private var searchText = ""
     @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: BuildWorkoutNavigationRouter
-    private let forReplaceExercise: Bool
+    private let type: BuildWorkoutViewType
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
          navigationRouter: BuildWorkoutNavigationRouter,
-         forReplaceExercise: Bool = false) {
+         type: BuildWorkoutViewType = .normal) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
-        self.forReplaceExercise = forReplaceExercise
+        self.type = type
         self.viewModel.send(.load, taskPriority: .userInitiated)
     }
     
@@ -34,27 +34,13 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         switch viewModel.viewState {
         case .loading:
             ProgressView()
-                .navigationBar(viewState: .init(
-                    title: forReplaceExercise ? Strings.replaceExercise : Strings.addExercises)
-                ) {
-                    if forReplaceExercise {
-                        navigationRouter.navigate(.dismissReplace)
-                    } else {
-                        viewModel.send(.toggleDialog(type: .leave, isOpen: true),
-                                       taskPriority: .userInitiated)
-                    }
-                }
+                .navigationBar(viewState: .init(title: type == .replace ? Strings.replaceExercise : Strings.addExercises),
+                               backAction: dismissAction)
         case .main(let display), .exitEdit(let display):
             mainView(display: display)
         case .error:
             ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
-                      backAction: {
-                if forReplaceExercise {
-                    navigationRouter.navigate(.dismissReplace)
-                } else {
-                    navigationRouter.navigate(.exit)
-                }
-            })
+                      backAction: dismissAction)
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
@@ -75,7 +61,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                     }
                     if display.isFiltering {
                         Circle()
-                            .fill(Color(splytColor: .red))
+                            .fill(Color(SplytColor.red))
                             .frame(width: Layout.size(1))
                             .offset(x: Layout.size(0.5), y: Layout.size(0.5))
                         
@@ -91,17 +77,8 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .sheet(isPresented: $filterSheetPresented) {
             filterSheet(display: display.filterDisplay)
         }
-        .navigationBar(viewState: .init(
-            title: forReplaceExercise ? Strings.replaceExercise : Strings.addExercises
-        ),
-                       backAction: {
-            if forReplaceExercise {
-                navigationRouter.navigate(.dismissReplace)
-            } else {
-                viewModel.send(.toggleDialog(type: .leave, isOpen: true),
-                               taskPriority: .userInitiated)
-            }
-        },
+        .navigationBar(viewState: .init(title: type == .replace ? Strings.replaceExercise : Strings.addExercises),
+                       backAction: dismissAction,
                        content: {
             continueButton(canContinue: display.canSave)
         })
@@ -131,14 +108,9 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         Section {
                             ForEach(viewState.exercises, id: \.self) { exerciseViewState in
                                 AddExerciseTile(viewState: exerciseViewState,
-                                                tapAction: {
-                                    if forReplaceExercise {
-                                        navigationRouter.navigate(.replace(exerciseId: exerciseViewState.id))
-                                    } else {
-                                        viewModel.send(.toggleExercise(exerciseId: exerciseViewState.id),
-                                                       taskPriority: .userInitiated)
-                                    }
-                                },
+                                                useCheckmark: type == .add,
+                                                tapAction: addExerciseTileTapAction(exerciseId: exerciseViewState.id,
+                                                                                    isCreatingSuperset: display.supersetDisplay.isCreatingSuperset),
                                                 favoriteAction: {
                                     viewModel.send(.toggleFavorite(exerciseId: exerciseViewState.id),
                                                    taskPriority: .userInitiated)
@@ -154,7 +126,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                     .padding(.vertical, Layout.size(1))
                                 Spacer()
                             }
-                            .background(Color(splytColor: .white))
+                            .background(Color(SplytColor.white))
                         }
                     }
                 }
@@ -195,7 +167,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         Text(Strings.favorites)
                             .body()
                     }
-                    .tint(Color(splytColor: userTheme.theme))
+                    .tint(Color( userTheme.theme))
                 }
             }
             Tile {
@@ -209,10 +181,10 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                 Text(muscle.rawValue)
                                     .body(style: .medium)
                                     .frame(width: Layout.size(17))
-                                    .foregroundColor(Color(splytColor: .black))
+                                    .foregroundColor(Color(SplytColor.black))
                             }
                                                              .toggleStyle(.button)
-                                                             .tint(Color(splytColor: userTheme.theme))
+                                                             .tint(Color( userTheme.theme))
                         }
                     }
                 }
@@ -247,23 +219,23 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private func continueButton(canContinue: Bool) -> some View {
-        if forReplaceExercise {
-            EmptyView()
-        } else {
+        switch type {
+        case .normal:
             SplytButton(text: Strings.next,
                         isEnabled: canContinue) {
                 viewModel.send(.nextTapped,
                                taskPriority: .userInitiated)
                 navigationRouter.navigate(.editSetsReps)
             }
+        case .replace, .add:
+            EmptyView()
         }
     }
     
     @ViewBuilder
     private func supersetMenu(supersetDisplay: SupersetDisplay) -> some View {
-        if forReplaceExercise {
-            EmptyView()
-        } else {
+        switch type {
+        case .normal, .add:
             Group {
                 if supersetDisplay.isCreatingSuperset {
                     Tile {
@@ -277,8 +249,12 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                 }
                                 SplytButton(text: "Save",
                                             isEnabled: supersetDisplay.canSave) {
-                                    viewModel.send(.saveSuperset,
-                                                   taskPriority: .userInitiated)
+                                    if type == .normal {
+                                        viewModel.send(.saveSuperset,
+                                                       taskPriority: .userInitiated)
+                                    } else if type == .add {
+                                        navigationRouter.navigate(.addExercises(exerciseIds: supersetDisplay.exerciseIds))
+                                    }
                                 }
                             }
                         }
@@ -291,8 +267,46 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 }
             }
             .padding(.horizontal, horizontalPadding)
+        case .replace:
+            EmptyView()
         }
     }
+    
+    private var dismissAction: () -> Void {
+        switch type {
+        case .normal:
+            return { viewModel.send(.toggleDialog(type: .leave, isOpen: true),
+                                    taskPriority: .userInitiated) }
+        case .replace, .add:
+            return { navigationRouter.navigate(.dismiss) }
+        }
+    }
+    
+    private func addExerciseTileTapAction(exerciseId: String,
+                                          isCreatingSuperset: Bool) -> (() -> Void) {
+        switch type {
+        case .normal:
+            return { viewModel.send(.toggleExercise(exerciseId: exerciseId),
+                                    taskPriority: .userInitiated) }
+        case .replace:
+            return { navigationRouter.navigate(.replace(exerciseId: exerciseId)) }
+        case .add:
+            if isCreatingSuperset {
+                return { viewModel.send(.toggleExercise(exerciseId: exerciseId),
+                                        taskPriority: .userInitiated) }
+            } else {
+               return { navigationRouter.navigate(.addExercises(exerciseIds: [exerciseId])) }
+            }
+        }
+    }
+}
+
+// MARK: - BuildWorkoutViewType
+
+enum BuildWorkoutViewType {
+    case normal
+    case replace
+    case add
 }
 
 // MARK: - Strings

@@ -47,29 +47,23 @@ public struct DoExerciseGroupView: View {
             CollapseHeader(isExpanded: $isExpanded,
                            viewState: viewState.header) {
                 VStack {
-                    ForEach(Array(viewState.exercises.enumerated()), id: \.offset) { exerciseIndex, exercise in
-                        ExerciseView(viewState: exercise,
-                                     type: .inProgress(
-                                        usePreviousInputAction: { setIndex, fromModifier in
-                                            usePreviousInputAction(exerciseIndex, setIndex, fromModifier)
-                                        },
-                                        addNoteAction: addNoteAction,
-                                        replaceExerciseAction: {
-                                            replaceExerciseAction(exerciseIndex)
-                                        },
-                                        deleteExerciseAction: {
-                                            deleteExerciseAction(exerciseIndex)
-                                        },
-                                        canDeleteExercise: canDeleteExercise
-                                     ),
-                                     addSetAction: addSetAction,
-                                     removeSetAction: removeSetAction,
-                                     updateSetAction: { setIndex, newInput in
-                            updateSetAction(exerciseIndex, setIndex, newInput)
-                        },
-                                     updateModifierAction: { setIndex, newInput in
-                            updateModifierAction(exerciseIndex, setIndex, newInput)
-                        })
+                    ForEach(Array(viewState.exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseStatus in
+                        switch exerciseStatus {
+                        case .loaded(let viewState):
+                            ExerciseView(arguments: .regular(
+                                viewState: viewState,
+                                type: inProgressType(exerciseIndex: exerciseIndex),
+                                addSetAction: addSetAction,
+                                removeSetAction: removeSetAction,
+                                updateSetAction: { setIndex, newInput in
+                                    updateSetAction(exerciseIndex, setIndex, newInput)
+                                },
+                                updateModifierAction: { setIndex, newInput in
+                                    updateModifierAction(exerciseIndex, setIndex, newInput)
+                                }))
+                        case .loading:
+                            ExerciseView(arguments: .loading)
+                        }
                     }
                     .padding(.bottom, Layout.size(1))
                     if let slider = viewState.slider {
@@ -82,17 +76,33 @@ public struct DoExerciseGroupView: View {
             }
         }
     }
+    
+    private func inProgressType(exerciseIndex: Int) -> ExerciseViewType {
+        return .inProgress(
+            usePreviousInputAction: { setIndex, fromModifier in
+                usePreviousInputAction(exerciseIndex, setIndex, fromModifier)
+            },
+            addNoteAction: addNoteAction,
+            replaceExerciseAction: {
+                replaceExerciseAction(exerciseIndex)
+            },
+            deleteExerciseAction: {
+                deleteExerciseAction(exerciseIndex)
+            },
+            canDeleteExercise: canDeleteExercise
+        )
+    }
 }
 
 // MARK: - View State
 
 public struct DoExerciseGroupViewState: Equatable {
     let header: CollapseHeaderViewState
-    public let exercises: [ExerciseViewState]
+    public let exercises: [ExerciseViewStatus]
     let slider: ActionSliderViewState? // Not shown once completed
     
     public init(header: CollapseHeaderViewState,
-                exercises: [ExerciseViewState],
+                exercises: [ExerciseViewStatus],
                 slider: ActionSliderViewState?) {
         self.header = header
         self.exercises = exercises

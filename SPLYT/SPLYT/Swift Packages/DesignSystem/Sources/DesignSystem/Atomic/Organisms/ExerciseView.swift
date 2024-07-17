@@ -4,31 +4,37 @@ import ExerciseCore
 public struct ExerciseView: View {
     @State private var showActionSheet: Bool = false
     @EnvironmentObject private var userTheme: UserTheme
-    private let viewState: ExerciseViewState
-    private let type: ExerciseViewType
-    private let addSetAction: () -> Void
-    private let removeSetAction: () -> Void
-    private let updateSetAction: (Int, SetInput) -> Void // Int to represent the set index the action is happening to
-    private let updateModifierAction: (Int, SetInput) -> Void
+    private let arguments: ExerciseViewArguments
     private let horizontalPadding = Layout.size(2)
     
-    public init(viewState: ExerciseViewState,
-                type: ExerciseViewType,
-                addSetAction: @escaping () -> Void,
-                removeSetAction: @escaping () -> Void,
-                updateSetAction: @escaping (Int, SetInput) -> Void,
-                updateModifierAction: @escaping (Int, SetInput) -> Void) {
-        self.viewState = viewState
-        self.type = type
-        self.addSetAction = addSetAction
-        self.removeSetAction = removeSetAction
-        self.updateSetAction = updateSetAction
-        self.updateModifierAction = updateModifierAction
+    public init(arguments: ExerciseViewArguments) {
+        self.arguments = arguments
     }
     
     public var body: some View {
+        switch arguments {
+        case let .regular(viewState, type, addSetAction, removeSetAction, updateSetAction, updateModifierAction):
+            loadedView(viewState: viewState, 
+                       type: type,
+                       addSetAction: addSetAction,
+                       removeSetAction: removeSetAction,
+                       updateSetAction: updateSetAction,
+                       updateModifierAction: updateModifierAction)
+        case .loading:
+            ProgressView()
+                .padding(.vertical, Layout.size(2))
+        }
+    }
+    
+    @ViewBuilder
+    private func loadedView(viewState: ExerciseViewState,
+                            type: ExerciseViewType,
+                            addSetAction: @escaping () -> Void,
+                            removeSetAction: @escaping () -> Void,
+                            updateSetAction: @escaping (Int, SetInput) -> Void,
+                            updateModifierAction: @escaping (Int, SetInput) -> Void) -> some View {
         VStack {
-            header
+            header(viewState: viewState, type: type)
             ForEach(viewState.sets, id: \.setIndex) { set in
                 SetView(viewState: set,
                         exerciseType: type,
@@ -36,7 +42,10 @@ public struct ExerciseView: View {
                         updateModifierAction: updateModifierAction)
             }
             .padding(.horizontal, horizontalPadding)
-            setButtons
+            setButtons(viewState: viewState, 
+                       type: type,
+                       addSetAction: addSetAction,
+                       removeSetAction: removeSetAction)
         }
         .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
             switch type {
@@ -48,12 +57,11 @@ public struct ExerciseView: View {
                     Button(Strings.deleteExercise, role: .destructive) { deleteExerciseAction() }
                 }
             }
-            
         }
     }
     
     @ViewBuilder
-    private var header: some View {
+    private func header(viewState: ExerciseViewState, type: ExerciseViewType) -> some View {
         HStack {
             SectionHeader(viewState: viewState.header)
             Spacer()
@@ -72,9 +80,14 @@ public struct ExerciseView: View {
     }
     
     @ViewBuilder
-    private var setButtons: some View {
+    private func setButtons(viewState: ExerciseViewState,
+                            type: ExerciseViewType,
+                            addSetAction: @escaping () -> Void,
+                            removeSetAction: @escaping () -> Void) -> some View {
         HStack(spacing: Layout.size(2)) {
-            addRemoveSetButtons
+            addRemoveSetButtons(viewState: viewState, 
+                                addSetAction: addSetAction,
+                                removeSetAction: removeSetAction)
             Spacer()
             switch type {
             case .build:
@@ -90,7 +103,9 @@ public struct ExerciseView: View {
     }
     
     @ViewBuilder
-    private var addRemoveSetButtons: some View {
+    private func addRemoveSetButtons(viewState: ExerciseViewState,
+                                     addSetAction: @escaping () -> Void,
+                                     removeSetAction: @escaping () -> Void) -> some View {
         IconButton(iconName: "minus",
                    iconColor: .white,
                    isEnabled: viewState.canRemoveSet) { removeSetAction() }
@@ -112,7 +127,26 @@ public enum ExerciseViewType {
                     canDeleteExercise: Bool)
 }
 
-// MARK: View State
+// MARK: - Arguments
+
+public enum ExerciseViewArguments {
+    case regular(viewState: ExerciseViewState,
+                 type: ExerciseViewType,
+                 addSetAction: () -> Void,
+                 removeSetAction: () -> Void,
+                 updateSetAction: (Int, SetInput) -> Void,
+                 updateModifierAction: (Int, SetInput) -> Void)
+    case loading
+}
+
+// MARK: - Status
+
+public enum ExerciseViewStatus: Equatable, Hashable {
+    case loaded(ExerciseViewState)
+    case loading
+}
+
+// MARK: - View State
 
 public struct ExerciseViewState: Equatable, Hashable {
     public let header: SectionHeaderViewState

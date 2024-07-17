@@ -5,7 +5,7 @@ public struct Scrim: View {
     public init() {}
     
     public var body: some View {
-        Color(splytColor: .gray).opacity(0.15)
+        Color(SplytColor.gray).opacity(0.15)
     }
 }
 

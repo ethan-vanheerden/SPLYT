@@ -24,3 +24,18 @@ public struct Exercise: Codable, Equatable {
         self.sets = sets
     }
 }
+
+// MARK: - Loading
+
+public extension Exercise {
+    static let loadingExerciseId = "LOADING"
+    
+    static func loadingExercise(numSets: Int) -> Exercise {
+        let emptySets: [Set] = Array(repeating: .init(input: .repsWeight(input: .init()),
+                                                      modifier: nil),
+                                     count: numSets)
+        return Exercise(id: loadingExerciseId,
+                        name: loadingExerciseId,
+                        sets: emptySets)
+    }
+}

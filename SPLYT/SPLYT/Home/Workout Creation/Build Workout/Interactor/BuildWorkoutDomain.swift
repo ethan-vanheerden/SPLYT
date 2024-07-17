@@ -18,14 +18,16 @@ final class BuildWorkoutDomain: Equatable {
     var canSave: Bool
     var isCreatingSuperset: Bool
     var canSaveSuperset: Bool
+    var supersetExerciseIds: [String]
     
     init(exercises: [String: AvailableExercise],
-        builtWorkout: Workout,
-        currentGroup: Int,
-        filterDomain: BuildWorkoutFilterDomain,
-        canSave: Bool,
-        isCreatingSuperset: Bool,
-        canSaveSuperset: Bool) {
+         builtWorkout: Workout,
+         currentGroup: Int,
+         filterDomain: BuildWorkoutFilterDomain,
+         canSave: Bool,
+         isCreatingSuperset: Bool,
+         canSaveSuperset: Bool,
+         supersetExerciseIds: [String]) {
         self.exercises = exercises
         self.builtWorkout = builtWorkout
         self.currentGroup = currentGroup
@@ -33,6 +35,7 @@ final class BuildWorkoutDomain: Equatable {
         self.canSave = canSave
         self.isCreatingSuperset = isCreatingSuperset
         self.canSaveSuperset = canSaveSuperset
+        self.supersetExerciseIds = supersetExerciseIds
     }
     
     static func == (lhs: BuildWorkoutDomain, rhs: BuildWorkoutDomain) -> Bool {
@@ -42,7 +45,8 @@ final class BuildWorkoutDomain: Equatable {
         lhs.filterDomain == rhs.filterDomain &&
         lhs.canSave == rhs.canSave &&
         lhs.isCreatingSuperset == rhs.isCreatingSuperset &&
-        lhs.canSaveSuperset == rhs.canSaveSuperset
+        lhs.canSaveSuperset == rhs.canSaveSuperset &&
+        lhs.supersetExerciseIds == rhs.supersetExerciseIds
     }
 }
 

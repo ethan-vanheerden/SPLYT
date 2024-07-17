@@ -27,8 +27,12 @@ enum DoWorkoutDomainAction {
     case cacheWorkout(secondsElapsed: Int)
     case pauseRest
     case resumeRest(restSeconds: Int)
+    case markExerciseLoading(group: Int, exerciseIndex: Int) // TODO: Combine would be much better to do for this flow
     case replaceExercise(group: Int, exerciseIndex: Int, newExerciseId: String)
     case deleteExercise(group: Int, exerciseIndex: Int)
+    case addModifier(group: Int, exerciseIndex: Int, setIndex: Int, modifier: SetModifier)
+    case removeModifier(group: Int, exerciseIndex: Int, setIndex: Int)
+    case addExercises(newExerciseIds: [String])
 }
 
 // MARK: - Domain Results
@@ -102,12 +106,25 @@ final class DoWorkoutInteractor {
             return await handleTogglePauseRest(isPaused: true, restSeconds: nil)
         case .resumeRest(let restSeconds):
             return await handleTogglePauseRest(isPaused: false, restSeconds: restSeconds)
+        case let .markExerciseLoading(group, exerciseIndex):
+            return handleMarkExerciseLoading(group: group, exerciseIndex: exerciseIndex)
         case let .replaceExercise(group, exerciseIndex, newExerciseId):
             return await handleReplaceExercise(group: group,
                                                exerciseIndex: exerciseIndex,
                                                newExerciseId: newExerciseId)
         case let .deleteExercise(group, exerciseIndex):
             return handleDeleteExercise(group: group, exerciseIndex: exerciseIndex)
+        case let .addModifier(group, exerciseIndex, setIndex, modifier):
+            return handleAddModifier(group: group,
+                                     exerciseIndex: exerciseIndex,
+                                     setIndex: setIndex,
+                                     modifier: modifier)
+        case let .removeModifier(group, exerciseIndex, setIndex):
+            return handleRemoveModifier(group: group,
+                                        exerciseIndex: exerciseIndex,
+                                        setIndex: setIndex)
+        case .addExercises(let exerciseIds):
+            return await handleAddExercises(newExerciseIds: exerciseIds)
         }
     }
 }
@@ -337,6 +354,15 @@ private extension DoWorkoutInteractor {
         return .loaded(domain)
     }
     
+    func handleMarkExerciseLoading(group: Int, exerciseIndex: Int) -> DoWorkoutDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        let numSets = domain.workout.exerciseGroups[group].exercises[exerciseIndex].sets.count
+        domain.workout.exerciseGroups[group].exercises[exerciseIndex] = .loadingExercise(numSets: numSets)
+        
+        return updateDomain(domain: domain)
+    }
+    
     func handleReplaceExercise(group: Int,
                                exerciseIndex: Int,
                                newExerciseId: String) async -> DoWorkoutDomainResult {
@@ -345,24 +371,11 @@ private extension DoWorkoutInteractor {
         do {
             let availableExercise = try await service.loadExercise(exerciseId: newExerciseId)
             
-            // Replace the exercise with this one with the same number of sets
-            // as the replaced exercise
-            var groups = domain.workout.exerciseGroups
-            guard group < groups.count else { return .error }
-            var targetGroup = groups[group]
-            
-            var exercises = targetGroup.exercises
-            guard exerciseIndex < exercises.count else { return .error }
-            let targetExercise = exercises[exerciseIndex]
-            
-            let numSets = targetExercise.sets.count
-            let exercise = WorkoutInteractor.createExercise(from: availableExercise,
-                                                            numSets: numSets)
-            
-            exercises[exerciseIndex] = exercise
-            targetGroup.exercises = exercises
-            groups[group] = targetGroup
-            domain.workout.exerciseGroups = groups
+            let newGroups = try WorkoutInteractor.replaceExercise(groupIndex: group,
+                                                                  groups: domain.workout.exerciseGroups,
+                                                                  exerciseIndex: exerciseIndex,
+                                                                  availableExercise: availableExercise)
+            domain.workout.exerciseGroups = newGroups
             
             return updateDomain(domain: domain)
         } catch {
@@ -404,6 +417,60 @@ private extension DoWorkoutInteractor {
         domain.workout.exerciseGroups = groups
         
         return updateDomain(domain: domain)
+    }
+    
+    func handleAddModifier(group: Int,
+                           exerciseIndex: Int,
+                           setIndex: Int,
+                           modifier: SetModifier) -> DoWorkoutDomainResult {
+        guard var domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.editModifier(groupIndex: group,
+                                                           groups: domain.workout.exerciseGroups,
+                                                           exerciseIndex: exerciseIndex,
+                                                           setIndex: setIndex,
+                                                           modifier: modifier)
+        domain.workout.exerciseGroups = updatedGroups
+        
+        return updateDomain(domain: domain)
+    }
+    
+    func handleRemoveModifier(group: Int, exerciseIndex: Int, setIndex: Int) -> DoWorkoutDomainResult {
+        guard var domain = savedDomain else { return .error }
+        let updatedGroups = WorkoutInteractor.editModifier(groupIndex: group,
+                                                           groups: domain.workout.exerciseGroups,
+                                                           exerciseIndex: exerciseIndex,
+                                                           setIndex: setIndex,
+                                                           modifier: nil)
+        domain.workout.exerciseGroups = updatedGroups
+        
+        return updateDomain(domain: domain)
+    }
+    
+    func handleAddExercises(newExerciseIds: [String]) async -> DoWorkoutDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        do {
+            var exercises = [AvailableExercise]()
+            
+            for newExerciseId in newExerciseIds {
+                let exercise = try await service.loadExercise(exerciseId: newExerciseId)
+                exercises.append(exercise)
+            }
+            
+            let newGroups = WorkoutInteractor.addExercises(groups: domain.workout.exerciseGroups,
+                                                           exercises: exercises)
+            domain.workout.exerciseGroups = newGroups
+            
+            let lastGroupCompleted = domain.completedGroups.last ?? false
+            domain.completedGroups.append(false)
+            domain.expandedGroups.append(lastGroupCompleted)
+            domain.fractionCompleted = getFractionCompleted(completedGroups: domain.completedGroups)
+
+            
+            return updateDomain(domain: domain)
+        } catch {
+            return .error
+        }
     }
 }
 

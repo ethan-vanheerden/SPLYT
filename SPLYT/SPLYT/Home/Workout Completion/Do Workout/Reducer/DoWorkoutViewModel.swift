@@ -27,8 +27,12 @@ enum DoWorkoutViewEvent {
     case cacheWorkout(secondElapsed: Int)
     case pauseRest
     case resumeRest(restSeconds: Int)
+    case markExerciseLoading(group: Int, exerciseIndex: Int)
     case replaceExercise(group: Int, exerciseIndex: Int, newExerciseId: String)
     case deleteExercise(group: Int, exerciseIndex: Int)
+    case addModifier(group: Int, exerciseIndex: Int, setIndex: Int, modifier: SetModifier)
+    case removeModifier(group: Int, exerciseIndex: Int, setIndex: Int)
+    case addExercises(exerciseIds: [String])
 }
 
 // MARK: - View Model
@@ -84,12 +88,25 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
             await react(domainAction: .pauseRest)
         case .resumeRest(let restSeconds):
             await react(domainAction: .resumeRest(restSeconds: restSeconds))
+        case let .markExerciseLoading(group, exerciseIndex):
+            await react(domainAction: .markExerciseLoading(group: group, exerciseIndex: exerciseIndex))
         case let .replaceExercise(group, exerciseIndex, newExerciseId):
             await react(domainAction: .replaceExercise(group: group,
                                                        exerciseIndex: exerciseIndex,
                                                        newExerciseId: newExerciseId))
         case let .deleteExercise(group, exerciseIndex):
             await react(domainAction: .deleteExercise(group: group, exerciseIndex: exerciseIndex))
+        case let .addModifier(group, exerciseIndex, setIndex, modifier):
+            await react(domainAction: .addModifier(group: group,
+                                                   exerciseIndex: exerciseIndex,
+                                                   setIndex: setIndex,
+                                                   modifier: modifier))
+        case let .removeModifier(group, exerciseIndex, setIndex):
+            await react(domainAction: .removeModifier(group: group,
+                                                      exerciseIndex: exerciseIndex,
+                                                      setIndex: setIndex))
+        case .addExercises(let exerciseIds):
+            await react(domainAction: .addExercises(newExerciseIds: exerciseIds))
         }
     }
 }

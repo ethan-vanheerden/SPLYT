@@ -31,7 +31,7 @@ struct Dialog<Content: View>: View {
             }
             .padding(Layout.size(2))
             .roundedBackground(cornerRadius: Layout.size(1),
-                               fill: Color(splytColor: .white).shadow(.drop(radius: Layout.size(0.125))))
+                               fill: Color(SplytColor.white).shadow(.drop(radius: Layout.size(0.125))))
             .frame(width: proxy.size.width * 0.7)
             .centerGeometry(proxy: proxy)
         }
