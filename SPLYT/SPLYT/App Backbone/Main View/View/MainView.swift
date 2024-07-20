@@ -17,7 +17,6 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
     @ObservedObject private var authManager: A
     @State private var selectedTab: TabSelection = .home
     private let loginViewModel: LVM
-    private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
          authManager: A,
@@ -57,10 +56,10 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
     
     @ViewBuilder
     private var mainView: some View {
-        ZStack(alignment: .bottom) {
+        VStack {
             tabView
-            TabBar(selectedTab: $selectedTab)
-                .padding(.horizontal, horizontalPadding)
+                .animation(nil, value: selectedTab) // Want just the tab to animate, not the actual view change
+            TabBar(selectedTab: $selectedTab.animation())
                 .padding(.bottom, Layout.size(4))
         }
     }

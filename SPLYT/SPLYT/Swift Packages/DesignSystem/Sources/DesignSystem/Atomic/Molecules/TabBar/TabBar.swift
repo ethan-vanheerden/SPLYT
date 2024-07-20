@@ -16,21 +16,27 @@ public struct TabBar: View {
             ForEach(TabSelection.allCases, id: \.self) { tab in
                 Spacer()
                 tabView(tab: tab)
+                    .background {
+                        ZStack {
+                            if tab == selectedTab {
+                                Capsule().fill(Color(userTheme.theme).gradient)
+                                    .matchedGeometryEffect(id: geoId, in: animation)
+                            }
+                        }
+                        .animation(.smooth(duration: 0.5), value: selectedTab)
+                    }
                     .onTapGesture {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         selectedTab = tab
                     }
                     .foregroundStyle(iconColor(tab: tab).gradient)
                 Spacer()
             }
         }
-        .padding(.vertical, Layout.size(1.5))
-        .background(Color(SplytColor.white), in: .capsule)
-//        .roundedBackground(cornerRadius: Layout.size(4),
-//                           fill: Color(SplytColor.white).shadow(.drop(radius: Layout.size(0.25))))
     }
     
     private func iconColor(tab: TabSelection) -> Color {
-        return tab == selectedTab ? Color( userTheme.theme) : Color(SplytColor.gray)
+        return tab == selectedTab ? Color(SplytColor.white) : Color(SplytColor.gray)
     }
     
     @ViewBuilder
@@ -41,6 +47,9 @@ public struct TabBar: View {
             Text(tab.title)
                 .footnote(style: .semiBold)
         }
+        .padding(.vertical, Layout.size(0.5))
+        .foregroundStyle(iconColor(tab: tab))
         .frame(width: Layout.size(10)) // Fixed so properly centered
     }
-}
+} // TODO: revert back to original - use the animation tho
+

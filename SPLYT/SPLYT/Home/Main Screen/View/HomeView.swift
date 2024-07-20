@@ -67,7 +67,6 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
             }
             .navigationBar(viewState: display.navBar)
             fabView(state: display.fab)
-                .padding(.bottom, Layout.size(4))
             // TODO: Maybe add some filters?
         }
         .dialog(isOpen: deletedWorkoutId != nil,

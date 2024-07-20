@@ -18,7 +18,7 @@ public struct PillSegmentedControl: View {
             ForEach(Array(titles.enumerated()), id: \.offset) { titleIndex, title in
                 Text(title)
                     .subhead()
-                    .foregroundStyle(titleIndex == selectedIndex ? Color.white : Color.black)
+                    .foregroundStyle(titleIndex == selectedIndex ? Color(SplytColor.white) : Color(SplytColor.black))
                     .animation(.easeOut, value: selectedIndex)
                     .padding(.vertical, Layout.size(1))
                     .padding(.leading, leadingPadding(index: titleIndex))
@@ -26,7 +26,7 @@ public struct PillSegmentedControl: View {
                     .background {
                         ZStack {
                             if titleIndex == selectedIndex {
-                                Capsule().fill(Color(userTheme.theme))
+                                Capsule().fill(Color(userTheme.theme).gradient)
                                     .matchedGeometryEffect(id: geoId, in: animation)
                             }
                         }
@@ -38,7 +38,7 @@ public struct PillSegmentedControl: View {
                     }
             }
         }
-        .background(Color(SplytColor.gray50).opacity(0.2), in: .capsule)
+        .background(Color(SplytColor.gray50).opacity(0.2).gradient, in: .capsule)
     }
     
     private func leadingPadding(index: Int) -> CGFloat? {
