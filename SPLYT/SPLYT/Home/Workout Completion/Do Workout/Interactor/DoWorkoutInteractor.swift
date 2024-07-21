@@ -528,9 +528,9 @@ private extension DoWorkoutInteractor {
             for (exerciseIndex, exercise) in group.exercises.enumerated() {
                 for (setIndex, set) in exercise.sets.enumerated() {
                     let newInput = createSetPlaceholder(setInput: set.input)
-                    let newModifer = createModifierPlaceholder(modifier: set.modifier)
+                    let newModifier = createModifierPlaceholder(modifier: set.modifier)
                     let newSet = Set(input: newInput,
-                                     modifier: newModifer)
+                                     modifier: newModifier)
                     newGroups[groupIndex].exercises[exerciseIndex].sets[setIndex] = newSet
                 }
             }

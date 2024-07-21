@@ -109,7 +109,9 @@ struct DoWorkoutService: DoWorkoutServiceType {
     }
     
     func loadInProgressWorkout() throws -> InProgressWorkout {
-        try cacheInteractor.load(request: inProgressCacheRequest)
+        screenLocker.enableAutoLock() // Re-enable if coming back from a crash
+        
+        return try cacheInteractor.load(request: inProgressCacheRequest)
     }
     
     func saveInProgressWorkout(_ inProgressWorkout: InProgressWorkout) {

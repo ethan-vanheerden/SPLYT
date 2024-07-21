@@ -3,7 +3,8 @@ import ExerciseCore
 import Core
 
 public struct SetView: View {
-    @State private var showBaseActionSheet: Bool = false
+    @State private var showRegularActionSheet: Bool = false
+    @State private var showModifierActionSheet: Bool = false
     @EnvironmentObject private var userTheme: UserTheme
     private let viewState: SetViewState
     private let exerciseType: ExerciseViewType
@@ -28,35 +29,38 @@ public struct SetView: View {
     }
     
     public var body: some View {
-        mainView
-            .confirmationDialog("", isPresented: $showBaseActionSheet, titleVisibility: .hidden) {
-                let forModifier = viewState.modifier != nil
-                if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
-                hasPreviousInput(forModifier: forModifier) {
-                    Button(Strings.usePreviousInput) {
-                        usePreviousInputAction(viewState.setIndex, forModifier)
-                    }
-                }
-                if let _ = viewState.modifier {
-                    Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
-                } else {
-                    Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
-                }
-            }
-    }
-    
-    @ViewBuilder
-    private var mainView: some View {
         VStack(alignment: .leading) {
             setRow(modifier: nil)
             if let modifier = viewState.modifier {
                 setRow(modifier: modifier)
             }
         }
+        .confirmationDialog("", isPresented: $showRegularActionSheet, titleVisibility: .hidden) {
+            if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
+            hasPreviousInput(forModifier: false) {
+                Button(Strings.usePreviousInput) {
+                    usePreviousInputAction(viewState.setIndex, false)
+                }
+            }
+            if viewState.modifier != nil {
+                Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
+            } else {
+                Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
+            }
+        }
+        .confirmationDialog("", isPresented: $showModifierActionSheet, titleVisibility: .hidden) {
+            if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
+            hasPreviousInput(forModifier: true) {
+                Button(Strings.usePreviousInput) {
+                    usePreviousInputAction(viewState.setIndex, true)
+                }
+            }
+        }
     }
     
     @ViewBuilder
     private func setRow(modifier: SetModifierViewState?) -> some View {
+        let isModifierRow = modifier != nil
         HStack {
             rowTitle(modifier: modifier)
                 .alignmentGuide(VerticalAlignment.center) { d in
@@ -70,11 +74,11 @@ public struct SetView: View {
                 entryView(setInput: viewState.input, updateAction: updateSetAction)
             }
             Spacer()
-            iconButton
+            iconButton(forModifier: isModifierRow)
                 .alignmentGuide(VerticalAlignment.center) { d in
                     d[.bottom] - iconButtonOffset
                 }
-                .isVisible(modifier == nil) // For consistent spacing
+                .isVisible(!isModifierRow || hasPreviousInput(forModifier: true)) // For consistent spacing
         }
     }
     
@@ -155,10 +159,16 @@ public struct SetView: View {
     }
     
     @ViewBuilder
-    private var iconButton: some View {
+    private func iconButton(forModifier: Bool) -> some View {
         IconButton(iconName: "ellipsis",
                    style: .secondary,
-                   iconColor: userTheme.theme) { showBaseActionSheet = true }
+                   iconColor: userTheme.theme) { 
+            if forModifier {
+                showModifierActionSheet = true
+            } else {
+                showRegularActionSheet = true
+            }
+        }
     }
     
     /// Determines if the button to use previous input in the confirmation dialog is visible.
