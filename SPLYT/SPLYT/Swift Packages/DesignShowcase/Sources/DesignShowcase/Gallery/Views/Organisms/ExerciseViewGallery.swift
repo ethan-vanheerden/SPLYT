@@ -53,12 +53,13 @@ struct ExerciseViewGallery: View {
                                                  canRemoveSet: true,
                                                  numSetsTitle: "3 sets"
                                                 ),
-                    type: .build(addModifierAction: { _ in },
-                                 removeModifierAction: { _ in }),
+                    type: .build,
                     addSetAction: { },
                     removeSetAction: { },
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in }))
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in }))
                 SectionHeader(viewState: SectionHeaderViewState(title: "In Progress"))
                     .padding(.horizontal)
                 ExerciseView(arguments: .regular(
@@ -75,7 +76,9 @@ struct ExerciseViewGallery: View {
                     addSetAction: { },
                     removeSetAction: { },
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in }))
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in }))
                 SectionHeader(viewState: .init(title: "Loading"))
                     .padding(.horizontal)
                 ExerciseView(arguments: .loading)

@@ -202,7 +202,6 @@
 		AABE01BE2BF5085B0058F084 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE01BD2BF5085B0058F084 /* AppearanceView.swift */; };
 		AABE9EC52B27999700B1135A /* GetFavoriteExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */; };
 		AABE9EC82B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE9EC72B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift */; };
-		AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */; };
 		AAC83F6C29F482F400A73E9C /* BuildWorkoutTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */; };
 		AACB29752A15573300AACB6B /* DoWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */; };
 		AACB29772A15576700AACB6B /* DoWorkoutReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB29762A15576700AACB6B /* DoWorkoutReducer.swift */; };
@@ -485,7 +484,6 @@
 		AABE9EC12B2645CC00B1135A /* UserAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserAuth; sourceTree = "<group>"; };
 		AABE9EC42B27999700B1135A /* GetFavoriteExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteExercisesRequest.swift; sourceTree = "<group>"; };
 		AABE9EC72B27A0A600B1135A /* UpdateFavoriteExercisesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFavoriteExercisesRequest.swift; sourceTree = "<group>"; };
-		AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformer.swift; sourceTree = "<group>"; };
 		AAC83F6B29F482F400A73E9C /* BuildWorkoutTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildWorkoutTransformerTests.swift; sourceTree = "<group>"; };
 		AACB29742A15573300AACB6B /* DoWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutViewModel.swift; sourceTree = "<group>"; };
 		AACB29762A15576700AACB6B /* DoWorkoutReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoWorkoutReducer.swift; sourceTree = "<group>"; };
@@ -1872,7 +1870,6 @@
 				AAE79B04296F09C50010848E /* BuildWorkoutViewState.swift */,
 				AACCAA7E297C5FA700932085 /* BuildWorkoutDisplay.swift */,
 				AA52BBA129B3BD19009CDBDA /* BuildWorkoutNavigationRouter.swift */,
-				AAC83F6929F479D900A73E9C /* BuildWorkoutTransformer.swift */,
 				AA02ECE22B5974A40035F7C8 /* EditSetsRepsView.swift */,
 			);
 			path = View;
@@ -2365,7 +2362,6 @@
 				AA1786EA2A91146E00563B04 /* LoginService.swift in Sources */,
 				AAE79AFB296EFA1E0010848E /* BuildWorkoutViewModel.swift in Sources */,
 				AA2C24502A3CC16A004FC939 /* NameWorkoutReducer.swift in Sources */,
-				AAC83F6A29F479D900A73E9C /* BuildWorkoutTransformer.swift in Sources */,
 				AACB297B2A1557C400AACB6B /* DoWorkoutDomain.swift in Sources */,
 				AA4043CF2BFBDE48002FC041 /* AppIcon.swift in Sources */,
 				AABE9EC52B27999700B1135A /* GetFavoriteExercisesRequest.swift in Sources */,

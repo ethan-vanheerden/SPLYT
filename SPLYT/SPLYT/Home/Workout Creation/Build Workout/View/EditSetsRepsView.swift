@@ -20,7 +20,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @State private var editSetIndex: Int = 0
     @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: BuildWorkoutNavigationRouter
-    private let transformer: BuildWorkoutTransformer = .init()
+    private let transformer: WorkoutTransformer = .init()
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
@@ -82,22 +82,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         if case .loaded(let viewState) = exerciseStatus {
                             ExerciseView(arguments: .regular(
                                 viewState: viewState,
-                                type: .build(
-                                    addModifierAction: { setIndex in
-                                        // Stores the selected set and exercise for when the modifier is actually added
-                                        editGroupIndex = groupIndex
-                                        editSetIndex = setIndex
-                                        editExerciseIndex = exerciseIndex
-                                        withAnimation {
-                                            showSetModifiers = true
-                                        }
-                                    },
-                                    removeModifierAction: { setIndex in
-                                        viewModel.send(.removeModifier(group: groupIndex,
-                                                                       exerciseIndex: exerciseIndex,
-                                                                       setIndex: setIndex),
-                                                       taskPriority: .userInitiated)
-                                    }),
+                                type: .build,
                                 addSetAction: { viewModel.send(.addSet(group: groupIndex),
                                                                taskPriority: .userInitiated) },
                                 removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
@@ -115,8 +100,23 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                                                    setIndex: setIndex,
                                                                    with: setInput),
                                                    taskPriority: .userInitiated)
-                                }
-                            ))
+                                },
+                                addModifierAction: { setIndex in
+                                    // Stores the selected set and exercise for when the modifier is actually added
+                                    editGroupIndex = groupIndex
+                                    editSetIndex = setIndex
+                                    editExerciseIndex = exerciseIndex
+                                    withAnimation {
+                                        showSetModifiers = true
+                                    }
+                                },
+                                removeModifierAction: { setIndex in
+                                    viewModel.send(.removeModifier(group: groupIndex,
+                                                                   exerciseIndex: exerciseIndex,
+                                                                   setIndex: setIndex),
+                                                   taskPriority: .userInitiated)
+                                })
+                            )
                         }
                     }
                 }
@@ -174,21 +174,13 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     
     @ViewBuilder
     private var setModifiers: some View {
-        HStack(spacing: Layout.size(2.5)) {
-            Spacer()
-            ForEach(SetModifierViewState.allCases, id: \.title) { modifier in
-                Tag(viewState: TagFactory.tagFromModifier(modifier: modifier,
-                                                          color: userTheme.theme))
-                .onTapGesture {
-                    viewModel.send(.addModifier(group: editGroupIndex,
-                                                exerciseIndex: editExerciseIndex,
-                                                setIndex: editSetIndex,
-                                                modifier: transformer.transformModifier(modifier)),
-                                   taskPriority: .userInitiated)
-                    showSetModifiers = false
-                }
-            }
-            Spacer()
+        SetModifiersView { modifierState in
+            viewModel.send(.addModifier(group: editGroupIndex,
+                                        exerciseIndex: editExerciseIndex,
+                                        setIndex: editSetIndex,
+                                        modifier: transformer.transformModifier(modifierState)),
+                           taskPriority: .userInitiated)
+            showSetModifiers = false
         }
     }
     

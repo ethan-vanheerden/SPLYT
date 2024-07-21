@@ -13,6 +13,8 @@ public struct DoExerciseGroupView: View {
     private let finishSlideAction: () -> Void
     private let replaceExerciseAction: (Int) -> Void // Exercise index
     private let deleteExerciseAction: (Int) -> Void // Exercise index
+    private let addModifierAction: (Int, Int) -> Void // Exercise index, set index
+    private let removeModifierAction: (Int, Int) -> Void // Exercise index, set index
     private let canDeleteExercise: Bool
     
     public init(isExpanded: Binding<Bool>,
@@ -26,6 +28,8 @@ public struct DoExerciseGroupView: View {
                 finishSlideAction: @escaping () -> Void,
                 replaceExerciseAction: @escaping (Int) -> Void,
                 deleteExerciseAction: @escaping (Int) -> Void,
+                addModifierAction: @escaping (Int, Int) -> Void,
+                removeModifierAction: @escaping (Int, Int) -> Void,
                 canDeleteExercise: Bool) {
         self._isExpanded = isExpanded
         self.viewState = viewState
@@ -38,9 +42,10 @@ public struct DoExerciseGroupView: View {
         self.finishSlideAction = finishSlideAction
         self.replaceExerciseAction = replaceExerciseAction
         self.deleteExerciseAction = deleteExerciseAction
+        self.addModifierAction = addModifierAction
+        self.removeModifierAction = removeModifierAction
         self.canDeleteExercise = canDeleteExercise
     }
-    
     
     public var body: some View {
         VStack {
@@ -60,7 +65,14 @@ public struct DoExerciseGroupView: View {
                                 },
                                 updateModifierAction: { setIndex, newInput in
                                     updateModifierAction(exerciseIndex, setIndex, newInput)
-                                }))
+                                },
+                                addModifierAction: { setIndex in
+                                    addModifierAction(exerciseIndex, setIndex)
+                                },
+                                removeModifierAction: { setIndex in
+                                    removeModifierAction(exerciseIndex, setIndex)
+                                }
+                            ))
                         case .loading:
                             ExerciseView(arguments: .loading)
                         }

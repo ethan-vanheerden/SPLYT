@@ -28,7 +28,9 @@ struct CollapseHeaderGallery: View {
                                                   deleteExerciseAction: { },
                                                   canDeleteExercise: true),
                         updateSetAction: { _, _ in },
-                        updateModifierAction: { _, _ in })
+                        updateModifierAction: { _, _ in },
+                        addModifierAction: { _ in },
+                        removeModifierAction: { _ in })
             }
         }
         .padding(.horizontal)

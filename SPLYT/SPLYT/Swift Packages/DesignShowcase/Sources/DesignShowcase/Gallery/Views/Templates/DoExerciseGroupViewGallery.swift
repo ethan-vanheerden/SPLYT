@@ -21,6 +21,8 @@ struct DoExerciseGroupViewGallery: View {
                                     finishSlideAction: { },
                                     replaceExerciseAction: { _ in },
                                     deleteExerciseAction: { _ in },
+                                    addModifierAction: { _, _ in },
+                                    removeModifierAction: { _, _ in },
                                     canDeleteExercise: true)
                 Spacer()
             }

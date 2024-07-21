@@ -13,13 +13,16 @@ public struct ExerciseView: View {
     
     public var body: some View {
         switch arguments {
-        case let .regular(viewState, type, addSetAction, removeSetAction, updateSetAction, updateModifierAction):
-            loadedView(viewState: viewState, 
+        case let .regular(viewState, type, addSetAction, removeSetAction, 
+                          updateSetAction, updateModifierAction, addModifierAction, removeModifierAction):
+            loadedView(viewState: viewState,
                        type: type,
                        addSetAction: addSetAction,
                        removeSetAction: removeSetAction,
                        updateSetAction: updateSetAction,
-                       updateModifierAction: updateModifierAction)
+                       updateModifierAction: updateModifierAction,
+                       addModifierAction: addModifierAction,
+                       removeModifierAction: removeModifierAction)
         case .loading:
             ProgressView()
                 .padding(.vertical, Layout.size(2))
@@ -32,17 +35,21 @@ public struct ExerciseView: View {
                             addSetAction: @escaping () -> Void,
                             removeSetAction: @escaping () -> Void,
                             updateSetAction: @escaping (Int, SetInput) -> Void,
-                            updateModifierAction: @escaping (Int, SetInput) -> Void) -> some View {
+                            updateModifierAction: @escaping (Int, SetInput) -> Void,
+                            addModifierAction: @escaping (Int) -> Void,
+                            removeModifierAction: @escaping (Int) -> Void) -> some View {
         VStack {
             header(viewState: viewState, type: type)
             ForEach(viewState.sets, id: \.setIndex) { set in
                 SetView(viewState: set,
                         exerciseType: type,
                         updateSetAction: updateSetAction,
-                        updateModifierAction: updateModifierAction)
+                        updateModifierAction: updateModifierAction,
+                        addModifierAction: addModifierAction,
+                        removeModifierAction: removeModifierAction)
             }
             .padding(.horizontal, horizontalPadding)
-            setButtons(viewState: viewState, 
+            setButtons(viewState: viewState,
                        type: type,
                        addSetAction: addSetAction,
                        removeSetAction: removeSetAction)
@@ -69,7 +76,7 @@ public struct ExerciseView: View {
             case .build:
                 EmptyView()
             case .inProgress:
-                IconButton(iconName: "ellipsis",
+                IconButton(iconName: "square.and.pencil",
                            style: .secondary,
                            iconColor: userTheme.theme) {
                     showActionSheet = true
@@ -117,9 +124,7 @@ public struct ExerciseView: View {
 // MARK: - Type
 
 public enum ExerciseViewType {
-    // Ints for the set index
-    case build(addModifierAction: (Int) -> Void,
-               removeModifierAction: (Int) -> Void)
+    case build
     case inProgress(usePreviousInputAction: (Int, Bool) -> Void, // (Set index, For Modifier)
                     addNoteAction: () -> Void,
                     replaceExerciseAction: () -> Void,
@@ -130,12 +135,16 @@ public enum ExerciseViewType {
 // MARK: - Arguments
 
 public enum ExerciseViewArguments {
-    case regular(viewState: ExerciseViewState,
-                 type: ExerciseViewType,
-                 addSetAction: () -> Void,
-                 removeSetAction: () -> Void,
-                 updateSetAction: (Int, SetInput) -> Void,
-                 updateModifierAction: (Int, SetInput) -> Void)
+    case regular(
+        viewState: ExerciseViewState,
+        type: ExerciseViewType,
+        addSetAction: () -> Void,
+        removeSetAction: () -> Void,
+        updateSetAction: (Int, SetInput) -> Void, // Set index, input
+        updateModifierAction: (Int, SetInput) -> Void, // Set index, input
+        addModifierAction: (Int) -> Void, // Set index
+        removeModifierAction: (Int) -> Void // Set index
+    )
     case loading
 }
 

@@ -14,8 +14,13 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     @ObservedObject private var viewModel: VM
     @State private var countdownSeconds: Int = 3
     @State private var restFABPresenting = false
+    @State private var showSetModifiers: Bool = false
+    @State private var editGroupIndex: Int = 0
+    @State private var editExerciseIndex: Int = 0
+    @State private var editSetIndex: Int = 0
     @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: DoWorkoutNavigationRouter
+    private let transformer: WorkoutTransformer = .init()
     private let countdownTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private let horizontalPadding: CGFloat = Layout.size(2)
     
@@ -61,6 +66,11 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 primaryAction: { viewModel.send(.saveWorkout, taskPriority: .userInitiated) },
                 secondaryAction: { viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: false),
                                                   taskPriority: .userInitiated) })
+        .sheet(isPresented: $showSetModifiers) {
+            setModifiers
+                .presentationDetents([.height(Layout.size(12))])
+                .presentationDragIndicator(.visible)
+        }
         .onChange(of: viewModel.secondsElapsed) { newValue in
             // We want to update the in progress cache once every 30 seconds
             if newValue != 0 && newValue % 30 == 0 {
@@ -219,10 +229,37 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                                exerciseIndex: exerciseIndex),
                                taskPriority: .userInitiated)
             },
+                                addModifierAction: { exerciseIndex, setIndex in
+                // Stores the selected set and exercise for when the modifier is actually added
+                editGroupIndex = groupIndex
+                editSetIndex = setIndex
+                editExerciseIndex = exerciseIndex
+                withAnimation {
+                    showSetModifiers = true
+                }
+            },
+                                removeModifierAction: { exerciseIndex, setIndex in
+                viewModel.send(.removeModifier(group: groupIndex,
+                                               exerciseIndex: exerciseIndex,
+                                               setIndex: setIndex),
+                               taskPriority: .userInitiated)
+            },
                                 canDeleteExercise: display.canDeleteExercise)
             .padding(.horizontal, horizontalPadding)
         }
         .animation(.default, value: display.expandedGroups) // Preserves collapse animation
+    }
+    
+    @ViewBuilder
+    private var setModifiers: some View {
+        SetModifiersView { modifierState in
+            viewModel.send(.addModifier(group: editGroupIndex,
+                                        exerciseIndex: editExerciseIndex,
+                                        setIndex: editSetIndex,
+                                        modifier: transformer.transformModifier(modifierState)),
+                           taskPriority: .userInitiated)
+            showSetModifiers = false
+        }
     }
     
     private func groupExpandBinding(group: Int, expandedGroups: [Bool]) -> Binding<Bool> {

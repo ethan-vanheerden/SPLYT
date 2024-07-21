@@ -9,32 +9,40 @@ public struct SetView: View {
     private let exerciseType: ExerciseViewType
     private let updateSetAction: (Int, SetInput) -> Void // Set index, the new input
     private let updateModifierAction: (Int, SetInput) -> Void
+    private let addModifierAction: (Int) -> Void
+    private let removeModifierAction: (Int) -> Void
     private let iconButtonOffset = Layout.size(1)
     
     public init(viewState: SetViewState,
                 exerciseType: ExerciseViewType,
                 updateSetAction: @escaping (Int, SetInput) -> Void,
-                updateModifierAction: @escaping (Int, SetInput) -> Void) {
+                updateModifierAction: @escaping (Int, SetInput) -> Void,
+                addModifierAction: @escaping (Int) -> Void,
+                removeModifierAction: @escaping (Int) -> Void) {
         self.viewState = viewState
         self.exerciseType = exerciseType
         self.updateSetAction = updateSetAction
         self.updateModifierAction = updateModifierAction
+        self.addModifierAction = addModifierAction
+        self.removeModifierAction = removeModifierAction
     }
     
     public var body: some View {
-        switch exerciseType {
-        case let .build(addModifierAction, removeModifierAction):
-            mainView
-                .confirmationDialog("", isPresented: $showBaseActionSheet, titleVisibility: .hidden) {
-                    if let _ = viewState.modifier {
-                        Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
-                    } else {
-                        Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
+        mainView
+            .confirmationDialog("", isPresented: $showBaseActionSheet, titleVisibility: .hidden) {
+                let forModifier = viewState.modifier != nil
+                if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
+                hasPreviousInput(forModifier: forModifier) {
+                    Button(Strings.usePreviousInput) {
+                        usePreviousInputAction(viewState.setIndex, forModifier)
                     }
                 }
-        case .inProgress:
-            mainView
-        }
+                if let _ = viewState.modifier {
+                    Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
+                } else {
+                    Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
+                }
+            }
     }
     
     @ViewBuilder
@@ -62,10 +70,11 @@ public struct SetView: View {
                 entryView(setInput: viewState.input, updateAction: updateSetAction)
             }
             Spacer()
-            iconButton(forModifier: modifier != nil)
+            iconButton
                 .alignmentGuide(VerticalAlignment.center) { d in
                     d[.bottom] - iconButtonOffset
                 }
+                .isVisible(modifier == nil) // For consistent spacing
         }
     }
     
@@ -146,30 +155,17 @@ public struct SetView: View {
     }
     
     @ViewBuilder
-    private func iconButton(forModifier: Bool) -> some View {
-        switch exerciseType {
-        case .build where forModifier == false:
-            IconButton(iconName: "ellipsis",
-                       style: .secondary,
-                       iconColor: userTheme.theme) { showBaseActionSheet = true }
-        case let .inProgress(usePreviousInputAction, _, _, _, _):
-            IconButton(iconName: "arrow.counterclockwise") {
-                usePreviousInputAction(viewState.setIndex, forModifier)
-            }
-            .isVisible(usePreviousIconVisible(forModifier: forModifier))
-        default:
-            IconButton(iconName: "ellipsis",
-                       style: .secondary,
-                       iconColor: userTheme.theme) { }
-                .isVisible(false) // Keeps spacing consistent even with no button
-        }
+    private var iconButton: some View {
+        IconButton(iconName: "ellipsis",
+                   style: .secondary,
+                   iconColor: userTheme.theme) { showBaseActionSheet = true }
     }
     
-    /// Determines if the button to use previous input on a set row is visible.
+    /// Determines if the button to use previous input in the confirmation dialog is visible.
     /// This should only be visible if there is a placeholder without actual input already there.
     /// - Parameter forModifier: Whether the set row is for a modifier or not.
     /// - Returns: True if the icon should be visible, false otherwise
-    private func usePreviousIconVisible(forModifier: Bool) -> Bool {
+    private func hasPreviousInput(forModifier: Bool) -> Bool {
         let isVisible: Bool
         if forModifier {
             isVisible = viewState.modifier?.hasPlaceholder ?? false && !(viewState.modifier?.hasValue ?? true)
@@ -259,4 +255,5 @@ public struct SetViewState: Equatable, Hashable {
 fileprivate struct Strings {
     static let addModifier = "Add Modifier"
     static let removeModifier = "Remove Modifier"
+    static let usePreviousInput = "Use Previous Input"
 }

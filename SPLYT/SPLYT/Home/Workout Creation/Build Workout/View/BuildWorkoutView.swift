@@ -40,7 +40,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             mainView(display: display)
         case .error:
             ErrorView(retryAction: { viewModel.send(.load, taskPriority: .userInitiated) },
-                      backAction: dismissAction)
+                      backAction: { navigationRouter.navigate(.exit) })
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
