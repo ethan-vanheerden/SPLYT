@@ -30,15 +30,18 @@ public struct PillSegmentedControl: View {
                                     .matchedGeometryEffect(id: geoId, in: animation)
                             }
                         }
-                        .animation(.snappy, value: selectedIndex)
+                        .animation(.smooth, value: selectedIndex)
                     }
                     .onTapGesture {
+                        guard selectedIndex != titleIndex else {
+                            return
+                        }
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         selectedIndex = titleIndex
                     }
             }
         }
-        .background(Color(SplytColor.gray50).opacity(0.2).gradient, in: .capsule)
+        .background(Color(SplytColor.gray).gradient.opacity(0.2), in: .capsule)
     }
     
     private func leadingPadding(index: Int) -> CGFloat? {

@@ -51,7 +51,8 @@ private extension LoginReducer {
     var emailTextEntry: TextEntryViewState {
         return .init(title: Strings.email,
                      includeCancelButton: false,
-                     capitalization: .never)
+                     capitalization: .never,
+                     disableAutoCorrect: true)
     }
     
     var passwordtextEntry: TextEntryViewState {

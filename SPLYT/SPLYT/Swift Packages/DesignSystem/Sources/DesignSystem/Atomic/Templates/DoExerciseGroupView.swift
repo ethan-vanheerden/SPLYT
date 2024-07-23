@@ -85,6 +85,7 @@ public struct DoExerciseGroupView: View {
                         .padding(.bottom, Layout.size(2))
                     }
                 }
+                .disabled(!isExpanded)
             }
         }
     }

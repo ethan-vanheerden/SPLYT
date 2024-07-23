@@ -88,7 +88,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 headerView(display: display)
                 ScrollView(showsIndicators: false) {
                     groupsView(display: display)
-                        .padding(.bottom, Layout.size(2))
+                        .padding(.bottom, Layout.size(10))
                 }
             }
             RestFAB(isPresenting: $restFABPresenting,
@@ -118,7 +118,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             HStack(spacing: Layout.size(1)) {
                 Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
                     .title1()
-                    .foregroundStyle(display.isResting ? Color( userTheme.theme).gradient
+                    .foregroundStyle(display.isResting ? Color(userTheme.theme).gradient
                                      : Color(SplytColor.black).gradient)
                 Spacer()
                 IconButton(iconName: "pencil", action: { })

@@ -76,6 +76,7 @@ public struct TextEntry: View {
             switch viewState.entryType {
             case .normal:
                 TextField(viewState.placeholder, text: $text)
+                    .autocorrectionDisabled(viewState.disableAutoCorrect)
             case .password:
                 ZStack(alignment: .trailing) {
                     SecureField(viewState.placeholder, text: $text)
@@ -115,6 +116,7 @@ public struct TextEntryViewState: Equatable {
     let includeCancelButton: Bool
     let capitalization: Capitalization
     let autoFocus: Bool
+    let disableAutoCorrect: Bool
     
     public init(title: String? = nil,
                 placeholder: String = "",
@@ -122,7 +124,8 @@ public struct TextEntryViewState: Equatable {
                 iconName: String? = nil,
                 includeCancelButton: Bool = true,
                 capitalization: Capitalization = .firstWord,
-                autoFocus: Bool = false) {
+                autoFocus: Bool = false,
+                disableAutoCorrect: Bool = true) {
         self.title = title
         self.placeholder = placeholder
         self.entryType = entryType
@@ -130,6 +133,7 @@ public struct TextEntryViewState: Equatable {
         self.includeCancelButton = includeCancelButton
         self.capitalization = capitalization
         self.autoFocus = autoFocus
+        self.disableAutoCorrect = disableAutoCorrect
     }
 }
 
