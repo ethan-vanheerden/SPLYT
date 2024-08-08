@@ -20,7 +20,7 @@ public struct RestFABRow: View {
             .frame(width: Layout.size(10))
             .roundedBackground(cornerRadius: Layout.size(1), 
                                fill: Color(SplytColor.background).shadow(.drop(color: Color(SplytColor.shadow),
-                                                                               radius: Layout.size(0.25))))
+                                                                               radius: Layout.size(0.5))))
             .scaleEffect(isPressed ? 0.9 : 1)
             .gesture(press)
     }

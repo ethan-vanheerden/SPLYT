@@ -25,7 +25,7 @@ public struct HomeFABRow: View {
                                                  iconColor: .white),
                                 imageName: viewState.imageName)
     }
-}
+} // TODO: Custom exercise button on build workout, appearnce view
 
 // MARK: - ViewState
 

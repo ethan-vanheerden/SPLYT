@@ -143,7 +143,9 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 .title2()
                 .foregroundStyle(Color(userTheme.theme))
             Spacer()
-            IconButton(iconName: "trash", style: .secondary, iconColor: .red50) {
+            IconButton(iconName: "trash", 
+                       style: .secondary,
+                       iconColor: .red) {
                 viewModel.send(.deleteGroup(groupIndex: groupIndex),
                                taskPriority: .userInitiated)
             }

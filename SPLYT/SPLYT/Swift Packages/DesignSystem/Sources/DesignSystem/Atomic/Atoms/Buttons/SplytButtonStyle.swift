@@ -35,7 +35,7 @@ struct SplytButtonStyle: ButtonStyle {
                 .loading(let color):
             baseButton
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                            normalColor: Color(textCologit gittttttr),
+                                                            normalColor: Color(textColor),
                                                             pressedColor: Color(color ?? userTheme.theme),
                                                             animationEnabled: animationEnabled))
                 .roundedBackground(cornerRadius: cornerRadius,
