@@ -18,6 +18,9 @@ public enum SplytColor: String, CaseIterable {
     case pink = "Pink"
     case orange = "Orange"
     case mint = "Mint"
+    case label = "Label"
+    case background = "Background"
+    case shadow = "Shadow"
     
     public var color: Color {
         switch self {
@@ -55,6 +58,12 @@ public enum SplytColor: String, CaseIterable {
             return Color("Orange")
         case .mint:
             return Color("Mint")
+        case .label:
+            return Color("Label")
+        case .background:
+            return Color("Background")
+        case .shadow:
+            return Color("Shadow")
         }
     }
     

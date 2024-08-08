@@ -72,7 +72,7 @@ struct WorkoutPreviewView<VM: ViewModel>: View where VM.Event == DoWorkoutViewEv
                 HStack {
                     Text(title)
                         .title3()
-                        .foregroundColor(Color( userTheme.theme))
+                        .foregroundColor(Color(userTheme.theme))
                     Spacer()
                 }
                 .padding(.bottom, Layout.size(0.5))

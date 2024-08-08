@@ -77,7 +77,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             if createAccount {
                 Text(display.emailMessage)
                     .footnote()
-                    .foregroundColor(Color( display.emailMessageColor))
+                    .foregroundColor(Color(display.emailMessageColor))
                     .padding(.bottom, Layout.size(1))
             }
             TextEntry(text: passwordTextBinding(password: display.password),
@@ -88,13 +88,13 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             if createAccount {
                 Text(display.passwordMessage)
                     .footnote()
-                    .foregroundColor(Color( display.passwordMessageColor))
+                    .foregroundColor(Color(display.passwordMessageColor))
             }
             if createAccount {
                 birthdayPicker(birthday: display.birthday)
                 Text(display.birthdayMessage)
                     .footnote()
-                    .foregroundColor(Color( display.birthdayMessageColor))
+                    .foregroundColor(Color(display.birthdayMessageColor))
             }
         }
         .padding(.bottom, Layout.size(4))

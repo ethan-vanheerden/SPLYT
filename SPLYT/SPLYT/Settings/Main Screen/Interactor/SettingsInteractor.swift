@@ -139,8 +139,8 @@ private extension SettingsInteractor {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let workout = "WORKOUT"
-    static let developer = "DEVELOPER"
-    static let customization = "CUSTOMIZATION"
-    static let support = "SUPPORT"
+    static let workout = "Workout"
+    static let developer = "Developer"
+    static let customization = "Customization"
+    static let support = "Support"
 }

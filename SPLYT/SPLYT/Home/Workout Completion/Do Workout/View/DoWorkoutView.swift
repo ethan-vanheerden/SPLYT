@@ -119,13 +119,14 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
                     .title1()
                     .foregroundStyle(display.isResting ? Color(userTheme.theme).gradient
-                                     : Color(SplytColor.black).gradient)
+                                     : Color(SplytColor.label).gradient)
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                     .isVisible(false) // TODO: 51: Workout notes
                 IconButton(iconName: "book.closed", action: { })
                     .isVisible(false) // TODO: 54: Workout logs
-                IconButton(iconName: "plus") { 
+                IconButton(iconName: "plus",
+                           iconColor: .white) { 
                     navigationRouter.navigate(.addExercises(addAction: { addedExerciseIds in
                         viewModel.send(.addExercises(exerciseIds: addedExerciseIds),
                                        taskPriority: .userInitiated)
@@ -159,7 +160,7 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             .foregroundColor(Color(SplytColor.white))
             Spacer()
         }
-        .background(LinearGradient(colors: [Color(SplytColor.white), userTheme.theme.color],
+        .background(LinearGradient(colors: [Color(SplytColor.background), userTheme.theme.color],
                                    startPoint: .top,
                                    endPoint: .bottom))
         .onReceive(countdownTimer) { _ in

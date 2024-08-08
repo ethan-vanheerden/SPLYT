@@ -14,9 +14,10 @@ public struct Tag: View {
                 .padding(Layout.size(0.5))
                 .foregroundColor(.white)
                 .roundedBackground(cornerRadius: Layout.size(1),
-                                   fill: Color( viewState.color)
+                                   fill: Color(viewState.color)
                     .gradient
-                    .shadow(.drop(radius: Layout.size(0.5))))
+                    .shadow(.drop(color: Color(SplytColor.shadow),
+                                  radius: Layout.size(0.5))))
         }
     }
 }

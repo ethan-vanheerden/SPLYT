@@ -26,11 +26,11 @@ public struct RoutineTile: View {
                         .body()
                     Text(viewState.subtitle)
                         .subhead()
-                        .foregroundStyle(Color( userTheme.theme))
+                        .foregroundStyle(Color(userTheme.theme))
                     if let lastCompleted = viewState.lastCompletedTitle {
                         Text(lastCompleted)
                             .footnote()
-                            .foregroundColor(.init( .gray))
+                            .foregroundColor(.init(.gray))
                     }
                 }
                 Spacer()

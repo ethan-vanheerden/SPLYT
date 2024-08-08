@@ -158,7 +158,7 @@ private struct UnderlineModifier: ViewModifier {
         content
             .background(
                 Rectangle()
-                    .fill(Color( userTheme.theme).gradient)
+                    .fill(Color(userTheme.theme).gradient)
                     .frame(width: frames[selectedIndex].width, height: Layout.size(0.4))
                     .offset(x: frames[selectedIndex].minX - frames[0].minX), alignment: .bottomLeading
             )

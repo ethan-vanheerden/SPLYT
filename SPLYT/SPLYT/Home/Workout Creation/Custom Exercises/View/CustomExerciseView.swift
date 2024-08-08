@@ -81,17 +81,19 @@ struct CustomExerciseView<VM: ViewModel>: View where VM.Event == CustomExerciseV
     private func musclesWorked(display: CustomExerciseDisplay) -> some View {
         VStack {
             SectionHeader(viewState: display.musclesWorkedHeader)
-            LazyVGrid(columns: musclesWorkedColumns) {
-                ForEach(MusclesWorked.allCases, id: \.self) { muscle in
-                    Toggle(isOn: muscleWorkedBinding(musclesWorked: display.musclesWorked,
-                                                     currentMuscle: muscle)) {
-                        Text(muscle.rawValue)
-                            .body(style: .medium)
-                            .frame(width: Layout.size(17))
-                            .foregroundColor(Color(SplytColor.black))
+            Tile {
+                LazyVGrid(columns: musclesWorkedColumns) {
+                    ForEach(MusclesWorked.allCases, id: \.self) { muscle in
+                        Toggle(isOn: muscleWorkedBinding(musclesWorked: display.musclesWorked,
+                                                         currentMuscle: muscle)) {
+                            Text(muscle.rawValue)
+                                .body(style: .medium)
+                                .frame(width: Layout.size(17))
+                                .foregroundColor(Color(SplytColor.label))
+                        }
+                                                         .toggleStyle(.button)
+                                                         .tint(Color(userTheme.theme))
                     }
-                                                     .toggleStyle(.button)
-                                                     .tint(Color( userTheme.theme))
                 }
             }
         }

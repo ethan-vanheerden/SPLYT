@@ -126,7 +126,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                     .padding(.vertical, Layout.size(1))
                                 Spacer()
                             }
-                            .background(Color(SplytColor.white))
+                            .background()
                         }
                     }
                 }
@@ -167,7 +167,7 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         Text(Strings.favorites)
                             .body()
                     }
-                    .tint(Color( userTheme.theme))
+                    .tint(Color(userTheme.theme))
                 }
             }
             Tile {
@@ -181,10 +181,10 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                 Text(muscle.rawValue)
                                     .body(style: .medium)
                                     .frame(width: Layout.size(17))
-                                    .foregroundColor(Color(SplytColor.black))
+                                    .foregroundColor(Color(SplytColor.label))
                             }
                                                              .toggleStyle(.button)
-                                                             .tint(Color( userTheme.theme))
+                                                             .tint(Color(userTheme.theme))
                         }
                     }
                 }
@@ -312,7 +312,7 @@ enum BuildWorkoutViewType {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let addExercises = "ADD EXERCISES"
+    static let addExercises = "Add Exercises"
     static let addGroup = "Add group"
     static let noExercisesFound = "No exercises found"
     static let removeFilters = "Remove Filters"

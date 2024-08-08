@@ -3,6 +3,7 @@ import Core
 
 public struct RestFABRow: View {
     @State private var isPressed = false
+    @EnvironmentObject private var userTheme: UserTheme
     private let seconds: Int
     private let tapAction: () -> Void
     
@@ -17,7 +18,9 @@ public struct RestFABRow: View {
             .subhead()
             .padding(Layout.size(1))
             .frame(width: Layout.size(10))
-            .roundedBackground(cornerRadius: Layout.size(1), fill: Color(SplytColor.white).shadow(.drop(radius: Layout.size(0.25))))
+            .roundedBackground(cornerRadius: Layout.size(1), 
+                               fill: Color(SplytColor.background).shadow(.drop(color: Color(SplytColor.shadow),
+                                                                               radius: Layout.size(0.25))))
             .scaleEffect(isPressed ? 0.9 : 1)
             .gesture(press)
     }

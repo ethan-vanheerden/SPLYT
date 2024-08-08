@@ -39,6 +39,6 @@ public struct SplytButton: View {
 public enum SplytButtonType {
     case primary(color: SplytColor? = nil)
     case secondary(color: SplytColor? = nil)
-    case textOnly
+    case textOnly(fillsSpace: Bool = false)
     case loading(color: SplytColor? = nil)
 }

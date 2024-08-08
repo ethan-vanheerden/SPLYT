@@ -3,6 +3,7 @@ import SwiftUI
 public struct PillSegmentedControl: View {
     @Binding private var selectedIndex: Int
     @EnvironmentObject private var userTheme: UserTheme
+    @Environment(\.colorScheme) private var colorScheme
     @Namespace private var animation
     private let titles: [String]
     private let horizontalPadding = Layout.size(2)
@@ -18,7 +19,7 @@ public struct PillSegmentedControl: View {
             ForEach(Array(titles.enumerated()), id: \.offset) { titleIndex, title in
                 Text(title)
                     .subhead()
-                    .foregroundStyle(titleIndex == selectedIndex ? Color(SplytColor.white) : Color(SplytColor.black))
+                    .foregroundStyle(Color(textColor(titleIndex: titleIndex)))
                     .animation(.easeOut, value: selectedIndex)
                     .padding(.vertical, Layout.size(1))
                     .padding(.leading, leadingPadding(index: titleIndex))
@@ -42,6 +43,16 @@ public struct PillSegmentedControl: View {
             }
         }
         .background(Color(SplytColor.gray).gradient.opacity(0.2), in: .capsule)
+    }
+    
+    private func textColor(titleIndex: Int) -> SplytColor {
+        if titleIndex == selectedIndex {
+            return .white
+        } else if colorScheme == .light {
+            return .black
+        } else {
+            return .gray
+        }
     }
     
     private func leadingPadding(index: Int) -> CGFloat? {

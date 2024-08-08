@@ -66,8 +66,8 @@ private extension NameWorkoutReducer {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let createWorkout = "CREATE WORKOUT"
-    static let createPlan = "CREATE PLAN"
+    static let createWorkout = "Create Workout"
+    static let createPlan = "Create Plan"
     static let workoutName = "Workout Name"
     static let planName = "Plan Name"
     static let enterWorkoutName = "Enter a workout name"

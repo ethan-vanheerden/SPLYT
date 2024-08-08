@@ -32,7 +32,9 @@ public struct TabBar: View {
                     .foregroundStyle(iconColor(tab: tab).gradient)
                 Spacer()
             }
+            .padding(.top, Layout.size(0.5))
         }
+        .background(Color(SplytColor.background).shadow(.drop(radius: Layout.size(0.125))))
     }
     
     private func iconColor(tab: TabSelection) -> Color {
@@ -51,5 +53,4 @@ public struct TabBar: View {
         .foregroundStyle(iconColor(tab: tab))
         .frame(width: Layout.size(10)) // Fixed so properly centered
     }
-} // TODO: revert back to original - use the animation tho
-
+}

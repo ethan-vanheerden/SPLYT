@@ -15,7 +15,7 @@ struct ProgressBarStyle: ProgressViewStyle {
         return GeometryReader { proxy in
             HStack {
                 RoundedRectangle(cornerRadius: Layout.size(1))
-                    .fill(Color( color ?? userTheme.theme).gradient)
+                    .fill(Color(color ?? userTheme.theme).gradient)
                     .frame(width: proxy.size.width * fractionCompleted)
                     .matchedGeometryEffect(id: "PROGRESS_BAR", in: animation)
                 Spacer()

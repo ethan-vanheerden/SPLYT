@@ -42,6 +42,9 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
                 .onAppear {
                     fabPresenting = false
                 }
+                .onDisappear {
+                    fabPresenting = false
+                }
         case .workoutInProgress:
             ProgressView()
                 .onAppear {
@@ -57,7 +60,7 @@ struct HomeView<VM: ViewModel>: View where VM.Event == HomeViewEvent, VM.ViewSta
         return ZStack {
             VStack {
                 HStack {
-                    PillSegmentedControl(selectedIndex: $segmentedControlIndex.animation(),
+                    PillSegmentedControl(selectedIndex: $segmentedControlIndex.animation(.smooth),
                                          titles: display.segmentedControlTitles)
                     Spacer()
                 }

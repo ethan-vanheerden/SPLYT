@@ -50,7 +50,7 @@ public struct RestFAB: View {
                     Image(systemName: "stopwatch")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(Color( userTheme.theme))
+                        .foregroundColor(Color(userTheme.theme))
                         .frame(width: Layout.size(2.5))
                     timeView
                     IconButton(iconName: isPaused ? "play.fill" : "pause",
@@ -68,7 +68,8 @@ public struct RestFAB: View {
                 .padding()
                 .background {
                     Capsule()
-                        .fill(Color(SplytColor.white).shadow(.drop(radius: Layout.size(2))))
+                        .fill(Color(SplytColor.background).gradient.shadow(.drop(color: Color(SplytColor.shadow),
+                                                                                 radius: Layout.size(1.25))))
                 }
             }
             .padding()
@@ -116,15 +117,9 @@ public struct RestFAB: View {
     }
     
     private var baseIcon: FABIconViewState {
-        if isPresenting {
-            return FABIconViewState(size: .primary(backgroundColor: .white,
-                                                   iconColor: userTheme.theme),
-                                    imageName: "minus")
-        } else {
-            return FABIconViewState(size: .primary(backgroundColor: .white,
-                                                   iconColor: userTheme.theme),
-                                    imageName: "stopwatch")
-        }
+        return FABIconViewState(size: .primary(backgroundColor: .background,
+                                               iconColor: userTheme.theme),
+                                imageName: isPresenting ? "minus" : "stopwatch")
     }
     
     @ViewBuilder
@@ -153,7 +148,7 @@ public struct RestFAB: View {
     }
     
     private var moreIcon: FABIconViewState {
-        return FABIconViewState(size: .secondary(backgroundColor: .white,
+        return FABIconViewState(size: .secondary(backgroundColor: .background,
                                                  iconColor: userTheme.theme),
                                 imageName: "ellipsis")
     }

@@ -47,7 +47,6 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent,
     private func mainView(display: HistoryDisplay) -> some View {
         let deleteHistoryId = deletedHistoryId(dialog: display.presentedDialog)
         workoutsView(workouts: display.workouts)
-            .padding(.bottom, Layout.size(1))
             .dialog(isOpen: deleteHistoryId != nil,
                     viewState: display.deleteWorkoutHistoryDialog,
                     primaryAction: { viewModel.send(.deleteWorkoutHistory(historyId: deleteHistoryId ?? ""),

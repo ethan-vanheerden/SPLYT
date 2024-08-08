@@ -49,7 +49,7 @@ public struct AddExerciseTile: View {
             Image(systemName: "checkmark.circle.fill")
                 .resizable()
                 .frame(width: Layout.size(2.5), height: Layout.size(2.5))
-                .foregroundStyle(Color( userTheme.theme))
+                .foregroundStyle(Color(userTheme.theme))
         } else {
             numberSelection
         }
@@ -65,7 +65,7 @@ public struct AddExerciseTile: View {
                         .foregroundStyle(Color(SplytColor.white))
                         .background {
                             Circle()
-                                .fill(Color( userTheme.theme))
+                                .fill(Color(userTheme.theme))
                                 .frame(width: Layout.size(2.5), height: Layout.size(2.5))
                         }
                 }

@@ -31,12 +31,12 @@ public struct CollapseHeader<Content: View>: View {
                 .multilineTextAlignment(.center)
             Spacer()
             Image(systemName: "checkmark.circle.fill")
-                .foregroundStyle(Color( userTheme.theme))
+                .foregroundStyle(Color(userTheme.theme))
                 .imageScale(.large)
                 .isVisible(viewState.isComplete ?? false)
             
         }
-        .foregroundColor(Color( viewState.color ?? userTheme.theme))
+        .foregroundColor(Color(viewState.color ?? userTheme.theme))
         .onTapGesture {
             withAnimation {
                 isExpanded.toggle()

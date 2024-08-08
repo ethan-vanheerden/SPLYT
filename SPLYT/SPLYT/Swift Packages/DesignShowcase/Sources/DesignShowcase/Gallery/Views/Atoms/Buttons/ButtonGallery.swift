@@ -16,7 +16,7 @@ struct ButtonGallery: View {
     @ViewBuilder
     private func buttons(isEnabled: Bool) -> some View {
         VStack {
-            SplytButton(text: "BUTTON TEXT",
+            SplytButton(text: "Primary Button",
                         isEnabled: isEnabled) { print("Button tapped!") }
             HStack(spacing: Layout.size(2)) {
                 Spacer()
@@ -38,7 +38,7 @@ struct ButtonGallery: View {
                         isEnabled: isEnabled,
                         animationEnabled: false) { print("Button tapped!") }
             SplytButton(text: "Text Only",
-                        type: .textOnly,
+                        type: .textOnly(fillsSpace: true),
                         textColor: .lightBlue,
                         isEnabled: isEnabled) { print("Button tapped!") }
             SplytButton(text: "",

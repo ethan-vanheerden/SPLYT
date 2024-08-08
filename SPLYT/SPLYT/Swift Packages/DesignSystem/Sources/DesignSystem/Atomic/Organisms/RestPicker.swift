@@ -22,11 +22,11 @@ public struct RestPicker: View {
             Spacer()
             HStack {
                 Counter(selectedNumber: $minutes,
-                        viewState: CounterViewState(maxNumber: 10,
-                                                    label: Strings.min))
+                        viewState: .init(maxNumber: 10,
+                                         label: Strings.min))
                 Counter(selectedNumber: $seconds,
-                        viewState: CounterViewState(maxNumber: 59,
-                                                    label: Strings.sec))
+                        viewState: .init(maxNumber: 59,
+                                         label: Strings.sec))
             }
             Spacer()
             pickerButtons
@@ -36,8 +36,8 @@ public struct RestPicker: View {
     private var pickerButtons: some View {
         HStack(spacing: Layout.size(2)) {
             SplytButton(text: Strings.cancel,
-                        type: .primary(color: .white),
-                        textColor: .gray) {
+                        type: .textOnly(fillsSpace: true),
+                        textColor: .label) {
                 cancelAction()
             }
             SplytButton(text: Strings.confirm,

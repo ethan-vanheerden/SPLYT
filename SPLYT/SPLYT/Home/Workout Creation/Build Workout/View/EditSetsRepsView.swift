@@ -124,7 +124,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(style: StrokeStyle(lineWidth: 2))
-                        .foregroundStyle(Color( userTheme.theme))
+                        .foregroundStyle(Color(userTheme.theme))
                         .padding(Layout.size(1))
                 )
                 .listRowSeparator(.hidden)
@@ -141,7 +141,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         HStack {
             Text(groupTitles[groupIndex])
                 .title2()
-                .foregroundStyle(Color( userTheme.theme))
+                .foregroundStyle(Color(userTheme.theme))
             Spacer()
             IconButton(iconName: "trash", style: .secondary, iconColor: .red50) {
                 viewModel.send(.deleteGroup(groupIndex: groupIndex),
@@ -149,7 +149,7 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             }
             Image(systemName: "line.3.horizontal")
                 .imageScale(.large)
-                .foregroundColor(Color( userTheme.theme))
+                .foregroundColor(Color(userTheme.theme))
             
         }
     }

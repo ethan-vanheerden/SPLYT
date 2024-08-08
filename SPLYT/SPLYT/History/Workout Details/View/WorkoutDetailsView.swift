@@ -80,10 +80,10 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
         VStack(alignment: .leading) {
             Text(display.workoutName)
                 .title1()
-                .foregroundColor(Color(SplytColor.black))
+                .foregroundColor(Color(SplytColor.label))
             Text(display.numExercisesTitle)
                 .title2()
-                .foregroundColor(Color( userTheme.theme))
+                .foregroundColor(Color(userTheme.theme))
             Text(display.completedTitle)
                 .title3()
                 .foregroundColor(Color(SplytColor.gray))
@@ -112,7 +112,7 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
     private var optionsButton: some View {
         IconButton(iconName: "ellipsis",
                    style: .secondary,
-                   iconColor: .black) {
+                   iconColor: .label) {
             optionsSheetPresented = true
         }
     }

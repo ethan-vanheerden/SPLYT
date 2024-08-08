@@ -28,7 +28,7 @@ public struct TextEntry: View {
                 textField
                 if viewState.includeCancelButton && showCancel {
                     SplytButton(text: Strings.cancel,
-                                type: .textOnly,
+                                type: .textOnly(),
                                 textColor: userTheme.theme) {
                         text = ""
                         isFocused = false

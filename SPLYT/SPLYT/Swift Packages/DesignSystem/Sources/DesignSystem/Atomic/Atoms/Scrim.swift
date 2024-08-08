@@ -5,12 +5,6 @@ public struct Scrim: View {
     public init() {}
     
     public var body: some View {
-        Color(SplytColor.gray).opacity(0.15)
-    }
-}
-
-struct ScrimView_Previews: PreviewProvider {
-    static var previews: some View {
-        Scrim()
+        Color(SplytColor.background).opacity(0.5)
     }
 }

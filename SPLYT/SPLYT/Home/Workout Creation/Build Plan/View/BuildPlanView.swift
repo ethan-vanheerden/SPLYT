@@ -130,7 +130,7 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let addWorkouts = "Add your workouts"
+    static let addWorkouts = "Add Your Workouts"
     static let noWorkoutsYet = "You have no workouts in this plan yet. Select the button below to get started!"
     static let addWorkout = "Add workout"
     static let save = "Save"

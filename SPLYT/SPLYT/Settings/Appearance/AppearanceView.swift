@@ -59,7 +59,8 @@ struct AppearanceView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: Layout.size(7.5), height: Layout.size(7.5))
                     .clipShape(RoundedRectangle(cornerRadius: Layout.size(1.5)))
-                    .shadow(radius: Layout.size(0.5))
+                    .shadow(color: Color(SplytColor.shadow),
+                            radius: Layout.size(0.5))
                     .overlay {
                         Image(systemName: "checkmark.circle.fill")
                             .imageScale(.large)

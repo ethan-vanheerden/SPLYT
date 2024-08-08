@@ -100,8 +100,8 @@ private extension HomeReducer {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let createPlan = "CREATE NEW PLAN"
-    static let createWorkout = "CREATE NEW WORKOUT"
+    static let createPlan = "Create new plan"
+    static let createWorkout = "Create new workout"
     static let home = "🏠 Home"
     static let workouts = "Workouts"
     static let plans = "Plans"
