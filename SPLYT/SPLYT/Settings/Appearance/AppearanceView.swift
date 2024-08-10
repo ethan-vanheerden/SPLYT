@@ -11,29 +11,51 @@ import DesignSystem
 
 struct AppearanceView: View {
     @StateObject private var viewModel = AppearanceViewModel()
-    private let colorThemeColumns: [GridItem] = Array(repeating: .init(.flexible()), count: 5)
+    private let accentColorColumns: [GridItem] = Array(repeating: .init(.flexible()), count: 5)
     private let appIconColumns: [GridItem] = Array(repeating: .init(.flexible()), count: 4)
     
     var body: some View {
         Form {
-            Section {
-                colorThemes
-            } header: {
-                Text(Strings.colorTheme)
-                    .subhead()
+            appearanceMode
+            section(title: Strings.accentColor) {
+                accentColors
             }
-            Section {
+            section(title: Strings.appIcon) {
                 appIcons
-            } header: {
-                Text(Strings.appIcon)
-                    .subhead()
             }
         }
     }
     
-    @ViewBuilder
-    private var colorThemes: some View {
-        LazyVGrid(columns: colorThemeColumns) {
+    private func section(title: String, 
+                         content: @escaping () -> some View) -> some View {
+        Section {
+            content()
+        } header: {
+            Text(title)
+                .subhead()
+        }
+    }
+    
+    private var appearanceMode: some View {
+        Picker(Strings.appearance, selection: appearanceModeBinding) {
+            ForEach(AppearanceMode.allCases, id: \.rawValue) { mode in
+                HStack {
+                    Image(systemName: mode.imageName)
+                    Text(mode.title)
+                }.tag(mode)
+            }
+        }
+    }
+    
+    private var appearanceModeBinding: Binding<AppearanceMode> {
+        return Binding(
+            get: { return viewModel.appearanceMode },
+            set: { viewModel.updateAppearanceMode(to: $0) }
+        )
+    }
+    
+    private var accentColors: some View {
+        LazyVGrid(columns: accentColorColumns) {
             ForEach(SplytColor.userThemes, id: \.self) { color in
                 Circle()
                     .fill(color.color.gradient)
@@ -50,7 +72,6 @@ struct AppearanceView: View {
         }
     }
     
-    @ViewBuilder
     private var appIcons: some View {
         LazyVGrid(columns: appIconColumns) {
             ForEach(AppIcon.allCases, id: \.self) { appIcon in
@@ -81,6 +102,7 @@ struct AppearanceView: View {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let colorTheme = "Color Theme"
+    static let appearance = "Appearance"
+    static let accentColor = "Accent Color"
     static let appIcon = "App Icon"
 }

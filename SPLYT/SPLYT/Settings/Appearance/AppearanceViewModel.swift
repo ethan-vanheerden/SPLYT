@@ -12,7 +12,8 @@ import DesignSystem
 
 /// Inspired by https://www.avanderlee.com/swift/alternate-app-icon-configuration-in-xcode/
 final class AppearanceViewModel: ObservableObject {
-    @AppStorage("userTheme") private(set) var userTheme: SplytColor = .blue
+    @AppStorage(ThemeStorage.userTheme.rawValue) private(set) var userTheme: SplytColor = .blue
+    @AppStorage(ThemeStorage.appearanceMode.rawValue) var appearanceMode: AppearanceMode = .automatic
     @Published private(set) var appIcon: AppIcon
     
     init() {
@@ -39,5 +40,10 @@ final class AppearanceViewModel: ObservableObject {
             appIcon = icon
             try await UIApplication.shared.setAlternateIconName(iconName)
         } catch { }
+    }
+    
+    @MainActor
+    func updateAppearanceMode(to mode: AppearanceMode) {
+        appearanceMode = mode
     }
 }
