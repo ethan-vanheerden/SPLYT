@@ -14,6 +14,7 @@ import ExerciseCore
 
 protocol CustomExerciseServiceType {
     func createCustomExercise(exerciseName: String, musclesWorked: [MusclesWorked]) async throws
+    func exerciseExists(exerciseName: String) -> Bool
 }
 
 // MARK: - Implementation
@@ -21,11 +22,14 @@ protocol CustomExerciseServiceType {
 struct CustomExerciseService: CustomExerciseServiceType {
     private let cacheInteractor: CacheInteractorType
     private let apiInteractor: APIInteractorType.Type
+    private let workoutService: WorkoutServiceType
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
-         apiInteractor: APIInteractorType.Type = APIInteractor.self) {
+         apiInteractor: APIInteractorType.Type = APIInteractor.self,
+         workoutService: WorkoutServiceType = WorkoutService()) {
         self.cacheInteractor = cacheInteractor
         self.apiInteractor = apiInteractor
+        self.workoutService = workoutService
     }
     
     func createCustomExercise(exerciseName: String, musclesWorked: [MusclesWorked]) async throws {
@@ -40,5 +44,14 @@ struct CustomExerciseService: CustomExerciseServiceType {
         
         cachedExercises[exercise.id] = exercise
         try cacheInteractor.save(request: cacheRequest, data: cachedExercises)
+    }
+    
+    func exerciseExists(exerciseName: String) -> Bool {
+        do {
+            let cachedExercises = try workoutService.loadFromCache()
+            return cachedExercises.values.contains { $0.name.lowercased() == exerciseName.lowercased() }
+        } catch {
+            return false
+        }
     }
 }

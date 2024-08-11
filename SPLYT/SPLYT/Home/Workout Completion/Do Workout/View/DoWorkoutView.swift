@@ -112,14 +112,10 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
         }
     }
     
-    @ViewBuilder
     private func headerView(display: DoWorkoutDisplay) -> some View {
         VStack {
             HStack(spacing: Layout.size(1)) {
-                Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
-                    .title1()
-                    .foregroundStyle(display.isResting ? Color(userTheme.theme).gradient
-                                     : Color(SplytColor.label).gradient)
+                timerView(isResting: display.isResting)
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                     .isVisible(false) // TODO: 51: Workout notes
@@ -143,6 +139,13 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             Divider()
         }
         .padding(.horizontal, horizontalPadding)
+    }
+    
+    private func timerView(isResting: Bool) -> some View {
+        Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
+            .title1()
+            .foregroundStyle(isResting ? Color(userTheme.theme).gradient
+                             : Color(SplytColor.label).gradient)
     }
     
     @ViewBuilder

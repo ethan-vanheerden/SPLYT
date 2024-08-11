@@ -17,6 +17,7 @@ enum CustomExerciseViewEvent {
     case updateMuscleWorked(muscle: MusclesWorked, isSelected: Bool)
     case submit
     case save
+    case toggleDialog(type: CustomExerciseDialog, isOpen: Bool)
 }
 
 // MARK: - View Model
@@ -43,6 +44,9 @@ final class CustomExerciseViewModel: ViewModel {
             await react(domainAction: .submit)
         case .save:
             await react(domainAction: .save)
+        case let .toggleDialog(type, isOpen):
+            await react(domainAction: .toggleDialog(type: type,
+                                                    isOpen: isOpen))
         }
     }
 }

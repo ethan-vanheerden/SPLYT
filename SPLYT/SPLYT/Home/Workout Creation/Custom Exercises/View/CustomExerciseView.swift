@@ -69,6 +69,15 @@ struct CustomExerciseView<VM: ViewModel>: View where VM.Event == CustomExerciseV
         }
         .padding(.top, Layout.size(2))
         .padding(.horizontal, horizontalPadding)
+        .dialog(isOpen: display.shownDialog == .exerciseAlreadyExists,
+                viewState: display.exerciseExistsDialog,
+                primaryAction: {
+            navigationRouter.navigate(.showMeExercise(exerciseName: display.exerciseName))
+        },
+                secondaryAction: {
+            viewModel.send(.toggleDialog(type: .exerciseAlreadyExists, isOpen: false),
+                           taskPriority: .userInitiated)
+        })
     }
     
     @ViewBuilder

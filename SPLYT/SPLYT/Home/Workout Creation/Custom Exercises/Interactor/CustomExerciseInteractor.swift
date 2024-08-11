@@ -16,6 +16,7 @@ enum CustomExerciseDomainAction {
     case updateMuscleWorked(muscle: MusclesWorked, isSelected: Bool)
     case submit
     case save
+    case toggleDialog(type: CustomExerciseDialog, isOpen: Bool)
 }
 
 // MARK: - Domain Results
@@ -24,6 +25,7 @@ enum CustomExerciseDomainResult: Equatable {
     case error
     case loaded(CustomExerciseDomain)
     case exit(CustomExerciseDomain)
+    case dialog(type: CustomExerciseDialog, domain: CustomExerciseDomain)
 }
 
 // MARK: - Interactor
@@ -50,6 +52,8 @@ final class CustomExerciseInteractor {
             return handleSubmit()
         case .save:
             return await handleSave()
+        case let .toggleDialog(type, isOpen):
+            return handleToggleDialog(type: type, isOpen: isOpen)
         }
     }
 }
@@ -91,7 +95,13 @@ private extension CustomExerciseInteractor {
     }
     
     func handleSave() async -> CustomExerciseDomainResult {
-        guard let domain = savedDomain else { return .error }
+        guard var domain = savedDomain else { return .error }
+        
+        if service.exerciseExists(exerciseName: domain.exerciseName) {
+            domain.isSaving = false
+            _ = updateDomain(domain: domain)
+            return .dialog(type: .exerciseAlreadyExists, domain: domain)
+        }
         
         do {
             let musclesWorked = domain.musclesWorked.filter { $0.value }.map { $0.key }
@@ -102,6 +112,12 @@ private extension CustomExerciseInteractor {
         } catch {
             return .error
         }
+    }
+    
+    func handleToggleDialog(type: CustomExerciseDialog, isOpen: Bool) -> CustomExerciseDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        return isOpen ? .dialog(type: type, domain: domain) : .loaded(domain)
     }
 }
 

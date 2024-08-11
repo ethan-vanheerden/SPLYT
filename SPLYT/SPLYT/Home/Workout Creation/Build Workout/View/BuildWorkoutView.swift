@@ -52,30 +52,14 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @ViewBuilder
     private func mainView(display: BuildWorkoutDisplay) -> some View {
         VStack {
-            HStack {
-                ZStack(alignment: .topLeading) {
-                    IconButton(iconName: "line.3.horizontal.decrease.circle",
-                               style: .secondary,
-                               iconColor: userTheme.theme) {
-                        filterSheetPresented = true
-                    }
-                    if display.isFiltering {
-                        Circle()
-                            .fill(Color(SplytColor.red))
-                            .frame(width: Layout.size(1))
-                            .offset(x: Layout.size(0.5), y: Layout.size(0.5))
-                        
-                    }
-                }
-                TextEntry(text: $searchText,
-                          viewState: TextEntryBuilder.searchEntry(capitalization: .everyWord))
-            }
-            .padding(.horizontal, horizontalPadding)
+            searchHeader(isFiltering: display.isFiltering)
+                .padding(.horizontal, horizontalPadding)
             exerciseList(display: display)
             supersetMenu(supersetDisplay: display.supersetDisplay)
         }
         .sheet(isPresented: $filterSheetPresented) {
-            filterSheet(display: display.filterDisplay)
+            filterSheet(display: display.filterDisplay,
+                        isFiltering: display.isFiltering)
         }
         .navigationBar(viewState: .init(title: type == .replace ? Strings.replaceExercise : Strings.addExercises),
                        backAction: dismissAction,
@@ -94,6 +78,40 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         .onChange(of: searchText) { newValue in
             viewModel.send(.filter(by: .search(searchText: newValue)),
                            taskPriority: .userInitiated)
+        }
+    }
+    
+    private func searchHeader(isFiltering: Bool) -> some View {
+        HStack(spacing: .zero) {
+            plusIcon
+            filterIcon(isFiltering: isFiltering)
+                .padding(.trailing, Layout.size(0.5))
+            TextEntry(text: $searchText,
+                      viewState: TextEntryBuilder.searchEntry(capitalization: .everyWord))
+        }
+    }
+    
+    private var plusIcon: some View {
+        IconButton(iconName: "plus.circle",
+                   style: .secondary,
+                   iconColor: userTheme.theme,
+                   action: createCustomExerciseAction)
+    }
+    
+    private func filterIcon(isFiltering: Bool) -> some View {
+        ZStack(alignment: .topLeading) {
+            IconButton(iconName: "line.3.horizontal.decrease.circle",
+                       style: .secondary,
+                       iconColor: userTheme.theme) {
+                filterSheetPresented = true
+            }
+            if isFiltering {
+                Circle()
+                    .fill(Color(SplytColor.red))
+                    .frame(width: Layout.size(1))
+                    .offset(x: Layout.size(0.5), y: Layout.size(0.5))
+                
+            }
         }
     }
     
@@ -143,23 +161,15 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                         viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
                     }
                 }
-                SplytButton(text: Strings.createCustomExercise) {
-                    navigationRouter.navigate(
-                        .createCustomExercise(exerciseName: searchText,
-                                              saveAction: { exerciseName in
-                                                  viewModel.send(.customExerciseAdded(exerciseName: exerciseName),
-                                                                 taskPriority: .userInitiated)
-                                                  searchText = exerciseName
-                                              })
-                    )
-                }
+                SplytButton(text: Strings.createCustomExercise,
+                            action: createCustomExerciseAction)
             }
         }
         .padding(.horizontal, horizontalPadding)
     }
     
     @ViewBuilder
-    private func filterSheet(display: BuildWorkoutFilterDisplay) -> some View {
+    private func filterSheet(display: BuildWorkoutFilterDisplay, isFiltering: Bool) -> some View {
         VStack(spacing: Layout.size(2)) {
             Tile {
                 HStack {
@@ -190,6 +200,11 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                 }
             }
             Spacer()
+            if isFiltering {
+                SplytButton(text: Strings.removeFilters) {
+                    viewModel.send(.removeAllFilters, taskPriority: .userInitiated)
+                }
+            }
         }
         .padding(.horizontal, horizontalPadding)
         .padding(.top, Layout.size(2))
@@ -269,6 +284,22 @@ struct BuildWorkoutView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
             .padding(.horizontal, horizontalPadding)
         case .replace:
             EmptyView()
+        }
+    }
+    
+    private var createCustomExerciseAction: () -> Void {
+        return {
+            navigationRouter.navigate(
+                .createCustomExercise(exerciseName: searchText,
+                                      saveAction: { exerciseName in
+                                          viewModel.send(.customExerciseAdded(exerciseName: exerciseName),
+                                                         taskPriority: .userInitiated)
+                                          searchText = exerciseName
+                                      },
+                                      exerciseAlreadyExistsAction: { exerciseName in
+                                          searchText = exerciseName
+                                      })
+            )
         }
     }
     

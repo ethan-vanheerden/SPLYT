@@ -13,6 +13,7 @@ import Core
 enum CustomExerciseNavigationEvent {
     case exit
     case save(exerciseName: String)
+    case showMeExercise(exerciseName: String)
 }
 
 // MARK: - Router
@@ -20,9 +21,12 @@ enum CustomExerciseNavigationEvent {
 final class CustomExerciseNavigationRouter: NavigationRouter {
     weak var navigator: Navigator?
     private let saveAction: (String) -> Void
+    private let exerciseAlreadyExistsAction: (String) -> Void
     
-    init(saveAction: @escaping (String) -> Void) {
+    init(saveAction: @escaping (String) -> Void,
+         exerciseAlreadyExistsAction: @escaping (String) -> Void) {
         self.saveAction = saveAction
+        self.exerciseAlreadyExistsAction = exerciseAlreadyExistsAction
     }
     
     func navigate(_ event: CustomExerciseNavigationEvent) {
@@ -31,6 +35,8 @@ final class CustomExerciseNavigationRouter: NavigationRouter {
             handleExit()
         case .save(let exerciseName):
             handleSave(exerciseName: exerciseName)
+        case .showMeExercise(let exerciseName):
+            handleShowMeExercise(exerciseName: exerciseName)
         }
     }
 }
@@ -46,5 +52,11 @@ private extension CustomExerciseNavigationRouter {
         let saveAction = saveAction
         navigator?.dismissWithCompletion(animated: true,
                                          completion: { saveAction(exerciseName) })
+    }
+    
+    func handleShowMeExercise(exerciseName: String) {
+        let exerciseAlreadyExistsAction = exerciseAlreadyExistsAction
+        navigator?.dismissWithCompletion(animated: true,
+                                         completion: { exerciseAlreadyExistsAction(exerciseName) })
     }
 }

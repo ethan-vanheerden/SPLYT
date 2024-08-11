@@ -16,4 +16,6 @@ struct CustomExerciseDisplay: Equatable {
     let musclesWorkedHeader: SectionHeaderViewState
     let canSave: Bool
     let isSaving: Bool
+    let shownDialog: CustomExerciseDialog?
+    let exerciseExistsDialog: DialogViewState
 }

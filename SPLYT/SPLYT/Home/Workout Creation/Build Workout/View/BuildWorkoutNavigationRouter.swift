@@ -20,7 +20,8 @@ enum BuildWorkoutNavigationEvent {
     // workout page can be updated with it once the custom exercise is created
     case createCustomExercise(exerciseName: String,
                               service: CustomExerciseServiceType? = nil,
-                              saveAction: (String) -> Void)
+                              saveAction: (String) -> Void,
+                              exerciseAlreadyExistsAction: (String) -> Void)
     case dismiss
     case replace(exerciseId: String)
     case addExercises(exerciseIds: [String])
@@ -50,10 +51,11 @@ final class BuildWorkoutNavigationRouter: NavigationRouter {
             handleEditSetsReps()
         case .goBack:
             handleGoBack()
-        case let .createCustomExercise(exerciseName, service, saveAction):
+        case let .createCustomExercise(exerciseName, service, saveAction, exerciseAlreadyExistsAction):
             handleCreateCustomExercise(exerciseName: exerciseName,
                                        service: service,
-                                       saveAction: saveAction)
+                                       saveAction: saveAction,
+                                       exerciseAlreadyExistsAction: exerciseAlreadyExistsAction)
         case .dismiss:
             handleDismiss()
         case .replace(let exerciseId):
@@ -84,11 +86,13 @@ private extension BuildWorkoutNavigationRouter {
     
     func handleCreateCustomExercise(exerciseName: String,
                                     service: CustomExerciseServiceType?,
-                                    saveAction: @escaping (String) -> Void) {
+                                    saveAction: @escaping (String) -> Void,
+                                    exerciseAlreadyExistsAction: @escaping (String) -> Void) {
         let interactor = CustomExerciseInteractor(exerciseName: exerciseName,
                                                   service: service ?? CustomExerciseService())
         let viewModel = CustomExerciseViewModel(interactor: interactor)
-        let navRouter = CustomExerciseNavigationRouter(saveAction: saveAction)
+        let navRouter = CustomExerciseNavigationRouter(saveAction: saveAction,
+                                                       exerciseAlreadyExistsAction: exerciseAlreadyExistsAction)
         let view = CustomExerciseView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         

@@ -14,3 +14,9 @@ struct CustomExerciseDomain: Equatable {
     var canSave: Bool
     var isSaving: Bool
 }
+
+// MARK: - Dialog Type
+
+enum CustomExerciseDialog: Equatable {
+    case exerciseAlreadyExists
+}

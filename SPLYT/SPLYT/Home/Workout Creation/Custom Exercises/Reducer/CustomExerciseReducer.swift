@@ -19,6 +19,9 @@ struct CustomExerciseReducer {
         case .exit(let domain):
             let display = getDisplay(domain: domain)
             return .exit(display)
+        case let .dialog(dialog, domain):
+            let display = getDisplay(domain: domain, dialog: dialog)
+            return .loaded(display)
         }
     }
 }
@@ -26,13 +29,15 @@ struct CustomExerciseReducer {
 // MARK: - Private
 
 private extension CustomExerciseReducer {
-    func getDisplay(domain: CustomExerciseDomain) -> CustomExerciseDisplay {
+    func getDisplay(domain: CustomExerciseDomain, dialog: CustomExerciseDialog? = nil) -> CustomExerciseDisplay {
         return .init(exerciseName: domain.exerciseName,
                      musclesWorked: domain.musclesWorked,
                      exerciseNameEntry: exerciseNameEntry,
                      musclesWorkedHeader: musclesWorkedHeader,
                      canSave: domain.canSave,
-                     isSaving: domain.isSaving)
+                     isSaving: domain.isSaving,
+                     shownDialog: dialog,
+                     exerciseExistsDialog: exerciseExistsDialog)
     }
     
     var exerciseNameEntry: TextEntryViewState {
@@ -46,6 +51,13 @@ private extension CustomExerciseReducer {
         return .init(title: Strings.musclesWorked,
                      includeLine: false)
     }
+    
+    var exerciseExistsDialog: DialogViewState {
+        return .init(title: Strings.exerciseExists,
+                     subtitle: Strings.exerciseExistsDescription,
+                     primaryButtonTitle: Strings.showMe,
+                     secondaryButtonTitle: Strings.cancel)
+    }
 }
 
 // MARK: - Strings
@@ -54,4 +66,10 @@ fileprivate struct Strings {
     static let exerciseName = "Exercise Name"
     static let myAwesomeExercise = "My Awesome Exercise"
     static let musclesWorked = "Muscles Worked"
+    static let exerciseExists = "Exercise Aready Exists"
+    static let exerciseExistsDescription = """
+We already have this exercise. Would you like to see it?
+"""
+    static let showMe = "Show Me"
+    static let cancel = "Cancel"
 }

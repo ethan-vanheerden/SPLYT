@@ -234,6 +234,12 @@ private extension DoWorkoutInteractor {
         // Update the fraction completed
         domain.fractionCompleted = getFractionCompleted(completedGroups: domain.completedGroups)
         
+        // If workout is complete, show the finish dialog
+        if domain.fractionCompleted == 1 {
+            _ = updateDomain(domain: domain)
+            return .dialog(dialog: .finishWorkout, domain: domain)
+        }
+        
         return updateDomain(domain: domain)
     }
     
