@@ -18,12 +18,14 @@ struct License: Equatable {
 
 enum ThirdPartyPackage: String, Equatable, CaseIterable {
     case abseil = "abseil-cpp-binary"
+    case appCheck = "app-check"
     case firebaseiOS = "firebase-ios-sdk"
     case googleAppMeasurement = "googleappmeasurement"
     case googleDataTransport = "googledatatransport"
     case googleUtilities = "googleutilities"
     case grpcBinary = "grpc-binary"
     case gtmSessionFetcher = "gtm-session-fetcher"
+    case interopForGoogle = "interop-ios-for-google-sdks"
     case levelDB = "leveldb"
     case nanoPB = "nanopb"
     case promises = "promises"
@@ -35,6 +37,8 @@ enum ThirdPartyPackage: String, Equatable, CaseIterable {
         switch self {
         case .abseil:
             return "https://github.com/google/abseil-cpp-binary/blob/main/LICENSE"
+        case .appCheck:
+            return "https://github.com/google/app-check/blob/main/LICENSE"
         case .firebaseiOS:
             return "https://github.com/firebase/firebase-ios-sdk/blob/main/LICENSE"
         case .googleAppMeasurement:
@@ -47,6 +51,8 @@ enum ThirdPartyPackage: String, Equatable, CaseIterable {
             return "https://github.com/google/grpc-binary/blob/main/LICENSE"
         case .gtmSessionFetcher:
             return "https://github.com/google/gtm-session-fetcher/blob/main/LICENSE"
+        case .interopForGoogle:
+            return "https://github.com/google/interop-ios-for-google-sdks/blob/main/LICENSE"
         case .levelDB:
             return "https://github.com/firebase/leveldb/blob/firebase-release/LICENSE"
         case .nanoPB:
