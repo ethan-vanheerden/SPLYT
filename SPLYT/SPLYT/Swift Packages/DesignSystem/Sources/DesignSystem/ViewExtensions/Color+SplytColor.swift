@@ -2,7 +2,7 @@ import SwiftUI
 
 /// Creates a SwiftUI usable version of a `SplytColor`
 public extension Color {
-    init(splytColor: SplytColor) {
+    init(_ splytColor: SplytColor) {
         self = splytColor.color
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import Core
 import SwiftUI
+import DesignSystem
 
 // MARK: - Navigation Events
 
@@ -54,16 +55,14 @@ private extension BuildPlanNavigationRouter {
     func handleCreateNewWorkout() {
         let interactor = NameWorkoutInteractor(routineType: .workout)
         let nameViewModel = NameWorkoutViewModel(interactor: interactor)
-        let navRouter = NameWorkoutNavigationRouter() { [weak self] workout in
+        var navRouter = NameWorkoutNavigationRouter() { [weak self] workout in
             // Custom save action to just add the workout to the plan instead of full-saving the workout
             self?.viewModel.send(.addWorkout(workout), taskPriority: .userInitiated)
         }
         let view = NameWorkoutView(viewModel: nameViewModel, navigationRouter: navRouter) { [weak self] in
             self?.navigator?.dismiss(animated: true)
-        }
-        let navController = UINavigationController(rootViewController: UIHostingController(rootView: view))
-        navController.setNavigationBarHidden(true, animated: false)
-        navRouter.navigator = navController
-        navigator?.present(navController, animated: true)
+        }.withUserTheme()
+        
+        presentNavController(view: view, navRouter: &navRouter)
     }
 }

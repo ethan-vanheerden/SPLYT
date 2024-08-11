@@ -28,6 +28,10 @@ protocol BuildWorkoutServiceType {
     /// Saves the given workout.
     /// - Parameter workout: The workout to save
     func saveWorkout(_ workout: Workout) throws
+    
+    /// Reloads the available exercises directly from the cache.
+    /// - Returns: A map of the exercise ID to each `AvailableExercise`
+    func reloadCache() throws -> [String: AvailableExercise]
 }
 
 // MARK: - Errors
@@ -45,54 +49,30 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
     private let userSettings: UserSettings
     private let userAuth: UserAuthType
     private let currentDate: Date
-    /*
-     To prevent fetching a very long list of exercises every time the user wants to build a
-     workout (which can happen a lot when building a plan), we set a sync period so they only
-     fetch once during a specified timeframe.
-     */
-    private let DAYS_FOR_RESYNC = 1
+    private let workoutService: WorkoutServiceType
     
     init(cacheInteractor: CacheInteractorType = CacheInteractor(),
          routineService: CreatedRoutinesServiceType = CreatedRoutinesService(),
          apiInteractor: APIInteractorType.Type = APIInteractor.self,
          userSettings: UserSettings = UserDefaults.standard,
          userAuth: UserAuthType = UserAuth(),
-         currentDate: Date = Date.now) {
+         currentDate: Date = Date.now,
+         workoutService: WorkoutServiceType? = nil) {
         self.cacheInteractor = cacheInteractor
         self.routineService = routineService
         self.apiInteractor = apiInteractor
         self.userSettings = userSettings
         self.userAuth = userAuth
         self.currentDate = currentDate
+        self.workoutService = workoutService ?? WorkoutService(cacheInteractor: cacheInteractor,
+                                                               routineService: routineService,
+                                                               userSettings: userSettings,
+                                                               userAuth: userAuth,
+                                                               currentDate: currentDate)
     }
     
     func loadAvailableExercises() async throws -> [String: AvailableExercise] {
-        let lastSynced = userSettings.object(forKey: .lastSyncedExercises)
-        
-        guard let lastSynced = lastSynced as? Date,
-              Int(currentDate.timeIntervalSince(lastSynced) / (60 * 60 * 24)) < DAYS_FOR_RESYNC else {
-            do {
-                let exercisesRequest = GetAvailableExercisesRequest(userAuth: userAuth)
-                let favoritesRequest = GetFavoriteExercisesRequest(userAuth: userAuth)
-                
-                let exercisesResponse = try await apiInteractor.performRequest(with: exercisesRequest)
-                let favoritesResponse = try await apiInteractor.performRequest(with: favoritesRequest)
-                
-                var exerciseMap = mapExercises(exercisesResponse.exercises)
-                let result = try updateExerciseCache(exerciseMap: &exerciseMap,
-                                                     favorites: favoritesResponse.userFavorites,
-                                                     unfavoritedExerciseID: nil)
-                
-                userSettings.set(currentDate, forKey: .lastSyncedExercises)
-                return result
-            } catch {
-                // If API call failed, just try loading from cache
-                return try loadFromCache()
-            }
-        }
-        
-        // If we fetched the exercises recently, just load from the cache
-        return try loadFromCache()
+        return try await workoutService.loadAvailableExercises()
     }
     
     func toggleFavorite(exerciseId: String, isFavorite: Bool) async throws {
@@ -104,10 +84,10 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
         let favoritesResponse = try await apiInteractor.performRequest(with: request)
         
         // Update the favorites in the cache
-        var cachedExercises = try loadFromCache()
-        try updateExerciseCache(exerciseMap: &cachedExercises,
-                                favorites: favoritesResponse.userFavorites,
-                                unfavoritedExerciseID: isFavorite ? nil : exerciseId)
+        var cachedExercises = try workoutService.loadFromCache()
+        try workoutService.updateExerciseCache(exerciseMap: &cachedExercises,
+                                               favorites: favoritesResponse.userFavorites,
+                                               unfavoritedExerciseID: isFavorite ? nil : exerciseId)
     }
     
     func saveWorkout(_ workout: Workout) throws {
@@ -115,69 +95,8 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
                                        planId: nil,
                                        lastCompletedDate: nil)
     }
-}
-
-// MARK: - Private
-
-private extension BuildWorkoutService {
-    /// Loads the exercises from the cache.
-    /// - Returns: A map of the exercise ID to the actual exercise
-    func loadFromCache() throws -> [String: AvailableExercise] {
-        let request = AvailableExercisesCacheRequest()
-        // First check if the user has the cached AvailableExercise file yet
-        if !(try cacheInteractor.fileExists(request: request)) {
-            
-            // Save the fallback file
-            guard let url = Bundle.main.url(forResource: "fallback_exercises", withExtension: "json") else {
-                throw BuildWorkoutError.fallbackFileNotFound
-            }
-            
-            let data = try Data(contentsOf: url)
-            let exercises = try JSONDecoder().decode([AvailableExercise].self, from: data)
-            
-            // Now save the fallback data to the cache
-            var exerciseMap = mapExercises(exercises)
-            return try updateExerciseCache(exerciseMap: &exerciseMap,
-                                           favorites: [],
-                                           unfavoritedExerciseID: nil)
-        }
-        
-        return try cacheInteractor.load(request: request)
-    }
     
-    /// Saves the available exercise map to cache with the specified favorites.
-    /// - Parameter exercises: The exercises map
-    /// - Parameter favorites: The user's favorite exercise IDs
-    /// - Parameter unfavoritedExerciseID: The exercise ID which was unfavorited
-    /// - Returns: The saved ID -> exercise map
-    @discardableResult
-    func updateExerciseCache(exerciseMap: inout [String: AvailableExercise],
-                             favorites: [String],
-                             unfavoritedExerciseID: String?) throws -> [String: AvailableExercise] {
-        for favoriteId in favorites {
-            exerciseMap[favoriteId]?.isFavorite = true
-        }
-        
-        if let unfavoritedExerciseID = unfavoritedExerciseID {
-            exerciseMap[unfavoritedExerciseID]?.isFavorite = false
-        }
-        
-        let request = AvailableExercisesCacheRequest()
-        try cacheInteractor.save(request: request, data: exerciseMap)
-        
-        return exerciseMap
-    }
-    
-    /// Converts an `AvailableExercise` list into a dictionary where the keys are the exercises IDs, and the values are the exercises.
-    /// - Parameter exercises: The exercises
-    /// - Returns: The ID -> exercise map
-    func mapExercises(_ exercises: [AvailableExercise]) -> [String: AvailableExercise] {
-        var map = [String: AvailableExercise]()
-        
-        exercises.forEach { exercise in
-            map[exercise.id] = exercise
-        }
-        
-        return map
+    func reloadCache() throws -> [String : AvailableExercise] {
+        return try workoutService.loadFromCache()
     }
 }

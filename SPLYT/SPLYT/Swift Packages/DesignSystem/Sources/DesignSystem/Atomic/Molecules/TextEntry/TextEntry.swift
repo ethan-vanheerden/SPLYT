@@ -3,12 +3,16 @@ import SwiftUI
 public struct TextEntry: View {
     @FocusState private var isFocused: Bool
     @Binding private var text: String
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: TextEntryViewState
+    private let focusAction: ((Bool) -> Void)?
     
     public init(text: Binding<String>,
-                viewState: TextEntryViewState) {
+                viewState: TextEntryViewState,
+                focusAction: ((Bool) -> Void)? = nil) {
         self._text = text
         self.viewState = viewState
+        self.focusAction = focusAction
     }
     
     public var body: some View {
@@ -24,12 +28,22 @@ public struct TextEntry: View {
                 textField
                 if viewState.includeCancelButton && showCancel {
                     SplytButton(text: Strings.cancel,
-                                type: .textOnly,
-                                textColor: .lightBlue) {
+                                type: .textOnly(),
+                                textColor: userTheme.theme) {
                         text = ""
                         isFocused = false
                     }
                 }
+            }
+        }
+        .onAppear {
+            if viewState.autoFocus {
+                isFocused = true
+            }
+        }
+        .onChange(of: isFocused) { newValue in
+            if let focusAction = focusAction {
+                focusAction(newValue)
             }
         }
     }
@@ -39,7 +53,7 @@ public struct TextEntry: View {
         HStack {
             if let iconName = viewState.iconName {
                 Image(systemName: iconName)
-                    .foregroundColor(Color(splytColor: .gray).opacity(0.5))
+                    .foregroundColor(Color(SplytColor.gray).opacity(0.5))
                     .padding(.leading, Layout.size(1))
             }
             textEntry
@@ -50,7 +64,7 @@ public struct TextEntry: View {
                 .focused($isFocused)
             clearButton
         }
-        .roundedBackground(cornerRadius: Layout.size(1), fill: Color(splytColor: .gray).opacity(0.10))
+        .roundedBackground(cornerRadius: Layout.size(1), fill: Color(SplytColor.gray).opacity(0.10))
         .onTapGesture {
             isFocused.toggle()
         }
@@ -62,6 +76,7 @@ public struct TextEntry: View {
             switch viewState.entryType {
             case .normal:
                 TextField(viewState.placeholder, text: $text)
+                    .autocorrectionDisabled(viewState.disableAutoCorrect)
             case .password:
                 ZStack(alignment: .trailing) {
                     SecureField(viewState.placeholder, text: $text)
@@ -69,7 +84,7 @@ public struct TextEntry: View {
                 }
             }
         }
-        .textInputAutocapitalization(viewState.autoCapitalize ? nil : .never)
+        .textInputAutocapitalization(viewState.capitalization.toSwiftUI)
     }
     
     @ViewBuilder
@@ -99,20 +114,26 @@ public struct TextEntryViewState: Equatable {
     let entryType: TextEntryType
     let iconName: String?
     let includeCancelButton: Bool
-    let autoCapitalize: Bool
+    let capitalization: Capitalization
+    let autoFocus: Bool
+    let disableAutoCorrect: Bool
     
     public init(title: String? = nil,
                 placeholder: String = "",
                 entryType: TextEntryType = .normal,
                 iconName: String? = nil,
                 includeCancelButton: Bool = true,
-                autoCapitalize: Bool = true) {
+                capitalization: Capitalization = .firstWord,
+                autoFocus: Bool = false,
+                disableAutoCorrect: Bool = true) {
         self.title = title
         self.placeholder = placeholder
         self.entryType = entryType
         self.iconName = iconName
         self.includeCancelButton = includeCancelButton
-        self.autoCapitalize = autoCapitalize
+        self.capitalization = capitalization
+        self.autoFocus = autoFocus
+        self.disableAutoCorrect = disableAutoCorrect
     }
 }
 
@@ -126,8 +147,11 @@ public enum TextEntryType: Equatable {
 // MARK: - Common View States
 
 public struct TextEntryBuilder {
-    public static var searchEntry: TextEntryViewState = .init(placeholder: Strings.search,
-                                                              iconName: "magnifyingglass")
+    public static func searchEntry(capitalization: Capitalization = .firstWord) -> TextEntryViewState {
+        return .init(placeholder: Strings.search,
+                     iconName: "magnifyingglass",
+                     capitalization: capitalization)
+    }
 }
 
 // MARK: - Strings

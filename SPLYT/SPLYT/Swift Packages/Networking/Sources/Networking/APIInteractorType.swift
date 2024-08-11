@@ -15,7 +15,7 @@ public protocol APIInteractorType {
 
 public struct APIInteractor: APIInteractorType {
     public init() {}
-
+    
     public static func performRequest<R: NetworkRequest>(with request: R) async throws -> R.Response {
         /// Can do better error handling here if needed
         let responseJson = try await URLSession.shared.data(for: request.createRequest())

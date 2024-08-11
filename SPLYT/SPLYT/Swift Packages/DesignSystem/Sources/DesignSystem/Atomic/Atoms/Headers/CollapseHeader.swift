@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct CollapseHeader<Content: View>: View {
     @Binding private var isExpanded: Bool
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: CollapseHeaderViewState
     private let content: () -> Content
     
@@ -30,12 +31,12 @@ public struct CollapseHeader<Content: View>: View {
                 .multilineTextAlignment(.center)
             Spacer()
             Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(Color(splytColor: .green))
+                .foregroundStyle(Color(userTheme.theme))
                 .imageScale(.large)
                 .isVisible(viewState.isComplete ?? false)
             
         }
-        .foregroundColor(Color(splytColor: viewState.color))
+        .foregroundColor(Color(viewState.color ?? userTheme.theme))
         .onTapGesture {
             withAnimation {
                 isExpanded.toggle()
@@ -48,11 +49,11 @@ public struct CollapseHeader<Content: View>: View {
 
 public struct CollapseHeaderViewState: Hashable {
     public let title: String
-    fileprivate let color: SplytColor
+    fileprivate let color: SplytColor?
     fileprivate let isComplete: Bool?
     
     public init(title: String,
-                color: SplytColor = .black,
+                color: SplytColor? = nil,
                 isComplete: Bool? = nil) {
         self.title = title
         self.color = color

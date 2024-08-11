@@ -40,6 +40,6 @@ struct RestPresetsFixtures {
     ]
     
     static let footerMessage: String = """
-These are your quick-access rest shortcuts you can select while you are doing your workout.
+These are your quick-access rest time shortcuts you can select during a workout.
 """
 }

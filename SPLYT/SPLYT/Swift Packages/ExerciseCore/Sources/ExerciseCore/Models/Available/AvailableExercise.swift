@@ -15,6 +15,7 @@ public struct AvailableExercise: Codable, Equatable {
     public var isFavorite: Bool = false
     public let defaultInputType: SetInput
     public var selectedGroups: [Int] = [] // The groups in the workout which have this exercise
+    private let fallbackInput: SetInput = .repsWeight(input: .init())
     
     public init(id: String,
                 name: String,
@@ -36,7 +37,9 @@ public struct AvailableExercise: Codable, Equatable {
         self.id = try container.decode(String.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
         self.musclesWorked = try container.decode([MusclesWorked].self, forKey: .musclesWorked)
-        self.defaultInputType = try container.decode(SetInput.self, forKey: .defaultInputType)
+        
+        self.defaultInputType = try container.decodeIfPresent(SetInput.self,
+                                                              forKey: .defaultInputType) ?? .repsWeight(input: .init())
         
         // Cache request has the is_favorite field, the network request doesn't
         self.isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false

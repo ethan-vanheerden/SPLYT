@@ -31,7 +31,8 @@ struct Dialog<Content: View>: View {
             }
             .padding(Layout.size(2))
             .roundedBackground(cornerRadius: Layout.size(1),
-                               fill: Color(splytColor: .white).shadow(.drop(radius: Layout.size(0.125))))
+                               fill: Color(SplytColor.background).shadow(.drop(color: Color(SplytColor.shadow),
+                                                                               radius: Layout.size(0.125))))
             .frame(width: proxy.size.width * 0.7)
             .centerGeometry(proxy: proxy)
         }
@@ -43,8 +44,8 @@ struct Dialog<Content: View>: View {
            let secondaryAction = secondaryAction {
             HStack(spacing: Layout.size(2)) {
                 SplytButton(text: secondaryButtonTitle,
-                            type: .secondary(color: .white),
-                            textColor: .gray,
+                            type: .textOnly(fillsSpace: true),
+                            textColor: .label,
                             animationEnabled: false,
                             action: secondaryAction)
                 primaryButton
@@ -58,7 +59,7 @@ struct Dialog<Content: View>: View {
     @ViewBuilder
     private var primaryButton: some View {
         SplytButton(text: viewState.primaryButtonTitle,
-                    type: .secondary(),
+                    type: .primary(),
                     action: primaryAction)
     }
 }
@@ -79,34 +80,5 @@ public struct DialogViewState: Equatable {
         self.subtitle = subtitle
         self.primaryButtonTitle = primaryButtonTitle
         self.secondaryButtonTitle = secondaryButtonTitle
-    }
-}
-
-struct Dialog_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Dialog(viewState: DialogViewState(title: "Dialog title",
-                                              primaryButtonTitle: "Ok"),
-                   primaryAction: { },
-                   secondaryAction: nil) {
-                EmptyView()
-            }
-            Dialog(viewState: DialogViewState(title: "Dialog title",
-                                              subtitle: "All of this text is the dialog subtitle. It can be very long.",
-                                              primaryButtonTitle: "Ok"),
-                   primaryAction: { },
-                   secondaryAction: nil) {
-                EmptyView()
-            }
-            Dialog(viewState: DialogViewState(title: "Dialog title",
-                                              subtitle: "All of this text is the dialog subtitle. It can be very long.",
-                                              primaryButtonTitle: "Ok",
-                                              secondaryButtonTitle: "Cancel"),
-                   primaryAction: { },
-                   secondaryAction: { }) {
-               Text("Additional View")
-                    .body()
-            }
-        }
     }
 }

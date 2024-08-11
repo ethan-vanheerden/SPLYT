@@ -15,8 +15,11 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
                                                                                LVM.Event == LoginViewEvent {
     @ObservedObject private var viewModel: VM
     @ObservedObject private var authManager: A
+    @State private var selectedTab: TabSelection = .home
+    @State private var homeViewController = HomeViewController_SwiftUI()
+    @State private var historyViewController = HistoryViewController_SwiftUI()
+    @State private var settingsViewController = SettingsViewController_SwiftUI()
     private let loginViewModel: LVM
-    @State private var selectedTab: TabType = .home
     
     init(viewModel: VM,
          authManager: A,
@@ -56,9 +59,10 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
     
     @ViewBuilder
     private var mainView: some View {
-        VStack {
+        VStack(spacing: .zero) {
             tabView
-            TabBar(selectedTab: $selectedTab)
+                .animation(nil, value: selectedTab) // Want just the tab to animate, not the actual view change
+            TabBar(selectedTab: $selectedTab.animation())
                 .padding(.bottom, Layout.size(4))
         }
     }

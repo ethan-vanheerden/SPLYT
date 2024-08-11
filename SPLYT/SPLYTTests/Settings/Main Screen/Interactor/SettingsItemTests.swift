@@ -49,7 +49,7 @@ final class SettingsItemTests: XCTestCase {
     }
     
     func testBackgroundColor() {
-        XCTAssertEqual(sut.designShowcase.backgroundColor, .purple)
+        XCTAssertEqual(sut.designShowcase.backgroundColor, .darkBlue)
         XCTAssertEqual(sut.restPresets.backgroundColor, .blue)
         XCTAssertEqual(sut.submitFeedback.backgroundColor, .green)
         XCTAssertEqual(sut.about.backgroundColor, .gray)

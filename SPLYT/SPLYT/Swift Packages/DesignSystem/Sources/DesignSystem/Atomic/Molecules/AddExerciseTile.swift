@@ -1,14 +1,18 @@
 import SwiftUI
 
 public struct AddExerciseTile: View {
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: AddExerciseTileViewState
+    private let useCheckmark: Bool
     private let tapAction: () -> Void
     private let favoriteAction: () -> Void
     
     public init(viewState: AddExerciseTileViewState,
+                useCheckmark: Bool = false,
                 tapAction: @escaping () -> Void,
                 favoriteAction: @escaping () -> Void) {
         self.viewState = viewState
+        self.useCheckmark = useCheckmark
         self.tapAction = tapAction
         self.favoriteAction = favoriteAction
     }
@@ -21,6 +25,7 @@ public struct AddExerciseTile: View {
                     .body()
                 Spacer()
                 selection
+                    .padding(.trailing, Layout.size(1))
             }
         }
         .onTapGesture {
@@ -32,7 +37,7 @@ public struct AddExerciseTile: View {
         let imageName = viewState.isFavorite ? "star.fill" : "star"
         let opacity = viewState.isFavorite ? 1 : 0.5
         return Image(systemName: imageName)
-            .foregroundColor(Color(splytColor: .yellow).opacity(opacity))
+            .foregroundColor(Color(SplytColor.yellow).opacity(opacity))
             .onTapGesture {
                 favoriteAction()
             }
@@ -40,22 +45,33 @@ public struct AddExerciseTile: View {
     
     @ViewBuilder
     private var selection: some View {
+        if useCheckmark && !viewState.selectedGroups.isEmpty {
+            Image(systemName: "checkmark.circle.fill")
+                .resizable()
+                .frame(width: Layout.size(2.5), height: Layout.size(2.5))
+                .foregroundStyle(Color(userTheme.theme))
+        } else {
+            numberSelection
+        }
+    }
+    
+    @ViewBuilder
+    private var numberSelection: some View {
         HStack {
             ForEach(viewState.selectedGroups, id: \.hashValue) { groupNumber in
                 Group {
                     Text("\(groupNumber + 1)")
                         .footnote()
-                        .foregroundStyle(Color(splytColor: .white))
+                        .foregroundStyle(Color(SplytColor.white))
                         .background {
                             Circle()
-                                .fill(Color(splytColor: .lightBlue))
+                                .fill(Color(userTheme.theme))
                                 .frame(width: Layout.size(2.5), height: Layout.size(2.5))
                         }
                 }
                 .padding(.trailing, Layout.size(1))
             }
         }
-        .padding(.trailing, Layout.size(1))
     }
 }
 

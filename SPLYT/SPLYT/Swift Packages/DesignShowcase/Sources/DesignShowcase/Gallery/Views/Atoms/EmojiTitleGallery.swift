@@ -7,7 +7,7 @@ struct EmojiTitleGallery: View {
         VStack {
             EmojiTitle(emoji: "😁", title: "This is a title")
             EmojiTitle(emoji: "🫨", title: "This is another title")
-                .foregroundColor(Color(splytColor: .lightBlue))
+                .foregroundColor(Color(SplytColor.lightBlue))
         }
     }
 }

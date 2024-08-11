@@ -18,6 +18,10 @@ struct ExerciseViewGallery: View {
                      title: "Set 3",
                      type: .repsWeight(weightTitle: "lbs", repsTitle: "reps"),
                      modifier: .eccentric),
+        SetViewState(setIndex: 3,
+                     title: "Set 4",
+                     type: .repsWeight(weightTitle: "lbs", repsTitle: "reps"),
+                     modifier: nil),
     ]
     
     private let setsTwo: [SetViewState] = [
@@ -42,33 +46,42 @@ struct ExerciseViewGallery: View {
         ScrollView {
             VStack(spacing: Layout.size(2)) {
                 SectionHeader(viewState: SectionHeaderViewState(title: "Build"))
-                    .foregroundColor(Color(splytColor: .lightBlue))
                     .padding(.horizontal)
-                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "BACK SQUAT"),
-                                                          sets: setsOne,
-                                                          canRemoveSet: true,
-                                                          numSetsTitle: "3 sets"
-                                                         ),
-                             type: .build(addModifierAction: { _ in },
-                                          removeModifierAction: { _ in }),
-                             addSetAction: { },
-                             removeSetAction: { },
-                             updateSetAction: { _, _ in },
-                             updateModifierAction: { _, _ in })
+                ExerciseView(arguments: .regular(
+                    viewState: ExerciseViewState(header: SectionHeaderViewState(title: "BACK SQUAT"),
+                                                 sets: setsOne,
+                                                 canRemoveSet: true,
+                                                 numSetsTitle: "3 sets"
+                                                ),
+                    type: .build,
+                    addSetAction: { },
+                    removeSetAction: { },
+                    updateSetAction: { _, _ in },
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in }))
                 SectionHeader(viewState: SectionHeaderViewState(title: "In Progress"))
-                    .foregroundColor(Color(splytColor: .lightBlue))
                     .padding(.horizontal)
-                ExerciseView(viewState: ExerciseViewState(header: SectionHeaderViewState(title: "PUSHUPS"),
-                                                          sets: setsTwo,
-                                                          canRemoveSet: false,
-                                                          numSetsTitle: "3 sets"
-                                                         ),
-                             type: .inProgress(usePreviousInputAction: { _, _ in },
-                                               addNoteAction: { }),
-                             addSetAction: { },
-                             removeSetAction: { },
-                             updateSetAction: { _, _ in },
-                             updateModifierAction: { _, _ in })
+                ExerciseView(arguments: .regular(
+                    viewState: ExerciseViewState(header: SectionHeaderViewState(title: "PUSHUPS"),
+                                                 sets: setsTwo,
+                                                 canRemoveSet: false,
+                                                 numSetsTitle: "3 sets"
+                                                ),
+                    type: .inProgress(usePreviousInputAction: { _, _ in },
+                                      addNoteAction: { },
+                                      replaceExerciseAction: { },
+                                      deleteExerciseAction: { },
+                                      canDeleteExercise: true),
+                    addSetAction: { },
+                    removeSetAction: { },
+                    updateSetAction: { _, _ in },
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in }))
+                SectionHeader(viewState: .init(title: "Loading"))
+                    .padding(.horizontal)
+                ExerciseView(arguments: .loading)
             }
             .padding(.horizontal, Layout.size(2))
         }

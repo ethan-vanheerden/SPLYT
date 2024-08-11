@@ -14,14 +14,26 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     @ObservedObject private var viewModel: VM
     @State private var countdownSeconds: Int = 3
     @State private var restFABPresenting = false
+    @State private var showSetModifiers: Bool = false
+    @State private var editGroupIndex: Int = 0
+    @State private var editExerciseIndex: Int = 0
+    @State private var editSetIndex: Int = 0
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: DoWorkoutNavigationRouter
+    private let transformer: WorkoutTransformer = .init()
     private let countdownTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private let horizontalPadding: CGFloat = Layout.size(2)
     
     init(viewModel: VM,
-         navigationRouter: DoWorkoutNavigationRouter) {
+         navigationRouter: DoWorkoutNavigationRouter,
+         fromCache: Bool = false) {
         self.viewModel = viewModel
         self.navigationRouter = navigationRouter
+        
+        if fromCache {
+            countdownTimer.upstream.connect().cancel() // There won't be a countdown
+            viewModel.send(.loadWorkout, taskPriority: .userInitiated)
+        }
     }
     
     var body: some View {
@@ -30,13 +42,13 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             ProgressView()
         case .error:
             ErrorView(retryAction: { viewModel.send(.loadWorkout, taskPriority: .userInitiated) },
-                      backAction: { navigationRouter.navigate(.exit)} )
+                      backAction: { navigationRouter.navigate(.exit())} )
         case .loaded(let display):
             mainView(display: display)
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
-                    navigationRouter.navigate(.exit)
+                    navigationRouter.navigate(.exit(workoutDetailsId: display.workoutDetailsId))
                 }
         }
     }
@@ -45,15 +57,27 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
     private func mainView(display: DoWorkoutDisplay) -> some View {
         ZStack {
             workoutView(display: display)
-            countdownView
+            countdownView(inCountdown: display.inCountdown)
                 .isVisible(display.inCountdown)
                 .animation(.default, value: display.inCountdown)
         }
         .dialog(isOpen: display.presentedDialog == .finishWorkout,
                 viewState: display.finishDialog,
-                primaryAction: { viewModel.send(.saveWorkout, taskPriority: .userInitiated) }, // TODO: progress indicator?
+                primaryAction: { viewModel.send(.saveWorkout, taskPriority: .userInitiated) },
                 secondaryAction: { viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: false),
                                                   taskPriority: .userInitiated) })
+        .sheet(isPresented: $showSetModifiers) {
+            setModifiers
+                .presentationDetents([.height(Layout.size(12))])
+                .presentationDragIndicator(.visible)
+        }
+        .onChange(of: viewModel.secondsElapsed) { newValue in
+            // We want to update the in progress cache once every 30 seconds
+            if newValue != 0 && newValue % 30 == 0 {
+                viewModel.send(.cacheWorkout(secondElapsed: newValue),
+                               taskPriority: .userInitiated)
+            }
+        }
     }
     
     @ViewBuilder
@@ -64,29 +88,47 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 headerView(display: display)
                 ScrollView(showsIndicators: false) {
                     groupsView(display: display)
-                        .padding(.bottom, Layout.size(2))
+                        .padding(.bottom, Layout.size(10))
                 }
             }
             RestFAB(isPresenting: $restFABPresenting,
                     workoutSeconds: .constant(viewModel.secondsElapsed),
                     viewState: display.restFAB,
-                    selectRestAction: { viewModel.send(.toggleRest(isResting: true), taskPriority: .userInitiated) },
-                    stopRestAction: { viewModel.send(.toggleRest(isResting: false), taskPriority: .userInitiated) })
+                    selectRestAction: { restSeconds in
+                viewModel.send(.startRest(restSeconds: restSeconds),
+                               taskPriority: .userInitiated)
+            },
+                    stopRestAction: { manuallyStopped in
+                viewModel.send(.stopRest(manuallyStopped: manuallyStopped),
+                               taskPriority: .userInitiated)
+            },
+                    pauseAction: {
+                viewModel.send(.pauseRest,
+                               taskPriority: .userInitiated)
+            }, resumeAction: { restSeconds in
+                viewModel.send(.resumeRest(restSeconds: restSeconds),
+                               taskPriority: .userInitiated)
+            })
         }
     }
     
-    @ViewBuilder
     private func headerView(display: DoWorkoutDisplay) -> some View {
         VStack {
             HStack(spacing: Layout.size(1)) {
-                Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
-                    .title1()
-                    .foregroundColor(display.isResting ? Color(splytColor: .lightBlue) : Color(splytColor: .black))
+                timerView(isResting: display.isResting)
                 Spacer()
                 IconButton(iconName: "pencil", action: { })
                     .isVisible(false) // TODO: 51: Workout notes
                 IconButton(iconName: "book.closed", action: { })
                     .isVisible(false) // TODO: 54: Workout logs
+                IconButton(iconName: "plus",
+                           iconColor: .white) { 
+                    navigationRouter.navigate(.addExercises(addAction: { addedExerciseIds in
+                        viewModel.send(.addExercises(exerciseIds: addedExerciseIds),
+                                       taskPriority: .userInitiated)
+                    }))
+                }
+                    .padding(.trailing, Layout.size(1))
                 SplytButton(text: Strings.finish) {
                     viewModel.send(.toggleDialog(dialog: .finishWorkout, isOpen: true),
                                    taskPriority: .userInitiated)
@@ -99,8 +141,15 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
         .padding(.horizontal, horizontalPadding)
     }
     
+    private func timerView(isResting: Bool) -> some View {
+        Text(TimeUtils.hrMinSec(seconds: viewModel.secondsElapsed))
+            .title1()
+            .foregroundStyle(isResting ? Color(userTheme.theme).gradient
+                             : Color(SplytColor.label).gradient)
+    }
+    
     @ViewBuilder
-    private var countdownView: some View {
+    private func countdownView(inCountdown: Bool) -> some View {
         HStack {
             Spacer()
             VStack {
@@ -111,12 +160,14 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                     .title1()
                 Spacer()
             }
-            .foregroundColor(Color(splytColor: .white))
+            .foregroundColor(Color(SplytColor.white))
             Spacer()
         }
-        .background(SplytGradient.classic.gradient(startPoint: .top, endPoint: .bottom))
+        .background(LinearGradient(colors: [Color(SplytColor.background), userTheme.theme.color],
+                                   startPoint: .top,
+                                   endPoint: .bottom))
         .onReceive(countdownTimer) { _ in
-            if countdownSeconds <= 0 {
+            if inCountdown && countdownSeconds <= 0 {
                 countdownTimer.upstream.connect().cancel() // Can only have one timer running at a time idk
                 viewModel.send(.stopCountdown, taskPriority: .userInitiated)
             } else {
@@ -131,10 +182,14 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
             DoExerciseGroupView(isExpanded: groupExpandBinding(group: groupIndex,
                                                                expandedGroups: display.expandedGroups),
                                 viewState: group,
-                                addSetAction: { viewModel.send(.addSet(group: groupIndex),
-                                                               taskPriority: .userInitiated) },
-                                removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
-                                                                  taskPriority: .userInitiated) },
+                                addSetAction: {
+                viewModel.send(.addSet(group: groupIndex),
+                               taskPriority: .userInitiated)
+            },
+                                removeSetAction: {
+                viewModel.send(.removeSet(group: groupIndex),
+                               taskPriority: .userInitiated)
+            },
                                 updateSetAction: { exerciseIndex, setIndex, setInput in
                 viewModel.send(.updateSet(group: groupIndex,
                                           exerciseIndex: exerciseIndex,
@@ -159,11 +214,56 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                                taskPriority: .userInitiated)
             },
                                 addNoteAction: { }, // TODO: add notes
-                                finishSlideAction: { viewModel.send(.completeGroup(group: groupIndex),
-                                                                    taskPriority: .userInitiated) })
+                                finishSlideAction: {
+                viewModel.send(.completeGroup(group: groupIndex),
+                               taskPriority: .userInitiated)
+            },
+                                replaceExerciseAction: { exerciseIndex in
+                navigationRouter.navigate(.replaceExercise(replaceAction: { exerciseId in
+                    viewModel.send(.markExerciseLoading(group: groupIndex,
+                                                        exerciseIndex: exerciseIndex))
+                    viewModel.send(.replaceExercise(group: groupIndex,
+                                                    exerciseIndex: exerciseIndex,
+                                                    newExerciseId: exerciseId),
+                                   taskPriority: .userInitiated)
+                }))
+            },
+                                deleteExerciseAction: { exerciseIndex in
+                viewModel.send(.deleteExercise(group: groupIndex,
+                                               exerciseIndex: exerciseIndex),
+                               taskPriority: .userInitiated)
+            },
+                                addModifierAction: { exerciseIndex, setIndex in
+                // Stores the selected set and exercise for when the modifier is actually added
+                editGroupIndex = groupIndex
+                editSetIndex = setIndex
+                editExerciseIndex = exerciseIndex
+                withAnimation {
+                    showSetModifiers = true
+                }
+            },
+                                removeModifierAction: { exerciseIndex, setIndex in
+                viewModel.send(.removeModifier(group: groupIndex,
+                                               exerciseIndex: exerciseIndex,
+                                               setIndex: setIndex),
+                               taskPriority: .userInitiated)
+            },
+                                canDeleteExercise: display.canDeleteExercise)
             .padding(.horizontal, horizontalPadding)
         }
         .animation(.default, value: display.expandedGroups) // Preserves collapse animation
+    }
+    
+    @ViewBuilder
+    private var setModifiers: some View {
+        SetModifiersView { modifierState in
+            viewModel.send(.addModifier(group: editGroupIndex,
+                                        exerciseIndex: editExerciseIndex,
+                                        setIndex: editSetIndex,
+                                        modifier: transformer.transformModifier(modifierState)),
+                           taskPriority: .userInitiated)
+            showSetModifiers = false
+        }
     }
     
     private func groupExpandBinding(group: Int, expandedGroups: [Bool]) -> Binding<Bool> {

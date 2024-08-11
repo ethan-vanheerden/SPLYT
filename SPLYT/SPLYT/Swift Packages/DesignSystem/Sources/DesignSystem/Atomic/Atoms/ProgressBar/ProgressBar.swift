@@ -9,8 +9,7 @@ public struct ProgressBar: View {
     
     public var body: some View {
         ProgressView(value: viewState.fractionCompleted, total: 1.0)
-            .progressViewStyle(ProgressBarStyle(color: viewState.color,
-                                                outlineColor: viewState.outlineColor))
+            .progressViewStyle(ProgressBarStyle(color: viewState.color))
     }
 }
 
@@ -18,14 +17,11 @@ public struct ProgressBar: View {
 
 public struct ProgressBarViewState: Equatable {
     let fractionCompleted: Double // ex: .50
-    let color: SplytColor
-    let outlineColor: SplytColor?
+    let color: SplytColor?
     
     public init(fractionCompleted: Double,
-                color: SplytColor,
-                outlineColor: SplytColor? = nil) {
+                color: SplytColor? = nil) {
         self.fractionCompleted = fractionCompleted
         self.color = color
-        self.outlineColor = outlineColor
     }
 }

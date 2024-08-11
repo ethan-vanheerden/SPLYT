@@ -61,7 +61,6 @@ struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEve
             set: { newPresets in
                 let presets = newPresets.map { $0.preset }
                 viewModel.send(.updatePresets(newPresets: presets), taskPriority: .userInitiated)
-                
             }
         )
     }
@@ -79,7 +78,7 @@ struct RestPresetsView<VM: ViewModel>: View where VM.Event == RestPresetsViewEve
                 }
             Spacer()
             Image(systemName: "line.3.horizontal")
-                .foregroundColor(Color(splytColor: .gray))
+                .foregroundColor(Color(SplytColor.gray))
         }
     }
     

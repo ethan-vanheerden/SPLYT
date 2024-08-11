@@ -5,48 +5,84 @@ public enum SplytColor: String, CaseIterable {
     case gray = "Gray"
     case gray50 = "Gray 50"
     case green = "Green"
+    case forestGreen = "Forest Green"
     case lightBlue = "Light Blue"
     case red = "Red"
+    case red50 = "Red 50"
     case white = "White"
     case yellow = "Yellow"
     case clear = "Clear"
-    case purple = "Purple"
+    case darkBlue = "Dark Blue"
     case blue = "Blue"
+    case purple = "Purple"
+    case pink = "Pink"
+    case orange = "Orange"
+    case mint = "Mint"
+    case label = "Label"
+    case background = "Background"
+    case shadow = "Shadow"
     
     public var color: Color {
         switch self {
         case .black:
-            return Color.black
+            return Color("Black")
         case .gray:
-            return Color.gray
+            return Color("Gray")
         case .gray50:
-            return Color.gray.opacity(0.5)
+            return Color("Gray50")
         case .green:
-            return Color.green
+            return Color("Green")
+        case .forestGreen:
+            return Color("ForestGreen")
         case .lightBlue:
-            return Color(uiColor: UIColor(red: 104/255,
-                                          green: 172/255,
-                                          blue: 252/255,
-                                          alpha: 1))
+            return Color("LightBlue")
         case .red:
-            return Color.red
+            return Color("Red")
+        case .red50:
+            return Color("Red50")
         case .white:
-            return Color.white
+            return Color("White")
         case .yellow:
-            return Color.yellow
+            return Color("Yellow")
         case .clear:
             return Color.clear
-        case .purple:
-            return Color(uiColor: UIColor(red: 42/255,
-                                          green: 0,
-                                          blue: 254/255,
-                                          alpha: 1))
+        case .darkBlue:
+            return Color("DarkBlue")
         case .blue:
-            return Color.blue
+            return Color("Blue")
+        case .purple:
+            return Color("Purple")
+        case .pink:
+            return Color("Pink")
+        case .orange:
+            return Color("Orange")
+        case .mint:
+            return Color("Mint")
+        case .label:
+            return Color("Label")
+        case .background:
+            return Color("Background")
+        case .shadow:
+            return Color("Shadow")
         }
     }
     
     public func opacity(_ opacity: Double) -> Color {
         return self.color.opacity(opacity)
+    }
+    
+    public static var userThemes: [SplytColor] {
+        return [
+            .red,
+            .pink,
+            .orange,
+            .yellow,
+            .green,
+            .forestGreen,
+            .mint,
+            .blue,
+            .darkBlue,
+            .purple
+        ]
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 import Core
 import SwiftUI
 import ExerciseCore
+import DesignSystem
 
 // MARK: - Navigation Events
 
@@ -19,6 +20,7 @@ enum HomeNavigationEvent {
     case editWorkout(id: String)
     case selectPlan(id: String)
     case editPlan(id: String)
+    case resumeWorkout
 }
 
 // MARK: - Router
@@ -40,6 +42,8 @@ final class HomeNavigationRouter: NavigationRouter {
             handleSelectPlan(id: id)
         case .editPlan(let id):
             handleEditPlan(id: id)
+        case .resumeWorkout:
+            handleResumeWorkout()
         }
     }
 }
@@ -55,7 +59,7 @@ private extension HomeNavigationRouter {
         let view = NameWorkoutView(viewModel: viewModel,
                                    navigationRouter: navRouter) {
             navRouter.navigator?.dismissSelf(animated: true)
-        }
+        }.withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
     }
     
@@ -64,8 +68,11 @@ private extension HomeNavigationRouter {
         let viewModel = DoWorkoutViewModel(interactor: interactor)
         var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
             self?.navigator?.dismiss(animated: true)
+        } exitAction: { [weak self] workoutDetailsId in
+            self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
         }
-        let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
+        let view = WorkoutPreviewView(viewModel: viewModel, 
+                                      navigationRouter: navRouter).withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
     }
     
@@ -76,8 +83,11 @@ private extension HomeNavigationRouter {
     func handleSelectPlan(id: String) {
         let interactor = DoPlanInteractor(planId: id)
         let viewModel = DoPlanViewModel(interactor: interactor)
-        var navRouter = DoPlanNavigationRouter(planId: id)
-        let view = DoPlanView(viewModel: viewModel, navigationRouter: navRouter)
+        var navRouter = DoPlanNavigationRouter(planId: id) { [weak self] workoutDetailsId in
+            self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
+        }
+        let view = DoPlanView(viewModel: viewModel, 
+                              navigationRouter: navRouter).withUserTheme()
         presentNavController(view: view, navRouter: &navRouter)
     }
     
@@ -85,12 +95,29 @@ private extension HomeNavigationRouter {
         // TODO
     }
     
-    func presentNavController<V: View, N: NavigationRouter>(view: V, navRouter: inout N) {
-        // NOTE: this assigns the navigator for the given nav router
-        // Use a navigation controller since we will be pushing views on top of a presented view
-        let navController = UINavigationController(rootViewController: UIHostingController(rootView: view))
-        navController.setNavigationBarHidden(true, animated: false)
-        navRouter.navigator = navController
-        navigator?.present(navController, animated: true)
+    func openWorkoutDetails(workoutDetailsId: String) {
+        let interactor = WorkoutDetailsInteractor(historyId: workoutDetailsId)
+        let viewModel = WorkoutDetailsViewModel(interactor: interactor)
+        let navRouter = WorkoutDetailsNavigationRouter()
+        let view = WorkoutDetailsView(viewModel: viewModel, navigationRouter: navRouter)
+        navRouter.navigator = navigator
+        
+        let vc = UIHostingController(rootView: view.withUserTheme())
+        navigator?.present(vc, animated: true)
+    }
+    
+    func handleResumeWorkout() {
+        let interactor = DoWorkoutInteractor()
+        let viewModel = DoWorkoutViewModel(interactor: interactor)
+        var navRouter = DoWorkoutNavigationRouter(viewModel: viewModel) { [weak self] in
+            self?.navigator?.dismiss(animated: true)
+        } exitAction: {
+            [weak self] workoutDetailsId in
+            self?.openWorkoutDetails(workoutDetailsId: workoutDetailsId)
+        }
+        let view = DoWorkoutView(viewModel: viewModel,
+                                 navigationRouter: navRouter,
+                                 fromCache: true).withUserTheme()
+        presentNavController(view: view, navRouter: &navRouter)
     }
 }

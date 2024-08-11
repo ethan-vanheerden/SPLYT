@@ -13,10 +13,9 @@ import Core
 enum LoginViewEvent: Equatable {
     case load
     case toggleCreateAccount(isCreateAccount: Bool)
-    case updateEmail(newEmail: String)
-    case updatePassword(newPassword: String)
-    case updateBirthday(newBirthday: Date)
+    case updateField(field: LoginField)
     case submit
+    case fieldChangedFocus(field: LoginField, isFocused: Bool)
 }
 
 // MARK: - View Model
@@ -36,14 +35,12 @@ final class LoginViewModel: ViewModel {
             await react(domainAction: .load)
         case .toggleCreateAccount(let isCreateAccount):
             await react(domainAction: .toggleCreateAccount(isCreateAccount: isCreateAccount))
-        case .updateEmail(let newEmail):
-            await react(domainAction: .updateEmail(newEmail: newEmail))
-        case .updatePassword(let newPassword):
-            await react(domainAction: .updatePassword(newPassword: newPassword))
-        case .updateBirthday(let newBirthday):
-            await react(domainAction: .updateBirthday(newBirthday: newBirthday))
+        case .updateField(let field):
+            await react(domainAction: .updateField(field: field))
         case .submit:
             await react(domainAction: .submit)
+        case let .fieldChangedFocus(field, isFocused):
+            await react(domainAction: .fieldChangedFocus(field: field, isFocused: isFocused))
         }
     }
 }

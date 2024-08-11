@@ -2,7 +2,6 @@ import Core
 import UIKit
 
 public final class MockNavigator: Navigator {
-    
     public init() { }
     
     public private(set) var stubPushedVC: UIViewController?
@@ -23,6 +22,10 @@ public final class MockNavigator: Navigator {
     public private(set) var calledDismissSelf = false
     public func dismissSelf(animated: Bool) {
         calledDismissSelf = true
+    }
+    
+    public func dismissWithCompletion(animated: Bool, completion: @escaping () -> Void) {
+        
     }
     
     public private(set) var calledPop = false

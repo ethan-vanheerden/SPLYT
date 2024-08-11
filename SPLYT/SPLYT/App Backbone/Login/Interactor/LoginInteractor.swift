@@ -12,10 +12,9 @@ import Foundation
 enum LoginDomainAction {
     case load
     case toggleCreateAccount(isCreateAccount: Bool)
-    case updateEmail(newEmail: String)
-    case updatePassword(newPassword: String)
-    case updateBirthday(newBirthday: Date)
+    case updateField(field: LoginField)
     case submit
+    case fieldChangedFocus(field: LoginField, isFocused: Bool)
 }
 
 // MARK: - Domain Results
@@ -51,14 +50,12 @@ final class LoginInteractor {
             return handleLoad()
         case .toggleCreateAccount(let isCreateAccount):
             return handleToggleCreateAccount(isCreateAccount: isCreateAccount)
-        case .updateEmail(let newEmail):
-            return handleUpdateEmail(newEmail: newEmail)
-        case .updatePassword(let newPassword):
-            return handleUpdatePassword(newPassword: newPassword)
-        case .updateBirthday(let newBirthday):
-            return handleUpdateBirthday(newBirthday: newBirthday)
+        case .updateField(let field):
+            return handleUpdateField(field: field)
         case .submit:
             return await handleSubmit()
+        case let .fieldChangedFocus(field, isFocused):
+            return handleFieldChangedFocus(field: field, isFocused: isFocused)
         }
     }
 }
@@ -94,45 +91,15 @@ private extension LoginInteractor {
         return updateDomain(domain: domain)
     }
     
-    func handleUpdateEmail(newEmail: String) -> LoginDomainResult {
-        guard var domain = savedDomain else { return .error }
-        
-        let emailValid = isEmailValid(email: newEmail)
-        domain.email = newEmail
-        domain.emailMessage = emailValid || newEmail.isEmpty ? Strings.validEmailMessage : Strings.invalidEmail
-        domain.emailError = !emailValid && !newEmail.isEmpty
-        domain.canSubmit = canSubmit(email: domain.email,
-                                     password: domain.password,
-                                     birthday: domain.birthday)
-        
-        return updateDomain(domain: domain)
-    }
-    
-    func handleUpdatePassword(newPassword: String) -> LoginDomainResult {
-        guard var domain = savedDomain else { return .error }
-        
-        let passwordValid = isPasswordValid(password: newPassword)
-        domain.password = newPassword
-        domain.passwordMessage = passwordValid || newPassword.isEmpty ? Strings.validPasswordMessage : Strings.invalidPassword
-        domain.passwordError = !passwordValid && !newPassword.isEmpty
-        domain.canSubmit = canSubmit(email: domain.email,
-                                     password: domain.password,
-                                     birthday: domain.birthday)
-        
-        return updateDomain(domain: domain)
-    }
-    
-    func handleUpdateBirthday(newBirthday: Date) -> LoginDomainResult {
-        guard var domain = savedDomain else { return .error }
-        
-        let birthdayValid = isBirthdayValid(birthday: newBirthday)
-        domain.birthday = newBirthday
-        domain.birthdayError = !birthdayValid
-        domain.canSubmit = canSubmit(email: domain.email,
-                                     password: domain.password,
-                                     birthday: domain.birthday)
-        
-        return updateDomain(domain: domain)
+    func handleUpdateField(field: LoginField) -> LoginDomainResult {
+        switch field {
+        case .email(let newEmail):
+            return handleUpdateEmail(newEmail: newEmail)
+        case .password(let newPassword):
+            return handleUpdatePassword(newPassword: newPassword)
+        case .birthday(let newBirthday):
+            return handleUpdateBirthday(newBirthday: newBirthday)
+        }
     }
     
     func handleSubmit() async -> LoginDomainResult {
@@ -159,6 +126,29 @@ private extension LoginInteractor {
         
         return updateDomain(domain: domain)
     }
+    
+    func handleFieldChangedFocus(field: LoginField, isFocused: Bool) -> LoginDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        switch field {
+        case .email:
+            let email = domain.email
+            let emailValid = isEmailValid(email: email)
+            domain.emailMessage = isFocused || emailValid || email.isEmpty ? Strings.validEmailMessage : Strings.invalidEmail
+            domain.emailError = !isFocused && !emailValid && !email.isEmpty
+            
+            return updateDomain(domain: domain)
+        case .password:
+            let password = domain.password
+            let passwordValid = isPasswordValid(password: password)
+            domain.passwordMessage = isFocused || passwordValid || password.isEmpty ? Strings.validPasswordMessage : Strings.invalidPassword
+            domain.passwordError = !isFocused && !passwordValid && !password.isEmpty
+            
+            return updateDomain(domain: domain)
+        default:
+            return updateDomain(domain: domain)
+        }
+    }
 }
 
 // MARK: - Other Private Helpers
@@ -172,6 +162,44 @@ private extension LoginInteractor {
     func updateDomain(domain: LoginDomain) -> LoginDomainResult {
         savedDomain = domain
         return .loaded(domain)
+    }
+    
+    func handleUpdateEmail(newEmail: String) -> LoginDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        domain.email = newEmail
+        domain.canSubmit = canSubmit(email: domain.email,
+                                     password: domain.password,
+                                     birthday: domain.birthday,
+                                     isCreateAccount: domain.isCreateAccount)
+        
+        return updateDomain(domain: domain)
+    }
+    
+    func handleUpdatePassword(newPassword: String) -> LoginDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        domain.password = newPassword
+        domain.canSubmit = canSubmit(email: domain.email,
+                                     password: domain.password,
+                                     birthday: domain.birthday,
+                                     isCreateAccount: domain.isCreateAccount)
+        
+        return updateDomain(domain: domain)
+    }
+    
+    func handleUpdateBirthday(newBirthday: Date) -> LoginDomainResult {
+        guard var domain = savedDomain else { return .error }
+        
+        let birthdayValid = isBirthdayValid(birthday: newBirthday)
+        domain.birthday = newBirthday
+        domain.birthdayError = !birthdayValid
+        domain.canSubmit = canSubmit(email: domain.email,
+                                     password: domain.password,
+                                     birthday: domain.birthday,
+                                     isCreateAccount: domain.isCreateAccount)
+        
+        return updateDomain(domain: domain)
     }
     
     func isEmailValid(email: String) -> Bool {
@@ -196,10 +224,13 @@ private extension LoginInteractor {
         }
     }
     
-    func canSubmit(email: String, password: String, birthday: Date) -> Bool {
+    func canSubmit(email: String,
+                   password: String,
+                   birthday: Date,
+                   isCreateAccount: Bool) -> Bool {
         return isEmailValid(email: email)
         && isPasswordValid(password: password)
-        && isBirthdayValid(birthday: birthday)
+        && (isBirthdayValid(birthday: birthday) || !isCreateAccount)
     }
 }
 

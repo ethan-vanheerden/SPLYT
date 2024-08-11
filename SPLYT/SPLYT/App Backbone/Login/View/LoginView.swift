@@ -13,8 +13,9 @@ import DesignSystem
 struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                                             VM.ViewState == LoginViewState {
     @ObservedObject private var viewModel: VM
-    private let horizontalPadding = Layout.size(2)
     @State private var date = Date.now
+    @EnvironmentObject private var userTheme: UserTheme
+    private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM) {
         self.viewModel = viewModel
@@ -51,7 +52,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             HStack {
                 Text(Strings.dontHaveAccount)
                     .footnote()
-                    .foregroundColor(Color(splytColor: .gray))
+                    .foregroundColor(Color(SplytColor.gray))
                 Spacer()
             }
             .onTapGesture {
@@ -69,25 +70,31 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func textEntries(display: LoginDisplay, createAccount: Bool) -> some View {
         VStack(alignment: .leading) {
             TextEntry(text: emailTextBinding(email: display.email),
-                      viewState: display.emailTextEntry)
+                      viewState: display.emailTextEntry) { isFocused in
+                viewModel.send(.fieldChangedFocus(field: .email(""), isFocused: isFocused),
+                               taskPriority: .userInitiated)
+            }
             if createAccount {
                 Text(display.emailMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: display.emailMessageColor))
+                    .foregroundColor(Color(display.emailMessageColor))
                     .padding(.bottom, Layout.size(1))
             }
             TextEntry(text: passwordTextBinding(password: display.password),
-                      viewState: display.passwordTextEntry)
+                      viewState: display.passwordTextEntry) { isFocused in
+                viewModel.send(.fieldChangedFocus(field: .password(""), isFocused: isFocused),
+                               taskPriority: .userInitiated)
+            }
             if createAccount {
                 Text(display.passwordMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: display.passwordMessageColor))
+                    .foregroundColor(Color(display.passwordMessageColor))
             }
             if createAccount {
                 birthdayPicker(birthday: display.birthday)
                 Text(display.birthdayMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: display.birthdayMessageColor))
+                    .foregroundColor(Color(display.birthdayMessageColor))
             }
         }
         .padding(.bottom, Layout.size(4))
@@ -96,7 +103,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func emailTextBinding(email: String) -> Binding<String> {
         return Binding(
             get: { return email },
-            set: { viewModel.send(.updateEmail(newEmail: $0),
+            set: { viewModel.send(.updateField(field: .email($0)),
                                   taskPriority: .userInitiated) }
         )
     }
@@ -104,7 +111,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func passwordTextBinding(password: String) -> Binding<String> {
         return Binding(
             get: { return password },
-            set: { viewModel.send(.updatePassword(newPassword: $0),
+            set: { viewModel.send(.updateField(field: .password($0)),
                                   taskPriority: .userInitiated) }
         )
     }
@@ -112,7 +119,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func birthdayBinding(birthday: Date) -> Binding<Date> {
         return Binding(
             get: { return birthday },
-            set: { viewModel.send(.updateBirthday(newBirthday: $0),
+            set: { viewModel.send(.updateField(field: .birthday($0)),
                                   taskPriority: .userInitiated) }
         )
     }
@@ -125,7 +132,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                 Text(Strings.birthday)
                     .body()
             }
-            .tint(Color(splytColor: .lightBlue))
+                       .tint(Color(SplytColor.blue))
         }
         .padding(.top, Layout.size(1))
     }
@@ -137,9 +144,10 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
             if let errorMessage = errorMessage {
                 Text(errorMessage)
                     .footnote()
-                    .foregroundColor(Color(splytColor: .red))
+                    .foregroundColor(Color(SplytColor.red))
             }
             SplytButton(text: buttonText,
+                        type: .primary(color: .blue),
                         isEnabled: isEnabled) {
                 viewModel.send(.submit, taskPriority: .userInitiated)
             }
@@ -174,11 +182,11 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
         VStack {
             Text(Strings.bySigningUp)
                 .footnote()
-                .foregroundColor(Color(splytColor: .gray))
+                .foregroundColor(Color(SplytColor.gray))
             Link(destination: termsURL) {
                 Text(Strings.termsConditions)
                     .footnote()
-                    .foregroundColor(Color(splytColor: .lightBlue))
+                    .foregroundColor(Color(SplytColor.blue))
             }
         }
     }
@@ -186,7 +194,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
 
 fileprivate struct Strings {
     static let SPLYT = "SPLYT"
-    static let welcomeBack = "Welcome back!"
+    static let welcomeBack = "Welcome!"
     static let dontHaveAccount = "Don't have an account yet? Create one!"
     static let login = "Login"
     static let createAccount = "Create Account"

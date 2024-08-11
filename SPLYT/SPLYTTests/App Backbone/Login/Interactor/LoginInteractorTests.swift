@@ -134,11 +134,31 @@ final class LoginInteractorTests: XCTestCase {
         let invalidDate = try XCTUnwrap(Calendar.current.date(byAdding: .year,
                                                               value: -15,
                                                               to: Date.now))
+        _ = await sut.interact(with: .toggleCreateAccount(isCreateAccount: true))
         let result = await sut.interact(with: .updateBirthday(newBirthday: invalidDate))
         
         var expectedDomain = Fixtures.domain
         expectedDomain.birthday = invalidDate
         expectedDomain.birthdayError = true
+        expectedDomain.isCreateAccount = true
+        expectedDomain.canSubmit = false
+        
+        XCTAssertEqual(result, .loaded(expectedDomain))
+    }
+    
+    func testInteract_UpdateBirthday_InvalidDate_IsCreateAccount_Success() async throws {
+        await loadAndFill()
+        let invalidDate = try XCTUnwrap(Calendar.current.date(byAdding: .year,
+                                                              value: -15,
+                                                              to: Date.now))
+        _ = await sut.interact(with: .toggleCreateAccount(isCreateAccount: false))
+        let result = await sut.interact(with: .updateBirthday(newBirthday: invalidDate))
+        
+        var expectedDomain = Fixtures.domainFilled
+        expectedDomain.birthday = invalidDate
+        expectedDomain.birthdayError = true
+        expectedDomain.isCreateAccount = false
+        expectedDomain.canSubmit = true
         
         XCTAssertEqual(result, .loaded(expectedDomain))
     }

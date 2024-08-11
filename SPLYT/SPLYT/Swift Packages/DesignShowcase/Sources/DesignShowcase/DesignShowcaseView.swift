@@ -15,20 +15,22 @@ struct DesignShowcaseView: View {
     private func detail(items: [GalleryItem]) -> some View {
         List(items, id: \.title) { item in
             NavigationLink(item.title) {
-                switch item {
-                case let particle as Particle:
-                    ParticleFactory().makeView(particle)
-                case let atom as Atom:
-                    AtomFactory().makeView(atom)
-                case let molecule as Molecule:
-                    MoleculeFactory().makeView(molecule)
-                case let organism as Organism:
-                    OrganismFactory().makeView(organism)
-                case let template as Template:
-                    TemplateFactory().makeView(template)
-                default:
-                    EmptyView()
-                }
+                Group {
+                    switch item {
+                    case let particle as Particle:
+                        ParticleFactory().makeView(particle)
+                    case let atom as Atom:
+                        AtomFactory().makeView(atom)
+                    case let molecule as Molecule:
+                        MoleculeFactory().makeView(molecule)
+                    case let organism as Organism:
+                        OrganismFactory().makeView(organism)
+                    case let template as Template:
+                        TemplateFactory().makeView(template)
+                    default:
+                        EmptyView()
+                    }
+                }.navigationTitle(item.title)
             }
         }
     }

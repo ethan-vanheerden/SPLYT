@@ -3,6 +3,7 @@ import SwiftUI
 public struct RestPicker: View {
     @Binding private var minutes: Int
     @Binding private var seconds: Int
+    @EnvironmentObject private var userTheme: UserTheme
     private let confirmAction: () -> Void
     private let cancelAction: () -> Void
     
@@ -21,15 +22,11 @@ public struct RestPicker: View {
             Spacer()
             HStack {
                 Counter(selectedNumber: $minutes,
-                        viewState: CounterViewState(maxNumber: 10,
-                                                    label: Strings.min,
-                                                    backGroundColor: .lightBlue,
-                                                    textColor: .black))
+                        viewState: .init(maxNumber: 10,
+                                         label: Strings.min))
                 Counter(selectedNumber: $seconds,
-                        viewState: CounterViewState(maxNumber: 59,
-                                                    label: Strings.sec,
-                                                    backGroundColor: .lightBlue,
-                                                    textColor: .black))
+                        viewState: .init(maxNumber: 59,
+                                         label: Strings.sec))
             }
             Spacer()
             pickerButtons
@@ -39,8 +36,8 @@ public struct RestPicker: View {
     private var pickerButtons: some View {
         HStack(spacing: Layout.size(2)) {
             SplytButton(text: Strings.cancel,
-                        type: .primary(color: .white),
-                        textColor: .gray) {
+                        type: .textOnly(fillsSpace: true),
+                        textColor: .label) {
                 cancelAction()
             }
             SplytButton(text: Strings.confirm,

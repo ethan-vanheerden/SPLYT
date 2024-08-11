@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 public struct IconButton: View {
@@ -10,8 +9,8 @@ public struct IconButton: View {
     private let action: () -> Void
     
     public init(iconName: String,
-                style: IconButtonConfiguration = .primary(backgroundColor: .lightBlue, outlineColor: .lightBlue),
-                iconColor: SplytColor = .white,
+                style: IconButtonConfiguration = .primary(),
+                iconColor: SplytColor = .label,
                 isEnabled: Bool = true,
                 animationEnabled: Bool = true,
                 action: @escaping () -> Void) {
@@ -37,6 +36,6 @@ public struct IconButton: View {
 // MARK: - Button Style
 
 public enum IconButtonConfiguration {
-    case primary(backgroundColor: SplytColor, outlineColor: SplytColor? = nil)
+    case primary(backgroundColor: SplytColor? = nil, outlineColor: SplytColor? = nil)
     case secondary
 }

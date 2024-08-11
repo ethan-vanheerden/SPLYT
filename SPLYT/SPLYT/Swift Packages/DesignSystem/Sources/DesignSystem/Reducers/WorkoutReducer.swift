@@ -5,8 +5,8 @@ import ExerciseCore
 public struct WorkoutReducer {
     
     public static func reduceExerciseGroups(groups: [ExerciseGroup],
-                                            includeHeaderLine: Bool = true) -> [[ExerciseViewState]] {
-        var result = [[ExerciseViewState]]()
+                                            includeHeaderLine: Bool = true) -> [[ExerciseViewStatus]] {
+        var result = [[ExerciseViewStatus]]()
         
         for group in groups {
             // For each group, get the ExerciseViewStates of the exercises in it
@@ -31,7 +31,7 @@ public struct WorkoutReducer {
         return result
     }
     
-    /// Ex: ["Group 1", "Group 2", "Group 3"]
+    /// Ex: ["Block 1", "Block 2", "Block 3"]
     public static func getGroupTitles(workout: Workout) -> [String] {
         var titles = [String]()
         
@@ -101,10 +101,10 @@ public struct WorkoutReducer {
     public static func getWorkoutAndPlanName(workout: Workout) -> String {
         var planTitle = ""
         if let planName = workout.planName {
-            planTitle = " | \(planName)"
+            planTitle = "\(planName) | "
         }
         
-        return workout.name + planTitle
+        return planTitle + workout.name
     }
 }
 
@@ -112,17 +112,19 @@ public struct WorkoutReducer {
 
 private extension WorkoutReducer {
     
-    static func getExerciseViewStates(exercises: [Exercise], includeHeaderLine: Bool) -> [ExerciseViewState] {
+    static func getExerciseViewStates(exercises: [Exercise], includeHeaderLine: Bool) -> [ExerciseViewStatus] {
         return exercises.map { exercise in
+            guard exercise.id != Exercise.loadingExerciseId else { return .loading }
+            
             let headerState = SectionHeaderViewState(title: exercise.name,
                                                      includeLine: includeHeaderLine)
             let numSetsTitle = getNumSetsTitle(numSets: exercise.sets.count)
             
-            return ExerciseViewState(header: headerState,
+            let viewState = ExerciseViewState(header: headerState,
                                      sets: getSetStates(exercise: exercise),
                                      canRemoveSet: exercise.sets.count > 1,
-                                     numSetsTitle: numSetsTitle
-            )
+                                     numSetsTitle: numSetsTitle)
+            return .loaded(viewState)
         }
     }
     
@@ -193,7 +195,7 @@ fileprivate struct Strings {
     static let lbs = "lbs"
     static let reps = "reps"
     static let sec = "sec"
-    static let group = "Group"
+    static let group = "Block"
     static let exercise = "exercise"
     static let exercises = "exercises"
     static let workout = "workout"

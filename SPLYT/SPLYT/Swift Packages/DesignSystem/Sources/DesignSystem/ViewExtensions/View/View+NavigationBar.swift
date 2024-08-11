@@ -19,8 +19,7 @@ public extension View {
                     if let backAction = backAction {
                         ToolbarItem(placement: .navigation) {
                             IconButton(iconName: viewState.backIconName,
-                                       style: .secondary,
-                                       iconColor: .black) { backAction() }
+                                       style: .secondary) { backAction() }
                         }
                     }
                     ToolbarItem(placement: getToolbarPlacement(position: viewState.position)) {

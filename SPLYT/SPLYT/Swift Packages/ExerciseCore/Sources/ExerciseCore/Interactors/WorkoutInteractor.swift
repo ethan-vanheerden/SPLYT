@@ -2,6 +2,7 @@ import Foundation
 
 /// Contains common interactor functions involving workouts.
 public struct WorkoutInteractor {
+    typealias Errors = WorkoutInteractorError
     
     /// Adds a set to all the exercises in an exercise group.
     /// - Parameters:
@@ -125,6 +126,54 @@ public struct WorkoutInteractor {
                           exerciseIndex: exerciseIndex)
     }
     
+    /// Replaces an exercise in a list of groups with a target exercise. The replaced exercise will have the same
+    /// number of sets as the one it's replacing.
+    /// - Parameters:
+    ///   - groupIndex: The group index of the target exercise to replace
+    ///   - groups: The exercise groups
+    ///   - exerciseIndex: The index of the exercise to replace in its respective group
+    ///   - availableExercise: The `AvailableExercise` to replace an existing exercise with
+    /// - Returns: The same exercise groups with the new replaced exercise
+    public static func replaceExercise(groupIndex: Int,
+                                       groups: [ExerciseGroup],
+                                       exerciseIndex: Int,
+                                       availableExercise: AvailableExercise) throws -> [ExerciseGroup] {
+        var groups = groups
+        
+        guard groupIndex < groups.count else { throw Errors.invalidIndex }
+        var targetGroup = groups[groupIndex]
+        
+        var exercises = targetGroup.exercises
+        guard exerciseIndex < exercises.count else { throw Errors.invalidIndex }
+        let targetExercise = exercises[exerciseIndex]
+        
+        let numSets = targetExercise.sets.count
+        let exercise = createExercise(from: availableExercise,
+                                      numSets: numSets)
+        
+        exercises[exerciseIndex] = exercise
+        targetGroup.exercises = exercises
+        groups[groupIndex] = targetGroup
+        
+        return groups
+    }
+    
+    /// Adds the given list of `AvailableExercises` as a new group to the end of the given groups.
+    /// - Parameters:
+    ///   - groups: The groups to add the exercises to
+    ///   - exercises: The exercises to add to the new group
+    /// - Returns: The updates list of groups with the exercises added
+    public static func addExercises(groups: [ExerciseGroup],
+                                    exercises: [AvailableExercise]) -> [ExerciseGroup] {
+        var groups = groups
+        
+        let exercises = exercises.map { createExercise(from: $0, numSets: 1) }
+        
+        groups.append(ExerciseGroup(exercises: exercises))
+        
+        return groups
+    }
+    
     
     /// Creates a unique workout/plan id using the workout/plan name and creation date
     /// in the form of: name-2023-02-15T16:39:57Z.
@@ -139,6 +188,26 @@ public struct WorkoutInteractor {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         
         return name + "-" + formatter.string(from: creationDate)
+    }
+    
+    /// Creates a new exercise with the given number of sets.
+    /// - Parameters:
+    ///   - available: The `AvailableExercise` that this exercise is based on
+    ///   - numSets: The number of sets this exercise will have
+    /// - Returns: The exercise
+    public static func createExercise(from available: AvailableExercise, numSets: Int) -> Exercise {
+        let id = available.id
+        var sets: [Set] = []
+        
+        for _ in 1...numSets {
+            let newSet = Set(input: available.defaultInputType,
+                             modifier: nil)
+            sets.append(newSet)
+        }
+        
+        return Exercise(id: id,
+                        name: available.name,
+                        sets: sets)
     }
 }
 
@@ -178,4 +247,10 @@ private extension WorkoutInteractor {
         
         return groups
     }
+}
+
+// MARK: - Errors
+
+enum WorkoutInteractorError: Error {
+    case invalidIndex
 }

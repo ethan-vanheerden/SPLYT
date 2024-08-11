@@ -36,35 +36,49 @@ struct SetViewGallery: View {
     var body: some View {
         VStack {
             SetView(viewState: viewStateOne,
-                    exerciseType: .build(addModifierAction: { _ in },
-                                         removeModifierAction: { _ in }),
+                    exerciseType: .build,
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in })
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: viewStateTwo,
-                    exerciseType: .build(addModifierAction: { _ in },
-                                         removeModifierAction: { _ in }),
+                    exerciseType: .build,
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in })
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: viewStateThree,
-                    exerciseType: .build(addModifierAction: { _ in },
-                                         removeModifierAction: { _ in }),
+                    exerciseType: .build,
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in })
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: viewStateFour,
-                    exerciseType: .build(addModifierAction: { _ in },
-                                         removeModifierAction: { _ in }),
+                    exerciseType: .build,
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in })
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: viewStateFive,
                     exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
-                                              addNoteAction: { }),
+                                              addNoteAction: { },
+                                              replaceExerciseAction: { },
+                                              deleteExerciseAction: { },
+                                              canDeleteExercise: true),
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in })
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
             SetView(viewState: viewStateSix,
                     exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
-                                              addNoteAction: { }),
+                                              addNoteAction: { },
+                                              replaceExerciseAction: { },
+                                              deleteExerciseAction: { },
+                                              canDeleteExercise: true),
                     updateSetAction: { _, _ in },
-                    updateModifierAction: { _, _ in })
+                    updateModifierAction: { _, _ in },
+                    addModifierAction: { _ in },
+                    removeModifierAction: { _ in })
         }
         .padding(.horizontal, Layout.size(2))
     }

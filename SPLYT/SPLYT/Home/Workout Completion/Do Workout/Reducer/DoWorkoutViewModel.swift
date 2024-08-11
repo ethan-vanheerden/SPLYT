@@ -14,7 +14,8 @@ import ExerciseCore
 enum DoWorkoutViewEvent {
     case loadWorkout
     case stopCountdown
-    case toggleRest(isResting: Bool)
+    case startRest(restSeconds: Int)
+    case stopRest(manuallyStopped: Bool)
     case toggleGroupExpand(group: Int, isExpanded: Bool)
     case completeGroup(group: Int)
     case addSet(group: Int)
@@ -23,6 +24,15 @@ enum DoWorkoutViewEvent {
     case usePreviousInput(group: Int, exerciseIndex: Int, setIndex: Int, forModifier: Bool)
     case toggleDialog(dialog: DoWorkoutDialog, isOpen: Bool)
     case saveWorkout
+    case cacheWorkout(secondElapsed: Int)
+    case pauseRest
+    case resumeRest(restSeconds: Int)
+    case markExerciseLoading(group: Int, exerciseIndex: Int)
+    case replaceExercise(group: Int, exerciseIndex: Int, newExerciseId: String)
+    case deleteExercise(group: Int, exerciseIndex: Int)
+    case addModifier(group: Int, exerciseIndex: Int, setIndex: Int, modifier: SetModifier)
+    case removeModifier(group: Int, exerciseIndex: Int, setIndex: Int)
+    case addExercises(exerciseIds: [String])
 }
 
 // MARK: - View Model
@@ -39,12 +49,14 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
     override func send(_ event: DoWorkoutViewEvent) async {
         switch event {
         case .loadWorkout:
-            await react(domainAction: .loadWorkout)
+            await react(domainAction: .loadWorkout, updateTime: true)
         case .stopCountdown:
             await startTime() // Start the workout timer
             await react(domainAction: .stopCountdown)
-        case .toggleRest(let isResting):
-            await react(domainAction: .toggleRest(isResting: isResting))
+        case .startRest(let restSeconds):
+            await react(domainAction: .startRest(restSeconds: restSeconds))
+        case .stopRest(let manuallyStopped):
+            await react(domainAction: .stopRest(manuallyStopped: manuallyStopped))
         case let .toggleGroupExpand(group, isExpanded):
             await react(domainAction: .toggleGroupExpand(group: group, isExpanded: isExpanded))
         case .completeGroup(let group):
@@ -68,6 +80,33 @@ final class DoWorkoutViewModel: TimeViewModel<DoWorkoutViewState, DoWorkoutViewE
             await react(domainAction: .toggleDialog(dialog: dialog, isOpen: isOpen))
         case .saveWorkout:
             await react(domainAction: .saveWorkout)
+            await stopTime()
+        case .cacheWorkout(let secondsElapsed):
+            // Don't need to update view, just make the interactor call
+            _ = await interactor.interact(with: .cacheWorkout(secondsElapsed: secondsElapsed))
+        case .pauseRest:
+            await react(domainAction: .pauseRest)
+        case .resumeRest(let restSeconds):
+            await react(domainAction: .resumeRest(restSeconds: restSeconds))
+        case let .markExerciseLoading(group, exerciseIndex):
+            await react(domainAction: .markExerciseLoading(group: group, exerciseIndex: exerciseIndex))
+        case let .replaceExercise(group, exerciseIndex, newExerciseId):
+            await react(domainAction: .replaceExercise(group: group,
+                                                       exerciseIndex: exerciseIndex,
+                                                       newExerciseId: newExerciseId))
+        case let .deleteExercise(group, exerciseIndex):
+            await react(domainAction: .deleteExercise(group: group, exerciseIndex: exerciseIndex))
+        case let .addModifier(group, exerciseIndex, setIndex, modifier):
+            await react(domainAction: .addModifier(group: group,
+                                                   exerciseIndex: exerciseIndex,
+                                                   setIndex: setIndex,
+                                                   modifier: modifier))
+        case let .removeModifier(group, exerciseIndex, setIndex):
+            await react(domainAction: .removeModifier(group: group,
+                                                      exerciseIndex: exerciseIndex,
+                                                      setIndex: setIndex))
+        case .addExercises(let exerciseIds):
+            await react(domainAction: .addExercises(newExerciseIds: exerciseIds))
         }
     }
 }
@@ -81,9 +120,16 @@ private extension DoWorkoutViewModel {
         }
     }
     
-    func react(domainAction: DoWorkoutDomainAction) async {
-        let domain: DoWorkoutDomainResult = await interactor.interact(with: domainAction)
-        let newViewState = reducer.reduce(domain)
+    func react(domainAction: DoWorkoutDomainAction, updateTime: Bool = false) async {
+        let domainResult: DoWorkoutDomainResult = await interactor.interact(with: domainAction)
+        
+        if updateTime, 
+            case .loaded(let domain) = domainResult,
+            let secondsElapsed = domain.cachedSecondsElapsed {
+            await startTime(secondsElapsed: secondsElapsed)
+        }
+        
+        let newViewState = reducer.reduce(domainResult)
         await updateViewState(newViewState)
     }
 }

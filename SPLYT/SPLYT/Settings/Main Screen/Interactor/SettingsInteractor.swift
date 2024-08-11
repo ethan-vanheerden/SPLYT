@@ -12,6 +12,7 @@ import Foundation
 enum SettingsDomainAction {
     case load
     case signOut
+    case toggleDialog(type: SettingsDialog, isOpen: Bool)
 }
 
 // MARK: - Domain Results
@@ -19,6 +20,7 @@ enum SettingsDomainAction {
 enum SettingsDomainResult: Equatable {
     case error
     case loaded(SettingsDomain)
+    case dialog(type: SettingsDialog, domain: SettingsDomain)
 }
 
 // MARK: - Interactor
@@ -26,9 +28,12 @@ enum SettingsDomainResult: Equatable {
 final class SettingsInteractor {
     private var savedDomain: SettingsDomain?
     private let service: SettingsServiceType
+    private let versionInteractor: VersionInteractorType
     
-    init(service: SettingsServiceType = SettingsService()) {
+    init(service: SettingsServiceType = SettingsService(),
+         versionInteractor: VersionInteractorType = VersionInteractor()) {
         self.service = service
+        self.versionInteractor = versionInteractor
     }
     
     func interact(with action: SettingsDomainAction) async -> SettingsDomainResult {
@@ -37,6 +42,8 @@ final class SettingsInteractor {
             return handleLoad()
         case .signOut:
             return handleSignOut()
+        case let .toggleDialog(type, isOpen):
+            return handleToggleDialog(type: type, isOpen: isOpen)
         }
     }
 }
@@ -45,7 +52,9 @@ final class SettingsInteractor {
 
 private extension SettingsInteractor {
     func handleLoad() -> SettingsDomainResult {
-        let domain = SettingsDomain(sections: sections)
+        let domain = SettingsDomain(sections: sections,
+                                    versionString: versionInteractor.versionString,
+                                    buildNumberString: versionInteractor.buildNumberString)
         
         return updateDomain(domain: domain)
     }
@@ -56,6 +65,13 @@ private extension SettingsInteractor {
         let success = service.signOut()
         
         return success ? updateDomain(domain: domain) : .error
+    }
+    
+    func handleToggleDialog(type: SettingsDialog, isOpen: Bool) -> SettingsDomainResult {
+        guard let domain = savedDomain else { return .error }
+        
+        return isOpen ? .dialog(type: type, domain: domain) : .loaded(domain)
+        
     }
 }
 
@@ -75,8 +91,9 @@ private extension SettingsInteractor {
     var sections: [SettingsSection] {
         return [
             workoutSection,
-            developerSection,
-            supportSection
+            customizationSection,
+            supportSection,
+            developerSection
         ]
     }
     
@@ -84,6 +101,14 @@ private extension SettingsInteractor {
         return .init(title: Strings.workout,
                      items: [
                         .restPresets
+                     ],
+                     isEnabled: true)
+    }
+    
+    var customizationSection: SettingsSection {
+        return .init(title: Strings.customization,
+                     items: [
+                        .appearance
                      ],
                      isEnabled: true)
     }
@@ -114,7 +139,8 @@ private extension SettingsInteractor {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let workout = "WORKOUT"
-    static let developer = "DEVELOPER"
-    static let support = "SUPPORT"
+    static let workout = "Workout"
+    static let developer = "Developer"
+    static let customization = "Customization"
+    static let support = "Support"
 }

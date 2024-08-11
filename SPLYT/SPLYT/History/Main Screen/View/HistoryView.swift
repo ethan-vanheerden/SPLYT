@@ -46,17 +46,14 @@ struct HistoryView<VM: ViewModel>: View where VM.Event == HistoryViewEvent,
     @ViewBuilder
     private func mainView(display: HistoryDisplay) -> some View {
         let deleteHistoryId = deletedHistoryId(dialog: display.presentedDialog)
-        
-        VStack {
-            workoutsView(workouts: display.workouts)
-        }
-        .dialog(isOpen: deleteHistoryId != nil,
-                viewState: display.deleteWorkoutHistoryDialog,
-                primaryAction: { viewModel.send(.deleteWorkoutHistory(historyId: deleteHistoryId ?? ""),
-                                                taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(dialog: .deleteWorkoutHistory(historyId: ""),
-                                                                isOpen: false),
-                                                  taskPriority: .userInitiated) })
+        workoutsView(workouts: display.workouts)
+            .dialog(isOpen: deleteHistoryId != nil,
+                    viewState: display.deleteWorkoutHistoryDialog,
+                    primaryAction: { viewModel.send(.deleteWorkoutHistory(historyId: deleteHistoryId ?? ""),
+                                                    taskPriority: .userInitiated) },
+                    secondaryAction: { viewModel.send(.toggleDialog(dialog: .deleteWorkoutHistory(historyId: ""),
+                                                                    isOpen: false),
+                                                      taskPriority: .userInitiated) })
     }
     
     /// Returns the historyId releated to a delete history dialog

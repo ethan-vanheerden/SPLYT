@@ -3,51 +3,64 @@ import ExerciseCore
 import Core
 
 public struct SetView: View {
-    @State private var showBaseActionSheet: Bool = false
+    @State private var showRegularActionSheet: Bool = false
+    @State private var showModifierActionSheet: Bool = false
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: SetViewState
     private let exerciseType: ExerciseViewType
     private let updateSetAction: (Int, SetInput) -> Void // Set index, the new input
     private let updateModifierAction: (Int, SetInput) -> Void
+    private let addModifierAction: (Int) -> Void
+    private let removeModifierAction: (Int) -> Void
     private let iconButtonOffset = Layout.size(1)
     
     public init(viewState: SetViewState,
                 exerciseType: ExerciseViewType,
                 updateSetAction: @escaping (Int, SetInput) -> Void,
-                updateModifierAction: @escaping (Int, SetInput) -> Void) {
+                updateModifierAction: @escaping (Int, SetInput) -> Void,
+                addModifierAction: @escaping (Int) -> Void,
+                removeModifierAction: @escaping (Int) -> Void) {
         self.viewState = viewState
         self.exerciseType = exerciseType
         self.updateSetAction = updateSetAction
         self.updateModifierAction = updateModifierAction
+        self.addModifierAction = addModifierAction
+        self.removeModifierAction = removeModifierAction
     }
     
     public var body: some View {
-        switch exerciseType {
-        case let .build(addModifierAction, removeModifierAction):
-            mainView
-                .confirmationDialog("", isPresented: $showBaseActionSheet, titleVisibility: .hidden) {
-                    if let _ = viewState.modifier {
-                        Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
-                    } else {
-                        Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
-                    }
-                }
-        case .inProgress:
-            mainView
-        }
-    }
-    
-    @ViewBuilder
-    private var mainView: some View {
         VStack(alignment: .leading) {
             setRow(modifier: nil)
             if let modifier = viewState.modifier {
                 setRow(modifier: modifier)
             }
         }
+        .confirmationDialog("", isPresented: $showRegularActionSheet, titleVisibility: .hidden) {
+            if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
+            hasPreviousInput(forModifier: false) {
+                Button(Strings.usePreviousInput) {
+                    usePreviousInputAction(viewState.setIndex, false)
+                }
+            }
+            if viewState.modifier != nil {
+                Button(Strings.removeModifier) { removeModifierAction(viewState.setIndex) }
+            } else {
+                Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
+            }
+        }
+        .confirmationDialog("", isPresented: $showModifierActionSheet, titleVisibility: .hidden) {
+            if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
+            hasPreviousInput(forModifier: true) {
+                Button(Strings.usePreviousInput) {
+                    usePreviousInputAction(viewState.setIndex, true)
+                }
+            }
+        }
     }
     
     @ViewBuilder
     private func setRow(modifier: SetModifierViewState?) -> some View {
+        let isModifierRow = modifier != nil
         HStack {
             rowTitle(modifier: modifier)
                 .alignmentGuide(VerticalAlignment.center) { d in
@@ -61,10 +74,11 @@ public struct SetView: View {
                 entryView(setInput: viewState.input, updateAction: updateSetAction)
             }
             Spacer()
-            iconButton(forModifier: modifier != nil)
+            iconButton(forModifier: isModifierRow)
                 .alignmentGuide(VerticalAlignment.center) { d in
                     d[.bottom] - iconButtonOffset
                 }
+                .isVisible(!isModifierRow || hasPreviousInput(forModifier: true)) // For consistent spacing
         }
     }
     
@@ -88,68 +102,80 @@ public struct SetView: View {
         case let .repsWeight(weightTitle, repsTitle, input):
             HStack(spacing: Layout.size(4)) {
                 // Reps Entry
-                let repsBinding = entryBinding(value: String(input.reps),
-                                               input: setInput,
-                                               repsInRepsWeight: true,
-                                               updateAction: updateAction)
-                SetEntry(input: repsBinding,
+                SetEntry(input: entryBinding(input: String(input.reps),
+                                          setInput: setInput,
+                                          keyboardType: .reps,
+                                          updateAction: setUpdateAction(input: setInput,
+                                                                        repsInRepsWeight: true,
+                                                                        updateAction: updateAction)),
                          title: repsTitle,
                          keyboardType: .reps,
                          placeholder: String(input.repsPlaceholder))
                 
                 // Weight Entry
-                let weightBinding = entryBinding(value: String(input.weight),
-                                                 input: setInput,
-                                                 updateAction: updateAction)
-                SetEntry(input: weightBinding,
+                SetEntry(input: entryBinding(input: String(input.weight),
+                                          setInput: setInput,
+                                          keyboardType: .weight,
+                                          updateAction: setUpdateAction(input: setInput,
+                                                                        updateAction: updateAction)),
                          title: weightTitle,
                          keyboardType: .weight,
                          placeholder: String(input.weightPlaceholder))
             }
         case let .repsOnly(title, input):
-            let repsBinding = entryBinding(value: String(input.reps),
-                                           input: setInput,
-                                           updateAction: updateAction)
-            SetEntry(input: repsBinding,
+            SetEntry(input: entryBinding(input: String(input.reps),
+                                      setInput: setInput,
+                                      keyboardType: .reps,
+                                      updateAction: setUpdateAction(input: setInput,
+                                                                    updateAction: updateAction)),
                      title: title,
                      keyboardType: .reps,
                      placeholder: String(input.placeholder))
         case let .time(title, input):
-            let secondsBinding = entryBinding(value: String(input.seconds),
-                                              input: setInput,
-                                              updateAction: updateAction)
-            SetEntry(input: secondsBinding,
+            SetEntry(input: entryBinding(input: String(input.seconds),
+                                      setInput: setInput,
+                                      keyboardType: .time,
+                                      updateAction: setUpdateAction(input: setInput,
+                                                                    updateAction: updateAction)),
                      title: title,
                      keyboardType: .time,
                      placeholder: String(input.placeholder))
         }
     }
     
+    private func entryBinding(input: String, 
+                              setInput: SetInputViewState,
+                              keyboardType: KeyboardInputType,
+                              updateAction: @escaping (String) -> Void) -> Binding<String> {
+        return Binding(
+            get: { input },
+            set: { newValue in
+                guard !newValue.hasSuffix(".") else { return }
+                
+                let validText = SetEntryFormatter.validateText(text: newValue, inputType: keyboardType)
+                updateAction(validText)
+            }
+        )
+    }
+    
     @ViewBuilder
     private func iconButton(forModifier: Bool) -> some View {
-        switch exerciseType {
-        case .build where forModifier == false:
-            IconButton(iconName: "ellipsis",
-                       style: .secondary,
-                       iconColor: .lightBlue) { showBaseActionSheet = true }
-        case let .inProgress(usePreviousInputAction, _):
-            IconButton(iconName: "arrow.counterclockwise") {
-                usePreviousInputAction(viewState.setIndex, forModifier)
+        IconButton(iconName: "ellipsis",
+                   style: .secondary,
+                   iconColor: userTheme.theme) { 
+            if forModifier {
+                showModifierActionSheet = true
+            } else {
+                showRegularActionSheet = true
             }
-            .isVisible(usePreviousIconVisible(forModifier: forModifier))
-        default:
-            IconButton(iconName: "ellipsis",
-                       style: .secondary,
-                       iconColor: .lightBlue) { }
-                .isVisible(false) // Keeps spacing consistent even with no button
         }
     }
     
-    /// Determines if the button to use previous input on a set row is visible.
+    /// Determines if the button to use previous input in the confirmation dialog is visible.
     /// This should only be visible if there is a placeholder without actual input already there.
     /// - Parameter forModifier: Whether the set row is for a modifier or not.
     /// - Returns: True if the icon should be visible, false otherwise
-    private func usePreviousIconVisible(forModifier: Bool) -> Bool {
+    private func hasPreviousInput(forModifier: Bool) -> Bool {
         let isVisible: Bool
         if forModifier {
             isVisible = viewState.modifier?.hasPlaceholder ?? false && !(viewState.modifier?.hasValue ?? true)
@@ -162,7 +188,8 @@ public struct SetView: View {
     private func tagView(modifier: SetModifierViewState) -> some View {
         // If a tag has no associated SetInput, we can move it up
         let offset: CGFloat = modifier.hasAdditionalInput ? 0 : -Layout.size(3)
-        let viewState = TagFactory.tagFromModifier(modifier: modifier)
+        let viewState = TagFactory.tagFromModifier(modifier: modifier,
+                                                   color: userTheme.theme)
         
         return Tag(viewState: viewState)
             .fixedSize()
@@ -181,42 +208,30 @@ public struct SetView: View {
         }
     }
     
-    /// Creates a binding to the textfield used for a set entry.
-    /// - Parameters:
-    ///   - value: The value to be present in the text field
-    ///   - input: The type of set input that this text field will represent
-    ///   - repsInRepsWeight: If this is a reps and weight set, indicates if this is for the rep text field
-    ///   - updateAction: The update action to perform when the text value in the text field changes
-    /// - Returns: A binding to use for getting/updating values for the set text fields.
-    private func entryBinding(value: String,
-                              input: SetInputViewState,
-                              repsInRepsWeight: Bool = false,
-                              updateAction: @escaping (Int, SetInput) -> Void) -> Binding<String> {
-        return Binding(
-            get: { return value },
-            set: { newValue in
-                // Note: with this logic, if an input is not valid, we set the input to an empty
-                let parsedInput = validateText(input: newValue)
-                let newInput: SetInput
-                
-                switch input {
-                case .repsWeight(_, _, var input):
-                    if repsInRepsWeight {
-                        input.reps = Int(parsedInput)
-                    } else {
-                        input.weight = parsedInput
-                    }
-                    newInput = .repsWeight(input: input)
-                case .repsOnly(_, var input):
+    private func setUpdateAction(input: SetInputViewState,
+                                 repsInRepsWeight: Bool = false,
+                                 updateAction: @escaping (Int, SetInput) -> Void) -> ((String) -> Void) {
+        return { validText in
+            let parsedInput = Double(validText)
+            let newInput: SetInput
+            
+            switch input {
+            case .repsWeight(_, _, var input):
+                if repsInRepsWeight {
                     input.reps = Int(parsedInput)
-                    newInput = .repsOnly(input: input)
-                case .time(_, var input):
-                    input.seconds = Int(parsedInput)
-                    newInput = .time(input: input)
+                } else {
+                    input.weight = parsedInput
                 }
-                updateAction(viewState.setIndex, newInput)
+                newInput = .repsWeight(input: input)
+            case .repsOnly(_, var input):
+                input.reps = Int(parsedInput)
+                newInput = .repsOnly(input: input)
+            case .time(_, var input):
+                input.seconds = Int(parsedInput)
+                newInput = .time(input: input)
             }
-        )
+            updateAction(viewState.setIndex, newInput)
+        }
     }
     
     private func validateText(input: String) -> Double? {
@@ -250,4 +265,5 @@ public struct SetViewState: Equatable, Hashable {
 fileprivate struct Strings {
     static let addModifier = "Add Modifier"
     static let removeModifier = "Remove Modifier"
+    static let usePreviousInput = "Use Previous Input"
 }

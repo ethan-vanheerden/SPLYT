@@ -56,8 +56,7 @@ private extension WorkoutDetailsReducer {
         let groupTitles = WorkoutReducer.getGroupTitles(workout: workout)
         
         for (index, exercises) in groups.enumerated() {
-            let header = CollapseHeaderViewState(title: groupTitles[index],
-                                                 color: .lightBlue)
+            let header = CollapseHeaderViewState(title: groupTitles[index])
             let newGroupState = CompletedExerciseGroupViewState(header: header,
                                                                 exercises: exercises)
             result.append(newGroupState)

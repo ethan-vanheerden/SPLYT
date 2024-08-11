@@ -55,10 +55,10 @@ private extension HistoryReducer {
     private func getTileTitle(workoutName: String, planName: String?) -> String {
         var planTitle = ""
         if let planName = planName {
-            planTitle = " | \(planName)"
+            planTitle = "\(planName) | "
         }
         
-        return workoutName + planTitle
+        return planTitle + workoutName
     }
 }
 

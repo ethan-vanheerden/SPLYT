@@ -22,8 +22,13 @@ open class TimeViewModel<T, U>: ViewModel {
     
     /// Starts keeping track of time.
     @MainActor
-    public func startTime() {
-        timeStarted = Date()
+    public func startTime(secondsElapsed: Int? = nil) {
+        if let secondsElapsed = secondsElapsed {
+            timeStarted = Date().addingTimeInterval(TimeInterval(-secondsElapsed))
+        } else {
+            timeStarted = Date()
+        }
+        
         // Publish every 0.5 seconds to ensure we don't lag
         Timer.publish(every: 0.5, on: .main, in: .common)
             .autoconnect()

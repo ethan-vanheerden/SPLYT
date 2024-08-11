@@ -6,7 +6,7 @@ struct ActionSliderGallery: View {
     @State private var sliderTwoFinsihed = false
     private let viewStateOne = ActionSliderViewState(sliderColor: .green,
                                                      backgroundText: "Finish")
-    private let viewStateTwo = ActionSliderViewState(sliderColor: .purple,
+    private let viewStateTwo = ActionSliderViewState(sliderColor: .darkBlue,
                                                      backgroundText: "Slide to complete")
     var body: some View {
         VStack {

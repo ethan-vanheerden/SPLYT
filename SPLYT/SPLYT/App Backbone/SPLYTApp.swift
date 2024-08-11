@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 @main
 struct SPLYTApp: App {
@@ -14,6 +15,8 @@ struct SPLYTApp: App {
     var body: some Scene {
         WindowGroup {
             MainViewController_SwiftUI()
+                .withAppearanceTheme()
+                .withUserTheme()
                 .ignoresSafeArea(.all)
         }
     }

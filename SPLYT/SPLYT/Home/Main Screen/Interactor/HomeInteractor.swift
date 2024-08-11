@@ -23,6 +23,7 @@ enum HomeDomainResult: Equatable {
     case error
     case loaded(HomeDomain)
     case dialog(type: HomeDialog, domain: HomeDomain)
+    case workoutInProgress
 }
 
 // MARK: - Protocol
@@ -60,6 +61,10 @@ final class HomeInteractor: HomeInteractorType {
 private extension HomeInteractor {
     func handleLoad() -> HomeDomainResult {
         do {
+            if service.isWorkoutInProgress() {
+                return .workoutInProgress
+            }
+            
             let routines = try service.loadRoutines()
             let domain = HomeDomain(routines: routines)
             

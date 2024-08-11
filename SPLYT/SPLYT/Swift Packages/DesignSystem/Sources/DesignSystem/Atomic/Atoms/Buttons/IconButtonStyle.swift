@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct IconButtonStyle: ButtonStyle {
+    @EnvironmentObject private var userTheme: UserTheme
     private let iconName: String // Apple built-in image names
     private let style: IconButtonConfiguration
     private let iconColor: SplytColor
@@ -43,25 +44,27 @@ struct IconButtonStyle: ButtonStyle {
             .frame(width: backgroundSize, height: backgroundSize)
             
             .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                        normalColor: Color(splytColor: iconColor),
-                                                        pressedColor: Color(splytColor: backgroundColor),
+                                                        normalColor: Color(iconColor),
+                                                        pressedColor: Color(backgroundColor 
+                                                                            ?? userTheme.theme),
                                                         animationEnabled: animationEnabled))
             .roundedBackground(cornerRadius: cornerRadius,
                                fill: ButtonUtils.animationColor(configuration: configuration,
-                                                                normalColor: Color(splytColor: backgroundColor),
-                                                                pressedColor: Color(splytColor: iconColor),
-                                                                animationEnabled: animationEnabled))
+                                                                normalColor: Color(backgroundColor
+                                                                                   ?? userTheme.theme),
+                                                                pressedColor: Color(SplytColor.clear),
+                                                                animationEnabled: animationEnabled).gradient)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(lineWidth: Layout.size(0.25))
-                    .fill(Color(splytColor: outlineColor ?? backgroundColor))
+                    .fill(Color(outlineColor ?? backgroundColor ?? userTheme.theme).gradient)
             )
         case .secondary:
             baseImage
                 .frame(width: backgroundSize, height: backgroundSize)
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                            normalColor: Color(splytColor: iconColor),
-                                                            pressedColor: Color(splytColor: iconColor).opacity(0.5),
+                                                            normalColor: Color(iconColor),
+                                                            pressedColor: Color(iconColor).opacity(0.5),
                                                             animationEnabled: animationEnabled))
         }
     }

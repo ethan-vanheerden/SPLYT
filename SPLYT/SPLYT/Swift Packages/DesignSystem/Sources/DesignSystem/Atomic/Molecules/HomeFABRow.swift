@@ -1,7 +1,7 @@
-
 import SwiftUI
 
 public struct HomeFABRow: View {
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: HomeFABRowViewState
     private let tapAction: () -> Void
     
@@ -21,11 +21,11 @@ public struct HomeFABRow: View {
     }
     
     private var fabIconType: FABIconViewState {
-        return FABIconViewState(size: .secondary(backgroundColor: .white,
-                                                 iconColor: .lightBlue),
+        return FABIconViewState(size: .secondary(backgroundColor: userTheme.theme,
+                                                 iconColor: .white),
                                 imageName: viewState.imageName)
     }
-}
+} // TODO: Custom exercise button on build workout, appearnce view
 
 // MARK: - ViewState
 
@@ -37,12 +37,5 @@ public struct HomeFABRowViewState: Equatable {
                 imageName: String) {
         self.title = title
         self.imageName = imageName
-    }
-}
-
-struct FABRow_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeFABRow(viewState: HomeFABRowViewState(title: "CREATE NEW WORKOUT", imageName: "plus"),
-                   tapAction: { })
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import Core
 import SwiftUI
+import DesignSystem
 
 // MARK: - Navigation Events
 
@@ -38,7 +39,7 @@ private extension HistoryNavigationRouter {
         let view = WorkoutDetailsView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         
-        let vc = UIHostingController(rootView: view)
+        let vc = UIHostingController(rootView: view.withUserTheme())
         navigator?.present(vc, animated: true)
     }
 }

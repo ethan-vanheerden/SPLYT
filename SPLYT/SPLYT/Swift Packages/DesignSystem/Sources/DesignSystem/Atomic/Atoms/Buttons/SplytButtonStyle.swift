@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SplytButtonStyle: ButtonStyle {
+    @EnvironmentObject private var userTheme: UserTheme
     private let text: String
     private let type: SplytButtonType
     private let textColor: SplytColor
@@ -30,28 +31,36 @@ struct SplytButtonStyle: ButtonStyle {
     private func body(configuration: Configuration) -> some View {
         switch type {
         case .primary(let color),
-                .secondary(let color):
+                .secondary(let color),
+                .loading(let color):
             baseButton
                 .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                            normalColor: Color(splytColor: textColor),
-                                                            pressedColor: Color(splytColor: color),
+                                                            normalColor: Color(textColor),
+                                                            pressedColor: Color(color ?? userTheme.theme),
                                                             animationEnabled: animationEnabled))
-                .roundedBackground(cornerRadius: cornerRadius, fill: ButtonUtils.animationColor(configuration: configuration,
-                                                                                                normalColor: Color(splytColor: color),
-                                                                                                pressedColor: Color(splytColor: textColor),
-                                                                                                animationEnabled: animationEnabled))
+                .roundedBackground(cornerRadius: cornerRadius,
+                                   fill: ButtonUtils.animationColor(configuration: configuration,
+                                                                    normalColor: Color(color ?? userTheme.theme),
+                                                                    pressedColor: Color(SplytColor.clear),
+                                                                    animationEnabled: animationEnabled))
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(lineWidth: Layout.size(0.25))
-                        .fill(Color(splytColor: color))
+                        .fill(Color(color ?? userTheme.theme))
                 )
-        case .textOnly:
-            textView
-                .lineLimit(1)
-                .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
-                                                            normalColor: Color(splytColor: textColor),
-                                                            pressedColor: Color(splytColor: textColor).opacity(0.5),
-                                                            animationEnabled: animationEnabled))
+        case .textOnly(let fillsSpace):
+            Group {
+                if fillsSpace {
+                    baseButton
+                } else {
+                    buttonContent
+                }
+            }
+            .lineLimit(1)
+            .foregroundColor(ButtonUtils.animationColor(configuration: configuration,
+                                                        normalColor: Color(textColor),
+                                                        pressedColor: Color(textColor).opacity(0.5),
+                                                        animationEnabled: animationEnabled))
         }
     }
     
@@ -59,7 +68,7 @@ struct SplytButtonStyle: ButtonStyle {
     private var baseButton: some View {
         HStack {
             Spacer()
-            textView
+            buttonContent
                 .lineLimit(1)
             Spacer()
         }
@@ -67,7 +76,7 @@ struct SplytButtonStyle: ButtonStyle {
     }
     
     @ViewBuilder
-    private var textView: some View {
+    private var buttonContent: some View {
         switch type {
         case .primary, .textOnly:
             Text(text)
@@ -75,6 +84,9 @@ struct SplytButtonStyle: ButtonStyle {
         case .secondary:
             Text(text)
                 .footnote()
+        case .loading:
+            ProgressView()
+                .tint(Color(SplytColor.white))
         }
     }
 }

@@ -7,11 +7,11 @@ struct ScrimGallery: View {
             VStack {
                 Text("Hello, World!")
                 Rectangle()
-                    .fill(Color(splytColor: .red))
+                    .fill(Color(SplytColor.red))
                 Text("MORE TEXT")
                     .largeTitle()
                 Rectangle()
-                    .fill(Color(splytColor: .lightBlue))
+                    .fill(Color(SplytColor.lightBlue))
             }
             Scrim()
                 .edgesIgnoringSafeArea(.all)

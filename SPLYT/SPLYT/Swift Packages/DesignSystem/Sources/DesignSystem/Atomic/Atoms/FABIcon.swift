@@ -14,12 +14,13 @@ public struct FABIcon: View {
     public var body: some View {
         ZStack {
             Circle()
-                .fill(Color(splytColor: viewState.size.backgroundColor)
-                    .shadow(.drop(radius: Layout.size(1))))
+                .fill(Color(viewState.size.backgroundColor).gradient
+                    .shadow(.drop(color: Color(SplytColor.shadow), 
+                                  radius: Layout.size(1.25), y: 4)))
                 .frame(width: circleSize)
             Image(systemName: viewState.imageName)
                 .imageScale(iconSize)
-                .foregroundColor(Color(splytColor: viewState.size.iconColor))
+                .foregroundColor(Color(viewState.size.iconColor))
         }
         .gesture(press)
         .frame(width: circleFrame, height: circleFrame)

@@ -18,8 +18,9 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
     @State private var editGroupIndex: Int = 0
     @State private var editExerciseIndex: Int = 0
     @State private var editSetIndex: Int = 0
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: BuildWorkoutNavigationRouter
-    private let transformer: BuildWorkoutTransformer = .init()
+    private let transformer: WorkoutTransformer = .init()
     private let horizontalPadding = Layout.size(2)
     
     init(viewModel: VM,
@@ -36,41 +37,70 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
         case .main(let display):
             mainView(display: display)
                 .navigationBar(viewState: .init(title: Strings.editSetsReps),
-                               backAction: { navigationRouter.navigate(.goBack)},
+                               backAction: {
+                    viewModel.send(.backTapped(userInitiated: true),
+                                   taskPriority: .userInitiated)
+                    navigationRouter.navigate(.goBack)
+                },
                                content: { saveButton(canSave: display.canSave) })
         case .exit(let display):
             mainView(display: display)
                 .onAppear {
                     navigationRouter.navigate(.exit)
                 }
+        case .exitEdit(let display):
+            mainView(display: display)
+                .onAppear {
+                    viewModel.send(.backTapped(userInitiated: false),
+                                   taskPriority: .userInitiated)
+                    navigationRouter.navigate(.goBack)
+                }
         }
     }
     
     @ViewBuilder
     private func mainView(display: BuildWorkoutDisplay) -> some View {
-        ZStack(alignment: .bottom) {
-            exercises(display: display)
-            setModifiers
-                .isVisible(showSetModifiers)
-        }
+        exercises(display: display)
+            .sheet(isPresented: $showSetModifiers) {
+                setModifiers
+                    .presentationDetents([.height(Layout.size(12))])
+                    .presentationDragIndicator(.visible)
+            }
     }
     
     @ViewBuilder
     private func exercises(display: BuildWorkoutDisplay) -> some View {
-        ScrollView {
-            ForEach(Array(display.groups.enumerated()), id: \.offset) { groupIndex, exercises in
+        List {
+            ForEach(groupsBinding(groups: display.groups), id: \.index, editActions: .move) { $groupTuple in
+                let groupIndex = groupTuple.index
+                let exercises = groupTuple.exercises
+                
                 VStack(spacing: Layout.size(2)) {
-                    HStack {
-                        Text(display.groupTitles[groupIndex])
-                            .title2()
-                            .foregroundStyle(Color(splytColor: .lightBlue))
-                        Spacer()
-                    }
+                    editGroupHeader(groupIndex: groupIndex, groupTitles: display.groupTitles)
                     // Use enumerated here so we can get the exercise index in the group to make updating faster
-                    ForEach(Array(exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseState in
-                        ExerciseView(
-                            viewState: exerciseState,
-                            type: .build(
+                    ForEach(Array(exercises.enumerated()), id: \.offset) { exerciseIndex, exerciseStatus in
+                        if case .loaded(let viewState) = exerciseStatus {
+                            ExerciseView(arguments: .regular(
+                                viewState: viewState,
+                                type: .build,
+                                addSetAction: { viewModel.send(.addSet(group: groupIndex),
+                                                               taskPriority: .userInitiated) },
+                                removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
+                                                                  taskPriority: .userInitiated) },
+                                updateSetAction: { setIndex, setInput in
+                                    viewModel.send(.updateSet(group: groupIndex,
+                                                              exerciseIndex: exerciseIndex,
+                                                              setIndex: setIndex,
+                                                              with: setInput),
+                                                   taskPriority: .userInitiated)
+                                },
+                                updateModifierAction: { setIndex, setInput in
+                                    viewModel.send(.updateModifier(group: groupIndex,
+                                                                   exerciseIndex: exerciseIndex,
+                                                                   setIndex: setIndex,
+                                                                   with: setInput),
+                                                   taskPriority: .userInitiated)
+                                },
                                 addModifierAction: { setIndex in
                                     // Stores the selected set and exercise for when the modifier is actually added
                                     editGroupIndex = groupIndex
@@ -85,78 +115,81 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
                                                                    exerciseIndex: exerciseIndex,
                                                                    setIndex: setIndex),
                                                    taskPriority: .userInitiated)
-                                }),
-                            addSetAction: { viewModel.send(.addSet(group: groupIndex),
-                                                           taskPriority: .userInitiated) },
-                            removeSetAction: { viewModel.send(.removeSet(group: groupIndex),
-                                                              taskPriority: .userInitiated) },
-                            updateSetAction: { setIndex, setInput in
-                                viewModel.send(.updateSet(group: groupIndex,
-                                                          exerciseIndex: exerciseIndex,
-                                                          setIndex: setIndex,
-                                                          with: setInput),
-                                               taskPriority: .userInitiated)
-                            },
-                            updateModifierAction: { setIndex, setInput in
-                                viewModel.send(.updateModifier(group: groupIndex,
-                                                               exerciseIndex: exerciseIndex,
-                                                               setIndex: setIndex,
-                                                               with: setInput),
-                                               taskPriority: .userInitiated)
-                            }
-                        )
+                                })
+                            )
+                        }
                     }
                 }
                 .padding(horizontalPadding)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(style: StrokeStyle(lineWidth: 2))
-                        .foregroundStyle(Color(splytColor: .lightBlue))
+                        .foregroundStyle(Color(userTheme.theme))
                         .padding(Layout.size(1))
                 )
+                .listRowSeparator(.hidden)
+                .listRowInsets(.init())
+                
             }
         }
+        .listStyle(.plain)
         .scrollIndicators(.hidden)
     }
     
     @ViewBuilder
-    private var setModifiers: some View {
-        ZStack(alignment: .bottom) {
-            Scrim()
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation {
-                        showSetModifiers = false
-                    }
-                }
-            Tile {
-                HStack(spacing: Layout.size(2.5)) {
-                    Spacer()
-                    ForEach(SetModifierViewState.allCases, id: \.title) { modifier in
-                        Tag(viewState: TagFactory.tagFromModifier(modifier: modifier))
-                            .onTapGesture {
-                                viewModel.send(.addModifier(group: editGroupIndex,
-                                                            exerciseIndex: editExerciseIndex,
-                                                            setIndex: editSetIndex,
-                                                            modifier: transformer.transformModifier(modifier)),
-                                               taskPriority: .userInitiated)
-                                showSetModifiers = false
-                            }
-                    }
-                    Spacer()
-                }
+    private func editGroupHeader(groupIndex: Int, groupTitles: [String]) -> some View {
+        HStack {
+            Text(groupTitles[groupIndex])
+                .title2()
+                .foregroundStyle(Color(userTheme.theme))
+            Spacer()
+            IconButton(iconName: "trash", 
+                       style: .secondary,
+                       iconColor: .red) {
+                viewModel.send(.deleteGroup(groupIndex: groupIndex),
+                               taskPriority: .userInitiated)
             }
-            .padding(.horizontal, horizontalPadding)
-            .scaleEffect(showSetModifiers ? 1 : 0.25)
+            Image(systemName: "line.3.horizontal")
+                .imageScale(.large)
+                .foregroundColor(Color(userTheme.theme))
+            
+        }
+    }
+    
+    // Binding to a list of tuples of each group and its group index
+    private func groupsBinding(groups: [[ExerciseViewStatus]]) -> Binding<[(index: Int, exercises: [ExerciseViewStatus])]> {
+        return Binding(
+            get: {
+                var result = [(index: Int, exercises: [ExerciseViewStatus])]()
+                for (index, group) in groups.enumerated() {
+                    result.append((index: index, exercises: group))
+                }
+                return result
+            },
+            set: { newGroups in
+                let indexOrder = newGroups.map { $0.index }
+                viewModel.send(.rearrangeGroups(newOrder: indexOrder),
+                               taskPriority: .userInitiated)
+            }
+        )
+    }
+    
+    @ViewBuilder
+    private var setModifiers: some View {
+        SetModifiersView { modifierState in
+            viewModel.send(.addModifier(group: editGroupIndex,
+                                        exerciseIndex: editExerciseIndex,
+                                        setIndex: editSetIndex,
+                                        modifier: transformer.transformModifier(modifierState)),
+                           taskPriority: .userInitiated)
+            showSetModifiers = false
         }
     }
     
     @ViewBuilder
     private func saveButton(canSave: Bool) -> some View {
-        IconButton(iconName: "checkmark",
-                   style: .secondary,
-                   iconColor: .lightBlue,
-                   isEnabled: canSave) {
+        SplytButton(text: Strings.save,
+                    isEnabled: canSave) {
             viewModel.send(.save, taskPriority: .userInitiated)
         }
     }
@@ -166,4 +199,5 @@ struct EditSetsRepsView<VM: ViewModel>: View where VM.Event == BuildWorkoutViewE
 
 fileprivate struct Strings {
     static let editSetsReps = "Edit Sets & Reps"
+    static let save = "Save"
 }

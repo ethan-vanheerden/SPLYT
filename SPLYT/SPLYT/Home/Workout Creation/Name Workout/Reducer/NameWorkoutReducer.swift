@@ -57,15 +57,17 @@ private extension NameWorkoutReducer {
         }
         
         return TextEntryViewState(title: title,
-                                  placeholder: placeholder)
+                                  placeholder: placeholder,
+                                  capitalization: .everyWord,
+                                  autoFocus: true)
     }
 }
 
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let createWorkout = "CREATE WORKOUT"
-    static let createPlan = "CREATE PLAN"
+    static let createWorkout = "Create Workout"
+    static let createPlan = "Create Plan"
     static let workoutName = "Workout Name"
     static let planName = "Plan Name"
     static let enterWorkoutName = "Enter a workout name"

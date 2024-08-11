@@ -9,20 +9,27 @@ public struct RestFAB: View {
     @State private var pickerSeconds = 0
     @Binding private var isPresenting: Bool
     @Binding private var workoutSeconds: Int // Total number of seconds elapsed in the workout
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: RestFABViewState
-    private let selectRestAction: () -> Void
-    private let stopRestAction: () -> Void
+    private let selectRestAction: (Int) -> Void
+    private let stopRestAction: (Bool) -> Void // Bool for whether the user manually stopped it
+    private let pauseAction: () -> Void
+    private let resumeAction: (Int) -> Void
     
     public init(isPresenting: Binding<Bool>,
                 workoutSeconds: Binding<Int>,
                 viewState: RestFABViewState,
-                selectRestAction: @escaping () -> Void,
-                stopRestAction: @escaping () -> Void) {
+                selectRestAction: @escaping (Int) -> Void,
+                stopRestAction: @escaping (Bool) -> Void,
+                pauseAction: @escaping () -> Void,
+                resumeAction: @escaping (Int) -> Void) {
         self._isPresenting = isPresenting
         self._workoutSeconds = workoutSeconds
         self.viewState = viewState
         self.selectRestAction = selectRestAction
         self.stopRestAction = stopRestAction
+        self.pauseAction = pauseAction
+        self.resumeAction = resumeAction
     }
     
     public var body: some View {
@@ -43,24 +50,26 @@ public struct RestFAB: View {
                     Image(systemName: "stopwatch")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(Color(splytColor: .lightBlue))
+                        .foregroundColor(Color(userTheme.theme))
                         .frame(width: Layout.size(2.5))
                     timeView
                     IconButton(iconName: isPaused ? "play.fill" : "pause",
                                style: .secondary,
-                               iconColor: .lightBlue) {
+                               iconColor: userTheme.theme) {
                         isPaused.toggle()
+                        isPaused ? pauseAction() : resumeAction(secondsLeft)
                     }
                     IconButton(iconName: "xmark",
                                style: .secondary,
                                iconColor: .red) {
-                        stopRest()
+                        stopRest(isManual: true)
                     }
                 }
                 .padding()
                 .background {
                     Capsule()
-                        .fill(Color(splytColor: .white).shadow(.drop(radius: Layout.size(2))))
+                        .fill(Color(SplytColor.background).gradient.shadow(.drop(color: Color(SplytColor.shadow),
+                                                                                 radius: Layout.size(1.25))))
                 }
             }
             .padding()
@@ -78,7 +87,7 @@ public struct RestFAB: View {
                 
                 // Update the countdown and switch back the FAB state if we need to
                 if secondsLeft - delta < 0 {
-                    stopRest()
+                    stopRest(isManual: false)
                 } else if !isPaused {
                     secondsLeft -= delta
                 }
@@ -86,11 +95,11 @@ public struct RestFAB: View {
     }
     
     /// All the actions to be done when the rest period should be stopped
-    private func stopRest() -> Void {
+    private func stopRest(isManual: Bool) -> Void {
         withAnimation {
             secondsLeft = 0
             isPaused = false
-            stopRestAction()
+            stopRestAction(isManual)
         }
     }
     
@@ -108,15 +117,9 @@ public struct RestFAB: View {
     }
     
     private var baseIcon: FABIconViewState {
-        if isPresenting {
-            return FABIconViewState(size: .primary(backgroundColor: .white,
-                                                   iconColor: .lightBlue),
-                                    imageName: "minus")
-        } else {
-            return FABIconViewState(size: .primary(backgroundColor: .white,
-                                                   iconColor: .lightBlue),
-                                    imageName: "stopwatch")
-        }
+        return FABIconViewState(size: .primary(backgroundColor: .background,
+                                               iconColor: userTheme.theme),
+                                imageName: isPresenting ? "minus" : "stopwatch")
     }
     
     @ViewBuilder
@@ -125,14 +128,14 @@ public struct RestFAB: View {
             FABIcon(viewState: moreIcon) {
                 showTimePicker = true
             }
-            .offset(y: isPresenting ? 0 : Layout.size(16)) // TODO: find another way since picker gets messed up with timer
+            .offset(y: isPresenting ? 0 : Layout.size(16))
             VStack(spacing: Layout.size(1)) {
                 ForEach(Array(viewState.restPresets.enumerated()), id: \.offset) { index, seconds in
                     let verticalOffset = CGFloat((viewState.restPresets.count - index) * 6)
                     RestFABRow(seconds: seconds) {
                         isPresenting = false
                         withAnimation {
-                            selectRestAction()
+                            selectRestAction(seconds)
                             secondsLeft = seconds
                         }
                     }
@@ -145,8 +148,8 @@ public struct RestFAB: View {
     }
     
     private var moreIcon: FABIconViewState {
-        return FABIconViewState(size: .secondary(backgroundColor: .white,
-                                                 iconColor: .lightBlue),
+        return FABIconViewState(size: .secondary(backgroundColor: .background,
+                                                 iconColor: userTheme.theme),
                                 imageName: "ellipsis")
     }
     
@@ -156,8 +159,8 @@ public struct RestFAB: View {
                    confirmAction: {
             showTimePicker = false
             isPresenting = false
-            selectRestAction()
             secondsLeft = TimeUtils.getTotalSeconds(minutes: pickerMinutes, seconds: pickerSeconds)
+            selectRestAction(secondsLeft)
         },
                    cancelAction: {
             showTimePicker = false

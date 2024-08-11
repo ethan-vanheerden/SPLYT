@@ -8,13 +8,13 @@ struct CollapseHeaderGallery: View {
     var body: some View {
         VStack {
             CollapseHeader(isExpanded: $headerOneExpanded,
-                           viewState: CollapseHeaderViewState(title: "Title")) {
+                           viewState: CollapseHeaderViewState(title: "Title",
+                                                              color: .black)) {
                 Text("Hello, world!")
                     .body()
             }
             CollapseHeader(isExpanded: $headerTwoExpanded,
                            viewState: CollapseHeaderViewState(title: "Group 1",
-                                                              color: .lightBlue,
                                                               isComplete: true)) {
                 SetView(viewState: SetViewState(setIndex: 0,
                                                 title: "Set 1",
@@ -23,10 +23,16 @@ struct CollapseHeaderGallery: View {
                                                                   input: .init()),
                                                 modifier: nil),
                         exerciseType: .inProgress(usePreviousInputAction: { _, _ in },
-                                                  addNoteAction: { }),
+                                                  addNoteAction: { },
+                                                  replaceExerciseAction: { },
+                                                  deleteExerciseAction: { },
+                                                  canDeleteExercise: true),
                         updateSetAction: { _, _ in },
-                        updateModifierAction: { _, _ in })
+                        updateModifierAction: { _, _ in },
+                        addModifierAction: { _ in },
+                        removeModifierAction: { _ in })
             }
         }
+        .padding(.horizontal)
     }
 }

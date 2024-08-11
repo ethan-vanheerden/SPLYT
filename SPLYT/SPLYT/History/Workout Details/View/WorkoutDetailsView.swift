@@ -13,6 +13,7 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
                                                      VM.ViewState == WorkoutDetailsViewState {
     @ObservedObject private var viewModel: VM
     @State private var optionsSheetPresented = false
+    @EnvironmentObject private var userTheme: UserTheme
     private let navigationRouter: WorkoutDetailsNavigationRouter
     private let horizontalPadding = Layout.size(2)
     
@@ -31,7 +32,7 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
     }
     
     @ViewBuilder
-    var viewStateView: some View {
+    private var viewStateView: some View {
         switch viewModel.viewState {
         case .loading:
             ProgressView()
@@ -79,13 +80,13 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
         VStack(alignment: .leading) {
             Text(display.workoutName)
                 .title1()
-                .foregroundColor(Color(splytColor: .black))
+                .foregroundColor(Color(SplytColor.label))
             Text(display.numExercisesTitle)
                 .title2()
-                .foregroundColor(Color(splytColor: .lightBlue))
+                .foregroundColor(Color(userTheme.theme))
             Text(display.completedTitle)
                 .title3()
-                .foregroundColor(Color(splytColor: .gray))
+                .foregroundColor(Color(SplytColor.gray))
         }
     }
     
@@ -111,7 +112,7 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
     private var optionsButton: some View {
         IconButton(iconName: "ellipsis",
                    style: .secondary,
-                   iconColor: .black) {
+                   iconColor: .label) {
             optionsSheetPresented = true
         }
     }

@@ -22,3 +22,11 @@ struct LoginDomain: Equatable {
     var canSubmit: Bool
     let termsURL: URL
 }
+
+// MARK: - Login Field
+
+enum LoginField: Equatable {
+    case email(String)
+    case password(String)
+    case birthday(Date)
+}

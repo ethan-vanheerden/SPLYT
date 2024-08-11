@@ -12,15 +12,19 @@ struct RestFABGallery: View {
             RestFAB(isPresenting: $isPresenting,
                     workoutSeconds: .constant(0),
                     viewState: viewState(isResting: true),
-                    selectRestAction: { },
-                    stopRestAction: { })
+                    selectRestAction: { print($0) },
+                    stopRestAction: { print($0) },
+                    pauseAction: { print("paused") },
+                    resumeAction: { print("resumed with \($0) seconds") })
             SectionHeader(viewState: .init(title: "Not Resting"))
                 .padding(.horizontal, Layout.size(2))
             RestFAB(isPresenting: $isPresenting,
                     workoutSeconds: .constant(0),
                     viewState: viewState(isResting: false),
-                    selectRestAction: { },
-                    stopRestAction: { })
+                    selectRestAction: { print($0) },
+                    stopRestAction: { print($0) },
+                    pauseAction: { print("paused") },
+                    resumeAction: { print("resumed with \($0) seconds") })
         }
     }
     

@@ -24,18 +24,11 @@ public protocol Navigator: AnyObject {
     /// - Parameter animated: Whether or not to animate the UI change
     func dismissSelf(animated: Bool)
     
+    func dismissWithCompletion(animated: Bool, completion: @escaping () -> Void)
+    
     /// Pops the top view controller on the current navigation stack.
     /// - Parameter animated: Whether or not to animate the UI change
     func pop(animated: Bool)
-}
-
-/// Default methods since not every `Navigator` will need to implement each one
-public extension Navigator {
-    func push(_ vc: UIViewController, animated: Bool) { }
-    func present(_ vc: UIViewController, animated: Bool) { }
-    func dismiss(animated: Bool) { }
-    func dismissSelf(animated: Bool) { }
-    func pop(animated: Bool) { }
 }
 
 /// Default methods for base UINavigationControllers
@@ -54,7 +47,11 @@ public extension Navigator where Self: UINavigationController {
     }
     
    func dismissSelf(animated: Bool) {
-       self.presentationController?.presentingViewController.dismiss(animated: true)
+       self.presentationController?.presentingViewController.dismiss(animated: animated)
+    }
+    
+    func dismissWithCompletion(animated: Bool, completion: @escaping () -> Void) {
+        self.dismiss(animated: animated, completion: completion)
     }
     
     func pop(animated: Bool) {

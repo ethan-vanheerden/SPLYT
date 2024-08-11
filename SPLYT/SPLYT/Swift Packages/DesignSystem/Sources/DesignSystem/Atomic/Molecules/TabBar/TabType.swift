@@ -1,17 +1,17 @@
 
-public enum TabType: CaseIterable {
+public enum TabSelection: CaseIterable {
     case home
     case history
     case settings
     
-    func imageName(isSelected: Bool) -> String {
+    var imageName: String {
         switch self {
         case .home:
-            return isSelected ? "house.fill" : "house"
+            return "house.fill"
         case .history:
-            return isSelected ? "book.fill" : "book"
+            return "book.fill"
         case .settings:
-            return isSelected ? "gearshape.fill" : "gearshape"
+            return "gearshape.fill"
         }
     }
     

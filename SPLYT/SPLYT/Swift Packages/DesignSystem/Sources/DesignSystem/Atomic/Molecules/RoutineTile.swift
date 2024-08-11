@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct RoutineTile: View {
     @State private var showActionSheet: Bool = false
+    @EnvironmentObject private var userTheme: UserTheme
     private let viewState: RoutineTileViewState
     private let tapAction: () -> Void
     private let editAction: (() -> Void)?
@@ -25,18 +26,18 @@ public struct RoutineTile: View {
                         .body()
                     Text(viewState.subtitle)
                         .subhead()
-                        .foregroundColor(.init(splytColor: .lightBlue))
+                        .foregroundStyle(Color(userTheme.theme))
                     if let lastCompleted = viewState.lastCompletedTitle {
                         Text(lastCompleted)
                             .footnote()
-                            .foregroundColor(.init(splytColor: .gray))
+                            .foregroundColor(.init(.gray))
                     }
                 }
                 Spacer()
                 if viewState.includeIcon {
                     IconButton(iconName: "ellipsis.circle",
                                style: .secondary,
-                               iconColor: .lightBlue) { showActionSheet = true }
+                               iconColor: userTheme.theme) { showActionSheet = true }
                 }
             }
             .frame(height: Layout.size(6)) // Fixed height even if there is no last completed

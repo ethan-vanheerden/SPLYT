@@ -12,4 +12,5 @@ enum HomeViewState: Equatable {
     case error
     case loading
     case main(HomeDisplay)
+    case workoutInProgress
 }

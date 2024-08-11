@@ -119,10 +119,8 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
     
     @ViewBuilder
     private func saveButton(canSave: Bool) -> some View {
-        IconButton(iconName: "checkmark",
-                   style: .secondary,
-                   iconColor: .lightBlue,
-                   isEnabled: canSave) {
+        SplytButton(text: Strings.save,
+                    isEnabled: canSave) {
             viewModel.send(.toggleDialog(dialog: .save, isOpen: true),
                            taskPriority: .userInitiated)
         }
@@ -132,7 +130,8 @@ struct BuildPlanView<VM: ViewModel>: View where VM.Event == BuildPlanViewEvent, 
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let addWorkouts = "Add your workouts"
+    static let addWorkouts = "Add Your Workouts"
     static let noWorkoutsYet = "You have no workouts in this plan yet. Select the button below to get started!"
     static let addWorkout = "Add workout"
+    static let save = "Save"
 }

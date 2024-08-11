@@ -8,7 +8,7 @@ final class EmojiTitleTests: XCTestCase {
         let view = VStack {
             EmojiTitle(emoji: "😁", title: "This is a title")
             EmojiTitle(emoji: "🫨", title: "This is another title")
-                .foregroundColor(Color(splytColor: .lightBlue))
+                .foregroundColor(Color(SplytColor.lightBlue))
         }
         let vc = UIHostingController(rootView: view)
         assertSnapshot(matching: vc, as: .image(on: .smallImage()))

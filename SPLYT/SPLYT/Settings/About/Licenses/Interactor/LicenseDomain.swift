@@ -29,6 +29,7 @@ enum ThirdPartyPackage: String, Equatable, CaseIterable {
     case promises = "promises"
     case swiftProtobuf = "swift-protobuf"
     case swiftSnapshotTesting = "swift-snapshot-testing"
+    case swiftuiIntrospect = "swiftui-introspect"
     
     var path: String {
         switch self {
@@ -56,6 +57,8 @@ enum ThirdPartyPackage: String, Equatable, CaseIterable {
             return "https://github.com/apple/swift-protobuf/blob/main/LICENSE.txt"
         case .swiftSnapshotTesting:
             return "https://github.com/pointfreeco/swift-snapshot-testing/blob/main/LICENSE"
+        case .swiftuiIntrospect:
+            return "https://github.com/siteline/swiftui-introspect/blob/main/LICENSE"
         }
     }
 }

@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 /// Heavily borrowed from https://github.com/pBoelck/CustomSegmentedControl
@@ -9,13 +8,13 @@ public struct SegmentedControl: View {
     @State private var backgroundFrame = CGRect.zero
     @State private var isScrollable = true
     private let titles: [String]
-
+    
     public init(selectedIndex: Binding<Int>, titles: [String]) {
         self._selectedIndex = selectedIndex
         self.titles = titles
         self.frames = Array<CGRect>(repeating: .zero, count: titles.count)
     }
-
+    
     public var body: some View {
         VStack {
             if isScrollable {
@@ -38,8 +37,8 @@ public struct SegmentedControl: View {
             GeometryReader { proxy in
                 Color.clear.preference(key: RectPreferenceKey.self, value: proxy.frame(in: .global))
                     .onPreferenceChange(RectPreferenceKey.self) {
-                    self.setBackgroundFrame(frame: $0)
-                }
+                        self.setBackgroundFrame(frame: $0)
+                    }
             }
         )
     }
@@ -52,20 +51,20 @@ public struct SegmentedControl: View {
                                    checkIsScrollable: checkIsScrollable,
                                    titles: titles)
     }
-
+    
     private func setBackgroundFrame(frame: CGRect) {
         backgroundFrame = frame
         checkIsScrollable()
     }
-
+    
     private func checkIsScrollable() {
         if frames[frames.count - 1].width > .zero {
             var width = CGFloat.zero
-
+            
             for frame in frames {
                 width += frame.width
             }
-
+            
             if isScrollable && width <= backgroundFrame.width {
                 isScrollable = false
             } else if !isScrollable && width > backgroundFrame.width {
@@ -82,21 +81,21 @@ private struct SegmentedControlButtonView: View {
     @Binding private var isScrollable: Bool
     private let titles: [String]
     private let checkIsScrollable: (() -> Void)
-
+    
     fileprivate init(selectedIndex: Binding<Int>,
-         frames: Binding<[CGRect]>,
-         backgroundFrame: Binding<CGRect>,
-         isScrollable: Binding<Bool>,
-         checkIsScrollable: (@escaping () -> Void),
-         titles: [String]) {
-            self._selectedIndex = selectedIndex
-            self._frames = frames
-            self._backgroundFrame = backgroundFrame
-            self._isScrollable = isScrollable
-            self.checkIsScrollable = checkIsScrollable
-            self.titles = titles
+                     frames: Binding<[CGRect]>,
+                     backgroundFrame: Binding<CGRect>,
+                     isScrollable: Binding<Bool>,
+                     checkIsScrollable: (@escaping () -> Void),
+                     titles: [String]) {
+        self._selectedIndex = selectedIndex
+        self._frames = frames
+        self._backgroundFrame = backgroundFrame
+        self._isScrollable = isScrollable
+        self.checkIsScrollable = checkIsScrollable
+        self.titles = titles
     }
-
+    
     var body: some View {
         HStack(spacing: 0) {
             ForEach(titles.indices, id: \.self) { index in
@@ -125,7 +124,7 @@ private struct SegmentedControlButtonView: View {
         .modifier(UnderlineModifier(selectedIndex: selectedIndex, frames: frames))
         .animation(.default, value: selectedIndex)
     }
-
+    
     private func setFrame(index: Int, frame: CGRect) {
         self.frames[index] = frame
         checkIsScrollable()
@@ -136,13 +135,17 @@ private struct CustomSegmentButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration
             .label
-            .padding(EdgeInsets(top: Layout.size(1.5), leading: Layout.size(2), bottom: Layout.size(1.5), trailing: Layout.size(2)))
+            .padding(EdgeInsets(top: Layout.size(1.5),
+                                leading: Layout.size(2),
+                                bottom: Layout.size(1.5),
+                                trailing: Layout.size(2)))
     }
 }
 
 
 /// This modifier provides an animated underscore for the SegmentedControl.
 private struct UnderlineModifier: ViewModifier {
+    @EnvironmentObject private var userTheme: UserTheme
     private var selectedIndex: Int
     private let frames: [CGRect]
     
@@ -150,18 +153,18 @@ private struct UnderlineModifier: ViewModifier {
         self.selectedIndex = selectedIndex
         self.frames = frames
     }
-
+    
     func body(content: Content) -> some View {
         content
             .background(
                 Rectangle()
-                    .fill(Color(splytColor: .lightBlue))
+                    .fill(Color(userTheme.theme).gradient)
                     .frame(width: frames[selectedIndex].width, height: Layout.size(0.4))
                     .offset(x: frames[selectedIndex].minX - frames[0].minX), alignment: .bottomLeading
             )
             .background(
                 Rectangle()
-                    .fill(Color(splytColor: .gray).opacity(0.5))
+                    .fill(Color(SplytColor.gray).opacity(0.5))
                     .frame(height: 1), alignment: .bottomLeading
             )
     }
@@ -171,7 +174,7 @@ private struct UnderlineModifier: ViewModifier {
 fileprivate struct RectPreferenceKey: PreferenceKey {
     typealias Value = CGRect
     static var defaultValue = CGRect.zero
-
+    
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
         value = nextValue()
     }

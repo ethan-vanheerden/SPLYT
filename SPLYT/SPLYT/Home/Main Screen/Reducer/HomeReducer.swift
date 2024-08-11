@@ -20,6 +20,8 @@ final class HomeReducer {
         case let .dialog(dialog, domain):
             let display = getDisplay(domain: domain, dialog: dialog)
             return .main(display)
+        case .workoutInProgress:
+            return .workoutInProgress
         }
     }
 }
@@ -98,11 +100,11 @@ private extension HomeReducer {
 // MARK: - Strings
 
 fileprivate struct Strings {
-    static let createPlan = "CREATE NEW PLAN"
-    static let createWorkout = "CREATE NEW WORKOUT"
+    static let createPlan = "Create new plan"
+    static let createWorkout = "Create new workout"
     static let home = "🏠 Home"
-    static let workouts = "WORKOUTS"
-    static let plans = "PLANS"
+    static let workouts = "Workouts"
+    static let plans = "Plans"
     static let deleteWorkout = "Delete workout?"
     static let cantBeUndone = "This action can't be undone."
     static let delete = "Delete"

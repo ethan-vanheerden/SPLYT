@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import DesignSystem
 
 /// The base navigation controller for the app
 final class MainViewNavigationController<A: AuthManagerType>: UINavigationController {

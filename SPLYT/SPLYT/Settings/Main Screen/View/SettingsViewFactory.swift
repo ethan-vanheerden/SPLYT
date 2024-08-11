@@ -21,6 +21,8 @@ struct SettingsViewFactory {
             let interactor = RestPresetsInteractor()
             let viewModel = RestPresetsViewModel(interactor: interactor)
             RestPresetsView(viewModel: viewModel)
+        case .appearance:
+            AppearanceView()
         case .about:
             AboutView()
         default:
