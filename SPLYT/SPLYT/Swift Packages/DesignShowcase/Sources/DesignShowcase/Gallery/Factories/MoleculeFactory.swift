@@ -22,12 +22,16 @@ struct MoleculeFactory {
             HomeFABRowGallery()
         case .navigationBar:
             NavigationBarGallery()
+        case .pillSegmentedControl:
+            PillSegmentedControlGallery()
         case .restFABRow:
             RestFABRowGallery()
         case .routineTile:
             RoutineTileGallery()
         case .segmentedControl:
             SegmentedControlGallery()
+        case .setModifiersView:
+            SetModifiersViewGallery()
         case .setView:
             SetViewGallery()
         case .tabBar:
