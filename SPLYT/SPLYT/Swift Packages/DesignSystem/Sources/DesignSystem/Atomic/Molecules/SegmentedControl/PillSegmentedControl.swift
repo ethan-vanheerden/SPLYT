@@ -31,7 +31,7 @@ public struct PillSegmentedControl: View {
                                     .matchedGeometryEffect(id: geoId, in: animation)
                             }
                         }
-                        .animation(.smooth, value: selectedIndex)
+                        .animation(.smooth(duration: 0.25), value: selectedIndex)
                     }
                     .onTapGesture {
                         guard selectedIndex != titleIndex else {

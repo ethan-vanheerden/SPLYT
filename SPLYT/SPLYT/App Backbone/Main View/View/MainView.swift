@@ -62,7 +62,7 @@ struct MainView<VM: ViewModel, LVM: ViewModel, A: AuthManagerType>: View where V
         VStack(spacing: .zero) {
             tabView
                 .animation(nil, value: selectedTab) // Want just the tab to animate, not the actual view change
-            TabBar(selectedTab: $selectedTab.animation())
+            TabBar(selectedTab: $selectedTab)
                 .padding(.bottom, Layout.size(4))
         }
     }
