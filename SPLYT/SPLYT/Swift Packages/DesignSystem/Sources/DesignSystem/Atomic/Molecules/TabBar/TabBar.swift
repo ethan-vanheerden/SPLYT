@@ -3,9 +3,7 @@ import SwiftUI
 public struct TabBar: View {
     @Binding private var selectedTab: TabSelection
     @EnvironmentObject private var userTheme: UserTheme
-    @Namespace private var animation
     private let iconLength = Layout.size(3.25)
-    private let geoId = "TAB_BAR"
     
     public init(selectedTab: Binding<TabSelection>) {
         self._selectedTab = selectedTab
@@ -16,15 +14,6 @@ public struct TabBar: View {
             ForEach(TabSelection.allCases, id: \.self) { tab in
                 Spacer()
                 tabView(tab: tab)
-                    .background {
-                        ZStack {
-                            if tab == selectedTab {
-                                Capsule().fill(Color(userTheme.theme).gradient)
-                                    .matchedGeometryEffect(id: geoId, in: animation)
-                            }
-                        }
-                        .animation(.smooth(duration: 0.5), value: selectedTab)
-                    }
                     .onTapGesture {
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         selectedTab = tab
@@ -38,7 +27,7 @@ public struct TabBar: View {
     }
     
     private func iconColor(tab: TabSelection) -> Color {
-        return tab == selectedTab ? Color(SplytColor.white) : Color(SplytColor.gray)
+        return tab == selectedTab ? Color(userTheme.theme) : Color(SplytColor.gray)
     }
     
     @ViewBuilder
