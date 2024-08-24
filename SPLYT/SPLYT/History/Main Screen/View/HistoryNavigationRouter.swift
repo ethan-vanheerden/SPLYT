@@ -39,7 +39,6 @@ private extension HistoryNavigationRouter {
         let view = WorkoutDetailsView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         
-        let vc = ThemedHostingController(rootView: view.withUserTheme())
-        navigator?.present(vc, animated: true)
+        navigator?.present(view, animated: true)
     }
 }

@@ -53,17 +53,3 @@ final class ThemedHostingController<Content: View>: UIHostingController<Content>
         overrideUserInterfaceStyle = preferredColorScheme.uiUserInterfaceStyle
     }
 }
-
-extension Navigator where Self: UINavigationController {
-    public func push<Content: View>(_ view: Content, animated: Bool) {
-        let hostingController = ThemedHostingController(rootView: view.withUserTheme())
-        push(hostingController, animated: true)
-    }
-    
-    public func present<Content: View>(_ view: Content, animated: Bool) {
-        let hostingController = ThemedHostingController(rootView: view.withUserTheme())
-        present(hostingController, animated: true)
-    }
-}
-
-extension UINavigationController: Navigator { }

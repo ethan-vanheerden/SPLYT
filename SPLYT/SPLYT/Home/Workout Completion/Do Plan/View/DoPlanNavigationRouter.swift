@@ -58,9 +58,7 @@ private extension DoPlanNavigationRouter {
         let view = WorkoutPreviewView(viewModel: viewModel, navigationRouter: navRouter)
         
         navRouter.navigator = navigator
-        
+
         navigator?.push(view, animated: true)
-        let vc = ThemedHostingController(rootView: view.withUserTheme())
-        navigator?.push(vc, animated: true)
     }
 }
