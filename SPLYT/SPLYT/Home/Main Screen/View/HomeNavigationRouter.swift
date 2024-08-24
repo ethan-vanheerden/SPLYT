@@ -102,7 +102,7 @@ private extension HomeNavigationRouter {
         let view = WorkoutDetailsView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         
-        let vc = UIHostingController(rootView: view.withUserTheme())
+        let vc = ThemedHostingController(rootView: view.withUserTheme())
         navigator?.present(vc, animated: true)
     }
     

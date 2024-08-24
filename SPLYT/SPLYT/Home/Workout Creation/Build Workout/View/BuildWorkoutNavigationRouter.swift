@@ -76,7 +76,7 @@ private extension BuildWorkoutNavigationRouter {
     func handleEditSetsReps() {
         let view = EditSetsRepsView(viewModel: viewModel,
                                     navigationRouter: self)
-        let vc = UIHostingController(rootView: view.withUserTheme())
+        let vc = ThemedHostingController(rootView: view.withUserTheme())
         self.navigator?.push(vc, animated: true)
     }
     
@@ -96,7 +96,7 @@ private extension BuildWorkoutNavigationRouter {
         let view = CustomExerciseView(viewModel: viewModel, navigationRouter: navRouter)
         navRouter.navigator = navigator
         
-        let vc = UIHostingController(rootView: view.withUserTheme())
+        let vc = ThemedHostingController(rootView: view.withUserTheme())
         navigator?.present(vc, animated: true)
     }
     

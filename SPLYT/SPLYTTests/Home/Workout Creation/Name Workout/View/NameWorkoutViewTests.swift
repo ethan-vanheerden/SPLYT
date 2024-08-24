@@ -22,7 +22,7 @@ final class NameWorkoutsViewTests: XCTestCase {
         sut = NameWorkoutView(viewModel: viewModel,
                               navigationRouter: NameWorkoutNavigationRouter(),
                               dismissAction: { })
-        vc = UIHostingController(rootView: sut)
+        vc = ThemedHostingController(rootView: sut)
     }
     
     func testLoading() {

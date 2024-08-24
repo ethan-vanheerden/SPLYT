@@ -58,6 +58,18 @@ public enum AppearanceMode: String, CaseIterable {
             return .dark
         }
     }
+    
+    // UIKit-usable
+    public var uiUserInterfaceStyle: UIUserInterfaceStyle {
+        switch self {
+        case .automatic:
+            return .unspecified
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
+    }
 }
 
 // MARK: - Strings

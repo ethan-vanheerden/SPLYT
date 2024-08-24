@@ -70,6 +70,8 @@
 		AA2C245E2A3F7517004FC939 /* BuildPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C245D2A3F7517004FC939 /* BuildPlanView.swift */; };
 		AA2C24602A3F7596004FC939 /* BuildPlanNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C245F2A3F7596004FC939 /* BuildPlanNavigationRouter.swift */; };
 		AA2C24622A3F75DC004FC939 /* BuildPlanReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2C24612A3F75DC004FC939 /* BuildPlanReducer.swift */; };
+		AA37FA6B2C7A14DE007E91A6 /* NavigationRouter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37FA6A2C7A14DE007E91A6 /* NavigationRouter+Extensions.swift */; };
+		AA37FA6E2C7A1550007E91A6 /* ThemedControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37FA6D2C7A1550007E91A6 /* ThemedControllers.swift */; };
 		AA4043CC2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4043CB2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift */; };
 		AA4043CF2BFBDE48002FC041 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4043CE2BFBDE48002FC041 /* AppIcon.swift */; };
 		AA4043D12BFBEA73002FC041 /* AppearanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4043D02BFBEA73002FC041 /* AppearanceViewModel.swift */; };
@@ -347,6 +349,8 @@
 		AA2C245D2A3F7517004FC939 /* BuildPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanView.swift; sourceTree = "<group>"; };
 		AA2C245F2A3F7596004FC939 /* BuildPlanNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanNavigationRouter.swift; sourceTree = "<group>"; };
 		AA2C24612A3F75DC004FC939 /* BuildPlanReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPlanReducer.swift; sourceTree = "<group>"; };
+		AA37FA6A2C7A14DE007E91A6 /* NavigationRouter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationRouter+Extensions.swift"; sourceTree = "<group>"; };
+		AA37FA6D2C7A1550007E91A6 /* ThemedControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedControllers.swift; sourceTree = "<group>"; };
 		AA4043CB2BFA670A002FC041 /* InProgressWorkoutCacheRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressWorkoutCacheRequest.swift; sourceTree = "<group>"; };
 		AA4043CE2BFBDE48002FC041 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		AA4043D02BFBEA73002FC041 /* AppearanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewModel.swift; sourceTree = "<group>"; };
@@ -862,6 +866,15 @@
 				AA2C244F2A3CC16A004FC939 /* NameWorkoutReducer.swift */,
 			);
 			path = Reducer;
+			sourceTree = "<group>";
+		};
+		AA37FA6C2C7A1521007E91A6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				AA37FA6A2C7A14DE007E91A6 /* NavigationRouter+Extensions.swift */,
+				AA37FA6D2C7A1550007E91A6 /* ThemedControllers.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		AA4A31482882D089003E7C64 /* Swift Packages */ = {
@@ -1430,6 +1443,7 @@
 		AA825D6428723CDD0041D94A /* App Backbone */ = {
 			isa = PBXGroup;
 			children = (
+				AA37FA6C2C7A1521007E91A6 /* Navigation */,
 				AA2B260F2A8290060001E79A /* Login */,
 				AA2B260B2A828F130001E79A /* Main View */,
 				AA825D3A287238BF0041D94A /* SPLYTApp.swift */,
@@ -2381,6 +2395,7 @@
 				AA672A452A6494440009919E /* HistoryNavigationController.swift in Sources */,
 				AAB42B2F2A79A584002A1ED2 /* RestPresetsDisplay.swift in Sources */,
 				AA02ECE32B5974A40035F7C8 /* EditSetsRepsView.swift in Sources */,
+				AA37FA6B2C7A14DE007E91A6 /* NavigationRouter+Extensions.swift in Sources */,
 				AA7CEA7428850B95005FCBE8 /* SettingsItem.swift in Sources */,
 				AA893138294A4A7600D7B4B1 /* AvailableExercisesCacheRequest.swift in Sources */,
 				AACB29772A15576700AACB6B /* DoWorkoutReducer.swift in Sources */,
@@ -2456,6 +2471,7 @@
 				AA0EB1DD2BFE74CB007570AC /* CustomExerciseViewModel.swift in Sources */,
 				AA7CEA70288506E8005FCBE8 /* SettingsViewModel.swift in Sources */,
 				AA672A4D2A64955C0009919E /* HistoryDisplay.swift in Sources */,
+				AA37FA6E2C7A1550007E91A6 /* ThemedControllers.swift in Sources */,
 				AA4A31452882CD1C003E7C64 /* HomeView.swift in Sources */,
 				AA116FE82A7849DE00E68852 /* SettingsDisplay.swift in Sources */,
 				AACB297F2A15580E00AACB6B /* DoWorkoutViewState.swift in Sources */,

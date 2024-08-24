@@ -76,7 +76,7 @@ private extension DoWorkoutNavigationRouter {
     func handleBeginWorkout() {
         let view = DoWorkoutView(viewModel: viewModel,
                                  navigationRouter: self)
-        let vc = UIHostingController(rootView: view.withUserTheme())
+        let vc = ThemedHostingController(rootView: view.withUserTheme())
         self.navigator?.push(vc, animated: false)
     }
     
