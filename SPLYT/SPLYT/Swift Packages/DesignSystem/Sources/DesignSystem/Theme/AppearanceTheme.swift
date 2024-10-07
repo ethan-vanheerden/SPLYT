@@ -1,7 +1,7 @@
 import SwiftUI
 
 public final class AppearanceTheme: ObservableObject {
-    @AppStorage(ThemeStorage.appearanceMode.rawValue) private var appearanceMode: AppearanceMode = .automatic
+    @AppStorage(ThemeStorage.appearanceMode.rawValue) var appearanceMode: AppearanceMode = .automatic
     
     private init() { }
     

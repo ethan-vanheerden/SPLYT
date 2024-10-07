@@ -6,7 +6,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
-        
+
         Task {
             do {
                 try await NotificationInteractor().requestAuthorization()
@@ -30,7 +30,6 @@ extension AppDelegate {
         if UIApplication.shared.applicationState == .active,
            shouldPresentNotificationWhenActive(notification: notification) {
             // App is active, ignore the notification
-            print("App is active, ignoring notification")
             completionHandler([])
         } else {
             // App is not active, present the notification

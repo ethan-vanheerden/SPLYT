@@ -13,7 +13,7 @@ import Core
 // MARK: - UINavigationController
 
 /// Custom controller used to propagte the user's desired appearance mode to  UINavigationControllers.
-final class ThemedNavigationController: UINavigationController {
+class ThemedNavigationController: UINavigationController {
     var preferredColorScheme: AppearanceMode = AppearanceTheme.shared.mode {
         didSet {
             overrideUserInterfaceStyle = preferredColorScheme.uiUserInterfaceStyle

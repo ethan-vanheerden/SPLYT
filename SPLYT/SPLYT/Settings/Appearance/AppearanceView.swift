@@ -75,7 +75,7 @@ struct AppearanceView: View {
     private var appIcons: some View {
         LazyVGrid(columns: appIconColumns) {
             ForEach(AppIcon.allCases, id: \.self) { appIcon in
-                Image(uiImage: UIImage(named: appIcon.rawValue) ?? UIImage())
+                Image(appIcon.imageResource)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: Layout.size(7.5), height: Layout.size(7.5))

@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", exact: "1.11.0"),
         .package(path: "../ExerciseCore"),
         .package(path: "../Core"),
-        .package(url: "https://github.com/siteline/swiftui-introspect", from: "1.1.3")
+        .package(url: "https://github.com/siteline/swiftui-introspect", from: "1.3.0")
     ],
     targets: [
         .target(
