@@ -12,6 +12,7 @@ struct AppearanceThemeModifier: ViewModifier {
     @ObservedObject var theme = AppearanceTheme.shared
 
     func body(content: Content) -> some View {
-        content.preferredColorScheme(theme.colorScheme)
+        content
+            .preferredColorScheme(theme.appearanceMode.colorScheme)
     }
 }

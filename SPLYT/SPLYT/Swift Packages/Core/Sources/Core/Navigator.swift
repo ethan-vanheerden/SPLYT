@@ -1,5 +1,5 @@
 import UIKit
-
+import SwiftUI
 
 /// A delegate to a `NavigationRouter`. This should handle the actual navigation UI changes.
 public protocol Navigator: AnyObject {
@@ -10,11 +10,23 @@ public protocol Navigator: AnyObject {
     ///   - animated: Whether or not to animate the UI change
     func push(_ vc: UIViewController, animated: Bool)
     
+    /// Pushes a given SwiftUI `View` onto the navigation stack.
+    /// - Parameters:
+    ///   - view: The `View` to push
+    ///   - animated: Whether or not to animate the UI change
+    func push<Content: View>(_ view: Content, animated: Bool)
+    
     /// Presents a given `UIViewController` in front of the current screen.
     /// - Parameters:
     ///   - vc: The `UIViewController` to present
     ///   - animated: Whether or not to animate the UI change
     func present(_ vc: UIViewController, animated: Bool)
+    
+    /// Presents a given SwiftUI `View` in front of the current screen.
+    /// - Parameters:
+    ///   - view: The `View` to present
+    ///   - animated: Whether or not to animate the UI change
+    func present<Content: View>(_ view: Content, animated: Bool)
     
     /// Dismisses the current view which is being shown
     /// - Parameter animated: Whether or not to animate the UI change
@@ -58,5 +70,3 @@ public extension Navigator where Self: UINavigationController {
         self.popViewController(animated: animated)
     }
 }
-
-extension UINavigationController: Navigator { }

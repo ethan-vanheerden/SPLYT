@@ -54,7 +54,7 @@ public struct ExerciseView: View {
                        addSetAction: addSetAction,
                        removeSetAction: removeSetAction)
         }
-        .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
+        .themedConfirmationDialog(isPresented: $showActionSheet) {
             switch type {
             case .build:
                 EmptyView()

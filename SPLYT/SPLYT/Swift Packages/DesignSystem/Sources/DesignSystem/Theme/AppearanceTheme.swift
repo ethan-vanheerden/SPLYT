@@ -1,7 +1,7 @@
 import SwiftUI
 
 public final class AppearanceTheme: ObservableObject {
-    @AppStorage(ThemeStorage.appearanceMode.rawValue) private var appearanceMode: AppearanceMode = .automatic
+    @AppStorage(ThemeStorage.appearanceMode.rawValue) var appearanceMode: AppearanceMode = .automatic
     
     private init() { }
     
@@ -52,6 +52,18 @@ public enum AppearanceMode: String, CaseIterable {
         switch self {
         case .automatic:
             return nil
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
+    }
+    
+    // UIKit-usable
+    public var uiUserInterfaceStyle: UIUserInterfaceStyle {
+        switch self {
+        case .automatic:
+            return .unspecified
         case .light:
             return .light
         case .dark:

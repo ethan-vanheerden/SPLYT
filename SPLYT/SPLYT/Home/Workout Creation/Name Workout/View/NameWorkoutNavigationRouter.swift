@@ -67,9 +67,8 @@ private extension NameWorkoutNavigationRouter {
         navRouter.navigator = navigator
         let view = BuildWorkoutView(viewModel: viewModel,
                                     navigationRouter: navRouter)
-        let vc = UIHostingController(rootView: view.withUserTheme())
-        
-        navigator?.push(vc, animated: true)
+
+        navigator?.push(view, animated: true)
     }
     
     func startBuildPlan(navState: NameWorkoutNavigationState) {
@@ -79,8 +78,7 @@ private extension NameWorkoutNavigationRouter {
         navRouter.navigator = navigator
         let view = BuildPlanView(viewModel: viewModel,
                                  navigationRouter: navRouter)
-        let vc = UIHostingController(rootView: view.withUserTheme())
         
-        navigator?.push(vc, animated: true)
+        navigator?.push(view, animated: true)
     }
 }

@@ -25,4 +25,25 @@ enum AppIcon: String, CaseIterable {
             return rawValue
         }
     }
+    
+    var imageResource: ImageResource {
+        switch self {
+        case .primary:
+            return .appIcon
+        case .pulse:
+            return .appIconPulse
+        case .breeze:
+            return .appIconBreeze
+        case .miami:
+            return .appIconMiami
+        case .flare:
+            return .appIconFlare
+        case .charcoal:
+            return .appIconCharcoal
+        case .black:
+            return .appIconBlack
+        case .white:
+            return .appIconWhite
+        }
+    }
 }

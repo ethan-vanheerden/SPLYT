@@ -1,5 +1,6 @@
 import Core
 import UIKit
+import SwiftUI
 
 public final class MockNavigator: Navigator {
     public init() { }
@@ -9,9 +10,19 @@ public final class MockNavigator: Navigator {
         stubPushedVC = vc
     }
     
+    public private(set) var calledPushView = false
+    public func push<Content: View>(_ view: Content, animated: Bool) {
+        calledPushView = true
+    }
+    
     public private(set) var stubPresentedVC: UIViewController?
     public func present(_ vc: UIViewController, animated: Bool) {
         stubPresentedVC = vc
+    }
+    
+    public private(set) var calledPresentView = false
+    public func present<Content: View>(_ view: Content, animated: Bool) {
+        calledPresentView = true
     }
     
     public private(set) var calledDismiss = false

@@ -72,10 +72,10 @@ struct DoWorkoutView<VM: TimeViewModel<DoWorkoutViewState, DoWorkoutViewEvent>>:
                 .presentationDragIndicator(.visible)
         }
         .onChange(of: viewModel.secondsElapsed) { newValue in
-            // We want to update the in progress cache once every 30 seconds
-            if newValue != 0 && newValue % 30 == 0 {
+            // We want to update the in progress cache once every 15 seconds
+            if newValue != 0 && newValue % 15 == 0 {
                 viewModel.send(.cacheWorkout(secondElapsed: newValue),
-                               taskPriority: .userInitiated)
+                               taskPriority: .background)
             }
         }
     }
