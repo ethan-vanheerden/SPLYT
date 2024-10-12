@@ -22,5 +22,3 @@ extension Navigator where Self: UINavigationController {
 }
 
 extension UINavigationController: @retroactive Navigator { }
-
-// TODO: SwiftUI stuff not respecting dark mode - sheets/action buttons

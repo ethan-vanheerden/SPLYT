@@ -109,15 +109,11 @@ public struct RestFAB: View {
             baseIcon: baseIcon) {
             fabRows
         }
-            .preferredColorScheme(.light)
             .sheet(isPresented: $showTimePicker) {
                 restPicker
-                    .preferredColorScheme(.light)
                     .presentationDetents([.fraction(0.33)])
                     .presentationDragIndicator(.visible)
             }
-            .preferredColorScheme(.light)
-        // TODO: fix this
     }
     
     private var baseIcon: FABIconViewState {
