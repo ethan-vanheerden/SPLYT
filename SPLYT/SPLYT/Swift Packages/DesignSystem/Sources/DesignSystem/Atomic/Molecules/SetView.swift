@@ -35,7 +35,7 @@ public struct SetView: View {
                 setRow(modifier: modifier)
             }
         }
-        .confirmationDialog("", isPresented: $showRegularActionSheet, titleVisibility: .hidden) {
+        .themedConfirmationDialog(isPresented: $showRegularActionSheet) {
             if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
             hasPreviousInput(forModifier: false) {
                 Button(Strings.usePreviousInput) {
@@ -48,7 +48,7 @@ public struct SetView: View {
                 Button(Strings.addModifier) { addModifierAction(viewState.setIndex) }
             }
         }
-        .confirmationDialog("", isPresented: $showModifierActionSheet, titleVisibility: .hidden) {
+        .themedConfirmationDialog(isPresented: $showModifierActionSheet) {
             if case let .inProgress(usePreviousInputAction, _, _, _, _) = exerciseType,
             hasPreviousInput(forModifier: true) {
                 Button(Strings.usePreviousInput) {

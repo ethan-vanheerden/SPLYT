@@ -46,7 +46,7 @@ public struct RoutineTile: View {
         .onTapGesture {
             tapAction()
         }
-        .confirmationDialog("", isPresented: $showActionSheet, titleVisibility: .hidden) {
+        .themedConfirmationDialog(isPresented: $showActionSheet) {
             // TODO: 55: Edit workouts and plans
 //            if let editAction = editAction {
 //                Button(Strings.edit) { editAction() }

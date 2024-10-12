@@ -60,7 +60,7 @@ struct WorkoutDetailsView<VM: ViewModel>: View where VM.Event == WorkoutDetailsV
             .padding(.horizontal, horizontalPadding)
         }
         .animation(.default, value: display.expandedGroups)
-        .confirmationDialog("", isPresented: $optionsSheetPresented, titleVisibility: .hidden) {
+        .themedConfirmationDialog(isPresented: $optionsSheetPresented) {
             Button(Strings.delete, role: .destructive) {
                 viewModel.send(.toggleDialog(dialog: .delete, isOpen: true),
                                taskPriority: .userInitiated)
