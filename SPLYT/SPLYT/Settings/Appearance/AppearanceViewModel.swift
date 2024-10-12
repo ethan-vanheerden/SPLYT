@@ -42,7 +42,6 @@ final class AppearanceViewModel: ObservableObject {
         } catch { }
     }
     
-    
     @MainActor
     func updateAppearanceMode(to mode: AppearanceMode) {
         appearanceMode = mode

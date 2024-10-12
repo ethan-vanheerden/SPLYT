@@ -63,7 +63,7 @@ public struct Counter: View {
     @ViewBuilder
     private var selection: some View {
         TextField("", text: $selectedNumberText)
-            .introspect(.textField, on: .iOS(.v15, .v16, .v17, .v18)) { textField in
+            .introspect(.textField, on: .iOS(.v16, .v17, .v18)) { textField in
                 // Using this library to avoid duplicate done button issue
                 let toolbar = UIToolbar()
                 let done = UIBarButtonItem(title: "Done",
