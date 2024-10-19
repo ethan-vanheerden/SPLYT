@@ -26,7 +26,6 @@ private extension LoginReducer {
     func getDisplay(domain: LoginDomain) -> LoginDisplay {
         let emailMessageColor = getMessageColor(isError: domain.emailError)
         let passwordMessageColor = getMessageColor(isError: domain.passwordError)
-        let birthdayMessageColor = getMessageColor(isError: domain.birthdayError)
         
         let display = LoginDisplay(email: domain.email,
                                    password: domain.password,
@@ -38,7 +37,6 @@ private extension LoginReducer {
                                    passwordMessage: domain.passwordMessage,
                                    passwordMessageColor: passwordMessageColor,
                                    birthdayMessage: domain.birthdayMessage,
-                                   birthdayMessageColor: birthdayMessageColor,
                                    isCreateAccount: domain.isCreateAccount,
                                    errorMessage: domain.errorMessage,
                                    submitButtonEnabled: domain.canSubmit,

@@ -11,4 +11,8 @@ public protocol NetworkRequest {
 
 public enum NetworkError: Error {
     case invalidURL
+    case unsupportedResponse
 }
+
+/// Used for requests where we don't require/care about the response
+public struct NoResponse: Codable { }

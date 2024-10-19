@@ -62,7 +62,7 @@ struct WorkoutService: WorkoutServiceType {
         let lastSynced = userSettings.object(forKey: .lastSyncedExercises)
         
         let favoritesRequest = GetFavoriteExercisesRequest(userAuth: userAuth)
-        let favoritesResponse = try await apiInteractor.performRequest(with: favoritesRequest)
+        let favoritesResponse = try await apiInteractor.performRequest(with: favoritesRequest).responseBody
         
         guard let lastSynced = lastSynced as? Date,
               Int(currentDate.timeIntervalSince(lastSynced) / (60 * 60 * 24)) < DAYS_FOR_RESYNC else {
@@ -70,7 +70,7 @@ struct WorkoutService: WorkoutServiceType {
                 print("Fetching exercises...")
                 let exercisesRequest = GetAvailableExercisesRequest(userAuth: userAuth)
                 
-                let exercisesResponse = try await apiInteractor.performRequest(with: exercisesRequest)
+                let exercisesResponse = try await apiInteractor.performRequest(with: exercisesRequest).responseBody
                 
                 var exerciseMap = mapExercises(exercisesResponse.exercises)
                 let result = try updateExerciseCache(exerciseMap: &exerciseMap,

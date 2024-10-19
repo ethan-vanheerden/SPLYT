@@ -94,7 +94,7 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
                 birthdayPicker(birthday: display.birthday)
                 Text(display.birthdayMessage)
                     .footnote()
-                    .foregroundColor(Color(display.birthdayMessageColor))
+                    .foregroundColor(Color(SplytColor.gray))
             }
         }
         .padding(.bottom, Layout.size(4))
@@ -128,7 +128,8 @@ struct LoginView<VM: ViewModel>: View where VM.Event == LoginViewEvent,
     private func birthdayPicker(birthday: Date) -> some View {
         VStack {
             DatePicker(selection: birthdayBinding(birthday: birthday),
-                       in: ...Date.now, displayedComponents: .date) {
+                       in: ...Date.now,
+                       displayedComponents: .date) {
                 Text(Strings.birthday)
                     .body()
             }

@@ -12,9 +12,3 @@ struct SettingsDomain: Equatable {
     let versionString: String?
     let buildNumberString: String?
 }
-
-// MARK: - Dialog Type
-
-enum SettingsDialog: Equatable {
-    case signOut
-}

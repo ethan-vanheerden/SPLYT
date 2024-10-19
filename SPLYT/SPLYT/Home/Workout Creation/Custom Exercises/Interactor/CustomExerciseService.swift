@@ -36,7 +36,7 @@ struct CustomExerciseService: CustomExerciseServiceType {
         let request = CreateCustomExerciseRequest(requestBody: .init(name: exerciseName,
                                                                      musclesWorked: musclesWorked))
         
-        let exercise = try await apiInteractor.performRequest(with: request)
+        let exercise = try await apiInteractor.performRequest(with: request).responseBody
         
         // Need to save the custom exercise to the user's cache as well
         let cacheRequest = AvailableExercisesCacheRequest()

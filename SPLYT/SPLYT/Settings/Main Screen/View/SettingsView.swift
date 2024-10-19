@@ -54,11 +54,6 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
             versionView(versionString: display.versionString,
                         buildNumberString: display.buildNumberString)
         }
-        .dialog(isOpen: display.shownDialog == .signOut,
-                viewState: display.signOutDialog,
-                primaryAction: { viewModel.send(.signOut, taskPriority: .userInitiated) },
-                secondaryAction: { viewModel.send(.toggleDialog(type: .signOut, isOpen: false),
-                                                  taskPriority: .userInitiated) })
     }
     
     @ViewBuilder
@@ -96,9 +91,6 @@ struct SettingsView<VM: ViewModel>: View where VM.Event == SettingsViewEvent,
     private func buttonDetail(item: SettingsItem) -> some View {
         Button {
             switch item {
-            case .signOut:
-                viewModel.send(.toggleDialog(type: .signOut, isOpen: true),
-                               taskPriority: .userInitiated)
             default:
                 return
             }
