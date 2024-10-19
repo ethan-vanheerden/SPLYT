@@ -11,6 +11,4 @@ struct SettingsDisplay: Equatable {
     let sections: [SettingsSection]
     let versionString: String?
     let buildNumberString: String?
-    let shownDialog: SettingsDialog?
-    let signOutDialog: DialogViewState
 }

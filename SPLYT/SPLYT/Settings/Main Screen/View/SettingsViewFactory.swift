@@ -20,11 +20,17 @@ struct SettingsViewFactory {
         case .restPresets:
             let interactor = RestPresetsInteractor()
             let viewModel = RestPresetsViewModel(interactor: interactor)
+            
             RestPresetsView(viewModel: viewModel)
         case .appearance:
             AppearanceView()
         case .about:
             AboutView()
+        case .account:
+            let interactor = AccountInteractor(service: AccountService())
+            let viewModel = AccountViewModel(interactor: interactor)
+            
+            AccountView(viewModel: viewModel)
         default:
             EmptyView()
         }

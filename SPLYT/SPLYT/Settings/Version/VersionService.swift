@@ -1,5 +1,5 @@
 //
-//  VersionInteractor.swift
+//  VersionService.swift
 //  SPLYT
 //
 //  Created by Ethan Van Heerden on 5/27/24.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol VersionInteractorType {
+protocol VersionServicing {
     var versionString: String? { get }
     var buildNumberString: String? { get }
 }
 
-struct VersionInteractor: VersionInteractorType {
+struct VersionService: VersionServicing {
     var versionString: String? {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }

@@ -12,8 +12,6 @@ import Core
 
 enum SettingsViewEvent {
     case load
-    case signOut
-    case toggleDialog(type: SettingsDialog, isOpen: Bool)
 }
 
 // MARK: - View Model
@@ -31,10 +29,6 @@ final class SettingsViewModel: ViewModel {
         switch event {
         case .load:
             await react(domainAction: .load)
-        case .signOut:
-            await react(domainAction: .signOut)
-        case let .toggleDialog(type, isOpen):
-            await react(domainAction: .toggleDialog(type: type, isOpen: isOpen))
         }
     }
 }

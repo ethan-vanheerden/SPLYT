@@ -16,7 +16,6 @@ struct LoginDomain: Equatable {
     var passwordMessage: String
     var passwordError: Bool
     var birthdayMessage: String
-    var birthdayError: Bool
     var isCreateAccount: Bool
     var errorMessage: String?
     var canSubmit: Bool

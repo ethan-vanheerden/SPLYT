@@ -81,7 +81,7 @@ struct BuildWorkoutService: BuildWorkoutServiceType  {
         let request = UpdateFavoriteExerciseRequest(requestBody: requestBody,
                                                     userAuth: userAuth)
         
-        let favoritesResponse = try await apiInteractor.performRequest(with: request)
+        let favoritesResponse = try await apiInteractor.performRequest(with: request).responseBody
         
         // Update the favorites in the cache
         var cachedExercises = try workoutService.loadFromCache()

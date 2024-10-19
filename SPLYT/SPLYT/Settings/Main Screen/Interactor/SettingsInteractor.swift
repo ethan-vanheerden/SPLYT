@@ -11,8 +11,6 @@ import Foundation
 
 enum SettingsDomainAction {
     case load
-    case signOut
-    case toggleDialog(type: SettingsDialog, isOpen: Bool)
 }
 
 // MARK: - Domain Results
@@ -20,30 +18,22 @@ enum SettingsDomainAction {
 enum SettingsDomainResult: Equatable {
     case error
     case loaded(SettingsDomain)
-    case dialog(type: SettingsDialog, domain: SettingsDomain)
 }
 
 // MARK: - Interactor
 
 final class SettingsInteractor {
     private var savedDomain: SettingsDomain?
-    private let service: SettingsServiceType
-    private let versionInteractor: VersionInteractorType
+    private let versionService: VersionServicing
     
-    init(service: SettingsServiceType = SettingsService(),
-         versionInteractor: VersionInteractorType = VersionInteractor()) {
-        self.service = service
-        self.versionInteractor = versionInteractor
+    init(versionService: VersionServicing = VersionService()) {
+        self.versionService = versionService
     }
     
     func interact(with action: SettingsDomainAction) async -> SettingsDomainResult {
         switch action {
         case .load:
             return handleLoad()
-        case .signOut:
-            return handleSignOut()
-        case let .toggleDialog(type, isOpen):
-            return handleToggleDialog(type: type, isOpen: isOpen)
         }
     }
 }
@@ -53,25 +43,10 @@ final class SettingsInteractor {
 private extension SettingsInteractor {
     func handleLoad() -> SettingsDomainResult {
         let domain = SettingsDomain(sections: sections,
-                                    versionString: versionInteractor.versionString,
-                                    buildNumberString: versionInteractor.buildNumberString)
+                                    versionString: versionService.versionString,
+                                    buildNumberString: versionService.buildNumberString)
         
         return updateDomain(domain: domain)
-    }
-    
-    func handleSignOut() -> SettingsDomainResult {
-        guard let domain = savedDomain else { return .error }
-        
-        let success = service.signOut()
-        
-        return success ? updateDomain(domain: domain) : .error
-    }
-    
-    func handleToggleDialog(type: SettingsDialog, isOpen: Bool) -> SettingsDomainResult {
-        guard let domain = savedDomain else { return .error }
-        
-        return isOpen ? .dialog(type: type, domain: domain) : .loaded(domain)
-        
     }
 }
 
@@ -130,7 +105,7 @@ private extension SettingsInteractor {
                      items: [
                         .submitFeedback,
                         .about,
-                        .signOut
+                        .account
                      ],
                      isEnabled: true)
     }
